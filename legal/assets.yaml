@@ -84,6 +84,28 @@ entries:
       - These are test evidence, not product branding or Beautiful UI website screenshots.
       - The Ubuntu fixtures were accepted after visual review of CI run 33622890532; the macOS fixtures prevent local cross-OS raster false positives.
 
+  - id: p1_component_test_goldens
+    source: Project-rendered Flutter golden fixtures
+    kind: generated_test_images
+    distribution_status: approved
+    distributable: true
+    generation_toolchains:
+      - Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts for supplemental local fixtures and the initial Linux candidate.
+      - Ubuntu 24.04 x64 canonical rendering remains pending the first P1 CI comparison.
+    files:
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_light.png
+        sha256: 98ca805603399a56e1db3e8c1973ffa3ccecf13d5bc29c689a98662f761980ef
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark.png
+        sha256: e972274e72c12e0cedf9cd1e374ea4ff8bab4455b753897918bc8b8fbeeb4ab4
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_light_macos.png
+        sha256: 98ca805603399a56e1db3e8c1973ffa3ccecf13d5bc29c689a98662f761980ef
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark_macos.png
+        sha256: e972274e72c12e0cedf9cd1e374ea4ff8bab4455b753897918bc8b8fbeeb4ab4
+    notes:
+      - Generated entirely from project Dart code and inherited, license-tracked shadcn_flutter fonts.
+      - These are deterministic test evidence, not product branding or source-project screenshots.
+      - Replace the two canonical hashes after Ubuntu CI candidates are visually accepted.
+
   - id: flutter_generated_catalog_launcher_assets
     source: Flutter 3.47.0 flutter create platform templates
     kind: generated_catalog_launcher_and_launch_images

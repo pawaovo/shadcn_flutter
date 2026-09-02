@@ -16,6 +16,16 @@ flutter build web --release --dart-define=ENABLE_WEB_SEMANTICS=true
 flutter build web --release --wasm --dart-define=ENABLE_WEB_SEMANTICS=true
 ```
 
-The current catalog exposes the Loading State variants, theme cycling, motion
-policy cycling, and responsive one/two-column layouts. It contains no AI
+The current catalog exposes the complete P1 module set, theme cycling, motion
+policy cycling, and responsive one/two/three-column layouts. It contains no AI
 backend and makes no request for the excluded Surfer demonstration video.
+
+Run the shared device journey with Flutter Test on Android or Linux:
+
+```bash
+flutter test integration_test/catalog_journey_test.dart -d <device>
+```
+
+Web integration uses `flutter drive`, a matching ChromeDriver, and the
+`test_driver/integration_test.dart` adapter because Flutter 3.47 does not run
+`integration_test` through `flutter test -d chrome`.

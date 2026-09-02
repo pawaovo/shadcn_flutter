@@ -67,48 +67,70 @@ items:
       - packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart
     open_items:
       - Inter and JetBrains Mono asset decision
-      - Linux canonical golden confirmation
-      - six-platform CI evidence
+      - exact bundled font and icon dependency inventory for public release
 
   - registry_name: button
     title: Button
     source_type: registry:ui
     scope_kind: building_block
     phase: P0
-    status: not_started
-    planned_disposition: map_to_shadcn_flutter_without_public_shallow_wrapper
+    status: in_progress
+    planned_disposition: package_private_action_control_without_public_shallow_wrapper
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/action_control.dart
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+      - packages/beautiful_ai_ui/lib/src/components/context_cards.dart
+    intentional_deviations:
+      - The source atom is absorbed into a package-private control contract instead of becoming a public shallow wrapper.
 
   - registry_name: glide-menu
     title: GlideMenu
     source_type: registry:ui
     scope_kind: building_block
-    phase: P2
-    status: not_started
-    planned_disposition: internal_semantic_menu_or_popover_pattern
+    phase: P1
+    status: in_progress
+    planned_disposition: internal_semantic_search_result_pattern
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/search.dart
+    intentional_deviations:
+      - Search keeps the menu behavior internal and exposes only typed search items and callbacks.
 
   - registry_name: entity-chip
     title: EntityChip
     source_type: registry:ui
     scope_kind: building_block
     phase: P1
-    status: not_started
-    planned_disposition: internal_entity_summary_pattern
+    status: in_progress
+    planned_disposition: absorbed_into_recommendation_card
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+    intentional_deviations:
+      - Entity presentation is internal to the recommendation composite and is not a separately exported atom.
 
   - registry_name: value-pill
     title: ValuePill
     source_type: registry:ui
     scope_kind: building_block
-    phase: P2
-    status: not_started
-    planned_disposition: internal_value_and_status_pattern
+    phase: P1
+    status: in_progress
+    planned_disposition: absorbed_into_recommendation_card
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+    intentional_deviations:
+      - Confidence values are rendered by the recommendation composite without a separately exported atom.
 
   - registry_name: shimmer
     title: Shimmer
     source_type: registry:ui
     scope_kind: building_block
     phase: P0
-    status: not_started
-    planned_disposition: map_or_reimplement_with_reduced_motion
+    status: in_progress
+    planned_disposition: absorbed_into_loading_state_with_reduced_motion
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/loading_state.dart
+      - packages/beautiful_ai_ui/lib/src/foundation/motion.dart
+    intentional_deviations:
+      - The shimmer is an internal Loading State treatment and freezes under reduced or disabled motion.
 
   - registry_name: stream-text
     title: StreamText
@@ -145,8 +167,6 @@ items:
       - Elapsed time is a separate non-live semantics node so decisecond changes cannot create announcement storms.
       - Label and elapsed text use the stronger muted-ink token instead of source ink-3 so small text can meet contrast guidance.
     open_items:
-      - Linux canonical golden confirmation
-      - six-platform CI build evidence
       - real assistive-technology smoke evidence
 
   - registry_name: thinking-state
@@ -154,9 +174,30 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P1
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Disclosure state survives constraint changes.
+    variants:
+      - steps
+      - reasoning
+      - search
+      - coding
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/thinking.dart
+      - packages/beautiful_ai_ui/test/widget/thinking_test.dart
+      - packages/beautiful_ai_ui/test/semantics/thinking_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Status and immutable trace snapshots are caller-controlled; the package contains no demo sequence timer.
+      - Collapsed interactive descendants are removed from focus and Semantics traversal.
+      - Search and coding activation are delegated to the host and never open URLs or run tools internally.
+      - Compact and large-text layouts may wrap source content that the Web reference truncates.
+      - Reduced motion removes continuous shimmer and spinner motion without changing caller state.
+      - Disclosure actions use independent localizable labels so the status and button are not announced twice.
+    open_items:
+      - accepted Linux canonical P1 golden
+      - real assistive-technology smoke evidence
+      - explicit high-contrast behavior evidence
 
   - registry_name: streaming-text
     title: Streaming Text
@@ -218,18 +259,49 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P1
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Primary action becomes full width and confidence includes text.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+      - packages/beautiful_ai_ui/test/widget/recommendation_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/recommendation_card_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Recommendation content is structured text instead of an arbitrary Widget or ReactNode slot.
+      - Acceptance is an asynchronous host callback with pending de-duplication and normalized failure reporting.
+      - A model generation prevents stale success or failure from committing after the recommendation snapshot changes.
+      - Collapsed alternatives leave focus and Semantics traversal.
+      - Compact and large-text layouts stack actions and make the primary action full width.
+    open_items:
+      - accepted Linux canonical P1 golden
+      - real assistive-technology smoke evidence
+      - explicit normal and reduced-motion acceptance-transition evidence
 
   - registry_name: context-cards
     title: Context Cards
     source_type: registry:component
     scope_kind: composite_component
     phase: P1
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Compact uses a single column with expandable long content.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/context_cards.dart
+      - packages/beautiful_ai_ui/test/widget/context_cards_test.dart
+      - packages/beautiful_ai_ui/test/semantics/context_cards_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Stable caller-owned IDs replace title-based reconciliation.
+      - Long compact content has an accessible local disclosure.
+      - Collapsed body Semantics expose a shortened summary; the full body is restored only after expansion.
+      - A source becomes interactive only when the host supplies a callback; the package never launches a URL.
+      - Platform targets are enlarged to Android and Apple accessibility guidance.
+      - The caller list is defensively snapshotted on insertion and widget updates.
+    open_items:
+      - accepted Linux canonical P1 golden
+      - real assistive-technology smoke evidence
+      - explicit high-contrast behavior evidence
 
   - registry_name: diff-table
     title: Diff Table
@@ -274,9 +346,25 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P1
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
-    adaptive_note: Desktop dialog or popover becomes a compact sheet when appropriate.
+    adaptive_note: The public module is inline and responsive; host overlays choose dialog, popover, or compact sheet presentation.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/search.dart
+      - packages/beautiful_ai_ui/test/widget/search_test.dart
+      - packages/beautiful_ai_ui/test/semantics/search_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Stable typed items replace bare strings and preserve identity across filtering and resize.
+      - Arrow navigation, Enter selection, Escape clearing, selected Semantics, and IME composition protection are implemented inside the module.
+      - The module does not own an overlay or product navigation; selection is returned through a callback.
+      - The empty state is delayed until three Unicode scalar values, matching source intent without assuming ASCII input.
+      - Item order and nested keywords are defensively snapshotted; pointer hover never reports semantic selection.
+      - Field, clear, and result hit regions remain at least 48dp across all adaptive modes.
+    open_items:
+      - accepted Linux canonical P1 golden
+      - real assistive-technology smoke evidence
+      - explicit high-contrast and normal/reduced transition evidence
 
   - registry_name: flowchart
     title: Flowchart
@@ -302,9 +390,28 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P1
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Code scrolls horizontally and copy feedback is announced.
+    variants:
+      - code
+      - diff
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/code_block.dart
+      - packages/beautiful_ai_ui/test/widget/code_block_test.dart
+      - packages/beautiful_ai_ui/test/semantics/code_block_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Named constructors and one canonical code string replace string variants and divergent display/copy values.
+      - Long code remains unwrapped in a horizontal viewport rather than using the source pre-wrap behavior.
+      - Copy is de-duplicated while pending and exposes localized success or failure live feedback.
+      - Diff rows announce added, removed, or context meaning instead of relying on color.
+      - Copy and header targets are enlarged from the source visual size to Flutter accessibility guidance.
+    open_items:
+      - accepted Linux canonical P1 golden
+      - real assistive-technology smoke evidence
+      - explicit high-contrast behavior evidence
+      - long-source tokenization and intrinsic-layout benchmark before a stable release
 
   - registry_name: fine-tune-card
     title: Fine-tune Card

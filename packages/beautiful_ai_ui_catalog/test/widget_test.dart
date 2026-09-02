@@ -4,15 +4,24 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('catalog renders all Loading State variants', (tester) async {
+  testWidgets('catalog renders the complete P1 module set', (tester) async {
     await tester.pumpWidget(const CatalogApp());
     await tester.pump();
 
-    expect(find.text('Beautiful AI UI · Loading State'), findsOneWidget);
-    expect(find.text('Drive'), findsOneWidget);
-    expect(find.text('Dots'), findsOneWidget);
-    expect(find.text('Orbit'), findsOneWidget);
-    expect(find.text('Surfer'), findsOneWidget);
+    expect(find.text('Beautiful AI UI · P1 Catalog'), findsOneWidget);
+    expect(find.text('Loading · Drive'), findsOneWidget);
+    expect(find.text('Loading · Dots'), findsOneWidget);
+    expect(find.text('Loading · Orbit'), findsOneWidget);
+    expect(find.text('Loading · Surfer'), findsOneWidget);
+    expect(find.text('Thinking · steps'), findsOneWidget);
+    expect(find.text('Thinking · reasoning'), findsOneWidget);
+    expect(find.text('Thinking · search'), findsOneWidget);
+    expect(find.text('Thinking · coding'), findsOneWidget);
+    expect(find.text('Context Cards'), findsOneWidget);
+    expect(find.text('Recommendation Card'), findsOneWidget);
+    expect(find.text('Search'), findsOneWidget);
+    expect(find.text('Code Block · Code'), findsOneWidget);
+    expect(find.text('Code Block · Diff'), findsOneWidget);
     await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
     await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
 
@@ -40,6 +49,44 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.enter);
     await tester.pump();
     expect(find.text('Theme: light'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  testWidgets('catalog P1 examples remain directly interactive', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const CatalogApp());
+    await tester.pump();
+
+    final scrollable = find.byType(Scrollable).first;
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('catalog-recommendation-card')),
+      700,
+      scrollable: scrollable,
+    );
+    await tester.tap(find.text('Alternatives'));
+    await tester.pump();
+    expect(find.text('Other options'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('catalog-search')),
+      700,
+      scrollable: scrollable,
+    );
+    await tester.enterText(find.byType(EditableText), 'waffle');
+    await tester.pump();
+    expect(find.text('Find waffle cone suppliers'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('catalog-code-block')),
+      700,
+      scrollable: scrollable,
+    );
+    await tester.tap(find.text('Copy'));
+    await tester.pump();
+    expect(find.text('Copied'), findsOneWidget);
+    expect(tester.takeException(), isNull);
 
     await tester.pumpWidget(const SizedBox.shrink());
   });
@@ -73,7 +120,7 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    expect(find.text('Surfer'), findsOneWidget);
+    expect(find.text('Loading · Surfer'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
   });

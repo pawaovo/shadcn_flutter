@@ -21,6 +21,9 @@
   },
   "local_capabilities": {
     "chrome_web": "available",
+    "chrome_version": "152.0.7977.66",
+    "chromedriver_version": "152.0.7977.75",
+    "chrome_webdriver_journey": "passed",
     "android_sdk": "missing",
     "xcode": "incomplete",
     "cocoapods": "missing"
@@ -41,5 +44,12 @@
       "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
       "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
     }
+  },
+  "p1_journeys": {
+    "chrome_local": "passed_complete_p1_interaction_path",
+    "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
+    "chrome_ci": "pending_commit",
+    "linux_xvfb_ci": "pending_commit",
+    "android_emulator_ci": "pending_commit"
   }
 }

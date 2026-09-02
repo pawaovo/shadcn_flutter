@@ -17,7 +17,14 @@ Newly authored `beautiful_ai_ui` Dart code is distributed under the BSD 3-Clause
 - License: MIT
 - Local license copy: [`LICENSES/BEAUTIFUL_UI_MIT.txt`](LICENSES/BEAUTIFUL_UI_MIT.txt)
 
-The foundation, six shared building-block patterns, and twenty composite-component patterns recorded in [`legal/component_provenance.yaml`](legal/component_provenance.yaml) are planned as independent Flutter adaptations of visual, state, and interaction intent. The React/Next.js/Tailwind implementation, npm runtime, scripted harness data, source logos, Central Icons package, and externally hosted Surfer video are not part of the distributable Flutter library.
+The Foundation plus Loading State, Thinking, Context Cards, Recommendation
+Card, Search, and Code Block are implemented as independent Flutter
+adaptations of visual, state, and interaction intent. Remaining entries in
+[`legal/component_provenance.yaml`](legal/component_provenance.yaml) are
+planned or intentionally deferred. The React/Next.js/Tailwind implementation,
+npm runtime, scripted harness data, source logos, Central Icons package, and
+externally hosted Surfer video are not part of the distributable Flutter
+library.
 
 The MIT license requires the copyright and permission notice to accompany copies or substantial portions. The full text is preserved in the local license copy above.
 

@@ -41,33 +41,66 @@ items:
   - name: button
     source_path: public/r/button.json
     source_type: registry:ui
-    adaptation: map_to_shadcn_flutter_or_internal_behavior
+    adaptation: independent_internal_action_control_no_public_wrapper
     phase: P0
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/atoms/Button.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/action_control.dart
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+      - packages/beautiful_ai_ui/lib/src/components/context_cards.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: glide-menu
     source_path: public/r/glide-menu.json
     source_type: registry:ui
-    adaptation: internal_flutter_menu_pattern
-    phase: P2
-    implementation_status: not_started
+    adaptation: independent_internal_search_result_pattern_no_public_wrapper
+    phase: P1
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/GlideMenu.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/search.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: entity-chip
     source_path: public/r/entity-chip.json
     source_type: registry:ui
-    adaptation: internal_flutter_entity_pattern
+    adaptation: absorbed_into_recommendation_card_no_public_wrapper
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/atoms/EntityChip.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: value-pill
     source_path: public/r/value-pill.json
     source_type: registry:ui
-    adaptation: internal_flutter_value_pattern
-    phase: P2
-    implementation_status: not_started
+    adaptation: absorbed_into_recommendation_card_no_public_wrapper
+    phase: P1
+    implementation_status: in_progress
+    source_files:
+      - components/atoms/ValuePill.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: shimmer
     source_path: public/r/shimmer.json
     source_type: registry:ui
-    adaptation: flutter_motion_pattern_with_reduced_motion
+    adaptation: absorbed_into_loading_state_with_reduced_motion
     phase: P0
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/atoms/Shimmer.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/loading_state.dart
+      - packages/beautiful_ai_ui/lib/src/foundation/motion.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: stream-text
     source_path: public/r/stream-text.json
     source_type: registry:ui
@@ -99,7 +132,16 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/ThinkingState.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/thinking.dart
+      - packages/beautiful_ai_ui/test/widget/thinking_test.dart
+      - packages/beautiful_ai_ui/test/semantics/thinking_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: streaming-text
     source_path: public/r/streaming-text.json
     source_type: registry:component
@@ -141,13 +183,34 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/RecommendationCard.tsx
+      - components/atoms/Button.tsx
+      - components/atoms/EntityChip.tsx
+      - components/atoms/ValuePill.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
+      - packages/beautiful_ai_ui/test/widget/recommendation_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/recommendation_card_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: context-cards
     source_path: public/r/context-cards.json
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/ContextCards.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/context_cards.dart
+      - packages/beautiful_ai_ui/test/widget/context_cards_test.dart
+      - packages/beautiful_ai_ui/test/semantics/context_cards_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: diff-table
     source_path: public/r/diff-table.json
     source_type: registry:component
@@ -177,7 +240,17 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/SearchList.tsx
+      - components/primitives/GlideMenu.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/search.dart
+      - packages/beautiful_ai_ui/test/widget/search_test.dart
+      - packages/beautiful_ai_ui/test/semantics/search_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: flowchart
     source_path: public/r/flowchart.json
     source_type: registry:component
@@ -195,7 +268,16 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P1
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/CodeBlock.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/code_block.dart
+      - packages/beautiful_ai_ui/test/widget/code_block_test.dart
+      - packages/beautiful_ai_ui/test/semantics/code_block_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: fine-tune-card
     source_path: public/r/fine-tune-card.json
     source_type: registry:component

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../implementation/shadcn/theme_adapter.dart';
 import 'environment.dart';
+import 'failure.dart';
 import 'layout.dart';
 import 'motion.dart';
 import 'theme.dart';
@@ -50,6 +51,9 @@ final class BeautifulUiScope extends StatelessWidget {
   /// - [breakpoints] (`BeautifulUiBreakpoints`, default: 600/1024): Nominal
   ///   layout thresholds.
   /// - [motion] (`BeautifulMotionPolicy`, default: `system`): Motion policy.
+  /// - [onFailure] (`BeautifulUiFailureHandler?`, default: null): Optional
+  ///   root handler for recoverable external-action failures. Without one,
+  ///   failures are reported through [FlutterError.reportError].
   ///
   /// A surrounding [MediaQuery] is required for platform brightness,
   /// high-contrast, text-scale, and reduced-motion behavior.
@@ -61,6 +65,7 @@ final class BeautifulUiScope extends StatelessWidget {
     this.themeMode = BeautifulUiThemeMode.system,
     this.breakpoints = const BeautifulUiBreakpoints(),
     this.motion = BeautifulMotionPolicy.system,
+    this.onFailure,
   });
 
   /// The subtree that receives the package environment.
@@ -80,6 +85,9 @@ final class BeautifulUiScope extends StatelessWidget {
 
   /// Motion accessibility policy.
   final BeautifulMotionPolicy motion;
+
+  /// Receives normalized recoverable failures from descendant modules.
+  final BeautifulUiFailureHandler? onFailure;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +118,7 @@ final class BeautifulUiScope extends StatelessWidget {
           child: BeautifulUiEnvironment(
             breakpoints: breakpoints,
             motionPolicy: motion,
+            failureHandler: onFailure,
             child: BeautifulUiTheme(
               data: effectiveTheme,
               child: child ?? const SizedBox.shrink(),

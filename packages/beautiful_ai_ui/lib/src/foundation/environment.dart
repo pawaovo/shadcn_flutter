@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'failure.dart';
 import 'layout.dart';
 import 'motion.dart';
 
@@ -10,6 +11,7 @@ final class BeautifulUiEnvironment extends InheritedWidget {
     super.key,
     required this.breakpoints,
     required this.motionPolicy,
+    required this.failureHandler,
     required super.child,
   });
 
@@ -18,6 +20,9 @@ final class BeautifulUiEnvironment extends InheritedWidget {
 
   /// Motion policy shared by module implementations.
   final BeautifulMotionPolicy motionPolicy;
+
+  /// Optional application-level handler for recoverable module failures.
+  final BeautifulUiFailureHandler? failureHandler;
 
   /// Returns the closest internal environment.
   static BeautifulUiEnvironment of(BuildContext context) {
@@ -55,9 +60,27 @@ final class BeautifulUiEnvironment extends InheritedWidget {
     return motionPolicy == BeautifulMotionPolicy.system;
   }
 
+  /// Reports a recoverable module failure through the configured root seam.
+  void reportFailure(BeautifulUiFailure failure) {
+    final handler = failureHandler;
+    if (handler != null) {
+      handler(failure);
+      return;
+    }
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: failure,
+        stack: failure.stackTrace,
+        library: 'beautiful_ai_ui',
+        context: ErrorDescription('while handling ${failure.operation.name}'),
+      ),
+    );
+  }
+
   @override
   bool updateShouldNotify(BeautifulUiEnvironment oldWidget) {
     return oldWidget.breakpoints != breakpoints ||
-        oldWidget.motionPolicy != motionPolicy;
+        oldWidget.motionPolicy != motionPolicy ||
+        oldWidget.failureHandler != failureHandler;
   }
 }

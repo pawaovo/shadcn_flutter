@@ -7,6 +7,116 @@ import 'package:flutter/widgets.dart';
 
 SemanticsHandle? _semanticsHandle;
 
+const _thinkingItems = <BeautifulThinkingItem>[
+  BeautifulThinkingItem(id: 'briefs', label: 'Reading flavor briefs'),
+  BeautifulThinkingItem(id: 'suppliers', label: 'Scanning supplier lists'),
+  BeautifulThinkingItem(
+    id: 'notes',
+    label: 'Comparing tasting notes',
+    detail: '6 flavors',
+  ),
+];
+
+const _contextChunks = <BeautifulContextChunk>[
+  BeautifulContextChunk(
+    id: 'vendor-rule',
+    title: 'Vendor onboarding rule',
+    characterCountLabel: '290 characters',
+    body:
+        'Cold-chain certification must be verified before a new dairy can be '
+        'added to the reorder workflow.',
+    sourceLabel: 'Dairy Onboarding SOP.pdf',
+    sourceBadge: 'PDF',
+    tone: BeautifulContextTone.destructive,
+  ),
+  BeautifulContextChunk(
+    id: 'seasonal-demand',
+    title: 'Seasonal demand row',
+    characterCountLabel: '1,250 characters',
+    body:
+        'Q4 velocity table: pistachio +18%, vanilla +6%, rocky road -11%; '
+        'retire flavors below 40 scoops weekly.',
+    sourceLabel: 'Sales Velocity Export.csv',
+    sourceBadge: 'CSV',
+    tone: BeautifulContextTone.success,
+  ),
+];
+
+const _recommendationOptions = <BeautifulRecommendationOption>[
+  BeautifulRecommendationOption(
+    id: 'cone-king',
+    body: 'Reorder waffle cones from Cone King with a 7-day lead time.',
+    shortLabel: 'Reorder from Cone King · 7-day lead',
+    signal: 3,
+    tone: BeautifulRecommendationTone.success,
+    confidenceLabel: 'High confidence',
+    actionLabel: 'Accept',
+  ),
+  BeautifulRecommendationOption(
+    id: 'madagascar',
+    body: 'Switch vanilla to Vanilla Madagascar for peak season.',
+    shortLabel: 'Switch to Vanilla Madagascar',
+    signal: 2,
+    tone: BeautifulRecommendationTone.warning,
+    confidenceLabel: 'Needs review',
+    actionLabel: 'Configure',
+  ),
+  BeautifulRecommendationOption(
+    id: 'full-restock',
+    body: 'Fall back to a full restock across every SKU.',
+    shortLabel: 'Full restock across every SKU',
+    signal: 0,
+    tone: BeautifulRecommendationTone.neutral,
+    confidenceLabel: 'No signal',
+    actionLabel: 'Accept full restock',
+  ),
+];
+
+const _searchItems = <BeautifulSearchItem>[
+  BeautifulSearchItem(id: 'forecast', title: 'Forecast summer demand'),
+  BeautifulSearchItem(id: 'cones', title: 'Find waffle cone suppliers'),
+  BeautifulSearchItem(id: 'seasonal', title: 'Compare seasonal flavors'),
+  BeautifulSearchItem(id: 'launch', title: 'Draft flavor launch plan'),
+  BeautifulSearchItem(id: 'cold-chain', title: 'Check cold-chain status'),
+  BeautifulSearchItem(id: 'sugar', title: 'Audit sugar costs'),
+  BeautifulSearchItem(id: 'retire', title: 'Retire low sellers'),
+];
+
+const _sampleCode = '''export async function churnBatch() {
+  const flavor = await getFlavor("pistachio");
+  const base = await dairy.fetch({ flavor });
+  await freezer.store(base, { temp: "-16C" });
+  return base.gallons;
+}''';
+
+const _sampleDiff = <BeautifulDiffLine>[
+  BeautifulDiffLine(
+    oldLineNumber: 1,
+    newLineNumber: 1,
+    kind: BeautifulDiffLineKind.context,
+    pieces: <BeautifulCodePiece>[
+      BeautifulCodePiece(text: 'await freezer.store(base, { temp: '),
+    ],
+  ),
+  BeautifulDiffLine(
+    oldLineNumber: 2,
+    kind: BeautifulDiffLineKind.removed,
+    pieces: <BeautifulCodePiece>[
+      BeautifulCodePiece(
+        text: '  "-14C"',
+        change: BeautifulDiffLineKind.removed,
+      ),
+    ],
+  ),
+  BeautifulDiffLine(
+    newLineNumber: 2,
+    kind: BeautifulDiffLineKind.added,
+    pieces: <BeautifulCodePiece>[
+      BeautifulCodePiece(text: '  "-16C"', change: BeautifulDiffLineKind.added),
+    ],
+  ),
+];
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (const bool.fromEnvironment('ENABLE_WEB_SEMANTICS')) {
@@ -106,6 +216,7 @@ final class _CatalogHome extends StatefulWidget {
 final class _CatalogHomeState extends State<_CatalogHome> {
   final Stopwatch _stopwatch = Stopwatch();
   Timer? _timer;
+  String? _openedContextSource;
 
   @override
   void initState() {
@@ -133,7 +244,6 @@ final class _CatalogHomeState extends State<_CatalogHome> {
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final horizontal = constraints.maxWidth >= 900;
             return Column(
               children: <Widget>[
                 _CatalogHeader(
@@ -146,23 +256,8 @@ final class _CatalogHomeState extends State<_CatalogHome> {
                   child: SingleChildScrollView(
                     padding: EdgeInsets.all(theme.spacing.xl),
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1180),
-                      child: horizontal
-                          ? Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(child: _firstColumn(theme)),
-                                SizedBox(width: theme.spacing.lg),
-                                Expanded(child: _secondColumn(theme)),
-                              ],
-                            )
-                          : Column(
-                              children: <Widget>[
-                                _firstColumn(theme),
-                                SizedBox(height: theme.spacing.lg),
-                                _secondColumn(theme),
-                              ],
-                            ),
+                      constraints: const BoxConstraints(maxWidth: 1320),
+                      child: _CatalogGrid(children: _cards()),
                     ),
                   ),
                 ),
@@ -174,55 +269,157 @@ final class _CatalogHomeState extends State<_CatalogHome> {
     );
   }
 
-  Widget _firstColumn(BeautifulUiThemeData theme) {
-    return Column(
-      children: <Widget>[
+  List<Widget> _cards() {
+    return <Widget>[
+      _CatalogCard(
+        title: 'Loading · Drive',
+        caption: 'Square-cell chevron wavefront',
+        child: BeautifulLoadingState(
+          label: 'Preparing workspace',
+          elapsed: _stopwatch.elapsed,
+        ),
+      ),
+      _CatalogCard(
+        title: 'Loading · Dots',
+        caption: 'Circular-cell chevron wavefront',
+        child: BeautifulLoadingState(
+          label: 'Indexing sources',
+          variant: BeautifulLoadingVariant.dots,
+          elapsed: _stopwatch.elapsed,
+        ),
+      ),
+      _CatalogCard(
+        title: 'Loading · Orbit',
+        caption: 'A pixel comet follows the perimeter',
+        child: BeautifulLoadingState(
+          label: 'Checking dependencies',
+          variant: BeautifulLoadingVariant.orbit,
+          elapsed: _stopwatch.elapsed,
+        ),
+      ),
+      _CatalogCard(
+        title: 'Loading · Surfer',
+        caption: 'License-safe, zero-network media fallback',
+        child: BeautifulLoadingState(
+          label: 'Running a long task',
+          variant: BeautifulLoadingVariant.surfer,
+          elapsed: _stopwatch.elapsed,
+          surferFallbackLabel: 'Provide licensed media from the host app',
+        ),
+      ),
+      for (final variant in BeautifulThinkingVariant.values)
         _CatalogCard(
-          title: 'Drive',
-          caption: 'Square-cell chevron wavefront',
-          child: BeautifulLoadingState(
-            label: 'Preparing workspace',
-            elapsed: _stopwatch.elapsed,
+          title: 'Thinking · ${variant.name}',
+          caption: 'Caller-owned trace with persistent disclosure state',
+          child: BeautifulThinking(
+            key: ValueKey<String>('catalog-thinking-${variant.name}'),
+            variant: variant,
+            status: variant == BeautifulThinkingVariant.steps
+                ? BeautifulThinkingStatus.working
+                : BeautifulThinkingStatus.complete,
+            workingLabel: variant == BeautifulThinkingVariant.search
+                ? 'Searching the web'
+                : variant == BeautifulThinkingVariant.coding
+                ? 'Running tools'
+                : 'Thinking',
+            completedLabel: variant == BeautifulThinkingVariant.search
+                ? 'Searched the web'
+                : variant == BeautifulThinkingVariant.coding
+                ? 'Ran 3 tools'
+                : 'Thought for 4 seconds',
+            query: variant == BeautifulThinkingVariant.search
+                ? 'best waffle cone supplier'
+                : null,
+            items: _thinkingItems,
+            initiallyExpanded: true,
+            expandLabel: 'Show ${variant.name} thinking details',
+            collapseLabel: 'Hide ${variant.name} thinking details',
+            onItemPressed: (_) {},
           ),
         ),
-        SizedBox(height: theme.spacing.lg),
-        _CatalogCard(
-          title: 'Dots',
-          caption: 'Circular-cell chevron wavefront',
-          child: BeautifulLoadingState(
-            label: 'Indexing sources',
-            variant: BeautifulLoadingVariant.dots,
-            elapsed: _stopwatch.elapsed,
-          ),
+      _CatalogCard(
+        title: 'Context Cards',
+        caption: _openedContextSource == null
+            ? 'Retrieved chunks with compact disclosure and source action'
+            : 'Opened source: $_openedContextSource',
+        child: BeautifulContextCards(
+          key: const Key('catalog-context-cards'),
+          chunks: _contextChunks,
+          countLabel: '32',
+          onSourcePressed: (chunk) {
+            setState(() => _openedContextSource = chunk.id);
+          },
         ),
-      ],
-    );
+      ),
+      _CatalogCard(
+        title: 'Recommendation Card',
+        caption: 'Alternatives, confidence, and asynchronous acceptance',
+        child: BeautifulRecommendationCard(
+          key: const Key('catalog-recommendation-card'),
+          title: 'Want me to place this restock order?',
+          options: _recommendationOptions,
+          onAccept: (_) {},
+        ),
+      ),
+      _CatalogCard(
+        title: 'Search',
+        caption: 'Live filtering with pointer, keyboard, and Semantics paths',
+        child: BeautifulSearch(
+          key: const Key('catalog-search'),
+          items: _searchItems,
+          placeholder: 'Search flavors…',
+          searchLabel: 'Search flavors',
+          onSelected: (_) {},
+        ),
+      ),
+      _CatalogCard(
+        title: 'Code Block · Code',
+        caption: 'Line numbers, lightweight syntax color, and copy feedback',
+        child: BeautifulCodeBlock.code(
+          key: const Key('catalog-code-block'),
+          filename: 'churn.ts',
+          code: _sampleCode,
+          onCopy: (_) {},
+        ),
+      ),
+      const _CatalogCard(
+        title: 'Code Block · Diff',
+        caption: 'Typed unified diff with non-color change semantics',
+        child: BeautifulCodeBlock.diff(
+          filename: 'churn.ts',
+          lines: _sampleDiff,
+        ),
+      ),
+    ];
   }
+}
 
-  Widget _secondColumn(BeautifulUiThemeData theme) {
-    return Column(
-      children: <Widget>[
-        _CatalogCard(
-          title: 'Orbit',
-          caption: 'A pixel comet follows the perimeter',
-          child: BeautifulLoadingState(
-            label: 'Checking dependencies',
-            variant: BeautifulLoadingVariant.orbit,
-            elapsed: _stopwatch.elapsed,
-          ),
-        ),
-        SizedBox(height: theme.spacing.lg),
-        _CatalogCard(
-          title: 'Surfer',
-          caption: 'License-safe, zero-network media fallback',
-          child: BeautifulLoadingState(
-            label: 'Running a long task',
-            variant: BeautifulLoadingVariant.surfer,
-            elapsed: _stopwatch.elapsed,
-            surferFallbackLabel: 'Provide licensed media from the host app',
-          ),
-        ),
-      ],
+final class _CatalogGrid extends StatelessWidget {
+  const _CatalogGrid({required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = BeautifulUiTheme.of(context);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 1160
+            ? 3
+            : constraints.maxWidth >= 760
+            ? 2
+            : 1;
+        final totalGaps = theme.spacing.lg * (columns - 1);
+        final cardWidth = (constraints.maxWidth - totalGaps) / columns;
+        return Wrap(
+          spacing: theme.spacing.lg,
+          runSpacing: theme.spacing.lg,
+          children: <Widget>[
+            for (final child in children)
+              SizedBox(width: cardWidth, child: child),
+          ],
+        );
+      },
     );
   }
 }
@@ -252,7 +449,7 @@ final class _CatalogHeader extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final title = Text(
-              'Beautiful AI UI · Loading State',
+              'Beautiful AI UI · P1 Catalog',
               style: theme.typography.label.copyWith(
                 color: theme.colors.ink,
                 fontSize: 15,

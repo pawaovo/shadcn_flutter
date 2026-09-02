@@ -40,7 +40,9 @@ packages/
 │       ├── adaptive/
 │       ├── interaction/
 │       ├── accessibility/
-│       └── implementation/shadcn/
+│       └── implementation/
+│           ├── controls/
+│           └── shadcn/
 └── beautiful_ai_ui_catalog/        # Non-published catalog and harness
 ```
 
@@ -82,7 +84,23 @@ Public APIs follow these rules:
 - Use one documented controlled/uncontrolled convention for state that may be host-owned. Do not expose competing `value`, `initialValue`, `controller`, and callback mechanisms for the same state.
 - Add controllers only for genuinely high-frequency or imperative surfaces. The first candidates are streamed text chunks and a flowchart viewport; ordinary cards, rows, filters, and approvals use data plus callbacks.
 - Add a customization slot only after a second concrete use case exists. Slots are semantic and must not expose the internal shadcn widget tree.
-- Errors that affect a component's visible state are supplied as data. Platform and service exceptions are handled by the host.
+- Errors that affect a component's visible state are supplied as data. A
+  narrow host callback is also the seam for real external actions such as
+  recommendation acceptance or clipboard replacement. Exceptions from those
+  actions are normalized as `BeautifulUiFailure` and reported through
+  `BeautifulUiScope.onFailure`; without a handler they use
+  `FlutterError.reportError`.
+
+The P1 modules demonstrate this ownership contract:
+
+- Loading State, Thinking, and Search receive caller-owned business snapshots;
+- Context Cards owns only local body disclosure and delegates source actions;
+- Recommendation Card de-duplicates pending acceptance and commits success
+  only after the host callback completes;
+- Code Block owns copy feedback and uses Flutter Clipboard by default, while a
+  callback can replace that external action for policy or testing;
+- collapsed Thinking, Context, and Recommendation descendants leave both the
+  focus and Semantics trees.
 
 ## Foundation and theming
 
@@ -147,6 +165,13 @@ Custom painters, charts, drag handles, streamed status, and selection overlays r
 The catalog is both a visual reference and an executable contract. It shows normal, hover, focus, pressed, disabled, loading, empty, error, long-content, RTL, high-contrast, and reduced-motion states across compact, medium, and expanded constraints.
 
 Scripted prompts, fake records, timers, and simulated streaming belong only in the catalog. The publishable package contains no scripted agent, demo business data, LLM client, SSE/WebSocket client, database, microphone service, or approval backend.
+
+The same critical Catalog journey runs through WebDriver Chrome, Android
+emulator, and Linux desktop under Xvfb. It launches the real application,
+cycles theme and motion policy, opens recommendation alternatives, filters
+Search, copies Code Block content through the injected catalog callback, and
+fails on framework exceptions. Widget tests remain the broader behavioral
+matrix; device journeys prove the packaged runners can execute the core path.
 
 ## Verification contract
 

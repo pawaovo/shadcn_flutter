@@ -99,3 +99,18 @@ The parity manifest records the approved presentation per component before imple
 | G4: stable release | All advertised platforms meet the table above; real assistive-technology review, browser pass, performance evidence, license audit, and publish dry-run are complete |
 
 Evidence is dated and release-specific. A platform returns to Partial when a toolchain, renderer, or major interaction dependency changes until proportionate regression evidence is restored.
+
+## Current evidence snapshot
+
+- CI run `33623501086` passed JavaScript and Wasm Web releases, Android debug
+  APK, iOS release without signing, and macOS, Windows, and Linux release
+  builds for the Loading vertical slice.
+- The P1 shared Catalog journey passes locally through Flutter WebDriver on
+  Chrome 152 with a matching ChromeDriver. The same test is wired for Ubuntu
+  Chrome, Linux/Xvfb, and Android emulator execution in CI; those new jobs are
+  not evidence until the P1 commit completes remotely.
+- Widget and Semantics suites cover the P1 components at adaptive boundaries,
+  200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
+  paths.
+- Physical-device smoke passes and real TalkBack, VoiceOver, Narrator, and
+  Orca reviews remain release gates, so no platform is yet marked Verified.

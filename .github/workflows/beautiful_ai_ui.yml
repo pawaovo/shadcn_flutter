@@ -66,6 +66,15 @@ jobs:
             exit 1
           fi
 
+          for journey_file in \
+            "$CATALOG_DIR/integration_test/catalog_journey_test.dart" \
+            "$CATALOG_DIR/test_driver/integration_test.dart"; do
+            if [ ! -f "$journey_file" ]; then
+              echo "::error::Required catalog journey file is missing: $journey_file"
+              exit 1
+            fi
+          done
+
   quality:
     name: Format, analyze, and test
     needs: detect-targets
@@ -259,6 +268,97 @@ jobs:
       - name: Build Android debug APK
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter build apk --debug --no-pub
+
+  web-linux-journeys:
+    name: Run Chrome and Linux journeys
+    needs: detect-targets
+    if: needs.detect-targets.outputs.web == 'true' && needs.detect-targets.outputs.linux == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux journey dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes clang cmake libgtk-3-dev liblzma-dev libstdc++-12-dev ninja-build pkg-config xvfb
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Run Chrome journey
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          export PATH="$CHROMEWEBDRIVER:$PATH"
+          chromedriver --port=4444 > "$RUNNER_TEMP/chromedriver.log" 2>&1 &
+          webdriver_pid=$!
+          trap 'kill "$webdriver_pid" 2>/dev/null || true' EXIT
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/catalog_journey_test.dart \
+            --device-id=web-server \
+            --browser-name=chrome \
+            --driver-port=4444 \
+            --browser-dimension=1440x900 \
+            --web-browser-flag=--force-device-scale-factor=1 \
+            --no-pub
+
+      - name: Run Linux desktop journey
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: xvfb-run --auto-servernum flutter test integration_test/catalog_journey_test.dart --device-id=linux --no-pub
+
+  android-journey:
+    name: Run Android journey
+    needs: detect-targets
+    if: needs.detect-targets.outputs.android == 'true' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Enable KVM group permissions
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run journey on Android emulator
+        uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          script: cd packages/beautiful_ai_ui_catalog && flutter test integration_test/catalog_journey_test.dart --device-id=emulator-5554 --no-pub
 
   apple-builds:
     name: Build Apple catalogs
