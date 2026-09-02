@@ -44,6 +44,23 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
   });
 
+  testWidgets('catalog controls support semantics activation', (tester) async {
+    final semantics = tester.ensureSemantics();
+
+    await tester.pumpWidget(const CatalogApp());
+    await tester.pump();
+
+    final themeButton = find.semantics.byLabel('Theme: system');
+    expect(themeButton, findsOne);
+
+    tester.semantics.tap(themeButton);
+    await tester.pump();
+    expect(find.text('Theme: light'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    semantics.dispose();
+  });
+
   testWidgets('catalog stays overflow-free at compact viewport width', (
     tester,
   ) async {

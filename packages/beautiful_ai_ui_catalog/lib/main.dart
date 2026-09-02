@@ -366,6 +366,7 @@ final class _CatalogButtonState extends State<_CatalogButton> {
       button: true,
       excludeSemantics: true,
       label: widget.label,
+      onTap: widget.onPressed,
       child: FocusableActionDetector(
         onShowHoverHighlight: (value) => setState(() => _hovered = value),
         onShowFocusHighlight: (value) => setState(() => _focused = value),
