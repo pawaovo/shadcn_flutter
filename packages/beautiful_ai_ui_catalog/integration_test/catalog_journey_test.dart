@@ -1,4 +1,5 @@
 import 'package:beautiful_ai_ui_catalog/main.dart' as catalog;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -89,9 +90,8 @@ void main() {
         await tester.enterText(find.byType(EditableText), 'waffle');
         await tester.pump();
         expect(find.text('Find waffle cone suppliers'), findsOneWidget);
-        tester.semantics.tap(
-          find.semantics.byLabel('Find waffle cone suppliers'),
-        );
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
         await tester.pump();
         expect(
           tester

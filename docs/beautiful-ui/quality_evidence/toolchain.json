@@ -54,7 +54,7 @@
     "chrome_local": "passed_complete_p1_interaction_path",
     "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
     "chrome_ci": "passed_run_33632807691",
-    "linux_xvfb_ci": "rerun_pending_explicit_enabled_semantics_fix",
-    "android_emulator_ci": "rerun_pending_explicit_enabled_semantics_fix"
+    "linux_xvfb_ci": "rerun_pending_keyboard_selection_path",
+    "android_emulator_ci": "rerun_pending_keyboard_selection_path"
   }
 }
