@@ -70,6 +70,7 @@ void main() {
         .getSemanticsData();
 
     expect(first.flagsCollection.isButton, isTrue);
+    expect(first.flagsCollection.isEnabled, ui.Tristate.isTrue);
     expect(first.hasAction(SemanticsAction.tap), isTrue);
     expect(second.flagsCollection.isButton, isTrue);
     expect(

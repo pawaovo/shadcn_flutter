@@ -358,6 +358,7 @@ items:
       - The empty state is delayed until three Unicode scalar values, matching source intent without assuming ASCII input.
       - Item order and nested keywords are defensively snapshotted; pointer hover never reports semantic selection.
       - Field, clear, and result hit regions remain at least 48dp across all adaptive modes.
+      - Result and clear actions explicitly expose enabled Semantics across Web and desktop accessibility bridges.
     open_items:
       - real assistive-technology smoke evidence
       - explicit high-contrast and normal/reduced transition evidence

@@ -873,6 +873,7 @@ final class _SearchActionState extends State<_SearchAction> {
     return Semantics(
       container: true,
       button: true,
+      enabled: true,
       focusable: true,
       focused: _focused,
       selected: widget.selected,

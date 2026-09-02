@@ -21,6 +21,8 @@ All notable changes to this package will be documented in this file.
 
 - Honor disabled theme animation in the pinned shadcn layer so reduced-motion
   policy remains consistent (commit 80db77a, @pawaovo).
+- Mark Search result and clear actions explicitly enabled for desktop
+  accessibility bridges (product/main, @pawaovo).
 
 ## [0.1.0-dev.1]
 

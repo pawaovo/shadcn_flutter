@@ -109,7 +109,7 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
   Chrome 152 with a matching ChromeDriver. The same test is wired for Ubuntu
   Chrome, Linux/Xvfb, and Android emulator execution in CI. Run `33632807691`
   passed Chrome and every P1 platform build; Linux/Xvfb and Android journey
-  fixes await the follow-up committed run.
+  fixes, including explicit enabled action Semantics, await the follow-up run.
 - Widget and Semantics suites cover the P1 components at adaptive boundaries,
   200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
   paths.
