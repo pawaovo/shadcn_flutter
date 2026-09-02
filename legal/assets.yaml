@@ -67,16 +67,22 @@ entries:
     kind: generated_test_images
     distribution_status: approved
     distributable: true
-    generation_toolchain: Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts
+    generation_toolchains:
+      - Flutter 3.47.0 on Ubuntu 24.04 x64 with package-loaded Geist fonts for the canonical CI fixtures.
+      - Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts for supplemental local fixtures.
     files:
       - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_light.png
-        sha256: 3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262
+        sha256: 6a23a9d0f9615830da9790ffa23cb2a6c170f8e30db5183462393987ece710c8
       - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_dark.png
+        sha256: dc8175f4aefe985ca81de7cfd8e215002cc8a9aec431c4d77aa9de5eec6847ac
+      - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_light_macos.png
+        sha256: 3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262
+      - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_dark_macos.png
         sha256: 255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112
     notes:
       - Generated entirely from project Dart code and inherited, license-tracked shadcn_flutter fonts.
       - These are test evidence, not product branding or Beautiful UI website screenshots.
-      - Replace hashes after the Linux canonical baseline is accepted.
+      - The Ubuntu fixtures were accepted after visual review of CI run 33622890532; the macOS fixtures prevent local cross-OS raster false positives.
 
   - id: flutter_generated_catalog_launcher_assets
     source: Flutter 3.47.0 flutter create platform templates

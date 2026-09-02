@@ -26,11 +26,20 @@
     "cocoapods": "missing"
   },
   "golden": {
-    "local_platform": "macOS arm64",
+    "canonical_platform": "Ubuntu 24.04 x64",
     "font_families": [
       "packages/shadcn_flutter/GeistSans",
       "packages/shadcn_flutter/GeistMono"
     ],
-    "linux_canonical_status": "pending_ci"
+    "linux_canonical_status": "accepted_from_ci_run_33622890532",
+    "linux_canonical_sha256": {
+      "light": "6a23a9d0f9615830da9790ffa23cb2a6c170f8e30db5183462393987ece710c8",
+      "dark": "dc8175f4aefe985ca81de7cfd8e215002cc8a9aec431c4d77aa9de5eec6847ac"
+    },
+    "local_supplemental_platform": "macOS arm64",
+    "local_supplemental_sha256": {
+      "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
+      "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
+    }
   }
 }

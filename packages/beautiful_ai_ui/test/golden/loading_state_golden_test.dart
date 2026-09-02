@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -68,8 +70,11 @@ void main() {
 
       await expectLater(
         find.byKey(boundaryKey),
-        matchesGoldenFile('goldens/loading_state_${brightness.name}.png'),
+        matchesGoldenFile(
+          'goldens/loading_state_${brightness.name}'
+          '${Platform.isMacOS ? '_macos' : ''}.png',
+        ),
       );
-    });
+    }, skip: !(Platform.isLinux || Platform.isMacOS));
   }
 }

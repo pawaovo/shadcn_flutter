@@ -63,11 +63,16 @@ used its documented single-threaded fallback.
 
 ## Open evidence
 
-- Linux canonical golden comparison must pass in CI; the initial PNGs were
-  generated on the pinned macOS host and inspected manually.
-- Android debug APK plus iOS, macOS, Windows, and Linux native builds are
-  delegated to the new CI matrix because this machine lacks the required
-  native toolchains.
+- Linux canonical goldens were captured from Ubuntu 24.04 in CI run
+  `33622890532`, then accepted after comparing its 520×380 actual images with
+  the original macOS fixtures. Layout, text, colors, spacing, and geometry were
+  unchanged; the 5.30% dark and 6.46% light differences were confined to
+  cross-OS text, border, grid, and shadow rasterization. Separate macOS
+  fixtures preserve deterministic local testing.
+- CI run `33622890532` passed the Web JS and Wasm releases, Android debug APK,
+  iOS release without code signing, and macOS, Windows, and Linux release
+  builds. The overall run failed only because its first Linux golden comparison
+  was intentionally used to capture the now-accepted Ubuntu canonical images.
 - Real TalkBack, VoiceOver, Narrator, and Orca checks remain later release
   evidence.
 - Inter and JetBrains Mono remain a tracked Foundation parity item; this slice
