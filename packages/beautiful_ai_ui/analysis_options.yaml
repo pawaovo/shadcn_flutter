@@ -1,0 +1,21 @@
+analyzer:
+  exclude:
+  - build/**
+  - example/android/**
+  - example/ios/**
+  - example/linux/**
+  - example/macos/**
+  - example/web/**
+  - example/windows/**
+  - android/**
+  - ios/**
+  - web/**
+  - windows/**
+  - macos/**
+  - linux/**
+
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+  - public_member_api_docs

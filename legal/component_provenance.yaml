@@ -1,0 +1,215 @@
+schema_version: 1
+updated_at: "2026-09-02"
+
+project:
+  package: beautiful_ai_ui
+  relationship: independent_unofficial_reimplementation
+
+source:
+  project: Beautiful UI
+  repository: https://github.com/slev12397/beautiful-ui
+  commit: dd1ba4f323c29ef6c383b2dbf1d7100f2c26ccac
+  license: MIT
+  license_file: LICENSES/BEAUTIFUL_UI_MIT.txt
+  copyright: Copyright (c) 2026 Shane Levine
+  registry_index: public/r/registry.json
+
+method:
+  description: Reimplement visual hierarchy, state, and interaction intent in Flutter; do not translate TSX or Tailwind line by line.
+  runtime_dependency_on_source: false
+  source_branding_in_distribution: false
+  source_demo_data_in_library: false
+  source_npm_dependencies_in_library: false
+
+status_contract:
+  source_registration: complete
+  implementation_status: Uses the exact status vocabulary defined by docs/beautiful-ui/parity_manifest.yaml.
+
+items:
+  - name: foundation
+    source_path: public/r/foundation.json
+    source_type: registry:style
+    adaptation: flutter_foundation_tokens_and_policy
+    phase: P0
+    implementation_status: in_progress
+    source_files:
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/foundation
+      - packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart
+    license_decision: adapted_under_beautiful_ui_mit
+  - name: button
+    source_path: public/r/button.json
+    source_type: registry:ui
+    adaptation: map_to_shadcn_flutter_or_internal_behavior
+    phase: P0
+    implementation_status: not_started
+  - name: glide-menu
+    source_path: public/r/glide-menu.json
+    source_type: registry:ui
+    adaptation: internal_flutter_menu_pattern
+    phase: P2
+    implementation_status: not_started
+  - name: entity-chip
+    source_path: public/r/entity-chip.json
+    source_type: registry:ui
+    adaptation: internal_flutter_entity_pattern
+    phase: P1
+    implementation_status: not_started
+  - name: value-pill
+    source_path: public/r/value-pill.json
+    source_type: registry:ui
+    adaptation: internal_flutter_value_pattern
+    phase: P2
+    implementation_status: not_started
+  - name: shimmer
+    source_path: public/r/shimmer.json
+    source_type: registry:ui
+    adaptation: flutter_motion_pattern_with_reduced_motion
+    phase: P0
+    implementation_status: not_started
+  - name: stream-text
+    source_path: public/r/stream-text.json
+    source_type: registry:ui
+    adaptation: internal_flutter_stream_rendering
+    phase: P2
+    implementation_status: not_started
+  - name: loading-state
+    source_path: public/r/loading-state.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/LoadingState.tsx
+      - app/globals.css
+      - lib/meta.ts
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/loading_state.dart
+      - packages/beautiful_ai_ui/test/widget/loading_state_test.dart
+      - packages/beautiful_ai_ui/test/semantics
+      - packages/beautiful_ai_ui/test/golden
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - subway-surfers.mp4
+      - https://95dnc2a95qgwt9ff.public.blob.vercel-storage.com/subway-surfers.mp4
+  - name: thinking-state
+    source_path: public/r/thinking-state.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: not_started
+  - name: streaming-text
+    source_path: public/r/streaming-text.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: approval-card
+    source_path: public/r/approval-card.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: tool-chips
+    source_path: public/r/tool-chips.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: task-rows
+    source_path: public/r/task-rows.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: chat-composer
+    source_path: public/r/chat-composer.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: prompt-bar
+    source_path: public/r/prompt-bar.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+  - name: recommendation-card
+    source_path: public/r/recommendation-card.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: not_started
+  - name: context-cards
+    source_path: public/r/context-cards.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: not_started
+  - name: diff-table
+    source_path: public/r/diff-table.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+  - name: records-table
+    source_path: public/r/records-table.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+  - name: filter-table
+    source_path: public/r/filter-table.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: sidebar-nav
+    source_path: public/r/sidebar-nav.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite_with_replacement_icons
+    phase: P3
+    implementation_status: not_started
+  - name: search
+    source_path: public/r/search.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: not_started
+  - name: flowchart
+    source_path: public/r/flowchart.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+  - name: insight-cards
+    source_path: public/r/insight-cards.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+  - name: code-block
+    source_path: public/r/code-block.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P1
+    implementation_status: not_started
+  - name: fine-tune-card
+    source_path: public/r/fine-tune-card.json
+    source_type: registry:component
+    adaptation: public_flutter_composite
+    phase: P2
+    implementation_status: not_started
+  - name: selection-actions
+    source_path: public/r/selection-actions.json
+    source_type: registry:component
+    adaptation: spike_then_public_flutter_composite
+    phase: P3
+    implementation_status: not_started
+
+maintenance:
+  - Update an item when implementation begins, source material beyond the listed registry entry is consulted, or a file contains a substantial adaptation.
+  - Add the exact source path, source commit, destination path, adaptation status, reviewer, and license decision before marking the parity item complete.
+  - Keep every phase and implementation_status exactly aligned with docs/beautiful-ui/parity_manifest.yaml, and keep attribution aligned with THIRD_PARTY_NOTICES.md.

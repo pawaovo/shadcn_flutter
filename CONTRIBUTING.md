@@ -22,8 +22,8 @@ PRs that do not follow this process may be closed if the solution is not aligned
 
 ## Quick start
 
-- Flutter: >= 3.32.3
-- Dart SDK: >= 3.6.0 < 4.0.0
+- Flutter: >= 3.47.0
+- Dart SDK: >= 3.13.0 < 4.0.0
 - Platforms: mobile, desktop, and web (docs run on web)
 
 Windows PowerShell quickstart:
@@ -105,7 +105,7 @@ cd ../../..
 ## Local development
 
 - Install tooling once:
-  - Flutter 3.32.3+ and Dart 3.6+
+  - Flutter 3.47.0+ and Dart 3.13+
   - Chrome for web docs
 
 - Typical workflow:

@@ -13,3 +13,6 @@ workspace:
 - packages/gen
 - packages/shadcn_flutter_genui
 - packages/shadcn_flutter_genui/example
+- packages/beautiful_ai_ui
+- packages/beautiful_ai_ui/example
+- packages/beautiful_ai_ui_catalog

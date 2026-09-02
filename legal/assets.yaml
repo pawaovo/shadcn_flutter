@@ -1,0 +1,117 @@
+schema_version: 1
+updated_at: "2026-09-02"
+
+policy:
+  default: deny_unregistered_assets
+  rule: Every bundled font, icon font, image, video, audio file, animation, and generated asset needs origin, version or hash, license, destination, and redistribution approval before release.
+  remote_media: Runtime loading of source demonstration media is prohibited unless a product-specific security, privacy, reliability, and license review explicitly approves it.
+  branding: Source project logos and trade dress are not distributable product branding.
+
+distribution_status_values:
+  excluded: Must not be present in source packages, built artifacts, runtime fetches, or release media.
+  inherited: Supplied only through an upstream dependency and subject to that dependency's verified license inventory.
+  pending_approval: Must not ship until the stated approval gate is complete.
+  conditional: May ship only after all listed requirements are complete and the status changes to approved.
+  approved: Approved for the recorded files, versions, hashes, destinations, and release scope.
+
+entries:
+  - id: central_icons_round_outlined
+    source: "@central-icons-react/round-outlined-radius-2-stroke-2"
+    source_context: Beautiful UI Sidebar Nav
+    kind: commercial_icon_package
+    distribution_status: excluded
+    distributable: false
+    reason: Requires a commercial license key and is unnecessary for parity.
+    replacement: Use an approved open icon already available through shadcn_flutter, provisionally Lucide, and preserve the interaction meaning rather than icon identity.
+
+  - id: loading_state_surfer_video
+    source: Beautiful UI Loading State Surfer demo video reference
+    source_context: Beautiful UI Loading State
+    kind: unbundled_unversioned_demo_video
+    distribution_status: excluded
+    distributable: false
+    runtime_fetch_allowed: false
+    reason: The pinned registry references /subway-surfers.mp4 while the pinned component source references a remote Vercel Blob; the media binary is absent from the pinned repository and no separate redistribution authorization has been established.
+    replacement: Use an original Flutter-rendered animation or an independently licensed project asset recorded here.
+
+  - id: beautiful_ui_and_turbo_brand_assets
+    source: Beautiful UI website and repository
+    kind: logos_and_brand_assets
+    distribution_status: excluded
+    distributable: false
+    reason: Software licenses do not grant product branding or endorsement rights.
+    replacement: Independent project name, iconography, screenshots, and catalog branding.
+
+  - id: shadcn_flutter_bundled_fonts_and_icons
+    source: shadcn_flutter package at 5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73
+    kind: dependency_assets
+    distribution_status: inherited
+    distributable: true
+    approval_gate: The exact dependency asset and license inventory must pass for the release candidate.
+    notes:
+      - Do not duplicate the files into beautiful_ai_ui without a separate asset record.
+      - Preserve upstream package license notices and review Flutter's generated license registry in release builds.
+      - Current upstream package metadata lists RadixIcons, BootstrapIcons, LucideIcons, GeistSans, and GeistMono assets.
+
+  - id: beautiful_ui_typography_equivalents
+    source: Beautiful UI foundation design intent
+    kind: fonts
+    distribution_status: pending_approval
+    distributable: false
+    notes:
+      - An exact font is not required for architectural parity if platform or approved dependency typography satisfies the role.
+      - If Inter, JetBrains Mono, or another font is bundled later, record exact files, upstream version, hashes, license text, subsetting changes, and destination before merge.
+
+  - id: loading_state_test_goldens
+    source: Project-rendered Flutter golden fixtures
+    kind: generated_test_images
+    distribution_status: approved
+    distributable: true
+    generation_toolchain: Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts
+    files:
+      - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_light.png
+        sha256: 3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262
+      - path: packages/beautiful_ai_ui/test/golden/goldens/loading_state_dark.png
+        sha256: 255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112
+    notes:
+      - Generated entirely from project Dart code and inherited, license-tracked shadcn_flutter fonts.
+      - These are test evidence, not product branding or Beautiful UI website screenshots.
+      - Replace hashes after the Linux canonical baseline is accepted.
+
+  - id: flutter_generated_catalog_launcher_assets
+    source: Flutter 3.47.0 flutter create platform templates
+    kind: generated_catalog_launcher_and_launch_images
+    distribution_status: pending_approval
+    distributable: false
+    source_revision: 4cf2416426
+    license: BSD-3-Clause
+    license_file: LICENSES/FLUTTER_SDK_BSD_3_CLAUSE.txt
+    hash_manifest: legal/catalog_template_assets.sha256
+    destinations:
+      - packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-*/ic_launcher.png
+      - packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets
+      - packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets
+      - packages/beautiful_ai_ui_catalog/web/favicon.png
+      - packages/beautiful_ai_ui_catalog/web/icons
+      - packages/beautiful_ai_ui_catalog/windows/runner/resources/app_icon.ico
+    notes:
+      - The catalog is publish_to none; these files come from the pinned Flutter SDK templates.
+      - The generated launcher art includes Flutter branding and is acceptable only for local and CI scaffold validation.
+      - Replace it with independently branded, registered assets before any public app-store, hosted catalog, or branding release; then change this entry to approved.
+
+  - id: future_original_assets
+    source: project_created_or_commissioned
+    kind: generated_or_authored_assets
+    distribution_status: conditional
+    distributable: false
+    requirements:
+      - Record creator or generator, creation date, source inputs, usage rights, file hash, and destination.
+      - Do not use Beautiful UI, Turbo, or other third-party logos as source material.
+      - Review app-store and web privacy implications for any remotely loaded asset.
+
+release_checks:
+  - No file ships from an entry whose distributable value is false.
+  - Only approved or fully verified inherited entries may contribute files to a release.
+  - Package, example, and catalog asset declarations match this inventory.
+  - THIRD_PARTY_NOTICES.md and the built Flutter license page cover every redistributed third-party asset.
+  - Screenshots and marketing materials are reviewed separately from runtime package contents.

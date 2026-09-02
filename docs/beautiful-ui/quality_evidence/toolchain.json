@@ -1,0 +1,36 @@
+{
+  "captured_on": "2026-09-02",
+  "flutter": {
+    "version": "3.47.0",
+    "channel": "stable",
+    "framework_revision": "4cf2416426",
+    "engine_revision": "5f77625673"
+  },
+  "dart": {
+    "version": "3.13.0"
+  },
+  "host": {
+    "os": "macOS 15.7.9",
+    "architecture": "arm64",
+    "locale": "zh-Hans-CN"
+  },
+  "source_pins": {
+    "shadcn_flutter": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+    "shadcn_flutter_tag": "v0.0.54",
+    "beautiful_ui": "dd1ba4f323c29ef6c383b2dbf1d7100f2c26ccac"
+  },
+  "local_capabilities": {
+    "chrome_web": "available",
+    "android_sdk": "missing",
+    "xcode": "incomplete",
+    "cocoapods": "missing"
+  },
+  "golden": {
+    "local_platform": "macOS arm64",
+    "font_families": [
+      "packages/shadcn_flutter/GeistSans",
+      "packages/shadcn_flutter/GeistMono"
+    ],
+    "linux_canonical_status": "pending_ci"
+  }
+}

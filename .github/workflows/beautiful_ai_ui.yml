@@ -1,0 +1,374 @@
+name: Beautiful AI UI
+
+on:
+  pull_request:
+    branches:
+      - product/main
+  push:
+    branches:
+      - product/main
+  workflow_dispatch:
+
+concurrency:
+  group: beautiful-ai-ui-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.47.0"
+  LIBRARY_DIR: packages/beautiful_ai_ui
+  CATALOG_DIR: packages/beautiful_ai_ui_catalog
+
+jobs:
+  detect-targets:
+    name: Detect generated targets
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      library: ${{ steps.paths.outputs.library }}
+      catalog: ${{ steps.paths.outputs.catalog }}
+      web: ${{ steps.paths.outputs.web }}
+      android: ${{ steps.paths.outputs.android }}
+      ios: ${{ steps.paths.outputs.ios }}
+      macos: ${{ steps.paths.outputs.macos }}
+      windows: ${{ steps.paths.outputs.windows }}
+      linux: ${{ steps.paths.outputs.linux }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect packages and generated platform runners
+        id: paths
+        shell: bash
+        run: |
+          {
+            echo "library=$([ -f "$LIBRARY_DIR/pubspec.yaml" ] && echo true || echo false)"
+            echo "catalog=$([ -f "$CATALOG_DIR/pubspec.yaml" ] && echo true || echo false)"
+            echo "web=$([ -d "$CATALOG_DIR/web" ] && echo true || echo false)"
+            echo "android=$([ -d "$CATALOG_DIR/android" ] && echo true || echo false)"
+            echo "ios=$([ -d "$CATALOG_DIR/ios" ] && echo true || echo false)"
+            echo "macos=$([ -d "$CATALOG_DIR/macos" ] && echo true || echo false)"
+            echo "windows=$([ -d "$CATALOG_DIR/windows" ] && echo true || echo false)"
+            echo "linux=$([ -d "$CATALOG_DIR/linux" ] && echo true || echo false)"
+          } >> "$GITHUB_OUTPUT"
+
+          for platform in web android ios macos windows linux; do
+            if [ ! -d "$CATALOG_DIR/$platform" ]; then
+              echo "::error::Required $platform catalog runner is missing."
+              exit 1
+            fi
+          done
+
+          if [ ! -f "$LIBRARY_DIR/pubspec.yaml" ] || [ ! -f "$CATALOG_DIR/pubspec.yaml" ]; then
+            echo "::error::Required Beautiful AI UI library or catalog package is missing."
+            exit 1
+          fi
+
+  quality:
+    name: Format, analyze, and test
+    needs: detect-targets
+    if: needs.detect-targets.outputs.library == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Report Flutter version
+        run: flutter --version
+
+      - name: Resolve workspace dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Verify pub workspace
+        run: dart pub workspace list
+
+      - name: Check formatting
+        shell: bash
+        run: |
+          targets=(
+            "$LIBRARY_DIR"
+            "packages/shadcn_flutter/lib/src/shadcn_app.dart"
+            "packages/shadcn_flutter/test/components/shadcn_layer_test.dart"
+          )
+          if [ -d "$CATALOG_DIR" ]; then
+            targets+=("$CATALOG_DIR")
+          fi
+          dart format --output=none --set-exit-if-changed "${targets[@]}"
+
+      - name: Analyze packages
+        shell: bash
+        run: |
+          packages=("packages/shadcn_flutter" "$LIBRARY_DIR")
+          if [ -f "$CATALOG_DIR/pubspec.yaml" ]; then
+            packages+=("$CATALOG_DIR")
+          fi
+
+          for package in "${packages[@]}"; do
+            (cd "$package" && flutter analyze --fatal-infos --fatal-warnings)
+          done
+
+      - name: Enforce the shadcn implementation seam
+        shell: bash
+        run: |
+          if rg -n "package:shadcn_flutter/src/" "$LIBRARY_DIR/lib"; then
+            echo "::error::beautiful_ai_ui must not deep-import shadcn_flutter src libraries."
+            exit 1
+          fi
+
+          if rg -n "package:shadcn_flutter" "$LIBRARY_DIR/lib" \
+            --glob '!**/implementation/shadcn/**'; then
+            echo "::error::Only the internal implementation/shadcn seam may import shadcn_flutter."
+            exit 1
+          fi
+
+          if rg -n "export .*shadcn_flutter" "$LIBRARY_DIR/lib"; then
+            echo "::error::The public package must not re-export shadcn_flutter."
+            exit 1
+          fi
+
+      - name: Run package tests
+        working-directory: packages/beautiful_ai_ui
+        shell: bash
+        run: |
+          mapfile -d '' tests < <(
+            find test -type f -name '*_test.dart' \
+              ! -path 'test/semantics/*' \
+              ! -path 'test/golden/*' \
+              -print0 2>/dev/null
+          )
+
+          if [ "${#tests[@]}" -eq 0 ]; then
+            echo "::error::Required package behavior tests are missing."
+            exit 1
+          fi
+          flutter test --no-pub "${tests[@]}"
+
+      - name: Run semantics tests
+        working-directory: packages/beautiful_ai_ui
+        shell: bash
+        run: |
+          if find test/semantics -type f -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --no-pub test/semantics
+          else
+            echo "::error::Required semantics tests are missing."
+            exit 1
+          fi
+
+      - name: Verify Linux golden tests
+        working-directory: packages/beautiful_ai_ui
+        shell: bash
+        run: |
+          if find test/golden -type f -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --no-pub --concurrency=1 test/golden
+          else
+            echo "::error::Required golden tests are missing."
+            exit 1
+          fi
+
+      - name: Upload golden failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-golden-failures
+          path: packages/beautiful_ai_ui/test/**/failures/**
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Run catalog tests
+        if: needs.detect-targets.outputs.catalog == 'true'
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          if find test -type f -name '*_test.dart' -print -quit 2>/dev/null | grep -q .; then
+            flutter test --no-pub
+          else
+            echo "::error::Required catalog tests are missing."
+            exit 1
+          fi
+
+      - name: Run shadcn core regression tests
+        working-directory: packages/shadcn_flutter
+        run: flutter test --no-pub
+
+  web-build:
+    name: Build Web catalog
+    needs: detect-targets
+    if: needs.detect-targets.outputs.web == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build Web release
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build web --release --no-pub --dart-define=ENABLE_WEB_SEMANTICS=true
+
+      - name: Build WebAssembly release
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build web --release --wasm --no-pub --dart-define=ENABLE_WEB_SEMANTICS=true
+
+  android-build:
+    name: Build Android catalog
+    needs: detect-targets
+    if: needs.detect-targets.outputs.android == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build Android debug APK
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build apk --debug --no-pub
+
+  apple-builds:
+    name: Build Apple catalogs
+    needs: detect-targets
+    if: (needs.detect-targets.outputs.ios == 'true' || needs.detect-targets.outputs.macos == 'true') && github.event_name != 'pull_request'
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build iOS release without code signing
+        if: needs.detect-targets.outputs.ios == 'true'
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build ios --release --no-codesign --no-pub
+
+      - name: Build macOS release
+        if: needs.detect-targets.outputs.macos == 'true'
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build macos --release --no-pub
+
+  windows-build:
+    name: Build Windows catalog
+    needs: detect-targets
+    if: needs.detect-targets.outputs.windows == 'true' && github.event_name != 'pull_request'
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build Windows release
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build windows --release --no-pub
+
+  linux-build:
+    name: Build Linux catalog
+    needs: detect-targets
+    if: needs.detect-targets.outputs.linux == 'true' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes clang cmake libgtk-3-dev liblzma-dev libstdc++-12-dev ninja-build pkg-config
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build Linux release
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter build linux --release --no-pub
+
+  publish-dry-run:
+    name: Validate pub.dev package
+    needs:
+      - detect-targets
+      - quality
+    if: needs.detect-targets.outputs.library == 'true' && needs.quality.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui
+        run: flutter pub get --enforce-lockfile
+
+      - name: Run publish dry-run
+        working-directory: packages/beautiful_ai_ui
+        run: flutter pub publish --dry-run

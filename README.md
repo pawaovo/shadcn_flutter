@@ -12,10 +12,21 @@
 - [`packages/shadcn_flutter/example/`](packages/shadcn_flutter/example/) — a minimal consumer app
 - [`packages/gen/`](packages/gen/) — developer tooling (icon/style/color
   generators, docs and LLM reference generators)
+- [`packages/beautiful_ai_ui/`](packages/beautiful_ai_ui/) — an independent,
+  adaptive set of AI interface primitives built behind a stable package seam
+- [`packages/beautiful_ai_ui_catalog/`](packages/beautiful_ai_ui_catalog/) —
+  the non-published six-platform visual and interaction catalog
+
+The `beautiful_ai_ui` extension lives on the fork's `product/main` branch. It
+does not alter the public interface of the upstream core package and is not
+affiliated with or endorsed by Beautiful UI, Turbo, or the upstream
+`shadcn_flutter` authors. See [the architecture decision](docs/beautiful-ui/decisions/0001-package-seam.md)
+and [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Getting started
 
 ```shell
+mise install       # installs the repository-pinned Flutter 3.47.0 toolchain
 flutter pub get   # resolves every package in the workspace at once
 flutter analyze
 ```

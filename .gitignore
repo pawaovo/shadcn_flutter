@@ -26,8 +26,8 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-# Libraries should not include pubspec.lock, per https://dart.dev/guides/libraries/private-files#pubspeclock.
-/pubspec.lock
+# This fork contains executable catalog applications in a Dart Pub Workspace.
+# Keep the shared root lockfile so CI and release evidence resolve identically.
 **/doc/api/
 .dart_tool/
 build/

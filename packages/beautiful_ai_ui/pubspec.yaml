@@ -1,0 +1,29 @@
+name: beautiful_ai_ui
+description: "Independent, adaptive AI interface primitives for Flutter, built on shadcn_flutter."
+version: 0.1.0-dev.1
+homepage: "https://github.com/pawaovo/shadcn_flutter"
+repository: "https://github.com/pawaovo/shadcn_flutter/tree/product/main/packages/beautiful_ai_ui"
+issue_tracker: "https://github.com/pawaovo/shadcn_flutter/issues"
+
+environment:
+  sdk: ">=3.13.0 <4.0.0"
+  flutter: ">=3.47.0"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shadcn_flutter: ">=0.0.54 <0.1.0"
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+topics:
+- ai
+- components
+- design-system
+- responsive
+- widgets

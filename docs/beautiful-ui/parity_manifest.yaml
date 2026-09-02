@@ -1,0 +1,326 @@
+schema_version: 1
+manifest_status: initial
+updated_at: "2026-09-02"
+
+project:
+  package: beautiful_ai_ui
+  implementation_kind: independent_flutter_reimplementation
+  official_affiliation: none
+
+baselines:
+  shadcn_flutter:
+    repository: https://github.com/sunarya-thito/shadcn_flutter
+    commit: 5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73
+    tag: v0.0.54
+  beautiful_ui:
+    repository: https://github.com/slev12397/beautiful-ui
+    commit: dd1ba4f323c29ef6c383b2dbf1d7100f2c26ccac
+    registry_path: public/r/registry.json
+
+scope_counts:
+  total: 27
+  foundation: 1
+  building_block: 6
+  composite_component: 20
+
+phase_meanings:
+  P0: Foundation, package seam, shared policy, catalog, and test infrastructure.
+  P1: Six-component MVP after the Loading State vertical slice.
+  P2: Agent workflow components and the building blocks first required by them.
+  P3: Complex data, navigation, composition, visualization, and selection experiences.
+
+status_meanings:
+  not_started: No implementation evidence has been accepted.
+  in_progress: Implementation exists but one or more definition-of-done dimensions are incomplete.
+  blocked: A recorded product, platform, dependency, or licensing decision prevents progress.
+  complete: All applicable definition-of-done dimensions and release evidence are accepted.
+  mapped_to_dependency: The source item is intentionally satisfied by an existing dependency and verified through the consuming composites.
+  excluded: The source item is deliberately outside distributable scope, with a recorded reason.
+
+definition_of_done:
+  - public_api_boundary
+  - visual_states
+  - core_interactions
+  - compact_medium_expanded
+  - state_preservation_on_resize
+  - touch_pointer_keyboard
+  - semantics_and_assistive_technology
+  - light_dark_high_contrast
+  - text_scale_localization_rtl
+  - reduced_motion
+  - unit_widget_semantics_golden_tests
+  - catalog_scenarios
+  - documentation
+  - source_license_and_asset_provenance
+  - required_platform_evidence
+
+items:
+  - registry_name: foundation
+    title: Beautiful UI foundation
+    source_type: registry:style
+    scope_kind: foundation
+    phase: P0
+    status: in_progress
+    planned_disposition: translate_to_flutter_tokens_and_policy
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/foundation
+      - packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart
+    open_items:
+      - Inter and JetBrains Mono asset decision
+      - Linux canonical golden confirmation
+      - six-platform CI evidence
+
+  - registry_name: button
+    title: Button
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P0
+    status: not_started
+    planned_disposition: map_to_shadcn_flutter_without_public_shallow_wrapper
+
+  - registry_name: glide-menu
+    title: GlideMenu
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P2
+    status: not_started
+    planned_disposition: internal_semantic_menu_or_popover_pattern
+
+  - registry_name: entity-chip
+    title: EntityChip
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P1
+    status: not_started
+    planned_disposition: internal_entity_summary_pattern
+
+  - registry_name: value-pill
+    title: ValuePill
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P2
+    status: not_started
+    planned_disposition: internal_value_and_status_pattern
+
+  - registry_name: shimmer
+    title: Shimmer
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P0
+    status: not_started
+    planned_disposition: map_or_reimplement_with_reduced_motion
+
+  - registry_name: stream-text
+    title: StreamText
+    source_type: registry:ui
+    scope_kind: building_block
+    phase: P2
+    status: not_started
+    planned_disposition: internal_stream_rendering_primitive
+
+  - registry_name: loading-state
+    title: Loading State
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: in_progress
+    planned_disposition: public_composite_and_vertical_slice
+    adaptive_note: Preserve status and elapsed information; reduce non-essential motion.
+    asset_note: The Surfer remote video is excluded.
+    variants:
+      - drive
+      - dots
+      - orbit
+      - surfer
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/loading_state.dart
+      - packages/beautiful_ai_ui/test/widget/loading_state_test.dart
+      - packages/beautiful_ai_ui/test/semantics
+      - packages/beautiful_ai_ui/test/golden
+      - packages/beautiful_ai_ui_catalog/lib/main.dart
+    intentional_deviations:
+      - Elapsed time is caller-controlled instead of an internal demo timer.
+      - The Surfer variant has no default network request or third-party game video.
+      - Reduced motion freezes repeating pixels, shimmer, and the code-rendered media fallback; caller media state is preserved under TickerMode.
+      - Elapsed time is a separate non-live semantics node so decisecond changes cannot create announcement storms.
+      - Label and elapsed text use the stronger muted-ink token instead of source ink-3 so small text can meet contrast guidance.
+    open_items:
+      - Linux canonical golden confirmation
+      - six-platform CI build evidence
+      - real assistive-technology smoke evidence
+
+  - registry_name: thinking-state
+    title: Thinking
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Disclosure state survives constraint changes.
+
+  - registry_name: streaming-text
+    title: Streaming Text
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Selectable content grows naturally; sources and actions wrap or use a sheet.
+
+  - registry_name: approval-card
+    title: Approval Card
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Primary actions remain reachable above the software keyboard.
+
+  - registry_name: tool-chips
+    title: Tool Chips
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Details have tap and keyboard paths; compact overlays may become sheets.
+
+  - registry_name: task-rows
+    title: Task Rows
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Labels wrap and progress is never communicated only by color.
+
+  - registry_name: chat-composer
+    title: Chat
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Composer respects SafeArea, software keyboard, and scroll-to-latest behavior.
+
+  - registry_name: prompt-bar
+    title: Prompt Bar
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Compact keeps compose/send visible and moves secondary tools to a menu or sheet.
+    risk: File, microphone, permission, and input-method boundaries require explicit product contracts.
+
+  - registry_name: recommendation-card
+    title: Recommendation Card
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Primary action becomes full width and confidence includes text.
+
+  - registry_name: context-cards
+    title: Context Cards
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Compact uses a single column with expandable long content.
+
+  - registry_name: diff-table
+    title: Diff Table
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Compact uses one change card per record and preserves old/new semantics without color dependence.
+
+  - registry_name: records-table
+    title: Records Table
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Compact uses list/card plus detail; expanded may expose full column controls.
+    risk: Workload, virtualization, editing, column configuration, and selection contracts are not yet frozen.
+
+  - registry_name: filter-table
+    title: Filter Table
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Filters wrap or scroll; dense rows may become a compact list.
+
+  - registry_name: sidebar-nav
+    title: Sidebar Nav
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Expanded sidebar becomes a medium rail and compact drawer or bottom navigation.
+    asset_note: Central Icons are excluded and replaced with approved open icons.
+
+  - registry_name: search
+    title: Search
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Desktop dialog or popover becomes a compact sheet when appropriate.
+
+  - registry_name: flowchart
+    title: Flowchart
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Compact may be a read-only overview or ordered stepper.
+    risk: Graph scale, editing scope, hit targets, scroll conflicts, semantics, and keyboard operations require a contract.
+
+  - registry_name: insight-cards
+    title: Insight Cards
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Compact uses a single-card flow and every chart has a textual summary.
+
+  - registry_name: code-block
+    title: Code Block
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P1
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Code scrolls horizontally and copy feedback is announced.
+
+  - registry_name: fine-tune-card
+    title: Fine-tune Card
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P2
+    status: not_started
+    planned_disposition: public_composite
+    adaptive_note: Compact stacks fields; numeric controls support touch, keyboard, and direct input.
+
+  - registry_name: selection-actions
+    title: Selection Actions
+    source_type: registry:component
+    scope_kind: composite_component
+    phase: P3
+    status: not_started
+    planned_disposition: spike_then_public_composite
+    adaptive_note: Touch uses a system-appropriate toolbar or sheet; desktop may anchor to selection.
+    risk: Flutter selection integration and per-platform behavior require a spike.
