@@ -580,7 +580,7 @@ class ShadcnLayer extends StatelessWidget {
         ? appScaling.scale(darkTheme ?? theme)
         : appScaling.scale(theme);
     return ShadcnAnimatedTheme(
-      duration: kDefaultDuration,
+      duration: enableThemeAnimation ? kDefaultDuration : Duration.zero,
       data: scaledTheme,
       child: Builder(
         builder: (context) {
