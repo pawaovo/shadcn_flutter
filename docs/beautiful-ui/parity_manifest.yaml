@@ -195,7 +195,6 @@ items:
       - Reduced motion removes continuous shimmer and spinner motion without changing caller state.
       - Disclosure actions use independent localizable labels so the status and button are not announced twice.
     open_items:
-      - accepted Linux canonical P1 golden
       - real assistive-technology smoke evidence
       - explicit high-contrast behavior evidence
 
@@ -274,7 +273,6 @@ items:
       - Collapsed alternatives leave focus and Semantics traversal.
       - Compact and large-text layouts stack actions and make the primary action full width.
     open_items:
-      - accepted Linux canonical P1 golden
       - real assistive-technology smoke evidence
       - explicit normal and reduced-motion acceptance-transition evidence
 
@@ -299,7 +297,6 @@ items:
       - Platform targets are enlarged to Android and Apple accessibility guidance.
       - The caller list is defensively snapshotted on insertion and widget updates.
     open_items:
-      - accepted Linux canonical P1 golden
       - real assistive-technology smoke evidence
       - explicit high-contrast behavior evidence
 
@@ -362,7 +359,6 @@ items:
       - Item order and nested keywords are defensively snapshotted; pointer hover never reports semantic selection.
       - Field, clear, and result hit regions remain at least 48dp across all adaptive modes.
     open_items:
-      - accepted Linux canonical P1 golden
       - real assistive-technology smoke evidence
       - explicit high-contrast and normal/reduced transition evidence
 
@@ -408,7 +404,6 @@ items:
       - Diff rows announce added, removed, or context meaning instead of relying on color.
       - Copy and header targets are enlarged from the source visual size to Flutter accessibility guidance.
     open_items:
-      - accepted Linux canonical P1 golden
       - real assistive-technology smoke evidence
       - explicit high-contrast behavior evidence
       - long-source tokenization and intrinsic-layout benchmark before a stable release

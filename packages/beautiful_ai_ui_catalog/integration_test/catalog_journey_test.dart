@@ -89,7 +89,9 @@ void main() {
         await tester.enterText(find.byType(EditableText), 'waffle');
         await tester.pump();
         expect(find.text('Find waffle cone suppliers'), findsOneWidget);
-        await tester.tap(find.text('Find waffle cone suppliers'));
+        tester.semantics.tap(
+          find.semantics.byLabel('Find waffle cone suppliers'),
+        );
         await tester.pump();
         expect(
           tester

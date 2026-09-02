@@ -43,13 +43,18 @@
     "local_supplemental_sha256": {
       "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
       "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
+    },
+    "p1_linux_canonical_status": "accepted_from_ci_run_33632807691",
+    "p1_linux_canonical_sha256": {
+      "light": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
+      "dark": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe"
     }
   },
   "p1_journeys": {
     "chrome_local": "passed_complete_p1_interaction_path",
     "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
-    "chrome_ci": "pending_commit",
-    "linux_xvfb_ci": "pending_commit",
-    "android_emulator_ci": "pending_commit"
+    "chrome_ci": "passed_run_33632807691",
+    "linux_xvfb_ci": "rerun_pending_semantic_selection_fix",
+    "android_emulator_ci": "rerun_pending_bounded_pub_retry"
   }
 }

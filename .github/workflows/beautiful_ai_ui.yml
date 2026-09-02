@@ -249,7 +249,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -328,7 +328,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -340,9 +340,19 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Resolve dependencies
+      - name: Resolve dependencies with bounded retry
         working-directory: packages/beautiful_ai_ui_catalog
-        run: flutter pub get --enforce-lockfile
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            if flutter pub get --enforce-lockfile; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
 
       - name: Enable KVM group permissions
         run: |
