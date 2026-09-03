@@ -114,7 +114,16 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
   explicit enabled Semantics and keyboard Search selection fixes on the
   committed tree. Canonical P1 Linux goldens retain their accepted origin in
   run `33632807691`.
-- Widget and Semantics suites cover the P1 components at adaptive boundaries,
+- P2 implementation commit `92992e48ec0f361be9015e443bd15bff95b7b4d6`
+  passed all six platform builds (including Web JS/Wasm) and the expanded
+  Chrome, Linux/Xvfb, and Android emulator journeys in
+  [run `33701530733`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33701530733).
+  That run failed only at the missing P2 Linux golden baselines, exported
+  candidates, and skipped the dependent publish check. Both Ubuntu candidates
+  were visually accepted and registered for the follow-up strict comparison.
+  Local verification passed 257 package tests, 7 Catalog tests, 571 upstream
+  tests, and publish dry-run with 0 warnings.
+- Widget and Semantics suites cover the P1 and P2 components at adaptive boundaries,
   200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
   paths.
 - Physical-device smoke passes and real TalkBack, VoiceOver, Narrator, and

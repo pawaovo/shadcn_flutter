@@ -49,7 +49,7 @@
       "light": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
       "dark": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe"
     },
-    "p2_linux_canonical_status": "pending_remote_capture_and_visual_acceptance",
+    "p2_linux_canonical_status": "accepted_from_ci_run_33701530733",
     "p2_linux_missing_baseline_behavior": "export_review_candidate_and_fail_without_accepting_canonical",
     "p2_local_supplemental_platform": "macOS arm64",
     "p2_local_supplemental_status": "visually_accepted_2026-09-03",
@@ -57,6 +57,10 @@
     "p2_local_supplemental_sha256": {
       "light": "efbd7c6b59ab835a67213f771e7ea8364a4223af4cca157c9a110a70513f9c87",
       "dark": "6ae62ff7a1ce40df2759d10b13ba03a7fdf2d39ba9002e960b91be82c6a546eb"
+    },
+    "p2_linux_canonical_sha256": {
+      "light": "ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c",
+      "dark": "12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a"
     }
   },
   "p1_journeys": {
@@ -75,9 +79,11 @@
     "chrome_local_version": "152.0.7977.66",
     "chromedriver_local_version": "152.0.7977.75",
     "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
-    "chrome_ci": "pending_first_p2_run",
-    "linux_xvfb_ci": "pending_first_p2_run",
-    "android_emulator_ci": "pending_first_p2_run"
+    "chrome_ci": "passed_run_33701530733",
+    "linux_xvfb_ci": "passed_run_33701530733",
+    "android_emulator_ci": "passed_run_33701530733",
+    "verified_commit": "92992e48ec0f361be9015e443bd15bff95b7b4d6",
+    "verified_run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33701530733"
   },
   "p2_local_validation": {
     "verified_on": "2026-09-03",
@@ -90,7 +96,15 @@
     "web_wasm_release": "passed",
     "wasm_browser_review": "chat_prompt_editable_no_error_logs",
     "wasm_browser_limitation": "single_thread_skwasm_warning_from_localhost_isolation_headers",
-    "publish_dry_run": "pending_final_integrated_run",
+    "publish_dry_run": "passed_zero_warnings_1_mb_archive",
     "package_tests_passed": 257
+  },
+  "p2_remote_validation": {
+    "run_id": 33701530733,
+    "commit": "92992e48ec0f361be9015e443bd15bff95b7b4d6",
+    "platform_builds": "all_six_passed_including_web_js_and_wasm",
+    "device_journeys": "chrome_linux_xvfb_android_passed",
+    "quality": "first_run_failed_only_missing_p2_linux_goldens",
+    "publish_dry_run": "skipped_in_first_run_due_to_quality_dependency"
   }
 }

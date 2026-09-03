@@ -113,7 +113,12 @@ entries:
     distributable: true
     generation_toolchains:
       - Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts for supplemental local fixtures.
+      - Flutter 3.47.0 on Ubuntu 24.04 x64 with package-loaded Geist fonts for canonical fixtures accepted from CI run 33701530733.
     files:
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light.png
+        sha256: ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark.png
+        sha256: 12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light_macos.png
         sha256: efbd7c6b59ab835a67213f771e7ea8364a4223af4cca157c9a110a70513f9c87
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark_macos.png
@@ -121,7 +126,7 @@ entries:
     notes:
       - Generated entirely from project Dart code and inherited, license-tracked fonts, at 1440 by 1400 pixels and DPR 1.
       - Seven P2 components, both Task Rows variants, source and tool disclosures, light and dark themes, and disabled motion are represented.
-      - Supplemental macOS images were visually reviewed; Ubuntu canonical candidates must be captured and accepted separately.
+      - Supplemental macOS images and Ubuntu canonical candidates from CI run 33701530733 were independently visually reviewed and accepted.
       - Symbols are drawn in Flutter to avoid unsupported Unicode glyphs in the pinned fonts.
 
   - id: flutter_generated_catalog_launcher_assets
