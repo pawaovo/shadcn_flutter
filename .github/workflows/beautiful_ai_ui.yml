@@ -648,6 +648,13 @@ jobs:
           inventory = json.loads(subprocess.check_output(
               ["xcrun", "simctl", "list", "--json"], text=True,
           ))
+          simulator_sdk = subprocess.check_output(
+              ["xcrun", "--sdk", "iphonesimulator", "--show-sdk-version"], text=True,
+          ).strip()
+          inventory["selected_simulator_sdk"] = simulator_sdk
+          inventory["selected_xcode"] = subprocess.check_output(
+              ["xcodebuild", "-version"], text=True,
+          ).strip()
           Path(os.environ["RUNNER_TEMP"], "beautiful-ios-simulators.json").write_text(
               json.dumps(inventory, indent=2), encoding="utf-8",
           )
@@ -655,6 +662,8 @@ jobs:
               runtime for runtime in inventory["runtimes"]
               if runtime.get("isAvailable")
               and runtime["identifier"].startswith("com.apple.CoreSimulator.SimRuntime.iOS-")
+              and tuple(map(int, runtime["version"].split(".")[:2]))
+                  <= tuple(map(int, simulator_sdk.split(".")[:2]))
           ]
           runtimes.sort(
               key=lambda runtime: tuple(int(part) for part in runtime["version"].split(".")),
@@ -675,7 +684,7 @@ jobs:
           else:
               raise SystemExit("No available iPhone in an installed iOS runtime; no runtime will be downloaded.")
 
-          print(f"Selected {runtime['name']}: {device['name']} ({device['udid']})")
+          print(f"Selected {runtime['name']} with Simulator SDK {simulator_sdk}: {device['name']} ({device['udid']})")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
               output.write(f"device_id={device['udid']}\n")
               output.write(f"shutdown_after={str(device['state'] != 'Booted').lower()}\n")
@@ -696,18 +705,32 @@ jobs:
           xcrun simctl bootstatus "$SIMULATOR_UDID" -b
           flutter devices --device-timeout=30
 
+      - name: Verify the bounded simulator console launcher
+        if: needs.detect-targets.outputs.ios == 'true'
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_run_ios_catalog_journey.py'
+
+      - name: Build iOS simulator journey
+        if: needs.detect-targets.outputs.ios == 'true'
+        timeout-minutes: 8
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          mkdir -p artifacts/apple
+          flutter build ios --debug --simulator --verbose --no-pub \
+            --target=integration_test/catalog_journey_test.dart \
+            > artifacts/apple/ios-build.log 2>&1
+
       - name: Run iOS simulator journey
         if: needs.detect-targets.outputs.ios == 'true'
-        timeout-minutes: 20
+        timeout-minutes: 12
         working-directory: packages/beautiful_ai_ui_catalog
         env:
           SIMULATOR_UDID: ${{ steps.ios-simulator.outputs.device_id }}
         shell: bash
         run: |
-          mkdir -p artifacts/apple
-          flutter test integration_test/catalog_journey_test.dart \
-            --device-id="$SIMULATOR_UDID" --no-pub --timeout=10m --reporter=expanded \
-            --file-reporter=json:artifacts/apple/ios-journey.json
+          python3 ../../.github/scripts/run_ios_catalog_journey.py \
+            --flutter "$(command -v flutter)" --device "$SIMULATOR_UDID" \
+            --artifacts artifacts/apple
 
       - name: Shut down the simulator started by this job
         if: always() && steps.boot-ios-simulator.outcome == 'success' && steps.ios-simulator.outputs.shutdown_after == 'true'
@@ -813,7 +836,7 @@ jobs:
       - quality
     if: needs.detect-targets.outputs.library == 'true' && needs.quality.result == 'success'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -829,6 +852,26 @@ jobs:
         working-directory: packages/beautiful_ai_ui
         run: flutter pub get --enforce-lockfile
 
+      - name: Verify an isolated hosted consumer
+        timeout-minutes: 25
+        env:
+          TMPDIR: ${{ runner.temp }}
+        shell: bash
+        run: |
+          python3 tool/verify_hosted_consumer.py \
+            --flutter "$(command -v flutter)" \
+            --timeout 300 \
+            --output "$RUNNER_TEMP/hosted-consumer/result.json"
+
       - name: Run publish dry-run
         working-directory: packages/beautiful_ai_ui
         run: flutter pub publish --dry-run
+
+      - name: Upload isolated consumer evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isolated-hosted-consumer
+          path: ${{ runner.temp }}/hosted-consumer/
+          if-no-files-found: warn
+          retention-days: 7
