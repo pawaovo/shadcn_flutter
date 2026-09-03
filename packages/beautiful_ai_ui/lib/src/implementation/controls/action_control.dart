@@ -83,6 +83,18 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
   var _hovered = false;
   var _focused = false;
   var _hasFocus = false;
+  var _pressed = false;
+
+  @override
+  void didUpdateWidget(BeautifulActionControl oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onPressed == null) _pressed = false;
+  }
+
+  void _setPressed(bool value) {
+    if (_pressed == value) return;
+    setState(() => _pressed = value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +177,9 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: widget.onPressed,
+            onTapDown: enabled ? (_) => _setPressed(true) : null,
+            onTapUp: enabled ? (_) => _setPressed(false) : null,
+            onTapCancel: enabled ? () => _setPressed(false) : null,
             child: AnimatedContainer(
               duration: duration,
               curve: theme.motion.outCurve,
@@ -184,10 +199,11 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
               // focus cannot reflow labels or change lazy-menu row extents.
               foregroundDecoration: BoxDecoration(
                 border: Border.all(
-                  color: _focused
+                  color: _focused || _pressed
                       ? theme.colors.foregroundOn(background)
                       : border,
-                  width: _focused ? 3 : (selected ? 2 : 1),
+                  width:
+                      (_focused ? 3 : (selected ? 2 : 1)) + (_pressed ? 1 : 0),
                 ),
                 borderRadius: BorderRadius.circular(theme.radii.control),
               ),
@@ -236,7 +252,9 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
         const Color(0x00000000),
       ),
     };
-    if (!selected) return (background, foreground, border);
+    if (!selected) {
+      return _pressedColors(theme, background, foreground, border);
+    }
     final selectedBackground = switch (widget.tone) {
       BeautifulActionTone.secondary || BeautifulActionTone.quiet =>
         Color.alphaBlend(colors.accentTint, colors.surface),
@@ -247,6 +265,29 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
       BeautifulActionTone.quiet => colors.foregroundOn(selectedBackground),
       _ => foreground,
     };
-    return (selectedBackground, selectedForeground, selectedForeground);
+    return _pressedColors(
+      theme,
+      selectedBackground,
+      selectedForeground,
+      selectedForeground,
+    );
+  }
+
+  (Color, Color, Color) _pressedColors(
+    BeautifulUiThemeData theme,
+    Color background,
+    Color foreground,
+    Color border,
+  ) {
+    if (!_pressed) return (background, foreground, border);
+    final base = Color.alphaBlend(background, theme.colors.surface);
+    final ink = Color.alphaBlend(foreground, base);
+    // Move away from the existing ink so the label stays readable throughout
+    // the transition. The extra outline also distinguishes neutral fills at
+    // the light/dark endpoint, where a color shift alone may be invisible.
+    final endpoint = ink.computeLuminance() < base.computeLuminance()
+        ? const Color(0xffffffff)
+        : const Color(0xff000000);
+    return (Color.lerp(base, endpoint, .12)!, foreground, border);
   }
 }

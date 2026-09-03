@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
+import '../foundation/motion.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/action_control.dart';
 
@@ -1216,10 +1217,34 @@ final class _FlowchartHeader extends StatefulWidget {
 
 final class _FlowchartHeaderState extends State<_FlowchartHeader> {
   bool _focused = false;
+  bool _hovered = false;
+  bool _pressed = false;
+
+  void _setPressed(bool value) {
+    if (_pressed != value) setState(() => _pressed = value);
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
+    final environment = BeautifulUiEnvironment.of(context);
+    final duration =
+        (MediaQuery.maybeOf(context)?.disableAnimations ?? false) ||
+            environment.motionPolicy == BeautifulMotionPolicy.none ||
+            !TickerMode.valuesOf(context).enabled
+        ? Duration.zero
+        : theme.motion.quick;
+    var background = widget.selected
+        ? theme.colors.accentTint
+        : _hovered
+        ? theme.colors.hoverStrong
+        : theme.colors.inset;
+    if (_pressed) {
+      background = Color.alphaBlend(
+        theme.colors.ink.withValues(alpha: 0.12),
+        Color.alphaBlend(background, theme.colors.surface),
+      );
+    }
     return Semantics(
       button: true,
       selected: widget.selected,
@@ -1243,6 +1268,7 @@ final class _FlowchartHeaderState extends State<_FlowchartHeader> {
             if (focused) widget.onFocus();
           },
           onShowFocusHighlight: (focused) => setState(() => _focused = focused),
+          onShowHoverHighlight: (hovered) => setState(() => _hovered = hovered),
           shortcuts: const <ShortcutActivator, Intent>{
             SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
             SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
@@ -1258,13 +1284,16 @@ final class _FlowchartHeaderState extends State<_FlowchartHeader> {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: widget.onSelect,
-            child: Container(
+            onTapDown: (_) => _setPressed(true),
+            onTapUp: (_) => _setPressed(false),
+            onTapCancel: () => _setPressed(false),
+            child: AnimatedContainer(
+              duration: duration,
+              curve: theme.motion.outCurve,
               constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
               padding: EdgeInsets.all(theme.spacing.sm),
               decoration: BoxDecoration(
-                color: widget.selected
-                    ? theme.colors.accentTint
-                    : theme.colors.inset,
+                color: background,
                 borderRadius: BorderRadius.circular(theme.radii.control),
                 border: Border.all(
                   color: _focused

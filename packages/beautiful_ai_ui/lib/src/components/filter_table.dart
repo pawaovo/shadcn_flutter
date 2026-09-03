@@ -208,6 +208,12 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
     final visibleRows = _rows
         .where((row) => _status == null || row.status == _status)
         .toList(growable: false);
+    final resultCount = '${visibleRows.length} / ${_rows.length}';
+    // Isolate the numeric ratio without changing the localized prefix's bidi
+    // direction. Otherwise an RTL paragraph paints "1 / 12" as "12 / 1".
+    final visibleCount = Directionality.of(context) == TextDirection.rtl
+        ? '\u2066$resultCount\u2069'
+        : resultCount;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -245,8 +251,7 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
                     '${visibleRows.length} / ${_rows.length}',
                 excludeSemantics: true,
                 child: Text(
-                  '${widget.labels.results}: '
-                  '${visibleRows.length} / ${_rows.length}',
+                  '${widget.labels.results}: $visibleCount',
                   style: theme.typography.caption.copyWith(
                     color: theme.colors.inkMuted,
                   ),

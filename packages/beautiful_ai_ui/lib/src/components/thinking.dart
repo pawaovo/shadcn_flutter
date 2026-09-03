@@ -407,30 +407,33 @@ final class _BeautifulThinkingState extends State<BeautifulThinking>
           ),
         );
       },
-      child: IgnorePointer(
-        ignoring: !_expanded,
-        child: ExcludeFocus(
-          excluding: !_expanded,
-          child: ExcludeSemantics(
+      child: TickerMode(
+        enabled: _expanded,
+        child: IgnorePointer(
+          ignoring: !_expanded,
+          child: ExcludeFocus(
             excluding: !_expanded,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(top: 4, start: 5),
-              child: Stack(
-                children: <Widget>[
-                  PositionedDirectional(
-                    top: 0,
-                    bottom: 2,
-                    start: 3,
-                    child: ColoredBox(
-                      color: theme.colors.line,
-                      child: const SizedBox(width: 1),
+            child: ExcludeSemantics(
+              excluding: !_expanded,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.only(top: 4, start: 5),
+                child: Stack(
+                  children: <Widget>[
+                    PositionedDirectional(
+                      top: 0,
+                      bottom: 2,
+                      start: 3,
+                      child: ColoredBox(
+                        color: theme.colors.line,
+                        child: const SizedBox(width: 1),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 16),
-                    child: _buildTrace(theme, motion),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 16),
+                      child: _buildTrace(theme, motion),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -755,7 +758,10 @@ final class _ThinkingMotion {
   final Duration itemStagger;
   final bool translateItems;
 
-  Duration itemDuration(int index) => itemBase + itemStagger * index;
+  // A trace is caller-sized. Keep the initial stagger while preventing later
+  // rows from animating for tens of seconds in a long completed trace.
+  Duration itemDuration(int index) =>
+      itemBase + itemStagger * index.clamp(0, 3);
 }
 
 final class _ThinkingControl extends StatefulWidget {
@@ -1023,6 +1029,7 @@ final class _ThinkingItemCopy extends StatelessWidget {
             ],
           ),
           style: theme.typography.mono.copyWith(fontSize: 11),
+          textDirection: TextDirection.ltr,
         ),
       );
     }

@@ -2263,7 +2263,17 @@ final class _RecordsCheck extends StatefulWidget {
 
 final class _RecordsCheckState extends State<_RecordsCheck> {
   var _focused = false;
+  var _hasFocus = false;
+  var _hovered = false;
+  var _pressed = false;
   final _focusNode = FocusNode();
+
+  @override
+  void didUpdateWidget(_RecordsCheck oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onChanged == null) _pressed = false;
+  }
+
   @override
   void dispose() {
     _focusNode.dispose();
@@ -2273,17 +2283,25 @@ final class _RecordsCheckState extends State<_RecordsCheck> {
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
+    final enabled = widget.onChanged != null;
     return Semantics(
       label: widget.label,
       checked: widget.mixed ? null : widget.checked,
       mixed: widget.mixed,
-      enabled: widget.onChanged != null,
+      enabled: enabled,
+      focusable: enabled,
+      focused: enabled && _hasFocus,
       excludeSemantics: true,
       onTap: widget.onChanged,
       child: FocusableActionDetector(
         focusNode: _focusNode,
-        enabled: widget.onChanged != null,
+        enabled: enabled,
+        mouseCursor: enabled
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        onFocusChange: (value) => setState(() => _hasFocus = value),
         onShowFocusHighlight: (value) => setState(() => _focused = value),
+        onShowHoverHighlight: (value) => setState(() => _hovered = value),
         shortcuts: const <ShortcutActivator, Intent>{
           SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
           SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
@@ -2298,6 +2316,9 @@ final class _RecordsCheckState extends State<_RecordsCheck> {
         },
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
+          onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
+          onTapUp: enabled ? (_) => setState(() => _pressed = false) : null,
+          onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
           onTap: widget.onChanged == null
               ? null
               : () {
@@ -2308,6 +2329,13 @@ final class _RecordsCheckState extends State<_RecordsCheck> {
             constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
+              color: !enabled
+                  ? null
+                  : _pressed
+                  ? theme.colors.hoverStrong
+                  : _hovered
+                  ? theme.colors.hover
+                  : null,
               border: Border.all(
                 color: _focused ? theme.colors.accent : const Color(0x00000000),
                 width: 2,

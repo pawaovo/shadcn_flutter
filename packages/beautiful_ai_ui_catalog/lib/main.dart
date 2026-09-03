@@ -6,6 +6,8 @@ import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'host_file_attachments.dart';
+
 part 'p2_examples.dart';
 part 'p3_examples.dart';
 
@@ -148,11 +150,13 @@ final class _CatalogAppState extends State<CatalogApp> {
     return WidgetsApp(
       color: const Color(0xff0285ff),
       debugShowCheckedModeBanner: false,
-      shortcuts: const <ShortcutActivator, Intent>{
-        SingleActivator(LogicalKeyboardKey.keyD, meta: true):
-            _ToggleThemeIntent(),
+      shortcuts: <ShortcutActivator, Intent>{
+        ...WidgetsApp.defaultShortcuts,
+        const SingleActivator(LogicalKeyboardKey.keyD, meta: true):
+            const _ToggleThemeIntent(),
       },
       actions: <Type, Action<Intent>>{
+        ...WidgetsApp.defaultActions,
         _ToggleThemeIntent: CallbackAction<_ToggleThemeIntent>(
           onInvoke: (_) {
             _cycleTheme();
@@ -392,7 +396,7 @@ final class _CatalogHomeState extends State<_CatalogHome> {
           key: const Key('catalog-code-block'),
           filename: 'churn.ts',
           code: _sampleCode,
-          onCopy: (_) {},
+          onCopy: (text) => Clipboard.setData(ClipboardData(text: text)),
         ),
       ),
       const _CatalogCard(

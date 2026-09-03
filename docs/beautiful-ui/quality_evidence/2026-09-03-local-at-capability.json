@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-03",
+  "status": "blocked_before_task_acceptance",
+  "scope": "Local physical-device discovery and VoiceOver observation capability; not component assistive-technology acceptance",
+  "host": "macOS 15.7.9 24G830 arm64",
+  "available_flutter_targets": ["macos", "chrome"],
+  "apple_physical_device_discovery": "xcrun devicectl list devices: No devices found.",
+  "mobile_physical_devices_available": false,
+  "voiceover": {
+    "initial_settings_state": "off",
+    "temporarily_enabled_via_system_settings": true,
+    "settings_enabled_state_observed": true,
+    "running_process_observed": "/System/Library/CoreServices/VoiceOver.app/Contents/MacOS/VoiceOver",
+    "caption_panel_preference": "already enabled; not modified",
+    "caption_window_observation_attempts": [
+      {"app": "com.apple.VoiceOver", "result": "Computer Use server error -10005: timeoutReached"},
+      {"app": "com.apple.VoiceOver", "result": "Computer Use server error -10005: timeoutReached"}
+    ],
+    "actual_utterances_verified": false,
+    "component_task_flows_accepted": false,
+    "final_settings_state": "off",
+    "restored_initial_state": true
+  },
+  "interpretation": "VoiceOver can start on this Mac, but the current control tool could not expose its caption window. Application AX text and process existence do not establish spoken output or screen-reader task completion.",
+  "required_next_evidence": [
+    "Actual VoiceOver task navigation and spoken/caption output through an observable reader session or an operator recording",
+    "Authorized Android and iOS physical devices for the prepared device journeys and real input/reader flows",
+    "Windows Narrator and Linux Orca sessions with actual input, output and task evidence"
+  ]
+}

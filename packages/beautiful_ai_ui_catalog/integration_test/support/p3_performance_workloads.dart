@@ -540,9 +540,10 @@ P3PerformanceWorkload _insights() {
     ),
   );
   var rounds = 0;
+  var maximumRealizedTextRows = 0;
   return P3PerformanceWorkload(
     id: 'insight_cards',
-    description: 'Inspect four exact 512-point series using pointer and keys, then disclose, scroll and hide all textual observations.',
+    description: 'Inspect four exact 512-point series using pointer and keys, then disclose their complete lazy text list, scroll to and verify the final observation in every series, return to the first row and hide the data.',
     dataset: <String, Object?>{
       'series': 4,
       'observations_per_series': 512,
@@ -604,11 +605,57 @@ P3PerformanceWorkload _insights() {
       await actions.step('disclose_and_scroll_512_text_rows', () async {
         await actions.tap(_key('beautiful-insight-data-comparison'));
         await actions.settle();
+        final data = _key('beautiful-insight-data-scroll-comparison');
+        final scroll = tester.widget<ListView>(data).controller!;
+        void verifyRow(int index) {
+          final text = tester
+              .widget<Text>(_key('beautiful-insight-datum-comparison-p$index'))
+              .data!;
+          expect(text, startsWith('Observation $index.'));
+          for (final item in series) {
+            expect(
+              text,
+              contains('${item.label}: ${item.points[index].formattedValue}'),
+            );
+          }
+          maximumRealizedTextRows = math.max(
+            maximumRealizedTextRows,
+            _realizedPrefix('beautiful-insight-datum-comparison-'),
+          );
+          expect(maximumRealizedTextRows, lessThan(64));
+        }
+
+        verifyRow(0);
+        expect(_key('beautiful-insight-datum-comparison-p511'), findsNothing);
+        await actions.drag(data, const Offset(0, -240));
+        await actions.settle();
+        expect(scroll.offset, greaterThan(0));
+        // Exercise the real scrolling list. A lazy list estimates extent
+        // until rows are laid out, so finish at its observed end if needed.
+        for (var attempt = 0; attempt < 4; attempt++) {
+          final movement = scroll.animateTo(
+            scroll.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.linear,
+          );
+          await actions.settle();
+          await movement;
+          if (_key('beautiful-insight-datum-comparison-p511')
+              .evaluate()
+              .isNotEmpty) {
+            break;
+          }
+        }
         expect(_key('beautiful-insight-datum-comparison-p511'), findsOneWidget);
-        await actions.drag(
-          find.byKey(p3PerformanceOuterScrollKey),
-          const Offset(0, -480),
+        verifyRow(511);
+        final back = scroll.animateTo(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.linear,
         );
+        await actions.settle();
+        await back;
+        verifyRow(0);
       });
       await actions.step('collapse_text_data', () async {
         await actions.tap(_key('beautiful-insight-data-comparison'));
@@ -620,6 +667,7 @@ P3PerformanceWorkload _insights() {
     outcomes: () => <String, Object?>{
       'completed_inspection_rounds': rounds,
       'active_plot_count': _realizedPrefix('beautiful-insight-plot-'),
+      'maximum_realized_text_rows': maximumRealizedTextRows,
     },
   );
 }

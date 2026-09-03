@@ -40,7 +40,43 @@ final class _CatalogPromptExampleState extends State<_CatalogPromptExample> {
   var _connected = false;
   var _tall = false;
   var _variant = BeautifulPromptBarVariant.rounded;
-  var _activity = 'Compose a restock request with local sample integrations';
+  final _fileAttachments = CatalogFileAttachments();
+  String? _fileError;
+  var _activity = catalogRealFiles
+      ? 'Choose real files to read locally; dictation remains a sample'
+      : 'Compose a restock request with local sample integrations';
+
+  Future<List<BeautifulPromptAttachment>> _attachFiles() async {
+    if (!catalogRealFiles) {
+      final id = ++_attachment;
+      setState(() => _activity = 'Attached sample inventory file $id');
+      return <BeautifulPromptAttachment>[
+        BeautifulPromptAttachment(
+          id: 'inventory-$id',
+          label: 'inventory-$id.csv',
+        ),
+      ];
+    }
+    setState(() => _fileError = null);
+    try {
+      final attachments = await _fileAttachments.pick();
+      if (!mounted) return const [];
+      setState(() {
+        _activity = attachments.isEmpty
+            ? 'File selection cancelled; existing attachments retained'
+            : 'Read ${attachments.length} real files locally:\n${_fileAttachments.receiptsFor(attachments).map((file) => file.summary).join('\n')}';
+      });
+      return attachments;
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _fileError = 'Could not read the selected files. Try again.';
+          _activity = 'File selection failed; no new files were added';
+        });
+      }
+      rethrow;
+    }
+  }
 
   @override
   Widget build(BuildContext context) => _CatalogCard(
@@ -73,6 +109,7 @@ final class _CatalogPromptExampleState extends State<_CatalogPromptExample> {
           composerId: 'catalog-restock-prompt',
           variant: _variant,
           tall: _tall,
+          errorText: _fileError,
           placeholder: 'Ask about restocking, or type @ or /',
           models: const <BeautifulPromptModel>[
             BeautifulPromptModel(id: 'balanced', label: 'Balanced'),
@@ -114,16 +151,10 @@ final class _CatalogPromptExampleState extends State<_CatalogPromptExample> {
               _activity = 'Connected sample source: $id';
             });
           },
-          onAttach: () {
-            final id = ++_attachment;
-            setState(() => _activity = 'Attached sample inventory file $id');
-            return <BeautifulPromptAttachment>[
-              BeautifulPromptAttachment(
-                id: 'inventory-$id',
-                label: 'inventory-$id.csv',
-              ),
-            ];
-          },
+          attachLabel: catalogRealFiles
+              ? 'Choose files from device'
+              : 'Add photos and files',
+          onAttach: _attachFiles,
           dictateLabel: 'Insert sample dictation',
           onDictate: () {
             setState(() => _activity = 'Inserted local sample transcript');
@@ -137,6 +168,10 @@ final class _CatalogPromptExampleState extends State<_CatalogPromptExample> {
                   'Prompt received: ${submission.text} '
                   '· ${submission.attachments.length} files '
                   '· ${submission.modelId}';
+              if (catalogRealFiles && submission.attachments.isNotEmpty) {
+                _activity +=
+                    '\nRead file receipts:\n${_fileAttachments.receiptsFor(submission.attachments).map((file) => file.summary).join('\n')}';
+              }
             });
           },
         ),

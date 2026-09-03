@@ -488,12 +488,14 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
                 children: [
                   Text(
                     '+${diff.additions}',
+                    textDirection: TextDirection.ltr,
                     style: theme.typography.mono.copyWith(
                       color: _readableTone(theme, theme.colors.success),
                     ),
                   ),
                   Text(
                     '−${diff.deletions}',
+                    textDirection: TextDirection.ltr,
                     style: theme.typography.mono.copyWith(
                       color: _readableTone(theme, theme.colors.destructive),
                     ),

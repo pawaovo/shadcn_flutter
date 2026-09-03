@@ -284,6 +284,28 @@ void main() {
                 tester.getSize(find.byType(BeautifulActionControl)),
                 initialSize,
               );
+              await mouse.down(
+                tester.getCenter(find.byType(BeautifulActionControl)),
+              );
+              await tester.pump(kPressTimeout);
+              await tester.pump();
+              final pressed = _painted(tester);
+              expect(pressed.border.width, 4);
+              expect(
+                _contrast(
+                  pressed.foreground,
+                  pressed.background,
+                  colors.surface,
+                ),
+                greaterThanOrEqualTo(4.5),
+              );
+              expect(
+                tester.getSize(find.byType(BeautifulActionControl)),
+                initialSize,
+              );
+              await mouse.cancel();
+              await tester.pump();
+              expect(_painted(tester), painted);
               await mouse.removePointer();
               semantics.dispose();
             },
@@ -347,6 +369,83 @@ void main() {
         },
       );
     }
+  }
+
+  testWidgets(
+    'disabling a held control clears feedback and cancels activation',
+    (tester) async {
+      var enabled = true;
+      var activations = 0;
+      late StateSetter update;
+      await tester.pumpWidget(
+        beautifulTestApp(
+          disableAnimations: true,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              update = setState;
+              return BeautifulActionControl(
+                label: 'Execute action',
+                onPressed: enabled ? () => activations++ : null,
+              );
+            },
+          ),
+        ),
+      );
+      final before = _painted(tester);
+      final pointer = await tester.startGesture(
+        tester.getCenter(find.byType(BeautifulActionControl)),
+      );
+      await tester.pump(kPressTimeout);
+      await tester.pump();
+      expect(_painted(tester).border.width, 2);
+      update(() => enabled = false);
+      await tester.pump();
+      expect(_painted(tester).border.width, 1);
+      update(() => enabled = true);
+      await tester.pump();
+      expect(_painted(tester), before);
+      await pointer.up();
+      await tester.pump();
+      expect(activations, 0);
+      await tester.tap(find.byType(BeautifulActionControl));
+      expect(activations, 1);
+    },
+  );
+
+  for (final motion in BeautifulMotionPolicy.values) {
+    testWidgets(
+      'held feedback settles and releases with ${motion.name} motion',
+      (tester) async {
+        var activations = 0;
+        await tester.pumpWidget(
+          beautifulTestApp(
+            motion: motion,
+            child: BeautifulActionControl(
+              label: 'Execute action',
+              tone: BeautifulActionTone.primary,
+              onPressed: () => activations++,
+            ),
+          ),
+        );
+        final before = _painted(tester);
+        final beforeSize = tester.getSize(find.byType(BeautifulActionControl));
+        final pointer = await tester.startGesture(
+          tester.getCenter(find.byType(BeautifulActionControl)),
+        );
+        await tester.pump(kPressTimeout);
+        await tester.pump(const Duration(milliseconds: 150));
+        expect(_painted(tester), isNot(before));
+        expect(activations, 0);
+        expect(tester.hasRunningAnimations, isFalse);
+        expect(tester.getSize(find.byType(BeautifulActionControl)), beforeSize);
+        await pointer.up();
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 150));
+        expect(_painted(tester), before);
+        expect(activations, 1);
+        expect(tester.hasRunningAnimations, isFalse);
+      },
+    );
   }
 
   testWidgets(

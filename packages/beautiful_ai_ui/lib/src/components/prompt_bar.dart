@@ -354,6 +354,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
   final ScrollController _bodyScroll = ScrollController();
   final Object _tapGroup = Object();
   late List<BeautifulPromptSource> _sources;
+  late Map<String, BeautifulPromptSource> _sourcesById;
   late List<BeautifulPromptCommand> _commands;
   late List<BeautifulPromptModel> _models;
   late List<_PromptAttachmentEntry> _attachments;
@@ -371,6 +372,11 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
   _PromptMenu? _explicitMenu;
   final Map<String, Object> _connections = <String, Object>{};
   List<double> _rowExtents = <double>[];
+  Object? _optionMeasurementInputs;
+  // Retain warm measurements across filtering and menu dismissal, without
+  // retaining an unbounded history of caller-edited labels.
+  final Map<String, double> _optionMeasurements = <String, double>{};
+  static const _optionMeasurementLimit = 4096;
 
   bool get _isComposing =>
       _draft.value.composing.isValid && !_draft.value.composing.isCollapsed;
@@ -415,10 +421,14 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
       debugLabel: 'BeautifulPromptBar editor',
       onKeyEvent: _handleKey,
     )..addListener(_focusChanged);
+    PaintingBinding.instance.systemFonts.addListener(_fontsChanged);
   }
 
   void _snapshot() {
     _sources = List<BeautifulPromptSource>.unmodifiable(widget.sources);
+    _sourcesById = <String, BeautifulPromptSource>{
+      for (final source in _sources) source.id: source,
+    };
     _commands = List<BeautifulPromptCommand>.unmodifiable(widget.commands);
     _models = List<BeautifulPromptModel>.unmodifiable(widget.models);
     assert(_unique(_sources.map((item) => item.id)), 'Duplicate source IDs.');
@@ -429,10 +439,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
           _models.any((model) => model.id == widget.selectedModelId),
       'selectedModelId must identify an existing model.',
     );
-    _connections.removeWhere(
-      (id, _) =>
-          !_sources.any((source) => source.id == id && !source.connected),
-    );
+    _connections.removeWhere((id, _) => _sourcesById[id]?.connected ?? true);
   }
 
   static bool _unique(Iterable<String> ids) {
@@ -470,6 +477,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
 
   @override
   void dispose() {
+    PaintingBinding.instance.systemFonts.removeListener(_fontsChanged);
     _draft
       ..removeListener(_draftChanged)
       ..dispose();
@@ -479,6 +487,14 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
     _menuScroll.dispose();
     _bodyScroll.dispose();
     super.dispose();
+  }
+
+  void _fontsChanged() {
+    // The family name can stay unchanged while FontLoader installs different
+    // metrics. Rebuild open menus as well as invalidating future reopenings.
+    if (!mounted) return;
+    setState(_optionMeasurements.clear);
+    if (_menu != null) _revealActive();
   }
 
   void _draftChanged() {
@@ -613,7 +629,13 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
           : bottom > position.pixels + position.viewportDimension
           ? bottom - position.viewportDimension
           : position.pixels;
-      _menuScroll.jumpTo(target.clamp(0, position.maxScrollExtent));
+      // Lazy slivers estimate maxScrollExtent from realized rows. A wrapped
+      // label near the end can be taller than those initial rows, so use the
+      // complete measured extent when revealing an arbitrary keyboard target.
+      final total = _rowExtents.fold<double>(0, (a, b) => a + b);
+      _menuScroll.jumpTo(
+        target.clamp(0, math.max(0, total - position.viewportDimension)),
+      );
     });
   }
 
@@ -1211,31 +1233,12 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
               LayoutBuilder(
                 builder: (context, constraints) {
                   final labels = options.map(_optionLabel).toList();
-                  _rowExtents = labels.map((label) {
-                    final painter =
-                        TextPainter(
-                          text: TextSpan(
-                            text: label,
-                            style: theme.typography.label.copyWith(
-                              fontSize: 12.5,
-                            ),
-                          ),
-                          textDirection: Directionality.of(context),
-                          textScaler: MediaQuery.textScalerOf(context),
-                          textAlign: TextAlign.center,
-                        )..layout(
-                          maxWidth: math.max(
-                            1,
-                            constraints.maxWidth - theme.spacing.md * 2 - 2,
-                          ),
-                        );
-                    final extent = math.max(
-                      48.0,
-                      painter.height + theme.spacing.sm * 2 + 2,
-                    );
-                    painter.dispose();
-                    return extent;
-                  }).toList();
+                  _rowExtents = _measureOptions(
+                    context,
+                    theme,
+                    labels,
+                    constraints.maxWidth,
+                  );
                   final total = _rowExtents.fold<double>(0, (a, b) => a + b);
                   return SizedBox(
                     height: math.min(height, total),
@@ -1243,6 +1246,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                       key: ValueKey<_PromptMenu>(menu),
                       controller: _menuScroll,
                       primary: false,
+                      padding: EdgeInsets.zero,
                       itemCount: options.length,
                       itemExtentBuilder: (index, _) => _rowExtents[index],
                       itemBuilder: (context, index) {
@@ -1276,6 +1280,79 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
     );
   }
 
+  List<double> _measureOptions(
+    BuildContext context,
+    BeautifulUiThemeData theme,
+    List<String> labels,
+    double width,
+  ) {
+    final defaults = DefaultTextStyle.of(context);
+    var style = theme.typography.label.copyWith(fontSize: 12.5);
+    if (style.inherit) style = defaults.style.merge(style);
+    if (MediaQuery.boldTextOf(context)) {
+      style = style.merge(const TextStyle(fontWeight: FontWeight.bold));
+    }
+    style = style.merge(
+      TextStyle(
+        height: MediaQuery.maybeLineHeightScaleFactorOverrideOf(context),
+        letterSpacing: MediaQuery.maybeLetterSpacingOverrideOf(context),
+        wordSpacing: MediaQuery.maybeWordSpacingOverrideOf(context),
+      ),
+    );
+    final direction = Directionality.of(context);
+    final scaler = MediaQuery.textScalerOf(context);
+    final locale = Localizations.maybeLocaleOf(context);
+    final maxWidth = defaults.softWrap
+        ? math.max(1.0, width - theme.spacing.md * 2 - 2)
+        : double.infinity;
+    final padding = theme.spacing.sm * 2 + 2;
+    final heightBehavior =
+        defaults.textHeightBehavior ??
+        DefaultTextHeightBehavior.maybeOf(context);
+    final inputs = (
+      style,
+      direction,
+      scaler,
+      locale,
+      maxWidth,
+      padding,
+      defaults.maxLines,
+      defaults.textWidthBasis,
+      heightBehavior,
+    );
+    if (_optionMeasurementInputs != inputs) {
+      _optionMeasurementInputs = inputs;
+      _optionMeasurements.clear();
+    }
+    TextPainter? painter;
+    final extents = <double>[];
+    for (final label in labels) {
+      var extent = _optionMeasurements[label];
+      if (extent == null) {
+        painter ??= TextPainter(
+          textDirection: direction,
+          textScaler: scaler,
+          locale: locale,
+          textAlign: TextAlign.center,
+          maxLines: defaults.maxLines,
+          textWidthBasis: defaults.textWidthBasis,
+          textHeightBehavior: heightBehavior,
+        );
+        painter
+          ..text = TextSpan(text: label, style: style)
+          ..layout(maxWidth: maxWidth);
+        extent = math.max(48.0, painter.height + padding);
+        if (_optionMeasurements.length >= _optionMeasurementLimit) {
+          _optionMeasurements.remove(_optionMeasurements.keys.first);
+        }
+        _optionMeasurements[label] = extent;
+      }
+      extents.add(extent);
+    }
+    painter?.dispose();
+    return extents;
+  }
+
   String _optionLabel(_PromptOption option) {
     final lines = <String>[
       option.kind == _PromptOptionKind.attach && _attaching
@@ -1284,7 +1361,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
       if (option.description.isNotEmpty) option.description,
     ];
     if (option.kind == _PromptOptionKind.source) {
-      final source = _sources.firstWhere((source) => source.id == option.id);
+      final source = _sourcesById[option.id]!;
       if (!source.connected) {
         lines.add(
           _connections.containsKey(source.id)
@@ -1304,9 +1381,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
       _PromptOptionKind.command => true,
       _PromptOptionKind.source =>
         !_connections.containsKey(option.id) &&
-            (_sources
-                    .firstWhere((source) => source.id == option.id)
-                    .connected ||
+            (_sourcesById[option.id]!.connected ||
                 widget.onConnectSource != null),
     };
   }

@@ -352,8 +352,10 @@ final class BeautifulInsightLabels {
 ///
 /// Work is bounded to 32 pages, four series of 512 observations, eight metrics,
 /// and twelve allocation segments. Only the selected chart is painted; its full
-/// textual data is created only when requested. No timers, networking, numeric
-/// formatting, forecasting, or model execution are performed.
+/// textual data is created only when requested. More than 24 textual rows use a
+/// bounded, lazy scroll viewport with complete values and keyboard navigation.
+/// No timers, networking, numeric formatting, forecasting, or model execution
+/// are performed.
 final class BeautifulInsightCards extends StatefulWidget {
   /// Creates a carousel and validates stable page identities in release builds.
   BeautifulInsightCards({
@@ -841,23 +843,11 @@ final class _BeautifulInsightCardsState extends State<BeautifulInsightCards> {
         if (inspection.showData)
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                for (var i = 0; i < points.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Text(
-                      '${points[i].label}. ${series.map((s) => '${s.label}: ${s.points[i].formattedValue}').join('. ')}',
-                      key: ValueKey<String>(
-                        'beautiful-insight-datum-${page.id}-${points[i].id}',
-                      ),
-                      style: theme.typography.caption.copyWith(
-                        color: theme.colors.ink,
-                      ),
-                    ),
-                  ),
-              ],
+            child: _InsightTextData(
+              key: ValueKey<(String, String)>((page.id, chartId)),
+              pageId: page.id,
+              label: widget.labels.showData,
+              series: series,
             ),
           ),
       ],
@@ -983,6 +973,159 @@ final class _BeautifulInsightCardsState extends State<BeautifulInsightCards> {
             ),
           ),
       ],
+    );
+  }
+}
+
+final class _InsightTextData extends StatefulWidget {
+  const _InsightTextData({
+    super.key,
+    required this.pageId,
+    required this.label,
+    required this.series,
+  });
+
+  final String pageId;
+  final String label;
+  final List<BeautifulInsightSeries> series;
+
+  @override
+  State<_InsightTextData> createState() => _InsightTextDataState();
+}
+
+final class _InsightTextDataState extends State<_InsightTextData> {
+  final _scroll = ScrollController();
+  final _focus = FocusNode();
+  bool _focused = false;
+  bool _seekingEnd = false;
+
+  @override
+  void didUpdateWidget(_InsightTextData oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!identical(oldWidget.series, widget.series)) _seekingEnd = false;
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    _focus.dispose();
+    super.dispose();
+  }
+
+  void _jumpToEnd() {
+    if (!mounted || !_seekingEnd || !_scroll.hasClients) return;
+    _scroll.jumpTo(_scroll.position.maxScrollExtent);
+    // Variable-height translated rows refine the estimated end after layout.
+    // Keep following that end until the actual final row is visible.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_seekingEnd || !_scroll.hasClients) return;
+      if ((_scroll.offset - _scroll.position.maxScrollExtent).abs() > 0.5) {
+        _jumpToEnd();
+      } else {
+        _seekingEnd = false;
+      }
+    });
+  }
+
+  KeyEventResult _onKey(FocusNode node, KeyEvent event) {
+    if ((event is! KeyDownEvent && event is! KeyRepeatEvent) ||
+        !_scroll.hasClients) {
+      return KeyEventResult.ignored;
+    }
+    final position = _scroll.position;
+    if (event.logicalKey == LogicalKeyboardKey.end) {
+      _seekingEnd = true;
+      _jumpToEnd();
+      return KeyEventResult.handled;
+    }
+    final target = switch (event.logicalKey) {
+      LogicalKeyboardKey.home => 0.0,
+      LogicalKeyboardKey.arrowUp => position.pixels - 64,
+      LogicalKeyboardKey.arrowDown => position.pixels + 64,
+      LogicalKeyboardKey.pageUp =>
+        position.pixels - position.viewportDimension * 0.85,
+      LogicalKeyboardKey.pageDown =>
+        position.pixels + position.viewportDimension * 0.85,
+      _ => null,
+    };
+    if (target == null) return KeyEventResult.ignored;
+    _seekingEnd = false;
+    _scroll.jumpTo(target.clamp(0, position.maxScrollExtent));
+    return KeyEventResult.handled;
+  }
+
+  Widget _row(int index, BeautifulUiThemeData theme) {
+    final point = widget.series.first.points[index];
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Text(
+        '${point.label}. ${widget.series.map((s) => '${s.label}: ${s.points[index].formattedValue}').join('. ')}',
+        key: ValueKey<String>(
+          'beautiful-insight-datum-${widget.pageId}-${point.id}',
+        ),
+        style: theme.typography.caption.copyWith(color: theme.colors.ink),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = BeautifulUiTheme.of(context);
+    final count = widget.series.first.points.length;
+    if (count <= 24) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          for (var index = 0; index < count; index++) _row(index, theme),
+        ],
+      );
+    }
+    return Semantics(
+      container: true,
+      explicitChildNodes: true,
+      label: widget.label,
+      child: Focus(
+        focusNode: _focus,
+        onFocusChange: (focused) => setState(() => _focused = focused),
+        onKeyEvent: _onKey,
+        child: Listener(
+          onPointerDown: (_) {
+            _seekingEnd = false;
+            _focus.requestFocus();
+          },
+          onPointerSignal: (_) => _seekingEnd = false,
+          child: SizedBox(
+            height: 320,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: _focused
+                      ? theme.colors.accentInk
+                      : theme.colors.lineStrong,
+                  width: _focused ? 2 : 1,
+                ),
+                borderRadius: BorderRadius.circular(theme.radii.control),
+              ),
+              child: RawScrollbar(
+                controller: _scroll,
+                thumbVisibility: true,
+                thumbColor: theme.colors.inkMuted,
+                radius: Radius.circular(theme.radii.control),
+                child: ListView.builder(
+                  key: ValueKey<String>(
+                    'beautiful-insight-data-scroll-${widget.pageId}',
+                  ),
+                  controller: _scroll,
+                  primary: false,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  itemCount: count,
+                  itemBuilder: (context, index) => _row(index, theme),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show BoxWidthStyle;
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -585,6 +586,9 @@ final class _BeautifulSelectionActionsState
                     cursorColor: theme.colors.accent,
                     backgroundCursorColor: theme.colors.inkMuted,
                     selectionColor: theme.colors.accentTint,
+                    // Native max-width boxes can cover unselected RTL text.
+                    // Editing actions must show the exact source range.
+                    selectionWidthStyle: BoxWidthStyle.tight,
                     selectionControls: hasOverlay
                         ? BeautifulTextSelectionControls(theme.colors.accent)
                         : null,

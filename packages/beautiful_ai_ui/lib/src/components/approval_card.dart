@@ -906,6 +906,7 @@ final class _BeautifulApprovalCardState extends State<BeautifulApprovalCard> {
                   liveRegion: true,
                   child: Text(
                     '${_index + 1} / ${widget.questions.length}',
+                    textDirection: TextDirection.ltr,
                     textAlign: TextAlign.center,
                     style: theme.typography.caption.copyWith(
                       color: theme.colors.inkMuted,

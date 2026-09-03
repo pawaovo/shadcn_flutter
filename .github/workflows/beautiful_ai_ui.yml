@@ -348,12 +348,15 @@ jobs:
         shell: bash
         run: |
           export PATH="$CHROMEWEBDRIVER:$PATH"
-          chromedriver --port=4444 > "$RUNNER_TEMP/chromedriver.log" 2>&1 &
+          mkdir -p artifacts/chrome
+          export BEAUTIFUL_INPUT_EVIDENCE="$PWD/artifacts/chrome"
+          chromedriver --port=4444 > artifacts/chrome/chromedriver.log 2>&1 &
           webdriver_pid=$!
           trap 'kill "$webdriver_pid" 2>/dev/null || true' EXIT
           flutter drive \
-            --driver=test_driver/integration_test.dart \
+            --driver=integration_test/driver/catalog_trusted_journey_driver.dart \
             --target=integration_test/catalog_journey_test.dart \
+            --dart-define=CATALOG_TRUSTED_BROWSER_COPY=true \
             --device-id=web-server \
             --browser-name=chrome \
             --driver-port=4444 \
@@ -364,6 +367,14 @@ jobs:
       - name: Run Linux desktop journey
         working-directory: packages/beautiful_ai_ui_catalog
         run: xvfb-run --auto-servernum flutter test integration_test/catalog_journey_test.dart --device-id=linux --no-pub
+
+      - name: Upload trusted Chrome journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome-trusted-journey
+          path: packages/beautiful_ai_ui_catalog/artifacts/chrome/
+          if-no-files-found: warn
 
   firefox-journey:
     name: Run Firefox journey
@@ -393,6 +404,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts/firefox
+          export BEAUTIFUL_INPUT_EVIDENCE="$PWD/artifacts/firefox"
           firefox --version | tee artifacts/firefox/browser-version.txt
           "$GECKOWEBDRIVER/geckodriver" --version | tee artifacts/firefox/driver-version.txt
           "$GECKOWEBDRIVER/geckodriver" --host 127.0.0.1 --port 4444 \
@@ -432,8 +444,9 @@ jobs:
             exit 1
           fi
           flutter drive \
-            --driver=test_driver/integration_test.dart \
+            --driver=integration_test/driver/catalog_trusted_journey_driver.dart \
             --target=integration_test/catalog_journey_test.dart \
+            --dart-define=CATALOG_TRUSTED_BROWSER_COPY=true \
             --device-id=web-server --browser-name=firefox --headless \
             --driver-port=4444 --browser-dimension=1440x900 \
             --no-pub 2>&1 | tee artifacts/firefox/journey.log
@@ -478,6 +491,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts/edge
+          export BEAUTIFUL_INPUT_EVIDENCE="$PWD/artifacts/edge"
           python3 ../../.github/scripts/flutter_edge_webdriver.py \
             --driver "$EDGEWEBDRIVER/msedgedriver" \
             --binary "$(command -v microsoft-edge)" \
@@ -520,8 +534,9 @@ jobs:
             exit 1
           fi
           flutter drive \
-            --driver=test_driver/integration_test.dart \
+            --driver=integration_test/driver/catalog_trusted_journey_driver.dart \
             --target=integration_test/catalog_journey_test.dart \
+            --dart-define=CATALOG_TRUSTED_BROWSER_COPY=true \
             --device-id=web-server --browser-name=edge \
             --driver-port=4444 --browser-dimension=1440x900 \
             --no-pub 2>&1 | tee artifacts/edge/journey.log
@@ -602,6 +617,12 @@ jobs:
       - name: Verify the bounded simulator console launcher
         if: needs.detect-targets.outputs.ios == 'true'
         run: python3 -B -m unittest discover -s .github/scripts -p 'test_run_ios_catalog_journey.py'
+
+      - name: Select full Xcode before dependency resolution
+        run: |
+          test -d /Applications/Xcode.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
+          DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -version
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
 import '../foundation/layout.dart';
+import '../foundation/motion.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/text_selection.dart';
 
@@ -947,11 +948,40 @@ final class _SidebarButton extends StatefulWidget {
 final class _SidebarButtonState extends State<_SidebarButton> {
   var _focused = false;
   var _hovered = false;
+  var _pressed = false;
+
+  @override
+  void didUpdateWidget(_SidebarButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onPressed == null) _pressed = false;
+  }
+
+  void _setPressed(bool value) {
+    if (_pressed != value) setState(() => _pressed = value);
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
     final enabled = widget.onPressed != null;
+    final environment = BeautifulUiEnvironment.of(context);
+    final duration =
+        (MediaQuery.maybeOf(context)?.disableAnimations ?? false) ||
+            environment.motionPolicy == BeautifulMotionPolicy.none ||
+            !TickerMode.valuesOf(context).enabled
+        ? Duration.zero
+        : theme.motion.quick;
+    var background = widget.selected == true
+        ? theme.colors.hoverStrong
+        : enabled && _hovered
+        ? theme.colors.hover
+        : const Color(0x00000000);
+    if (enabled && _pressed) {
+      background = Color.alphaBlend(
+        theme.colors.ink.withValues(alpha: 0.12),
+        Color.alphaBlend(background, theme.colors.surface),
+      );
+    }
     return Semantics(
       label: widget.semanticLabel ?? widget.label,
       button: true,
@@ -985,15 +1015,16 @@ final class _SidebarButtonState extends State<_SidebarButton> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: widget.onPressed,
-          child: Container(
+          onTapDown: enabled ? (_) => _setPressed(true) : null,
+          onTapUp: enabled ? (_) => _setPressed(false) : null,
+          onTapCancel: enabled ? () => _setPressed(false) : null,
+          child: AnimatedContainer(
+            duration: duration,
+            curve: theme.motion.outCurve,
             constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
-              color: widget.selected == true
-                  ? theme.colors.hoverStrong
-                  : _hovered
-                  ? theme.colors.hover
-                  : null,
+              color: background,
               border: Border.all(
                 color: _focused ? theme.colors.accent : const Color(0x00000000),
                 width: 2,

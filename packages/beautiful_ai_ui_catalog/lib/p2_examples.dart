@@ -106,7 +106,9 @@ final class _CatalogStreamingExampleState
                 () => _activity = 'Follow-up selected: ${followUp.label}',
               );
             },
-            onCopy: (_) {
+            onCopy: (text) async {
+              await Clipboard.setData(ClipboardData(text: text));
+              if (!mounted) return;
               setState(() => _activity = 'Response copied');
             },
             feedback: _feedback,

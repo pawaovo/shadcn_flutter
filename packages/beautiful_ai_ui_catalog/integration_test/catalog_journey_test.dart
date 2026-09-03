@@ -7,6 +7,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'support/interactions.dart';
 import 'support/catalog_semantics_fixture.dart';
+import 'support/trusted_clipboard_action.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,10 @@ void main() {
     'catalog launches and completes its critical interaction journey',
     (tester) async {
       final semantics = tester.ensureSemantics();
+      final previousDevicePointers = binding.shouldPropagateDevicePointerEvents;
+      if (useTrustedBrowserCopy) {
+        binding.shouldPropagateDevicePointerEvents = true;
+      }
       try {
         catalog.main();
         await tester.pump(const Duration(seconds: 1));
@@ -128,13 +133,19 @@ void main() {
           700,
           scrollable: scrollable,
         );
-        await tester.tap(_inside('catalog-code-block', find.text('Copy')));
+        await activateCatalogCopy(
+          tester,
+          _inside('catalog-code-block', find.text('Copy')),
+          'journey-code-copy',
+          completed: _inside('catalog-code-block', find.text('Copied')),
+        );
         await tester.pump();
         expect(find.text('Copied'), findsOneWidget);
         await _runP2Journey(tester);
         await _runP3Journey(tester);
         expect(tester.takeException(), isNull);
       } finally {
+        binding.shouldPropagateDevicePointerEvents = previousDevicePointers;
         semantics.dispose();
         runApp(const SizedBox.shrink());
         await tester.pump();
@@ -153,7 +164,13 @@ Future<void> _runP2Journey(WidgetTester tester) async {
     await tester.pump(const Duration(milliseconds: 180));
   }
 
-  await tap('catalog-streaming-complete', find.text('Copy response'));
+  await activateCatalogCopy(
+    tester,
+    _inside('catalog-streaming-complete', find.text('Copy response')),
+    'journey-stream-copy',
+    completed: find.text('Response copied'),
+  );
+  await tester.pump(const Duration(milliseconds: 180));
   expect(find.text('Response copied'), findsOneWidget);
   await tap('catalog-streaming-complete', find.text('Sources (2)'));
   await tap(

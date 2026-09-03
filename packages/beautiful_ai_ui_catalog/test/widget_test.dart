@@ -81,6 +81,7 @@ void main() {
   testWidgets('catalog P1 examples remain directly interactive', (
     tester,
   ) async {
+    final clipboardWrites = _mockWidgetClipboard(tester);
     await tester.pumpWidget(const CatalogApp());
     await tester.pump();
 
@@ -112,8 +113,16 @@ void main() {
       scrollable: scrollable,
     );
     await tester.tap(_inside('catalog-code-block', find.text('Copy')));
-    await tester.pump();
+    await _waitForCopyFeedback(tester, find.text('Copied'));
     expect(find.text('Copied'), findsOneWidget);
+    expect(clipboardWrites, <String>[
+      '''export async function churnBatch() {
+  const flavor = await getFlavor("pistachio");
+  const base = await dairy.fetch({ flavor });
+  await freezer.store(base, { temp: "-16C" });
+  return base.gallons;
+}''',
+    ]);
     expect(tester.takeException(), isNull);
 
     await tester.pumpWidget(const SizedBox.shrink());
@@ -139,6 +148,7 @@ void main() {
   testWidgets('catalog P2 host callbacks complete the workflow', (
     tester,
   ) async {
+    final clipboardWrites = _mockWidgetClipboard(tester);
     await tester.pumpWidget(const CatalogApp());
     await tester.pump();
 
@@ -149,7 +159,12 @@ void main() {
     }
 
     await tap('catalog-streaming-complete', find.text('Copy response'));
+    await _waitForCopyFeedback(tester, find.text('Response copied'));
     expect(find.text('Response copied'), findsOneWidget);
+    expect(clipboardWrites, <String>[
+      'Prioritize the pistachio restock. [1]\n'
+          'Confirm the waffle cone order before Friday. [2]',
+    ]);
     await tap('catalog-streaming-complete', find.text('Sources (2)'));
     await tap(
       'catalog-streaming-complete',
@@ -421,6 +436,43 @@ void main() {
 
 Finder _inside(String key, Finder matching) =>
     find.descendant(of: find.byKey(Key(key)), matching: matching);
+
+// Widget-only transport mock. Real native and W3C integration targets never
+// install this handler and must exercise their actual platform clipboard.
+List<String> _mockWidgetClipboard(WidgetTester tester) {
+  final writes = <String>[];
+  var text = '';
+  tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+    SystemChannels.platform,
+    (call) async {
+      switch (call.method) {
+        case 'Clipboard.setData':
+          text = (call.arguments as Map)['text'] as String;
+          writes.add(text);
+          return null;
+        case 'Clipboard.getData':
+          return <String, String>{'text': text};
+        case 'Clipboard.hasStrings':
+          return <String, bool>{'value': text.isNotEmpty};
+      }
+      return null;
+    },
+  );
+  addTearDown(
+    () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      null,
+    ),
+  );
+  return writes;
+}
+
+Future<void> _waitForCopyFeedback(WidgetTester tester, Finder feedback) async {
+  for (var frame = 0; frame < 120 && feedback.evaluate().isEmpty; frame++) {
+    await tester.pump(const Duration(milliseconds: 16));
+  }
+  expect(feedback, findsOneWidget);
+}
 
 Future<void> _runP3Journey(WidgetTester tester) async {
   Future<void> tap(String key, Finder target) async {

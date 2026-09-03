@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-03",
+  "scope": "Catalog only; beautiful_ai_ui publish dependencies are unchanged",
+  "new_packages": 8,
+  "existing_packages_now_direct": [
+    "crypto"
+  ],
+  "existing_transitive_packages": [
+    "cross_file"
+  ],
+  "bundle_requirement": "Preserve each full upstream LICENSE through generated Flutter notices; Android includes aFileChooser Apache-2.0 text",
+  "packages": [
+    {
+      "name": "file_selector",
+      "version": "1.1.0",
+      "archive_sha256": "bd15e43e9268db636b53eeaca9f56324d1622af30e5c34d6e267649758c84d9a",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector/versions/1.1.0/license"
+    },
+    {
+      "name": "file_selector_android",
+      "version": "0.5.2+10",
+      "archive_sha256": "7c76473740e33a11343c8fce88166049230850d2f19cd8a652ea935fcb8c9206",
+      "license_ids": [
+        "BSD-3-Clause",
+        "Apache-2.0"
+      ],
+      "license_bytes": 12943,
+      "license_sha256": "8e139d4c7faa5e7a76752e743a745113f46e658071733bfae4914a04da12ae0e",
+      "license_source": "https://pub.dev/packages/file_selector_android/versions/0.5.2+10/license"
+    },
+    {
+      "name": "file_selector_ios",
+      "version": "0.5.3+6",
+      "archive_sha256": "97269e5307a0ab813b1fa2430bada0a96e0afb74848417f8676f64ba5de0051c",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_ios/versions/0.5.3+6/license"
+    },
+    {
+      "name": "file_selector_linux",
+      "version": "0.9.4+1",
+      "archive_sha256": "da76400e7872ce7637ffdce12749ec24169c25f6195c28372208e65a24bcd2ab",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_linux/versions/0.9.4+1/license"
+    },
+    {
+      "name": "file_selector_macos",
+      "version": "0.9.5+1",
+      "archive_sha256": "d57c62362766b5e7ae739448650b66c6aab7a68ba7ecc65e04018652645ae0f4",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_macos/versions/0.9.5+1/license"
+    },
+    {
+      "name": "file_selector_platform_interface",
+      "version": "2.7.0",
+      "archive_sha256": "35e0bd61ebcdb91a3505813b055b09b79dfdc7d0aee9c09a7ba59ae4bb13dc85",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_platform_interface/versions/2.7.0/license"
+    },
+    {
+      "name": "file_selector_web",
+      "version": "0.9.5",
+      "archive_sha256": "73181fbc5257776d8ecaa6a94ab3c8e920ad143b9132a6d984a9271dfc6928d3",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_web/versions/0.9.5/license"
+    },
+    {
+      "name": "file_selector_windows",
+      "version": "0.9.3+6",
+      "archive_sha256": "fbefc5fb92c6d3cbe8d284a2cd971b593bb07d2cd6da8557b81a862250b4acec",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/file_selector_windows/versions/0.9.3+6/license"
+    },
+    {
+      "name": "cross_file",
+      "version": "0.3.5+5",
+      "archive_sha256": "f141ea4f277af142a0356955707f6556f37b03947d39d55585981a06ca437bd6",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1497,
+      "license_sha256": "420f7739f169097f0aad1242045169cd643c8f1d94e62866fad265ae4c369b7d",
+      "license_source": "https://pub.dev/packages/cross_file/versions/0.3.5+5/license"
+    },
+    {
+      "name": "crypto",
+      "version": "3.0.7",
+      "archive_sha256": "c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf",
+      "license_ids": [
+        "BSD-3-Clause"
+      ],
+      "license_bytes": 1503,
+      "license_sha256": "ad6a71997da90924b2cfb1fb47ec46537f70faf469efe016168794ae45ed6888",
+      "license_source": "https://pub.dev/packages/crypto/versions/3.0.7/license"
+    }
+  ],
+  "catalog_portable_notice": {
+    "path": "packages/beautiful_ai_ui_catalog/NOTICES",
+    "sha256": "45acc47f2911bafbdd82bcadfebc0b810679d69c60556d38502fca95bc924555",
+    "source_package": "file_selector_android 0.5.2+10",
+    "transformation": "Only explicit package headers are added; both original license bodies remain byte-for-byte unchanged.",
+    "reason": "Upstream mixed LICENSE first block lacks package header; Flutter otherwise uses the copyright line as package label."
+  },
+  "license_registry_probe": {
+    "status": "passed",
+    "label_count": 11,
+    "labels": [
+      "file_selector",
+      "file_selector_android",
+      "file_selector_ios",
+      "file_selector_linux",
+      "file_selector_macos",
+      "file_selector_platform_interface",
+      "file_selector_web",
+      "file_selector_windows",
+      "cross_file",
+      "crypto",
+      "aFileChooser"
+    ],
+    "probe": "tool/probe_dependency_license_registry.dart",
+    "log_sha256": "92b55da86a3a87bc1fe71bfa94f52bff46d618fe7a9080a0e8ecad0d18a106f9",
+    "generated_test_notices_sha256": "b20adc670c604988c3078acaf290cc520c9f50dfe2addb98deceac393eccd090",
+    "scope": "Actual production LicenseRegistry reading generated unit_test_assets/NOTICES.Z; release binaries need their own notice validation."
+  }
+}

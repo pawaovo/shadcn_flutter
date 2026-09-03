@@ -1,0 +1,191 @@
+name: Beautiful AI UI input and AT capability evidence
+
+on:
+  push:
+    branches: [product/main]
+  pull_request:
+    branches: [product/main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.47.0"
+
+jobs:
+  browser-input:
+    name: Real ${{ matrix.browser }} input
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, edge, firefox]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Resolve locked dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Verify actual browser input protocol and failure propagation
+        run: |
+          dart --packages=.dart_tool/package_config.json .github/scripts/test_catalog_browser_input_protocol.dart
+          python3 -B -m unittest discover -s .github/scripts -p 'test_run_catalog_input_acceptance.py'
+      - name: Run framework and trusted browser input suites
+        run: python3 .github/scripts/run_catalog_input_acceptance.py --platform ${{ matrix.browser }} --artifacts artifacts/input-${{ matrix.browser }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: input-${{ matrix.browser }}
+          path: artifacts/input-${{ matrix.browser }}/
+          if-no-files-found: error
+
+  native-input:
+    name: Native ${{ matrix.platform }} input bridge
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            runner: ubuntu-24.04
+          - platform: macos
+            runner: macos-latest
+          - platform: windows
+            runner: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Windows descendant ownership and cleanup
+        if: matrix.platform == 'windows'
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_windows_owned_process.py' -v
+      - name: Install Linux runner dependencies
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev xvfb at-spi2-core
+      - name: Select full Xcode before dependency resolution
+        if: runner.os == 'macOS'
+        run: |
+          test -d /Applications/Xcode.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
+          DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -version
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Resolve locked dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Run platform input and real native clipboard bridge
+        run: python3 .github/scripts/run_catalog_input_acceptance.py --platform ${{ matrix.platform }} --artifacts artifacts/input-${{ matrix.platform }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: input-${{ matrix.platform }}
+          path: artifacts/input-${{ matrix.platform }}/
+          if-no-files-found: error
+
+  safari-input:
+    name: Real Safari full journey and input
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record and enable only this runner's real Safari driver
+        run: |
+          mkdir -p artifacts/input-safari
+          sw_vers > artifacts/input-safari/macos-version.txt
+          /usr/bin/safaridriver --version > artifacts/input-safari/safaridriver-version.txt
+          /usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' /Applications/Safari.app/Contents/Info.plist > artifacts/input-safari/safari-version.txt
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          with Path('artifacts/input-safari/enable-automation.log').open('w') as log:
+              subprocess.run(['sudo', '/usr/bin/safaridriver', '--enable'], stdout=log,
+                             stderr=subprocess.STDOUT, timeout=30, check=True)
+          PY
+      - name: Select full Xcode before dependency resolution
+        if: runner.os == 'macOS'
+        run: |
+          test -d /Applications/Xcode.app/Contents/Developer
+          echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
+          DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -version
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Resolve locked dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Run original full journey and real Safari input
+        run: python3 .github/scripts/run_catalog_input_acceptance.py --platform safari --include-journey --artifacts artifacts/input-safari
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: input-safari
+          path: artifacts/input-safari/
+          if-no-files-found: error
+
+  linux-at-capability:
+    name: Real Orca capability probe (not app acceptance)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify AT supervisor cleanup without launching AT
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_probe_real_at_linux.py' -v
+      - name: Provision real AT and speech backend in this disposable runner
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y orca speech-dispatcher speech-dispatcher-espeak-ng espeak-ng pulseaudio pulseaudio-utils python3-gi python3-pyatspi python3-speechd gir1.2-gtk-3.0 at-spi2-core dbus-x11 xvfb xauth xdotool
+      - name: Observe actual Orca navigation, utterance and synthesized PCM
+        run: timeout 65s dbus-run-session -- xvfb-run -a /usr/bin/python3 .github/scripts/probe_real_at_linux.py --output artifacts/real-at-linux --seconds 50
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-at-linux-capability
+          path: artifacts/real-at-linux/
+          if-no-files-found: error
+
+  windows-at-capability:
+    name: Real Narrator capability probe (not app acceptance)
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Observe actual Narrator, interactive desktop and audio endpoint
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, '.github/scripts')
+          from windows_owned_process import start_owned_process, stop_owned_process
+          output = Path('artifacts/real-at-windows')
+          output.mkdir(parents=True, exist_ok=True)
+          command = ['powershell', '-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
+                     '-File', '.github/scripts/probe_real_at_windows.ps1',
+                     '-OutputDirectory', str(output), '-Seconds', '50']
+          try:
+              with (output / 'process.log').open('w') as log:
+                  process = start_owned_process(command, stdout=log, stderr=subprocess.STDOUT)
+                  try:
+                      result = process.wait(timeout=65)
+                  finally:
+                      stop_owned_process(process)
+          except Exception as error:
+              (output / 'supervisor.json').write_text(json.dumps({
+                  'status': 'not_accepted', 'reason': str(error),
+                  'application_acceptance': 'not_accepted'}))
+              raise
+          raise SystemExit(result)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-at-windows-capability
+          path: artifacts/real-at-windows/
+          if-no-files-found: error

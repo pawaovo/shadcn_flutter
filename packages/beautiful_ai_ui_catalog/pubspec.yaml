@@ -11,6 +11,9 @@ resolution: workspace
 
 dependencies:
   beautiful_ai_ui: any
+  # Real file selection stays in this host; enable with CATALOG_REAL_FILES.
+  crypto: 3.0.7
+  file_selector: 1.1.0
   flutter:
     sdk: flutter
 
