@@ -15,6 +15,7 @@ from pathlib import Path
 import plistlib
 import queue
 import re
+import selectors
 import signal
 import subprocess
 import sys
@@ -66,31 +67,163 @@ def unified_service_uri(line, pid, executable, launched_at):
     return service_uri(line)
 
 
+def live_group_members(group_id):
+    try:
+        snapshot = subprocess.check_output(
+            ["/bin/ps", "-axo", "pid=,pgid=,stat="], text=True, timeout=1,
+        )
+    except subprocess.SubprocessError as error:
+        raise RuntimeError("Cannot verify process group membership") from error
+    members = []
+    for line in snapshot.splitlines():
+        pid, pgid, state = line.split()
+        if int(pgid) == group_id and not state.startswith("Z"):
+            members.append(int(pid))
+    return members
+
+
+def stop_process_group(process, grace=5):
+    def signal_group(sig):
+        # Darwin can report EPERM for a group containing only zombies.
+        process.poll()
+        try:
+            os.killpg(process.pid, sig)
+            return True
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            if live_group_members(process.pid):
+                raise
+            return False
+
+    signal_group(signal.SIGTERM)
+    deadline = time.monotonic() + grace
+    while time.monotonic() < deadline:
+        if not signal_group(0):
+            break
+        time.sleep(0.02)
+    if signal_group(0):
+        signal_group(signal.SIGKILL)
+    process.wait(timeout=5)
+
+
+def capture_query_snapshot(command, path, timeout):
+    """Capture a finite query by its exit status, without requiring inherited EOF.
+
+    CoreSimulator can proxy output through processes outside the host CLI's
+    process group. Successful command completion plus a finite available-byte
+    drain defines this snapshot; it does not claim those external services ended.
+    Generic LoggedProcess intentionally retains its strict EOF requirement.
+    """
+    start = time.monotonic()
+    status = {"exit_code": None, "timed_out": False, "stdout_eof": False,
+              "bytes_read": 0, "host_group_clean": False}
+    process = None
+    lines = []
+    pending = b""
+    try:
+        with path.open("w", encoding="utf-8") as log, selectors.DefaultSelector() as selector:
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       bufsize=0, start_new_session=True)
+            descriptor = process.stdout.fileno()
+            capture_ready = False
+
+            def drain(deadline):
+                nonlocal pending
+                while True:
+                    while b"\n" in pending:
+                        if time.monotonic() >= deadline:
+                            return False
+                        raw, pending = pending.split(b"\n", 1)
+                        line = raw.decode("utf-8", errors="replace") + "\n"
+                        lines.append(line)
+                        log.write(redact(line))
+                        log.flush()
+                    if time.monotonic() >= deadline:
+                        return False
+                    if status["stdout_eof"]:
+                        return True
+                    try:
+                        data = os.read(descriptor, 65536)
+                    except BlockingIOError:
+                        return time.monotonic() < deadline
+                    if not data:
+                        status["stdout_eof"] = True
+                        selector.unregister(descriptor)
+                        continue
+                    status["bytes_read"] += len(data)
+                    if status["bytes_read"] > 1024 * 1024:
+                        raise RuntimeError("VM Service snapshot exceeded its 1 MiB output bound")
+                    pending += data
+
+            try:
+                os.set_blocking(descriptor, False)
+                selector.register(descriptor, selectors.EVENT_READ)
+                capture_ready = True
+                deadline = start + timeout
+                while process.poll() is None:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        status.update(exit_code=124, timed_out=True)
+                        break
+                    if status["stdout_eof"]:
+                        time.sleep(min(0.02, remaining))
+                    elif selector.select(min(0.05, remaining)):
+                        if not drain(deadline):
+                            status.update(exit_code=124, timed_out=True)
+                            break
+                if status["exit_code"] is None:
+                    if time.monotonic() >= deadline:
+                        status.update(exit_code=124, timed_out=True)
+                    else:
+                        status["exit_code"] = process.returncode
+            finally:
+                # The real CLI and all live members of its own host PGID must
+                # still end. An inherited descriptor alone is not a live PID.
+                try:
+                    stop_process_group(process, grace=0)
+                    members = live_group_members(process.pid)
+                    if members:
+                        raise RuntimeError(f"Snapshot host process group still has live members: {members}")
+                    status["host_group_clean"] = True
+                    if capture_ready:
+                        # This one-second tail budget fits inside the caller's
+                        # cleanup reserve; byte limits still apply to the total.
+                        final_deadline = time.monotonic() + 1
+                        complete = drain(final_deadline)
+                        if pending and complete and time.monotonic() < final_deadline:
+                            # Preserve an incomplete diagnostic tail, but never
+                            # expose it as a candidate URI.
+                            log.write(redact(pending.decode("utf-8", errors="replace")))
+                            log.flush()
+                            pending = b""
+                        complete = complete and time.monotonic() < final_deadline
+                        status["final_drain_complete"] = complete
+                        if not complete:
+                            status.update(exit_code=124, timed_out=True)
+                finally:
+                    process.stdout.close()
+            if pending:
+                status["discarded_tail_bytes"] = len(pending)
+    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
+        status["error"] = redact(str(error))
+        raise
+    finally:
+        status["host_returncode"] = process.returncode if process is not None else None
+        status["elapsed_seconds"] = round(time.monotonic() - start, 3)
+        path.with_suffix(".json").write_text(json.dumps(status, indent=2) + "\n")
+    code = status["exit_code"]
+    return lines if code == 0 else [], code
+
+
 def query_unified_service(device, pid, launched_at, path, timeout):
     command = [
-        "xcrun", "simctl", "spawn", device, "log", "show", "--style", "compact",
+        "xcrun", "simctl", "spawn", device, "log", "show", "--no-pager", "--style", "compact",
         "--timezone", "UTC", "--info", "--debug",
         "--start", launched_at.strftime("%Y-%m-%d %H:%M:%S%z"),
         "--predicate", f'processIdentifier == {pid} AND composedMessage CONTAINS "Dart VM service is listening on"',
     ]
-    process = LoggedProcess(command, path)
-    try:
-        try:
-            code = process.process.wait(timeout=timeout)
-        except subprocess.TimeoutExpired:
-            code = 124
-    finally:
-        process.close(grace=0)
-    lines = []
-    while True:
-        try:
-            line = process.lines.get_nowait()
-        except queue.Empty:
-            break
-        if line is not None:
-            lines.append(line)
-    # Read original in-memory events. The saved log and .output are redacted.
-    return lines if code == 0 else [], code
+    return capture_query_snapshot(command, path, timeout)
 
 
 def discover_service(pid, device, executable, directory,
@@ -106,8 +239,12 @@ def discover_service(pid, device, executable, directory,
         budget = min(15, remaining - 8)
         path = directory / f"vm-service-history-{len(attempts) + 1}.log"
         print(f"[ios-journey] inspect unified VM log for PID {pid}", flush=True)
+        attempt = {"exit_code": None, "log": path.name,
+                   "capture_status": path.with_suffix(".json").name,
+                   "timeout_seconds": round(budget, 3)}
+        attempts.append(attempt)
         lines, code = query_unified_service(device, pid, launched_at, path, budget)
-        attempts.append({"exit_code": code, "log": path.name, "timeout_seconds": round(budget, 3)})
+        attempt["exit_code"] = code
         if time.monotonic() >= deadline:
             break
         for event in lines:
@@ -142,44 +279,7 @@ class LoggedProcess:
 
     def close(self, grace=5):
         # Stop the whole CLI process group, including log-reader/compiler children.
-        def live_group_members():
-            try:
-                snapshot = subprocess.check_output(
-                    ["/bin/ps", "-axo", "pid=,pgid=,stat="], text=True, timeout=1,
-                )
-            except subprocess.SubprocessError as error:
-                raise RuntimeError("Cannot verify process group membership after EPERM") from error
-            members = []
-            for line in snapshot.splitlines():
-                pid, pgid, state = line.split()
-                if int(pgid) == self.process.pid and not state.startswith("Z"):
-                    members.append(int(pid))
-            return members
-
-        def signal_group(sig):
-            # Darwin skips zombies in killpg1 and can return EPERM when the
-            # remaining group has no signalable members. Reap our leader first;
-            # never treat EPERM as absence while a non-zombie member remains.
-            self.process.poll()
-            try:
-                os.killpg(self.process.pid, sig)
-                return True
-            except ProcessLookupError:
-                return False
-            except PermissionError:
-                if live_group_members():
-                    raise
-                return False
-
-        signal_group(signal.SIGTERM)
-        deadline = time.monotonic() + grace
-        while time.monotonic() < deadline:
-            if not signal_group(0):
-                break
-            time.sleep(0.02)
-        if signal_group(0):
-            signal_group(signal.SIGKILL)
-        self.process.wait(timeout=5)
+        stop_process_group(self.process, grace)
         self.reader.join(timeout=2)
         if self.reader.is_alive():
             raise RuntimeError("CLI process group retained its output pipe after forced termination")

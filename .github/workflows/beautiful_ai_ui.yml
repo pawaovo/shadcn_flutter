@@ -483,6 +483,7 @@ jobs:
             --binary "$(command -v microsoft-edge)" \
             --log artifacts/edge/msedgedriver.log \
             --evidence artifacts/edge/browser-identity.json \
+            --diagnostics artifacts/edge/diagnostics \
             > artifacts/edge/adapter.log 2>&1 &
           adapter_pid=$!
           cleanup() {

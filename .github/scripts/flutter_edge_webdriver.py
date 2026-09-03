@@ -8,15 +8,72 @@ or modified. The server and its real msedgedriver upstream bind to loopback.
 """
 
 import argparse
+import base64
 import http.client
+import io
+import itertools
 import json
 import re
 import signal
+import socket
 import subprocess
 import sys
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+
+
+class _DeadlineReader(io.RawIOBase):
+    """Every buffered HTTP read shares the same absolute network deadline."""
+
+    def __init__(self, connection, deadline):
+        super().__init__()
+        self.connection = connection
+        self.deadline = deadline
+
+    def readable(self):
+        return True
+
+    def readinto(self, buffer):
+        remaining = self.deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError("Diagnostic total deadline exceeded")
+        self.connection.settimeout(remaining)
+        return self.connection.recv_into(buffer)
+
+
+class _DeadlineResponseSocket:
+    def __init__(self, connection, deadline):
+        self.connection = connection
+        self.deadline = deadline
+
+    def makefile(self, _mode):
+        return io.BufferedReader(_DeadlineReader(self.connection, self.deadline))
+
+
+def diagnostic_response(port, path, timeout=2):
+    """Read one genuine HTTP response within a total deadline; no worker survives."""
+    deadline = time.monotonic() + timeout
+    request = (
+        f"GET {path} HTTP/1.1\r\nHost: 127.0.0.1:{port}\r\n"
+        "Connection: close\r\n\r\n"
+    ).encode("ascii")
+    with socket.create_connection(("127.0.0.1", port), timeout=timeout) as connection:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError("Diagnostic total deadline exceeded")
+        connection.settimeout(remaining)
+        connection.sendall(request)
+        with http.client.HTTPResponse(_DeadlineResponseSocket(connection, deadline)) as response:
+            response.begin()
+            # Do not retain an unbounded response from an unhealthy driver.
+            limit = 16 * 1024 * 1024
+            body = response.read(limit + 1)
+            if time.monotonic() >= deadline:
+                raise TimeoutError("Diagnostic total deadline exceeded")
+            if len(body) > limit:
+                raise ValueError("Diagnostic response exceeds 16 MiB")
+            return response.status, json.loads(body)
 
 
 def normalize_session(body, binary):
@@ -73,12 +130,46 @@ def edge_identity(body, expected_version):
 class EdgeAdapter(ThreadingHTTPServer):
     daemon_threads = True
 
-    def __init__(self, port, upstream_port, binary, version, evidence):
+    def __init__(self, port, upstream_port, binary, version, evidence, diagnostics=None):
         super().__init__(("127.0.0.1", port), EdgeRequest)
         self.upstream_port = upstream_port
         self.binary = binary
         self.version = version
         self.evidence = evidence
+        self.diagnostics = diagnostics
+        self.request_ids = itertools.count(1)
+
+    def capture_failure(self, request_id, session_id, command):
+        """Collect bounded real driver evidence without retrying the failed action."""
+        if self.diagnostics is None:
+            return
+        try:
+            self.diagnostics.mkdir(parents=True, exist_ok=True)
+            report = {"failed_command": command}
+            # These are observation commands only. Each gets at most 2 seconds;
+            # an unresponsive renderer may make both fail, which is evidence too.
+            for endpoint in ("url", "screenshot"):
+                try:
+                    status, value = diagnostic_response(
+                        self.upstream_port, f"/session/{session_id}/{endpoint}",
+                    )
+                    report[endpoint] = {"status": status}
+                    if endpoint == "screenshot" and 200 <= status < 300:
+                        png = base64.b64decode(value["value"], validate=True)
+                        if not png.startswith(b"\x89PNG\r\n\x1a\n"):
+                            raise ValueError("WebDriver screenshot is not PNG")
+                        filename = f"failure-{request_id}.png"
+                        (self.diagnostics / filename).write_bytes(png)
+                        report[endpoint]["file"] = filename
+                    else:
+                        report[endpoint]["response"] = value
+                except (OSError, http.client.HTTPException, ValueError, KeyError, TypeError) as error:
+                    report[endpoint] = {"diagnostic_error": str(error)}
+            (self.diagnostics / f"failure-{request_id}.json").write_text(
+                json.dumps(report, indent=2) + "\n",
+            )
+        except OSError as error:
+            print(f"Edge failure diagnostics unavailable: {error}", flush=True)
 
 
 class EdgeRequest(BaseHTTPRequestHandler):
@@ -100,6 +191,14 @@ class EdgeRequest(BaseHTTPRequestHandler):
 
     def _forward(self):
         body = self.rfile.read(int(self.headers.get("Content-Length", "0")))
+        request_id = next(self.server.request_ids)
+        started = time.monotonic()
+        command = {"request_id": request_id, "method": self.command, "path": self.path}
+        # Record geometry verbatim, without dumping execute-script arguments or
+        # page contents into the concise adapter command trace.
+        if self.path.endswith("/window/rect") and body:
+            command["parameters"] = body.decode("utf-8", errors="replace")
+        print(json.dumps({"event": "webdriver_request", **command}), flush=True)
         normalized = False
         if self.command == "POST" and self.path == "/session":
             body, normalized = normalize_session(body, self.server.binary)
@@ -115,6 +214,13 @@ class EdgeRequest(BaseHTTPRequestHandler):
             response = connection.getresponse()
             data = response.read()
             response_headers = response.getheaders()
+            result = {
+                **command, "status": response.status,
+                "elapsed_seconds": round(time.monotonic() - started, 3),
+            }
+            if self.path.endswith("/window/rect"):
+                result["response"] = data.decode("utf-8", errors="replace")
+            print(json.dumps({"event": "webdriver_response", **result}), flush=True)
             if normalized and 200 <= response.status < 300:
                 try:
                     identity = edge_identity(data, self.server.version)
@@ -123,8 +229,16 @@ class EdgeRequest(BaseHTTPRequestHandler):
                 except (ValueError, KeyError, TypeError, AttributeError, OSError) as error:
                     self._fail(502, "session not created", str(error))
                     return
+            session_command = re.fullmatch(r"/session/([^/]+)/.+", self.path)
+            if response.status >= 500 and session_command:
+                self.server.capture_failure(request_id, session_command[1], result)
             self._send(response.status, data, response_headers)
         except (OSError, http.client.HTTPException) as error:
+            print(json.dumps({
+                "event": "webdriver_transport_error", **command,
+                "elapsed_seconds": round(time.monotonic() - started, 3),
+                "error": str(error),
+            }), flush=True)
             self._fail(502, "unknown error", f"Local Microsoft Edge WebDriver unavailable: {error}")
         finally:
             connection.close()
@@ -173,6 +287,8 @@ def main():
     parser.add_argument("--upstream-port", type=int, default=4445)
     parser.add_argument("--log", type=Path, required=True)
     parser.add_argument("--evidence", type=Path, required=True)
+    parser.add_argument("--diagnostics", type=Path,
+                        help="Directory for bounded URL/screenshot evidence after upstream server errors")
     args = parser.parse_args()
     if not (0 < args.port < 65536 and 0 < args.upstream_port < 65536) or args.port == args.upstream_port:
         parser.error("Use two distinct local ports from 1 to 65535")
@@ -191,11 +307,13 @@ def main():
             # Omitting --allowed-ips preserves the driver's loopback-only bind.
             # Supplying that switch enables remote binding even for an allowlist.
             driver = subprocess.Popen(
-                [args.driver, f"--port={args.upstream_port}"],
+                [args.driver, f"--port={args.upstream_port}",
+                 "--verbose", "--enable-chrome-logs"],
                 stdout=log, stderr=subprocess.STDOUT,
             )
             wait_for_driver(driver, args.upstream_port)
-            with EdgeAdapter(args.port, args.upstream_port, args.binary, version, args.evidence) as server:
+            with EdgeAdapter(args.port, args.upstream_port, args.binary, version,
+                             args.evidence, args.diagnostics) as server:
                 print(f"Edge session adapter listening on 127.0.0.1:{args.port}", flush=True)
                 server.serve_forever(poll_interval=0.2)
     except KeyboardInterrupt:

@@ -5,6 +5,7 @@ import errno
 from datetime import datetime, timezone
 import os
 from pathlib import Path
+import signal
 import sys
 import subprocess
 import tempfile
@@ -13,7 +14,8 @@ import unittest
 from unittest.mock import patch
 
 from run_ios_catalog_journey import (
-    Journey, LoggedProcess, discover_service, launch_pid, query_unified_service, redact,
+    Journey, LoggedProcess, capture_query_snapshot, discover_service, launch_pid,
+    query_unified_service, redact,
     service_uri, unified_service_uri,
 )
 
@@ -23,6 +25,127 @@ class IOSLaunchTests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)
         self.path = Path(self.directory.name)
+
+    def descriptor_holder_fixture(self, name, *, separate_group=True):
+        marker = self.path / f"{name}.pid"
+        command = (
+            "import os,time\n"
+            "if os.fork() == 0:\n"
+            f" {'os.setsid()' if separate_group else 'pass'}\n"
+            f" open({str(marker)!r},'w').write(str(os.getpid()))\n"
+            " time.sleep(30)\n"
+            "else:\n"
+            f" while not os.path.exists({str(marker)!r}): time.sleep(.01)\n"
+            " print('The Dart VM service is listening on http://127.0.0.1:12345/private-token/', flush=True)\n"
+            " os._exit(0)\n"
+        )
+        return [sys.executable, "-u", "-c", command], marker
+
+    def stop_holder(self, marker):
+        if marker.exists():
+            try:
+                os.kill(int(marker.read_text()), signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+
+    def test_snapshot_command_exit_does_not_wait_for_external_descriptor_eof(self):
+        command, marker = self.descriptor_holder_fixture("snapshot")
+        path = self.path / "snapshot.log"
+        start = time.monotonic()
+        try:
+            lines, code = capture_query_snapshot(command, path, 1)
+            self.assertEqual(code, 0)
+            self.assertIn("private-token", "".join(lines))
+            self.assertNotIn("private-token", path.read_text())
+            status = json.loads(path.with_suffix(".json").read_text())
+            self.assertEqual(status["exit_code"], 0)
+            self.assertFalse(status["timed_out"])
+            self.assertFalse(status["stdout_eof"])
+            self.assertTrue(status["host_group_clean"])
+            self.assertLess(time.monotonic() - start, 2)
+        finally:
+            self.stop_holder(marker)
+
+    def test_generic_logged_process_still_rejects_a_retained_external_pipe(self):
+        command, marker = self.descriptor_holder_fixture("generic")
+        process = LoggedProcess(command, self.path / "generic.log")
+        try:
+            self.assertEqual(process.process.wait(timeout=1), 0)
+            with self.assertRaisesRegex(RuntimeError, "retained its output pipe"):
+                process.close(grace=0)
+        finally:
+            self.stop_holder(marker)
+            process.close(grace=0)
+
+    def test_snapshot_timeout_rejects_a_valid_record_already_read(self):
+        path = self.path / "timeout.log"
+        lines, code = capture_query_snapshot([
+            sys.executable, "-u", "-c",
+            "import time; print('The Dart VM service is listening on http://127.0.0.1:12345/private-token/'); time.sleep(30)",
+        ], path, 0.1)
+        self.assertEqual((lines, code), ([], 124))
+        status = json.loads(path.with_suffix(".json").read_text())
+        self.assertTrue(status["timed_out"])
+        self.assertTrue(status["host_group_clean"])
+        self.assertNotIn("private-token", path.read_text())
+
+    def test_snapshot_cannot_pass_when_its_host_group_still_has_a_live_child(self):
+        command, marker = self.descriptor_holder_fixture("live-group", separate_group=False)
+        path = self.path / "live-group.log"
+        try:
+            with patch("run_ios_catalog_journey.stop_process_group"):
+                with self.assertRaisesRegex(RuntimeError, "still has live members"):
+                    capture_query_snapshot(command, path, 1)
+            status = json.loads(path.with_suffix(".json").read_text())
+            self.assertFalse(status["host_group_clean"])
+            self.assertIn("still has live members", status["error"])
+        finally:
+            self.stop_holder(marker)
+
+    def test_snapshot_drain_cannot_convert_a_late_exit_zero_into_success(self):
+        path = self.path / "slow-drain.log"
+        release = self.path / "release-output"
+        real_open = Path.open
+
+        class SlowLog:
+            def __init__(self, file):
+                self.file = file
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                self.file.close()
+
+            def write(self, text):
+                self.file.write(text)
+                release.touch()
+                time.sleep(0.05)
+
+            def flush(self):
+                self.file.flush()
+
+        def open_log(file_path, *args, **kwargs):
+            file = real_open(file_path, *args, **kwargs)
+            return SlowLog(file) if file_path == path else file
+
+        command = [sys.executable, "-u", "-c", (
+            "import pathlib,time\n"
+            "print('query ready',flush=True)\n"
+            f"while not pathlib.Path({str(release)!r}).exists(): time.sleep(.001)\n"
+            "for _ in range(100): print('The Dart VM service is listening on http://127.0.0.1:12345/private-token/')\n"
+            "time.sleep(.05)\n"
+        )]
+        start = time.monotonic()
+        with patch.object(Path, "open", open_log):
+            lines, code = capture_query_snapshot(command, path, 1)
+        self.assertEqual((lines, code), ([], 124))
+        status = json.loads(path.with_suffix(".json").read_text())
+        self.assertTrue(status["timed_out"])
+        self.assertEqual(status["host_returncode"], 0)
+        self.assertFalse(status["final_drain_complete"])
+        self.assertLess(time.monotonic() - start, 4)
+        self.assertNotIn("private-token", path.read_text())
 
     def test_hung_launch_command_is_a_bounded_failure(self):
         journey = Journey(self.path, "fixture-device")
@@ -148,6 +271,7 @@ class IOSLaunchTests(unittest.TestCase):
                 def fixture_process(command, *args, **kwargs):
                     if command[0] == "xcrun":
                         self.assertEqual(command[1:4], ["simctl", "spawn", "fixture-device"])
+                        self.assertIn("--no-pager", command)
                         self.assertEqual(command[command.index("--start") + 1], "2026-09-03 10:26:59+0000")
                         self.assertIn("processIdentifier == 31511", command[-1])
                         command = [sys.executable, "-u", "-c", f"print({event!r}); raise SystemExit({exit_code})"]
