@@ -2,6 +2,7 @@
 
 import json
 import errno
+from datetime import datetime, timezone
 import os
 from pathlib import Path
 import sys
@@ -11,7 +12,10 @@ import time
 import unittest
 from unittest.mock import patch
 
-from run_ios_catalog_journey import Journey, LoggedProcess, redact, service_uri
+from run_ios_catalog_journey import (
+    Journey, LoggedProcess, discover_service, query_unified_service, redact,
+    service_uri, unified_service_uri,
+)
 
 
 class IOSLaunchTests(unittest.TestCase):
@@ -97,6 +101,75 @@ class IOSLaunchTests(unittest.TestCase):
             self.assertTrue(process.reader.is_alive())
         finally:
             process.close(grace=0.05)
+
+    def test_current_launch_uri_can_be_discovered_only_in_raw_unified_history(self):
+        launched_at = datetime(2026, 9, 3, 10, 26, 59, tzinfo=timezone.utc)
+        uri = "http://127.0.0.1:52715/fixture-credential=/"
+        event = f"2026-09-03 10:27:01.266 Df Runner[31511:17d7d] (Flutter) flutter: The Dart VM service is listening on {uri}\n"
+        console = LoggedProcess([sys.executable, "-u", "-c",
+                                 "import time; print('fixture.catalog: 31511'); time.sleep(30)"],
+                                self.path / "console.log")
+        details = {}
+        try:
+            with patch("run_ios_catalog_journey.query_unified_service", return_value=([event], 0)) as query:
+                result = discover_service(console, "device", "fixture.catalog", "Runner", self.path,
+                                          launched_at, time.monotonic() + 10, details)
+            self.assertEqual(result, uri)
+            self.assertEqual(query.call_args.args[1:3], (31511, launched_at))
+            self.assertEqual(details["source"], "unified-log-history")
+            self.assertNotIn("fixture-credential", json.dumps(details))
+        finally:
+            console.close(grace=0.05)
+
+    def test_unified_history_rejects_other_pid_and_events_before_this_launch(self):
+        launched_at = datetime(2026, 9, 3, 10, 26, 59, tzinfo=timezone.utc)
+        tail = " (Flutter) flutter: The Dart VM service is listening on http://127.0.0.1:52715/old-token/"
+        for prefix in (
+            "2026-09-03 10:27:01.266 Df Runner[99999:17d7d]",
+            "2026-09-03 10:26:58.999 Df Runner[31511:17d7d]",
+            "2026-09-03 10:27:01.266 Df OtherApp[31511:17d7d]",
+        ):
+            self.assertIsNone(unified_service_uri(prefix + tail, 31511, "Runner", launched_at))
+
+    def test_history_query_keeps_raw_uri_only_in_memory_and_rejects_command_failure(self):
+        launched_at = datetime(2026, 9, 3, 10, 26, 59, tzinfo=timezone.utc)
+        event = ("2026-09-03 10:27:01.266 Df Runner[31511:17d7d] (Flutter) flutter: "
+                 "The Dart VM service is listening on http://127.0.0.1:52715/private-fixture-token/")
+        real_popen = subprocess.Popen
+        for exit_code in (0, 7):
+            with self.subTest(exit_code=exit_code):
+                def fixture_process(command, *args, **kwargs):
+                    if command[0] == "xcrun":
+                        self.assertEqual(command[1:4], ["simctl", "spawn", "fixture-device"])
+                        self.assertEqual(command[command.index("--start") + 1], "2026-09-03 10:26:59+0000")
+                        self.assertIn("processIdentifier == 31511", command[-1])
+                        command = [sys.executable, "-u", "-c", f"print({event!r}); raise SystemExit({exit_code})"]
+                    return real_popen(command, *args, **kwargs)
+
+                log = self.path / f"history-{exit_code}.log"
+                with patch("run_ios_catalog_journey.subprocess.Popen", side_effect=fixture_process):
+                    lines, code = query_unified_service("fixture-device", 31511, launched_at, log, 1)
+                self.assertEqual(code, exit_code)
+                if code == 0:
+                    self.assertIn("private-fixture-token", "".join(lines))
+                else:
+                    self.assertEqual(lines, [])
+                self.assertNotIn("private-fixture-token", log.read_text())
+
+    def test_history_discovery_keeps_one_global_deadline(self):
+        console = LoggedProcess([sys.executable, "-u", "-c",
+                                 "import time; print('fixture.catalog: 31511'); time.sleep(30)"],
+                                self.path / "deadline.log")
+        start = time.monotonic()
+        try:
+            with patch("run_ios_catalog_journey.query_unified_service") as query:
+                with self.assertRaisesRegex(TimeoutError, "launch deadline"):
+                    discover_service(console, "device", "fixture.catalog", "Runner", self.path,
+                                     datetime.now(timezone.utc), start + 0.05, {})
+                query.assert_not_called()  # Insufficient time for query + bounded cleanup.
+            self.assertLess(time.monotonic() - start, 1)
+        finally:
+            console.close(grace=0.05)
 
     @unittest.skipUnless(hasattr(os, "fork"), "CLI process groups require POSIX")
     def test_exited_leader_does_not_hide_term_ignoring_child(self):

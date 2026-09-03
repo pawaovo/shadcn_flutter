@@ -15,8 +15,8 @@ stable release or mark any platform `Verified`.
 
 | Area | Accepted evidence for this engineering pass | Limit of the result |
 |---|---|---|
-| Library behavior and Semantics | 528 tests passed | Does not replace complete real screen-reader or physical-device workflows |
-| Catalog | 19 tests passed; library and Catalog strict analyzers passed | Counts belong to this integrated pass; older P3 evidence retains its historical counts |
+| Library behavior and Semantics | 528 passed: 410 behavior, 106 Semantics, 12 goldens | Does not replace complete real screen-reader or physical-device workflows |
+| Catalog | Latest full local suite passed 26 tests, including the seven startup regressions; recorded strict analyzers passed | Third CI remains 19 historically; the enlarged suite has not yet been remotely verified |
 | Golden baselines | macOS checks passed; eight accepted Linux candidates passed strict comparison in run `33741053163` | Future visual/source changes still require proportionate verification |
 | Supplemental visual review | 49 images covering all 20 components individually reviewed | Two specific static profiles; the complete localization/state/motion matrix remains open |
 | Dependency fonts/icons | 43 source files and all 37 runtime declarations checked; full notices verified | Applies to the pinned inventory and inspected artifacts |
@@ -26,7 +26,7 @@ stable release or mark any platform `Verified`.
 | Native macOS interaction | Complete shared Catalog journey passed; native AX comparison succeeded without a Web-only compile flag | AX inspection is not a completed VoiceOver user workflow |
 | P3 native profile workloads | Historical baseline `20260903T080855Z` completed seven of seven scenarios, driver, and teardown | Final-source resampling after the palette/muted-ticker fixes is pending; product budgets remain open |
 | Latest portable-source builds | Wasm/macOS releases and the second run's platform builds passed | Actual iOS simulator journey remains unexecuted in the second run |
-| Expanded CI | Run `33741053163` completed with 11 successful jobs, one failure and no skips; strict Linux goldens and publish/hosted-consumer gate passed | Apple failed in launcher self-test process-group cleanup; actual simulator build/journey steps were not reached |
+| Expanded CI | Run `33742943774` completed with 11 successful jobs, one Apple failure and no skips; quality and publish/hosted-consumer checks passed | App and Catalog test ran; driver VM discovery failed, and teardown reported an active SemanticsHandle |
 
 The earlier fully successful implementation CI was
 [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
@@ -37,7 +37,11 @@ on `19c80c17e5346f7415b52af9583ba6770cfbee50` now provides the partial
 results described below. The second expanded run
 [`33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
 on `896bcfe8fd6419382f21ba6a311d37f5f017d875` completed with 11 successful
-jobs and one Apple launcher-test failure. No full-green expanded run is claimed.
+jobs and one Apple launcher-test failure. The third expanded run
+[`33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
+on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` again has 11 successful jobs
+and one Apple failure, with different evidence described below. No full-green
+expanded run is claimed.
 
 ## Visual and interaction corrections
 
@@ -192,8 +196,9 @@ GitHub's final API result is `completed/failure`: **nine successful jobs, two
 failed jobs, and one skipped job**. Quality failed only the eight changed
 Linux component goldens; their actual CI candidates were subsequently
 reviewed and accepted. The Apple job failed when the iOS simulator application
-launch timed out after about 20 minutes; Xcode compilation succeeded, but the
-widget test did not begin. Its iOS no-codesign build, macOS build, and macOS
+launch step timed out after about 20 minutes after Xcode compilation. Its
+runner did not report widget-test start/results; actual execution is
+unconfirmed in that capture. Its iOS no-codesign build, macOS build, and macOS
 journey steps had already passed. Publish validation was skipped after its
 quality dependency failed.
 
@@ -218,6 +223,38 @@ and all 13 complete notice/registry texts are present. Its result SHA256 is
 compact cloud metadata is retained in `toolchain.json` alongside the local
 before/after evidence.
 
+The third [run `33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
+on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` completed with **11 successful
+jobs, one Apple failure and no skips**. All six launcher self-tests passed;
+the simulator build succeeded in about five minutes and installation took
+about 22 seconds. The launcher console did not expose the VM announcement,
+so URI discovery reported a 120-second timeout and the driver did not attach.
+
+Downloaded unified logs nevertheless show the real VM announcement at
+10:27:01 and Catalog test start at 10:27:02. About 46 seconds later,
+`_endOfTestVerifications` reported an active `SemanticsHandle`; no other test
+body assertion failure was recorded, and `failure.png` displayed “Test
+finished”. Thus the app/test did run, while result attachment and teardown
+failed. The earlier run's actual execution remains unconfirmed; this third-run
+Semantics finding is not applied retrospectively to it.
+
+The next fixes target PID/launch-time-scoped unified-log discovery and the
+race between iOS's platform semantics handle from `viewDidAppear` and the
+test's baseline. Leak checks remain strict, with no exemption. Apple artifact
+`9889094131` and job `100608850829` identify this raw evidence.
+The latest complete local Catalog rerun passed 26 tests, including all seven
+new startup regressions (`/tmp/release-fourth-catalog-tests.log`, exit 0).
+Formatting checked three touched files with no changes, and the diff check
+passed. The third CI count below remains 19; remote verification of the
+enlarged suite is still pending.
+
+Third-run quality passed 410 behavior, 106 Semantics and 12 golden checks
+(528 library total), plus 19 Catalog and 571 core tests. The downloaded hosted
+artifact `9888622880` again verifies 209 unchanged dependency files, 12 theme
+observations and all 13 required notice/registry texts. Its result SHA256 is
+`96fc50d78e61c89136129333e7547eb57e6f7b6bd6f7600a2e7f1b1b63b4cb76`.
+Compact metadata and the first two run records remain in `toolchain.json`.
+
 ## External execution condition
 
 The current local Mac session is locked. Computer Use explicitly requires
@@ -229,9 +266,10 @@ is substituted for the missing final-source evidence.
 
 ## Remaining stable-release gates
 
-- Verify the locally implemented launcher fix remotely and execute the actual
-  iOS simulator journey. Keep the second run's successful
-  strict golden and publish/hosted-consumer checks as completed evidence.
+- Verify scoped VM discovery/driver attachment and a stable iOS semantics
+  baseline, then complete strict teardown without a leak exemption. The third
+  run already demonstrates real app/test execution; quality and hosted-consumer
+  checks remain completed evidence.
 - After manual unlock of the local Mac, start and finalize profile run 4
   against the final source and complete the post-TickerMode Safari visual
   recheck. Keep `20260903T080855Z` as historical evidence.

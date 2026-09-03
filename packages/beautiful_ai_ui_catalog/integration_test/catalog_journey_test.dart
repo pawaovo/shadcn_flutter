@@ -1,13 +1,25 @@
 import 'package:beautiful_ai_ui_catalog/main.dart' as catalog;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'support/interactions.dart';
+import 'support/catalog_semantics_fixture.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  final nativeSemantics = CatalogSemanticsFixture(binding);
+
+  setUpAll(() async {
+    if (!kIsWeb) {
+      await nativeSemantics.prepare(
+        () => prepareCatalogNativeSemantics(binding),
+      );
+    }
+  });
+  tearDownAll(nativeSemantics.dispose);
 
   testWidgets(
     'catalog launches and completes its critical interaction journey',

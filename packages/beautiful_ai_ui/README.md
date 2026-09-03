@@ -350,7 +350,7 @@ database, applies a document edit, or changes controlled selections.
 
 ## Status
 
-The current local verification includes **528 library tests, 19 Catalog tests,
+The current local verification includes **528 library tests, 26 Catalog tests,
 and strict analysis of both packages**. The macOS golden suite passed 12
 checks, and 49 supplemental images across all twenty modules were individually
 reviewed against the final frozen visual source. Ten current macOS image
@@ -420,15 +420,20 @@ locked and Computer Use requires manual unlock. The post-TickerMode Safari
 visual recheck is also unfinished. Historical measurements remain historical.
 
 The complete ordinary macOS Catalog journey and a native AX comparison have
-passed. The second twelve-job run `33741053163` completed with 11 successful
-jobs, one failure and no skips. Strict Linux goldens and publish validation
-passed, including the real hosted consumer and a zero-warning 3 MB dry-run.
-Apple builds/macOS journey/boot passed, but launcher self-test process-group
-cleanup failed before the actual iOS simulator build/journey began. That
-launcher fix passes six local regression checks and actionlint; actual
-remote simulator execution remains pending, and no all-pass run is claimed.
-The first run remains recorded in readiness. All six platforms are **Partial**,
-and all 27 registry entries remain `in_progress`.
+passed. Third run `33742943774` completed with 11 successful jobs, one Apple
+failure and no skips. Quality passed 410 behavior, 106 Semantics and 12 golden
+checks (528 library total), 19 Catalog tests and 571 core regressions. Cloud
+hosted-consumer checks again pass all 209 files, 12 theme observations and 13
+complete required notices.
+
+Launcher self-tests, simulator build and installation passed. Although
+console VM discovery timed out and the driver did not attach, unified logs
+prove the app and Catalog test ran. Teardown reported an active
+`SemanticsHandle`, with no other body assertion failure recorded. Scoped
+discovery and the iOS platform-handle baseline are being repaired with strict
+leak checks. Earlier runs remain in readiness; no all-pass run is claimed.
+All six platforms are **Partial**, and all 27 registry entries remain
+`in_progress`.
 
 This is an independent implementation. It is not affiliated with or endorsed
 by Beautiful UI, Turbo, or the `shadcn_flutter` authors. See the repository's

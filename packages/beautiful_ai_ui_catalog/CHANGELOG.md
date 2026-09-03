@@ -37,5 +37,11 @@
   profile run as requiring the user to unlock the local Mac manually.
 - Record second CI `33741053163`: 11 successful jobs, one Apple launcher
   self-test cleanup failure, no skips. Strict Linux goldens, cloud hosted
-  consumer and zero-warning publish preflight passed; actual simulator
-  execution remains pending after its skipped build/journey steps.
+  consumer and zero-warning publish preflight passed; that run skipped the
+  simulator build/journey after its preflight failure.
+- Record third CI `33742943774`: launcher self-tests/build/install pass and
+  unified logs confirm real app/test execution. Driver VM discovery times
+  out and strict teardown reports an active SemanticsHandle, with no other
+  body assertion failure recorded. Quality and cloud consumer gates pass;
+  scoped discovery and semantics-baseline repairs remain open without leak
+  exemptions.

@@ -51,12 +51,12 @@
       "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
       "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
     },
-    "p1_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_run_33741053163",
+    "p1_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
     "p1_linux_canonical_sha256": {
       "light": "ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804",
       "dark": "e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739"
     },
-    "p2_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_run_33741053163",
+    "p2_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
     "p2_linux_missing_baseline_behavior": "export_review_candidate_and_fail_without_accepting_canonical",
     "p2_local_supplemental_platform": "macOS arm64",
     "p2_local_supplemental_status": "visually_accepted_2026-09-03",
@@ -69,7 +69,7 @@
       "light": "3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196",
       "dark": "42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19"
     },
-    "p2_linux_comparison_verified_run": 33741053163,
+    "p2_linux_comparison_verified_run": 33742943774,
     "p3_local_supplemental_status": "visually_accepted_macos_2026-09-03",
     "p3_local_supplemental_sha256": {
       "p3_content_dark_macos.png": "ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637",
@@ -77,7 +77,7 @@
       "p3_workspace_dark_macos.png": "52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51",
       "p3_workspace_light_macos.png": "14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51"
     },
-    "p3_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_run_33741053163",
+    "p3_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
     "p3_linux_canonical_sha256": {
       "p3_content_light.png": "cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e",
       "p3_content_dark.png": "687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4",
@@ -88,7 +88,7 @@
       "verified_on": "2026-09-03",
       "macos_checks_passed": 12,
       "updated_supplemental_images": 8,
-      "linux_current_changes": "eight_accepted_baselines_strictly_verified_in_run_33741053163",
+      "linux_current_changes": "eight_accepted_baselines_strictly_verified_through_run_33742943774",
       "historical_baselines": "earlier_hashes_above_are_retained_for_their_original_implementation_runs",
       "current_supplemental_images": 10,
       "current_supplemental_sha256": {
@@ -115,8 +115,8 @@
         "p3_workspace_light.png": "55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f",
         "p3_workspace_dark.png": "2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93"
       },
-      "linux_strict_comparison_run_id": 33741053163,
-      "linux_strict_comparison_commit": "896bcfe8fd6419382f21ba6a311d37f5f017d875"
+      "linux_strict_comparison_run_id": 33742943774,
+      "linux_strict_comparison_commit": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda"
     },
     "previous_linux_canonical_baselines_before_33736546039": {
       "p1_linux_canonical_status": "accepted_from_ci_run_33632807691",
@@ -280,7 +280,7 @@
     "gallery_implementations": 20,
     "registry_items": 27,
     "package_tests_passed": 528,
-    "catalog_tests_passed": 19,
+    "catalog_tests_passed": 26,
     "strict_analysis": "final_library_and_catalog_passed",
     "macos_golden_checks_passed": 12,
     "supplemental_visual_images_reviewed": 49,
@@ -324,9 +324,9 @@
     "remote_ci": {
       "workflow": ".github/workflows/beautiful_ai_ui.yml",
       "configured_jobs": 12,
-      "run_id": 33741053163,
-      "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163",
-      "commit": "896bcfe8fd6419382f21ba6a311d37f5f017d875",
+      "run_id": 33742943774,
+      "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774",
+      "commit": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
       "status": "completed",
       "conclusion": "failure",
       "job_counts": {
@@ -344,31 +344,52 @@
         "Format, analyze, and test": "success_including_strict_linux_goldens",
         "Build Web catalog": "success_including_asset_audits",
         "Run Android journey": "success",
-        "Build Apple catalogs": "failure_bounded_launcher_self_test_cleanup_EPERM",
+        "Build Apple catalogs": "failure_driver_VM_discovery_timeout_and_logged_test_teardown_SemanticsHandle_error",
         "Build Linux catalog": "success",
         "Build Windows catalog": "success_including_native_journey",
         "Validate pub.dev package": "success_including_isolated_hosted_consumer_and_publish_dry_run"
       },
       "apple_steps": {
+        "bounded_launcher_self_tests": "success_all_six",
         "ios_no_codesign_release_build": "success",
         "macos_release_build": "success",
         "macos_native_journey": "success",
         "select_and_boot_ios_simulator": "success",
-        "bounded_launcher_self_test": "failure_two_of_four_cases_process_group_cleanup_EPERM",
-        "ios_simulator_build": "skipped_after_self_test_failure",
-        "ios_simulator_journey": "skipped_not_started"
+        "ios_simulator_build": "success_about_five_minutes",
+        "app_installation": "success_about_22_seconds",
+        "console_vm_discovery": "reported_timeout_after_120_seconds",
+        "driver_attached": false,
+        "actual_app_and_catalog_test_execution": "confirmed_by_downloaded_unified_logs",
+        "vm_announcement_log_time": "10:27:01",
+        "catalog_test_start_log_time": "10:27:02",
+        "test_teardown_about_46_seconds_later": "_endOfTestVerifications_active_SemanticsHandle_failure",
+        "other_test_body_assertion_failure_recorded": false,
+        "failure_screenshot": "Test finished"
       },
       "new_browser_jobs": {
         "firefox": "success",
         "edge": "success"
       },
       "current_linux_goldens": "strict_comparison_passed_against_eight_accepted_baselines",
-      "follow_up": "launcher_cleanup_fix_implemented_six_local_regressions_and_actionlint_passed_remote_simulator_execution_pending",
-      "launcher_follow_up_local": {
-        "implementation": "complete",
-        "regression_checks_passed": 6,
-        "actionlint": "passed",
-        "remote_simulator_execution": "pending"
+      "apple_artifact_id": 9889094131,
+      "apple_job_id": 100608850829,
+      "quality_job_id": 100608850605,
+      "publish_job_id": 100609924559,
+      "follow_up": "PID_and_launch_time_scoped_unified_log_VM_discovery_and_stable_iOS_platform_semantics_baseline",
+      "leak_check_policy": "strict_no_semantics_handle_leak_exemption",
+      "historical_boundary": "third_run_execution_and_semantics_evidence_is_not_inferred_for_first_run",
+      "local_follow_up": {
+        "native_startup_focused_regressions_passed": 7,
+        "enlarged_catalog_full_suite": "passed_26",
+        "leak_checks": "preserved_without_exemption",
+        "local_catalog_tests_passed": 26,
+        "focused_startup_regressions_included_in_full_suite": true,
+        "last_verified_third_ci_catalog_tests": 19,
+        "format_check": {
+          "files_checked": 3,
+          "changed": 0
+        },
+        "diff_check": "passed"
       }
     },
     "native_semantics_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-native-semantics.md",
@@ -376,7 +397,8 @@
     "final_local_logs": {
       "package_tests": "/tmp/release-portable-package-tests.log",
       "wasm_build": "/tmp/release-portable-wasm-build.log",
-      "native_build": "/tmp/release-portable-native-build.log"
+      "native_build": "/tmp/release-portable-native-build.log",
+      "catalog_tests": "/tmp/release-fourth-catalog-tests.log"
     },
     "final_visual_capture": {
       "images_reviewed": 49,
@@ -421,10 +443,10 @@
       "generated_notices_sha256": "803026de97a191d81e842aedf1285d2daa52c68184f8a5ea4cae65d8d076995f",
       "scope": "temporary_BAI_publication_surface_path_dependency_not_actual_pubdev_publication",
       "ci_validation": {
-        "run_id": 33741053163,
-        "repository_head": "896bcfe8fd6419382f21ba6a311d37f5f017d875",
-        "artifact_id": 9887907974,
-        "result_sha256": "ff2e38c34a3eb304567c1e40ee0692bddc0f3d0a5d0fcc2191f524281b00ef40",
+        "run_id": 33742943774,
+        "repository_head": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
+        "artifact_id": 9888622880,
+        "result_sha256": "96fc50d78e61c89136129333e7547eb57e6f7b6bd6f7600a2e7f1b1b63b4cb76",
         "passed": true,
         "hosted_dependency": {
           "source": "hosted",
@@ -436,11 +458,31 @@
         "theme_observations": 12,
         "license_labels": 13,
         "notices_sha256": "fd9ead85153b31917747fa668bff0e0a3921f66f7445d475b7a3074b7b9db84a",
-        "publish_dry_run": {
-          "warnings": 0,
-          "archive_size": "3 MB"
+        "synthetic_license_entries": false
+      },
+      "ci_validation_history": [
+        {
+          "run_id": 33741053163,
+          "repository_head": "896bcfe8fd6419382f21ba6a311d37f5f017d875",
+          "artifact_id": 9887907974,
+          "result_sha256": "ff2e38c34a3eb304567c1e40ee0692bddc0f3d0a5d0fcc2191f524281b00ef40",
+          "passed": true,
+          "hosted_dependency": {
+            "source": "hosted",
+            "version": "0.0.54",
+            "sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+            "url": "https://pub.dev"
+          },
+          "unmodified_files": 209,
+          "theme_observations": 12,
+          "license_labels": 13,
+          "notices_sha256": "fd9ead85153b31917747fa668bff0e0a3921f66f7445d475b7a3074b7b9db84a",
+          "publish_dry_run": {
+            "warnings": 0,
+            "archive_size": "3 MB"
+          }
         }
-      }
+      ]
     },
     "external_execution_condition": {
       "local_mac_session": "locked",
@@ -473,7 +515,7 @@
           "Format, analyze, and test": "failure_eight_linux_golden_differences_only",
           "Build Web catalog": "success_including_asset_audits",
           "Run Android journey": "success",
-          "Build Apple catalogs": "failure_ios_simulator_app_launch_timeout",
+          "Build Apple catalogs": "failure_simulator_runner_timeout_actual_test_execution_unconfirmed",
           "Build Linux catalog": "success",
           "Build Windows catalog": "success_including_native_journey",
           "Validate pub.dev package": "skipped_due_to_quality_dependency"
@@ -483,7 +525,7 @@
           "macos_release_build": "success",
           "macos_native_journey": "success",
           "select_and_boot_ios_simulator": "success",
-          "ios_simulator_journey": "failed_during_app_launch_after_xcode_compilation_before_widget_test",
+          "ios_simulator_journey": "runner_timeout_without_reported_widget_test_start_or_results_actual_execution_unconfirmed",
           "ios_journey_started_at": "2026-09-03T09:11:51Z",
           "ios_journey_completed_at": "2026-09-03T09:32:04Z"
         },
@@ -493,6 +535,56 @@
         },
         "follow_up": "launcher_remediation_accepted_goldens_and_portable_changes_need_next_committed_tree_run",
         "current_linux_goldens": "eight_candidates_accepted_followup_strict_comparison_pending"
+      },
+      {
+        "workflow": ".github/workflows/beautiful_ai_ui.yml",
+        "configured_jobs": 12,
+        "run_id": 33741053163,
+        "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163",
+        "commit": "896bcfe8fd6419382f21ba6a311d37f5f017d875",
+        "status": "completed",
+        "conclusion": "failure",
+        "job_counts": {
+          "success": 11,
+          "failure": 1,
+          "skipped": 0
+        },
+        "all_jobs_passed": false,
+        "job_results": {
+          "Detect generated targets": "success",
+          "Build Android catalog": "success",
+          "Run Edge journey": "success",
+          "Run Firefox journey": "success",
+          "Run Chrome and Linux journeys": "success",
+          "Format, analyze, and test": "success_including_strict_linux_goldens",
+          "Build Web catalog": "success_including_asset_audits",
+          "Run Android journey": "success",
+          "Build Apple catalogs": "failure_bounded_launcher_self_test_cleanup_EPERM",
+          "Build Linux catalog": "success",
+          "Build Windows catalog": "success_including_native_journey",
+          "Validate pub.dev package": "success_including_isolated_hosted_consumer_and_publish_dry_run"
+        },
+        "apple_steps": {
+          "ios_no_codesign_release_build": "success",
+          "macos_release_build": "success",
+          "macos_native_journey": "success",
+          "select_and_boot_ios_simulator": "success",
+          "bounded_launcher_self_test": "failure_two_of_four_cases_process_group_cleanup_EPERM",
+          "ios_simulator_build": "skipped_after_self_test_failure",
+          "ios_simulator_journey": "skipped_not_started"
+        },
+        "new_browser_jobs": {
+          "firefox": "success",
+          "edge": "success"
+        },
+        "current_linux_goldens": "strict_comparison_passed_against_eight_accepted_baselines",
+        "follow_up": "launcher_cleanup_fix_implemented_six_local_regressions_and_actionlint_passed_remote_simulator_execution_pending",
+        "launcher_follow_up_local": {
+          "implementation": "complete",
+          "regression_checks_passed": 6,
+          "actionlint": "passed",
+          "remote_simulator_execution": "pending"
+        }
       }
     ],
     "publish_dry_run_ci": {
@@ -500,7 +592,18 @@
       "warnings": 0,
       "archive_size": "3 MB",
       "hosted_consumer_gate": "passed",
-      "artifact_id": 9887907974
+      "artifact_id": 9887907974,
+      "success_repeated_in_run": 33742943774,
+      "size_and_warning_details_from_run_id": 33741053163
+    },
+    "quality_test_breakdown": {
+      "verified_run_id": 33742943774,
+      "behavior": 410,
+      "semantics": 106,
+      "goldens": 12,
+      "library_total": 528,
+      "catalog": 19,
+      "upstream_core": 571
     }
   }
 }

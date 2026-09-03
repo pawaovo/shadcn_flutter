@@ -55,7 +55,7 @@ definition_of_done:
   - required_platform_evidence
 
 release_open_items:
-  - Verify the iOS launcher cleanup fix remotely and execute the actual simulator journey; six local regressions and actionlint passed, as did strict Linux golden and publish validation in run 33741053163.
+  - Verify PID and launch-time-scoped VM discovery, driver attachment, and the iOS platform semantics baseline without exempting leaks; run 33742943774 proves app/test execution but fails discovery and strict teardown.
   - Complete physical-device and real TalkBack, VoiceOver, Narrator, and Orca task workflows.
   - After manual Mac unlock, finish the post-TickerMode Safari visual recheck; remaining browser, localization, visual-state and temporal motion combinations stay open.
   - Final profile run 4 has not started because Computer Use requires manual unlock of the local Mac; agreed budgets, repeatability and representative other-platform or physical-device measurements remain open.

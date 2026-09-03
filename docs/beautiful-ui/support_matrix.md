@@ -32,9 +32,9 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33741053163 |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33741053163 |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33741053163 |
+| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33742943774 |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33742943774 |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33742943774 |
 | Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Post-TickerMode visual recheck awaits manual Mac unlock; remaining compatibility evidence required |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
@@ -109,8 +109,9 @@ It keeps completed evidence separate from the remaining release gates:
 - All twenty Gallery components are implemented and exported. All 27 registry
   entries remain `in_progress`; implementation coverage is not full release
   acceptance.
-- The integrated library suite passed 528 tests, the Catalog passed 19 tests,
-  and both package scopes passed strict static analysis.
+- Third-run quality passed 410 behavior, 106 Semantics and 12 golden checks
+  (528 library total), 19 Catalog tests and 571 core regressions; both package
+  scopes passed strict static analysis.
 - The macOS golden suite passed 12 checks; ten current macOS image hashes are
   recorded. The final 49-image source inventory includes the hosted-adapter
   correction, with all image pixels unchanged. Eight Linux component
@@ -154,8 +155,9 @@ It keeps completed evidence separate from the remaining release gates:
   Web asset audits. Quality failed only the eight then-unaccepted Linux
   goldens; their candidates are now accepted. The run completed with nine
   successful jobs, two failed jobs, and one skipped job. Apple failed on the
-  iOS simulator app-launch timeout after successful compilation, before the
-  widget test began; its macOS journey passed. Publish validation was skipped
+  iOS simulator launch-step timeout after compilation. Its runner did not
+  report test start/results, so actual execution in that capture is unconfirmed;
+  its macOS journey passed. Publish validation was skipped
   due to quality. The next result below verifies the quality/publish and
   portable changes; actual simulator execution remains open.
 - The second [run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
@@ -167,6 +169,17 @@ It keeps completed evidence separate from the remaining release gates:
   simulator build/journey steps were not reached. The cleanup fix now passes
   six local regression checks and actionlint; remote simulator execution
   remains pending, and no all-pass result is claimed.
+- Third [run `33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
+  on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` completed with 11 successful
+  jobs, one Apple failure and no skips. Launcher self-tests, simulator build
+  and app installation passed. Console VM discovery timed out, but unified
+  logs prove the app advertised its VM and ran the Catalog test; only the
+  end-of-test active-SemanticsHandle failure was recorded, with no other body
+  assertion failure. The driver did not attach. Scoped log discovery and
+  native-platform semantics baseline fixes are pending, without leak-check
+  exemptions. Cloud hosted-consumer checks again pass 209 files/12 theme
+  observations/13 required complete notices. This evidence does not establish
+  what the first run's unobserved app did.
 - Safari's visual recheck after the TickerMode repair is unfinished and also
   requires the user to unlock the local Mac manually. Earlier Safari or
   profile observations are not promoted to final-source acceptance.
