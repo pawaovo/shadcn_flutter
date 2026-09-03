@@ -251,6 +251,7 @@ Widget beautifulEditableTextContextMenu(
   String? pasteLabel,
   String? selectAllLabel,
   bool Function()? isCurrent,
+  Iterable<ContextMenuButtonItem> additionalButtons = const [],
 }) {
   final labels = WidgetsLocalizations.of(context);
   final environment = BeautifulUiEnvironment.of(context);
@@ -281,6 +282,7 @@ Widget beautifulEditableTextContextMenu(
       ),
     );
   }
+  buttons.addAll(additionalButtons);
   return beautifulTextSelectionToolbar(
     context,
     anchors: editable.contextMenuAnchors,

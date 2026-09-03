@@ -61,7 +61,16 @@
     "p2_linux_canonical_sha256": {
       "light": "ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c",
       "dark": "12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a"
-    }
+    },
+    "p2_linux_comparison_verified_run": 33707996401,
+    "p3_local_supplemental_status": "visually_accepted_macos_2026-09-03",
+    "p3_local_supplemental_sha256": {
+      "p3_content_dark_macos.png": "ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637",
+      "p3_content_light_macos.png": "ef8770682d81bc1c42e3c4981245747a94c48283eac371675f97f1bc02663c91",
+      "p3_workspace_dark_macos.png": "52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51",
+      "p3_workspace_light_macos.png": "14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51"
+    },
+    "p3_linux_canonical_status": "pending_remote_capture_and_visual_acceptance"
   },
   "p1_journeys": {
     "chrome_local": "passed_complete_p1_interaction_path",
@@ -79,11 +88,11 @@
     "chrome_local_version": "152.0.7977.66",
     "chromedriver_local_version": "152.0.7977.75",
     "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
-    "chrome_ci": "passed_run_33701530733",
-    "linux_xvfb_ci": "passed_run_33701530733",
-    "android_emulator_ci": "passed_run_33701530733",
-    "verified_commit": "92992e48ec0f361be9015e443bd15bff95b7b4d6",
-    "verified_run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33701530733"
+    "chrome_ci": "passed_run_33707996401",
+    "linux_xvfb_ci": "passed_run_33707996401",
+    "android_emulator_ci": "passed_run_33707996401",
+    "verified_commit": "bc6a72959dfa84543abc844fa8fef4fcd15e7629",
+    "verified_run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33707996401"
   },
   "p2_local_validation": {
     "verified_on": "2026-09-03",
@@ -100,11 +109,45 @@
     "package_tests_passed": 257
   },
   "p2_remote_validation": {
-    "run_id": 33701530733,
-    "commit": "92992e48ec0f361be9015e443bd15bff95b7b4d6",
+    "run_id": 33707996401,
+    "commit": "bc6a72959dfa84543abc844fa8fef4fcd15e7629",
+    "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33707996401",
+    "jobs_passed": 10,
     "platform_builds": "all_six_passed_including_web_js_and_wasm",
     "device_journeys": "chrome_linux_xvfb_android_passed",
-    "quality": "first_run_failed_only_missing_p2_linux_goldens",
-    "publish_dry_run": "skipped_in_first_run_due_to_quality_dependency"
+    "quality": "passed_including_strict_p2_linux_golden_comparison",
+    "publish_dry_run": "passed",
+    "initial_run": {
+      "run_id": 33701530733,
+      "commit": "92992e48ec0f361be9015e443bd15bff95b7b4d6",
+      "platform_builds": "all_six_passed_including_web_js_and_wasm",
+      "device_journeys": "chrome_linux_xvfb_android_passed",
+      "quality": "first_run_failed_only_missing_p2_linux_goldens",
+      "publish_dry_run": "skipped_in_first_run_due_to_quality_dependency"
+    }
+  },
+  "p3_validation": {
+    "evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-p3-modules.md",
+    "contracts_path": "docs/beautiful-ui/p3_contracts.md",
+    "implementation_status": "all_seven_exported_in_progress",
+    "integrated_execution_status": "pending_recorded_results",
+    "remote_ci_status": "not_yet_recorded_for_p3",
+    "profile_release_performance": "not_yet_recorded"
+  },
+  "p3_local_validation": {
+    "verified_on": "2026-09-03",
+    "package_tests_passed": 457,
+    "catalog_tests_passed": 9,
+    "package_strict_analysis": "passed",
+    "catalog_strict_analysis": "passed",
+    "chrome_journey": "passed_full_p1_p2_p3",
+    "chrome_version": "152.0.7977.66",
+    "chromedriver_version": "152.0.7977.75",
+    "chrome_viewport": "1440x900 desktop DPR1",
+    "web_javascript_release": "passed",
+    "web_wasm_release": "passed",
+    "publish_dry_run": "pending_clean_commit",
+    "upstream_tests_passed": 571,
+    "upstream_strict_analysis": "passed"
   }
 }

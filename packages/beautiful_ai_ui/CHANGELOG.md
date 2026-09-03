@@ -35,6 +35,29 @@ All notable changes to this package will be documented in this file.
   shared touch, keyboard, and Semantics action handling; invalidate delayed
   clipboard edits when a conversation or approval question is replaced
   (product/main, @pawaovo).
+- Add rounded/pill Prompt Bar with lazy source/command suggestions, controlled
+  models, local attachments, and guarded host send/file/connection/dictation
+  actions (product/main, @pawaovo).
+- Add paginated Diff Table with exact before/after records and asynchronous
+  application of included changes; add lazy Records Table with typed property
+  configuration, search/sort/selection, column controls, and host save/add/run
+  actions (product/main, @pawaovo).
+- Add adaptive Sidebar Nav with workspace selection, lazy searchable recents,
+  drawer/rail/expanded presentations, and host-owned navigation
+  (product/main, @pawaovo).
+- Add a bounded DAG Flowchart with measured connectors, controlled conditions
+  and node edits, canvas pan/zoom/drag/keyboard movement, and compact editable
+  ordered steps (product/main, @pawaovo).
+- Add controlled Insight Cards with comparison/anomaly/allocation charts,
+  keyboard/touch point inspection, vector distinctions beyond color, and
+  full textual data disclosure (product/main, @pawaovo).
+- Add Selection Actions with real native UTF-16 selection, guarded anchored
+  toolbar, custom requests, replacement/explanation preview, and explicit
+  host application through typed edit snapshots (product/main, @pawaovo).
+- Add P3 component contracts, Catalog scenarios, workload fixtures, source
+  provenance, and `prompt`, `diff`, `records`, and `selection` failure
+  operations; keep release acceptance separate from implementation coverage
+  (product/main, @pawaovo).
 
 ### Fixed
 

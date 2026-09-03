@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 part 'p2_examples.dart';
+part 'p3_examples.dart';
 
 SemanticsHandle? _semanticsHandle;
 
@@ -162,11 +163,13 @@ final class _CatalogAppState extends State<CatalogApp> {
         return BeautifulUiScope(
           themeMode: _themeMode,
           motion: _motion,
-          child: _CatalogHome(
-            themeMode: _themeMode,
-            motion: _motion,
-            onThemePressed: _cycleTheme,
-            onMotionPressed: _cycleMotion,
+          child: Overlay.wrap(
+            child: _CatalogHome(
+              themeMode: _themeMode,
+              motion: _motion,
+              onThemePressed: _cycleTheme,
+              onMotionPressed: _cycleMotion,
+            ),
           ),
         );
       },
@@ -259,7 +262,14 @@ final class _CatalogHomeState extends State<_CatalogHome> {
                     padding: EdgeInsets.all(theme.spacing.xl),
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 1320),
-                      child: _CatalogGrid(children: _cards()),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          _CatalogGrid(children: _cards()),
+                          SizedBox(height: theme.spacing.lg),
+                          const _CatalogP3Examples(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -470,7 +480,7 @@ final class _CatalogHeader extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final title = Text(
-              'Beautiful AI UI · P1 + P2 Catalog',
+              'Beautiful AI UI · P1 + P2 + P3 Catalog',
               style: theme.typography.label.copyWith(
                 color: theme.colors.ink,
                 fontSize: 15,

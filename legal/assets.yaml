@@ -129,6 +129,28 @@ entries:
       - Supplemental macOS images and Ubuntu canonical candidates from CI run 33701530733 were independently visually reviewed and accepted.
       - Symbols are drawn in Flutter to avoid unsupported Unicode glyphs in the pinned fonts.
 
+  - id: p3_component_test_goldens
+    source: Project-rendered Flutter golden fixtures
+    kind: generated_test_images
+    distribution_status: approved
+    distributable: true
+    generation_toolchains:
+      - Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts for supplemental local fixtures.
+    files:
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_light_macos.png
+        sha256: ef8770682d81bc1c42e3c4981245747a94c48283eac371675f97f1bc02663c91
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_dark_macos.png
+        sha256: ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_light_macos.png
+        sha256: 14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_dark_macos.png
+        sha256: 52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51
+    notes:
+      - Original Flutter-rendered test evidence using registered dependency fonts; not source-project screenshots or branding.
+      - Content fixtures are 1440 by 1180 pixels, workspace fixtures 1440 by 1800 pixels, at DPR 1 with motion disabled.
+      - Seven P3 components, both Prompt variants, all three Insight charts, native selection preview, expanded Records grid and Flowchart canvas are represented.
+      - All four macOS images were visually reviewed; Ubuntu canonical candidates require separate capture and acceptance.
+
   - id: flutter_generated_catalog_launcher_assets
     source: Flutter 3.47.0 flutter create platform templates
     kind: generated_catalog_launcher_and_launch_images

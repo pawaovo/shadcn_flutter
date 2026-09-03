@@ -1,6 +1,6 @@
 # `beautiful_ai_ui` architecture
 
-Status: P0-P2 implementation contract; release verification remains incomplete
+Status: P0-P3 implementation contract; release verification remains incomplete
 Baseline date: 2026-09-02 (Asia/Shanghai)
 Updated: 2026-09-03 (Asia/Shanghai)
 
@@ -149,6 +149,33 @@ not act as competing controlled values. Fine-tune settings instead follow a
 fully controlled convention: the host accepts an edit by supplying its new
 settings snapshot.
 
+The seven P3 contracts are recorded in [`p3_contracts.md`](./p3_contracts.md).
+Their implementation extends the same ownership boundary:
+
+| Module | Host-owned data and actions | Package-owned presentation |
+|---|---|---|
+| Prompt Bar | Composer identity, source/command/model options, selected model, send/attach/connect/dictate/stop-dictation callbacks | Draft, attachment entries, lazy suggestions, menus, guarded pending feedback |
+| Diff Table | Proposal identity, columns, immutable before/after record values, asynchronous application of included IDs | Inclusion choices, bounded pages, pending/applied feedback |
+| Records Table | Typed properties/tools/cells/rows, accepted configuration, save/add/run/cell actions | Cached local search/sort, selection, column pin/hide/width, drafts/details, lazy viewport |
+| Sidebar Nav | Workspaces/destinations/recents, selected IDs, navigation/new-chat/workspace callbacks | Drawer/rail/expanded mode, query, menus, focus, lazy recent-list viewport |
+| Flowchart | Validated DAG snapshot and acceptance of complete edit proposals | Canvas transform, selected node, condition disclosure, drag preview, ordered-step presentation |
+| Insight Cards | Typed chart data, selected page/metric/segment, selection/follow-up callbacks | Inspected point, requested textual data, private vector rendering |
+| Selection Actions | Plain document text and identity, request results, accepted edits | Native UTF-16 selection, custom instruction, toolbar, result/retry/keep/discard presentation |
+
+Prompt, Diff, Records, and Selection external actions report failures through
+the `prompt`, `diff`, `records`, and `selection` operations. Clipboard actions
+continue to use the shared `clipboard` operation. Selection Actions uses an
+actual read-only Flutter `EditableText` and a guarded native toolbar, with
+the same actions available in a responsive in-flow panel. Its typed edit
+preserves the original request and replacement; `updatedText` computes the
+result against that exact base while application remains the host's decision.
+
+P3 workloads are bounded explicitly. Diff Table paginates; Records Table and
+Sidebar Nav realize rows near their viewport; Insight Cards paints only the
+selected bounded chart. Flowchart validates a small DAG and provides editable
+ordered steps on compact layouts. These choices are tested deterministically;
+they do not constitute measured release/profile frame or memory guarantees.
+
 ## Foundation and theming
 
 The foundation translates source intent into Flutter-native tokens rather than embedding CSS values in each component. It owns:
@@ -188,7 +215,7 @@ Complex compact adaptations are deliberate product presentations:
 
 - Records Table becomes a list/card summary with row detail instead of a scaled wide table.
 - Sidebar Nav becomes a drawer or bottom navigation pattern.
-- Flowchart may become a read-only view or stepper until touch editing has an approved contract.
+- Flowchart becomes editable ordered steps, retaining condition and movement actions without requiring a spatial canvas.
 - Selection Actions use a system-appropriate selection toolbar or sheet on touch devices.
 - Hover-only controls always receive tap/long-press and keyboard equivalents.
 
@@ -235,6 +262,13 @@ controlled numeric/type changes. The shared journey now exercises these host
 callbacks too. The existence of that journey is separate from accepted
 execution evidence, tracked in
 [`quality_evidence/2026-09-03-p2-modules.md`](./quality_evidence/2026-09-03-p2-modules.md).
+
+P3 scenarios live in `beautiful_ai_ui_catalog/lib/p3_examples.dart` and use the
+full available content width for table/canvas/selection surfaces. They supply
+the seven components' host state and callbacks. Catalog and shared-journey
+integration belongs to the P3 verification scope; implementation presence
+and accepted execution are recorded separately in
+[`quality_evidence/2026-09-03-p3-modules.md`](./quality_evidence/2026-09-03-p3-modules.md).
 
 ## Verification contract
 

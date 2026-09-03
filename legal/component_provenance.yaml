@@ -243,9 +243,21 @@ items:
   - name: prompt-bar
     source_path: public/r/prompt-bar.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/PromptBar.tsx
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/prompt_bar_test.dart
+      - packages/beautiful_ai_ui/test/semantics/prompt_bar_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - glimm browser shader dependency
+      - Scripted files, dictation text, and autoplay scenarios
   - name: recommendation-card
     source_path: public/r/recommendation-card.json
     source_type: registry:component
@@ -282,15 +294,34 @@ items:
   - name: diff-table
     source_path: public/r/diff-table.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/DiffTable.tsx
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/diff_table.dart
+      - packages/beautiful_ai_ui/test/widget/diff_table_test.dart
+      - packages/beautiful_ai_ui/test/semantics/diff_table_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: records-table
     source_path: public/r/records-table.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/RecordsTable.tsx
+      - app/beautifui/records-table.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/records_table.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/records_table_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - Fixed CRM demo records and simulated competitor results
   - name: filter-table
     source_path: public/r/filter-table.json
     source_type: registry:component
@@ -310,9 +341,21 @@ items:
   - name: sidebar-nav
     source_path: public/r/sidebar-nav.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite_with_replacement_icons
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/SidebarNav.tsx
+      - app/beautifui/sidebar-nav.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/sidebar_nav.dart
+      - packages/beautiful_ai_ui/test/widget/sidebar_nav_test.dart
+      - packages/beautiful_ai_ui/test/semantics/sidebar_nav_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - "@central-icons-react/round-outlined-radius-2-stroke-2"
+      - Beautiful UI and source workspace branding
   - name: search
     source_path: public/r/search.json
     source_type: registry:component
@@ -332,15 +375,34 @@ items:
   - name: flowchart
     source_path: public/r/flowchart.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/Flowchart.tsx
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/flowchart.dart
+      - packages/beautiful_ai_ui/test/widget/flowchart_test.dart
+      - packages/beautiful_ai_ui/test/semantics/flowchart_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: insight-cards
     source_path: public/r/insight-cards.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/InsightCards.tsx
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/insight_cards.dart
+      - packages/beautiful_ai_ui/test/widget/insight_cards_test.dart
+      - packages/beautiful_ai_ui/test/semantics/insight_cards_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - liveline React chart dependency
+      - Synthetic source time-series values and autoplay
   - name: code-block
     source_path: public/r/code-block.json
     source_type: registry:component
@@ -376,10 +438,21 @@ items:
   - name: selection-actions
     source_path: public/r/selection-actions.json
     source_type: registry:component
-    adaptation: spike_then_public_flutter_composite
+    adaptation: public_flutter_composite_after_approved_contract
     phase: P3
-    implementation_status: not_started
-
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/SelectionActions.tsx
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/selection_actions.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/selection_actions_test.dart
+      - packages/beautiful_ai_ui/test/semantics/selection_actions_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - iconoir-react dependency
+      - Canned source selection, rewrite, and streaming timers
 maintenance:
   - Update an item when implementation begins, source material beyond the listed registry entry is consulted, or a file contains a substantial adaptation.
   - Add the exact source path, source commit, destination path, adaptation status, reviewer, and license decision before marking the parity item complete.

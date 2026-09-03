@@ -121,8 +121,19 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
   That run failed only at the missing P2 Linux golden baselines, exported
   candidates, and skipped the dependent publish check. Both Ubuntu candidates
   were visually accepted and registered for the follow-up strict comparison.
+  Final [run `33707996401`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33707996401)
+  passed all ten jobs on `bc6a72959dfa84543abc844fa8fef4fcd15e7629`, including
+  strict Ubuntu golden comparison, publish dry-run, all platform builds, and
+  all three journeys. The missing-baseline issue is resolved for P2.
   Local verification passed 257 package tests, 7 Catalog tests, 571 upstream
   tests, and publish dry-run with 0 warnings.
+- All seven P3 implementation contracts are recorded in
+  [`p3_contracts.md`](./p3_contracts.md), covering ownership, adaptive
+  alternatives, input methods, bounded workloads, and source deviations.
+  Their public implementations are present and remain `in_progress`.
+  P3 execution evidence is recorded independently in
+  [`quality_evidence/2026-09-03-p3-modules.md`](./quality_evidence/2026-09-03-p3-modules.md);
+  passing P2 runs do not verify those later changes.
 - Widget and Semantics suites cover the P1 and P2 components at adaptive boundaries,
   200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
   paths.

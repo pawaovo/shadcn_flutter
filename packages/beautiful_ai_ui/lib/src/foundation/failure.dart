@@ -19,6 +19,18 @@ enum BeautifulUiOperation {
 
   /// A streamed answer retry failed.
   streaming,
+
+  /// A prompt send, attachment, source connection, or dictation action failed.
+  prompt,
+
+  /// Applying a proposed record diff failed.
+  diff,
+
+  /// A records property, run, or cell action failed.
+  records,
+
+  /// A selected-text request or application failed.
+  selection,
 }
 
 /// A recoverable failure reported by a Beautiful AI UI module.

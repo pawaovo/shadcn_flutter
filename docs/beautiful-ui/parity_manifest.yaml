@@ -231,7 +231,6 @@ items:
       - Clipboard and retry requests de-duplicate pending work and ignore obsolete completions after their generation or copy snapshot changes.
       - Native live regions announce localized lifecycle and copy status without announcing every text chunk.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology and physical-device text-selection evidence
       - long-answer streaming and selection performance evidence
 
@@ -257,7 +256,6 @@ items:
       - Success follows a completed host callback; failures preserve editable drafts and report through the root failure seam.
       - Keyboard navigation, IME-safe custom entry, and scrollable keyboard-constrained layouts replace source browser-specific behavior.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology and physical-device keyboard evidence
       - final normal and reduced-motion transition review
 
@@ -282,7 +280,6 @@ items:
       - Added and removed lines use visible signs and semantic meaning; collapsed panels leave focus and Semantics traversal.
       - The single source presentation has no artificial variant parameter.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology smoke evidence
       - large-output layout and disclosure performance evidence
 
@@ -309,7 +306,6 @@ items:
       - Optional host retry is de-duplicated and ignores obsolete snapshot completions; success never invents a task-state transition.
       - Status, progress, and step have localized visible and semantic text; decorative indeterminate rings freeze under reduced motion.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology smoke evidence
       - final normal and reduced-motion transition review
 
@@ -336,7 +332,6 @@ items:
       - New messages follow the bottom only when the reader was already there; otherwise an explicit latest action is available.
       - Message bodies are readable without live token announcements; response and error status are announced separately.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology and physical-device keyboard evidence
       - long-transcript layout and scrolling performance evidence
 
@@ -345,11 +340,24 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Compact keeps compose/send visible and moves secondary tools to a menu or sheet.
-    risk: File, microphone, permission, and input-method boundaries require explicit product contracts.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Rounded or pill composition grows vertically; compact wraps controls and preserves the draft around keyboard and safe-area changes.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/prompt_bar_test.dart
+      - packages/beautiful_ai_ui/test/semantics/prompt_bar_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Host callbacks own send, file picking, source connection, dictation, and dictation stop; the package has no permission service, model client, or demo autoplay.
+      - Model and connected-source values are host controlled; local draft and attachment entries have explicit composer identity and stale-result guards.
+      - At-source and slash-command suggestions are lazy and keyboard accessible; selecting a command inserts text without executing a business action.
+      - New or reattached files and edits made during an older send survive its completion.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device IME, clipboard, file, and dictation integration evidence
+      - profile or release performance evidence for the 1000-option and 10000-character target workloads
   - registry_name: recommendation-card
     title: Recommendation Card
     source_type: registry:component
@@ -402,20 +410,46 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Compact uses one change card per record and preserves old/new semantics without color dependence.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Compact uses per-record change cards; expanded aligns before and after values, with bounded pages in both modes.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/diff_table.dart
+      - packages/beautiful_ai_ui/test/widget/diff_table_test.dart
+      - packages/beautiful_ai_ui/test/semantics/diff_table_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Immutable caller before and after maps replace the fixed timed source demo and infer added, removed, modified, and unchanged meaning.
+      - Local inclusion choices span all pages; asynchronous application submits an immutable set of changed row IDs and leaves record mutation to the host.
+      - Explicit old and new labels and Semantics preserve change meaning without color dependence.
+      - Pages default to 20 rows and allow at most 100; the deterministic workload exercises 500 records with three fields.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology change-review evidence
+      - profile or release performance evidence for the documented paginated workload
   - registry_name: records-table
     title: Records Table
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Compact uses list/card plus detail; expanded may expose full column controls.
-    risk: Workload, virtualization, editing, column configuration, and selection contracts are not yet frozen.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Compact cards expose record details; expanded provides a horizontal grid with a bounded lazy vertical viewport.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/records_table.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/records_table_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Typed property, tool, cell, and row snapshots replace the fixed CRM schema and fabricated AI cell calculations.
+      - Search, sort, selection, pin, hide, width, and property drafts are local; accepted property settings and run results remain host owned.
+      - Save, add, run, and cell activation leave through host callbacks with normalized failures and stale-configuration guards.
+      - Sort and filter results are cached; only rows near the bounded viewport are realized for the 1000-record target and at most 20 columns.
+      - Native text controls and explicit width actions replace browser popovers and pointer-only controls; no spreadsheet formula engine or database is bundled.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology grid and compact-detail evidence
+      - profile or release frame and memory evidence for the documented lazy-record workload
   - registry_name: filter-table
     title: Filter Table
     source_type: registry:component
@@ -436,7 +470,6 @@ items:
       - Expanded tables expose table, header, row, and cell semantics while smaller layouts preserve every field in list items.
       - The host supplies scrolling for long result sets; the component does not fetch, edit, sort, or virtualize business records.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology table and list navigation evidence
       - documented practical row-count and layout performance evidence
 
@@ -445,11 +478,24 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Expanded sidebar becomes a medium rail and compact drawer or bottom navigation.
-    asset_note: Central Icons are excluded and replaced with approved open icons.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Automatic compact drawer, medium rail, and expanded sidebar can be overridden for a narrow host navigation lane.
+    asset_note: Central Icons and source logos are excluded; replacement symbols are independently drawn.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/sidebar_nav.dart
+      - packages/beautiful_ai_ui/test/widget/sidebar_nav_test.dart
+      - packages/beautiful_ai_ui/test/semantics/sidebar_nav_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Workspace, destination, and recent-item selections are host controlled; routing, new-chat creation, and workspace actions are callbacks.
+      - A bounded native inline drawer needs no Navigator and restores focus after dismissal.
+      - Recent search, text selection, expansion choice, and scroll position survive presentation changes; recent rows are lazy for the 1000-item target.
+      - Source portals, fixed workspace data, commercial icons, and source branding are omitted.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology navigation, drawer, and focus evidence
+      - profile or release performance evidence for long recent histories
   - registry_name: search
     title: Search
     source_type: registry:component
@@ -480,20 +526,45 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Compact may be a read-only overview or ordered stepper.
-    risk: Graph scale, editing scope, hit targets, scroll conflicts, semantics, and keyboard operations require a contract.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Expanded offers pan, bounded zoom, drag, and keyboard movement; compact preserves editable ordered steps and condition controls.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/flowchart.dart
+      - packages/beautiful_ai_ui/test/widget/flowchart_test.dart
+      - packages/beautiful_ai_ui/test/semantics/flowchart_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Immutable host-controlled DAG snapshots replace fixed source nodes and conditions; every accepted edit is supplied back by the host.
+      - Release validation rejects missing or duplicate IDs, invalid endpoints, cycles, and data outside the approved node, edge, option, and position bounds.
+      - Measured node bounds anchor connectors; pan and zoom stay bounded and zoom never shrinks controls below their baseline target size.
+      - Ordered steps and explicit move actions preserve editing without relying on dragging; graph execution and arbitrary edge creation are excluded.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device canvas or ordered-step editing evidence
+      - profile or release frame and memory evidence for the 24-node and 48-edge workload
   - registry_name: insight-cards
     title: Insight Cards
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Compact uses a single-card flow and every chart has a textual summary.
-
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Compact stacks prose and chart; expanded may pair them, with a textual summary and complete data disclosure for every chart.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/insight_cards.dart
+      - packages/beautiful_ai_ui/test/widget/insight_cards_test.dart
+      - packages/beautiful_ai_ui/test/semantics/insight_cards_semantics_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Carousel page, anomaly metric, and allocation segment selections remain controlled by the host; inspected points and data disclosure are local.
+      - Private Flutter vector painters replace liveline and source autoplay, using exact finite supplied values with dashed and marker distinctions beyond color.
+      - Only the selected chart is painted; full textual observations are created on request and support touch, keyboard, and Semantics inspection.
+      - Work is bounded to 32 pages, four series of 512 points, eight metrics, and twelve allocation segments; no forecasting or synthetic time series is generated.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology chart inspection and data-table evidence
+      - profile or release performance evidence beyond diagnostic debug timings
   - registry_name: code-block
     title: Code Block
     source_type: registry:component
@@ -542,7 +613,6 @@ items:
       - Numeric adjustment supports 48dp buttons, arrow keys, Shift acceleration, horizontal pointer scrubbing, and assistive increase and decrease actions.
       - Type choices open inline and restore focus on dismissal; the Edited marker compares accepted values with the initial mounted snapshot.
     open_items:
-      - accepted P2 canonical golden and required remote platform evidence
       - real assistive-technology and physical-device numeric input evidence
 
   - registry_name: selection-actions
@@ -550,7 +620,21 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P3
-    status: not_started
-    planned_disposition: spike_then_public_composite
-    adaptive_note: Touch uses a system-appropriate toolbar or sheet; desktop may anchor to selection.
-    risk: Flutter selection integration and per-platform behavior require a spike.
+    status: in_progress
+    planned_disposition: public_composite_after_approved_contract
+    adaptive_note: Native read-only selection anchors a quick toolbar; an in-flow preview panel keeps request and acceptance actions reachable across input methods.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/selection_actions.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/selection_actions_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p3_examples.dart
+    intentional_deviations:
+      - Actual native Flutter selection and exact UTF-16 ranges replace the source demo selection and canned rewrite.
+      - Host onRequest returns replacement or explanation text; onApply receives the original request and exact replacement with an updatedText helper.
+      - Document identity and meaningful text, range, or instruction changes invalidate obsolete pending UI; initialSelection is a seed rather than a controlled range.
+      - Native gestures and guarded clipboard controls share the selection boundary with keyboard and Semantics actions; the source timers, npm icons, and AI simulation are omitted.
+      - Plain text uses a bounded read-only editor viewport; rich-text editing and document persistence remain outside the package.
+    open_items:
+      - accepted P3 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device selection, toolbar, and clipboard evidence
+      - profile or release performance evidence for the 20000-character document workload
