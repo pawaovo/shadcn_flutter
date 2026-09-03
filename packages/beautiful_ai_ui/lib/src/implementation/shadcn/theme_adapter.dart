@@ -77,12 +77,36 @@ final class ShadcnLayerAdapter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mappedTheme = ShadcnThemeAdapter.fromBeautifulTheme(theme);
+    final effectiveTheme = shad.AdaptiveScaling.desktop.scale(mappedTheme);
     return shad.ShadcnLayer(
-      theme: ShadcnThemeAdapter.fromBeautifulTheme(theme),
+      theme: mappedTheme,
       scaling: shad.AdaptiveScaling.desktop,
       themeMode: shad.ThemeMode.light,
       enableThemeAnimation: animateTheme,
-      builder: builder,
+      builder: (context, child) {
+        if (animateTheme) return builder(context, child);
+        // Published shadcn_flutter 0.0.54 ignores enableThemeAnimation and
+        // interpolates its Theme, text, and icon defaults. Keep its public
+        // infrastructure, then shadow those inherited values with the exact
+        // snapshot used by BeautifulUiScope. Stable wrapper types preserve
+        // descendant state, focus, selection, and drafts across theme changes.
+        return shad.Theme(
+          data: effectiveTheme,
+          child: DefaultTextStyle.merge(
+            style: effectiveTheme.typography.base.copyWith(
+              inherit: false,
+              color: effectiveTheme.colorScheme.foreground,
+            ),
+            child: IconTheme(
+              data: effectiveTheme.iconTheme.medium.copyWith(
+                color: effectiveTheme.colorScheme.foreground,
+              ),
+              child: Builder(builder: (context) => builder(context, child)),
+            ),
+          ),
+        );
+      },
       child: child,
     );
   }

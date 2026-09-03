@@ -32,10 +32,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Local and earlier CI journeys passed; current workflow refresh pending |
-| Edge stable | Release-candidate compatibility and shared journey | Planned | Dedicated job configured; remote execution pending |
-| Firefox stable | Release-candidate compatibility and shared journey | Planned | Dedicated job configured; remote execution pending |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Manual/browser compatibility evidence still required |
+| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33736546039; later portable-source verification remains separate |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33736546039 |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33736546039 |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Post-TickerMode visual recheck awaits manual Mac unlock; remaining compatibility evidence required |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 
@@ -109,12 +109,13 @@ It keeps completed evidence separate from the remaining release gates:
 - All twenty Gallery components are implemented and exported. All 27 registry
   entries remain `in_progress`; implementation coverage is not full release
   acceptance.
-- The integrated library suite passed 526 tests, the Catalog passed 19 tests,
+- The integrated library suite passed 528 tests, the Catalog passed 19 tests,
   and both package scopes passed strict static analysis.
 - The macOS golden suite passed 12 checks; ten current macOS image hashes are
-  recorded, including eight updated component images. The final 49-image
-  review matches the frozen palette/muted-ticker source. Eight changed Linux
-  component baselines need CI candidates and explicit review.
+  recorded. The final 49-image source inventory includes the hosted-adapter
+  correction, with all image pixels unchanged. Eight Linux component
+  candidates from run `33736546039` were explicitly reviewed and accepted;
+  follow-up strict comparison is still required.
 - Shared action foreground contrast and visible selected states were repaired;
   Approval uses drawn checks, Sidebar's compact trigger accommodates large
   text, and numeric/chart controls expose native slider flags. The accepted
@@ -128,7 +129,9 @@ It keeps completed evidence separate from the remaining release gates:
   font files, 266 flag images, five original Web images, and 13 full generated
   LicenseRegistry labels. JavaScript, Wasm, and ordinary macOS release builds
   and their actual asset audits passed. Verified inherited Geist is the
-  current typography; no Inter or JetBrains Mono files are bundled.
+  current typography; no Inter or JetBrains Mono files are bundled. The
+  isolated hosted-consumer test now also verifies atomic themes and portable
+  13-label notice delivery without the fork's sibling package or overrides.
 - The ordinary macOS shared Catalog journey passed. Native AX comparison also
   succeeded without the Web compile flag. Catalog forcing of Web semantics
   is now gated by `kIsWeb`; native applications use the platform lifecycle.
@@ -138,22 +141,33 @@ It keeps completed evidence separate from the remaining release gates:
   `20260903T080855Z` on an
   M1 Pro/32 GiB machine: 4,524 independent frame samples and 480 process RSS
   samples at 1,728×963 logical pixels, DPR 2, 120 Hz. Driver, teardown and
-  script completed successfully. Its source predates the last palette and
-  muted-ticker fixes; final-source resampling is pending. Product budgets, repeatability,
+  script completed successfully. Its source predates the last palette,
+  muted-ticker and hosted-adapter fixes. Final profile run 4 has not started
+  because the Mac is locked and Computer Use requires manual user unlock.
+  Product budgets, repeatability,
   and representative other-platform/device measurements remain open; measured
   UI-build peaks include frames above 16ms.
-- The latest Wasm release build passed after the final source fixes.
-- CI now has twelve configured jobs. macOS, iOS simulator and Windows native
-  journeys join the existing native jobs; Firefox and Edge each have a new
-  browser job. These additions and current golden refresh are configured,
-  pending remote execution. No new remote pass is inferred from configuration.
+- Latest portable-source Wasm and ordinary macOS release builds passed.
+- The twelve-job [run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
+  on `19c80c17e5346f7415b52af9583ba6770cfbee50` passed Firefox/Edge,
+  Chrome/Linux, Android, Windows native and macOS native journeys, builds and
+  Web asset audits. Quality failed only the eight then-unaccepted Linux
+  goldens; their candidates are now accepted. The run completed with nine
+  successful jobs, two failed jobs, and one skipped job. Apple failed on the
+  iOS simulator app-launch timeout after successful compilation, before the
+  widget test began; its macOS journey passed. Publish validation was skipped
+  due to quality. Launcher remediation and the portable changes await the
+  next committed-tree verification.
+- Safari's visual recheck after the TickerMode repair is unfinished and also
+  requires the user to unlock the local Mac manually. Earlier Safari or
+  profile observations are not promoted to final-source acceptance.
 
 The earlier P3 implementation [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
 passed all ten jobs on `74178098705aa83b5452857aece6a3b10bb3ce4f`, including
 six-platform builds, Web JS/Wasm, Chrome/Linux/Android journeys, quality,
 Ubuntu golden comparison and publish validation. Earlier P1/P2 evidence is
 retained in their dated records. Those commits predate this engineering pass
-and do not establish a passing run for the current twelve-job workflow.
+and are retained separately from the partial twelve-job result above.
 
 Actual TalkBack, VoiceOver, Narrator and Orca task flows, physical-device
 input, remaining browsers and visual/motion combinations, agreed performance

@@ -4,8 +4,8 @@ Date: 2026-09-03 (Asia/Shanghai)
 Dependency baseline: `shadcn_flutter 0.0.54`, source commit
 `5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73`
 Toolchain: Flutter `3.47.0`, Dart `3.13.0`, local macOS arm64
-Status: source/hash, generated LicenseRegistry, and refreshed JavaScript,
-Wasm, and macOS release artifact coverage verified
+Status: workspace source/assets/registry coverage verified; portable package
+notice source checks and independent hosted-consumer execution passed
 
 ## Result and scope
 
@@ -22,6 +22,14 @@ and all font/icon binaries are unchanged. The transitive flag-icons MIT
 notice, identified by the separate media audit, is included too. The actual
 Flutter `LicenseRegistry` probe now reads **13 complete package/asset labels**
 from a freshly generated `NOTICES.Z`; it does not inject synthetic entries.
+
+A later publication-boundary check identified a separate gap: unmodified
+hosted `shadcn_flutter 0.0.54` has a package `LICENSE`, but does not carry this
+fork's added `NOTICES`. Workspace success alone therefore did not prove that
+publishing `beautiful_ai_ui` independently would deliver its dependency asset
+notices. The publishable `packages/beautiful_ai_ui/NOTICES` now starts with the
+complete unchanged BAI `LICENSE` and carries the full verified dependency
+notice set itself. The core notice remains available to this fork's users.
 
 The machine-readable inventory is
 [`legal/dependency_assets.json`](../../../legal/dependency_assets.json).
@@ -100,6 +108,46 @@ and flag-icons MIT. Geist blocks each carry both relevant family labels.
 The generated registry also retains `beautiful_ai_ui`, `beautiful-ui`, and
 the original `country_flags` MIT block supplied by those packages.
 
+The BAI carrier has ten blocks: its own complete BSD and Beautiful UI MIT
+blocks first, followed by all eight core-carried blocks. Its SHA256 is
+`30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7`.
+The source audit verifies all ten dependency labels in **both** package
+carriers, pins the original BAI `LICENSE` hash, and requires that entire
+original file to be the byte-for-byte prefix of BAI's `NOTICES`. It also
+checks each original license block individually. No font binary or dependency
+version constraint changed in this repair.
+
+The source result is recorded in
+[`2026-09-03-portable-notice-source-audit.json`](./2026-09-03-portable-notice-source-audit.json).
+Temporary negative fixtures that removed BAI's own license or altered its
+Geist notice were correctly rejected. The checker refused to export
+independent-consumer expectations from either failing fixture.
+
+The independent consumer resolves the real hosted `shadcn_flutter 0.0.54`
+without a workspace override or copied sibling package. A fresh disposable
+`PUB_CACHE` was used, and all 209 hosted runtime files were matched against
+the official archive SHA256
+`403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e`.
+That archive contains `LICENSE` and no package-root `NOTICES`.
+
+The [before report](./hosted-consumer-before.json) reproduced the publication
+gap: generated `NOTICES.Z` and real `LicenseRegistry` covered only four of
+13 expected full-text labels, missing the nine asset labels. The
+[after report](./hosted-consumer-after.json) passed all four stages: public
+dependency resolution, strict consumer analysis, two public-integration/theme
+tests, and one production-registry probe. Both generated notices and the
+registry now contain all 13 complete expected texts with no missing labels.
+
+The BAI publication-surface copy in that passing consumer records the same
+portable notice hash `30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7`.
+Its generated `NOTICES.Z` hash is
+`803026de97a191d81e842aedf1285d2daa52c68184f8a5ea4cae65d8d076995f`.
+The consumer is outside the repository, has no dependency overrides, and
+does not modify the hosted core or inject license entries. BAI itself is a
+temporary copy of its publication surface used as a path dependency, not an
+already completed pub.dev publication. These results are recorded separately
+from the larger workspace license graph below.
+
 The additional country flag notice applies to 266 `.si` files supplied by
 `country_flags 4.1.2`, whose README attributes the SVGs to `lipis/flag-icons`.
 The flag-icons license commit identifies the notice source; it is not claimed
@@ -154,6 +202,34 @@ against the original font, and requires identical output bytes. An unknown
 icon transformation fails. Non-icon typography must remain byte-identical.
 Each built font's size/hash and transformation result is recorded in JSON.
 
+For a separately resolved consumer, export the expected full texts only after
+the source audit succeeds:
+
+```sh
+python3 tool/audit_dependency_assets.py \
+  --require-complete-provenance \
+  --expectations-output /tmp/beautiful-ai-ui-expected-notices.json
+```
+
+The JSON is a `Map<String, String>` of label to complete original license
+text, read from the independently audited license files. The registry probe
+accepts `--dart-define=EXPECTED_LICENSES_FILE=/absolute/path/to/expectations.json`
+to run outside this repository. This supplies assertions only; it does not
+register licenses, replace the generated asset bundle, or inject a collector.
+
+The complete separate-resolution publication check is repeatable from the
+repository root:
+
+```sh
+python3 tool/verify_hosted_consumer.py \
+  --output /tmp/beautiful-ai-ui-hosted-consumer.json
+```
+
+It creates a disposable consumer/publication-surface copy and fresh package
+cache, resolves the real hosted core, preserves resolution and source hashes,
+and runs the integration and production-registry probes. The copied BAI
+`NOTICES` hash is part of the report; a workspace sibling does not supply it.
+
 To run the real registry probe from `packages/beautiful_ai_ui_catalog`:
 
 ```sh
@@ -174,6 +250,8 @@ notices. No source asset or license is generated by the audit scripts.
 | All source hashes and font declarations | Passed: 43 files, including all 37 declared runtime files |
 | Official upstream acquisition comparison | Passed: 43 assets at the documented origin boundary; Radix's earlier conversion remains explicitly unclaimed |
 | Complete dependency-root notice text | Passed: ten asset/package labels across eight full license blocks |
+| Portable BAI notice carrier | Passed: all ten dependency labels match both carriers; the unchanged original BAI LICENSE is preserved as a complete prefix and as two individually checked blocks |
+| Portable notice negative guards | Missing BAI terms or altered Geist attribution correctly exited 1 and did not export consumer expectations |
 | Negative hash guard | A temporary inventory with a forged source hash correctly exited 1 |
 | Negative provenance gate | A temporary inventory containing a deliberate unresolved gate correctly exited 1 with `--require-complete-provenance` |
 | Old Web artifact | Correctly failed for missing font/icon notices; all three icon subsets were nevertheless reproduced byte-for-byte |
@@ -182,6 +260,8 @@ notices. No source asset or license is generated by the audit scripts.
 | Fresh macOS release artifact | Build and `--require-complete-provenance` audit passed; all 37 runtime files match original source bytes, with complete generated notices |
 | Fresh Web JavaScript release artifact | Build, strict asset audit, and media audit passed; 34 typography files match source bytes and all three icon subsets were reproduced exactly |
 | Fresh Web Wasm release artifact | Build, strict asset audit, and media audit passed; 34 typography files match source bytes and all three icon subsets were reproduced exactly |
+| Independent hosted consumer before repair | Correctly reproduced missing nine labels: generated notices and real registry covered four of 13 required texts |
+| Independent hosted consumer after repair | Passed all four stages with unchanged hosted shadcn_flutter 0.0.54, 209 matching runtime files, two integration/theme tests and one real-registry probe; all 13 texts covered |
 
 Source verification is captured in
 [`2026-09-03-dependency-asset-source-audit.json`](./2026-09-03-dependency-asset-source-audit.json).
@@ -214,9 +294,16 @@ bytes match their saved report hashes. The Web output directory now contains
 the latest Wasm build; the JavaScript report records its preceding build.
 The authoritative font/icon and flag inventory references have also been
 merged into `legal/assets.yaml` under the inherited-dependency policy.
+These three records were generated in the workspace using the local sibling
+dependency. They remain valid for those built asset bytes, but do not by
+themselves prove the newly repaired standalone publication path.
 
 ## Remaining release boundaries
 
+- Keep the portable BAI carrier and independent hosted-consumer check in the
+  publication path. Dependency upgrades or changes to distributed licenses
+  require a corresponding inventory/consumer refresh. The current proof uses
+  a publication-surface copy of BAI and does not claim the package was published.
 - The recorded checks apply to these generated artifacts and their pinned
   asset inventory. Future dependency/resource changes or separately built
   artifacts require their own proportionate verification; these results do

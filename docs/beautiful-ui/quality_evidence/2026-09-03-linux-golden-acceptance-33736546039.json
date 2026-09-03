@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "date": "2026-09-03",
+  "status": "accepted_linux_canonical_candidates",
+  "source_run_id": 33736546039,
+  "source_run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039",
+  "source_commit": "19c80c17e5346f7415b52af9583ba6770cfbee50",
+  "source_environment": "Ubuntu CI golden job",
+  "review_method": "All eight testImage PNGs opened with view_image before copying. Representative maskedDiff images inspected for P1 light, P2 dark, P3 content light, and P3 workspace light.",
+  "observations": [
+    "Changes match the intended normal secondary text and light accentInk palette updates, readable filled-action foregrounds, and selected-action fill/border treatment.",
+    "Controls, complete fixture text, status marks, chart paths/markers, workflow nodes/connectors, and before/after table meaning remain visible. No new clipping, missing glyph, or unintended layout regression was observed.",
+    "P2 fixture contains a selected single-choice Approval mark; separate accessibility captures cover the fixed multi-choice and submitted native check marks."
+  ],
+  "preserved": {
+    "all_10_macos_golden_hashes": true,
+    "both_linux_loading_hashes": true,
+    "golden_test_sources": true
+  },
+  "follow_up": "A later Ubuntu strict comparison confirms the accepted baseline. Independent hosted-consumer adapter compatibility changes require their separate local comparison/source-inventory refresh; these files preserve the exact reviewed CI bytes.",
+  "files": [
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p1_components_light.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p1_components_light_testImage.png",
+      "previous_sha256": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
+      "sha256": "ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804",
+      "width": 1200,
+      "height": 1020,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p1_components_dark_testImage.png",
+      "previous_sha256": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe",
+      "sha256": "e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739",
+      "width": 1200,
+      "height": 1020,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p2_components_light.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p2_components_light_testImage.png",
+      "previous_sha256": "ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c",
+      "sha256": "3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196",
+      "width": 1440,
+      "height": 1400,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p2_components_dark_testImage.png",
+      "previous_sha256": "12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a",
+      "sha256": "42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19",
+      "width": 1440,
+      "height": 1400,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p3_content_light.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p3_content_light_testImage.png",
+      "previous_sha256": "7185fb90cc18f278236f88089effc30f42e789f37116944115d8c23267d0a432",
+      "sha256": "cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e",
+      "width": 1440,
+      "height": 1180,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p3_content_dark.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p3_content_dark_testImage.png",
+      "previous_sha256": "5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584",
+      "sha256": "687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4",
+      "width": 1440,
+      "height": 1180,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_light.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p3_workspace_light_testImage.png",
+      "previous_sha256": "2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5",
+      "sha256": "55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f",
+      "width": 1440,
+      "height": 1800,
+      "visual_review": "accepted_after_view_image"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_dark.png",
+      "source_candidate": "/tmp/release-linux-goldens-33736546039/golden/failures/p3_workspace_dark_testImage.png",
+      "previous_sha256": "71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9",
+      "sha256": "2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93",
+      "width": 1440,
+      "height": 1800,
+      "visual_review": "accepted_after_view_image"
+    }
+  ]
+}

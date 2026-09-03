@@ -5,6 +5,20 @@
   "provenance_limitations": [
     "Radix original SVG release and Iconly conversion recipe are not recorded. The audited acquisition boundary is the exact attributed font in the pinned shadcn_flutter dependency, consistent with the asset policy requiring a version or hash; no exact original conversion is claimed."
   ],
+  "notice_carriers": [
+    {
+      "path": "packages/shadcn_flutter/NOTICES",
+      "sha256": "a9c8893fe0b91aaf31d523e5b0107ed863b4ef582b4082bd276db289986b60d8"
+    },
+    {
+      "path": "packages/beautiful_ai_ui/NOTICES",
+      "sha256": "30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7"
+    }
+  ],
+  "portable_original_license_labels_preserved": [
+    "beautiful-ui",
+    "beautiful_ai_ui"
+  ],
   "source_assets_checked": 43,
   "runtime_fonts_checked": 37,
   "complete_notice_labels_checked": 10,
@@ -236,16 +250,19 @@
   ],
   "font_subset": "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/cache/artifacts/engine/darwin-x64/font-subset",
   "built_notice_labels": [
-    "shadcn_flutter",
+    "Bootstrap Icons",
+    "Feather (Lucide-derived icons)",
     "Geist",
     "Geist Mono",
-    "Geist legacy",
     "Geist Mono legacy",
-    "Bootstrap Icons",
+    "Geist legacy",
     "Lucide",
-    "Feather (Lucide-derived icons)",
     "Radix Icons",
-    "flag-icons"
+    "beautiful-ui",
+    "beautiful_ai_ui",
+    "country_flags",
+    "flag-icons",
+    "shadcn_flutter"
   ],
   "passed": true
 }

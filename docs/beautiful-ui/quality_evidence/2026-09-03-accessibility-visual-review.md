@@ -8,15 +8,17 @@ specific static scenarios below.** The final render exported without layout
 errors. Every final PNG was opened with `view_image`, or was byte-identical by
 SHA-256 to an image opened earlier in this review. After the final frozen
 palette and muted-ticker fixes, all six changed light high-contrast images
-were opened again; the other 43 images matched earlier inspected bytes.
+were opened again; the other 43 images matched earlier inspected bytes. The
+later private-adapter compatibility refresh reproduced all 49 previously
+inspected PNG hashes exactly, so no new visual difference was accepted.
 Test success alone was not used as visual acceptance.
 
 The machine-readable [review index](./2026-09-03-accessibility-visual-review.json)
 records each exact PNG hash, dimensions, scenario, observations, Flutter version,
 and 249 source/configuration/font hashes. The renderer's manifest SHA-256 is
-`31612099bcb0a461d0748007528bb71642221d2a11d57d1af70136bf6f04f686`.
-Capture finished at `2026-09-03T08:48:09.245071+00:00` with source files unchanged
-throughout capture. The base Git HEAD was `37a56e0e28c5a3dcadd16678a02c92037932fec2`;
+`c0f46b73679b5ee81b2e920371f6310a6acd37ffd3a9a2916262221b7cdd91c6`.
+Capture finished at `2026-09-03T09:22:39.878578+00:00` with source files unchanged
+throughout capture. The base Git HEAD was `19c80c17e5346f7415b52af9583ba6770cfbee50`;
 the exact source inventory includes the concurrent uncommitted fixes and is
 therefore more precise than that commit alone.
 
@@ -109,6 +111,16 @@ dynamic dark-to-light transition; that issue retains its separate widget and
 Safari evidence. The final macOS golden update and subsequent strict comparison
 each passed all 12 tests; Loading's two macOS PNGs and all ten Linux PNGs stayed
 byte-identical. This review did not change Linux baselines or golden test source.
+
+After the private shadcn adapter's hosted-consumer compatibility change, a
+normal macOS strict comparison passed 12/12 without `--update-goldens`. The
+49-image export then reproduced all previously reviewed image hashes; all
+20 golden hashes remained unchanged during that verification. Only
+`lib/src/implementation/shadcn/theme_adapter.dart` changed within the 249-entry
+render-source inventory. The new manifest and inventory above bind the existing
+visual acceptance to that adapter source. The separate
+[Ubuntu candidate acceptance](./2026-09-03-linux-golden-acceptance-33736546039.json)
+records the intervening Linux canonical update from its CI run.
 
 No unresolved clipping, missing mark, or missing selected-state distinction
 was observed in these final fixture images. Records intentionally truncates a

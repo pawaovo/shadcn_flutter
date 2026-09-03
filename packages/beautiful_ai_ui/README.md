@@ -17,7 +17,8 @@ support or full-parity claim.
 The current engineering pass has verified dependency font/media notices,
 reviewed representative static states, and collected a historical native
 macOS profile baseline for all seven P3 workloads. Final-source profiling
-after the last palette/muted-ticker fixes is pending. The dated
+after the palette/muted-ticker and hosted-adapter fixes has not started;
+desktop execution requires the user to unlock the local Mac. The dated
 [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
 distinguishes these completed checks from remaining release gates.
 
@@ -349,12 +350,13 @@ database, applies a document edit, or changes controlled selections.
 
 ## Status
 
-The current local verification includes **526 library tests, 19 Catalog tests,
+The current local verification includes **528 library tests, 19 Catalog tests,
 and strict analysis of both packages**. The macOS golden suite passed 12
 checks, and 49 supplemental images across all twenty modules were individually
 reviewed against the final frozen visual source. Ten current macOS image
-hashes are recorded, including eight updated component images; the eight
-changed Ubuntu component baselines await CI candidates and acceptance.
+hashes are recorded. The hosted-adapter fix changed no review/golden pixels;
+the eight Linux candidates from run `33736546039` were reviewed and accepted.
+A follow-up strict Ubuntu comparison remains required.
 
 Filled actions derive a contrasting foreground from the theme. Selected
 actions have a distinct fill/border, Approval checks use drawn paths, and
@@ -377,6 +379,34 @@ Flutter `LicenseRegistry` probe. Fresh JavaScript, Wasm, and macOS release
 asset audits passed; the resource inventories remain authoritative for those
 specific files and versions.
 
+The publishable package includes its own `NOTICES`, preserving its complete
+BSD/Beautiful UI MIT terms and the verified dependency asset notices. Flutter
+therefore receives those notices when an independent application resolves
+the hosted `shadcn_flutter 0.0.54`, without requiring this repository's sibling
+package patch. The source audit checks both notice carriers. An
+[independent consumer](../../docs/beautiful-ui/quality_evidence/hosted-consumer-after.json)
+with a fresh dependency cache and no overrides verified the unchanged hosted
+core, public integration/theme behavior, and all 13 required generated
+notice/registry texts. The [license audit](../../docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md)
+keeps this temporary publication-surface test separate from workspace checks
+and from an actual package publication.
+The [hosted-consumer record](../../docs/beautiful-ui/quality_evidence/2026-09-03-hosted-consumer.md)
+also confirms 12 atomic theme/state/focus observations using the private
+adapter, without changing the hosted dependency. Latest portable-source
+Wasm and ordinary macOS release builds passed.
+
+Before publishing from this repository, run the source notice audit and
+separate hosted-consumer check from the repository root:
+
+```sh
+python3 tool/audit_dependency_assets.py --require-complete-provenance
+python3 tool/verify_hosted_consumer.py --output /tmp/beautiful-ai-ui-hosted-consumer.json
+```
+
+The package's `LICENSE` and `NOTICES` both belong in the publication surface.
+These checks validate that surface and its independently resolved dependency;
+they do not publish it.
+
 All seven bounded P3 workloads completed in historical profile baseline
 `20260903T080855Z` on an M1
 Pro/32 GiB machine, yielding 4,524 frame samples and 480 process RSS samples.
@@ -384,15 +414,19 @@ The sampled window was 1,728×963 logical pixels at DPR 2 and 120 Hz. The
 [profile record](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md)
 reports measured peaks and limitations. Other platforms, repeated runs, and
 agreed product frame/memory budgets remain to be assessed. That source
-fingerprint predates the final palette and muted-ticker changes; a separate
-profile of the final source is pending and will not reuse the historical
-baseline's measurements as current results.
+fingerprint predates the final palette, muted-ticker and hosted-adapter
+changes. Final profile run 4 has not started because the Mac session is
+locked and Computer Use requires manual unlock. The post-TickerMode Safari
+visual recheck is also unfinished. Historical measurements remain historical.
 
 The complete ordinary macOS Catalog journey and a native AX comparison have
-passed. The twelve-job CI configuration adds native macOS/iOS simulator/
-Windows journeys and dedicated Firefox/Edge jobs; current remote execution
-is pending. All six platforms are **Partial**, and all 27 registry entries
-remain `in_progress`.
+passed. The twelve-job run `33736546039` completed with nine successful jobs,
+two failures and one skip. Firefox/Edge, Chrome/Linux, Android and Windows
+journeys passed; the Apple job's macOS journey passed, but iOS app launch
+timed out before its widget test began. Quality's eight golden differences
+have accepted replacement baselines; publish validation was skipped. The
+next committed-tree run remains required. All six platforms are **Partial**,
+and all 27 registry entries remain `in_progress`.
 
 This is an independent implementation. It is not affiliated with or endorsed
 by Beautiful UI, Turbo, or the `shadcn_flutter` authors. See the repository's

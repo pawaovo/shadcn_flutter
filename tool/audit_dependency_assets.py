@@ -181,6 +181,21 @@ def check_coverage(blocks: dict[str, list[str]], label: str, body: str) -> bool:
     return any(normalized(body) == normalized(text) for text in blocks.get(label, []))
 
 
+def expected_notice_texts(root: Path, inventory: dict) -> dict[str, str]:
+    """Independent full-text expectations from the audited license sources."""
+    expected = {}
+    for item in inventory["licenses"]:
+        body = (root / item["file"]).read_text()
+        for label in item["notice_labels"]:
+            expected[label] = body
+    for item in inventory["required_additional_notices"]:
+        body = (root / item["license_file"]).read_text()
+        if "source_label" in item:
+            body = notice_blocks(body)[item["source_label"]][0]
+        expected[item["label"]] = body
+    return expected
+
+
 def find_font_subset(root: Path) -> Path | None:
     config = root / ".dart_tool/package_config.json"
     if not config.is_file():
@@ -218,7 +233,23 @@ def verify(args: argparse.Namespace) -> dict:
         "provenance_gaps": gaps,
         "provenance_limitations": inventory.get("provenance_limitations", []),
     }
-    notices = notice_blocks((root / inventory["dependency"]["notices"]).read_text())
+    notice_paths = [inventory["dependency"]["notices"]]
+    portable = inventory["portable_notice"]
+    notice_paths.append(portable["notices"])
+    carriers = {
+        path: notice_blocks((root / path).read_text()) for path in notice_paths
+    }
+    original_license = (root / portable["original_license"]).read_bytes()
+    if sha256(original_license) != portable["original_license_sha256"]:
+        errors.append("Portable package's original LICENSE hash differs from the audited source")
+    portable_bytes = (root / portable["notices"]).read_bytes()
+    if portable["require_original_license_prefix"] and not portable_bytes.startswith(original_license):
+        errors.append("Portable NOTICES does not preserve the complete original LICENSE as its prefix")
+    own_license_blocks = notice_blocks(original_license.decode())
+    for label, bodies in own_license_blocks.items():
+        for body in bodies:
+            if not check_coverage(carriers[portable["notices"]], label, body):
+                errors.append(f"Portable NOTICES lost the package's own complete license for {label}")
     license_text = {}
     for item in inventory["licenses"]:
         data = (root / item["file"]).read_bytes()
@@ -226,8 +257,15 @@ def verify(args: argparse.Namespace) -> dict:
             errors.append(f"License hash changed: {item['file']}")
         license_text[item["id"]] = data.decode()
         for label in item["notice_labels"]:
-            if not check_coverage(notices, label, data.decode()):
-                errors.append(f"Package NOTICES does not cover complete license for {label}")
+            for path, notices in carriers.items():
+                if not check_coverage(notices, label, data.decode()):
+                    errors.append(f"{path} does not cover complete license for {label}")
+
+    result["notice_carriers"] = [
+        {"path": path, "sha256": sha256((root / path).read_bytes())}
+        for path in notice_paths
+    ]
+    result["portable_original_license_labels_preserved"] = sorted(own_license_blocks)
 
     for item in inventory["required_additional_notices"]:
         if "sha256" in item and sha256((root / item["license_file"]).read_bytes()) != item["sha256"]:
@@ -328,16 +366,10 @@ def verify(args: argparse.Namespace) -> dict:
         if notice_file is None:
             raise ValueError("Bundle has neither NOTICES nor NOTICES.Z")
         bundle_notices = notice_blocks(read_notices(notice_file))
-        for item in inventory["licenses"]:
-            for label in item["notice_labels"]:
-                if not check_coverage(bundle_notices, label, license_text[item["id"]]):
-                    errors.append(f"Built NOTICES lacks complete {label} license")
-        for item in inventory["required_additional_notices"]:
-            body = (root / item["license_file"]).read_text()
-            if "source_label" in item:
-                body = notice_blocks(body)[item["source_label"]][0]
-            if not check_coverage(bundle_notices, item["label"], body):
-                errors.append(f"Built NOTICES lacks complete {item['label']} license")
+        expected_notices = expected_notice_texts(root, inventory)
+        for label, body in expected_notices.items():
+            if not check_coverage(bundle_notices, label, body):
+                errors.append(f"Built NOTICES lacks complete {label} license")
         built_assets = []
         font_subset = args.font_subset or find_font_subset(root)
         with tempfile.TemporaryDirectory(prefix="font-subset-audit-") as temporary:
@@ -376,7 +408,7 @@ def verify(args: argparse.Namespace) -> dict:
         result["notice_sha256"] = sha256(notice_file.read_bytes())
         result["built_assets"] = built_assets
         result["font_subset"] = str(font_subset.resolve()) if font_subset else None
-        result["built_notice_labels"] = [label for item in inventory["licenses"] for label in item["notice_labels"]]
+        result["built_notice_labels"] = sorted(expected_notices)
     if args.require_complete_provenance and gaps:
         errors.extend("Release provenance incomplete: " + gap for gap in gaps)
     result["passed"] = not errors
@@ -393,6 +425,10 @@ def main() -> int:
     parser.add_argument("--cache", type=Path, help="Cache directory for public upstream artifacts")
     parser.add_argument("--require-complete-provenance", action="store_true")
     parser.add_argument("--json-output", type=Path)
+    parser.add_argument(
+        "--expectations-output", type=Path,
+        help="After a successful source audit, export full-text label expectations for an independent consumer probe",
+    )
     args = parser.parse_args()
     try:
         result = verify(args)
@@ -401,6 +437,11 @@ def main() -> int:
     if args.json_output:
         args.json_output.parent.mkdir(parents=True, exist_ok=True)
         args.json_output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+    if args.expectations_output and result["passed"]:
+        inventory = json.loads((args.root.resolve() / args.inventory).read_text())
+        expectations = expected_notice_texts(args.root.resolve(), inventory)
+        args.expectations_output.parent.mkdir(parents=True, exist_ok=True)
+        args.expectations_output.write_text(json.dumps(expectations, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if result["passed"] else 1
 

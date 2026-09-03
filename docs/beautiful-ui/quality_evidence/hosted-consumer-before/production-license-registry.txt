@@ -1,0 +1,27 @@
+package:skeletonizer has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+package:country_flags has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+00:00 +0: loading /private/var/folders/97/z6w3b4lj07b3sjrwc0pj3gcw0000gn/T/beautiful-ai-ui-hosted-consumer-dnpznsib/consumer/test/license_registry_test.dart
+00:00 +0: isolated consumer registers the complete generated package notices
+00:00 +0 -1: isolated consumer registers the complete generated package notices [E]
+  Expected: empty
+    Actual: [
+              'Bootstrap Icons',
+              'Feather (Lucide-derived icons)',
+              'Geist',
+              'Geist Mono',
+              'Geist Mono legacy',
+              'Geist legacy',
+              'Lucide',
+              'Radix Icons',
+              'flag-icons'
+            ]
+  Missing complete generated license text
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/license_registry_test.dart 46:7                main.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  /private/var/folders/97/z6w3b4lj07b3sjrwc0pj3gcw0000gn/T/beautiful-ai-ui-hosted-consumer-dnpznsib/consumer/test/license_registry_test.dart: isolated consumer registers the complete generated package notices

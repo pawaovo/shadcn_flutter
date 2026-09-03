@@ -48,6 +48,20 @@ multi-license format. Flutter collects this package-root file into generated
 `NOTICES`/`NOTICES.Z`, which the default `LicenseRegistry` reads. Keeping a
 license only in a nested font directory does not add it to that registry.
 
+The separately publishable
+[`beautiful_ai_ui/NOTICES`](packages/beautiful_ai_ui/NOTICES) also carries the
+complete verified dependency notices. It begins with the unchanged full
+`beautiful_ai_ui/LICENSE`, preserving both its own BSD and Beautiful UI MIT
+blocks. This makes notice delivery independent of whether a consumer uses
+this fork or the unmodified hosted `shadcn_flutter 0.0.54`, which does not
+contain the fork's added `NOTICES`. The source audit checks both carriers and
+preservation of the package's own license. The
+[standalone consumer report](docs/beautiful-ui/quality_evidence/hosted-consumer-after.json)
+verifies all 13 required full texts in generated notices and the real
+`LicenseRegistry`, using an unchanged hosted core and a temporary BAI
+publication-surface copy. This is recorded separately from workspace evidence
+and is not a claim that BAI has already been published.
+
 ## Bundled dependency fonts and icon fonts
 
 The exact file inventory is

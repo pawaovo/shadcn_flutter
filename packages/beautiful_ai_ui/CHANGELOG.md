@@ -97,7 +97,22 @@ All notable changes to this package will be documented in this file.
 - Make shared action color updates immediate when ancestor tickers are muted,
   fixing stale dark backgrounds with new light-theme text inside a
   reduced-motion Flowchart. Three paint regressions include a real 1,200dp
-  canvas; the integrated library suite now passes 526 tests
+  canvas; the integrated library suite now passes 528 tests
+  (product/main, @pawaovo).
+- Carry the complete verified dependency asset notices inside the separately
+  publishable `beautiful_ai_ui/NOTICES`, preserving its original BSD and
+  Beautiful UI MIT license blocks. Audit both package notice carriers so
+  hosted consumers do not depend on this fork's sibling `NOTICES` file
+  (product/main, @pawaovo).
+- Preserve atomic inherited themes with the unmodified hosted
+  `shadcn_flutter 0.0.54` through the package-private adapter. An isolated consumer verifies
+  12 immediate/timed theme, state, draft, selection and focus observations,
+  with all 13 complete generated notice texts delivered independently
+  (product/main, @pawaovo).
+- Accept eight reviewed Linux component golden candidates from run
+  `33736546039`; the hosted-adapter change preserves all reviewed image
+  pixels. Keep the first twelve-job CI result, iOS launch remediation, and
+  pending final-source profile/Safari checks explicit
   (product/main, @pawaovo).
 
 ## [0.1.0-dev.1]

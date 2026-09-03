@@ -55,10 +55,10 @@ definition_of_done:
   - required_platform_evidence
 
 release_open_items:
-  - Current twelve-job CI execution and reviewed Ubuntu golden refresh for the latest shared visual changes.
+  - Resolve the iOS simulator app-launch timeout and verify the next committed tree, including strict comparison against accepted Linux baselines and dependent publish validation.
   - Complete physical-device and real TalkBack, VoiceOver, Narrator, and Orca task workflows.
-  - Remaining browser, localization, visual-state combinations, and temporal normal or reduced-motion review.
-  - Final-source profile resampling after the last palette and muted-ticker fixes; agreed budgets, repeated runs, and representative other-platform or physical-device measurements.
+  - After manual Mac unlock, finish the post-TickerMode Safari visual recheck; remaining browser, localization, visual-state and temporal motion combinations stay open.
+  - Final profile run 4 has not started because Computer Use requires manual unlock of the local Mac; agreed budgets, repeatability and representative other-platform or physical-device measurements remain open.
 
 items:
   - registry_name: foundation
@@ -76,9 +76,11 @@ items:
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Verified inherited Geist Sans and Geist Mono are the current typography; Inter and JetBrains Mono are not bundled.
       - Normal subtle text and light accent text on accentTint now meet the tested 4.5 contrast threshold, with four palette regressions.
+      - A fresh isolated consumer with unmodified hosted shadcn_flutter 0.0.54 passes atomic theme, state and focus checks and portable delivery of all 13 required notice labels.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-hosted-consumer.md
     open_items:
       - complete real assistive-technology and physical-device acceptance from the support matrix
       - remaining visual combinations and temporal motion or interaction-state review
@@ -466,7 +468,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
@@ -561,7 +563,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
@@ -594,7 +596,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
@@ -658,7 +660,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
       - The compact closed trigger now grows for large text, and its repaired static state was re-rendered and reviewed.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
@@ -724,7 +726,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
@@ -756,7 +758,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
       - Adjustable controls expose native slider flags and the appropriate value, enabled state, and adjustment actions.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
@@ -857,7 +859,7 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md

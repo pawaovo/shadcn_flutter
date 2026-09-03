@@ -51,12 +51,12 @@
       "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
       "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
     },
-    "p1_linux_canonical_status": "accepted_from_ci_run_33632807691",
+    "p1_linux_canonical_status": "accepted_from_ci_run_33736546039_followup_strict_comparison_pending",
     "p1_linux_canonical_sha256": {
-      "light": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
-      "dark": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe"
+      "light": "ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804",
+      "dark": "e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739"
     },
-    "p2_linux_canonical_status": "accepted_from_ci_run_33701530733",
+    "p2_linux_canonical_status": "accepted_from_ci_run_33736546039_followup_strict_comparison_pending",
     "p2_linux_missing_baseline_behavior": "export_review_candidate_and_fail_without_accepting_canonical",
     "p2_local_supplemental_platform": "macOS arm64",
     "p2_local_supplemental_status": "visually_accepted_2026-09-03",
@@ -66,10 +66,10 @@
       "dark": "6ae62ff7a1ce40df2759d10b13ba03a7fdf2d39ba9002e960b91be82c6a546eb"
     },
     "p2_linux_canonical_sha256": {
-      "light": "ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c",
-      "dark": "12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a"
+      "light": "3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196",
+      "dark": "42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19"
     },
-    "p2_linux_comparison_verified_run": 33707996401,
+    "p2_linux_comparison_verified_run": null,
     "p3_local_supplemental_status": "visually_accepted_macos_2026-09-03",
     "p3_local_supplemental_sha256": {
       "p3_content_dark_macos.png": "ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637",
@@ -77,18 +77,18 @@
       "p3_workspace_dark_macos.png": "52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51",
       "p3_workspace_light_macos.png": "14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51"
     },
-    "p3_linux_canonical_status": "accepted_from_ci_run_33723609480",
+    "p3_linux_canonical_status": "accepted_from_ci_run_33736546039_followup_strict_comparison_pending",
     "p3_linux_canonical_sha256": {
-      "p3_content_light.png": "7185fb90cc18f278236f88089effc30f42e789f37116944115d8c23267d0a432",
-      "p3_content_dark.png": "5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584",
-      "p3_workspace_light.png": "2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5",
-      "p3_workspace_dark.png": "71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9"
+      "p3_content_light.png": "cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e",
+      "p3_content_dark.png": "687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4",
+      "p3_workspace_light.png": "55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f",
+      "p3_workspace_dark.png": "2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93"
     },
     "release_readiness_refresh": {
       "verified_on": "2026-09-03",
       "macos_checks_passed": 12,
       "updated_supplemental_images": 8,
-      "linux_current_changes": "eight_changed_component_baselines_pending_ci_candidates_and_explicit_acceptance",
+      "linux_current_changes": "eight_candidates_accepted_from_33736546039_strict_followup_pending",
       "historical_baselines": "earlier_hashes_above_are_retained_for_their_original_implementation_runs",
       "current_supplemental_images": 10,
       "current_supplemental_sha256": {
@@ -103,7 +103,38 @@
         "p3_workspace_dark_macos.png": "ac4818a37a83bc1e22a3a328e108d4c7f8d4cee56c3aa790f716cf0a063f098a",
         "p3_workspace_light_macos.png": "1021c7707bc32dee70f19aad9550c5ae0cd6dd39b65b7b705cb9ba4e3cd4d6cf"
       },
-      "hash_source": "packages/beautiful_ai_ui/build/release_review/macos-golden-final-after.json"
+      "hash_source": "packages/beautiful_ai_ui/build/release_review/macos-golden-final-after.json",
+      "linux_acceptance_evidence": "docs/beautiful-ui/quality_evidence/2026-09-03-linux-golden-acceptance-33736546039.json",
+      "linux_accepted_sha256": {
+        "p1_components_light.png": "ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804",
+        "p1_components_dark.png": "e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739",
+        "p2_components_light.png": "3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196",
+        "p2_components_dark.png": "42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19",
+        "p3_content_light.png": "cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e",
+        "p3_content_dark.png": "687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4",
+        "p3_workspace_light.png": "55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f",
+        "p3_workspace_dark.png": "2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93"
+      }
+    },
+    "previous_linux_canonical_baselines_before_33736546039": {
+      "p1_linux_canonical_status": "accepted_from_ci_run_33632807691",
+      "p1_linux_canonical_sha256": {
+        "light": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
+        "dark": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe"
+      },
+      "p2_linux_canonical_status": "accepted_from_ci_run_33701530733",
+      "p2_linux_canonical_sha256": {
+        "light": "ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c",
+        "dark": "12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a"
+      },
+      "p2_linux_comparison_verified_run": 33707996401,
+      "p3_linux_canonical_status": "accepted_from_ci_run_33723609480",
+      "p3_linux_canonical_sha256": {
+        "p3_content_light.png": "7185fb90cc18f278236f88089effc30f42e789f37116944115d8c23267d0a432",
+        "p3_content_dark.png": "5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584",
+        "p3_workspace_light.png": "2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5",
+        "p3_workspace_dark.png": "71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9"
+      }
     }
   },
   "p1_journeys": {
@@ -166,7 +197,7 @@
     "implementation_status": "all_seven_exported_in_progress",
     "integrated_execution_status": "local_results_and_complete_final_remote_results_recorded",
     "remote_ci_status": "all_10_jobs_passed_run_33726848975_on_74178098705aa83b5452857aece6a3b10bb3ce4f",
-    "profile_release_performance": "historical_baseline_20260903T080855Z_passed_final_source_resample_pending"
+    "profile_release_performance": "historical_baseline_20260903T080855Z_passed_final_run_4_not_started_manual_unlock_required"
   },
   "p3_local_validation": {
     "verified_on": "2026-09-03",
@@ -246,7 +277,7 @@
     "all_registry_statuses": "in_progress",
     "gallery_implementations": 20,
     "registry_items": 27,
-    "package_tests_passed": 526,
+    "package_tests_passed": 528,
     "catalog_tests_passed": 19,
     "strict_analysis": "final_library_and_catalog_passed",
     "macos_golden_checks_passed": 12,
@@ -284,39 +315,70 @@
       "renderer": "Impeller_Metal_verified_from_native_timeline",
       "acceptance_limitations": "single_machine_run_product_budgets_repeatability_and_other_platform_or_device_evidence_open",
       "readme_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md",
-      "source_alignment": "predates_final_palette_and_muted_ticker_fixes",
-      "final_source_resample": "pending_separate_followup_evidence_commit",
+      "source_alignment": "historical_source_predates_palette_muted_ticker_and_hosted_adapter_fixes",
+      "final_source_resample": "run_4_not_started_waiting_for_user_manual_mac_unlock",
       "source_manifest_sha256": "ed8f40f37ddb6e276683e1bfba622d17e13deee272dd5e84af57281e2cbd9637"
     },
     "remote_ci": {
       "workflow": ".github/workflows/beautiful_ai_ui.yml",
       "configured_jobs": 12,
-      "status": "configured_pending_remote_execution_for_current_changes",
-      "new_native_steps": [
-        "macos",
-        "ios_simulator",
-        "windows"
-      ],
-      "new_browser_jobs": {
-        "firefox": "configured_pending",
-        "edge": "configured_pending"
+      "run_id": 33736546039,
+      "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039",
+      "commit": "19c80c17e5346f7415b52af9583ba6770cfbee50",
+      "status": "completed",
+      "conclusion": "failure",
+      "job_counts": {
+        "success": 9,
+        "failure": 2,
+        "skipped": 1
       },
-      "current_linux_goldens": "eight_changed_component_baselines_pending_ci_candidates_and_explicit_acceptance"
+      "all_jobs_passed": false,
+      "job_results": {
+        "Detect generated targets": "success",
+        "Build Android catalog": "success",
+        "Run Edge journey": "success",
+        "Run Firefox journey": "success",
+        "Run Chrome and Linux journeys": "success",
+        "Format, analyze, and test": "failure_eight_linux_golden_differences_only",
+        "Build Web catalog": "success_including_asset_audits",
+        "Run Android journey": "success",
+        "Build Apple catalogs": "failure_ios_simulator_app_launch_timeout",
+        "Build Linux catalog": "success",
+        "Build Windows catalog": "success_including_native_journey",
+        "Validate pub.dev package": "skipped_due_to_quality_dependency"
+      },
+      "apple_steps": {
+        "ios_no_codesign_release_build": "success",
+        "macos_release_build": "success",
+        "macos_native_journey": "success",
+        "select_and_boot_ios_simulator": "success",
+        "ios_simulator_journey": "failed_during_app_launch_after_xcode_compilation_before_widget_test",
+        "ios_journey_started_at": "2026-09-03T09:11:51Z",
+        "ios_journey_completed_at": "2026-09-03T09:32:04Z"
+      },
+      "new_browser_jobs": {
+        "firefox": "success",
+        "edge": "success"
+      },
+      "follow_up": "launcher_remediation_accepted_goldens_and_portable_changes_need_next_committed_tree_run",
+      "current_linux_goldens": "eight_candidates_accepted_followup_strict_comparison_pending"
     },
     "native_semantics_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-native-semantics.md",
-    "latest_frozen_source_wasm_release": "passed_after_final_palette_and_muted_ticker_fixes",
+    "latest_frozen_source_wasm_release": "passed_after_portable_hosted_adapter_and_notice_changes",
     "final_local_logs": {
-      "package_tests": "/tmp/release-final-package-tests.log",
-      "wasm_build": "/tmp/release-final-wasm-build.log"
+      "package_tests": "/tmp/release-portable-package-tests.log",
+      "wasm_build": "/tmp/release-portable-wasm-build.log",
+      "native_build": "/tmp/release-portable-native-build.log"
     },
     "final_visual_capture": {
       "images_reviewed": 49,
-      "renderer_manifest_sha256": "31612099bcb0a461d0748007528bb71642221d2a11d57d1af70136bf6f04f686",
+      "renderer_manifest_sha256": "c0f46b73679b5ee81b2e920371f6310a6acd37ffd3a9a2916262221b7cdd91c6",
       "source_inventory_entries": 249,
-      "source_inventory_fingerprint_sha256": "936fc4800a23a18b044c0be7a3a5aa69fa16073e4bee3ef07e1e1a17ed65349c",
+      "source_inventory_fingerprint_sha256": "27790be59b89b36743994b9cc141e7fd3ca922c9bd2c4218543b6151b1e14131",
       "fingerprint_format": "UTF-8 JSON with sorted keys, compact separators and no trailing newline",
-      "captured_at_utc": "2026-09-03T08:48:09.245071+00:00",
-      "source_alignment": "final_frozen_palette_and_muted_ticker_implementation"
+      "captured_at_utc": "2026-09-03T09:22:39.878578+00:00",
+      "source_alignment": "portable_hosted_adapter_source_pixels_unchanged_from_accepted_final_visuals",
+      "all_review_and_golden_pixels_unchanged_after_adapter_fix": true
     },
     "last_frozen_source_fixes": {
       "normal_ink_subtle": {
@@ -333,7 +395,30 @@
       "palette_regressions_added": 4,
       "muted_ticker_action_color_fix": "Duration.zero when TickerMode.valuesOf(context).enabled is false",
       "paint_regressions_added": 3,
-      "paint_regression_scope": "includes_real_1200dp_Flowchart_canvas_after_theme_change"
+      "paint_regression_scope": "includes_real_1200dp_Flowchart_canvas_after_theme_change",
+      "hosted_adapter": "private_adapter_verified_with_unchanged_hosted_0.0.54_atomic_theme_state_and_focus"
+    },
+    "latest_frozen_source_macos_release": "passed_after_portable_hosted_adapter_and_notice_changes",
+    "hosted_consumer": {
+      "status": "passed",
+      "evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-hosted-consumer.md",
+      "before_result": "docs/beautiful-ui/quality_evidence/hosted-consumer-before.json",
+      "after_result": "docs/beautiful-ui/quality_evidence/hosted-consumer-after.json",
+      "dependency": "unmodified_hosted_shadcn_flutter_0.0.54",
+      "hosted_runtime_files_matched": 209,
+      "isolated_cache_and_no_overrides": true,
+      "atomic_theme_observations": 12,
+      "complete_expected_notice_labels": 13,
+      "publication_notice_sha256": "30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7",
+      "generated_notices_sha256": "803026de97a191d81e842aedf1285d2daa52c68184f8a5ea4cae65d8d076995f",
+      "scope": "temporary_BAI_publication_surface_path_dependency_not_actual_pubdev_publication"
+    },
+    "external_execution_condition": {
+      "local_mac_session": "locked",
+      "required_user_action": "manual_unlock_required_by_Computer_Use",
+      "final_profile_run_4": "not_started",
+      "safari_post_ticker_visual_recheck": "not_completed",
+      "historical_evidence_substitution": false
     }
   }
 }

@@ -1779,5 +1779,14 @@
   ],
   "provenance_limitations": [
     "Radix original SVG release and Iconly conversion recipe are not recorded. The audited acquisition boundary is the exact attributed font in the pinned shadcn_flutter dependency, consistent with the asset policy requiring a version or hash; no exact original conversion is claimed."
-  ]
+  ],
+  "portable_notice": {
+    "package": "beautiful_ai_ui",
+    "notices": "packages/beautiful_ai_ui/NOTICES",
+    "original_license": "packages/beautiful_ai_ui/LICENSE",
+    "original_license_sha256": "1ae6f90c1a42f3b6c3049dd04c9608d83f5b52404b31f0c1e60343d2025f8fe3",
+    "require_original_license_prefix": true,
+    "dependency_notice_source": "packages/shadcn_flutter/NOTICES",
+    "reason": "The separately published beautiful_ai_ui package must carry the verified asset notices even when resolving unmodified hosted shadcn_flutter 0.0.54 without this forks NOTICES."
+  }
 }

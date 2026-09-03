@@ -15,24 +15,27 @@ stable release or mark any platform `Verified`.
 
 | Area | Accepted evidence for this engineering pass | Limit of the result |
 |---|---|---|
-| Library behavior and Semantics | 526 tests passed | Does not replace complete real screen-reader or physical-device workflows |
+| Library behavior and Semantics | 528 tests passed | Does not replace complete real screen-reader or physical-device workflows |
 | Catalog | 19 tests passed; library and Catalog strict analyzers passed | Counts belong to this integrated pass; older P3 evidence retains its historical counts |
-| macOS golden suite | 12 of 12 checks passed; ten current macOS image hashes recorded, including eight updated component images | Eight changed Linux component baselines await CI candidates and explicit review |
+| Golden baselines | macOS checks passed; all ten macOS images unchanged after the hosted adapter correction; eight Linux candidates from run `33736546039` accepted | A later strict Ubuntu comparison against the accepted bytes remains required |
 | Supplemental visual review | 49 images covering all 20 components individually reviewed | Two specific static profiles; the complete localization/state/motion matrix remains open |
 | Dependency fonts/icons | 43 source files and all 37 runtime declarations checked; full notices verified | Applies to the pinned inventory and inspected artifacts |
 | Other media | 266 transitive flag images and five original Web images verified in release artifacts | Original platform icons and media retain their separate source/hash inventory |
-| Generated licenses | Real Flutter `LicenseRegistry` probe verified 13 complete labels | Does not assert an exhaustive legal guarantee for every dependency |
+| Generated licenses | Workspace and independent hosted-consumer probes verified all 13 complete required labels; portable BAI notice delivery passed | BAI is still an unpublished publication-surface copy; dependency scope and artifact boundaries remain explicit |
 | Release builds and assets | Ordinary macOS, Web JavaScript, and Web Wasm builds and their strict asset/notice audits passed | New or independently generated artifacts require proportionate revalidation |
 | Native macOS interaction | Complete shared Catalog journey passed; native AX comparison succeeded without a Web-only compile flag | AX inspection is not a completed VoiceOver user workflow |
 | P3 native profile workloads | Historical baseline `20260903T080855Z` completed seven of seven scenarios, driver, and teardown | Final-source resampling after the palette/muted-ticker fixes is pending; product budgets remain open |
-| Final frozen-source Web build | Latest Wasm release build passed after the final fixes | New remote twelve-job verification is pending |
-| Expanded CI | Twelve jobs configured, including new native and browser journey coverage | The new remote workflow has not yet produced an accepted run for these changes |
+| Latest portable-source builds | Wasm and ordinary macOS release builds passed after the adapter/notice changes | Full remote validation of the next committed tree remains pending |
+| Expanded CI | Run `33736546039` completed: nine jobs succeeded, including browser/native journeys and builds/Web asset checks | Two jobs failed: quality on eight then-unaccepted goldens and Apple on iOS app-launch timeout; publish validation was skipped |
 
 The last completed implementation CI was
 [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
 on `74178098705aa83b5452857aece6a3b10bb3ce4f`, with all ten jobs passing.
-It predates this engineering pass. Its success is retained as history and is
-not substituted for the pending twelve-job verification of the current tree.
+It predates this engineering pass. The expanded twelve-job run
+[`33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
+on `19c80c17e5346f7415b52af9583ba6770cfbee50` now provides the partial
+results described below; neither run is presented as a full green result for
+the later portable-adapter/notice tree.
 
 ## Visual and interaction corrections
 
@@ -79,13 +82,16 @@ selection findings shown in its fixtures. Compact dark, expanded light,
 medium constraints, real Arabic/Hebrew translations, full state combinations,
 and transitions over time are still separate review dimensions. The final
 49-image renderer manifest SHA256 is
-`31612099bcb0a461d0748007528bb71642221d2a11d57d1af70136bf6f04f686`;
+`c0f46b73679b5ee81b2e920371f6310a6acd37ffd3a9a2916262221b7cdd91c6`;
 the 249-entry source inventory fingerprint is
-`936fc4800a23a18b044c0be7a3a5aa69fa16073e4bee3ef07e1e1a17ed65349c`.
+`27790be59b89b36743994b9cc141e7fd3ca922c9bd2c4218543b6151b1e14131`.
 The final ten macOS image hashes, including the eight changed component
-images, are recorded in `toolchain.json`. Linux's eight changed component
-baselines require CI candidates and explicit visual acceptance; they are not
-updated automatically.
+images, are recorded in `toolchain.json`. The private hosted-adapter correction
+changed no pixels in any of the 49 review images or golden images. Linux's
+eight changed component candidates from run `33736546039` have now been
+[explicitly reviewed and accepted](./2026-09-03-linux-golden-acceptance-33736546039.json).
+The accepted files preserve the reviewed CI bytes; a subsequent strict
+comparison remains required.
 
 ## Measured P3 workload evidence
 
@@ -94,10 +100,11 @@ The successful **historical native profile baseline** is
 run ID `20260903T080855Z`. It captured **4,524 independent `FrameTiming`
 samples and 480 process RSS samples** across all seven scenarios. Both the
 integration driver and finalized script exited 0 after teardown.
-Its recorded source fingerprint predates the final normal-text palette and
-muted-ticker fixes. A separate profile run of the final source is planned for
-the next evidence commit. The statistics below describe the historical
-baseline and are not presented as measurements of the final frozen source.
+Its recorded source fingerprint predates the final normal-text palette,
+muted-ticker, and hosted-adapter corrections. Final profile run 4 has not
+started: the local Mac session is locked, and Computer Use requires the user
+to unlock it manually. The statistics below remain historical measurements,
+not final-source results.
 
 The machine was an Apple M1 Pro MacBook Pro with 32 GiB memory and macOS
 15.7.9. Flutter 3.47.0 ran in profile mode with an Impeller/Metal surface,
@@ -155,38 +162,67 @@ Fresh macOS, JavaScript, and Wasm release checks are captured in
 They do not provide brand rights or certify every unrelated third-party
 package or future artifact.
 
-## Remote configuration awaiting execution
+## Independent publication boundary
 
-The [Beautiful AI UI workflow](../../../.github/workflows/beautiful_ai_ui.yml)
-now has twelve jobs. Existing platform-build and Chrome/Linux/Android journey
-coverage is extended with macOS, iOS simulator, and Windows native journeys
-inside the corresponding native jobs. Firefox and Microsoft Edge each have
-a dedicated browser journey job. Source and built-asset notice checks are
-also wired into the appropriate quality/Web steps.
+The [isolated hosted-consumer record](./2026-09-03-hosted-consumer.md) closes
+both observed publication-path gaps. The private adapter now provides atomic
+inherited themes with unmodified hosted `shadcn_flutter 0.0.54`, retaining
+consumer state, Search draft/selection, and focus through 12 immediate/75ms/
+175ms observations. BAI's own `NOTICES` delivers all 13 required complete
+texts without relying on the fork's sibling notice file.
 
-The new jobs and steps are **configured, pending remote execution**. No
-Firefox, Edge, iOS simulator, Windows native journey, or refreshed Linux
-golden result is claimed for this pass until its actual run is recorded.
-The successful local macOS journey remains separate from its new CI step.
+The consumer runs outside the repository with no workspace or dependency
+overrides and a fresh package cache. All 209 installed hosted runtime/source
+files match the public archive. Resolution, strict analysis, two integration/
+theme tests, and the real production-registry probe all passed. The BAI input
+is an isolated publication-surface copy; this is not a pub.dev publication or
+proof of every later version allowed by its dependency range.
+
+## Remote CI results observed for this pass
+
+The twelve-job [workflow](../../../.github/workflows/beautiful_ai_ui.yml)
+ran as [run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
+on `19c80c17e5346f7415b52af9583ba6770cfbee50`. Recorded successes include
+Firefox, Edge, the Chrome/Linux shared journeys, Android, Windows native and
+macOS native journeys, platform builds and Web asset/notice audits.
+
+GitHub's final API result is `completed/failure`: **nine successful jobs, two
+failed jobs, and one skipped job**. Quality failed only the eight changed
+Linux component goldens; their actual CI candidates were subsequently
+reviewed and accepted. The Apple job failed when the iOS simulator application
+launch timed out after about 20 minutes; Xcode compilation succeeded, but the
+widget test did not begin. Its iOS no-codesign build, macOS build, and macOS
+journey steps had already passed. Publish validation was skipped after its
+quality dependency failed.
+
+The simulator launcher diagnostics/configuration are being corrected for the
+next run. The accepted baselines and later portable adapter/notice changes
+also need their next committed-tree verification. No all-pass result is
+claimed for this first expanded run.
+
+## External execution condition
+
+The current local Mac session is locked. Computer Use explicitly requires
+manual user unlock before desktop interaction can resume. Final profile run
+4 has not started, and Safari's visual recheck after the TickerMode repair has
+not completed. These two tasks remain open because their desktop execution
+condition is unavailable; no historical profile or earlier Safari observation
+is substituted for the missing final-source evidence.
 
 ## Remaining stable-release gates
 
-- Verify a consumer outside this workspace against the hosted dependency.
-  Published `shadcn_flutter 0.0.54` exports the required APIs, but still
-  ignores `enableThemeAnimation: false` and lacks the fork's package-root
-  font/icon `NOTICES`. A sibling package's notices are not included when
-  publishing `beautiful_ai_ui` alone. Independent consumption therefore
-  still needs an internal compatibility/notice-delivery solution and an
-  isolated test; workspace builds and publish dry-run do not establish it.
-- Accept the current twelve-job remote run and resolve/review refreshed
-  Ubuntu golden evidence, retaining the explicit baseline-acceptance policy.
-- Capture and finalize a separate P3 profile run aligned to the final palette
-  and muted-ticker source. Keep `20260903T080855Z` as historical evidence.
+- Resolve the iOS simulator launch timeout and verify the next committed
+  tree, including a started/completed simulator journey, strict comparison
+  against the eight accepted Linux baselines, and dependent publish validation.
+- After manual unlock of the local Mac, start and finalize profile run 4
+  against the final source and complete the post-TickerMode Safari visual
+  recheck. Keep `20260903T080855Z` as historical evidence.
 - Complete physical-device checks and actual TalkBack, VoiceOver, Narrator,
   and Orca workflows, including focus, selection, clipboard, IME, and core
   task completion. Native AX tree availability alone does not close this gate.
-- Complete remaining browser coverage, including Safari and the actual
-  configured Firefox/Edge runs, together with applicable native smoke checks.
+- Complete remaining browser and applicable native smoke coverage beyond the
+  successful recorded Firefox/Edge journeys, including the outstanding Safari
+  final visual check and compatibility matrix.
 - Review remaining visual/localization combinations and temporal hover,
   focus, pressed, normal-motion, and reduced-motion behavior.
 - Define product frame and memory budgets, assess measured peaks against

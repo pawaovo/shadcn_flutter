@@ -50,10 +50,14 @@ entries:
     inventory: legal/dependency_assets.json
     audit_tool: tool/audit_dependency_assets.py
     evidence: docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+    notice_carriers:
+      - packages/beautiful_ai_ui/NOTICES
+      - packages/shadcn_flutter/NOTICES
     approval_gate: The recorded dependency hashes, complete package notices, and actual release bundle inventory must pass for the release candidate.
     notes:
       - Do not duplicate the files into beautiful_ai_ui without a separate asset record.
-      - Preserve upstream package license notices and verify Flutter's generated LicenseRegistry against the complete font and icon notices in packages/shadcn_flutter/NOTICES.
+      - Preserve upstream package license notices and verify Flutter's generated LicenseRegistry against the complete font and icon notices carried by both source packages.
+      - beautiful_ai_ui carries its own complete notices so hosted dependency consumers do not rely on this repository's sibling shadcn_flutter notice patch.
       - Current upstream package metadata lists RadixIcons, BootstrapIcons, LucideIcons, GeistSans, and GeistMono assets.
       - The runtime declares 34 Geist font files and three icon fonts; six additional source OTF files are inventoried but not declared into the Catalog runtime.
       - The exact inherited Radix font is pinned by source commit and hash; its original SVG conversion recipe is not reconstructed and is recorded as a provenance limitation.
@@ -77,7 +81,7 @@ entries:
       - These assets arrive through the pinned shadcn_flutter dependency graph; they are not copied into the Beautiful AI UI library.
       - All 266 scalable images are byte-for-byte matches to the fixed official package archive and total 2601667 bytes.
       - The package credits lipis/flag-icons without pinning an original SVG revision; this limitation is recorded without claiming that conversion was reproduced.
-      - Flutter's generated LicenseRegistry retains the country_flags notice and the flag-icons notice added through packages/shadcn_flutter/NOTICES.
+      - Flutter's generated LicenseRegistry retains the country_flags notice and the flag-icons notice carried by both beautiful_ai_ui and the local shadcn_flutter fork.
 
   - id: beautiful_ui_typography_equivalents
     source: Beautiful UI foundation design intent
@@ -120,9 +124,9 @@ entries:
       - Flutter 3.47.0 on Ubuntu 24.04 x64 with package-loaded Geist fonts for canonical fixtures accepted from CI run 33632807691.
     files:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_light.png
-        sha256: 82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8
+        sha256: ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark.png
-        sha256: 30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe
+        sha256: e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_light_macos.png
         sha256: d61f46b7729bd89c1c01d97270f31ca402d490b941d5e7362972c0f29fabfdd1
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark_macos.png
@@ -142,9 +146,9 @@ entries:
       - Flutter 3.47.0 on Ubuntu 24.04 x64 with package-loaded Geist fonts for canonical fixtures accepted from CI run 33701530733.
     files:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light.png
-        sha256: ddf4f13f053059645e734d640fb379416a4c8578927136a431997c351440864c
+        sha256: 3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark.png
-        sha256: 12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a
+        sha256: 42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light_macos.png
         sha256: 90b5012efaf5fe640ad2844b5a35773cbdeadcb2095252c04c02ce700bd25f5a
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark_macos.png
@@ -165,13 +169,13 @@ entries:
       - Flutter 3.47.0 on Ubuntu 24.04 x64 with package-loaded Geist fonts; canonical images accepted from CI run 33723609480.
     files:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_light.png
-        sha256: 7185fb90cc18f278236f88089effc30f42e789f37116944115d8c23267d0a432
+        sha256: cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_dark.png
-        sha256: 5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584
+        sha256: 687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_light.png
-        sha256: 2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5
+        sha256: 55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_dark.png
-        sha256: 71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9
+        sha256: 2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_light_macos.png
         sha256: 66febbc0067f16f735abb7f3000bcf9321613f5b6c7bf5676f198dcc739398d0
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_dark_macos.png

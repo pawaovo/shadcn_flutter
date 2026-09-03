@@ -89,11 +89,15 @@ Web integration uses `flutter drive`, a matching ChromeDriver, and the
 `integration_test` through `flutter test -d chrome`.
 
 The current local suite passed **19 Catalog tests** and strict Catalog
-analysis; the library passed 526 tests and its strict analyzer. The complete
-ordinary macOS journey also passed. CI has twelve configured jobs, including
-macOS/iOS simulator/Windows native journey steps and dedicated Firefox/Edge
-jobs. Those new remote executions are pending; a configured job is not a
-compatibility result.
+analysis; the library passed 528 tests and its strict analyzer. The complete
+ordinary macOS journey also passed. The first twelve-job
+[run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
+finished with nine successful jobs, two failures and one skip. Firefox/Edge,
+Chrome/Linux, Android and Windows journeys passed. Apple's macOS journey
+passed, but iOS simulator app launch timed out after compilation and before
+the test began. Quality failed only the eight then-unaccepted Linux goldens;
+their candidates have since been accepted, and publish validation was skipped.
+The next committed-tree verification remains required.
 
 The Catalog now uses independently drawn launcher/Web artwork. The exact
 source and generated files are recorded in
@@ -109,15 +113,17 @@ profile fixture and saves raw artifacts under `build/p3-profile/`. The historica
 completed all seven P3 workloads with 4,524 frame samples and 480 RSS samples
 on an M1 Pro/32 GiB machine at 1,728×963 logical pixels, DPR 2, 120 Hz. It
 records measured spikes and process-memory limitations. Run `20260903T080855Z`
-predates the final normal-text palette and muted-ticker changes. A separate
-final-source profile is pending; product budgets, repeatability, and other
+predates the final palette, muted-ticker and hosted-adapter changes. Final
+profile run 4 has not started: the local Mac is locked and Computer Use
+requires manual user unlock. Product budgets, repeatability and other
 platforms remain separate acceptance work.
 
-The final 49-image visual capture matches the frozen palette and muted-ticker
-source. It includes the stronger normal subtle-text/accent-text treatment and
-readable Flowchart actions after theme changes with muted tickers. The latest
-Wasm release build passed after those fixes; the new twelve-job CI workflow
-and eight changed Linux component baselines remain pending remote acceptance.
+The final 49-image source capture includes the hosted-adapter correction,
+which changed no reviewed image or golden pixels. Eight Linux component
+candidates from run `33736546039` were accepted. Latest portable-source Wasm
+and ordinary macOS release builds passed. Safari's visual recheck after the
+TickerMode fix is unfinished and also requires manual Mac unlock; the next
+CI run must verify accepted baselines and iOS launcher remediation.
 
 The [49-image review](../../docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md)
 and [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)

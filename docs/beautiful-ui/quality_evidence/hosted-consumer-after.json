@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-09-03T09:20:31.331485+00:00",
+  "passed": true,
+  "scope": "isolated public-dependency consumer gate; not a package publication",
+  "verification_script_sha256": "1a59501196b3091ee8bb5a855d239e78cc8c93c406a6195c90105564a6c05693",
+  "temporary_directory_retained": false,
+  "repository_head": "19c80c17e5346f7415b52af9583ba6770cfbee50",
+  "flutter_executable": "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/flutter",
+  "toolchain": {
+    "frameworkVersion": "3.47.0",
+    "channel": "stable",
+    "repositoryUrl": "https://github.com/flutter/flutter.git",
+    "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+    "frameworkCommitDate": "2026-08-11 11:53:49 -0700",
+    "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+    "engineCommitDate": "2026-08-11 16:38:36.000Z",
+    "engineContentHash": "59d54a2b2896a6bbf356c94b7fac7b9e235bdacd",
+    "engineBuildDate": "2026-08-11 10:18:15.653",
+    "dartSdkVersion": "3.13.0",
+    "devToolsVersion": "2.60.0",
+    "flutterVersion": "3.47.0"
+  },
+  "hosted_dependency": {
+    "package": "shadcn_flutter",
+    "version": "0.0.54",
+    "metadata_url": "https://pub.dev/api/packages/shadcn_flutter/versions/0.0.54",
+    "published": "2026-08-27T18:12:22.644515Z",
+    "archive_url": "https://pub.dev/api/archives/shadcn_flutter-0.0.54.tar.gz",
+    "archive_sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+    "root_notice_files": [
+      "LICENSE"
+    ],
+    "runtime_files_in_archive": 209
+  },
+  "publication_copy": {
+    "source": "/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui",
+    "copy_scope": "lib, pubspec.yaml, README.md, CHANGELOG.md, LICENSE, NOTICES when present",
+    "normalization": "Remove resolution: workspace from the temporary development-source copy only; hosted archives may retain this field.",
+    "removed_workspace_directives": 1,
+    "source_file_hashes": {
+      "CHANGELOG.md": "ef4af0592d0806ff0097c4da015e3410f091a26372070c01e079aae995df6800",
+      "LICENSE": "1ae6f90c1a42f3b6c3049dd04c9608d83f5b52404b31f0c1e60343d2025f8fe3",
+      "NOTICES": "30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7",
+      "README.md": "a1205e3d1bb0a4a0788a85796eb85f5dd5b2e98706d39d00071003a58f1fb7d8",
+      "lib/beautiful_ai_ui.dart": "01cecc1be1c59895cbd1d4820153b4e12ca295ca879277b46ffce0244cdab6c7",
+      "lib/src/components/approval_card.dart": "665933ef043c9c437074ec8d4b4f4df9903886092af274962c2a87c45bf5bcc2",
+      "lib/src/components/chat.dart": "d4fd295d03a55441f91006f104a7063b1288195bc112d0d616a075a35c9c5be8",
+      "lib/src/components/code_block.dart": "c6b28d1f0a577a2c7f4552fc9a064d675b58bf5fbffaa780866ac1aef2137d21",
+      "lib/src/components/context_cards.dart": "264b47d0e361e3bbe9ba0457ac537dd2a2ea4335cef426573f456873d0565dec",
+      "lib/src/components/diff_table.dart": "1e8a0bfb5e429516435f905fa915d55228f30d288f5dc316cf0e3c41d32a8d19",
+      "lib/src/components/filter_table.dart": "bd85468b2cc124a5bd081274fa9dbb6ed5eb54cd0450d5fa2e6add4d2a8a7462",
+      "lib/src/components/fine_tune_card.dart": "730472c96a9d4b4707ced8d61ac424f2bf00bb27bc765afda1ac093e404d7436",
+      "lib/src/components/flowchart.dart": "9c6b500e0c7c8d64cd99646daa4fd664c17def02ec7b367d9ca87aabc9a4c58f",
+      "lib/src/components/insight_cards.dart": "7d92688cbe7c228c5eca6938374fda3e8d4aa2e7ed6927e8e58490848ea7a4aa",
+      "lib/src/components/loading_state.dart": "e5247a5a4073f6242efe393870b036ac76912ac2216e9f1e63d14e00eab14925",
+      "lib/src/components/prompt_bar.dart": "3a07db5becff0598381aa396c940b0f11742f0f5756208736527c0f2f97d0b5d",
+      "lib/src/components/recommendation_card.dart": "4afa8212be5f64e7353e0b5330f91a58d7ab43a66a4a22660eec1895de3ea788",
+      "lib/src/components/records_table.dart": "4dffc08ad0550e8203a5d3c05b657c52616ff681c5e22b649cf26aba79297b2c",
+      "lib/src/components/search.dart": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "lib/src/components/selection_actions.dart": "028b159db6e32828f2dc799f9f46866bbd9209a1e37ba37cefea623b00a5bd73",
+      "lib/src/components/sidebar_nav.dart": "c2eb3539228efe4293c09cf78a0190c5d5280f9a0c931b5d74f758703603eadd",
+      "lib/src/components/streaming_text.dart": "ed604ba0c2cc991a8e42e841617bccdac644630596fe7f3a753b740474a55aae",
+      "lib/src/components/task_rows.dart": "2c3712edf8ea9c769e213469558d0443750d7b4e9d5186a1bf09d449a7f9683d",
+      "lib/src/components/thinking.dart": "f72e1e84619443dff5b94ec9f25329d083a39e910e9c1b25a68753a7cf3000d9",
+      "lib/src/components/tool_chips.dart": "04123ce7b3c11305665a4faceec6e679030a5df3060dc32905f3ec5e3d8756b2",
+      "lib/src/foundation/environment.dart": "bd544b79b3432766803fef5e30c6a66e908177a44d5850d94131861265cc11f6",
+      "lib/src/foundation/failure.dart": "089bd61f23dc08a866e157cd6ba50fde294c835ae6ad6dcab235edc22666b7dd",
+      "lib/src/foundation/layout.dart": "8d2deb6adf203e3af26cb41321c0259f1bd2a6e88deb4f350853d18ea5614d10",
+      "lib/src/foundation/motion.dart": "6ccfb6f699a953407bd587efd0917f8ce7d5747f7edc367fcb3a23488bd12164",
+      "lib/src/foundation/scope.dart": "a000a5436d23ba5f88c7e4902cc6fc5054f3da593ad5cb53adadbc4c377fb5b2",
+      "lib/src/foundation/theme.dart": "0ae3b4e3775e42de611a2a3b5d3921008c46e4a6e33ff6b3d03da408282bda5f",
+      "lib/src/implementation/controls/action_control.dart": "0c2b7a66e87d9dc1881e1f71c49c6ebbcbde00d42a56b1436c9bf043954804f5",
+      "lib/src/implementation/controls/text_selection.dart": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938",
+      "lib/src/implementation/shadcn/theme_adapter.dart": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b",
+      "lib/src/implementation/streaming/stream_content.dart": "0c42124075e7d252f9cce43df071a16017e17068f268c2335965142cfcfd9d0c",
+      "pubspec.yaml": "3f16e59a7cb3fa798e3a53fc5a5433313b6bc438047b492a51b67dc519c4d109"
+    },
+    "publication_surface_sha256": "366bc60888ef802704993e9ea8a76f1f70f680d942bc90cf9eca6a59036cad20",
+    "notice_sha256": "30ea1bec73647df83b3716f1107ab27a56c945ec4cc2693b8e1cdc13768854e7"
+  },
+  "fixture_sha256": {
+    "main.dart": "2ccaabc4e8d6f78fa57a18006389577efdca60aa0ede580da232e16bfc9f57fd",
+    "consumer_theme_test.dart": "14531cb9d1b8807289c20f87c0f30c45d422c7150fa56e4376013d34cd1f1377",
+    "license_registry_test.dart": "ac32070794ea98790811f6a2091e328ee0d0c9555abf348103a6102a63c5f234"
+  },
+  "expected_notice_labels": [
+    "Bootstrap Icons",
+    "Feather (Lucide-derived icons)",
+    "Geist",
+    "Geist Mono",
+    "Geist Mono legacy",
+    "Geist legacy",
+    "Lucide",
+    "Radix Icons",
+    "beautiful-ui",
+    "beautiful_ai_ui",
+    "country_flags",
+    "flag-icons",
+    "shadcn_flutter"
+  ],
+  "isolation": {
+    "consumer_inside_repository": false,
+    "consumer_dependency_overrides": false,
+    "consumer_workspace": false,
+    "beautiful_ai_ui_source": "temporary publication-surface path dependency (not yet a hosted publication)",
+    "pub_cache": "fresh disposable directory; existing cache is untouched",
+    "pubspec": "name: beautiful_ai_ui_hosted_consumer\npublish_to: none\nenvironment:\n  sdk: \">=3.13.0 <4.0.0\"\n  flutter: \">=3.47.0\"\ndependencies:\n  flutter:\n    sdk: flutter\n  beautiful_ai_ui:\n    path: ../package\n  shadcn_flutter: 0.0.54\ndev_dependencies:\n  flutter_test:\n    sdk: flutter\n"
+  },
+  "stages": [
+    {
+      "name": "resolve-public-dependencies",
+      "command": [
+        "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/flutter",
+        "pub",
+        "get"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 42.717,
+      "passed": true
+    },
+    {
+      "name": "consumer-analysis",
+      "command": [
+        "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/flutter",
+        "analyze",
+        "--no-pub",
+        "--fatal-infos",
+        "--fatal-warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.223,
+      "passed": true
+    },
+    {
+      "name": "public-integration-and-atomic-theme",
+      "command": [
+        "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/flutter",
+        "test",
+        "--no-pub",
+        "--reporter",
+        "expanded",
+        "test/consumer_theme_test.dart"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.813,
+      "passed": true
+    },
+    {
+      "name": "production-license-registry",
+      "command": [
+        "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/flutter",
+        "test",
+        "--no-pub",
+        "--reporter",
+        "expanded",
+        "test/license_registry_test.dart"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.854,
+      "passed": true
+    }
+  ],
+  "resolution": {
+    "shadcn_flutter_lock": {
+      "source": "hosted",
+      "version": "0.0.54",
+      "sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+      "url": "https://pub.dev"
+    },
+    "shadcn_flutter_package_root": "/private/var/folders/97/z6w3b4lj07b3sjrwc0pj3gcw0000gn/T/beautiful-ai-ui-hosted-consumer-sg68cteu/pub-cache/hosted/pub.dev/shadcn_flutter-0.0.54",
+    "beautiful_ai_ui_package_root": "/private/var/folders/97/z6w3b4lj07b3sjrwc0pj3gcw0000gn/T/beautiful-ai-ui-hosted-consumer-sg68cteu/package",
+    "runtime_files_matching_public_archive": 209,
+    "hosted_dependency_unmodified": true
+  },
+  "theme_probe_result": {
+    "passed": true,
+    "observations": [
+      {
+        "theme": "dark",
+        "high_contrast": false,
+        "phase": "immediate",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "dark",
+        "high_contrast": false,
+        "phase": "75ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "dark",
+        "high_contrast": false,
+        "phase": "175ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "dark",
+        "high_contrast": true,
+        "phase": "immediate",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "dark",
+        "high_contrast": true,
+        "phase": "75ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "dark",
+        "high_contrast": true,
+        "phase": "175ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": true,
+        "phase": "immediate",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": true,
+        "phase": "75ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": true,
+        "phase": "175ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": false,
+        "phase": "immediate",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": false,
+        "phase": "75ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      },
+      {
+        "theme": "light",
+        "high_contrast": false,
+        "phase": "175ms",
+        "state_controller_selection_focus_preserved": true,
+        "public_and_internal_inherited_theme_agree": true
+      }
+    ]
+  },
+  "license_probe_result": {
+    "passed": true,
+    "expected_complete_labels": [
+      "Bootstrap Icons",
+      "Feather (Lucide-derived icons)",
+      "Geist",
+      "Geist Mono",
+      "Geist Mono legacy",
+      "Geist legacy",
+      "Lucide",
+      "Radix Icons",
+      "beautiful-ui",
+      "beautiful_ai_ui",
+      "country_flags",
+      "flag-icons",
+      "shadcn_flutter"
+    ],
+    "missing_complete_labels": [],
+    "generated_registry_label_count": 127,
+    "production_binding": true,
+    "synthetic_license_entries": false
+  },
+  "generated_notices": {
+    "artifact": "build/unit_test_assets/NOTICES.Z",
+    "sha256": "803026de97a191d81e842aedf1285d2daa52c68184f8a5ea4cae65d8d076995f",
+    "complete_expected_labels": 13,
+    "missing_complete_labels": [],
+    "passed": true
+  },
+  "log_directory": "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/quality_evidence/hosted-consumer-after"
+}

@@ -2,11 +2,11 @@
   "schema": 1,
   "status": "visually_reviewed_for_the_listed_static_scenarios",
   "reviewed_on": "2026-09-03",
-  "method": "Each final PNG was opened with view_image, or matched SHA-256 exactly to a PNG opened earlier in this review. After the final frozen palette and muted-ticker fixes, six changed light high-contrast images were opened again; the other 43 images were byte-identical to previously inspected images.",
+  "method": "All 49 PNGs in the latest private-adapter compatibility refresh are byte-identical by SHA-256 to previously manually inspected images; no visual difference was accepted automatically. The preceding final-palette review opened six changed light high-contrast images again and reused 43 previously inspected hashes.",
   "renderer_manifest_path": "packages/beautiful_ai_ui/build/release_review/manifest.json",
-  "renderer_manifest_sha256": "31612099bcb0a461d0748007528bb71642221d2a11d57d1af70136bf6f04f686",
-  "captured_at_utc": "2026-09-03T08:48:09.245071+00:00",
-  "capture_git_head": "37a56e0e28c5a3dcadd16678a02c92037932fec2",
+  "renderer_manifest_sha256": "c0f46b73679b5ee81b2e920371f6310a6acd37ffd3a9a2916262221b7cdd91c6",
+  "captured_at_utc": "2026-09-03T09:22:39.878578+00:00",
+  "capture_git_head": "19c80c17e5346f7415b52af9583ba6770cfbee50",
   "capture_includes_uncommitted_source_changes": true,
   "platform": "macos",
   "host_os": "Version 15.7.9 (Build 24G830)",
@@ -82,7 +82,7 @@
     "packages/beautiful_ai_ui/lib/src/foundation/theme.dart": "0ae3b4e3775e42de611a2a3b5d3921008c46e4a6e33ff6b3d03da408282bda5f",
     "packages/beautiful_ai_ui/lib/src/implementation/controls/action_control.dart": "0c2b7a66e87d9dc1881e1f71c49c6ebbcbde00d42a56b1436c9bf043954804f5",
     "packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938",
-    "packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart": "7db0fa4d8eee63f578732134fa488592a02e11dd212b13c4e087850398476483",
+    "packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b",
     "packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart": "0c42124075e7d252f9cce43df071a16017e17068f268c2335965142cfcfd9d0c",
     "packages/beautiful_ai_ui/pubspec.yaml": "3f68fd605830d88cf334e534a7a5c1be64a6e26d2f96a91260d1b75db3bd8111",
     "packages/beautiful_ai_ui/test/release_review/p1_p2_scenarios.dart": "7461ba74359304d4c5670ce6589b7ca3cf49631adafbca794786d629df683463",
@@ -859,5 +859,18 @@
       "observation": "Seeded text selection, original/suggested text and Keep/Discard/Retry controls fit after the host-returned edit preview."
     }
   ],
-  "source_inventory_sha256": "936fc4800a23a18b044c0be7a3a5aa69fa16073e4bee3ef07e1e1a17ed65349c"
+  "source_inventory_sha256": "27790be59b89b36743994b9cc141e7fd3ca922c9bd2c4218543b6151b1e14131",
+  "post_adapter_verification": {
+    "capture_time": "2026-09-03T09:22:39.878578+00:00",
+    "manifest_sha256": "c0f46b73679b5ee81b2e920371f6310a6acd37ffd3a9a2916262221b7cdd91c6",
+    "all_49_match_previously_viewed_sha256": true,
+    "all_20_golden_hashes_unchanged": true,
+    "macos_strict_comparison": "12 / 12 passed without --update-goldens",
+    "source_diff": {
+      "packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart": {
+        "old": "7db0fa4d8eee63f578732134fa488592a02e11dd212b13c4e087850398476483",
+        "new": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b"
+      }
+    }
+  }
 }
