@@ -134,7 +134,15 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
   P3 execution evidence is recorded independently in
   [`quality_evidence/2026-09-03-p3-modules.md`](./quality_evidence/2026-09-03-p3-modules.md);
   passing P2 runs do not verify those later changes.
-- Widget and Semantics suites cover the P1 and P2 components at adaptive boundaries,
+- P3 implementation commit `a27de98e909fe64a59d4d0f4f3c760f34501efa2` passed every
+  platform build, Web JS/Wasm, and the full P1+P2+P3 Chrome, Linux/Xvfb, and
+  Android emulator journeys in [run `33723609480`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33723609480).
+  The four missing P3 Linux golden files were the only first-run failures.
+  Their generated candidates were visually accepted and registered for
+  ordinary comparison in the follow-up workflow. Local validation passed
+  457 package tests, 9 Catalog tests, 571 upstream tests and a zero-warning
+  publish dry-run. All 20 gallery components now have Flutter implementations.
+- Widget and Semantics suites cover P1, P2 and P3 at adaptive boundaries,
   200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
   paths.
 - Physical-device smoke passes and real TalkBack, VoiceOver, Narrator, and

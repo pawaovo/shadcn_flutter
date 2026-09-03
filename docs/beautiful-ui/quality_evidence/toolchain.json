@@ -70,7 +70,13 @@
       "p3_workspace_dark_macos.png": "52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51",
       "p3_workspace_light_macos.png": "14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51"
     },
-    "p3_linux_canonical_status": "pending_remote_capture_and_visual_acceptance"
+    "p3_linux_canonical_status": "accepted_from_ci_run_33723609480",
+    "p3_linux_canonical_sha256": {
+      "p3_content_light.png": "7185fb90cc18f278236f88089effc30f42e789f37116944115d8c23267d0a432",
+      "p3_content_dark.png": "5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584",
+      "p3_workspace_light.png": "2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5",
+      "p3_workspace_dark.png": "71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9"
+    }
   },
   "p1_journeys": {
     "chrome_local": "passed_complete_p1_interaction_path",
@@ -146,8 +152,19 @@
     "chrome_viewport": "1440x900 desktop DPR1",
     "web_javascript_release": "passed",
     "web_wasm_release": "passed",
-    "publish_dry_run": "pending_clean_commit",
+    "publish_dry_run": "passed_zero_warnings_2_mb",
     "upstream_tests_passed": 571,
-    "upstream_strict_analysis": "passed"
+    "upstream_strict_analysis": "passed",
+    "wasm_browser_review": "records_search_enabled_editable_no_errors_compact_adaptations_verified"
+  },
+  "p3_remote_validation": {
+    "run_id": 33723609480,
+    "commit": "a27de98e909fe64a59d4d0f4f3c760f34501efa2",
+    "platform_builds": "all_six_passed_including_web_js_wasm",
+    "chrome_journey": "passed",
+    "linux_xvfb_journey": "passed",
+    "android_emulator_journey": "passed",
+    "quality": "first_run_failed_only_four_missing_p3_goldens",
+    "publish_dry_run": "skipped_in_first_run_due_to_quality_dependency"
   }
 }
