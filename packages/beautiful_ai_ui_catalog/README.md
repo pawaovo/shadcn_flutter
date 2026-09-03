@@ -90,14 +90,15 @@ Web integration uses `flutter drive`, a matching ChromeDriver, and the
 
 The current local suite passed **19 Catalog tests** and strict Catalog
 analysis; the library passed 528 tests and its strict analyzer. The complete
-ordinary macOS journey also passed. The first twelve-job
-[run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
-finished with nine successful jobs, two failures and one skip. Firefox/Edge,
-Chrome/Linux, Android and Windows journeys passed. Apple's macOS journey
-passed, but iOS simulator app launch timed out after compilation and before
-the test began. Quality failed only the eight then-unaccepted Linux goldens;
-their candidates have since been accepted, and publish validation was skipped.
-The next committed-tree verification remains required.
+ordinary macOS journey also passed. The second twelve-job
+[run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
+finished with 11 successful jobs, one failure and no skips. Strict Linux
+goldens and publish validation passed, including the isolated hosted consumer
+and a zero-warning 3 MB dry-run. Apple release builds, macOS journey and
+simulator boot passed. Two of four launcher self-tests failed with cleanup
+`EPERM`, so the actual simulator build/journey did not begin. The implemented
+cleanup fix passes six local regression checks and actionlint; actual remote
+simulator execution remains pending. Earlier CI history stays in readiness.
 
 The Catalog now uses independently drawn launcher/Web artwork. The exact
 source and generated files are recorded in
@@ -123,7 +124,7 @@ which changed no reviewed image or golden pixels. Eight Linux component
 candidates from run `33736546039` were accepted. Latest portable-source Wasm
 and ordinary macOS release builds passed. Safari's visual recheck after the
 TickerMode fix is unfinished and also requires manual Mac unlock; the next
-CI run must verify accepted baselines and iOS launcher remediation.
+CI run must verify the launcher self-test fix and actual iOS simulator journey.
 
 The [49-image review](../../docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md)
 and [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)

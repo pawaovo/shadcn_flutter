@@ -1,12 +1,15 @@
 """Exercise console-start boundaries without macOS, an app, or a simulator."""
 
 import json
+import errno
 import os
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 
 from run_ios_catalog_journey import Journey, LoggedProcess, redact, service_uri
 
@@ -50,6 +53,50 @@ class IOSLaunchTests(unittest.TestCase):
         report = json.loads((self.path / "ios-journey.json").read_text())
         self.assertFalse(report["passed"])
         self.assertEqual(report["stages"][0]["exit_code"], 7)
+
+    def test_real_unreaped_zombie_group_closes_without_permission_failure(self):
+        process = LoggedProcess([sys.executable, "-c", "pass"], self.path / "zombie.log")
+        try:
+            deadline = time.monotonic() + 2
+            while time.monotonic() < deadline:
+                state = subprocess.check_output(
+                    ["/bin/ps", "-p", str(process.process.pid), "-o", "stat="],
+                    text=True, timeout=1,
+                ).strip()
+                if state.startswith("Z"):
+                    break
+                time.sleep(0.01)
+            self.assertTrue(state.startswith("Z"), state)
+            if sys.platform == "darwin":
+                with self.assertRaises(PermissionError):
+                    os.killpg(process.process.pid, 0)
+            process.close(grace=0.05)
+            self.assertTrue(process.process.stdout.closed)
+        finally:
+            process.process.wait(timeout=2)
+            process.close(grace=0.05)
+
+    def test_permission_failure_with_a_live_group_member_is_not_ignored(self):
+        command = (
+            "import os, signal, time\n"
+            "if os.fork() == 0:\n"
+            " signal.signal(signal.SIGTERM, signal.SIG_IGN)\n"
+            " print('live', flush=True)\n"
+            " time.sleep(30)\n"
+            "else:\n"
+            " time.sleep(0.05)\n"
+            " os._exit(0)\n"
+        )
+        process = LoggedProcess([sys.executable, "-u", "-c", command], self.path / "live.log")
+        self.assertEqual(process.lines.get(timeout=1).strip(), "live")
+        self.assertEqual(process.process.wait(timeout=1), 0)
+        try:
+            with patch("run_ios_catalog_journey.os.killpg", side_effect=PermissionError(errno.EPERM, "denied")):
+                with self.assertRaises(PermissionError):
+                    process.close(grace=0.05)
+            self.assertTrue(process.reader.is_alive())
+        finally:
+            process.close(grace=0.05)
 
     @unittest.skipUnless(hasattr(os, "fork"), "CLI process groups require POSIX")
     def test_exited_leader_does_not_hide_term_ignoring_child(self):

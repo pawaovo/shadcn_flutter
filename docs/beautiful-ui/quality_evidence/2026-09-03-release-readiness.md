@@ -17,7 +17,7 @@ stable release or mark any platform `Verified`.
 |---|---|---|
 | Library behavior and Semantics | 528 tests passed | Does not replace complete real screen-reader or physical-device workflows |
 | Catalog | 19 tests passed; library and Catalog strict analyzers passed | Counts belong to this integrated pass; older P3 evidence retains its historical counts |
-| Golden baselines | macOS checks passed; all ten macOS images unchanged after the hosted adapter correction; eight Linux candidates from run `33736546039` accepted | A later strict Ubuntu comparison against the accepted bytes remains required |
+| Golden baselines | macOS checks passed; eight accepted Linux candidates passed strict comparison in run `33741053163` | Future visual/source changes still require proportionate verification |
 | Supplemental visual review | 49 images covering all 20 components individually reviewed | Two specific static profiles; the complete localization/state/motion matrix remains open |
 | Dependency fonts/icons | 43 source files and all 37 runtime declarations checked; full notices verified | Applies to the pinned inventory and inspected artifacts |
 | Other media | 266 transitive flag images and five original Web images verified in release artifacts | Original platform icons and media retain their separate source/hash inventory |
@@ -25,17 +25,19 @@ stable release or mark any platform `Verified`.
 | Release builds and assets | Ordinary macOS, Web JavaScript, and Web Wasm builds and their strict asset/notice audits passed | New or independently generated artifacts require proportionate revalidation |
 | Native macOS interaction | Complete shared Catalog journey passed; native AX comparison succeeded without a Web-only compile flag | AX inspection is not a completed VoiceOver user workflow |
 | P3 native profile workloads | Historical baseline `20260903T080855Z` completed seven of seven scenarios, driver, and teardown | Final-source resampling after the palette/muted-ticker fixes is pending; product budgets remain open |
-| Latest portable-source builds | Wasm and ordinary macOS release builds passed after the adapter/notice changes | Full remote validation of the next committed tree remains pending |
-| Expanded CI | Run `33736546039` completed: nine jobs succeeded, including browser/native journeys and builds/Web asset checks | Two jobs failed: quality on eight then-unaccepted goldens and Apple on iOS app-launch timeout; publish validation was skipped |
+| Latest portable-source builds | Wasm/macOS releases and the second run's platform builds passed | Actual iOS simulator journey remains unexecuted in the second run |
+| Expanded CI | Run `33741053163` completed with 11 successful jobs, one failure and no skips; strict Linux goldens and publish/hosted-consumer gate passed | Apple failed in launcher self-test process-group cleanup; actual simulator build/journey steps were not reached |
 
-The last completed implementation CI was
+The earlier fully successful implementation CI was
 [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
 on `74178098705aa83b5452857aece6a3b10bb3ce4f`, with all ten jobs passing.
 It predates this engineering pass. The expanded twelve-job run
 [`33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
 on `19c80c17e5346f7415b52af9583ba6770cfbee50` now provides the partial
-results described below; neither run is presented as a full green result for
-the later portable-adapter/notice tree.
+results described below. The second expanded run
+[`33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
+on `896bcfe8fd6419382f21ba6a311d37f5f017d875` completed with 11 successful
+jobs and one Apple launcher-test failure. No full-green expanded run is claimed.
 
 ## Visual and interaction corrections
 
@@ -90,8 +92,8 @@ images, are recorded in `toolchain.json`. The private hosted-adapter correction
 changed no pixels in any of the 49 review images or golden images. Linux's
 eight changed component candidates from run `33736546039` have now been
 [explicitly reviewed and accepted](./2026-09-03-linux-golden-acceptance-33736546039.json).
-The accepted files preserve the reviewed CI bytes; a subsequent strict
-comparison remains required.
+The accepted files preserve the reviewed CI bytes, and their strict Ubuntu
+comparison passed in the second run `33741053163`.
 
 ## Measured P3 workload evidence
 
@@ -195,10 +197,26 @@ widget test did not begin. Its iOS no-codesign build, macOS build, and macOS
 journey steps had already passed. Publish validation was skipped after its
 quality dependency failed.
 
-The simulator launcher diagnostics/configuration are being corrected for the
-next run. The accepted baselines and later portable adapter/notice changes
-also need their next committed-tree verification. No all-pass result is
-claimed for this first expanded run.
+The second [run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
+on `896bcfe8fd6419382f21ba6a311d37f5f017d875` is also `completed/failure`,
+with **11 successful jobs, one failed job and no skipped jobs**. Quality now
+passes the strict Linux golden comparison. Publish validation passes both
+the real hosted-consumer gate and a 3 MB dry-run with zero warnings.
+
+Apple's iOS release build, macOS release build/journey, and simulator boot
+passed. Its bounded-launcher self-test ran four cases; two failed with
+`EPERM` during process-group cleanup. Actual simulator build/journey steps
+were skipped after that self-test, so this run does not verify simulator
+execution or resolve the earlier launch result. The cleanup portability fix
+is now implemented: six local regression checks and actionlint passed.
+Remote simulator execution remains pending.
+
+The downloaded cloud hosted-consumer artifact `9887907974` was independently
+checked: 209 public dependency files match, all 12 theme observations pass,
+and all 13 complete notice/registry texts are present. Its result SHA256 is
+`ff2e38c34a3eb304567c1e40ee0692bddc0f3d0a5d0fcc2191f524281b00ef40`;
+compact cloud metadata is retained in `toolchain.json` alongside the local
+before/after evidence.
 
 ## External execution condition
 
@@ -211,9 +229,9 @@ is substituted for the missing final-source evidence.
 
 ## Remaining stable-release gates
 
-- Resolve the iOS simulator launch timeout and verify the next committed
-  tree, including a started/completed simulator journey, strict comparison
-  against the eight accepted Linux baselines, and dependent publish validation.
+- Verify the locally implemented launcher fix remotely and execute the actual
+  iOS simulator journey. Keep the second run's successful
+  strict golden and publish/hosted-consumer checks as completed evidence.
 - After manual unlock of the local Mac, start and finalize profile run 4
   against the final source and complete the post-TickerMode Safari visual
   recheck. Keep `20260903T080855Z` as historical evidence.

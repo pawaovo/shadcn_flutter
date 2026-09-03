@@ -148,6 +148,16 @@ temporary copy of its publication surface used as a path dependency, not an
 already completed pub.dev publication. These results are recorded separately
 from the larger workspace license graph below.
 
+The cloud publish job in
+[run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
+independently repeated this boundary successfully. Downloaded artifact
+`9887907974` confirms 209 unchanged hosted files, 12 theme observations, and
+all 13 complete notice/registry labels; its result SHA256 is
+`ff2e38c34a3eb304567c1e40ee0692bddc0f3d0a5d0fcc2191f524281b00ef40`.
+The same job's publish dry-run reported 3 MB and zero warnings. Compact cloud
+metadata is retained in `toolchain.json`; the overall CI run still failed in
+the separate Apple launcher self-test and is not represented as all green.
+
 The additional country flag notice applies to 266 `.si` files supplied by
 `country_flags 4.1.2`, whose README attributes the SVGs to `lipis/flag-icons`.
 The flag-icons license commit identifies the notice source; it is not claimed

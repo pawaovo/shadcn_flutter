@@ -598,6 +598,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify the bounded simulator console launcher
+        if: needs.detect-targets.outputs.ios == 'true'
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_run_ios_catalog_journey.py'
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -704,10 +708,6 @@ jobs:
           fi
           xcrun simctl bootstatus "$SIMULATOR_UDID" -b
           flutter devices --device-timeout=30
-
-      - name: Verify the bounded simulator console launcher
-        if: needs.detect-targets.outputs.ios == 'true'
-        run: python3 -B -m unittest discover -s .github/scripts -p 'test_run_ios_catalog_journey.py'
 
       - name: Build iOS simulator journey
         if: needs.detect-targets.outputs.ios == 'true'

@@ -356,7 +356,7 @@ checks, and 49 supplemental images across all twenty modules were individually
 reviewed against the final frozen visual source. Ten current macOS image
 hashes are recorded. The hosted-adapter fix changed no review/golden pixels;
 the eight Linux candidates from run `33736546039` were reviewed and accepted.
-A follow-up strict Ubuntu comparison remains required.
+Their strict Ubuntu comparison passed in run `33741053163`.
 
 Filled actions derive a contrasting foreground from the theme. Selected
 actions have a distinct fill/border, Approval checks use drawn paths, and
@@ -420,12 +420,14 @@ locked and Computer Use requires manual unlock. The post-TickerMode Safari
 visual recheck is also unfinished. Historical measurements remain historical.
 
 The complete ordinary macOS Catalog journey and a native AX comparison have
-passed. The twelve-job run `33736546039` completed with nine successful jobs,
-two failures and one skip. Firefox/Edge, Chrome/Linux, Android and Windows
-journeys passed; the Apple job's macOS journey passed, but iOS app launch
-timed out before its widget test began. Quality's eight golden differences
-have accepted replacement baselines; publish validation was skipped. The
-next committed-tree run remains required. All six platforms are **Partial**,
+passed. The second twelve-job run `33741053163` completed with 11 successful
+jobs, one failure and no skips. Strict Linux goldens and publish validation
+passed, including the real hosted consumer and a zero-warning 3 MB dry-run.
+Apple builds/macOS journey/boot passed, but launcher self-test process-group
+cleanup failed before the actual iOS simulator build/journey began. That
+launcher fix passes six local regression checks and actionlint; actual
+remote simulator execution remains pending, and no all-pass run is claimed.
+The first run remains recorded in readiness. All six platforms are **Partial**,
 and all 27 registry entries remain `in_progress`.
 
 This is an independent implementation. It is not affiliated with or endorsed

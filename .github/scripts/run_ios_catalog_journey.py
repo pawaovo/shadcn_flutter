@@ -78,28 +78,43 @@ class LoggedProcess:
 
     def close(self, grace=5):
         # Stop the whole CLI process group, including log-reader/compiler children.
-        def group_exists():
+        def live_group_members():
             try:
-                os.killpg(self.process.pid, 0)
+                snapshot = subprocess.check_output(
+                    ["/bin/ps", "-axo", "pid=,pgid=,stat="], text=True, timeout=1,
+                )
+            except subprocess.SubprocessError as error:
+                raise RuntimeError("Cannot verify process group membership after EPERM") from error
+            members = []
+            for line in snapshot.splitlines():
+                pid, pgid, state = line.split()
+                if int(pgid) == self.process.pid and not state.startswith("Z"):
+                    members.append(int(pid))
+            return members
+
+        def signal_group(sig):
+            # Darwin skips zombies in killpg1 and can return EPERM when the
+            # remaining group has no signalable members. Reap our leader first;
+            # never treat EPERM as absence while a non-zombie member remains.
+            self.process.poll()
+            try:
+                os.killpg(self.process.pid, sig)
                 return True
             except ProcessLookupError:
                 return False
+            except PermissionError:
+                if live_group_members():
+                    raise
+                return False
 
-        try:
-            os.killpg(self.process.pid, signal.SIGTERM)
-        except ProcessLookupError:
-            pass
+        signal_group(signal.SIGTERM)
         deadline = time.monotonic() + grace
         while time.monotonic() < deadline:
-            self.process.poll()  # Reap the leader without mistaking it for the group.
-            if not group_exists():
+            if not signal_group(0):
                 break
             time.sleep(0.02)
-        if group_exists():
-            try:
-                os.killpg(self.process.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
+        if signal_group(0):
+            signal_group(signal.SIGKILL)
         self.process.wait(timeout=5)
         self.reader.join(timeout=2)
         if self.reader.is_alive():

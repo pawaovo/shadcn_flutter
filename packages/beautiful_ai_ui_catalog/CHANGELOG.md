@@ -11,8 +11,7 @@
 - Add native macOS/iOS simulator/Windows journey steps and dedicated
   Firefox/Edge jobs to the twelve-job CI configuration. The first run
   `33736546039` records nine successful jobs, two failures and one skip;
-  iOS simulator app launch and follow-up golden/publish verification remain
-  explicit acceptance work.
+  its exact outcomes remain historical evidence.
 - Add a separate opt-in P3 native profile harness with source/artifact hashes,
   independent frame data, RSS samples, renderer/viewport evidence, and an
   explicit final driver/teardown result. Historical macOS baseline
@@ -29,10 +28,14 @@
 - Re-export the final 49 visual-review images after the last text-contrast
   and hosted-adapter corrections. Preserve all image pixels, record ten
   current macOS golden hashes, and accept eight reviewed Linux candidates
-  from run `33736546039` for a later strict comparison.
+  from run `33736546039`; strict comparison passed in run `33741053163`.
 - Confirm the final 528-test library suite, 19-test Catalog suite, both strict
   analyzers, and latest portable-source Wasm/macOS release builds. Preserve
   the isolated hosted-consumer theme and 13-label notice-delivery evidence
   separately from workspace and remote results.
 - Record the outstanding post-TickerMode Safari visual check and final
   profile run as requiring the user to unlock the local Mac manually.
+- Record second CI `33741053163`: 11 successful jobs, one Apple launcher
+  self-test cleanup failure, no skips. Strict Linux goldens, cloud hosted
+  consumer and zero-warning publish preflight passed; actual simulator
+  execution remains pending after its skipped build/journey steps.

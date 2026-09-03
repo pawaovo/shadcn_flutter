@@ -32,9 +32,9 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33736546039; later portable-source verification remains separate |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33736546039 |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33736546039 |
+| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33741053163 |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33741053163 |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33741053163 |
 | Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Post-TickerMode visual recheck awaits manual Mac unlock; remaining compatibility evidence required |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
@@ -115,7 +115,7 @@ It keeps completed evidence separate from the remaining release gates:
   recorded. The final 49-image source inventory includes the hosted-adapter
   correction, with all image pixels unchanged. Eight Linux component
   candidates from run `33736546039` were explicitly reviewed and accepted;
-  follow-up strict comparison is still required.
+  their strict Ubuntu comparison passed in run `33741053163`.
 - Shared action foreground contrast and visible selected states were repaired;
   Approval uses drawn checks, Sidebar's compact trigger accommodates large
   text, and numeric/chart controls expose native slider flags. The accepted
@@ -156,8 +156,17 @@ It keeps completed evidence separate from the remaining release gates:
   successful jobs, two failed jobs, and one skipped job. Apple failed on the
   iOS simulator app-launch timeout after successful compilation, before the
   widget test began; its macOS journey passed. Publish validation was skipped
-  due to quality. Launcher remediation and the portable changes await the
-  next committed-tree verification.
+  due to quality. The next result below verifies the quality/publish and
+  portable changes; actual simulator execution remains open.
+- The second [run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
+  on `896bcfe8fd6419382f21ba6a311d37f5f017d875` completed with 11 successful
+  jobs, one failed job and no skips. Strict Linux goldens and publish validation
+  (including the real hosted consumer; 3 MB archive, zero warnings) passed.
+  Apple builds, macOS journey and simulator boot passed, but two of four
+  launcher self-tests failed with process-group cleanup `EPERM`; actual
+  simulator build/journey steps were not reached. The cleanup fix now passes
+  six local regression checks and actionlint; remote simulator execution
+  remains pending, and no all-pass result is claimed.
 - Safari's visual recheck after the TickerMode repair is unfinished and also
   requires the user to unlock the local Mac manually. Earlier Safari or
   profile observations are not promoted to final-source acceptance.
