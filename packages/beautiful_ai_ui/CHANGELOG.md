@@ -16,6 +16,25 @@ All notable changes to this package will be documented in this file.
 - Add normalized recoverable failure reporting at `BeautifulUiScope`, plus
   real Chrome, Android emulator, and Linux/Xvfb Catalog journeys
   (product/main, @pawaovo).
+- Add Streaming Text with exact Unicode snapshots, stable source citations,
+  selectable content, copy feedback, retry, and completion actions; keep the
+  stream renderer internal (product/main, @pawaovo).
+- Add the question-based Approval Card, Tool Chips, and capsules/list Task
+  Rows with stable identity, accessible disclosure, and host-owned execution
+  and submission (product/main, @pawaovo).
+- Add Chat with host-owned messages and send/stop actions, IME-safe multiline
+  drafts, response/conversation isolation, and preserved reading position
+  (product/main, @pawaovo).
+- Add adaptive Filter Table status filtering and a controlled Fine-tune Card
+  with bounded numeric entry, touch/keyboard/pointer/assistive adjustment,
+  layout selection, and inline type choices (product/main, @pawaovo).
+- Add P2 Catalog scenarios, dedicated widget/Semantics tests, shared journey
+  coverage, and normalized `approval`, `taskRetry`, `chat`, and `streaming`
+  failure operations (product/main, @pawaovo).
+- Add Flutter text-selection handles and localized clipboard menus with
+  shared touch, keyboard, and Semantics action handling; invalidate delayed
+  clipboard edits when a conversation or approval question is replaced
+  (product/main, @pawaovo).
 
 ### Fixed
 
@@ -23,6 +42,9 @@ All notable changes to this package will be documented in this file.
   policy remains consistent (commit 80db77a, @pawaovo).
 - Mark Search result and clear actions explicitly enabled for desktop
   accessibility bridges (product/main, @pawaovo).
+- Preserve editable drafts when a clipboard cut fails, and draw P2 interface
+  symbols as vectors to avoid missing glyphs in pinned fonts
+  (product/main, @pawaovo).
 
 ## [0.1.0-dev.1]
 

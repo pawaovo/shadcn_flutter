@@ -7,6 +7,18 @@ enum BeautifulUiOperation {
 
   /// A clipboard write failed.
   clipboard,
+
+  /// An approval submission failed.
+  approval,
+
+  /// A host-requested task retry failed.
+  taskRetry,
+
+  /// A chat send or stop action failed.
+  chat,
+
+  /// A streamed answer retry failed.
+  streaming,
 }
 
 /// A recoverable failure reported by a Beautiful AI UI module.

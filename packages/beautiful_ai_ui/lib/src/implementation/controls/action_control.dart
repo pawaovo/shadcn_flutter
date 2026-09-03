@@ -39,6 +39,7 @@ final class BeautifulActionControl extends StatefulWidget {
     this.selected,
     this.fullWidth = false,
     this.minHeight = 44,
+    this.maxLines = 2,
   });
 
   /// Visible action text.
@@ -71,6 +72,9 @@ final class BeautifulActionControl extends StatefulWidget {
   /// Minimum interactive height in logical pixels.
   final double minHeight;
 
+  /// Visible label line limit, or null to wrap the full label.
+  final int? maxLines;
+
   @override
   State<BeautifulActionControl> createState() => _BeautifulActionControlState();
 }
@@ -78,6 +82,7 @@ final class BeautifulActionControl extends StatefulWidget {
 final class _BeautifulActionControlState extends State<BeautifulActionControl> {
   var _hovered = false;
   var _focused = false;
+  var _hasFocus = false;
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +100,10 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
     final (background, foreground, border) = _colors(theme, enabled);
     final label = Text(
       widget.label,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
+      maxLines: widget.maxLines,
+      overflow: widget.maxLines == null
+          ? TextOverflow.clip
+          : TextOverflow.ellipsis,
       textAlign: TextAlign.center,
       style: theme.typography.label.copyWith(color: foreground, fontSize: 12.5),
     );
@@ -108,7 +115,10 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
           leading,
           SizedBox(width: theme.spacing.xs),
         ],
-        if (widget.fullWidth) Expanded(child: label) else label,
+        if (widget.fullWidth)
+          Expanded(child: label)
+        else
+          Flexible(child: label),
         if (widget.trailing case final trailing?) ...<Widget>[
           SizedBox(width: theme.spacing.xs),
           trailing,
@@ -119,6 +129,8 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
     return Semantics(
       button: true,
       enabled: enabled,
+      focusable: enabled,
+      focused: enabled && _hasFocus,
       expanded: widget.expanded,
       selected: widget.selected,
       excludeSemantics: true,
@@ -128,6 +140,7 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
         width: widget.fullWidth ? double.infinity : null,
         child: FocusableActionDetector(
           enabled: enabled,
+          onFocusChange: (value) => setState(() => _hasFocus = value),
           mouseCursor: enabled
               ? SystemMouseCursors.click
               : SystemMouseCursors.basic,
@@ -152,7 +165,7 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
               duration: duration,
               curve: theme.motion.outCurve,
               constraints: BoxConstraints(
-                minWidth: 44,
+                minWidth: widget.minHeight >= 48 ? 48 : 44,
                 minHeight: widget.minHeight,
               ),
               padding: EdgeInsets.symmetric(

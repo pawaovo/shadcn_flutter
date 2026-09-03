@@ -1,7 +1,8 @@
 # `beautiful_ai_ui` architecture
 
-Status: initial implementation contract
+Status: P0-P2 implementation contract; release verification remains incomplete
 Baseline date: 2026-09-02 (Asia/Shanghai)
+Updated: 2026-09-03 (Asia/Shanghai)
 
 ## Purpose
 
@@ -42,6 +43,7 @@ packages/
 │       ├── accessibility/
 │       └── implementation/
 │           ├── controls/
+│           ├── streaming/
 │           └── shadcn/
 └── beautiful_ai_ui_catalog/        # Non-published catalog and harness
 ```
@@ -102,6 +104,51 @@ The P1 modules demonstrate this ownership contract:
 - collapsed Thinking, Context, and Recommendation descendants leave both the
   focus and Semantics trees.
 
+The P2 modules extend the same boundary with explicit state lifetimes:
+
+| Module | Host-owned data and actions | Package-owned presentation |
+|---|---|---|
+| Streaming Text | Exact text parts, stable source IDs, lifecycle, feedback, source/follow-up callbacks, retry | Source disclosure, selection, de-duplicated clipboard/retry feedback |
+| Approval Card | Question/option snapshots, initial answers, asynchronous submission, visible errors | Answer drafts, question navigation, dismissal, pending and submitted presentation |
+| Tool Chips | Tool state, output, and changed-file snapshots | Run, tool, file-preview, and show-more disclosure |
+| Task Rows | Status, progress, details, and optional asynchronous retry | Per-task disclosure, focus, and pending retry feedback |
+| Chat | Message snapshots, response identity, selected context tab, send/stop actions, visible errors | Draft input, selection, focus, pending actions, transcript position, follow-latest behavior |
+| Filter Table | Immutable business rows and localized display data | Status filter initialized once; change callback is observational |
+| Fine-tune Card | Accepted settings and a callback for complete proposed settings | Uncommitted numeric drafts, validation, focus, type disclosure, comparison with the initial settings |
+
+`stream-text` is implemented only inside `implementation/streaming/`. The
+composite consumes exact snapshots immediately and uses Flutter selection
+infrastructure; it adds no synthetic typewriter delay, network client, or
+public primitive wrapper. Streaming source markers refer to stable source IDs.
+Full-size source controls are available in an inline disclosure after the
+generation settles. Source images and demo URLs are not redistributed.
+
+Asynchronous presentation is bounded by identity. Approval model changes,
+task snapshot changes, new streamed-answer IDs, and new chat conversation or
+response IDs invalidate obsolete completions. A successful task retry never
+changes host-owned execution status. Chat send success clears only the exact
+unedited draft that was submitted, so preparing the next draft while a send
+is pending is safe. Recoverable errors use `approval`, `taskRetry`, `chat`, or
+`streaming` operations through the existing root failure seam; streamed answer
+copy continues to use `clipboard`.
+
+`implementation/controls/text_selection.dart` centralizes Flutter touch
+selection handles and gestures, localized 48dp clipboard menus, and guarded
+copy/cut/paste. Keyboard and native Semantics actions use the same routine.
+Pending clipboard work is invalidated by editor ownership as well as text and
+selection changes, so an identical-text replacement conversation or question
+cannot receive an obsolete paste. Cut changes the draft only after the
+clipboard write succeeds; a failure preserves input and uses the root failure
+seam.
+
+Approval single-choice answers may auto-advance or submit when `autoAdvance`
+is enabled. Multiple-choice and custom answers require an explicit Continue
+or Send action. `initialAnswers`, Chat's `initialDraft`, and Filter Table's
+`initialStatus` seed state only at the documented identity boundary; they do
+not act as competing controlled values. Fine-tune settings instead follow a
+fully controlled convention: the host accepts an edit by supplying its new
+settings snapshot.
+
 ## Foundation and theming
 
 The foundation translates source intent into Flutter-native tokens rather than embedding CSS values in each component. It owns:
@@ -160,6 +207,14 @@ Accessibility is part of component behavior, not catalog metadata. Every public 
 
 Custom painters, charts, drag handles, streamed status, and selection overlays require explicit semantics; they do not inherit accessibility from the source DOM implementation.
 
+Streaming Text and Filter Table use changing native `liveRegion` labels for
+lifecycle/copy feedback and matching counts. These nodes do not also set
+`SemanticsRole.status`: Flutter 3.47 rejects combining that role with the live
+region flag, and native announcement behavior needs the live-region flag.
+Streamed answer and chat message bodies are outside live regions so incoming
+text does not request repeated full-answer announcements. Actual screen-reader
+behavior remains a release evidence gate beyond Semantics-tree tests.
+
 ## Catalog and harness
 
 The catalog is both a visual reference and an executable contract. It shows normal, hover, focus, pressed, disabled, loading, empty, error, long-content, RTL, high-contrast, and reduced-motion states across compact, medium, and expanded constraints.
@@ -172,6 +227,14 @@ cycles theme and motion policy, opens recommendation alternatives, filters
 Search, copies Code Block content through the injected catalog callback, and
 fails on framework exceptions. Widget tests remain the broader behavioral
 matrix; device journeys prove the packaged runners can execute the core path.
+
+P2 scenarios live in `beautiful_ai_ui_catalog/lib/p2_examples.dart` and cover
+streaming/complete/failed answers, the approval question workflow, tool/file
+disclosures, both task-row variants, message send/stop, status filtering, and
+controlled numeric/type changes. The shared journey now exercises these host
+callbacks too. The existence of that journey is separate from accepted
+execution evidence, tracked in
+[`quality_evidence/2026-09-03-p2-modules.md`](./quality_evidence/2026-09-03-p2-modules.md).
 
 ## Verification contract
 

@@ -107,10 +107,13 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
   builds for the Loading vertical slice.
 - The P1 shared Catalog journey passes locally through Flutter WebDriver on
   Chrome 152 with a matching ChromeDriver. The same test is wired for Ubuntu
-  Chrome, Linux/Xvfb, and Android emulator execution in CI. Run `33632807691`
-  passed Chrome and every P1 platform build; Linux/Xvfb and Android journey
-  fixes, including explicit enabled Semantics and keyboard Search selection,
-  await the follow-up run.
+  Chrome, Linux/Xvfb, and Android emulator execution in CI. Run
+  [`33634769448`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33634769448)
+  passed all ten jobs on commit `29dc443efe1bc4db67946024bf66f91d98f8128f`,
+  including all three journeys and every P1 platform build. This verifies the
+  explicit enabled Semantics and keyboard Search selection fixes on the
+  committed tree. Canonical P1 Linux goldens retain their accepted origin in
+  run `33632807691`.
 - Widget and Semantics suites cover the P1 components at adaptive boundaries,
   200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
   paths.

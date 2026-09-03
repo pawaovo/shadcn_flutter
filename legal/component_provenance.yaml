@@ -1,5 +1,5 @@
 schema_version: 1
-updated_at: "2026-09-02"
+updated_at: "2026-09-03"
 
 project:
   package: beautiful_ai_ui
@@ -106,7 +106,16 @@ items:
     source_type: registry:ui
     adaptation: internal_flutter_stream_rendering
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/atoms/StreamText.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart
+      - packages/beautiful_ai_ui/lib/src/components/streaming_text.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/streaming_text_test.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: loading-state
     source_path: public/r/loading-state.json
     source_type: registry:component
@@ -147,31 +156,90 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/StreamingText.tsx
+      - components/atoms/StreamText.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/streaming_text.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart
+      - packages/beautiful_ai_ui/test/widget/streaming_text_test.dart
+      - packages/beautiful_ai_ui/test/semantics/streaming_text_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
+    excluded_source_assets:
+      - Embedded SOURCE_IMAGES data-URI demonstration artwork
+      - Demo source URLs and remote artwork
   - name: approval-card
     source_path: public/r/approval-card.json
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/ApprovalCard.tsx
+      - components/atoms/Button.tsx
+      - components/primitives/GlideMenu.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/approval_card.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/approval_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/approval_card_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: tool-chips
     source_path: public/r/tool-chips.json
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/ToolChips.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/tool_chips.dart
+      - packages/beautiful_ai_ui/test/widget/tool_chips_test.dart
+      - packages/beautiful_ai_ui/test/semantics/tool_chips_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: task-rows
     source_path: public/r/task-rows.json
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/TaskRows.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/task_rows.dart
+      - packages/beautiful_ai_ui/test/widget/task_rows_test.dart
+      - packages/beautiful_ai_ui/test/semantics/task_rows_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: chat-composer
     source_path: public/r/chat-composer.json
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/ChatComposer.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/chat.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/chat_test.dart
+      - packages/beautiful_ai_ui/test/semantics/chat_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: prompt-bar
     source_path: public/r/prompt-bar.json
     source_type: registry:component
@@ -228,7 +296,17 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/FilterTable.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/filter_table.dart
+      - packages/beautiful_ai_ui/test/widget/filter_table_test.dart
+      - packages/beautiful_ai_ui/test/semantics/filter_table_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: sidebar-nav
     source_path: public/r/sidebar-nav.json
     source_type: registry:component
@@ -283,7 +361,18 @@ items:
     source_type: registry:component
     adaptation: public_flutter_composite
     phase: P2
-    implementation_status: not_started
+    implementation_status: in_progress
+    source_files:
+      - components/primitives/FineTuneCard.tsx
+      - components/primitives/GlideMenu.tsx
+      - app/globals.css
+    target_files:
+      - packages/beautiful_ai_ui/lib/src/components/fine_tune_card.dart
+      - packages/beautiful_ai_ui/test/widget/fine_tune_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/fine_tune_card_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    license_decision: adapted_under_beautiful_ui_mit
   - name: selection-actions
     source_path: public/r/selection-actions.json
     source_type: registry:component

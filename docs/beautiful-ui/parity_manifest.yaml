@@ -1,6 +1,6 @@
 schema_version: 1
 manifest_status: initial
-updated_at: "2026-09-02"
+updated_at: "2026-09-03"
 
 project:
   package: beautiful_ai_ui
@@ -137,8 +137,19 @@ items:
     source_type: registry:ui
     scope_kind: building_block
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: internal_stream_rendering_primitive
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart
+      - packages/beautiful_ai_ui/lib/src/components/streaming_text.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/streaming_text_test.dart
+    intentional_deviations:
+      - The source timer, blur tail, and caret are replaced by immediate rendering of exact caller-owned text snapshots.
+      - Text selection and its copy action use Flutter selection infrastructure behind the composite boundary; the primitive is not exported.
+      - Incoming chunks never make the full answer a live region.
+    open_items:
+      - real assistive-technology and platform text-selection evidence
 
   - registry_name: loading-state
     title: Loading State
@@ -203,45 +214,131 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Selectable content grows naturally; sources and actions wrap or use a sheet.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/streaming_text.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart
+      - packages/beautiful_ai_ui/test/widget/streaming_text_test.dart
+      - packages/beautiful_ai_ui/test/semantics/streaming_text_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - Exact Unicode text parts, lifecycle, feedback, and stable source IDs are caller-owned; no simulated token timer or network transport is bundled.
+      - Inline citations describe their source; expanded sources provide full-size touch and keyboard actions instead of tiny embedded links.
+      - Source artwork and demo URLs are omitted; host callbacks own source navigation, follow-ups, feedback, and retry.
+      - Clipboard and retry requests de-duplicate pending work and ignore obsolete completions after their generation or copy snapshot changes.
+      - Native live regions announce localized lifecycle and copy status without announcing every text chunk.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device text-selection evidence
+      - long-answer streaming and selection performance evidence
 
   - registry_name: approval-card
     title: Approval Card
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Primary actions remain reachable above the software keyboard.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/approval_card.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/approval_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/approval_card_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - Stable question and option IDs preserve local drafts through reordering and discard removed choices.
+      - Single-choice auto-advance is explicit and configurable; multiple-choice and custom answers require Continue or Send.
+      - Submission passes immutable answers to an asynchronous host callback, de-duplicates pending requests, and ignores stale model completions.
+      - Success follows a completed host callback; failures preserve editable drafts and report through the root failure seam.
+      - Keyboard navigation, IME-safe custom entry, and scrollable keyboard-constrained layouts replace source browser-specific behavior.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device keyboard evidence
+      - final normal and reduced-motion transition review
 
   - registry_name: tool-chips
     title: Tool Chips
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
-    adaptive_note: Details have tap and keyboard paths; compact overlays may become sheets.
+    adaptive_note: Details are inline disclosures with touch and keyboard paths at every width.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/tool_chips.dart
+      - packages/beautiful_ai_ui/test/widget/tool_chips_test.dart
+      - packages/beautiful_ai_ui/test/semantics/tool_chips_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - Caller-owned execution and output snapshots replace the scripted reveal timer.
+      - Stable operation and file IDs preserve disclosure through updates and reordering.
+      - Inline tool and file previews replace portal or hover-only details; Escape closes the focused panel and restores trigger focus.
+      - Added and removed lines use visible signs and semantic meaning; collapsed panels leave focus and Semantics traversal.
+      - The single source presentation has no artificial variant parameter.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology smoke evidence
+      - large-output layout and disclosure performance evidence
 
   - registry_name: task-rows
     title: Task Rows
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Labels wrap and progress is never communicated only by color.
+    variants:
+      - capsules
+      - list
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/task_rows.dart
+      - packages/beautiful_ai_ui/test/widget/task_rows_test.dart
+      - packages/beautiful_ai_ui/test/semantics/task_rows_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - Typed pending, running, completed, and failed snapshots replace simulated task progression.
+      - Stable task and detail IDs preserve disclosure and focus across reordering, resize, and variant changes.
+      - Optional host retry is de-duplicated and ignores obsolete snapshot completions; success never invents a task-state transition.
+      - Status, progress, and step have localized visible and semantic text; decorative indeterminate rings freeze under reduced motion.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology smoke evidence
+      - final normal and reduced-motion transition review
 
   - registry_name: chat-composer
     title: Chat
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Composer respects SafeArea, software keyboard, and scroll-to-latest behavior.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/chat.dart
+      - packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart
+      - packages/beautiful_ai_ui/test/widget/chat_test.dart
+      - packages/beautiful_ai_ui/test/semantics/chat_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - The host owns messages, response identity, context selection, and errors; no scripted replies or backend are included.
+      - Local draft, focus, and reading position survive snapshot and viewport changes; new conversation identity resets the draft and isolates old callbacks.
+      - Enter sends while Shift+Enter and software newline preserve multiline input; active IME composition never submits.
+      - Send and stop de-duplicate pending actions; send success clears only the unchanged submitted draft.
+      - New messages follow the bottom only when the reader was already there; otherwise an explicit latest action is available.
+      - Message bodies are readable without live token announcements; response and error status are announced separately.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device keyboard evidence
+      - long-transcript layout and scrolling performance evidence
 
   - registry_name: prompt-bar
     title: Prompt Bar
@@ -324,9 +421,24 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
-    adaptive_note: Filters wrap or scroll; dense rows may become a compact list.
+    adaptive_note: Compact and medium modes use wrapping cards; expanded mode uses four aligned columns.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/filter_table.dart
+      - packages/beautiful_ai_ui/test/widget/filter_table_test.dart
+      - packages/beautiful_ai_ui/test/semantics/filter_table_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - Counts derive from immutable caller rows and local status selection; initialStatus is read once and onFilterChanged only reports user changes.
+      - Hidden rows leave visible and Semantics trees immediately; matching counts use a native live-region label.
+      - Expanded tables expose table, header, row, and cell semantics while smaller layouts preserve every field in list items.
+      - The host supplies scrolling for long result sets; the component does not fetch, edit, sort, or virtualize business records.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology table and list navigation evidence
+      - documented practical row-count and layout performance evidence
 
   - registry_name: sidebar-nav
     title: Sidebar Nav
@@ -414,9 +526,24 @@ items:
     source_type: registry:component
     scope_kind: composite_component
     phase: P2
-    status: not_started
+    status: in_progress
     planned_disposition: public_composite
     adaptive_note: Compact stacks fields; numeric controls support touch, keyboard, and direct input.
+    implementation_paths:
+      - packages/beautiful_ai_ui/lib/src/components/fine_tune_card.dart
+      - packages/beautiful_ai_ui/test/widget/fine_tune_card_test.dart
+      - packages/beautiful_ai_ui/test/semantics/fine_tune_card_semantics_test.dart
+      - packages/beautiful_ai_ui/test/golden/p2_components_golden_test.dart
+      - packages/beautiful_ai_ui_catalog/lib/p2_examples.dart
+    intentional_deviations:
+      - The host owns accepted settings; every edit emits a complete proposed snapshot instead of silently accepting it locally.
+      - Stable field IDs and finite bounds are validated, including release builds; fractional steps are retained rather than rounded to integers.
+      - Numeric drafts preserve invalid and composing input, commit on Enter, Done, or blur, and restore the accepted value on Escape.
+      - Numeric adjustment supports 48dp buttons, arrow keys, Shift acceleration, horizontal pointer scrubbing, and assistive increase and decrease actions.
+      - Type choices open inline and restore focus on dismissal; the Edited marker compares accepted values with the initial mounted snapshot.
+    open_items:
+      - accepted P2 canonical golden and required remote platform evidence
+      - real assistive-technology and physical-device numeric input evidence
 
   - registry_name: selection-actions
     title: Selection Actions

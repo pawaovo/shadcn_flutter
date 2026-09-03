@@ -5,6 +5,8 @@ import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+part 'p2_examples.dart';
+
 SemanticsHandle? _semanticsHandle;
 
 const _thinkingItems = <BeautifulThinkingItem>[
@@ -390,6 +392,25 @@ final class _CatalogHomeState extends State<_CatalogHome> {
           lines: _sampleDiff,
         ),
       ),
+      const _CatalogStreamingExample(
+        key: ValueKey('streaming-complete-example'),
+        initialStatus: BeautifulStreamingStatus.complete,
+      ),
+      const _CatalogStreamingExample(
+        key: ValueKey('streaming-live-example'),
+        initialStatus: BeautifulStreamingStatus.streaming,
+      ),
+      const _CatalogStreamingExample(
+        key: ValueKey('streaming-failed-example'),
+        initialStatus: BeautifulStreamingStatus.failed,
+      ),
+      const _CatalogApprovalExample(),
+      const _CatalogToolExample(),
+      const _CatalogTaskExample(variant: BeautifulTaskRowsVariant.capsules),
+      const _CatalogTaskExample(variant: BeautifulTaskRowsVariant.list),
+      const _CatalogChatExample(),
+      const _CatalogFilterExample(),
+      const _CatalogFineTuneExample(),
     ];
   }
 }
@@ -449,7 +470,7 @@ final class _CatalogHeader extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final title = Text(
-              'Beautiful AI UI · P1 Catalog',
+              'Beautiful AI UI · P1 + P2 Catalog',
               style: theme.typography.label.copyWith(
                 color: theme.colors.ink,
                 fontSize: 15,

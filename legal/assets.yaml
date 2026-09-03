@@ -1,5 +1,5 @@
 schema_version: 1
-updated_at: "2026-09-02"
+updated_at: "2026-09-03"
 
 policy:
   default: deny_unregistered_assets
@@ -105,6 +105,24 @@ entries:
       - Generated entirely from project Dart code and inherited, license-tracked shadcn_flutter fonts.
       - These are deterministic test evidence, not product branding or source-project screenshots.
       - The Ubuntu fixtures were visually accepted from CI run 33632807691; macOS files remain supplemental cross-OS references.
+
+  - id: p2_component_test_goldens
+    source: Project-rendered Flutter golden fixtures
+    kind: generated_test_images
+    distribution_status: approved
+    distributable: true
+    generation_toolchains:
+      - Flutter 3.47.0 on macOS arm64 with package-loaded Geist fonts for supplemental local fixtures.
+    files:
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light_macos.png
+        sha256: efbd7c6b59ab835a67213f771e7ea8364a4223af4cca157c9a110a70513f9c87
+      - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark_macos.png
+        sha256: 6ae62ff7a1ce40df2759d10b13ba03a7fdf2d39ba9002e960b91be82c6a546eb
+    notes:
+      - Generated entirely from project Dart code and inherited, license-tracked fonts, at 1440 by 1400 pixels and DPR 1.
+      - Seven P2 components, both Task Rows variants, source and tool disclosures, light and dark themes, and disabled motion are represented.
+      - Supplemental macOS images were visually reviewed; Ubuntu canonical candidates must be captured and accepted separately.
+      - Symbols are drawn in Flutter to avoid unsupported Unicode glyphs in the pinned fonts.
 
   - id: flutter_generated_catalog_launcher_assets
     source: Flutter 3.47.0 flutter create platform templates

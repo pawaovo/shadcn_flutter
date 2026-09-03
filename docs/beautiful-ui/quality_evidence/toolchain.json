@@ -48,13 +48,49 @@
     "p1_linux_canonical_sha256": {
       "light": "82ddbd3a7826c42a91bf737eb73cb74104f2b04dff58d13fc016d9fc69b0e3c8",
       "dark": "30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe"
+    },
+    "p2_linux_canonical_status": "pending_remote_capture_and_visual_acceptance",
+    "p2_linux_missing_baseline_behavior": "export_review_candidate_and_fail_without_accepting_canonical",
+    "p2_local_supplemental_platform": "macOS arm64",
+    "p2_local_supplemental_status": "visually_accepted_2026-09-03",
+    "p2_local_supplemental_viewport": "1440x1400, DPR 1, motion disabled",
+    "p2_local_supplemental_sha256": {
+      "light": "efbd7c6b59ab835a67213f771e7ea8364a4223af4cca157c9a110a70513f9c87",
+      "dark": "6ae62ff7a1ce40df2759d10b13ba03a7fdf2d39ba9002e960b91be82c6a546eb"
     }
   },
   "p1_journeys": {
     "chrome_local": "passed_complete_p1_interaction_path",
     "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
-    "chrome_ci": "passed_run_33632807691",
-    "linux_xvfb_ci": "rerun_pending_keyboard_selection_path",
-    "android_emulator_ci": "rerun_pending_keyboard_selection_path"
+    "chrome_ci": "passed_run_33634769448",
+    "linux_xvfb_ci": "passed_run_33634769448",
+    "android_emulator_ci": "passed_run_33634769448",
+    "verified_commit": "29dc443efe1bc4db67946024bf66f91d98f8128f",
+    "verified_run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33634769448",
+    "verified_on": "2026-09-03"
+  },
+  "p2_journeys": {
+    "verified_on": "2026-09-03",
+    "chrome_local": "passed_complete_p1_and_p2_interaction_path",
+    "chrome_local_version": "152.0.7977.66",
+    "chromedriver_local_version": "152.0.7977.75",
+    "chrome_local_viewport": "1440x900 desktop, DPR 1 without mobile emulation",
+    "chrome_ci": "pending_first_p2_run",
+    "linux_xvfb_ci": "pending_first_p2_run",
+    "android_emulator_ci": "pending_first_p2_run"
+  },
+  "p2_local_validation": {
+    "verified_on": "2026-09-03",
+    "scoped_strict_analyzers": "passed_three_package_scopes",
+    "repository_root_analyzer": "41_pre_existing_infos_in_unchanged_packages_docs",
+    "package_suite": "passed_full_suite_with_linux_candidate_safety_test",
+    "catalog_tests_passed": 7,
+    "upstream_tests_passed": 571,
+    "web_javascript_release": "passed",
+    "web_wasm_release": "passed",
+    "wasm_browser_review": "chat_prompt_editable_no_error_logs",
+    "wasm_browser_limitation": "single_thread_skwasm_warning_from_localhost_isolation_headers",
+    "publish_dry_run": "pending_final_integrated_run",
+    "package_tests_passed": 257
   }
 }
