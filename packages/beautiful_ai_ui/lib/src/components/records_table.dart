@@ -660,6 +660,9 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
   late List<BeautifulRecordColumn> _columns;
   late List<BeautifulRecordTool> _tools;
   List<BeautifulRecordRow> _visible = <BeautifulRecordRow>[];
+  var _visibleOrderRevision = 0;
+  Map<String, int> _visiblePositions = <String, int>{};
+  final _headerCells = <String, ({Object signature, Widget child})>{};
   final _selected = <String>{};
   final _hidden = <String>{};
   final _pinned = <String>{};
@@ -774,6 +777,7 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
       _columns.where((column) => column.hideable).map((column) => column.id),
     );
     _widths.removeWhere((id, _) => !columnIds.contains(id));
+    _headerCells.removeWhere((id, _) => !columnIds.contains(id));
     if (_sort != null &&
         !_columns.any(
           (column) => column.id == _sort!.columnId && column.sortable,
@@ -801,6 +805,7 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
     _widths.clear();
     _rowIdentityKeys.clear();
     _cellActionKeys.clear();
+    _headerCells.clear();
     _sort = widget.initialSort;
     _searchController.text = widget.initialQuery;
     _wideOffset = 0;
@@ -817,6 +822,7 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
   }
 
   void _recompute() {
+    final previous = _visible;
     final query = _searchController.text.trim().toLowerCase();
     _visible = _rows
         .where(
@@ -863,6 +869,19 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
         if (order != 0) return sort.descending ? -order : order;
         return originalIndex[a.id]!.compareTo(originalIndex[b.id]!);
       });
+    }
+    // Reset lazy layout only when membership/order actually changes. A sort
+    // that leaves the rows in place must not discard every mounted cell.
+    var orderChanged = previous.length != _visible.length;
+    for (var i = 0; !orderChanged && i < _visible.length; i++) {
+      orderChanged = previous[i].id != _visible[i].id;
+    }
+    if (orderChanged) {
+      _visibleOrderRevision++;
+      _visiblePositions = <String, int>{
+        for (var i = 0; i < _visible.length; i++)
+          'records-row-${_visible[i].id}': i,
+      };
     }
     if (!_visible.any((row) => row.id == _detailId)) _detailId = null;
   }
@@ -1145,6 +1164,7 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
                   focusNode: _searchFocus,
                   onChanged: (value) {
                     setState(_recompute);
+                    if (_vertical.hasClients) _vertical.jumpTo(0);
                     widget.onQueryChanged?.call(value);
                   },
                 ),
@@ -1377,10 +1397,6 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
                 ),
           )
         : width;
-    final positions = <String, int>{
-      for (var i = 0; i < _visible.length; i++)
-        'records-row-${_visible[i].id}': i,
-    };
     return KeyedSubtree(
       key: const ValueKey<String>('records-viewport-state'),
       child: _surface(
@@ -1443,9 +1459,8 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
                       SliverList(
                         key: ValueKey<Object>((
                           'records-sliver',
-                          _sort?.columnId,
-                          _sort?.descending,
-                          _searchController.text,
+                          widget.id,
+                          _visibleOrderRevision,
                         )),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -1467,7 +1482,7 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
                           childCount: _visible.length,
                           findChildIndexCallback: (key) =>
                               key is ValueKey<String>
-                              ? positions[key.value]
+                              ? _visiblePositions[key.value]
                               : null,
                         ),
                       ),
@@ -1512,48 +1527,64 @@ final class _BeautifulRecordsTableState extends State<BeautifulRecordsTable> {
               ),
             ),
           ),
-          for (final column in columns)
-            SizedBox(
-              width: _widths[column.id],
-              child: Semantics(
-                container: true,
-                explicitChildNodes: true,
-                role: SemanticsRole.columnHeader,
-                label: column.label,
-                child: Column(
-                  children: <Widget>[
-                    _button(
-                      column.label,
-                      () => _openEditor(column),
-                      key: 'records-header-${column.id}',
-                      maxLines: 1,
-                      semanticLabel:
-                          '${widget.labels.configure}: ${column.label}',
-                      fullWidth: true,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        if (column.sortable)
-                          Expanded(child: _sortButton(column))
-                        else
-                          const Spacer(),
-                        _RecordsResize(
-                          label: '${widget.labels.resize}: ${column.label}',
-                          value: _widths[column.id]!,
-                          onChanged: (value) => setState(
-                            () => _widths[column.id] = value.clamp(144, 800),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          for (final column in columns) _headerCell(column),
         ],
       ),
     ),
   );
+
+  Widget _headerCell(BeautifulRecordColumn column) {
+    final selected = _sort?.columnId == column.id;
+    final signature = (
+      column,
+      _widths[column.id],
+      widget.labels,
+      selected,
+      selected && _sort!.descending,
+    );
+    final cached = _headerCells[column.id];
+    if (cached?.signature == signature) return cached!.child;
+    // Only the changed property's controls need updating for a sort/resize.
+    // Inherited theme, direction and text scale still update their descendants.
+    final child = SizedBox(
+      width: _widths[column.id],
+      child: Semantics(
+        container: true,
+        explicitChildNodes: true,
+        role: SemanticsRole.columnHeader,
+        label: column.label,
+        child: Column(
+          children: <Widget>[
+            _button(
+              column.label,
+              () => _openEditor(column),
+              key: 'records-header-${column.id}',
+              maxLines: 1,
+              semanticLabel: '${widget.labels.configure}: ${column.label}',
+              fullWidth: true,
+            ),
+            Row(
+              children: <Widget>[
+                if (column.sortable)
+                  Expanded(child: _sortButton(column))
+                else
+                  const Spacer(),
+                _RecordsResize(
+                  label: '${widget.labels.resize}: ${column.label}',
+                  value: _widths[column.id]!,
+                  onChanged: (value) => setState(
+                    () => _widths[column.id] = value.clamp(144, 800),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+    _headerCells[column.id] = (signature: signature, child: child);
+    return child;
+  }
 
   Widget _identity(BeautifulUiThemeData theme, BeautifulRecordRow row) =>
       KeyedSubtree(

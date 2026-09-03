@@ -47,7 +47,7 @@ Future<void> main() async {
     final elapsed = Stopwatch()..start();
     while (true) {
       final values = await driver.script(
-        r'return {stage: globalThis.__beautifulInputAcceptance || null, result: window.$flutterDriverResult};',
+        r'return {stage: window.__beautifulInputAcceptance || null, result: window.$flutterDriverResult};',
       ) as Map;
       final encoded = values['result'];
       if (encoded is String) {
@@ -85,7 +85,7 @@ Future<void> main() async {
           );
           clicked.add(id);
           await driver.script(
-            'globalThis.__beautifulInputAcknowledgement = arguments[0]; return true;',
+            'window.__beautifulInputAcknowledgement = arguments[0]; return true;',
             <Object?>[id],
           );
         }

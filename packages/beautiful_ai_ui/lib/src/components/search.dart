@@ -159,7 +159,13 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
 
   late String _query;
   late List<BeautifulSearchItem> _items;
-  late Map<String, List<String>> _keywordsById;
+  late Map<String, List<String>> _searchTextById;
+  String? _filteredQuery;
+  List<BeautifulSearchItem>? _filteredCache;
+  Object? _measurementInputs;
+  final Map<(String, String?, String?), double> _rowMeasurements = {};
+  final Map<String, (double, double)> _resultOffsets = {};
+  double _resultsExtent = 0;
   String? _highlightedId;
   String? _focusedResultId;
   var _fieldFocused = false;
@@ -175,6 +181,7 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
       debugLabel: 'BeautifulSearch field',
       onKeyEvent: _handleFieldKeyEvent,
     )..addListener(_handleFieldFocusChanged);
+    PaintingBinding.instance.systemFonts.addListener(_handleFontsChanged);
   }
 
   @override
@@ -193,16 +200,28 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
 
   void _takeItemsSnapshot() {
     _items = List<BeautifulSearchItem>.unmodifiable(widget.items);
-    _keywordsById = Map<String, List<String>>.unmodifiable(
+    _searchTextById = Map<String, List<String>>.unmodifiable(
       <String, List<String>>{
         for (final item in _items)
-          item.id: List<String>.unmodifiable(item.keywords),
+          item.id: <String>[
+            item.title.toLowerCase(),
+            if (item.subtitle != null) item.subtitle!.toLowerCase(),
+            if (item.group != null) item.group!.toLowerCase(),
+            for (final keyword in item.keywords) keyword.toLowerCase(),
+          ],
       },
     );
+    _filteredQuery = null;
+    _filteredCache = null;
+  }
+
+  void _handleFontsChanged() {
+    if (mounted) setState(_rowMeasurements.clear);
   }
 
   @override
   void dispose() {
+    PaintingBinding.instance.systemFonts.removeListener(_handleFontsChanged);
     _fieldFocusNode
       ..removeListener(_handleFieldFocusChanged)
       ..dispose();
@@ -344,11 +363,27 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
       return;
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) {
+      if (!mounted || _highlightedId != id) {
         return;
       }
       final targetContext = _resultKeys[id]?.currentContext;
       if (targetContext == null) {
+        // An arbitrary keyboard target (including the first ArrowUp) may be
+        // outside the lazy viewport. Exact measured offsets reveal it without
+        // requiring all preceding result widgets to exist.
+        final offsets = _resultOffsets[id];
+        if (offsets == null || !_resultsScrollController.hasClients) return;
+        final position = _resultsScrollController.position;
+        final target = offsets.$1 < position.pixels
+            ? offsets.$1
+            : offsets.$2 - position.viewportDimension;
+        _resultsScrollController.jumpTo(
+          target.clamp(
+            0,
+            math.max(0, _resultsExtent - position.viewportDimension),
+          ),
+        );
+        _ensureHighlightedVisible();
         return;
       }
       final duration = _motionDuration(
@@ -365,30 +400,20 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
   }
 
   List<BeautifulSearchItem> _filteredItems() {
-    if (_query.isEmpty) {
-      return _items.take(5).toList(growable: false);
+    if (_filteredQuery == _query && _filteredCache != null) {
+      return _filteredCache!;
     }
     final needle = _query.toLowerCase();
-    return _items
-        .where((item) => _matches(item, needle))
-        .toList(growable: false);
-  }
-
-  bool _matches(BeautifulSearchItem item, String needle) {
-    if (item.title.toLowerCase().contains(needle)) {
-      return true;
-    }
-    final subtitle = item.subtitle;
-    if (subtitle != null && subtitle.toLowerCase().contains(needle)) {
-      return true;
-    }
-    final group = item.group;
-    if (group != null && group.toLowerCase().contains(needle)) {
-      return true;
-    }
-    return _keywordsById[item.id]!.any(
-      (keyword) => keyword.toLowerCase().contains(needle),
-    );
+    _filteredQuery = _query;
+    return _filteredCache = _query.isEmpty
+        ? _items.take(5).toList(growable: false)
+        : _items
+              .where(
+                (item) => _searchTextById[item.id]!.any(
+                  (text) => text.contains(needle),
+                ),
+              )
+              .toList(growable: false);
   }
 
   @override
@@ -602,26 +627,165 @@ final class _BeautifulSearchState extends State<BeautifulSearch> {
       return SizedBox(height: theme.spacing.sm);
     }
     final maxHeight = mode == BeautifulLayoutMode.compact ? 320.0 : 240.0;
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: maxHeight),
-      child: SingleChildScrollView(
-        controller: _resultsScrollController,
-        padding: EdgeInsets.all(theme.spacing.xs),
-        child: Semantics(
-          container: true,
-          explicitChildNodes: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              for (var index = 0; index < items.length; index++) ...<Widget>[
-                if (index > 0) const SizedBox(height: 1),
-                _buildResult(context, theme, items[index], index),
+    // Keep the compact default/unique-match layout unchanged. Only a larger
+    // result set needs extent measurement and lazy row construction.
+    if (items.length <= 5) {
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxHeight),
+        child: SingleChildScrollView(
+          controller: _resultsScrollController,
+          padding: EdgeInsets.all(theme.spacing.xs),
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                for (var index = 0; index < items.length; index++) ...<Widget>[
+                  if (index > 0) const SizedBox(height: 1),
+                  _buildResult(context, theme, items[index], index),
+                ],
               ],
-            ],
+            ),
           ),
         ),
-      ),
+      );
+    }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final extents = _measureResults(
+          context,
+          theme,
+          items,
+          constraints.maxWidth,
+        );
+        return SizedBox(
+          height: math.min(maxHeight, _resultsExtent),
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            child: ListView.builder(
+              controller: _resultsScrollController,
+              primary: false,
+              padding: EdgeInsets.all(theme.spacing.xs),
+              itemCount: items.length,
+              itemExtentBuilder: (index, _) => extents[index],
+              findChildIndexCallback: (key) {
+                final index = items.indexWhere(
+                  (item) => ValueKey(item.id) == key,
+                );
+                return index < 0 ? null : index;
+              },
+              itemBuilder: (context, index) => Padding(
+                key: ValueKey(items[index].id),
+                padding: EdgeInsets.only(top: index == 0 ? 0 : 1),
+                child: _buildResult(context, theme, items[index], index),
+              ),
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  List<double> _measureResults(
+    BuildContext context,
+    BeautifulUiThemeData theme,
+    List<BeautifulSearchItem> items,
+    double width,
+  ) {
+    final defaults = DefaultTextStyle.of(context);
+    TextStyle resolve(TextStyle style) {
+      if (style.inherit) style = defaults.style.merge(style);
+      if (MediaQuery.boldTextOf(context)) {
+        style = style.merge(const TextStyle(fontWeight: FontWeight.bold));
+      }
+      return style.merge(
+        TextStyle(
+          height: MediaQuery.maybeLineHeightScaleFactorOverrideOf(context),
+          letterSpacing: MediaQuery.maybeLetterSpacingOverrideOf(context),
+          wordSpacing: MediaQuery.maybeWordSpacingOverrideOf(context),
+        ),
+      );
+    }
+
+    final titleStyle = resolve(theme.typography.label);
+    final captionStyle = resolve(theme.typography.caption);
+    final direction = Directionality.of(context);
+    final scaler = MediaQuery.textScalerOf(context);
+    final locale = Localizations.maybeLocaleOf(context);
+    final textAlign = defaults.textAlign ?? TextAlign.start;
+    final heightBehavior =
+        defaults.textHeightBehavior ??
+        DefaultTextHeightBehavior.maybeOf(context);
+    final textWidth = math.max(
+      0.0,
+      width - (theme.spacing.xs + theme.spacing.sm) * 2,
+    );
+    final inputs = (
+      titleStyle,
+      captionStyle,
+      direction,
+      scaler,
+      locale,
+      textAlign,
+      heightBehavior,
+      defaults.textWidthBasis,
+      textWidth,
+      theme.spacing.sm,
+    );
+    if (_measurementInputs != inputs) {
+      _measurementInputs = inputs;
+      _rowMeasurements.clear();
+    }
+    TextPainter? painter;
+    double measure(String text, TextStyle style, int lines) {
+      painter ??= TextPainter(
+        textDirection: direction,
+        textAlign: textAlign,
+        textScaler: scaler,
+        locale: locale,
+        textWidthBasis: defaults.textWidthBasis,
+        textHeightBehavior: heightBehavior,
+        ellipsis: '\u2026',
+      );
+      painter!
+        ..text = TextSpan(text: text, style: style)
+        ..maxLines = lines
+        ..layout(maxWidth: textWidth);
+      return painter!.height;
+    }
+
+    final extents = <double>[];
+    _resultOffsets.clear();
+    var offset = theme.spacing.xs;
+    for (var index = 0; index < items.length; index++) {
+      final item = items[index];
+      final key = (item.title, item.subtitle, item.group);
+      var height = _rowMeasurements[key];
+      if (height == null) {
+        height = measure(item.title, titleStyle, 2);
+        if (item.subtitle?.isNotEmpty ?? false) {
+          height += measure(item.subtitle!, captionStyle, 2);
+        }
+        if (item.group?.isNotEmpty ?? false) {
+          height += measure(item.group!, captionStyle, 1);
+        }
+        height = math.max(48.0, height + theme.spacing.sm * 2);
+        // Bound retained query/layout history independently of result count.
+        if (_rowMeasurements.length >= 4096) {
+          _rowMeasurements.remove(_rowMeasurements.keys.first);
+        }
+        _rowMeasurements[key] = height;
+      }
+      final gap = index == 0 ? 0.0 : 1.0;
+      _resultOffsets[item.id] = (offset + gap, offset + gap + height);
+      extents.add(height + gap);
+      offset += height + gap;
+    }
+    painter?.dispose();
+    _resultsExtent = offset + theme.spacing.xs;
+    return extents;
   }
 
   Widget _buildResult(
@@ -853,13 +1017,17 @@ final class _SearchGlyphPainter extends CustomPainter {
   }
 }
 
-final class _SearchActionState extends State<_SearchAction> {
+final class _SearchActionState extends State<_SearchAction>
+    with AutomaticKeepAliveClientMixin<_SearchAction> {
   late final FocusNode _focusNode = FocusNode(
     debugLabel: 'BeautifulSearch action: ${widget.semanticLabel}',
   );
   var _hovered = false;
   var _focused = false;
   var _showFocusHighlight = false;
+
+  @override
+  bool get wantKeepAlive => _focused;
 
   @override
   void dispose() {
@@ -869,6 +1037,7 @@ final class _SearchActionState extends State<_SearchAction> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final highlighted = widget.selected || _hovered || _showFocusHighlight;
     return Semantics(
       container: true,
@@ -906,6 +1075,7 @@ final class _SearchActionState extends State<_SearchAction> {
           onFocusChange: (value) {
             if (_focused != value) {
               setState(() => _focused = value);
+              updateKeepAlive();
             }
             widget.onFocusChanged?.call(value);
           },

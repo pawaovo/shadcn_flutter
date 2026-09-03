@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "budget_id": "engineering_budget_v1",
+  "approval_status": "engineering_default_not_product_approved",
+  "all_platform_release_accepted": false,
+  "frame_budget": {
+    "basis": "1000000 / observed_display_refresh_rate_hz",
+    "build_p95_max_frame_intervals": 1,
+    "raster_p95_max_frame_intervals": 1,
+    "build_or_raster_over_interval_max_fraction": 0.01,
+    "build_max_frame_intervals": 2,
+    "raster_max_frame_intervals": 2,
+    "total_span_p95_max_frame_intervals": 2
+  },
+  "measured_process_rss": {
+    "sample_peak_max_bytes": 536870912,
+    "positive_end_minus_start_max_bytes": 67108864,
+    "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+  },
+  "evidence_requirements": {
+    "minimum_warmup_rounds": 1,
+    "minimum_measured_rounds": 3,
+    "minimum_frame_samples_per_scenario": 100,
+    "minimum_rss_samples_per_scenario": 10
+  },
+  "interpretation": [
+    "These are explicit engineering defaults, not official Flutter thresholds or a user-approved product budget.",
+    "Frame percentiles use nearest rank and the complete independent FrameTiming arrays, not bounded VM timeline retention.",
+    "Build and raster stages are assessed separately because rendering is pipelined; totalSpan includes scheduling and is not a count of displayed dropped frames.",
+    "The fixed measured-process RSS limits are a desktop harness risk gate; component memory and leak assessment remain unassessed even when it passes.",
+    "One passing observed run does not establish repeat-run stability or acceptance on other devices, platforms, accessibility configurations or physical input."
+  ]
+}

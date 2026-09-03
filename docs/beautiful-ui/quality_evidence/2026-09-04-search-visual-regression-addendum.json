@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "date": "2026-09-04",
+  "verified_at_utc": "2026-09-03T22:55:58.205452+00:00",
+  "status": "passed_for_byte_identical_search_static_fixtures",
+  "scope": "Search-only replay of the existing six P1/P2 localized, queried, two-title-only-result fixtures. Not a new lazy-list visual acceptance.",
+  "baseline_evidence": "docs/beautiful-ui/quality_evidence/2026-09-03-p1-p2-complementary-review.json",
+  "baseline_evidence_sha256": "5eab0d225de5ee42a49aef019b227b69e2822b74efd4d2d0a3cdaf50b67194c9",
+  "artifact_directory": "packages/beautiful_ai_ui/build/release_review/2026-09-04-search-regression",
+  "capture_manifest_sha256": "cba4d16352bc1c58eacfb88c451a86f02c67c0abb6ba438bdedf2f7f68367474",
+  "source_sha256": "efa09fcc76dd02d3264519274b6e56590eb971ca0237cc4e2a7a110ec93f0688",
+  "source_file_count": 198,
+  "source_unchanged_during_capture": true,
+  "source_rechecked_after_behavior_tests": true,
+  "changed_source_files_since_baseline": [
+    "packages/beautiful_ai_ui/lib/src/components/search.dart"
+  ],
+  "search_source_sha256": "b8bdaddec0ce41c1792a5664232933306e8104506075c3db274df45e608bd1e3",
+  "baseline_search_source_sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+  "counts": {
+    "captures": 6,
+    "byte_identical_to_reviewed_baseline": 6,
+    "changed_images": 0,
+    "newly_viewed_images": 0,
+    "rendering_errors": 0
+  },
+  "review_method": "Each fresh PNG SHA-256 was compared with both the accepted Sep3 index and its actual retained PNG. All six are byte-identical, so the existing individual visual reviews are inherited. No fresh image viewing was necessary or claimed.",
+  "capture": {
+    "command": [
+      "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+      "test",
+      "--no-pub",
+      "tool/release_review/p1_p2_matrix_test.dart",
+      "--dart-define=P1P2_MATRIX_ONLY=search",
+      "--dart-define=P1P2_MATRIX_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/release_review/2026-09-04-search-regression"
+    ],
+    "environment": {
+      "DEVELOPER_DIR": "/Applications/Xcode.app/Contents/Developer"
+    },
+    "captured_at_utc": "2026-09-03T22:53:57.653227Z",
+    "log": "capture.log",
+    "log_sha256": "0cfb28f8076cff94c3dbac61083bb8b7cc9a85ebc903292a8894a6f0afa4b90f",
+    "flutter_version": "3.47.0",
+    "framework_revision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+    "platform": "macos",
+    "host_os": "Version 15.7.9 (Build 24G830)",
+    "dpr": 1,
+    "started_at_utc": "2026-09-03T22:53:50.072494+00:00",
+    "finished_at_utc": "2026-09-03T22:53:57.653227Z",
+    "start_time_basis": "Timestamp when the pre-capture source snapshot was written, immediately before launching the filtered Flutter test."
+  },
+  "fonts": {
+    "same_pinned_font_and_license_files_as_baseline": true,
+    "validated_files": [
+      {
+        "file": "NotoSansCJKsc-Regular.otf",
+        "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+        "bytes": 16437364,
+        "version": "2.004"
+      },
+      {
+        "file": "NotoSansCJK-OFL.txt",
+        "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "bytes": 4301
+      },
+      {
+        "file": "NotoSansArabic.ttf",
+        "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+        "bytes": 844676,
+        "version": "2.012"
+      },
+      {
+        "file": "NotoSansArabic-OFL.txt",
+        "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+        "bytes": 4382
+      }
+    ],
+    "purpose": "Explicit test-only fallback; not shipped or evidence of native automatic fallback."
+  },
+  "focused_validation": {
+    "command": [
+      "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+      "test",
+      "--no-pub",
+      "test/widget/search_test.dart",
+      "test/widget/search_long_catalog_test.dart",
+      "test/semantics/search_semantics_test.dart",
+      "test/release_review/p1_p2_temporal_and_bidi_test.dart"
+    ],
+    "environment": {
+      "DEVELOPER_DIR": "/Applications/Xcode.app/Contents/Developer"
+    },
+    "passed": 43,
+    "breakdown": {
+      "existing_search_widget_and_semantics": 20,
+      "long_catalog_regressions": 13,
+      "p1_p2_temporal_and_bidi": 10
+    },
+    "log": "search-regressions.log",
+    "log_sha256": "0087ef0a0cf16d341bf3422cdb62dfef2e80dd0b30577dd6c98563810e8f8f1c",
+    "test_source_sha256": {
+      "packages/beautiful_ai_ui/test/widget/search_test.dart": "0aa8ba75239eae7828b8a3b02b40ed7d9de949a8d77516d78d736955bfd8671f",
+      "packages/beautiful_ai_ui/test/widget/search_long_catalog_test.dart": "c0fda25211e19e201b7bc37ef7e8157efe34b243f5a093391b8ca04abac2d321",
+      "packages/beautiful_ai_ui/test/semantics/search_semantics_test.dart": "71574001c77f1382beae7557a2cfb42bca5a7c0c7d0b8ae797f0f2ec19a401a0",
+      "packages/beautiful_ai_ui/test/release_review/p1_p2_temporal_and_bidi_test.dart": "f582d1bbe464c4e7fb248d1876b28f234d32923d10d49e903bae4d610f298e35"
+    }
+  },
+  "profiles": [
+    {
+      "id": "compact-dark-long-en-2x",
+      "viewport_width": 390.0,
+      "component_width": 358.0,
+      "brightness": "dark",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "en",
+      "direction": "ltr",
+      "motion": "none",
+      "disable_animations": false
+    },
+    {
+      "id": "compact-light-hc-ar-rtl-2x",
+      "viewport_width": 390.0,
+      "component_width": 358.0,
+      "brightness": "light",
+      "high_contrast": true,
+      "text_scale": 2.0,
+      "language": "ar",
+      "direction": "rtl",
+      "motion": "system",
+      "disable_animations": true
+    },
+    {
+      "id": "medium-light-zh-2x",
+      "viewport_width": 768.0,
+      "component_width": 736.0,
+      "brightness": "light",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "zh",
+      "direction": "ltr",
+      "motion": "reduced",
+      "disable_animations": false
+    },
+    {
+      "id": "medium-dark-hc-long-en-1x",
+      "viewport_width": 768.0,
+      "component_width": 736.0,
+      "brightness": "dark",
+      "high_contrast": true,
+      "text_scale": 1.0,
+      "language": "en",
+      "direction": "ltr",
+      "motion": "none",
+      "disable_animations": false
+    },
+    {
+      "id": "expanded-light-ar-rtl-1x",
+      "viewport_width": 1280.0,
+      "component_width": 1248.0,
+      "brightness": "light",
+      "high_contrast": false,
+      "text_scale": 1.0,
+      "language": "ar",
+      "direction": "rtl",
+      "motion": "reduced",
+      "disable_animations": false
+    },
+    {
+      "id": "expanded-dark-zh-2x",
+      "viewport_width": 1280.0,
+      "component_width": 1248.0,
+      "brightness": "dark",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "zh",
+      "direction": "ltr",
+      "motion": "system",
+      "disable_animations": true
+    }
+  ],
+  "captures": [
+    {
+      "module": "search",
+      "profile": "compact-dark-long-en-2x",
+      "file": "compact-dark-long-en-2x/search.png",
+      "width": 390.0,
+      "height": 376.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "b92dc5fc702c4631c27704cd3f2ee67c47ebe58266dc69be3155aa8fe5af9b37",
+      "baseline_sha256": "b92dc5fc702c4631c27704cd3f2ee67c47ebe58266dc69be3155aa8fe5af9b37",
+      "byte_identical_to_baseline": true
+    },
+    {
+      "module": "search",
+      "profile": "compact-light-hc-ar-rtl-2x",
+      "file": "compact-light-hc-ar-rtl-2x/search.png",
+      "width": 390.0,
+      "height": 396.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "cb40fc57a5ee34136da7321e540370ec849d26fc185571b5fce44b91ae78a402",
+      "baseline_sha256": "cb40fc57a5ee34136da7321e540370ec849d26fc185571b5fce44b91ae78a402",
+      "byte_identical_to_baseline": true
+    },
+    {
+      "module": "search",
+      "profile": "medium-light-zh-2x",
+      "file": "medium-light-zh-2x/search.png",
+      "width": 768.0,
+      "height": 344.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "3b9c2ebe2989b0aa1d9425a98be4447ef408acd26191b09b5859e23d26d1d7c1",
+      "baseline_sha256": "3b9c2ebe2989b0aa1d9425a98be4447ef408acd26191b09b5859e23d26d1d7c1",
+      "byte_identical_to_baseline": true
+    },
+    {
+      "module": "search",
+      "profile": "medium-dark-hc-long-en-1x",
+      "file": "medium-dark-hc-long-en-1x/search.png",
+      "width": 768.0,
+      "height": 312.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "519016f64c176111e3f222cee7fda0fb0a77e13957af99a3361f8ddff43f973b",
+      "baseline_sha256": "519016f64c176111e3f222cee7fda0fb0a77e13957af99a3361f8ddff43f973b",
+      "byte_identical_to_baseline": true
+    },
+    {
+      "module": "search",
+      "profile": "expanded-light-ar-rtl-1x",
+      "file": "expanded-light-ar-rtl-1x/search.png",
+      "width": 1280.0,
+      "height": 312.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "8a00f51a06051f135b994b713c34aa0b804dfb8f043ce79879091786eda91a46",
+      "baseline_sha256": "8a00f51a06051f135b994b713c34aa0b804dfb8f043ce79879091786eda91a46",
+      "byte_identical_to_baseline": true
+    },
+    {
+      "module": "search",
+      "profile": "expanded-dark-zh-2x",
+      "file": "expanded-dark-zh-2x/search.png",
+      "width": 1280.0,
+      "height": 344.0,
+      "visual_review": "inherited_from_byte_identical_review",
+      "sha256": "3dbaf4723a381a403e8fa5826e9265a9d8df0524ccade0e21de9a8eaaa3106fa",
+      "baseline_sha256": "3dbaf4723a381a403e8fa5826e9265a9d8df0524ccade0e21de9a8eaaa3106fa",
+      "byte_identical_to_baseline": true
+    }
+  ],
+  "limits": [
+    "The unchanged fixture exercises two title-only matches with a nonempty localized query; it does not exercise the first-five empty-query state, subtitle/group rows, empty state, focused/highlighted state, or more-than-five lazy branch.",
+    "The separate 13 behavior regressions cover the full 1000-item catalog, ten broad-match keyboard moves, first ArrowUp/wrap to999, row measurement invalidation, same-list and nested-keyword republishing, semantic selection, and retained focus after scrolling/reordering. They are not native performance measurements.",
+    "Specified-font headless rendering does not establish native automatic fallback, real assistive technology, device/input acceptance, or native frame and memory budgets.",
+    "The Sep3 evidence and old PNGs remain unchanged."
+  ]
+}

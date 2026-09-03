@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "status": "targeted_prompt_focus_visual_regression_passed",
+  "reviewed_at_utc": "2026-09-03T23:10:02.064869+00:00",
+  "scope": "Prompt-only three-profile visual replay after aligning EditableText.groupId with the surrounding Prompt TapRegion. Not a full P3 matrix or native acceptance run.",
+  "baseline_review": {
+    "path": "docs/beautiful-ui/quality_evidence/2026-09-03-p3-visual-localization-temporal-review.json",
+    "sha256": "c350bb4dbfa3ff5616825fd96cc25ddd1a7490774b1f3819b4189d6641e7bfe7",
+    "modified": false
+  },
+  "completed_cases": 3,
+  "png_count": 7,
+  "byte_identical_to_accepted_baseline": 7,
+  "changed_pngs": 0,
+  "new_direct_view_image_inspections": 0,
+  "headless_export_elapsed_seconds": 31.54,
+  "review_method": "Fresh and retained baseline PNG bytes were independently SHA-256 hashed and matched to the accepted review entry and fresh manifest. Prior direct visual observations carry forward by identity; no new image viewing is claimed.",
+  "prompt_source": {
+    "path": "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart",
+    "baseline_sha256": "d44a3f4701a59c7d053c1968dc84d7d21ab8958c69378d014b003696d4b579cb",
+    "current_sha256": "a541f8178320adbe7e887ef2e89543de10d4088a846ebf14557d88d5fc15a1e8",
+    "change": "EditableText groupId: _tapGroup"
+  },
+  "source_changes_since_baseline": [
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart",
+      "baseline_sha256": "d44a3f4701a59c7d053c1968dc84d7d21ab8958c69378d014b003696d4b579cb",
+      "current_sha256": "a541f8178320adbe7e887ef2e89543de10d4088a846ebf14557d88d5fc15a1e8",
+      "within_prompt_scope": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/records_table.dart",
+      "baseline_sha256": "45433eaa4224837a6ba797bd9ba84c06ef0157174ab45bf785d33bf75c3ac2fb",
+      "current_sha256": "603cf1558bab2e34a08e85423e1e19d66bc0582e74adc20b66b3d9a0c330dafb",
+      "within_prompt_scope": false
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/search.dart",
+      "baseline_sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "current_sha256": "b8bdaddec0ce41c1792a5664232933306e8104506075c3db274df45e608bd1e3",
+      "within_prompt_scope": false
+    }
+  ],
+  "all_run_source_inventories_equal": true,
+  "font_sha256": {
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansCJKsc-Regular.otf": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansCJK-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansArabic.ttf": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansArabic-OFL.txt": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+    "packages/beautiful_ai_ui/build/release_review/fonts/provenance.json": "2ef1dbb1269e4989a27462e52e149bdd63a309b27089499ddb900e803a8799d2"
+  },
+  "runs": [
+    {
+      "profile": "compact-dark-hc-2x-arabic-reduced",
+      "manifest": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/compact-arabic/manifest.json",
+      "manifest_sha256": "1c47c65fc69fbba98704cc262454e7859fdd8b1f6d2b1d1e03c7dc9e240abc76",
+      "captured_at_utc": "2026-09-03T23:08:34.089258+00:00",
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/compact-arabic",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=prompt-bar",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=compact-dark-hc-2x-arabic-reduced"
+      ],
+      "render_log_sha256": "47f99bedf39eca18f910c339fe13a17bfe5771ff50829fe47a2a227c70372cff",
+      "cases_passed": 1,
+      "png_count": 2,
+      "source_and_font_inventory_stable": true
+    },
+    {
+      "profile": "expanded-dark-normal-1x-english-reduced",
+      "manifest": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-dark/manifest.json",
+      "manifest_sha256": "963b86f6ab3a57e9dcd3cb85f7594a557f863b4938cefa12edac66fbce49689f",
+      "captured_at_utc": "2026-09-03T23:08:23.917525+00:00",
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-dark",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=prompt-bar",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=expanded-dark-normal-1x-english-reduced"
+      ],
+      "render_log_sha256": "aed61e91a1a00c37825e68a623d3b1353f457dc54fa54438dc39f5572b2c2b49",
+      "cases_passed": 1,
+      "png_count": 1,
+      "source_and_font_inventory_stable": true
+    },
+    {
+      "profile": "expanded-light-hc-1x-english-normal",
+      "manifest": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light/manifest.json",
+      "manifest_sha256": "726f8e0726d2e75fea3b6bc73be30e2492f762843ac5587291e297a23d18e983",
+      "captured_at_utc": "2026-09-03T23:08:10.855104+00:00",
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=prompt-bar",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=expanded-light-hc-1x-english-normal"
+      ],
+      "render_log_sha256": "047dbaaf7611dc2d41571b5423765776ec27cc54e65c72851f23108cf3e624bc",
+      "cases_passed": 1,
+      "png_count": 4,
+      "source_and_font_inventory_stable": true
+    }
+  ],
+  "images": [
+    {
+      "profile": "compact-dark-hc-2x-arabic-reduced",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/compact-arabic/compact-dark-hc-2x-arabic-reduced/prompt-bar-prepared.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/compact-dark-hc-2x-arabic-reduced/prompt-bar-prepared.png",
+      "sha256": "ac273ce07926f86eafc9042935ca19ad62bbfe305d1ed0a713c8e5154f76f47b",
+      "pixels": [
+        390,
+        682
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "compact-dark-hc-2x-arabic-reduced",
+      "state": "source-options",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/compact-arabic/compact-dark-hc-2x-arabic-reduced/prompt-bar-source-options.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/compact-dark-hc-2x-arabic-reduced/prompt-bar-source-options.png",
+      "sha256": "1fff099e0aa85e14623e15dbcf96934ac5cbe0599717d720feb2f80a207ed4cc",
+      "pixels": [
+        390,
+        878
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "expanded-dark-normal-1x-english-reduced",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-dark/expanded-dark-normal-1x-english-reduced/prompt-bar-prepared.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-dark-normal-1x-english-reduced/prompt-bar-prepared.png",
+      "sha256": "dcba5e87f5a069ad792dc177013e68c13d4bf237aee2e5246c0662d7a3637cca",
+      "pixels": [
+        1280,
+        280
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light/expanded-light-hc-1x-english-normal/prompt-bar-prepared.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/prompt-bar-prepared.png",
+      "sha256": "953eec9580b7578d98c716f2e241a1da212f7f58b1af037d6580268c8966c657",
+      "pixels": [
+        1280,
+        280
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "keyboard-focus",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light/expanded-light-hc-1x-english-normal/prompt-bar-keyboard-focus.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/prompt-bar-keyboard-focus.png",
+      "sha256": "c6dcf52ebf55e179f62c8b62b82b8828da1208a5819da93235b5115956ce543d",
+      "pixels": [
+        1280,
+        280
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "pointer-held",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light/expanded-light-hc-1x-english-normal/prompt-bar-pointer-held.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/prompt-bar-pointer-held.png",
+      "sha256": "0e317b473a2b4dad82fac17493cb943f954713d61bb6e4860db07da7f27d2a04",
+      "pixels": [
+        1280,
+        280
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    },
+    {
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "source-options",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-prompt-focus/expanded-light/expanded-light-hc-1x-english-normal/prompt-bar-source-options.png",
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/prompt-bar-source-options.png",
+      "sha256": "cf99f7c482076e08a223d4f9b98c43f4cadf2020d7a9855e7c7a670e90fac485",
+      "pixels": [
+        1280,
+        436
+      ],
+      "byte_identical_to_reviewed_baseline": true
+    }
+  ],
+  "behavior_evidence": {
+    "source": "packages/beautiful_ai_ui_catalog/test/catalog_platform_input_regression_test.dart",
+    "sha256": "ba9765c03f8783b64ae9fde4d1e9d8f6632cd52c805ecb2861e09b164f743e8f",
+    "previously_completed_in_this_session": true,
+    "platforms": [
+      "linux",
+      "macOS",
+      "windows"
+    ],
+    "passed": 3,
+    "contracts": "Down+Tab and Down+Enter insert /compare without submitting; model menu Escape closes menu and retains draft/editor focus. This headless behavior run is separate from the image exporter."
+  },
+  "limitations": [
+    "The exported keyboard focus and held pointer are on Send; the model menu Escape sequence is established by the separate Catalog regression, not these PNGs.",
+    "The exporter explicitly unfocuses Send before the held-mouse capture, so these images do not establish desktop editor focus retention during a pointer interaction.",
+    "Arabic RTL at 200 percent uses pinned review fonts. No claim of native font fallback or OS input/IME, W3C input, assistive technology, device behavior, or frame-time acceptance."
+  ]
+}

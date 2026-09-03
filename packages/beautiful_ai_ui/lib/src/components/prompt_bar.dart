@@ -1145,6 +1145,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                   ),
                 EditableText(
                   key: _editableKey,
+                  groupId: _tapGroup,
                   controller: _draft,
                   focusNode: _editorFocus,
                   style: theme.typography.body.copyWith(

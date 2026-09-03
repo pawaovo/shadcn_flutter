@@ -1,0 +1,4294 @@
+{
+  "schema_version": 1,
+  "assessment": "observed_run_engineering_budget",
+  "status": "budget_fail",
+  "budget_id": "engineering_budget_v1",
+  "approval_status": "engineering_default_not_product_approved",
+  "all_platform_release_accepted": false,
+  "suite": "p3",
+  "source_revision": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "run_id": "20260903T114308Z",
+  "runtime": {
+    "operating_system": "macos",
+    "operating_system_version": "Version 15.7.9 (Build 24G830)",
+    "logical_processor_count": 10,
+    "build_mode": "profile",
+    "native_view_physical_px": {
+      "width": 3456.0,
+      "height": 2160.0
+    },
+    "native_view_logical_dp": {
+      "width": 1728.0,
+      "height": 1080.0
+    },
+    "device_pixel_ratio": 2.0,
+    "display_refresh_rate_hz": 120.0,
+    "surface_width_dp": 1696.0,
+    "platform_text_scale_at_14dp": 14.0,
+    "platform_disable_animations": false,
+    "platform_high_contrast": false,
+    "locale": "zh-Hans-CN",
+    "theme": "light",
+    "motion_policy": "system",
+    "platform_semantics_enabled": false,
+    "framework_semantics_requested_by_test": true,
+    "semantics_note": "The original semantics_enabled field reads platformDispatcher.semanticsEnabled. It is false here. Flutter testWidgets separately defaults semanticsEnabled=true and holds its own framework handle; false does not mean no framework semantics tree."
+  },
+  "component_memory_assessment": "unassessed",
+  "leak_assessment": "unassessed",
+  "repeat_run_stability": "unassessed",
+  "other_platforms_and_devices": "unassessed",
+  "scenarios": [
+    {
+      "id": "prompt_bar",
+      "status": "budget_fail",
+      "frame_samples": 834,
+      "rss_samples": 80,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 834,
+          "min": 56,
+          "max": 45962,
+          "mean": 822.2769784172662,
+          "percentile_method": "nearest rank",
+          "p50": 417,
+          "p90": 991,
+          "p95": 1380,
+          "p99": 4978
+        },
+        "raster_us": {
+          "sample_count": 834,
+          "min": 192,
+          "max": 5336,
+          "mean": 884.9652278177458,
+          "percentile_method": "nearest rank",
+          "p50": 759,
+          "p90": 1544,
+          "p95": 1843,
+          "p99": 2694
+        },
+        "total_span_us": {
+          "sample_count": 834,
+          "min": 375,
+          "max": 46630,
+          "mean": 2298.218225419664,
+          "percentile_method": "nearest rank",
+          "p50": 1458,
+          "p90": 2983,
+          "p95": 3844,
+          "p99": 36272
+        },
+        "vsync_overhead_us": {
+          "sample_count": 834,
+          "min": 49,
+          "max": 38935,
+          "mean": 500.4796163069544,
+          "percentile_method": "nearest rank",
+          "p50": 97,
+          "p90": 145,
+          "p95": 177,
+          "p99": 15586
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 6,
+            "fraction": 0.007194244604316547
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 21,
+            "fraction": 0.025179856115107913
+          },
+          "vsync_overhead_us": {
+            "count": 11,
+            "fraction": 0.013189448441247002
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 6,
+            "fraction": 0.007194244604316547
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 15,
+            "fraction": 0.017985611510791366
+          },
+          "vsync_overhead_us": {
+            "count": 8,
+            "fraction": 0.009592326139088728
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 2096,
+          "build_us": 45962,
+          "raster_us": 528,
+          "vsync_overhead_us": 93,
+          "total_span_us": 46630,
+          "raster_finish_epoch_us": 1788435826511842,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1818,
+          "build_us": 45322,
+          "raster_us": 496,
+          "vsync_overhead_us": 92,
+          "total_span_us": 45950,
+          "raster_finish_epoch_us": 1788435823894520,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2113,
+          "build_us": 41866,
+          "raster_us": 453,
+          "vsync_overhead_us": 97,
+          "total_span_us": 42468,
+          "raster_finish_epoch_us": 1788435826682677,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1539,
+          "build_us": 37321,
+          "raster_us": 485,
+          "vsync_overhead_us": 87,
+          "total_span_us": 37948,
+          "raster_finish_epoch_us": 1788435821278201,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1835,
+          "build_us": 36682,
+          "raster_us": 483,
+          "vsync_overhead_us": 73,
+          "total_span_us": 37276,
+          "raster_finish_epoch_us": 1788435824060844,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1556,
+          "build_us": 35135,
+          "raster_us": 465,
+          "vsync_overhead_us": 96,
+          "total_span_us": 35746,
+          "raster_finish_epoch_us": 1788435821442677,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2154,
+          "build_us": 6843,
+          "raster_us": 877,
+          "vsync_overhead_us": 35985,
+          "total_span_us": 43756,
+          "raster_finish_epoch_us": 1788435827075628,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1600,
+          "build_us": 5168,
+          "raster_us": 721,
+          "vsync_overhead_us": 15586,
+          "total_span_us": 21536,
+          "raster_finish_epoch_us": 1788435821836795,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1879,
+          "build_us": 4978,
+          "raster_us": 778,
+          "vsync_overhead_us": 20134,
+          "total_span_us": 25956,
+          "raster_finish_epoch_us": 1788435824457852,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2148,
+          "build_us": 3021,
+          "raster_us": 807,
+          "vsync_overhead_us": 116,
+          "total_span_us": 4020,
+          "raster_finish_epoch_us": 1788435826969226,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 1537,
+          "build_us": 159,
+          "raster_us": 5336,
+          "vsync_overhead_us": 163,
+          "total_span_us": 5763,
+          "raster_finish_epoch_us": 1788435821221034,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1692,
+          "build_us": 651,
+          "raster_us": 3344,
+          "vsync_overhead_us": 184,
+          "total_span_us": 4453,
+          "raster_finish_epoch_us": 1788435822753040,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2249,
+          "build_us": 667,
+          "raster_us": 2958,
+          "vsync_overhead_us": 133,
+          "total_span_us": 3863,
+          "raster_finish_epoch_us": 1788435828027396,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2073,
+          "build_us": 864,
+          "raster_us": 2897,
+          "vsync_overhead_us": 103,
+          "total_span_us": 3936,
+          "raster_finish_epoch_us": 1788435826252483,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1923,
+          "build_us": 724,
+          "raster_us": 2830,
+          "vsync_overhead_us": 175,
+          "total_span_us": 3840,
+          "raster_finish_epoch_us": 1788435824844068,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2248,
+          "build_us": 664,
+          "raster_us": 2828,
+          "vsync_overhead_us": 162,
+          "total_span_us": 3761,
+          "raster_finish_epoch_us": 1788435828002294,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2200,
+          "build_us": 668,
+          "raster_us": 2797,
+          "vsync_overhead_us": 174,
+          "total_span_us": 3803,
+          "raster_finish_epoch_us": 1788435827494008,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1691,
+          "build_us": 609,
+          "raster_us": 2783,
+          "vsync_overhead_us": 146,
+          "total_span_us": 3674,
+          "raster_finish_epoch_us": 1788435822727259,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 1538,
+          "build_us": 928,
+          "raster_us": 2694,
+          "vsync_overhead_us": 144,
+          "total_span_us": 3797,
+          "raster_finish_epoch_us": 1788435821235717,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2231,
+          "build_us": 1999,
+          "raster_us": 2625,
+          "vsync_overhead_us": 132,
+          "total_span_us": 5422,
+          "raster_finish_epoch_us": 1788435827828957,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 2096,
+          "build_us": 45962,
+          "raster_us": 528,
+          "vsync_overhead_us": 93,
+          "total_span_us": 46630,
+          "raster_finish_epoch_us": 1788435826511842,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 45962,
+          "frame_interval_start_epoch_us": 1788435826465212,
+          "frame_interval_end_epoch_us": 1788435826511842,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1818,
+          "build_us": 45322,
+          "raster_us": 496,
+          "vsync_overhead_us": 92,
+          "total_span_us": 45950,
+          "raster_finish_epoch_us": 1788435823894520,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 45322,
+          "frame_interval_start_epoch_us": 1788435823848570,
+          "frame_interval_end_epoch_us": 1788435823894520,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 2113,
+          "build_us": 41866,
+          "raster_us": 453,
+          "vsync_overhead_us": 97,
+          "total_span_us": 42468,
+          "raster_finish_epoch_us": 1788435826682677,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 41866,
+          "frame_interval_start_epoch_us": 1788435826640209,
+          "frame_interval_end_epoch_us": 1788435826682677,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1539,
+          "build_us": 37321,
+          "raster_us": 485,
+          "vsync_overhead_us": 87,
+          "total_span_us": 37948,
+          "raster_finish_epoch_us": 1788435821278201,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 37321,
+          "frame_interval_start_epoch_us": 1788435821240253,
+          "frame_interval_end_epoch_us": 1788435821278201,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1835,
+          "build_us": 36682,
+          "raster_us": 483,
+          "vsync_overhead_us": 73,
+          "total_span_us": 37276,
+          "raster_finish_epoch_us": 1788435824060844,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 36682,
+          "frame_interval_start_epoch_us": 1788435824023568,
+          "frame_interval_end_epoch_us": 1788435824060844,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1556,
+          "build_us": 35135,
+          "raster_us": 465,
+          "vsync_overhead_us": 96,
+          "total_span_us": 35746,
+          "raster_finish_epoch_us": 1788435821442677,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 35135,
+          "frame_interval_start_epoch_us": 1788435821406931,
+          "frame_interval_end_epoch_us": 1788435821442677,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 2154,
+          "build_us": 6843,
+          "raster_us": 877,
+          "vsync_overhead_us": 35985,
+          "total_span_us": 43756,
+          "raster_finish_epoch_us": 1788435827075628,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 6843,
+          "frame_interval_start_epoch_us": 1788435827031872,
+          "frame_interval_end_epoch_us": 1788435827075628,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1537,
+          "build_us": 159,
+          "raster_us": 5336,
+          "vsync_overhead_us": 163,
+          "total_span_us": 5763,
+          "raster_finish_epoch_us": 1788435821221034,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5336,
+          "frame_interval_start_epoch_us": 1788435821215271,
+          "frame_interval_end_epoch_us": 1788435821221034,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1600,
+          "build_us": 5168,
+          "raster_us": 721,
+          "vsync_overhead_us": 15586,
+          "total_span_us": 21536,
+          "raster_finish_epoch_us": 1788435821836795,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5168,
+          "frame_interval_start_epoch_us": 1788435821815259,
+          "frame_interval_end_epoch_us": 1788435821836795,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 1879,
+          "build_us": 4978,
+          "raster_us": 778,
+          "vsync_overhead_us": 20134,
+          "total_span_us": 25956,
+          "raster_finish_epoch_us": 1788435824457852,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4978,
+          "frame_interval_start_epoch_us": 1788435824431896,
+          "frame_interval_end_epoch_us": 1788435824457852,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 6,
+      "measured_process_rss": {
+        "start_bytes": 152436736,
+        "end_bytes": 173932544,
+        "signed_end_minus_start_bytes": 21495808,
+        "sample_peak_bytes": 174178304,
+        "process_lifetime_max_at_last_sample_bytes": 177668096,
+        "maximum_sample_gap_us": 126067,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 128565248,
+            "process_lifetime_max_rss_bytes": 128565248
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 129286144,
+            "process_lifetime_max_rss_bytes": 129286144
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 136380416,
+            "process_lifetime_max_rss_bytes": 136380416
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 208896000,
+            "process_lifetime_max_rss_bytes": 224329728
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 196706304,
+            "process_lifetime_max_rss_bytes": 224329728
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 1380,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 45962,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 1843,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 5336,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.007194244604316547,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 3844,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 174178304,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 21495808,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "diff_table",
+      "status": "budget_fail",
+      "frame_samples": 497,
+      "rss_samples": 54,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 497,
+          "min": 52,
+          "max": 17205,
+          "mean": 1227.5835010060362,
+          "percentile_method": "nearest rank",
+          "p50": 832,
+          "p90": 2489,
+          "p95": 3265,
+          "p99": 10988
+        },
+        "raster_us": {
+          "sample_count": 497,
+          "min": 408,
+          "max": 12186,
+          "mean": 961.4144869215291,
+          "percentile_method": "nearest rank",
+          "p50": 774,
+          "p90": 1601,
+          "p95": 1952,
+          "p99": 2631
+        },
+        "total_span_us": {
+          "sample_count": 497,
+          "min": 633,
+          "max": 18632,
+          "mean": 2538.3420523138834,
+          "percentile_method": "nearest rank",
+          "p50": 1911,
+          "p90": 4551,
+          "p95": 5576,
+          "p99": 13027
+        },
+        "vsync_overhead_us": {
+          "sample_count": 497,
+          "min": 26,
+          "max": 13528,
+          "mean": 268.61770623742456,
+          "percentile_method": "nearest rank",
+          "p50": 143,
+          "p90": 199,
+          "p95": 294,
+          "p99": 6324
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 6,
+            "fraction": 0.012072434607645875
+          },
+          "raster_us": {
+            "count": 1,
+            "fraction": 0.002012072434607646
+          },
+          "total_span_us": {
+            "count": 11,
+            "fraction": 0.022132796780684104
+          },
+          "vsync_overhead_us": {
+            "count": 2,
+            "fraction": 0.004024144869215292
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 1,
+            "fraction": 0.002012072434607646
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 1,
+            "fraction": 0.002012072434607646
+          },
+          "vsync_overhead_us": {
+            "count": 0,
+            "fraction": 0.0
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 3029,
+          "build_us": 17205,
+          "raster_us": 1185,
+          "vsync_overhead_us": 157,
+          "total_span_us": 18632,
+          "raster_finish_epoch_us": 1788435839875420,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2913,
+          "build_us": 13353,
+          "raster_us": 830,
+          "vsync_overhead_us": 60,
+          "total_span_us": 14283,
+          "raster_finish_epoch_us": 1788435838604409,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2870,
+          "build_us": 11660,
+          "raster_us": 774,
+          "vsync_overhead_us": 157,
+          "total_span_us": 12634,
+          "raster_finish_epoch_us": 1788435838169430,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3231,
+          "build_us": 11546,
+          "raster_us": 725,
+          "vsync_overhead_us": 216,
+          "total_span_us": 12542,
+          "raster_finish_epoch_us": 1788435842010987,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3073,
+          "build_us": 10988,
+          "raster_us": 747,
+          "vsync_overhead_us": 1554,
+          "total_span_us": 13339,
+          "raster_finish_epoch_us": 1788435840311791,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3188,
+          "build_us": 9676,
+          "raster_us": 773,
+          "vsync_overhead_us": 175,
+          "total_span_us": 10664,
+          "raster_finish_epoch_us": 1788435841584111,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3094,
+          "build_us": 5560,
+          "raster_us": 924,
+          "vsync_overhead_us": 178,
+          "total_span_us": 6709,
+          "raster_finish_epoch_us": 1788435840563494,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3051,
+          "build_us": 5350,
+          "raster_us": 1134,
+          "vsync_overhead_us": 196,
+          "total_span_us": 6733,
+          "raster_finish_epoch_us": 1788435840088519,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2965,
+          "build_us": 4884,
+          "raster_us": 911,
+          "vsync_overhead_us": 457,
+          "total_span_us": 6904,
+          "raster_finish_epoch_us": 1788435839172029,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2966,
+          "build_us": 4518,
+          "raster_us": 665,
+          "vsync_overhead_us": 337,
+          "total_span_us": 5576,
+          "raster_finish_epoch_us": 1788435839195701,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 2872,
+          "build_us": 701,
+          "raster_us": 12186,
+          "vsync_overhead_us": 109,
+          "total_span_us": 13027,
+          "raster_finish_epoch_us": 1788435838186489,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3072,
+          "build_us": 219,
+          "raster_us": 6896,
+          "vsync_overhead_us": 137,
+          "total_span_us": 7359,
+          "raster_finish_epoch_us": 1788435840297478,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2869,
+          "build_us": 448,
+          "raster_us": 3378,
+          "vsync_overhead_us": 211,
+          "total_span_us": 4721,
+          "raster_finish_epoch_us": 1788435838153185,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2789,
+          "build_us": 570,
+          "raster_us": 3073,
+          "vsync_overhead_us": 193,
+          "total_span_us": 3890,
+          "raster_finish_epoch_us": 1788435837252365,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2783,
+          "build_us": 595,
+          "raster_us": 2631,
+          "vsync_overhead_us": 208,
+          "total_span_us": 3533,
+          "raster_finish_epoch_us": 1788435837202003,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2934,
+          "build_us": 335,
+          "raster_us": 2589,
+          "vsync_overhead_us": 215,
+          "total_span_us": 3208,
+          "raster_finish_epoch_us": 1788435838810002,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3134,
+          "build_us": 2340,
+          "raster_us": 2587,
+          "vsync_overhead_us": 146,
+          "total_span_us": 5130,
+          "raster_finish_epoch_us": 1788435841070246,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3090,
+          "build_us": 386,
+          "raster_us": 2552,
+          "vsync_overhead_us": 115,
+          "total_span_us": 3664,
+          "raster_finish_epoch_us": 1788435840468784,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 2779,
+          "build_us": 678,
+          "raster_us": 2420,
+          "vsync_overhead_us": 180,
+          "total_span_us": 3376,
+          "raster_finish_epoch_us": 1788435837168512,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 3149,
+          "build_us": 2427,
+          "raster_us": 2391,
+          "vsync_overhead_us": 172,
+          "total_span_us": 5061,
+          "raster_finish_epoch_us": 1788435841220177,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 3029,
+          "build_us": 17205,
+          "raster_us": 1185,
+          "vsync_overhead_us": 157,
+          "total_span_us": 18632,
+          "raster_finish_epoch_us": 1788435839875420,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 17205,
+          "frame_interval_start_epoch_us": 1788435839856788,
+          "frame_interval_end_epoch_us": 1788435839875420,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 2913,
+          "build_us": 13353,
+          "raster_us": 830,
+          "vsync_overhead_us": 60,
+          "total_span_us": 14283,
+          "raster_finish_epoch_us": 1788435838604409,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 13353,
+          "frame_interval_start_epoch_us": 1788435838590126,
+          "frame_interval_end_epoch_us": 1788435838604409,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 2872,
+          "build_us": 701,
+          "raster_us": 12186,
+          "vsync_overhead_us": 109,
+          "total_span_us": 13027,
+          "raster_finish_epoch_us": 1788435838186489,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 12186,
+          "frame_interval_start_epoch_us": 1788435838173462,
+          "frame_interval_end_epoch_us": 1788435838186489,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 2870,
+          "build_us": 11660,
+          "raster_us": 774,
+          "vsync_overhead_us": 157,
+          "total_span_us": 12634,
+          "raster_finish_epoch_us": 1788435838169430,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 11660,
+          "frame_interval_start_epoch_us": 1788435838156796,
+          "frame_interval_end_epoch_us": 1788435838169430,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3231,
+          "build_us": 11546,
+          "raster_us": 725,
+          "vsync_overhead_us": 216,
+          "total_span_us": 12542,
+          "raster_finish_epoch_us": 1788435842010987,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 11546,
+          "frame_interval_start_epoch_us": 1788435841998445,
+          "frame_interval_end_epoch_us": 1788435842010987,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3073,
+          "build_us": 10988,
+          "raster_us": 747,
+          "vsync_overhead_us": 1554,
+          "total_span_us": 13339,
+          "raster_finish_epoch_us": 1788435840311791,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 10988,
+          "frame_interval_start_epoch_us": 1788435840298452,
+          "frame_interval_end_epoch_us": 1788435840311791,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3188,
+          "build_us": 9676,
+          "raster_us": 773,
+          "vsync_overhead_us": 175,
+          "total_span_us": 10664,
+          "raster_finish_epoch_us": 1788435841584111,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 9676,
+          "frame_interval_start_epoch_us": 1788435841573447,
+          "frame_interval_end_epoch_us": 1788435841584111,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3072,
+          "build_us": 219,
+          "raster_us": 6896,
+          "vsync_overhead_us": 137,
+          "total_span_us": 7359,
+          "raster_finish_epoch_us": 1788435840297478,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 6896,
+          "frame_interval_start_epoch_us": 1788435840290119,
+          "frame_interval_end_epoch_us": 1788435840297478,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3094,
+          "build_us": 5560,
+          "raster_us": 924,
+          "vsync_overhead_us": 178,
+          "total_span_us": 6709,
+          "raster_finish_epoch_us": 1788435840563494,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5560,
+          "frame_interval_start_epoch_us": 1788435840556785,
+          "frame_interval_end_epoch_us": 1788435840563494,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 3051,
+          "build_us": 5350,
+          "raster_us": 1134,
+          "vsync_overhead_us": 196,
+          "total_span_us": 6733,
+          "raster_finish_epoch_us": 1788435840088519,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5350,
+          "frame_interval_start_epoch_us": 1788435840081786,
+          "frame_interval_end_epoch_us": 1788435840088519,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 7,
+      "measured_process_rss": {
+        "start_bytes": 250003456,
+        "end_bytes": 236683264,
+        "signed_end_minus_start_bytes": -13320192,
+        "sample_peak_bytes": 250216448,
+        "process_lifetime_max_at_last_sample_bytes": 269762560,
+        "maximum_sample_gap_us": 113459,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 196706304,
+            "process_lifetime_max_rss_bytes": 224329728
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 197541888,
+            "process_lifetime_max_rss_bytes": 224329728
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 207568896,
+            "process_lifetime_max_rss_bytes": 224329728
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 276348928,
+            "process_lifetime_max_rss_bytes": 294584320
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 278953984,
+            "process_lifetime_max_rss_bytes": 294584320
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 3265,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 17205,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 1952,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 12186,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.014084507042253521,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 5576,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 250216448,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "records_table",
+      "status": "budget_fail",
+      "frame_samples": 1191,
+      "rss_samples": 119,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 1191,
+          "min": 31,
+          "max": 22060,
+          "mean": 656.2241813602016,
+          "percentile_method": "nearest rank",
+          "p50": 515,
+          "p90": 851,
+          "p95": 1144,
+          "p99": 3845
+        },
+        "raster_us": {
+          "sample_count": 1191,
+          "min": 371,
+          "max": 4545,
+          "mean": 1311.60201511335,
+          "percentile_method": "nearest rank",
+          "p50": 955,
+          "p90": 2403,
+          "p95": 2838,
+          "p99": 3503
+        },
+        "total_span_us": {
+          "sample_count": 1191,
+          "min": 554,
+          "max": 25838,
+          "mean": 2263.5314861460956,
+          "percentile_method": "nearest rank",
+          "p50": 1699,
+          "p90": 3652,
+          "p95": 4356,
+          "p99": 9488
+        },
+        "vsync_overhead_us": {
+          "sample_count": 1191,
+          "min": 44,
+          "max": 9347,
+          "mean": 213.056255247691,
+          "percentile_method": "nearest rank",
+          "p50": 143,
+          "p90": 199,
+          "p95": 240,
+          "p99": 3687
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 9,
+            "fraction": 0.007556675062972292
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 14,
+            "fraction": 0.011754827875734676
+          },
+          "vsync_overhead_us": {
+            "count": 3,
+            "fraction": 0.0025188916876574307
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 5,
+            "fraction": 0.0041981528127623844
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 6,
+            "fraction": 0.005037783375314861
+          },
+          "vsync_overhead_us": {
+            "count": 0,
+            "fraction": 0.0
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 5132,
+          "build_us": 22060,
+          "raster_us": 1291,
+          "vsync_overhead_us": 2388,
+          "total_span_us": 25838,
+          "raster_finish_epoch_us": 1788435859911725,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4723,
+          "build_us": 18282,
+          "raster_us": 677,
+          "vsync_overhead_us": 2841,
+          "total_span_us": 21855,
+          "raster_finish_epoch_us": 1788435855899418,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4728,
+          "build_us": 18213,
+          "raster_us": 781,
+          "vsync_overhead_us": 107,
+          "total_span_us": 19150,
+          "raster_finish_epoch_us": 1788435856030047,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5545,
+          "build_us": 18063,
+          "raster_us": 725,
+          "vsync_overhead_us": 139,
+          "total_span_us": 18994,
+          "raster_finish_epoch_us": 1788435864038206,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5137,
+          "build_us": 17545,
+          "raster_us": 798,
+          "vsync_overhead_us": 166,
+          "total_span_us": 18559,
+          "raster_finish_epoch_us": 1788435860046113,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5540,
+          "build_us": 16639,
+          "raster_us": 910,
+          "vsync_overhead_us": 171,
+          "total_span_us": 17771,
+          "raster_finish_epoch_us": 1788435863903650,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4743,
+          "build_us": 14589,
+          "raster_us": 675,
+          "vsync_overhead_us": 132,
+          "total_span_us": 15450,
+          "raster_finish_epoch_us": 1788435856259680,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5152,
+          "build_us": 14268,
+          "raster_us": 687,
+          "vsync_overhead_us": 703,
+          "total_span_us": 15710,
+          "raster_finish_epoch_us": 1788435860276598,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5560,
+          "build_us": 14140,
+          "raster_us": 642,
+          "vsync_overhead_us": 102,
+          "total_span_us": 14920,
+          "raster_finish_epoch_us": 1788435864259132,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5550,
+          "build_us": 4849,
+          "raster_us": 565,
+          "vsync_overhead_us": 151,
+          "total_span_us": 5635,
+          "raster_finish_epoch_us": 1788435864116514,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 4554,
+          "build_us": 180,
+          "raster_us": 4545,
+          "vsync_overhead_us": 103,
+          "total_span_us": 5131,
+          "raster_finish_epoch_us": 1788435854178536,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4659,
+          "build_us": 391,
+          "raster_us": 3928,
+          "vsync_overhead_us": 152,
+          "total_span_us": 4580,
+          "raster_finish_epoch_us": 1788435855094651,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4561,
+          "build_us": 325,
+          "raster_us": 3870,
+          "vsync_overhead_us": 421,
+          "total_span_us": 4971,
+          "raster_finish_epoch_us": 1788435854253375,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 4668,
+          "build_us": 853,
+          "raster_us": 3727,
+          "vsync_overhead_us": 182,
+          "total_span_us": 4901,
+          "raster_finish_epoch_us": 1788435855253303,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5085,
+          "build_us": 891,
+          "raster_us": 3676,
+          "vsync_overhead_us": 231,
+          "total_span_us": 4935,
+          "raster_finish_epoch_us": 1788435859399159,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5495,
+          "build_us": 852,
+          "raster_us": 3622,
+          "vsync_overhead_us": 174,
+          "total_span_us": 5010,
+          "raster_finish_epoch_us": 1788435863449226,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5493,
+          "build_us": 825,
+          "raster_us": 3614,
+          "vsync_overhead_us": 156,
+          "total_span_us": 4859,
+          "raster_finish_epoch_us": 1788435863415743,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5084,
+          "build_us": 689,
+          "raster_us": 3609,
+          "vsync_overhead_us": 334,
+          "total_span_us": 4744,
+          "raster_finish_epoch_us": 1788435859382302,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5079,
+          "build_us": 839,
+          "raster_us": 3601,
+          "vsync_overhead_us": 251,
+          "total_span_us": 4865,
+          "raster_finish_epoch_us": 1788435859299092,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 5081,
+          "build_us": 902,
+          "raster_us": 3574,
+          "vsync_overhead_us": 285,
+          "total_span_us": 4900,
+          "raster_finish_epoch_us": 1788435859332456,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 5132,
+          "build_us": 22060,
+          "raster_us": 1291,
+          "vsync_overhead_us": 2388,
+          "total_span_us": 25838,
+          "raster_finish_epoch_us": 1788435859911725,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 22060,
+          "frame_interval_start_epoch_us": 1788435859885887,
+          "frame_interval_end_epoch_us": 1788435859911725,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 4723,
+          "build_us": 18282,
+          "raster_us": 677,
+          "vsync_overhead_us": 2841,
+          "total_span_us": 21855,
+          "raster_finish_epoch_us": 1788435855899418,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 18282,
+          "frame_interval_start_epoch_us": 1788435855877563,
+          "frame_interval_end_epoch_us": 1788435855899418,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 4728,
+          "build_us": 18213,
+          "raster_us": 781,
+          "vsync_overhead_us": 107,
+          "total_span_us": 19150,
+          "raster_finish_epoch_us": 1788435856030047,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 18213,
+          "frame_interval_start_epoch_us": 1788435856010897,
+          "frame_interval_end_epoch_us": 1788435856030047,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5545,
+          "build_us": 18063,
+          "raster_us": 725,
+          "vsync_overhead_us": 139,
+          "total_span_us": 18994,
+          "raster_finish_epoch_us": 1788435864038206,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 18063,
+          "frame_interval_start_epoch_us": 1788435864019212,
+          "frame_interval_end_epoch_us": 1788435864038206,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5137,
+          "build_us": 17545,
+          "raster_us": 798,
+          "vsync_overhead_us": 166,
+          "total_span_us": 18559,
+          "raster_finish_epoch_us": 1788435860046113,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 17545,
+          "frame_interval_start_epoch_us": 1788435860027554,
+          "frame_interval_end_epoch_us": 1788435860046113,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5540,
+          "build_us": 16639,
+          "raster_us": 910,
+          "vsync_overhead_us": 171,
+          "total_span_us": 17771,
+          "raster_finish_epoch_us": 1788435863903650,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 16639,
+          "frame_interval_start_epoch_us": 1788435863885879,
+          "frame_interval_end_epoch_us": 1788435863903650,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 4743,
+          "build_us": 14589,
+          "raster_us": 675,
+          "vsync_overhead_us": 132,
+          "total_span_us": 15450,
+          "raster_finish_epoch_us": 1788435856259680,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 14589,
+          "frame_interval_start_epoch_us": 1788435856244230,
+          "frame_interval_end_epoch_us": 1788435856259680,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5152,
+          "build_us": 14268,
+          "raster_us": 687,
+          "vsync_overhead_us": 703,
+          "total_span_us": 15710,
+          "raster_finish_epoch_us": 1788435860276598,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 14268,
+          "frame_interval_start_epoch_us": 1788435860260888,
+          "frame_interval_end_epoch_us": 1788435860276598,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5560,
+          "build_us": 14140,
+          "raster_us": 642,
+          "vsync_overhead_us": 102,
+          "total_span_us": 14920,
+          "raster_finish_epoch_us": 1788435864259132,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 14140,
+          "frame_interval_start_epoch_us": 1788435864244212,
+          "frame_interval_end_epoch_us": 1788435864259132,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 5550,
+          "build_us": 4849,
+          "raster_us": 565,
+          "vsync_overhead_us": 151,
+          "total_span_us": 5635,
+          "raster_finish_epoch_us": 1788435864116514,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4849,
+          "frame_interval_start_epoch_us": 1788435864110879,
+          "frame_interval_end_epoch_us": 1788435864116514,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 9,
+      "measured_process_rss": {
+        "start_bytes": 290652160,
+        "end_bytes": 286457856,
+        "signed_end_minus_start_bytes": -4194304,
+        "sample_peak_bytes": 296386560,
+        "process_lifetime_max_at_last_sample_bytes": 302628864,
+        "maximum_sample_gap_us": 104764,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 278953984,
+            "process_lifetime_max_rss_bytes": 294584320
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 287719424,
+            "process_lifetime_max_rss_bytes": 294584320
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 278855680,
+            "process_lifetime_max_rss_bytes": 295960576
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 321814528,
+            "process_lifetime_max_rss_bytes": 348028928
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 322519040,
+            "process_lifetime_max_rss_bytes": 348028928
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 1144,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 22060,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 2838,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 4545,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.007556675062972292,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 4356,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 296386560,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "sidebar_nav",
+      "status": "pass",
+      "frame_samples": 760,
+      "rss_samples": 69,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 760,
+          "min": 35,
+          "max": 2925,
+          "mean": 597.2342105263158,
+          "percentile_method": "nearest rank",
+          "p50": 561,
+          "p90": 1058,
+          "p95": 1231,
+          "p99": 1845
+        },
+        "raster_us": {
+          "sample_count": 760,
+          "min": 274,
+          "max": 2794,
+          "mean": 1104.3631578947368,
+          "percentile_method": "nearest rank",
+          "p50": 1270,
+          "p90": 1736,
+          "p95": 1865,
+          "p99": 2326
+        },
+        "total_span_us": {
+          "sample_count": 760,
+          "min": 479,
+          "max": 22606,
+          "mean": 2098.786842105263,
+          "percentile_method": "nearest rank",
+          "p50": 2165,
+          "p90": 3138,
+          "p95": 3488,
+          "p99": 8905
+        },
+        "vsync_overhead_us": {
+          "sample_count": 760,
+          "min": 41,
+          "max": 21350,
+          "mean": 303.9868421052632,
+          "percentile_method": "nearest rank",
+          "p50": 149,
+          "p90": 212,
+          "p95": 271,
+          "p99": 6777
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 9,
+            "fraction": 0.011842105263157895
+          },
+          "vsync_overhead_us": {
+            "count": 6,
+            "fraction": 0.007894736842105263
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 2,
+            "fraction": 0.002631578947368421
+          },
+          "vsync_overhead_us": {
+            "count": 2,
+            "fraction": 0.002631578947368421
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 7043,
+          "build_us": 2925,
+          "raster_us": 1770,
+          "vsync_overhead_us": 135,
+          "total_span_us": 4894,
+          "raster_finish_epoch_us": 1788435879399082,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6573,
+          "build_us": 2119,
+          "raster_us": 474,
+          "vsync_overhead_us": 156,
+          "total_span_us": 2834,
+          "raster_finish_epoch_us": 1788435875288691,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6398,
+          "build_us": 1936,
+          "raster_us": 1443,
+          "vsync_overhead_us": 189,
+          "total_span_us": 3633,
+          "raster_finish_epoch_us": 1788435873739495,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6837,
+          "build_us": 1929,
+          "raster_us": 593,
+          "vsync_overhead_us": 83,
+          "total_span_us": 2663,
+          "raster_finish_epoch_us": 1788435877613516,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6639,
+          "build_us": 1883,
+          "raster_us": 1612,
+          "vsync_overhead_us": 173,
+          "total_span_us": 3770,
+          "raster_finish_epoch_us": 1788435875864627,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6481,
+          "build_us": 1876,
+          "raster_us": 1787,
+          "vsync_overhead_us": 224,
+          "total_span_us": 3950,
+          "raster_finish_epoch_us": 1788435874464811,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6389,
+          "build_us": 1846,
+          "raster_us": 1312,
+          "vsync_overhead_us": 175,
+          "total_span_us": 3400,
+          "raster_finish_epoch_us": 1788435873664259,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6939,
+          "build_us": 1845,
+          "raster_us": 1288,
+          "vsync_overhead_us": 96,
+          "total_span_us": 3281,
+          "raster_finish_epoch_us": 1788435878505800,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6903,
+          "build_us": 1835,
+          "raster_us": 1426,
+          "vsync_overhead_us": 95,
+          "total_span_us": 3486,
+          "raster_finish_epoch_us": 1788435878197671,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6410,
+          "build_us": 1718,
+          "raster_us": 1158,
+          "vsync_overhead_us": 235,
+          "total_span_us": 3172,
+          "raster_finish_epoch_us": 1788435873839032,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 6698,
+          "build_us": 375,
+          "raster_us": 2794,
+          "vsync_overhead_us": 219,
+          "total_span_us": 3722,
+          "raster_finish_epoch_us": 1788435876389579,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6963,
+          "build_us": 592,
+          "raster_us": 2717,
+          "vsync_overhead_us": 162,
+          "total_span_us": 3698,
+          "raster_finish_epoch_us": 1788435878722887,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6699,
+          "build_us": 1109,
+          "raster_us": 2601,
+          "vsync_overhead_us": 199,
+          "total_span_us": 4192,
+          "raster_finish_epoch_us": 1788435876406715,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6567,
+          "build_us": 595,
+          "raster_us": 2533,
+          "vsync_overhead_us": 267,
+          "total_span_us": 3513,
+          "raster_finish_epoch_us": 1788435875206039,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6433,
+          "build_us": 365,
+          "raster_us": 2470,
+          "vsync_overhead_us": 359,
+          "total_span_us": 3552,
+          "raster_finish_epoch_us": 1788435874039414,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6434,
+          "build_us": 558,
+          "raster_us": 2385,
+          "vsync_overhead_us": 124,
+          "total_span_us": 3429,
+          "raster_finish_epoch_us": 1788435874055962,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6436,
+          "build_us": 1142,
+          "raster_us": 2357,
+          "vsync_overhead_us": 205,
+          "total_span_us": 3802,
+          "raster_finish_epoch_us": 1788435874089663,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6697,
+          "build_us": 551,
+          "raster_us": 2326,
+          "vsync_overhead_us": 199,
+          "total_span_us": 3191,
+          "raster_finish_epoch_us": 1788435876372382,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6614,
+          "build_us": 578,
+          "raster_us": 2280,
+          "vsync_overhead_us": 247,
+          "total_span_us": 3206,
+          "raster_finish_epoch_us": 1788435875630732,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 6966,
+          "build_us": 1090,
+          "raster_us": 2263,
+          "vsync_overhead_us": 137,
+          "total_span_us": 3589,
+          "raster_finish_epoch_us": 1788435878756109,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 7043,
+          "build_us": 2925,
+          "raster_us": 1770,
+          "vsync_overhead_us": 135,
+          "total_span_us": 4894,
+          "raster_finish_epoch_us": 1788435879399082,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2925,
+          "frame_interval_start_epoch_us": 1788435879394188,
+          "frame_interval_end_epoch_us": 1788435879399082,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6698,
+          "build_us": 375,
+          "raster_us": 2794,
+          "vsync_overhead_us": 219,
+          "total_span_us": 3722,
+          "raster_finish_epoch_us": 1788435876389579,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2794,
+          "frame_interval_start_epoch_us": 1788435876385857,
+          "frame_interval_end_epoch_us": 1788435876389579,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6963,
+          "build_us": 592,
+          "raster_us": 2717,
+          "vsync_overhead_us": 162,
+          "total_span_us": 3698,
+          "raster_finish_epoch_us": 1788435878722887,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2717,
+          "frame_interval_start_epoch_us": 1788435878719189,
+          "frame_interval_end_epoch_us": 1788435878722887,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6699,
+          "build_us": 1109,
+          "raster_us": 2601,
+          "vsync_overhead_us": 199,
+          "total_span_us": 4192,
+          "raster_finish_epoch_us": 1788435876406715,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2601,
+          "frame_interval_start_epoch_us": 1788435876402523,
+          "frame_interval_end_epoch_us": 1788435876406715,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6567,
+          "build_us": 595,
+          "raster_us": 2533,
+          "vsync_overhead_us": 267,
+          "total_span_us": 3513,
+          "raster_finish_epoch_us": 1788435875206039,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2533,
+          "frame_interval_start_epoch_us": 1788435875202526,
+          "frame_interval_end_epoch_us": 1788435875206039,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6433,
+          "build_us": 365,
+          "raster_us": 2470,
+          "vsync_overhead_us": 359,
+          "total_span_us": 3552,
+          "raster_finish_epoch_us": 1788435874039414,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2470,
+          "frame_interval_start_epoch_us": 1788435874035862,
+          "frame_interval_end_epoch_us": 1788435874039414,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6434,
+          "build_us": 558,
+          "raster_us": 2385,
+          "vsync_overhead_us": 124,
+          "total_span_us": 3429,
+          "raster_finish_epoch_us": 1788435874055962,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2385,
+          "frame_interval_start_epoch_us": 1788435874052533,
+          "frame_interval_end_epoch_us": 1788435874055962,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6436,
+          "build_us": 1142,
+          "raster_us": 2357,
+          "vsync_overhead_us": 205,
+          "total_span_us": 3802,
+          "raster_finish_epoch_us": 1788435874089663,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2357,
+          "frame_interval_start_epoch_us": 1788435874085861,
+          "frame_interval_end_epoch_us": 1788435874089663,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6697,
+          "build_us": 551,
+          "raster_us": 2326,
+          "vsync_overhead_us": 199,
+          "total_span_us": 3191,
+          "raster_finish_epoch_us": 1788435876372382,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2326,
+          "frame_interval_start_epoch_us": 1788435876369191,
+          "frame_interval_end_epoch_us": 1788435876372382,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 6614,
+          "build_us": 578,
+          "raster_us": 2280,
+          "vsync_overhead_us": 247,
+          "total_span_us": 3206,
+          "raster_finish_epoch_us": 1788435875630732,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 2280,
+          "frame_interval_start_epoch_us": 1788435875627526,
+          "frame_interval_end_epoch_us": 1788435875630732,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 0,
+      "measured_process_rss": {
+        "start_bytes": 329236480,
+        "end_bytes": 330334208,
+        "signed_end_minus_start_bytes": 1097728,
+        "sample_peak_bytes": 332627968,
+        "process_lifetime_max_at_last_sample_bytes": 348028928,
+        "maximum_sample_gap_us": 102427,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 322519040,
+            "process_lifetime_max_rss_bytes": 348028928
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 322846720,
+            "process_lifetime_max_rss_bytes": 348028928
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 325369856,
+            "process_lifetime_max_rss_bytes": 348028928
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 366559232,
+            "process_lifetime_max_rss_bytes": 410943488
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 366804992,
+            "process_lifetime_max_rss_bytes": 410943488
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 1231,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 2925,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 1865,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 2794,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.0,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 3488,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 332627968,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 1097728,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "flowchart",
+      "status": "pass",
+      "frame_samples": 366,
+      "rss_samples": 57,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 366,
+          "min": 23,
+          "max": 8910,
+          "mean": 1285.122950819672,
+          "percentile_method": "nearest rank",
+          "p50": 274,
+          "p90": 4165,
+          "p95": 4985,
+          "p99": 7041
+        },
+        "raster_us": {
+          "sample_count": 366,
+          "min": 984,
+          "max": 12968,
+          "mean": 2579.27868852459,
+          "percentile_method": "nearest rank",
+          "p50": 2400,
+          "p90": 3457,
+          "p95": 4513,
+          "p99": 5548
+        },
+        "total_span_us": {
+          "sample_count": 366,
+          "min": 1309,
+          "max": 13419,
+          "mean": 4069.6147540983607,
+          "percentile_method": "nearest rank",
+          "p50": 3353,
+          "p90": 6917,
+          "p95": 8022,
+          "p99": 11233
+        },
+        "vsync_overhead_us": {
+          "sample_count": 366,
+          "min": 39,
+          "max": 1461,
+          "mean": 140.06830601092895,
+          "percentile_method": "nearest rank",
+          "p50": 132,
+          "p90": 179,
+          "p95": 201,
+          "p99": 753
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 1,
+            "fraction": 0.00273224043715847
+          },
+          "raster_us": {
+            "count": 1,
+            "fraction": 0.00273224043715847
+          },
+          "total_span_us": {
+            "count": 16,
+            "fraction": 0.04371584699453552
+          },
+          "vsync_overhead_us": {
+            "count": 0,
+            "fraction": 0.0
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "vsync_overhead_us": {
+            "count": 0,
+            "fraction": 0.0
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 7756,
+          "build_us": 8910,
+          "raster_us": 3481,
+          "vsync_overhead_us": 143,
+          "total_span_us": 12584,
+          "raster_finish_epoch_us": 1788435892719248,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7483,
+          "build_us": 7932,
+          "raster_us": 3137,
+          "vsync_overhead_us": 116,
+          "total_span_us": 11233,
+          "raster_finish_epoch_us": 1788435888563735,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7606,
+          "build_us": 7881,
+          "raster_us": 3937,
+          "vsync_overhead_us": 127,
+          "total_span_us": 12000,
+          "raster_finish_epoch_us": 1788435890418666,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7704,
+          "build_us": 7041,
+          "raster_us": 3658,
+          "vsync_overhead_us": 173,
+          "total_span_us": 10934,
+          "raster_finish_epoch_us": 1788435891925932,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7757,
+          "build_us": 7001,
+          "raster_us": 3086,
+          "vsync_overhead_us": 180,
+          "total_span_us": 10329,
+          "raster_finish_epoch_us": 1788435892741992,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7634,
+          "build_us": 6849,
+          "raster_us": 3489,
+          "vsync_overhead_us": 109,
+          "total_span_us": 10508,
+          "raster_finish_epoch_us": 1788435890867173,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7734,
+          "build_us": 6205,
+          "raster_us": 2679,
+          "vsync_overhead_us": 159,
+          "total_span_us": 9091,
+          "raster_finish_epoch_us": 1788435892365754,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7762,
+          "build_us": 5893,
+          "raster_us": 2454,
+          "vsync_overhead_us": 177,
+          "total_span_us": 8569,
+          "raster_finish_epoch_us": 1788435892831898,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7635,
+          "build_us": 5774,
+          "raster_us": 2937,
+          "vsync_overhead_us": 183,
+          "total_span_us": 8941,
+          "raster_finish_epoch_us": 1788435890890606,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7758,
+          "build_us": 5632,
+          "raster_us": 2892,
+          "vsync_overhead_us": 178,
+          "total_span_us": 8756,
+          "raster_finish_epoch_us": 1788435892765418,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 7450,
+          "build_us": 217,
+          "raster_us": 12968,
+          "vsync_overhead_us": 152,
+          "total_span_us": 13419,
+          "raster_finish_epoch_us": 1788435888082593,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7698,
+          "build_us": 322,
+          "raster_us": 5735,
+          "vsync_overhead_us": 286,
+          "total_span_us": 6430,
+          "raster_finish_epoch_us": 1788435891821428,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7453,
+          "build_us": 2864,
+          "raster_us": 5726,
+          "vsync_overhead_us": 102,
+          "total_span_us": 8734,
+          "raster_finish_epoch_us": 1788435888136237,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7578,
+          "build_us": 346,
+          "raster_us": 5548,
+          "vsync_overhead_us": 243,
+          "total_span_us": 6221,
+          "raster_finish_epoch_us": 1788435890037888,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7678,
+          "build_us": 455,
+          "raster_us": 5517,
+          "vsync_overhead_us": 201,
+          "total_span_us": 6265,
+          "raster_finish_epoch_us": 1788435891587930,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7633,
+          "build_us": 196,
+          "raster_us": 5312,
+          "vsync_overhead_us": 199,
+          "total_span_us": 5891,
+          "raster_finish_epoch_us": 1788435890854222,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7658,
+          "build_us": 244,
+          "raster_us": 5296,
+          "vsync_overhead_us": 355,
+          "total_span_us": 7651,
+          "raster_finish_epoch_us": 1788435891355982,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7554,
+          "build_us": 334,
+          "raster_us": 5220,
+          "vsync_overhead_us": 117,
+          "total_span_us": 6002,
+          "raster_finish_epoch_us": 1788435889721002,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7575,
+          "build_us": 328,
+          "raster_us": 5070,
+          "vsync_overhead_us": 122,
+          "total_span_us": 5573,
+          "raster_finish_epoch_us": 1788435889978907,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 7530,
+          "build_us": 391,
+          "raster_us": 5048,
+          "vsync_overhead_us": 142,
+          "total_span_us": 5635,
+          "raster_finish_epoch_us": 1788435889416470,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 7450,
+          "build_us": 217,
+          "raster_us": 12968,
+          "vsync_overhead_us": 152,
+          "total_span_us": 13419,
+          "raster_finish_epoch_us": 1788435888082593,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 12968,
+          "frame_interval_start_epoch_us": 1788435888069174,
+          "frame_interval_end_epoch_us": 1788435888082593,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7756,
+          "build_us": 8910,
+          "raster_us": 3481,
+          "vsync_overhead_us": 143,
+          "total_span_us": 12584,
+          "raster_finish_epoch_us": 1788435892719248,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 8910,
+          "frame_interval_start_epoch_us": 1788435892706664,
+          "frame_interval_end_epoch_us": 1788435892719248,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7483,
+          "build_us": 7932,
+          "raster_us": 3137,
+          "vsync_overhead_us": 116,
+          "total_span_us": 11233,
+          "raster_finish_epoch_us": 1788435888563735,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 7932,
+          "frame_interval_start_epoch_us": 1788435888552502,
+          "frame_interval_end_epoch_us": 1788435888563735,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7606,
+          "build_us": 7881,
+          "raster_us": 3937,
+          "vsync_overhead_us": 127,
+          "total_span_us": 12000,
+          "raster_finish_epoch_us": 1788435890418666,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 7881,
+          "frame_interval_start_epoch_us": 1788435890406666,
+          "frame_interval_end_epoch_us": 1788435890418666,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7704,
+          "build_us": 7041,
+          "raster_us": 3658,
+          "vsync_overhead_us": 173,
+          "total_span_us": 10934,
+          "raster_finish_epoch_us": 1788435891925932,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 7041,
+          "frame_interval_start_epoch_us": 1788435891914998,
+          "frame_interval_end_epoch_us": 1788435891925932,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7757,
+          "build_us": 7001,
+          "raster_us": 3086,
+          "vsync_overhead_us": 180,
+          "total_span_us": 10329,
+          "raster_finish_epoch_us": 1788435892741992,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 7001,
+          "frame_interval_start_epoch_us": 1788435892731663,
+          "frame_interval_end_epoch_us": 1788435892741992,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7634,
+          "build_us": 6849,
+          "raster_us": 3489,
+          "vsync_overhead_us": 109,
+          "total_span_us": 10508,
+          "raster_finish_epoch_us": 1788435890867173,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 6849,
+          "frame_interval_start_epoch_us": 1788435890856665,
+          "frame_interval_end_epoch_us": 1788435890867173,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7734,
+          "build_us": 6205,
+          "raster_us": 2679,
+          "vsync_overhead_us": 159,
+          "total_span_us": 9091,
+          "raster_finish_epoch_us": 1788435892365754,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 6205,
+          "frame_interval_start_epoch_us": 1788435892356663,
+          "frame_interval_end_epoch_us": 1788435892365754,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7762,
+          "build_us": 5893,
+          "raster_us": 2454,
+          "vsync_overhead_us": 177,
+          "total_span_us": 8569,
+          "raster_finish_epoch_us": 1788435892831898,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5893,
+          "frame_interval_start_epoch_us": 1788435892823329,
+          "frame_interval_end_epoch_us": 1788435892831898,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 7635,
+          "build_us": 5774,
+          "raster_us": 2937,
+          "vsync_overhead_us": 183,
+          "total_span_us": 8941,
+          "raster_finish_epoch_us": 1788435890890606,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5774,
+          "frame_interval_start_epoch_us": 1788435890881665,
+          "frame_interval_end_epoch_us": 1788435890890606,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 2,
+      "measured_process_rss": {
+        "start_bytes": 381583360,
+        "end_bytes": 382173184,
+        "signed_end_minus_start_bytes": 589824,
+        "sample_peak_bytes": 390955008,
+        "process_lifetime_max_at_last_sample_bytes": 410943488,
+        "maximum_sample_gap_us": 105289,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 366804992,
+            "process_lifetime_max_rss_bytes": 410943488
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 366870528,
+            "process_lifetime_max_rss_bytes": 410943488
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 369688576,
+            "process_lifetime_max_rss_bytes": 410943488
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 427032576,
+            "process_lifetime_max_rss_bytes": 449265664
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 427474944,
+            "process_lifetime_max_rss_bytes": 449265664
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 4985,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 8910,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 4513,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 12968,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.00546448087431694,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 8022,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 390955008,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 589824,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "insight_cards",
+      "status": "budget_fail",
+      "frame_samples": 544,
+      "rss_samples": 61,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 544,
+          "min": 27,
+          "max": 45395,
+          "mean": 1622.0294117647059,
+          "percentile_method": "nearest rank",
+          "p50": 1575,
+          "p90": 2688,
+          "p95": 3818,
+          "p99": 5464
+        },
+        "raster_us": {
+          "sample_count": 544,
+          "min": 566,
+          "max": 5176,
+          "mean": 1102.9025735294117,
+          "percentile_method": "nearest rank",
+          "p50": 945,
+          "p90": 1475,
+          "p95": 1774,
+          "p99": 4358
+        },
+        "total_span_us": {
+          "sample_count": 544,
+          "min": 798,
+          "max": 46829,
+          "mean": 3162.3841911764707,
+          "percentile_method": "nearest rank",
+          "p50": 2697,
+          "p90": 4660,
+          "p95": 5740,
+          "p99": 40260
+        },
+        "vsync_overhead_us": {
+          "sample_count": 544,
+          "min": 33,
+          "max": 45601,
+          "mean": 387.0367647058824,
+          "percentile_method": "nearest rank",
+          "p50": 144,
+          "p90": 188,
+          "p95": 220,
+          "p99": 837
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 4,
+            "fraction": 0.007352941176470588
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 7,
+            "fraction": 0.012867647058823529
+          },
+          "vsync_overhead_us": {
+            "count": 3,
+            "fraction": 0.0055147058823529415
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 3,
+            "fraction": 0.0055147058823529415
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 6,
+            "fraction": 0.011029411764705883
+          },
+          "vsync_overhead_us": {
+            "count": 3,
+            "fraction": 0.0055147058823529415
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 8236,
+          "build_us": 45395,
+          "raster_us": 1232,
+          "vsync_overhead_us": 151,
+          "total_span_us": 46829,
+          "raster_finish_epoch_us": 1788435902753477,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8422,
+          "build_us": 44020,
+          "raster_us": 1223,
+          "vsync_overhead_us": 55,
+          "total_span_us": 45340,
+          "raster_finish_epoch_us": 1788435904743652,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8609,
+          "build_us": 39671,
+          "raster_us": 1057,
+          "vsync_overhead_us": 177,
+          "total_span_us": 40957,
+          "raster_finish_epoch_us": 1788435906722600,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8375,
+          "build_us": 11135,
+          "raster_us": 1627,
+          "vsync_overhead_us": 176,
+          "total_span_us": 13002,
+          "raster_finish_epoch_us": 1788435904211315,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8363,
+          "build_us": 5780,
+          "raster_us": 1838,
+          "vsync_overhead_us": 198,
+          "total_span_us": 7895,
+          "raster_finish_epoch_us": 1788435904006209,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8198,
+          "build_us": 5464,
+          "raster_us": 782,
+          "vsync_overhead_us": 225,
+          "total_span_us": 6520,
+          "raster_finish_epoch_us": 1788435902046505,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8219,
+          "build_us": 5361,
+          "raster_us": 1227,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6820,
+          "raster_finish_epoch_us": 1788435902396802,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8224,
+          "build_us": 5234,
+          "raster_us": 1823,
+          "vsync_overhead_us": 357,
+          "total_span_us": 7539,
+          "raster_finish_epoch_us": 1788435902472521,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8196,
+          "build_us": 5207,
+          "raster_us": 1224,
+          "vsync_overhead_us": 211,
+          "total_span_us": 6688,
+          "raster_finish_epoch_us": 1788435902013338,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8374,
+          "build_us": 5193,
+          "raster_us": 2027,
+          "vsync_overhead_us": 268,
+          "total_span_us": 7565,
+          "raster_finish_epoch_us": 1788435904189221,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 8607,
+          "build_us": 533,
+          "raster_us": 5176,
+          "vsync_overhead_us": 213,
+          "total_span_us": 6034,
+          "raster_finish_epoch_us": 1788435906654345,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8233,
+          "build_us": 602,
+          "raster_us": 5003,
+          "vsync_overhead_us": 204,
+          "total_span_us": 5921,
+          "raster_finish_epoch_us": 1788435902654239,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8235,
+          "build_us": 476,
+          "raster_us": 4909,
+          "vsync_overhead_us": 246,
+          "total_span_us": 5752,
+          "raster_finish_epoch_us": 1788435902704069,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8606,
+          "build_us": 452,
+          "raster_us": 4630,
+          "vsync_overhead_us": 248,
+          "total_span_us": 5454,
+          "raster_finish_epoch_us": 1788435906628765,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8608,
+          "build_us": 450,
+          "raster_us": 4475,
+          "vsync_overhead_us": 183,
+          "total_span_us": 5247,
+          "raster_finish_epoch_us": 1788435906678557,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8605,
+          "build_us": 314,
+          "raster_us": 4358,
+          "vsync_overhead_us": 202,
+          "total_span_us": 5051,
+          "raster_finish_epoch_us": 1788435906603361,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8421,
+          "build_us": 593,
+          "raster_us": 4216,
+          "vsync_overhead_us": 215,
+          "total_span_us": 5154,
+          "raster_finish_epoch_us": 1788435904695135,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8232,
+          "build_us": 259,
+          "raster_us": 4191,
+          "vsync_overhead_us": 198,
+          "total_span_us": 4746,
+          "raster_finish_epoch_us": 1788435902628063,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8234,
+          "build_us": 543,
+          "raster_us": 3938,
+          "vsync_overhead_us": 168,
+          "total_span_us": 4748,
+          "raster_finish_epoch_us": 1788435902678063,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 8420,
+          "build_us": 458,
+          "raster_us": 3856,
+          "vsync_overhead_us": 185,
+          "total_span_us": 4602,
+          "raster_finish_epoch_us": 1788435904669583,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 8236,
+          "build_us": 45395,
+          "raster_us": 1232,
+          "vsync_overhead_us": 151,
+          "total_span_us": 46829,
+          "raster_finish_epoch_us": 1788435902753477,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 45395,
+          "frame_interval_start_epoch_us": 1788435902706648,
+          "frame_interval_end_epoch_us": 1788435902753477,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8422,
+          "build_us": 44020,
+          "raster_us": 1223,
+          "vsync_overhead_us": 55,
+          "total_span_us": 45340,
+          "raster_finish_epoch_us": 1788435904743652,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 44020,
+          "frame_interval_start_epoch_us": 1788435904698312,
+          "frame_interval_end_epoch_us": 1788435904743652,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8609,
+          "build_us": 39671,
+          "raster_us": 1057,
+          "vsync_overhead_us": 177,
+          "total_span_us": 40957,
+          "raster_finish_epoch_us": 1788435906722600,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 39671,
+          "frame_interval_start_epoch_us": 1788435906681643,
+          "frame_interval_end_epoch_us": 1788435906722600,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8375,
+          "build_us": 11135,
+          "raster_us": 1627,
+          "vsync_overhead_us": 176,
+          "total_span_us": 13002,
+          "raster_finish_epoch_us": 1788435904211315,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 11135,
+          "frame_interval_start_epoch_us": 1788435904198313,
+          "frame_interval_end_epoch_us": 1788435904211315,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8363,
+          "build_us": 5780,
+          "raster_us": 1838,
+          "vsync_overhead_us": 198,
+          "total_span_us": 7895,
+          "raster_finish_epoch_us": 1788435904006209,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5780,
+          "frame_interval_start_epoch_us": 1788435903998314,
+          "frame_interval_end_epoch_us": 1788435904006209,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8198,
+          "build_us": 5464,
+          "raster_us": 782,
+          "vsync_overhead_us": 225,
+          "total_span_us": 6520,
+          "raster_finish_epoch_us": 1788435902046505,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5464,
+          "frame_interval_start_epoch_us": 1788435902039985,
+          "frame_interval_end_epoch_us": 1788435902046505,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8219,
+          "build_us": 5361,
+          "raster_us": 1227,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6820,
+          "raster_finish_epoch_us": 1788435902396802,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5361,
+          "frame_interval_start_epoch_us": 1788435902389982,
+          "frame_interval_end_epoch_us": 1788435902396802,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8224,
+          "build_us": 5234,
+          "raster_us": 1823,
+          "vsync_overhead_us": 357,
+          "total_span_us": 7539,
+          "raster_finish_epoch_us": 1788435902472521,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5234,
+          "frame_interval_start_epoch_us": 1788435902464982,
+          "frame_interval_end_epoch_us": 1788435902472521,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8196,
+          "build_us": 5207,
+          "raster_us": 1224,
+          "vsync_overhead_us": 211,
+          "total_span_us": 6688,
+          "raster_finish_epoch_us": 1788435902013338,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5207,
+          "frame_interval_start_epoch_us": 1788435902006650,
+          "frame_interval_end_epoch_us": 1788435902013338,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 8374,
+          "build_us": 5193,
+          "raster_us": 2027,
+          "vsync_overhead_us": 268,
+          "total_span_us": 7565,
+          "raster_finish_epoch_us": 1788435904189221,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5193,
+          "frame_interval_start_epoch_us": 1788435904181656,
+          "frame_interval_end_epoch_us": 1788435904189221,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 4,
+      "measured_process_rss": {
+        "start_bytes": 435814400,
+        "end_bytes": 456409088,
+        "signed_end_minus_start_bytes": 20594688,
+        "sample_peak_bytes": 466354176,
+        "process_lifetime_max_at_last_sample_bytes": 466386944,
+        "maximum_sample_gap_us": 107631,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 427474944,
+            "process_lifetime_max_rss_bytes": 449265664
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 428638208,
+            "process_lifetime_max_rss_bytes": 449265664
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 430178304,
+            "process_lifetime_max_rss_bytes": 449265664
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 480575488,
+            "process_lifetime_max_rss_bytes": 512655360
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 480739328,
+            "process_lifetime_max_rss_bytes": 512655360
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 3818,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 45395,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 1774,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 5176,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.007352941176470588,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 5740,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 466354176,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 20594688,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "selection_actions",
+      "status": "pass",
+      "frame_samples": 303,
+      "rss_samples": 38,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "display_refresh_rate_hz": 120.0,
+      "frame_interval_us": 8333.333333333334,
+      "sampling_window_validation": "unavailable_in_compact_summary",
+      "epoch_interval_validation": {
+        "steps": "unavailable_pre_epoch_capture",
+        "rounds": "unavailable_pre_epoch_capture",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 303,
+          "min": 26,
+          "max": 5189,
+          "mean": 1253.016501650165,
+          "percentile_method": "nearest rank",
+          "p50": 877,
+          "p90": 3537,
+          "p95": 4219,
+          "p99": 4917
+        },
+        "raster_us": {
+          "sample_count": 303,
+          "min": 183,
+          "max": 3525,
+          "mean": 987.3531353135313,
+          "percentile_method": "nearest rank",
+          "p50": 852,
+          "p90": 1686,
+          "p95": 1844,
+          "p99": 2635
+        },
+        "total_span_us": {
+          "sample_count": 303,
+          "min": 270,
+          "max": 26654,
+          "mean": 2824.075907590759,
+          "percentile_method": "nearest rank",
+          "p50": 2059,
+          "p90": 5466,
+          "p95": 6073,
+          "p99": 19027
+        },
+        "vsync_overhead_us": {
+          "sample_count": 303,
+          "min": 24,
+          "max": 23616,
+          "mean": 497.84158415841586,
+          "percentile_method": "nearest rank",
+          "p50": 153,
+          "p90": 201,
+          "p95": 262,
+          "p99": 15318
+        }
+      },
+      "interval_exceedances": {
+        "observed_refresh_rate": {
+          "refresh_rate_hz": 120.0,
+          "frame_interval_us": 8333.333333333334,
+          "reference_only": false,
+          "build_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 6,
+            "fraction": 0.019801980198019802
+          },
+          "vsync_overhead_us": {
+            "count": 6,
+            "fraction": 0.019801980198019802
+          }
+        },
+        "reference_60_hz": {
+          "refresh_rate_hz": 60,
+          "frame_interval_us": 16666.666666666668,
+          "reference_only": true,
+          "build_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "raster_us": {
+            "count": 0,
+            "fraction": 0.0
+          },
+          "total_span_us": {
+            "count": 6,
+            "fraction": 0.019801980198019802
+          },
+          "vsync_overhead_us": {
+            "count": 2,
+            "fraction": 0.006600660066006601
+          }
+        }
+      },
+      "largest_build_frames": [
+        {
+          "frame_number": 9275,
+          "build_us": 5189,
+          "raster_us": 1388,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6821,
+          "raster_finish_epoch_us": 1788435915313452,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9475,
+          "build_us": 4942,
+          "raster_us": 656,
+          "vsync_overhead_us": 223,
+          "total_span_us": 5864,
+          "raster_finish_epoch_us": 1788435917745827,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9478,
+          "build_us": 4924,
+          "raster_us": 844,
+          "vsync_overhead_us": 227,
+          "total_span_us": 6051,
+          "raster_finish_epoch_us": 1788435917787679,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9378,
+          "build_us": 4917,
+          "raster_us": 1358,
+          "vsync_overhead_us": 132,
+          "total_span_us": 6470,
+          "raster_finish_epoch_us": 1788435916488099,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9488,
+          "build_us": 4697,
+          "raster_us": 1286,
+          "vsync_overhead_us": 201,
+          "total_span_us": 6248,
+          "raster_finish_epoch_us": 1788435917962875,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9485,
+          "build_us": 4653,
+          "raster_us": 1894,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6787,
+          "raster_finish_epoch_us": 1788435917913415,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9491,
+          "build_us": 4640,
+          "raster_us": 1294,
+          "vsync_overhead_us": 206,
+          "total_span_us": 6219,
+          "raster_finish_epoch_us": 1788435917996185,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9486,
+          "build_us": 4578,
+          "raster_us": 1096,
+          "vsync_overhead_us": 196,
+          "total_span_us": 5979,
+          "raster_finish_epoch_us": 1788435917929278,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9272,
+          "build_us": 4574,
+          "raster_us": 1211,
+          "vsync_overhead_us": 199,
+          "total_span_us": 6044,
+          "raster_finish_epoch_us": 1788435915287675,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9377,
+          "build_us": 4500,
+          "raster_us": 1763,
+          "vsync_overhead_us": 180,
+          "total_span_us": 6504,
+          "raster_finish_epoch_us": 1788435916463133,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "largest_raster_frames": [
+        {
+          "frame_number": 9334,
+          "build_us": 591,
+          "raster_us": 3525,
+          "vsync_overhead_us": 198,
+          "total_span_us": 4425,
+          "raster_finish_epoch_us": 1788435915852723,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9358,
+          "build_us": 749,
+          "raster_us": 3256,
+          "vsync_overhead_us": 171,
+          "total_span_us": 5411,
+          "raster_finish_epoch_us": 1788435916099543,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9258,
+          "build_us": 601,
+          "raster_us": 2680,
+          "vsync_overhead_us": 218,
+          "total_span_us": 3613,
+          "raster_finish_epoch_us": 1788435915160249,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9547,
+          "build_us": 674,
+          "raster_us": 2635,
+          "vsync_overhead_us": 163,
+          "total_span_us": 3558,
+          "raster_finish_epoch_us": 1788435918526855,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9259,
+          "build_us": 506,
+          "raster_us": 2467,
+          "vsync_overhead_us": 195,
+          "total_span_us": 3321,
+          "raster_finish_epoch_us": 1788435915176621,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9333,
+          "build_us": 467,
+          "raster_us": 2409,
+          "vsync_overhead_us": 170,
+          "total_span_us": 3163,
+          "raster_finish_epoch_us": 1788435915826464,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9549,
+          "build_us": 508,
+          "raster_us": 2402,
+          "vsync_overhead_us": 153,
+          "total_span_us": 3143,
+          "raster_finish_epoch_us": 1788435918576439,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9496,
+          "build_us": 1333,
+          "raster_us": 2302,
+          "vsync_overhead_us": 136,
+          "total_span_us": 3852,
+          "raster_finish_epoch_us": 1788435918035479,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9357,
+          "build_us": 668,
+          "raster_us": 2288,
+          "vsync_overhead_us": 87,
+          "total_span_us": 3709,
+          "raster_finish_epoch_us": 1788435916072840,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        },
+        {
+          "frame_number": 9546,
+          "build_us": 659,
+          "raster_us": 2095,
+          "vsync_overhead_us": 119,
+          "total_span_us": 3311,
+          "raster_finish_epoch_us": 1788435918501607,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0
+        }
+      ],
+      "slowest_frame_association_note": "Top 10 ordered by max(build_us, raster_us). Closed frame intervals [raster_finish_epoch_us - total_span_us, raster_finish_epoch_us] are intersected with original recorded step and round intervals. Temporal overlap includes scheduling and pipelining; it does not establish CPU causality. No cumulative-duration timestamp inference is used.",
+      "slowest_frames": [
+        {
+          "frame_number": 9275,
+          "build_us": 5189,
+          "raster_us": 1388,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6821,
+          "raster_finish_epoch_us": 1788435915313452,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 5189,
+          "frame_interval_start_epoch_us": 1788435915306631,
+          "frame_interval_end_epoch_us": 1788435915313452,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9475,
+          "build_us": 4942,
+          "raster_us": 656,
+          "vsync_overhead_us": 223,
+          "total_span_us": 5864,
+          "raster_finish_epoch_us": 1788435917745827,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4942,
+          "frame_interval_start_epoch_us": 1788435917739963,
+          "frame_interval_end_epoch_us": 1788435917745827,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9478,
+          "build_us": 4924,
+          "raster_us": 844,
+          "vsync_overhead_us": 227,
+          "total_span_us": 6051,
+          "raster_finish_epoch_us": 1788435917787679,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4924,
+          "frame_interval_start_epoch_us": 1788435917781628,
+          "frame_interval_end_epoch_us": 1788435917787679,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9378,
+          "build_us": 4917,
+          "raster_us": 1358,
+          "vsync_overhead_us": 132,
+          "total_span_us": 6470,
+          "raster_finish_epoch_us": 1788435916488099,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4917,
+          "frame_interval_start_epoch_us": 1788435916481629,
+          "frame_interval_end_epoch_us": 1788435916488099,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9488,
+          "build_us": 4697,
+          "raster_us": 1286,
+          "vsync_overhead_us": 201,
+          "total_span_us": 6248,
+          "raster_finish_epoch_us": 1788435917962875,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4697,
+          "frame_interval_start_epoch_us": 1788435917956627,
+          "frame_interval_end_epoch_us": 1788435917962875,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9485,
+          "build_us": 4653,
+          "raster_us": 1894,
+          "vsync_overhead_us": 182,
+          "total_span_us": 6787,
+          "raster_finish_epoch_us": 1788435917913415,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4653,
+          "frame_interval_start_epoch_us": 1788435917906628,
+          "frame_interval_end_epoch_us": 1788435917913415,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9491,
+          "build_us": 4640,
+          "raster_us": 1294,
+          "vsync_overhead_us": 206,
+          "total_span_us": 6219,
+          "raster_finish_epoch_us": 1788435917996185,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4640,
+          "frame_interval_start_epoch_us": 1788435917989966,
+          "frame_interval_end_epoch_us": 1788435917996185,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9486,
+          "build_us": 4578,
+          "raster_us": 1096,
+          "vsync_overhead_us": 196,
+          "total_span_us": 5979,
+          "raster_finish_epoch_us": 1788435917929278,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4578,
+          "frame_interval_start_epoch_us": 1788435917923299,
+          "frame_interval_end_epoch_us": 1788435917929278,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9272,
+          "build_us": 4574,
+          "raster_us": 1211,
+          "vsync_overhead_us": 199,
+          "total_span_us": 6044,
+          "raster_finish_epoch_us": 1788435915287675,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4574,
+          "frame_interval_start_epoch_us": 1788435915281631,
+          "frame_interval_end_epoch_us": 1788435915287675,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        },
+        {
+          "frame_number": 9377,
+          "build_us": 4500,
+          "raster_us": 1763,
+          "vsync_overhead_us": 180,
+          "total_span_us": 6504,
+          "raster_finish_epoch_us": 1788435916463133,
+          "layer_cache_bytes": 0,
+          "picture_cache_bytes": 0,
+          "sort_duration_us": 4500,
+          "frame_interval_start_epoch_us": 1788435916456629,
+          "frame_interval_end_epoch_us": 1788435916463133,
+          "temporal_association": {
+            "steps_status": "unavailable_pre_epoch_capture",
+            "rounds_status": "unavailable_pre_epoch_capture",
+            "overlapping_steps": [],
+            "overlapping_rounds": [],
+            "cpu_causality_established": false
+          }
+        }
+      ],
+      "build_or_raster_over_interval_count": 0,
+      "measured_process_rss": {
+        "start_bytes": 492535808,
+        "end_bytes": 487063552,
+        "signed_end_minus_start_bytes": -5472256,
+        "sample_peak_bytes": 497090560,
+        "process_lifetime_max_at_last_sample_bytes": 512655360,
+        "maximum_sample_gap_us": 112759,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 480739328,
+            "process_lifetime_max_rss_bytes": 512655360
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 480788480,
+            "process_lifetime_max_rss_bytes": 512655360
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 481394688,
+            "process_lifetime_max_rss_bytes": 512655360
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 519094272,
+            "process_lifetime_max_rss_bytes": 548274176
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 519192576,
+            "process_lifetime_max_rss_bytes": 548274176
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 4219,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 5189,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 1844,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 3525,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.0,
+          "maximum": 0.01,
+          "passed": true
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 6073,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 497090560,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "schema_version": 1,
+    "budget_id": "engineering_budget_v1",
+    "approval_status": "engineering_default_not_product_approved",
+    "all_platform_release_accepted": false,
+    "frame_budget": {
+      "basis": "1000000 / observed_display_refresh_rate_hz",
+      "build_p95_max_frame_intervals": 1,
+      "raster_p95_max_frame_intervals": 1,
+      "build_or_raster_over_interval_max_fraction": 0.01,
+      "build_max_frame_intervals": 2,
+      "raster_max_frame_intervals": 2,
+      "total_span_p95_max_frame_intervals": 2
+    },
+    "measured_process_rss": {
+      "sample_peak_max_bytes": 536870912,
+      "positive_end_minus_start_max_bytes": 67108864,
+      "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+    },
+    "evidence_requirements": {
+      "minimum_warmup_rounds": 1,
+      "minimum_measured_rounds": 3,
+      "minimum_frame_samples_per_scenario": 100,
+      "minimum_rss_samples_per_scenario": 10
+    },
+    "interpretation": [
+      "These are explicit engineering defaults, not official Flutter thresholds or a user-approved product budget.",
+      "Frame percentiles use nearest rank and the complete independent FrameTiming arrays, not bounded VM timeline retention.",
+      "Build and raster stages are assessed separately because rendering is pipelined; totalSpan includes scheduling and is not a count of displayed dropped frames.",
+      "The fixed measured-process RSS limits are a desktop harness risk gate; component memory and leak assessment remain unassessed even when it passes.",
+      "One passing observed run does not establish repeat-run stability or acceptance on other devices, platforms, accessibility configurations or physical input."
+    ]
+  },
+  "input_artifacts": {
+    "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json": {
+      "bytes": 35874,
+      "sha256": "0acf5cae4bb91a5c468043b76e9d05427397d643768401bcc6fec164627c57b4"
+    },
+    "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/p3_frame_samples.json.gz": {
+      "bytes": 91870,
+      "sha256": "c1927b2c6fd7b5b1df20c42defdcbd970038cb289feb6e667e46ded0611d92ed"
+    },
+    "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/p3_memory_samples.json.gz": {
+      "bytes": 6024,
+      "sha256": "92c5e13fc218c1c3ec3848c2af6af5d5d7fbf950ea56e756e2ab98d2fbe7b45b"
+    },
+    "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/quality_evidence/performance/engineering_budget_v1.json": {
+      "bytes": 1760,
+      "sha256": "f4cc5ffbc95841eee3a9e6e2f5ff870e92d056975599870b1c3308313fed5358"
+    }
+  }
+}

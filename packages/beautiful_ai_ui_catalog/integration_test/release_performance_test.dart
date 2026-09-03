@@ -6,13 +6,26 @@ import 'package:integration_test/integration_test.dart';
 import 'support/p3_performance_measurement.dart';
 import 'support/performance_preparation.dart';
 import 'support/p3_performance_workloads.dart';
+import 'support/p1p2_performance_workloads.dart';
+import 'support/performance_suite.dart';
 
 void main() {
+  const suite = String.fromEnvironment('P3_PERF_SUITE', defaultValue: 'p1p2');
+  final expectedIds = expectedPerformanceScenarios(suite);
+  final factories = <P3PerformanceWorkload Function()>[
+    if (suite == 'all') ...p3PerformanceWorkloadFactories,
+    if (suite == 'all' || suite == 'p1p2') ...p1p2PerformanceWorkloadFactories,
+  ];
+  if (factories.length != expectedIds.length) {
+    throw ArgumentError('Use this target with P3_PERF_SUITE=p1p2 or all.');
+  }
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
   final report = <String, Object?>{
     'schema_version': 1,
-    'suite': 'beautiful_ai_ui_p3_native_profile',
+    'suite': 'beautiful_ai_ui_${suite}_native_profile',
+    'performance_suite': suite,
+    'expected_scenario_ids': expectedIds,
     'started_at_utc': DateTime.now().toUtc().toIso8601String(),
     'status': 'started',
     'measurement_notes': <String>[
@@ -21,7 +34,7 @@ void main() {
       'Frame samples come from SchedulerBinding.addTimingsCallback during integration_test.traceAction.',
       'Frame sample inclusion uses rasterFinishWallTime within the recorded sampling window; timings are flushed for two seconds before and after that window.',
       'Raw engine FrameTiming samples and raw VM timelines are retained by the driver.',
-      'Frame percentiles describe the sampled interaction workload; no invented pass/fail frame threshold or all-platform claim is made.',
+      'Frame percentiles describe the sampled interaction workload. The independent assess_profile_budget.py applies explicitly labeled engineering defaults after capture; it cannot establish all-platform or product-approved acceptance.',
       'ProcessInfo.currentRss includes the whole app, fixtures, harness, engine and trace overhead. It is not isolated Dart heap or per-component memory.',
       'ProcessInfo.maxRss is the peak since this process started, never a resettable per-workload peak. rss_observed_peak_bytes is the peak of 100ms currentRss samples.',
       'Warmup is one full interaction round; measured rounds repeat the same operations. Callback totals include warmup and are reported before and after measurement.',
@@ -34,7 +47,7 @@ void main() {
   };
   binding.reportData = <String, dynamic>{'p3_performance': report};
 
-  group('P3 native profile suite', () {
+  group('Release native profile suite', () {
     // Native accessibility inspection and window resizing happen before the
     // widget-test SemanticsHandle baseline. Platform-owned accessibility
     // handles must not be confused with leaked component-owned handles.
@@ -50,14 +63,12 @@ void main() {
           P3PerformanceRecorder.measuredRounds > 20) {
         throw TestFailure('P3_MEASURED_ROUNDS must be between 1 and 20.');
       }
-      await prepareNativePerformanceViewport(
-        binding,
-        report,
-        p3PerformanceWorkloadFactories.length,
-      );
+      await prepareNativePerformanceViewport(binding, report, factories.length);
     }, timeout: const Timeout(Duration(minutes: 2)));
 
-    testWidgets('P3 native profile frame and memory workloads', (tester) async {
+    testWidgets('Release native profile frame and memory workloads', (
+      tester,
+    ) async {
       expect(
         report['viewport_prepared_before_widget_test'],
         isTrue,
@@ -75,7 +86,7 @@ void main() {
       report['status'] = 'measuring';
       final recorder = P3PerformanceRecorder(binding, tester, report);
       final failures = <String>[];
-      for (final create in p3PerformanceWorkloadFactories) {
+      for (final create in factories) {
         try {
           await recorder.run(create);
         } catch (error) {

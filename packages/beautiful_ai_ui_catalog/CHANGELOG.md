@@ -2,7 +2,20 @@
 
 ## Unreleased
 
-Final automated code validation: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`
+Local acceptance on 2026-09-04 passes 50 Catalog tests and strict analysis.
+New trusted browser-input suites and separate real AT capability probes retain
+actual failure, timeout and cleanup evidence; their configured existence does
+not imply execution acceptance.
+
+- Preserve default Tab/Shift+Tab navigation alongside the custom theme shortcut.
+- Write Code/Streaming copies to the system Clipboard and await successful I/O.
+- Add opt-in `CATALOG_REAL_FILES=true` file selection with local byte counts and
+  SHA-256 receipts, cancellation and failure handling; retain sample dictation.
+- Extend native profiling to 15 representative P1/P2/P3 workloads with explicit
+  window/lifecycle preparation, source manifests, independent frame/RSS data and
+  separately assessed engineering budgets.
+
+Earlier complete automated baseline: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`
 passed all 12 jobs in CI `33748054504`, attempt 1. The actual iOS driver
 completed successfully (exit 0, 50.234s), with one whole journey and suite
 setup/teardown; the hosted-consumer gate also passed. Earlier run records below

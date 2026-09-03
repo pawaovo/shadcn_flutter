@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:integration_test/integration_test_driver.dart';
 
+import '../integration_test/support/performance_suite.dart';
+
 /// Writes compact evidence separately from raw engine frames and VM timelines.
 Future<void> main(List<String> arguments) async {
   if (arguments.length == 3 && arguments.first == '--finalize') {
@@ -65,6 +67,7 @@ Future<void> main(List<String> arguments) async {
           '--porcelain',
         ]),
         'device_id_requested': Platform.environment['P3_PERF_DEVICE_ID'],
+        'performance_suite': Platform.environment['P3_PERF_SUITE'] ?? 'p3',
         'launcher_metadata_file': 'launcher_metadata.json',
         'launch_log': 'launch.log',
         'launcher_notes': 'Files named here are created by tool/run_p3_profile.sh; direct flutter drive users should save the exact command, Flutter version and engine launch log themselves.',
@@ -148,9 +151,18 @@ Future<void> _finalize(Directory directory, int driverExitCode) async {
   report['workload_phase_status'] = report['status'];
   report['integration_driver_exit_code'] = driverExitCode;
   final scenarios = report['scenarios'] as List? ?? <Object>[];
+  final suite = Platform.environment['P3_PERF_SUITE'] ?? 'p3';
+  final expectedIds = expectedPerformanceScenarios(suite);
+  final actualIds = scenarios.map((value) => (value as Map)['id']).toList();
+  report['performance_suite'] = suite;
+  report['expected_scenario_ids'] = expectedIds;
   final complete =
       driverExitCode == 0 &&
-      scenarios.length == 7 &&
+      report['workload_phase_status'] == 'workloads_complete' &&
+      report['suite'] == 'beautiful_ai_ui_${suite}_native_profile' &&
+      actualIds.length == expectedIds.length &&
+      actualIds.toSet().length == expectedIds.length &&
+      actualIds.every(expectedIds.contains) &&
       scenarios.every((value) => (value as Map)['status'] == 'complete');
   report['status'] = complete ? 'complete' : 'failed';
   report['finalized_at_utc'] = DateTime.now().toUtc().toIso8601String();

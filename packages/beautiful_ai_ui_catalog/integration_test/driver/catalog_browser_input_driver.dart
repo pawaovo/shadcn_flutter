@@ -64,7 +64,7 @@ Future<void> main() async {
       Map<String, dynamic>? state;
       await driver.waitFor(() async {
         final value = await driver.script(
-          'return globalThis.__beautifulInputAcceptance || null;',
+          'return window.__beautifulInputAcceptance || null;',
         );
         if (value is Map && value['stage'] == name) {
           state = Map<String, dynamic>.from(value);
@@ -86,7 +86,7 @@ Future<void> main() async {
 
     Future<void> acknowledge(String name) => driver
         .script(
-          'globalThis.__beautifulInputAcknowledgement = arguments[0]; return true;',
+          'window.__beautifulInputAcknowledgement = arguments[0]; return true;',
           <Object?>[name],
         )
         .then((_) {});
@@ -209,7 +209,11 @@ final class BrowserInputDriver {
   Future<Object?> command(String method, String path, [Object? body]) async {
     final request = await _client.openUrl(method, session.resolve(path));
     request.headers.contentType = ContentType.json;
-    if (body != null) request.write(jsonEncode(body));
+    if (body != null) {
+      final bytes = utf8.encode(jsonEncode(body));
+      request.contentLength = bytes.length;
+      request.add(bytes);
+    }
     final response = await request.close().timeout(const Duration(seconds: 60));
     final text = await utf8.decoder
         .bind(response)

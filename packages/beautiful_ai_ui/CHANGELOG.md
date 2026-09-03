@@ -4,7 +4,12 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
-Automated release validation: [CI 33748054504](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+Local acceptance on 2026-09-04 passes 629 library tests and strict analysis.
+The supplemental visual review covers 78 P1/P2 images and 127 P3 images;
+1,008 P3 layout/interaction combinations passed. Real device, screen-reader,
+current cloud input and performance-budget acceptance are recorded separately.
+
+Earlier complete automated baseline: [CI 33748054504](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
 passed 12/12 jobs for code `c2bde85dd5da7c33b0f7881234ae312f3be1826c`,
 including the actual iOS driver and hosted-consumer gate. Library/Catalog/core
 tests passed 528/26/571. Final-source macOS profiling and the targeted Safari
@@ -89,6 +94,18 @@ acceptance remain separate; this is validation, not a package publication.
   input/AT and temporal/performance limitations (product/main, @pawaovo).
 
 ### Fixed
+
+- Preserve desktop Prompt focus when model, source and attachment controls are
+  used by keeping its editor and adjacent controls in the same tap region.
+- Add held-pointer feedback and cancellation/disable cleanup to shared actions,
+  Sidebar controls, Flowchart node headers and Records selection controls.
+- Keep approval page numbers, change counts and filter ratios correctly ordered
+  in RTL; keep native Arabic text-selection highlights within the selected text.
+- Bound hidden/long Thinking animations; cache Prompt/Search text measurement;
+  lazily render large Search and Insight datasets while preserving keyboard,
+  selection and complete data access.
+- Preserve Records row layout on unchanged result order and reuse unrelated
+  column headers without losing host updates, resizing, theme or RTL behavior.
 
 - Honor disabled theme animation in the pinned shadcn layer so reduced-motion
   policy remains consistent (commit 80db77a, @pawaovo).

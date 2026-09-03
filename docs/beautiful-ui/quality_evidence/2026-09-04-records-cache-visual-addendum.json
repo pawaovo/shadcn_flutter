@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "status": "targeted_records_visual_regression_passed",
+  "reviewed_at_utc": "2026-09-03T22:55:22.536518+00:00",
+  "scope": "Three explicitly selected Records Table profiles after visible-order and per-column header reuse optimization. This is not a complete P3 matrix rerun.",
+  "baseline_review": {
+    "path": "docs/beautiful-ui/quality_evidence/2026-09-03-p3-visual-localization-temporal-review.json",
+    "sha256": "c350bb4dbfa3ff5616825fd96cc25ddd1a7490774b1f3819b4189d6641e7bfe7",
+    "renderer_manifest_path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/manifest.json",
+    "renderer_manifest_sha256": "1c8fcbc5904aeba6efdbf971fb6dc6dc4a72eb0a113be7ce3dddab966f4e3fd7",
+    "declared_matrix_cases": 1008,
+    "declared_reviewed_images": 127,
+    "baseline_artifacts_modified": false
+  },
+  "module": "records-table",
+  "completed_cases": 3,
+  "reviewed_pngs": 7,
+  "byte_identical_to_baseline": 7,
+  "changed_pngs": 0,
+  "new_direct_view_image_inspections": 0,
+  "review_method": "All seven new PNG files and seven corresponding baseline files were independently hashed against both renderer manifests and the prior accepted review entries. Every file is byte-identical, so the prior direct visual observations apply. No changed image required a new direct view_image inspection.",
+  "source_changes_from_baseline": [
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/records_table.dart",
+      "baseline_sha256": "45433eaa4224837a6ba797bd9ba84c06ef0157174ab45bf785d33bf75c3ac2fb",
+      "current_sha256": "603cf1558bab2e34a08e85423e1e19d66bc0582e74adc20b66b3d9a0c330dafb",
+      "within_this_addendum_component": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/search.dart",
+      "baseline_sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "current_sha256": "b8bdaddec0ce41c1792a5664232933306e8104506075c3db274df45e608bd1e3",
+      "within_this_addendum_component": false
+    }
+  ],
+  "all_three_run_source_inventories_equal": true,
+  "font_sha256": {
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansCJKsc-Regular.otf": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansCJK-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansArabic.ttf": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+    "packages/beautiful_ai_ui/build/release_review/fonts/NotoSansArabic-OFL.txt": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+    "packages/beautiful_ai_ui/build/release_review/fonts/provenance.json": "2ef1dbb1269e4989a27462e52e149bdd63a309b27089499ddb900e803a8799d2"
+  },
+  "fixed_fonts_unchanged": true,
+  "manifests": [
+    {
+      "path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/compact-arabic/manifest.json",
+      "sha256": "0c88ea49fa06281a240b30903eb0a3557e9c29294fb14ec4583e22c9d1bb640d",
+      "captured_at_utc": "2026-09-03T22:54:23.200769+00:00",
+      "git_head": "a235b0244b4284ba836cc0d826d6d0f09f350cee",
+      "completed_cases": 1,
+      "png_count": 2,
+      "render_exit_code": 0,
+      "sources_unchanged_during_capture": true,
+      "font_inventory_identical_to_baseline": true,
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/compact-arabic",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=records-table",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=compact-dark-hc-2x-arabic-reduced"
+      ],
+      "render_log_path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/compact-arabic/render.log",
+      "render_log_sha256": "e24732294e2917da52b82abd4e3fab3ebbc31c5c6bc65a01cb6542ef42b08938"
+    },
+    {
+      "path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-dark/manifest.json",
+      "sha256": "01afeadfb67c2fecd0912e29096d45934578ee7c99ac549d07aa4315deb3f8bc",
+      "captured_at_utc": "2026-09-03T22:53:58.475602+00:00",
+      "git_head": "0f8db35bd756803f769797886b295f32bac6b211",
+      "completed_cases": 1,
+      "png_count": 1,
+      "render_exit_code": 0,
+      "sources_unchanged_during_capture": true,
+      "font_inventory_identical_to_baseline": true,
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-dark",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=records-table",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=expanded-dark-normal-1x-english-reduced"
+      ],
+      "render_log_path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-dark/render.log",
+      "render_log_sha256": "e24732294e2917da52b82abd4e3fab3ebbc31c5c6bc65a01cb6542ef42b08938"
+    },
+    {
+      "path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/manifest.json",
+      "sha256": "7dd21737d80ea381e20294713aac98afe05619a4a95b48e9841d237475905fb7",
+      "captured_at_utc": "2026-09-03T22:53:44.486735+00:00",
+      "git_head": "0f8db35bd756803f769797886b295f32bac6b211",
+      "completed_cases": 1,
+      "png_count": 4,
+      "render_exit_code": 0,
+      "sources_unchanged_during_capture": true,
+      "font_inventory_identical_to_baseline": true,
+      "command": [
+        "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+        "test",
+        "tool/release_review/p3_visual_acceptance_test.dart",
+        "--no-pub",
+        "--concurrency=1",
+        "--reporter=expanded",
+        "--dart-define=P3_VISUAL_EXPORT=true",
+        "--dart-define=P3_VISUAL_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light",
+        "--dart-define=P3_VISUAL_ONLY_MODULE=records-table",
+        "--dart-define=P3_VISUAL_ONLY_PROFILE=expanded-light-hc-1x-english-normal"
+      ],
+      "render_log_path": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/render.log",
+      "render_log_sha256": "e24732294e2917da52b82abd4e3fab3ebbc31c5c6bc65a01cb6542ef42b08938"
+    }
+  ],
+  "focused_regression": {
+    "path": "packages/beautiful_ai_ui/test/release_review/p3_records_rebuild_cache_test.dart",
+    "sha256": "43062e7030935881b1deaf1a356d42716843dd02344a45ac6d3453f11d5fe934",
+    "tests_passed": 2,
+    "coverage": [
+      "1000 rows and 20 properties; two numeric sorts and correct lazy first/last record",
+      "No-op order preserves row Element and paragraph render object; unaffected property headers retain widget identity",
+      "Filtering resets viewport and preserves selected record; table identity resets local state",
+      "Same host list container with replacement immutable row and column refreshes data and accepted configuration",
+      "Cached descendants react to dark theme and RTL; ArrowRight decreases resized column width in RTL"
+    ],
+    "additional_existing_widget_semantics_temporal_tests_passed": 54,
+    "targeted_analyze": "passed"
+  },
+  "images": [
+    {
+      "module": "records-table",
+      "profile": "compact-dark-hc-2x-arabic-reduced",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/compact-arabic/compact-dark-hc-2x-arabic-reduced/records-table-prepared.png",
+      "sha256": "12416a442587f0601b4cdf5fb4c3701415397f9e7a6f354386edabbcad0c8f75",
+      "pixel_width": 390,
+      "pixel_height": 1126,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/compact-dark-hc-2x-arabic-reduced/records-table-prepared.png",
+      "baseline_sha256": "12416a442587f0601b4cdf5fb4c3701415397f9e7a6f354386edabbcad0c8f75",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Compact high-contrast dark Arabic at 200% keeps RTL controls, joined letters and checked-row tint visible. Row summary is intentionally ellipsized and the fixed-height list clips lower content; the paired record-detail capture exposes the complete error.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "compact-dark-hc-2x-arabic-reduced",
+      "state": "record-detail",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/compact-arabic/compact-dark-hc-2x-arabic-reduced/records-table-record-detail.png",
+      "sha256": "e124a81d52553252f5803c42c6f97b688af9e202816558f37311a35c518d2ef2",
+      "pixel_width": 390,
+      "pixel_height": 1662,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/compact-dark-hc-2x-arabic-reduced/records-table-record-detail.png",
+      "baseline_sha256": "e124a81d52553252f5803c42c6f97b688af9e202816558f37311a35c518d2ef2",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "The paired compact 200% Arabic detail capture displays the full failure text in a wrapping detail panel with a complete close label. The upper list remains a visibly bounded/scrolled viewport; no detail text is clipped.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "expanded-dark-normal-1x-english-reduced",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-dark/expanded-dark-normal-1x-english-reduced/records-table-prepared.png",
+      "sha256": "35bca147759ee48695fd2088f2fe086aa6aa86c9c35721e03c794baab38c4d25",
+      "pixel_width": 1280,
+      "pixel_height": 786,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-dark-normal-1x-english-reduced/records-table-prepared.png",
+      "baseline_sha256": "35bca147759ee48695fd2088f2fe086aa6aa86c9c35721e03c794baab38c4d25",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Expanded normal-dark English presents clear supplier/category/review columns and selected state. The failed review uses an intentional bounded two-line ellipsis; the separate English detail image exposes full text.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "prepared",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/expanded-light-hc-1x-english-normal/records-table-prepared.png",
+      "sha256": "9cd60bda2388e1800ef260eb45fb1f306c73fcfea34e5340b218319aea5597dc",
+      "pixel_width": 1280,
+      "pixel_height": 786,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/records-table-prepared.png",
+      "baseline_sha256": "9cd60bda2388e1800ef260eb45fb1f306c73fcfea34e5340b218319aea5597dc",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Expanded high-contrast light English baseline has clear table headings, selection marks and row tint. The failed review remains a bounded ellipsized summary; full text is verified in its paired detail capture.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "keyboard-focus",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/expanded-light-hc-1x-english-normal/records-table-keyboard-focus.png",
+      "sha256": "9a71765c8bcba90e1ade3981742d505cd16f2d349208be67306be89386608827",
+      "pixel_width": 1280,
+      "pixel_height": 786,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/records-table-keyboard-focus.png",
+      "baseline_sha256": "9a71765c8bcba90e1ade3981742d505cd16f2d349208be67306be89386608827",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Keyboard focus has a strong dark rounded outline around Record properties relative to baseline; toolbar text and table geometry remain unchanged.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "pointer-held",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/expanded-light-hc-1x-english-normal/records-table-pointer-held.png",
+      "sha256": "adde958eb2542c1c5d5ddc3176ee9e16d7f8be54156f1261f90874e7cfa83372",
+      "pixel_width": 1280,
+      "pixel_height": 786,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/records-table-pointer-held.png",
+      "baseline_sha256": "adde958eb2542c1c5d5ddc3176ee9e16d7f8be54156f1261f90874e7cfa83372",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Held Record properties shows a filled neutral surface and dark outline distinct from the unpressed baseline; text stays readable and no adjacent control is displaced.",
+      "issues": []
+    },
+    {
+      "module": "records-table",
+      "profile": "expanded-light-hc-1x-english-normal",
+      "state": "record-detail",
+      "file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/2026-09-04-records-cache/expanded-light/expanded-light-hc-1x-english-normal/records-table-record-detail.png",
+      "sha256": "966a17f088298f09a3f11e14c89dbfae7ffa2e5667bef651c76e7c71da29045c",
+      "pixel_width": 1280,
+      "pixel_height": 982,
+      "baseline_file": "packages/beautiful_ai_ui/build/p3_visual_acceptance/final/expanded-light-hc-1x-english-normal/records-table-record-detail.png",
+      "baseline_sha256": "966a17f088298f09a3f11e14c89dbfae7ffa2e5667bef651c76e7c71da29045c",
+      "reviewed": true,
+      "acceptance_method": "identical_sha256_to_2026_09_03_accepted_direct_visual_review",
+      "observation": "Paired English detail panel displays the complete failed-review message, supplier identity, category and close action. The table summary remains intentionally ellipsized above it.",
+      "issues": []
+    }
+  ],
+  "limitations": [
+    "Only three Records Table matrix cases were rerun; this addendum does not claim a fresh complete 1008-case matrix or review of all 127 PNGs.",
+    "Byte-identical snapshots establish the listed pictured states only. Inherited dependency and cache invalidation behavior is separately checked by the focused widget tests.",
+    "The source inventory also records a Search component change since September 3. Search was not instantiated or reviewed in this Records-only run, and no Search acceptance is inferred.",
+    "Fixed test-only OFL fallbacks do not establish native platform font fallback.",
+    "No native profile frame timing, memory, device, assistive-technology, cross-platform or final release acceptance is granted by this visual addendum."
+  ],
+  "source_inventory_entry_count": 251,
+  "source_inventory_binding": "Complete source/configuration inventories are retained in each hashed renderer manifest listed above; all three were equal. Only baseline differences are repeated in this compact addendum."
+}

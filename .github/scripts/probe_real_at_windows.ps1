@@ -238,8 +238,21 @@ try {
     if (-not (Test-Path $compiler)) { throw 'The .NET Framework C# compiler is unavailable' }
     $compile = Start-Process $compiler -ArgumentList @('/nologo', '/target:winexe', ('/out:"' + $fixturePath + '"'), '/r:System.Windows.Forms.dll', '/r:System.Drawing.dll', ('"' + $sourcePath + '"')) -PassThru -NoNewWindow -RedirectStandardOutput (Join-Path $output 'compile.log') -RedirectStandardError (Join-Path $output 'compile-error.log')
     $owned.Add($compile)
+    # Windows PowerShell 5.1 can lose ExitCode for a redirected Start-Process
+    # unless its real process handle is retained before it exits. Waiting after
+    # exit does not recover it: https://github.com/PowerShell/PowerShell/issues/5421
+    $null = $compile.Handle
     Wait-Probe { $compile.Refresh(); $compile.HasExited } 8
-    if ($compile.ExitCode -ne 0) { throw 'Fixture compilation failed; see compile logs' }
+    $compileExit = $compile.ExitCode
+    $fixtureExists = Test-Path -LiteralPath $fixturePath -PathType Leaf
+    $fixtureBytes = if ($fixtureExists) { (Get-Item -LiteralPath $fixturePath).Length } else { 0 }
+    $report.evidence.fixture_compilation = @{
+        compiler = $compiler; exit_code = $compileExit
+        executable_exists = $fixtureExists; executable_bytes = $fixtureBytes
+    }
+    if ($null -eq $compileExit -or $compileExit -ne 0 -or $fixtureBytes -le 0) {
+        throw 'Fixture compilation was not verified; see fixture_compilation evidence and compile logs'
+    }
     $events = Join-Path $output 'fixture-events.log'
     [IO.File]::WriteAllText($events, '')
     $fixture = Start-Process $fixturePath -ArgumentList ('"' + $events + '"') -PassThru

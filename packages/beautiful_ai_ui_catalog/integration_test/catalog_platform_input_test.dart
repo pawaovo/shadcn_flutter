@@ -19,6 +19,7 @@ void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   final nativeSemantics = CatalogSemanticsFixture(binding);
   final scenarios = <Map<String, Object?>>[];
+  final inputTrace = <Map<String, Object?>>[];
   final report = <String, Object?>{
     'schema_version': 1,
     'suite': 'beautiful_ai_ui_catalog_framework_input',
@@ -38,6 +39,7 @@ void main() {
       'Web clipboard requires the separate trusted WebDriver input target. This suite does not verify an OS input method.',
     ],
     'scenarios': scenarios,
+    'input_trace': inputTrace,
   };
   binding.reportData = <String, dynamic>{'catalog_framework_input': report};
 
@@ -54,7 +56,7 @@ void main() {
     final semantics = tester.ensureSemantics();
     final previousFatal = WidgetController.hitTestWarningShouldBeFatal;
     WidgetController.hitTestWarningShouldBeFatal = true;
-    final actions = _CatalogInputActions(tester);
+    final actions = _CatalogInputActions(tester, inputTrace);
     try {
       await binding.setSurfaceSize(const Size(1120, 900));
       catalog.main();
@@ -69,14 +71,28 @@ void main() {
 
       await _scenario(scenarios, 'prompt_keyboard_menus_and_focus', () async {
         final prompt = _input('catalog-prompt-bar');
-        await actions.enter(prompt, '/');
-        await actions.key(
-          LogicalKeyboardKey.arrowDown,
-          PhysicalKeyboardKey.arrowDown,
-        );
-        await actions.key(LogicalKeyboardKey.tab, PhysicalKeyboardKey.tab);
-        expect(_editor(tester, prompt).controller.text, '/compare ');
-        expect(_editor(tester, prompt).focusNode.hasFocus, isTrue);
+        for (final selectionKey
+            in const <(LogicalKeyboardKey, PhysicalKeyboardKey)>[
+              (LogicalKeyboardKey.tab, PhysicalKeyboardKey.tab),
+              (LogicalKeyboardKey.enter, PhysicalKeyboardKey.enter),
+            ]) {
+          await actions.enter(prompt, '/');
+          await actions.until(
+            () => _inside(
+              'catalog-prompt-bar',
+              find.text('Commands'),
+            ).evaluate().isNotEmpty,
+            'The focused slash draft must expose its command menu before navigation.',
+          );
+          await actions.key(
+            LogicalKeyboardKey.arrowDown,
+            PhysicalKeyboardKey.arrowDown,
+          );
+          await actions.key(selectionKey.$1, selectionKey.$2);
+          expect(_editor(tester, prompt).controller.text, '/compare ');
+          expect(_editor(tester, prompt).focusNode.hasFocus, isTrue);
+          expect(find.textContaining('Prompt received:'), findsNothing);
+        }
 
         await actions.enter(prompt, '/');
         final commands = _inside('catalog-prompt-bar', find.text('Commands'));
@@ -106,6 +122,7 @@ void main() {
         expect(_editor(tester, prompt).controller.text, '/');
         return <String, Object?>{
           'command_inserted': '/compare ',
+          'command_selection_keys': <String>['Tab', 'Enter'],
           'escape_preserved_draft': true,
           'model_dismissal_restored_editor_focus': true,
         };
@@ -465,9 +482,33 @@ Future<void> _scenario(
 }
 
 final class _CatalogInputActions {
-  const _CatalogInputActions(this.tester);
+  _CatalogInputActions(this.tester, this.inputTrace);
 
   final WidgetTester tester;
+  final List<Map<String, Object?>> inputTrace;
+  EditableTextState? _lastEditor;
+
+  void _record(
+    String operation, {
+    bool? handled,
+    List<Map<String, Object?>>? keyEvents,
+  }) {
+    final editor = _lastEditor;
+    final value = editor?.mounted ?? false ? editor!.textEditingValue : null;
+    inputTrace.add(<String, Object?>{
+      'operation': operation,
+      'primary_focus': FocusManager.instance.primaryFocus?.debugLabel,
+      'lifecycle': tester.binding.lifecycleState?.name,
+      'handled': ?handled,
+      'key_events': ?keyEvents,
+      if (value != null) ...<String, Object?>{
+        'editor_has_primary_focus': editor!.widget.focusNode.hasPrimaryFocus,
+        'draft': value.text,
+        'selection': <int>[value.selection.start, value.selection.end],
+        'composing': <int>[value.composing.start, value.composing.end],
+      },
+    });
+  }
 
   Future<void> reveal(Finder target) async {
     await Scrollable.ensureVisible(tester.element(target), alignment: 0.5);
@@ -479,6 +520,7 @@ final class _CatalogInputActions {
     // Catalog sample callbacks complete after 120 ms; live timers prevent
     // pumpAndSettle from being a useful completion condition here.
     await tester.pump(const Duration(milliseconds: 180));
+    _record('tap $target');
   }
 
   Future<void> until(bool Function() completed, String failure) async {
@@ -500,21 +542,48 @@ final class _CatalogInputActions {
   Future<void> edit(Finder target, TextEditingValue value) async {
     await reveal(target);
     final state = tester.state<EditableTextState>(target);
+    _lastEditor = state;
     state.widget.focusNode.requestFocus();
     await tester.pump();
+    await until(
+      () => state.widget.focusNode.hasPrimaryFocus,
+      'The editing target must receive keyboard focus before text injection.',
+    );
     // IntegrationTest leaves TestTextInput unregistered. This public editing
     // path also works in profile mode and runs formatting/onChanged callbacks.
     state.userUpdateTextEditingValue(value, SelectionChangedCause.keyboard);
     await tester.pump(const Duration(milliseconds: 16));
+    _record('edit');
     expect(state.textEditingValue, value);
+    expect(state.widget.focusNode.hasPrimaryFocus, isTrue);
   }
 
   Future<void> key(
     LogicalKeyboardKey logical,
     PhysicalKeyboardKey physical,
   ) async {
-    await tester.sendKeyEvent(logical, physicalKey: physical);
+    _record('before ${logical.keyLabel}');
+    final events = <Map<String, Object?>>[];
+    bool observe(KeyEvent event) {
+      events.add(<String, Object?>{
+        'type': event.runtimeType.toString(),
+        'logical': event.logicalKey.keyLabel,
+        'physical': event.physicalKey.debugName,
+        'synthesized': event.synthesized,
+      });
+      return false;
+    }
+
+    final keyboard = HardwareKeyboard.instance;
+    keyboard.addHandler(observe);
+    late final bool handled;
+    try {
+      handled = await tester.sendKeyEvent(logical, physicalKey: physical);
+    } finally {
+      keyboard.removeHandler(observe);
+    }
     await tester.pump(const Duration(milliseconds: 16));
+    _record('after ${logical.keyLabel}', handled: handled, keyEvents: events);
   }
 
   Future<void> shiftKey(

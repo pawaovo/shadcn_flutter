@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'interactions.dart';
+import 'native_performance_environment.dart';
 
 const p3PerformanceSurfaceKey = Key('p3-performance-surface');
 const p3PerformanceOuterScrollKey = Key('p3-performance-outer-scroll');
@@ -48,6 +49,7 @@ final class P3PerformanceActions {
   final steps = <Map<String, Object?>>[];
 
   Future<void> step(String name, Future<void> Function() action) async {
+    final startedAtEpochUs = DateTime.now().microsecondsSinceEpoch;
     final clock = Stopwatch()..start();
     await action();
     await settle();
@@ -59,6 +61,8 @@ final class P3PerformanceActions {
         'name': name,
         'round': round,
         'wall_time_us': clock.elapsedMicroseconds,
+        'start_epoch_us': startedAtEpochUs,
+        'end_epoch_us': DateTime.now().microsecondsSinceEpoch,
       });
     }
   }
@@ -130,7 +134,7 @@ Widget p3PerformanceApp(String title, Widget child) => WidgetsApp(
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: Text(
-                    'P3 profile workload · $title',
+                    'Native profile workload · $title',
                     style: BeautifulUiTheme.of(context).typography.label,
                   ),
                 ),
@@ -169,6 +173,8 @@ Map<String, Object?> p3RuntimeMetadata(WidgetTester tester) {
     'build_mode': kProfileMode
         ? 'profile'
         : (kReleaseMode ? 'release' : 'debug'),
+    'application_lifecycle_state': tester.binding.lifecycleState?.name,
+    'frames_enabled': tester.binding.framesEnabled,
     'native_view_physical_px': <String, double>{
       'width': view.physicalSize.width,
       'height': view.physicalSize.height,
@@ -184,7 +190,15 @@ Map<String, Object?> p3RuntimeMetadata(WidgetTester tester) {
     'platform_disable_animations': media.disableAnimations,
     'platform_high_contrast': media.highContrast,
     'semantics_enabled': tester.binding.platformDispatcher.semanticsEnabled,
+    'platform_semantics_enabled':
+        tester.binding.platformDispatcher.semanticsEnabled,
+    'framework_semantics_enabled': tester.binding.semanticsEnabled,
     'locale': tester.binding.platformDispatcher.locale.toLanguageTag(),
+    'platform_locale': tester.binding.platformDispatcher.locale.toLanguageTag(),
+    'widget_locale': Localizations.maybeLocaleOf(
+      tester.element(find.byKey(p3PerformanceSurfaceKey)),
+    )?.toLanguageTag(),
+    'legacy_metadata_note': 'locale and semantics_enabled retain the historical platform-dispatcher meaning; widget locale and framework Semantics are recorded independently.',
     'theme': 'light',
     'motion_policy': 'system',
     'renderer': <String, Object?>{
@@ -255,7 +269,9 @@ final class P3PerformanceRecorder {
     final timings = <ui.FrameTiming>[];
     final memory = <Map<String, Object?>>[];
     final actions = <Map<String, Object?>>[];
+    final rounds = <Map<String, Object?>>[];
     Timer? sampler;
+    NativePerformanceEnvironmentMonitor? environment;
     void collect(List<ui.FrameTiming> values) => timings.addAll(values);
     var collecting = false;
     try {
@@ -276,6 +292,13 @@ final class P3PerformanceRecorder {
       final sampleViewSize = tester.view.physicalSize;
       final samplePixelRatio = tester.view.devicePixelRatio;
       result['runtime_before_measurement'] = p3RuntimeMetadata(tester);
+      if (!nativePerformanceEnvironmentReady(
+        nativePerformanceEnvironment(binding),
+      )) {
+        throw TestFailure(
+          'The native environment is not ready before measuring ${workload.id}; require the resumed app and a >=1120 x 720 dp viewport.',
+        );
+      }
       binding.addTimingsCallback(collect);
       collecting = true;
       var startWallUs = 0;
@@ -286,12 +309,17 @@ final class P3PerformanceRecorder {
       await binding.traceAction(
         () async {
           startWallUs = DateTime.now().microsecondsSinceEpoch;
+          environment = NativePerformanceEnvironmentMonitor(binding)..start();
           actionClock.start();
-          void sample(String phase) => memory.add(<String, Object?>{
-            'phase': phase,
-            'elapsed_us': actionClock.elapsedMicroseconds,
-            ...p3ProcessMemory(),
-          });
+          void sample(String phase) {
+            environment!.check(phase);
+            memory.add(<String, Object?>{
+              'phase': phase,
+              'elapsed_us': actionClock.elapsedMicroseconds,
+              ...p3ProcessMemory(),
+            });
+          }
+
           sample('before_interactions');
           sampler = Timer.periodic(
             memorySampleInterval,
@@ -299,6 +327,7 @@ final class P3PerformanceRecorder {
           );
           try {
             for (var round = 0; round < measuredRounds; round++) {
+              final roundStart = DateTime.now().microsecondsSinceEpoch;
               final runner = P3PerformanceActions(
                 tester,
                 record: true,
@@ -308,6 +337,11 @@ final class P3PerformanceRecorder {
                 await workload.exercise(runner);
               } finally {
                 actions.addAll(runner.steps);
+                rounds.add(<String, Object?>{
+                  'round': round,
+                  'start_epoch_us': roundStart,
+                  'end_epoch_us': DateTime.now().microsecondsSinceEpoch,
+                });
               }
             }
           } catch (error, stack) {
@@ -321,6 +355,8 @@ final class P3PerformanceRecorder {
             sample('after_interactions');
             actionClock.stop();
             endWallUs = DateTime.now().microsecondsSinceEpoch;
+            result['native_environment_during_measurement'] = environment!
+                .finish();
           }
         },
         streams: const <String>['Dart', 'Embedder', 'GC'],
@@ -359,6 +395,7 @@ final class P3PerformanceRecorder {
         },
         'raw_frame_timings': samples,
         'interaction_steps': actions,
+        'interaction_rounds': rounds,
         'rss_samples': memory,
         'rss_sample_count': memory.length,
         'rss_observed_peak_bytes': memory
@@ -375,6 +412,11 @@ final class P3PerformanceRecorder {
       });
       if (interactionError != null) {
         Error.throwWithStackTrace(interactionError!, interactionStack!);
+      }
+      if (!environment!.isValid) {
+        throw TestFailure(
+          'The native lifecycle, viewport or semantics state changed while sampling ${workload.id}; raw frames and RSS remain preserved, and this workload is invalid.',
+        );
       }
       if (tester.view.physicalSize != sampleViewSize ||
           tester.view.devicePixelRatio != samplePixelRatio) {
@@ -399,6 +441,7 @@ final class P3PerformanceRecorder {
       sampler?.cancel();
       if (collecting) binding.removeTimingsCallback(collect);
       result.putIfAbsent('interaction_steps', () => actions);
+      result.putIfAbsent('interaction_rounds', () => rounds);
       result.putIfAbsent('rss_samples', () => memory);
       result.putIfAbsent('rss_sample_count', () => memory.length);
       result['rss_after_workload'] = p3ProcessMemory();
