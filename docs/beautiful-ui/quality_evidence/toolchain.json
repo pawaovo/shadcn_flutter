@@ -143,7 +143,7 @@
   "p3_local_validation": {
     "verified_on": "2026-09-03",
     "package_tests_passed": 457,
-    "catalog_tests_passed": 9,
+    "catalog_tests_passed": 11,
     "package_strict_analysis": "passed",
     "catalog_strict_analysis": "passed",
     "chrome_journey": "passed_full_p1_p2_p3",
@@ -155,7 +155,8 @@
     "publish_dry_run": "passed_zero_warnings_2_mb",
     "upstream_tests_passed": 571,
     "upstream_strict_analysis": "passed",
-    "wasm_browser_review": "records_search_enabled_editable_no_errors_compact_adaptations_verified"
+    "wasm_browser_review": "records_search_enabled_editable_no_errors_compact_adaptations_verified",
+    "catalog_tap_readiness": "passed_bounded_hit_testable_stable_three_frame_regressions_and_chrome_journey"
   },
   "p3_remote_validation": {
     "run_id": 33723609480,
@@ -166,5 +167,15 @@
     "android_emulator_journey": "passed",
     "quality": "first_run_failed_only_four_missing_p3_goldens",
     "publish_dry_run": "skipped_in_first_run_due_to_quality_dependency"
+  },
+  "p3_baseline_verification": {
+    "run_id": 33724227835,
+    "commit": "6f546209c5b9a6717b37c4a95ab17b195f181bfc",
+    "quality_and_goldens": "passed",
+    "all_platform_builds": "passed",
+    "chrome_linux_journeys": "passed",
+    "publish_validation": "passed",
+    "android_journey": "failed_citation_center_not_hit_testable_after_reveal",
+    "remediation": "bounded_stable_hit_target_helper_with_single_pointer_activation"
   }
 }

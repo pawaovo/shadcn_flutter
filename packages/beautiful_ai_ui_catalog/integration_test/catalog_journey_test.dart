@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import 'support/interactions.dart';
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -135,9 +137,7 @@ Finder _inside(String key, Finder matching) =>
 Future<void> _runP2Journey(WidgetTester tester) async {
   Future<void> tap(String key, Finder target) async {
     final finder = _inside(key, target);
-    await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
-    await tester.pump();
-    await tester.tap(finder);
+    await tapCatalogTarget(tester, finder);
     await tester.pump(const Duration(milliseconds: 180));
   }
 
@@ -245,9 +245,7 @@ Future<void> _runP2Journey(WidgetTester tester) async {
 Future<void> _runP3Journey(WidgetTester tester) async {
   Future<void> tap(String key, Finder target) async {
     final finder = _inside(key, target);
-    await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
-    await tester.pump();
-    await tester.tap(finder);
+    await tapCatalogTarget(tester, finder);
     await tester.pump(const Duration(milliseconds: 180));
   }
 

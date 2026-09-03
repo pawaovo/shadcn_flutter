@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../integration_test/support/interactions.dart';
+
 void main() {
   testWidgets('catalog renders the complete P1, P2 and P3 module set', (
     tester,
@@ -142,9 +144,7 @@ void main() {
 
     Future<void> tap(String key, Finder target) async {
       final finder = _inside(key, target);
-      await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
-      await tester.pump();
-      await tester.tap(finder);
+      await tapCatalogTarget(tester, finder);
       await tester.pump(const Duration(milliseconds: 180));
     }
 
@@ -379,9 +379,7 @@ Finder _inside(String key, Finder matching) =>
 Future<void> _runP3Journey(WidgetTester tester) async {
   Future<void> tap(String key, Finder target) async {
     final finder = _inside(key, target);
-    await Scrollable.ensureVisible(tester.element(finder), alignment: 0.5);
-    await tester.pump();
-    await tester.tap(finder);
+    await tapCatalogTarget(tester, finder);
     await tester.pump(const Duration(milliseconds: 180));
   }
 
