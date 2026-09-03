@@ -4,6 +4,13 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
+Automated release validation: [CI 33748054504](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+passed 12/12 jobs for code `c2bde85dd5da7c33b0f7881234ae312f3be1826c`,
+including the actual iOS driver and hosted-consumer gate. Library/Catalog/core
+tests passed 528/26/571. Final-source macOS profiling and the targeted Safari
+Flowchart review are complete. Physical/AT/full-matrix and performance-budget
+acceptance remain separate; this is validation, not a package publication.
+
 ### Added
 
 - Add a package-owned theme, responsive, motion, accessibility, and shadcn
@@ -61,8 +68,8 @@ All notable changes to this package will be documented in this file.
 - Add a finalized macOS profile harness and evidence for all seven P3
   workloads, including independent engine frame samples, process RSS,
   measured viewport/renderer, and explicit budget/platform limitations. Keep
-  this successful baseline distinct from the final-source resample pending
-  after the last palette and muted-ticker fixes
+  the historical baseline distinct from the completed final-source capture
+  after the palette, muted-ticker and hosted-adapter fixes
   (product/main, @pawaovo).
 - Add exact inherited font/icon and transitive-media inventories, complete
   package notices, reproducible asset checks, and a real Flutter
@@ -71,6 +78,15 @@ All notable changes to this package will be documented in this file.
 - Add supplemental static accessibility review covering 49 images across all
   twenty modules and expanded native/browser CI configuration; remote results
   remain separate from job configuration (product/main, @pawaovo).
+
+- Complete final-source macOS profile run `20260903T114308Z`: seven workloads,
+  4,495 frames/478 RSS samples, matched runtime/build inputs and successful
+  teardown/driver/finalizer. Preserve the failed preparation attempt and older
+  baseline, with budgets and other-platform acceptance still open
+  (product/main, @pawaovo).
+- Accept the targeted Safari light/dark/light reduced-motion Flowchart color
+  regression from three independent image/AX checks; retain full-browser,
+  input/AT and temporal/performance limitations (product/main, @pawaovo).
 
 ### Fixed
 
@@ -112,7 +128,11 @@ All notable changes to this package will be documented in this file.
 - Accept eight reviewed Linux component golden candidates from run
   `33736546039`; the hosted-adapter change preserves all reviewed image
   pixels. Keep the first twelve-job CI result, iOS launch remediation, and
-  pending final-source profile/Safari checks explicit
+  final-source profile/Safari acceptance boundaries explicit
+  (product/main, @pawaovo).
+- Verify bounded PID discovery, real iOS driver completion, strict journey
+  setup/teardown and termination in final CI. Retain one journey versus
+  suite-hook event counts and the earlier failed attempts accurately
   (product/main, @pawaovo).
 
 ## [0.1.0-dev.1]

@@ -103,6 +103,11 @@ The recorded audit passed for freshly generated JavaScript, Wasm, and macOS
 release assets, in addition to a real Flutter `LicenseRegistry` probe. Those
 artifact-specific results do not replace the remaining platform, brand, or
 unrelated dependency acceptance requirements.
+Final [CI `33748054504`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+passed all 12 jobs for code `c2bde85dd5da7c33b0f7881234ae312f3be1826c`,
+including another downloaded and verified hosted-consumer result with all
+13 complete required notices. This remains validation rather than an actual
+package publication.
 
 ## Country flag images
 

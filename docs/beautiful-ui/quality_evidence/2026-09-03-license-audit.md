@@ -7,6 +7,15 @@ Toolchain: Flutter `3.47.0`, Dart `3.13.0`, local macOS arm64
 Status: workspace source/assets/registry coverage verified; portable package
 notice source checks and independent hosted-consumer execution passed
 
+Latest automated acceptance is [CI `33748054504`, attempt 1](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504):
+all 12 jobs passed for code `c2bde85dd5da7c33b0f7881234ae312f3be1826c`.
+The downloaded hosted-consumer artifact `9890573744` again verifies 209
+unchanged files, 12 theme observations and all 13 required complete notices.
+Its result SHA256 is
+`cfe7abbf71529b044e236fe93b53de05d36e0cfa9f82d3bd3cbd49ba4f28be45`.
+The [compact final CI record](./2026-09-03-final-ci-33748054504.json) preserves
+this result separately from older workspace and consumer snapshots below.
+
 ## Result and scope
 
 The audit identified and repaired a real distribution omission: the Catalog

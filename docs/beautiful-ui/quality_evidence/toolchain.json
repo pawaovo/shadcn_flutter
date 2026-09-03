@@ -51,12 +51,12 @@
       "light": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
       "dark": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112"
     },
-    "p1_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
+    "p1_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_final_run_33748054504",
     "p1_linux_canonical_sha256": {
       "light": "ed6c635d6bc5b6d95b0b2e5992e91b485593b9bb0ebf9386eb4f0c24d1f1c804",
       "dark": "e9a74941d0748717fdda013e356aea1a2d0040fb45f9a62a35f981912548b739"
     },
-    "p2_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
+    "p2_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_final_run_33748054504",
     "p2_linux_missing_baseline_behavior": "export_review_candidate_and_fail_without_accepting_canonical",
     "p2_local_supplemental_platform": "macOS arm64",
     "p2_local_supplemental_status": "visually_accepted_2026-09-03",
@@ -69,7 +69,7 @@
       "light": "3ed35168aca99aaf6694bc6900457969f690c347fb22377aeed37f992b56a196",
       "dark": "42b5e21d7c6a768a17a5786f24cff821ce227c7ea4a76632073c3de7baa01e19"
     },
-    "p2_linux_comparison_verified_run": 33742943774,
+    "p2_linux_comparison_verified_run": 33748054504,
     "p3_local_supplemental_status": "visually_accepted_macos_2026-09-03",
     "p3_local_supplemental_sha256": {
       "p3_content_dark_macos.png": "ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637",
@@ -77,7 +77,7 @@
       "p3_workspace_dark_macos.png": "52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51",
       "p3_workspace_light_macos.png": "14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51"
     },
-    "p3_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_runs_33741053163_and_33742943774",
+    "p3_linux_canonical_status": "accepted_from_run_33736546039_strictly_verified_in_final_run_33748054504",
     "p3_linux_canonical_sha256": {
       "p3_content_light.png": "cdc3423e2b93bea5b9e52955ac4a8d9b7c95c83fe0bf5f2d21348f9e6427e99e",
       "p3_content_dark.png": "687e22dfad354fad4c649fe44488793f9ff9e894a011ab026c960349771b2ea4",
@@ -88,7 +88,7 @@
       "verified_on": "2026-09-03",
       "macos_checks_passed": 12,
       "updated_supplemental_images": 8,
-      "linux_current_changes": "eight_accepted_baselines_strictly_verified_through_run_33742943774",
+      "linux_current_changes": "accepted_baselines_strictly_verified_in_final_run_33748054504",
       "historical_baselines": "earlier_hashes_above_are_retained_for_their_original_implementation_runs",
       "current_supplemental_images": 10,
       "current_supplemental_sha256": {
@@ -115,8 +115,9 @@
         "p3_workspace_light.png": "55ae0c9c88f18d7f9729c0ddcebfd21ac5f4623fb3a9d954b2ab4688e9cf182f",
         "p3_workspace_dark.png": "2a0f77fe737d82476fd05b309de354bcbca927db231dba7f949e4d7a58ccea93"
       },
-      "linux_strict_comparison_run_id": 33742943774,
-      "linux_strict_comparison_commit": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda"
+      "linux_strict_comparison_run_id": 33748054504,
+      "linux_strict_comparison_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+      "linux_strict_comparison_attempt": 1
     },
     "previous_linux_canonical_baselines_before_33736546039": {
       "p1_linux_canonical_status": "accepted_from_ci_run_33632807691",
@@ -198,8 +199,8 @@
     "contracts_path": "docs/beautiful-ui/p3_contracts.md",
     "implementation_status": "all_seven_exported_in_progress",
     "integrated_execution_status": "local_results_and_complete_final_remote_results_recorded",
-    "remote_ci_status": "all_10_jobs_passed_run_33726848975_on_74178098705aa83b5452857aece6a3b10bb3ce4f",
-    "profile_release_performance": "historical_baseline_20260903T080855Z_passed_final_run_4_not_started_manual_unlock_required"
+    "remote_ci_status": "current_automated_release_all_12_jobs_passed_run_33748054504_on_c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+    "profile_release_performance": "final_source_macOS_capture_114308Z_complete_budgets_repeatability_and_other_platform_acceptance_open"
   },
   "p3_local_validation": {
     "verified_on": "2026-09-03",
@@ -299,98 +300,108 @@
     "native_macos_shared_journey": "passed",
     "native_macos_ax": "no_flag_A_B_verified_Web_flag_now_gated_by_kIsWeb",
     "profile": {
-      "evidence_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json",
-      "run_id": "20260903T080855Z",
-      "status": "historical_baseline_complete",
+      "role": "final_source_success",
+      "evidence_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json",
+      "readme_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/README.md",
+      "run_id": "20260903T114308Z",
+      "status": "complete",
+      "validated_code_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
       "integration_driver_exit_code": 0,
       "script_exit_code": 0,
-      "teardown": "completed",
+      "teardown": "passed",
       "workloads_completed": 7,
-      "frame_samples": 4524,
-      "rss_samples": 480,
+      "frame_samples": 4495,
+      "rss_samples": 478,
       "native_view_logical_dp": {
         "width": 1728.0,
-        "height": 963.0
+        "height": 1080.0
       },
       "device_pixel_ratio": 2.0,
       "display_refresh_rate_hz": 120.0,
       "renderer": "Impeller_Metal_verified_from_native_timeline",
-      "acceptance_limitations": "single_machine_run_product_budgets_repeatability_and_other_platform_or_device_evidence_open",
-      "readme_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md",
-      "source_alignment": "historical_source_predates_palette_muted_ticker_and_hosted_adapter_fixes",
-      "final_source_resample": "run_4_not_started_waiting_for_user_manual_mac_unlock",
-      "source_manifest_sha256": "ed8f40f37ddb6e276683e1bfba622d17e13deee272dd5e84af57281e2cbd9637"
+      "source_manifest_sha256": "4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac",
+      "runtime_build_inputs_matching_revision": 50,
+      "worktree_clean": false,
+      "dirty_scope": "documentation_and_evidence_only",
+      "source_matches_revision": true,
+      "platform_semantics_enabled": false,
+      "framework_semantics_requested_by_test": true,
+      "partial_vm_timelines": 6,
+      "independent_frame_arrays_complete": true,
+      "peak_ui_build_ms": {
+        "prompt_bar": 45.962,
+        "records_table": 22.06,
+        "insight_cards": 45.395
+      },
+      "performance_budget_acceptance": "not_assessed",
+      "direct_regression_comparison_with_historical_baseline": false,
+      "limitations": "one_macOS_run_instrumented_process_RSS_programmatic_inputs_other_platform_and_physical_AT_acceptance_open"
     },
     "remote_ci": {
       "workflow": ".github/workflows/beautiful_ai_ui.yml",
       "configured_jobs": 12,
-      "run_id": 33742943774,
-      "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774",
-      "commit": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
+      "run_id": 33748054504,
+      "attempt": 1,
+      "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504",
+      "commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
       "status": "completed",
-      "conclusion": "failure",
+      "conclusion": "success",
       "job_counts": {
-        "success": 11,
-        "failure": 1,
+        "success": 12,
+        "failure": 0,
         "skipped": 0
       },
-      "all_jobs_passed": false,
+      "all_jobs_passed": true,
       "job_results": {
         "Detect generated targets": "success",
         "Build Android catalog": "success",
         "Run Edge journey": "success",
         "Run Firefox journey": "success",
         "Run Chrome and Linux journeys": "success",
-        "Format, analyze, and test": "success_including_strict_linux_goldens",
-        "Build Web catalog": "success_including_asset_audits",
+        "Format, analyze, and test": "success",
+        "Build Web catalog": "success",
         "Run Android journey": "success",
-        "Build Apple catalogs": "failure_driver_VM_discovery_timeout_and_logged_test_teardown_SemanticsHandle_error",
+        "Build Apple catalogs": "success",
         "Build Linux catalog": "success",
-        "Build Windows catalog": "success_including_native_journey",
-        "Validate pub.dev package": "success_including_isolated_hosted_consumer_and_publish_dry_run"
+        "Build Windows catalog": "success",
+        "Validate pub.dev package": "success"
       },
-      "apple_steps": {
-        "bounded_launcher_self_tests": "success_all_six",
-        "ios_no_codesign_release_build": "success",
-        "macos_release_build": "success",
-        "macos_native_journey": "success",
-        "select_and_boot_ios_simulator": "success",
-        "ios_simulator_build": "success_about_five_minutes",
-        "app_installation": "success_about_22_seconds",
-        "console_vm_discovery": "reported_timeout_after_120_seconds",
-        "driver_attached": false,
-        "actual_app_and_catalog_test_execution": "confirmed_by_downloaded_unified_logs",
-        "vm_announcement_log_time": "10:27:01",
-        "catalog_test_start_log_time": "10:27:02",
-        "test_teardown_about_46_seconds_later": "_endOfTestVerifications_active_SemanticsHandle_failure",
-        "other_test_body_assertion_failure_recorded": false,
-        "failure_screenshot": "Test finished"
-      },
-      "new_browser_jobs": {
-        "firefox": "success",
-        "edge": "success"
-      },
-      "current_linux_goldens": "strict_comparison_passed_against_eight_accepted_baselines",
-      "apple_artifact_id": 9889094131,
-      "apple_job_id": 100608850829,
-      "quality_job_id": 100608850605,
-      "publish_job_id": 100609924559,
-      "follow_up": "PID_and_launch_time_scoped_unified_log_VM_discovery_and_stable_iOS_platform_semantics_baseline",
-      "leak_check_policy": "strict_no_semantics_handle_leak_exemption",
-      "historical_boundary": "third_run_execution_and_semantics_evidence_is_not_inferred_for_first_run",
-      "local_follow_up": {
-        "native_startup_focused_regressions_passed": 7,
-        "enlarged_catalog_full_suite": "passed_26",
-        "leak_checks": "preserved_without_exemption",
-        "local_catalog_tests_passed": 26,
-        "focused_startup_regressions_included_in_full_suite": true,
-        "last_verified_third_ci_catalog_tests": 19,
-        "format_check": {
-          "files_checked": 3,
-          "changed": 0
+      "apple_job_id": 100625050615,
+      "apple_artifact_id": 9890828917,
+      "ios_driver_validation": {
+        "apple_job_id": 100625050615,
+        "artifact_id": 9890828917,
+        "source_result_file": "artifacts/apple/ios-journey.json",
+        "source_result_sha256": "3f178a21ceb6f677f2679a2285cc5342d0fd3b1165590900fc4d4eed4a4d85bd",
+        "passed": true,
+        "launch": {
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 7.582
         },
-        "diff_check": "passed"
-      }
+        "vm_discovery": {
+          "passed": true,
+          "elapsed_seconds": 12.396,
+          "elapsed_includes_launch": true,
+          "validated_pid": 26615,
+          "scoped_history_queries": 1
+        },
+        "native_driver": {
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 50.234,
+          "reported_result": "All tests passed."
+        },
+        "journey_tests_passed": 1,
+        "suite_setup_and_teardown": "passed",
+        "strict_semantics_leak_checks": "preserved",
+        "terminate": {
+          "passed": true,
+          "exit_code": 0
+        }
+      },
+      "current_linux_goldens": "strict_comparison_passed",
+      "follow_up": "automated_driver_gate_closed_remaining_manual_GUI_profile_and_release_acceptance_separate"
     },
     "native_semantics_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-native-semantics.md",
     "latest_frozen_source_wasm_release": "passed_after_portable_hosted_adapter_and_notice_changes",
@@ -443,10 +454,10 @@
       "generated_notices_sha256": "803026de97a191d81e842aedf1285d2daa52c68184f8a5ea4cae65d8d076995f",
       "scope": "temporary_BAI_publication_surface_path_dependency_not_actual_pubdev_publication",
       "ci_validation": {
-        "run_id": 33742943774,
-        "repository_head": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
-        "artifact_id": 9888622880,
-        "result_sha256": "96fc50d78e61c89136129333e7547eb57e6f7b6bd6f7600a2e7f1b1b63b4cb76",
+        "run_id": 33748054504,
+        "repository_head": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+        "artifact_id": 9890573744,
+        "result_sha256": "cfe7abbf71529b044e236fe93b53de05d36e0cfa9f82d3bd3cbd49ba4f28be45",
         "passed": true,
         "hosted_dependency": {
           "source": "hosted",
@@ -481,14 +492,44 @@
             "warnings": 0,
             "archive_size": "3 MB"
           }
+        },
+        {
+          "run_id": 33742943774,
+          "repository_head": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
+          "artifact_id": 9888622880,
+          "result_sha256": "96fc50d78e61c89136129333e7547eb57e6f7b6bd6f7600a2e7f1b1b63b4cb76",
+          "passed": true,
+          "hosted_dependency": {
+            "source": "hosted",
+            "version": "0.0.54",
+            "sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+            "url": "https://pub.dev"
+          },
+          "unmodified_files": 209,
+          "theme_observations": 12,
+          "license_labels": 13,
+          "notices_sha256": "fd9ead85153b31917747fa668bff0e0a3921f66f7445d475b7a3074b7b9db84a",
+          "synthetic_license_entries": false
         }
       ]
     },
     "external_execution_condition": {
-      "local_mac_session": "locked",
-      "required_user_action": "manual_unlock_required_by_Computer_Use",
-      "final_profile_run_4": "not_started",
-      "safari_post_ticker_visual_recheck": "not_completed",
+      "local_mac_session": "unlocked_usable",
+      "final_checks_status": "complete",
+      "final_source_profile": "completed_run_20260903T114308Z",
+      "safari_post_ticker_visual_recheck": "targeted_gate_passed",
+      "prior_lock_delay": {
+        "state": "locked_at_earlier_stage",
+        "effect": "delayed_local_checks_only"
+      },
+      "later_preparation_attempt": "113737Z_failed_due_to_uncompleted_viewport_preparation_not_lock",
+      "prior_capture_anomalies": "white_frames_noWindows_resolved_without_code_change_cause_unproven",
+      "restored_safari_state": {
+        "window": "ordinary",
+        "theme": "light",
+        "motion": "reduced"
+      },
+      "gui_testing_finished": true,
       "historical_evidence_substitution": false
     },
     "remote_ci_history": [
@@ -585,25 +626,292 @@
           "actionlint": "passed",
           "remote_simulator_execution": "pending"
         }
+      },
+      {
+        "workflow": ".github/workflows/beautiful_ai_ui.yml",
+        "configured_jobs": 12,
+        "run_id": 33742943774,
+        "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774",
+        "commit": "57efe1a3f9bb72c1a7b8668dec127ad261eaedda",
+        "status": "completed",
+        "conclusion": "failure",
+        "job_counts": {
+          "success": 11,
+          "failure": 1,
+          "skipped": 0
+        },
+        "all_jobs_passed": false,
+        "job_results": {
+          "Detect generated targets": "success",
+          "Build Android catalog": "success",
+          "Run Edge journey": "success",
+          "Run Firefox journey": "success",
+          "Run Chrome and Linux journeys": "success",
+          "Format, analyze, and test": "success_including_strict_linux_goldens",
+          "Build Web catalog": "success_including_asset_audits",
+          "Run Android journey": "success",
+          "Build Apple catalogs": "failure_driver_VM_discovery_timeout_and_logged_test_teardown_SemanticsHandle_error",
+          "Build Linux catalog": "success",
+          "Build Windows catalog": "success_including_native_journey",
+          "Validate pub.dev package": "success_including_isolated_hosted_consumer_and_publish_dry_run"
+        },
+        "apple_steps": {
+          "bounded_launcher_self_tests": "success_all_six",
+          "ios_no_codesign_release_build": "success",
+          "macos_release_build": "success",
+          "macos_native_journey": "success",
+          "select_and_boot_ios_simulator": "success",
+          "ios_simulator_build": "success_about_five_minutes",
+          "app_installation": "success_about_22_seconds",
+          "console_vm_discovery": "reported_timeout_after_120_seconds",
+          "driver_attached": false,
+          "actual_app_and_catalog_test_execution": "confirmed_by_downloaded_unified_logs",
+          "vm_announcement_log_time": "10:27:01",
+          "catalog_test_start_log_time": "10:27:02",
+          "test_teardown_about_46_seconds_later": "_endOfTestVerifications_active_SemanticsHandle_failure",
+          "other_test_body_assertion_failure_recorded": false,
+          "failure_screenshot": "Test finished"
+        },
+        "new_browser_jobs": {
+          "firefox": "success",
+          "edge": "success"
+        },
+        "current_linux_goldens": "strict_comparison_passed_against_eight_accepted_baselines",
+        "apple_artifact_id": 9889094131,
+        "apple_job_id": 100608850829,
+        "quality_job_id": 100608850605,
+        "publish_job_id": 100609924559,
+        "follow_up": "PID_and_launch_time_scoped_unified_log_VM_discovery_and_stable_iOS_platform_semantics_baseline",
+        "leak_check_policy": "strict_no_semantics_handle_leak_exemption",
+        "historical_boundary": "third_run_execution_and_semantics_evidence_is_not_inferred_for_first_run",
+        "local_follow_up": {
+          "native_startup_focused_regressions_passed": 7,
+          "enlarged_catalog_full_suite": "passed_26",
+          "leak_checks": "preserved_without_exemption",
+          "local_catalog_tests_passed": 26,
+          "focused_startup_regressions_included_in_full_suite": true,
+          "last_verified_third_ci_catalog_tests": 19,
+          "format_check": {
+            "files_checked": 3,
+            "changed": 0
+          },
+          "diff_check": "passed"
+        }
+      },
+      {
+        "workflow": ".github/workflows/beautiful_ai_ui.yml",
+        "configured_jobs": 12,
+        "run_id": 33745883748,
+        "attempt": 1,
+        "result_scope": "attempt_1_actual_executions",
+        "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33745883748",
+        "commit": "26d908e0ca4eb97063ea2e54b34816e648c9dbf8",
+        "status": "completed",
+        "conclusion": "failure",
+        "job_counts": {
+          "success": 10,
+          "failure": 2,
+          "skipped": 0
+        },
+        "all_jobs_passed": false,
+        "job_results": {
+          "Detect generated targets": "success",
+          "Build Android catalog": "success",
+          "Run Edge journey": "failure_pre_test_renderer_timeout_attempt_1",
+          "Run Firefox journey": "success",
+          "Run Chrome and Linux journeys": "success",
+          "Format, analyze, and test": "success_including_strict_linux_goldens",
+          "Build Web catalog": "success_including_asset_audits",
+          "Run Android journey": "success",
+          "Build Apple catalogs": "failure_driver_discovery_despite_actual_iOS_tests_and_strict_teardown_passing",
+          "Build Linux catalog": "success",
+          "Build Windows catalog": "success_including_native_journey",
+          "Validate pub.dev package": "success_including_isolated_hosted_consumer_and_publish_dry_run"
+        },
+        "apple_steps": {
+          "launcher_self_tests": "success",
+          "ios_no_codesign_release_build": "success",
+          "macos_release_build": "success",
+          "macos_native_journey": "success",
+          "select_and_boot_ios_simulator": "success",
+          "ios_simulator_build": "success",
+          "app_installation": "success",
+          "semantics_readiness": {
+            "log_time": "10:56:30",
+            "platform": true,
+            "lifecycle": "resumed",
+            "handles": 2
+          },
+          "actual_catalog_integration_tests": {
+            "journey_tests_passed": 1,
+            "runner_passed_events_including_suite_hooks": 3,
+            "duration_seconds_reported": 49,
+            "completion_log_time": "10:57:18",
+            "strict_teardown": "passed"
+          },
+          "native_semantics_baseline_race": "resolved_in_recorded_simulator_run_without_leak_exemptions",
+          "launcher_discovery": "failed_no_matching_VM_service_before_deadline",
+          "history_queries": [],
+          "launch_pid_timing": "console_pty_PID_output_flushed_only_during_shutdown",
+          "driver_stage_executed": false,
+          "driver_attached": false
+        },
+        "edge_initial_failure": {
+          "stage": "Window.setLocation(Point(0,0))_before_test_execution",
+          "error": "renderer_timeout_300_seconds",
+          "browser_version": "151.0.4129.101",
+          "driver_version": "151.0.4129.101",
+          "configuration_matches_two_prior_passes_byte_for_byte": true,
+          "cause": "unconfirmed"
+        },
+        "apple_artifact_id": 9890070160,
+        "apple_launcher_result_sha256": "23fc93512914608ba183bfe761653ceac2379f744161076622b4958df5eb2aa4",
+        "apple_unified_log_sha256": "d9cbf7f229ac5bed1f6057e1dee5c821ba702036c3c4aad6a14961257cd776dd",
+        "current_linux_goldens": "strict_comparison_passed",
+        "launcher_follow_up_local": {
+          "implementation": "bounded_one_shot_non_console_launch_then_validate_PID_scoped_history_and_original_driver",
+          "tests_passed": 11,
+          "review": "passed",
+          "source_frozen": true,
+          "remote_driver_completion": "pending"
+        },
+        "follow_up": "verify_revised_launcher_driver_completion_remotely"
       }
     ],
     "publish_dry_run_ci": {
-      "run_id": 33741053163,
+      "run_id": 33748054504,
+      "passed": true,
       "warnings": 0,
       "archive_size": "3 MB",
-      "hosted_consumer_gate": "passed",
-      "artifact_id": 9887907974,
-      "success_repeated_in_run": 33742943774,
-      "size_and_warning_details_from_run_id": 33741053163
+      "hosted_consumer_pass_reported_utc": "2026-09-03T11:13:30Z",
+      "archive_reported_utc": "2026-09-03T11:13:31Z",
+      "zero_warnings_reported_utc": "2026-09-03T11:13:41Z",
+      "source_log": "/tmp/release-final-publish-raw.log",
+      "package_published": false
     },
     "quality_test_breakdown": {
-      "verified_run_id": 33742943774,
-      "behavior": 410,
-      "semantics": 106,
-      "goldens": 12,
+      "verified_run_id": 33748054504,
+      "attempt": 1,
       "library_total": 528,
-      "catalog": 19,
+      "catalog": 26,
       "upstream_core": 571
+    },
+    "edge_retry": {
+      "run_id": 33745883748,
+      "attempt": 2,
+      "job_id": 100622856132,
+      "commit": "26d908e0ca4eb97063ea2e54b34816e648c9dbf8",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-03T11:00:55Z",
+      "completed_at": "2026-09-03T11:04:51Z",
+      "targeted_job_only": "Run Edge journey",
+      "source_or_configuration_changed": false,
+      "other_jobs_reused_not_reexecuted": true,
+      "overall_attempt_conclusion": "failure_due_to_reused_Apple_failure",
+      "interpretation": "same_SHA_retry_passed_original_timeout_cause_not_established"
+    },
+    "quality_test_breakdown_history": [
+      {
+        "verified_run_id": 33742943774,
+        "behavior": 410,
+        "semantics": 106,
+        "goldens": 12,
+        "library_total": 528,
+        "catalog": 19,
+        "upstream_core": 571
+      },
+      {
+        "verified_run_id": 33745883748,
+        "attempt": 1,
+        "library_total": 528,
+        "catalog": 26,
+        "upstream_core": 571
+      }
+    ],
+    "ios_simulator_native_semantics_validation": {
+      "verified_run_id": 33748054504,
+      "attempt": 1,
+      "journey_tests_passed": 1,
+      "suite_setup_and_teardown": "passed",
+      "semantics_race_gate": "closed_for_recorded_simulator_runs",
+      "driver_completion_gate": "closed_by_actual_driver_exit_0",
+      "native_driver_elapsed_seconds": 50.234,
+      "historical_fourth_runner_count": {
+        "passed_events_including_suite_hooks": 3,
+        "journey_tests": 1
+      }
+    },
+    "validated_code_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+    "documentation_commit_scope": "evidence_only_does_not_replace_validated_code_commit",
+    "final_ci_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json",
+    "profile_history": [
+      {
+        "evidence_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json",
+        "run_id": "20260903T080855Z",
+        "status": "historical_baseline_complete",
+        "integration_driver_exit_code": 0,
+        "script_exit_code": 0,
+        "teardown": "completed",
+        "workloads_completed": 7,
+        "frame_samples": 4524,
+        "rss_samples": 480,
+        "native_view_logical_dp": {
+          "width": 1728.0,
+          "height": 963.0
+        },
+        "device_pixel_ratio": 2.0,
+        "display_refresh_rate_hz": 120.0,
+        "renderer": "Impeller_Metal_verified_from_native_timeline",
+        "acceptance_limitations": "single_machine_run_product_budgets_repeatability_and_other_platform_or_device_evidence_open",
+        "readme_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md",
+        "source_alignment": "historical_source_predates_palette_muted_ticker_and_hosted_adapter_fixes",
+        "source_manifest_sha256": "ed8f40f37ddb6e276683e1bfba622d17e13deee272dd5e84af57281e2cbd9637",
+        "role": "historical_earlier_source_success"
+      },
+      {
+        "role": "failed_window_preparation",
+        "run_id": "20260903T113737Z",
+        "evidence_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final-attempt/summary.json",
+        "status": "failed",
+        "completed_workloads": 0,
+        "frame_samples": 0,
+        "rss_samples": 0,
+        "observed_viewport_dp": {
+          "width": 800,
+          "height": 600
+        },
+        "preparation_timeout_seconds": 120,
+        "integration_driver_exit_code": 0,
+        "final_script_exit_code": 1,
+        "reason": "available_zoom_action_not_completed_before_preparation_deadline",
+        "not_a_resize_incapability_or_lock_proof": true
+      }
+    ],
+    "safari_targeted_visual_validation": {
+      "status": "passed",
+      "evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md",
+      "json_path": "docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.json",
+      "browser": "Safari 26.6.1",
+      "source_commit_identified_by_operator": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+      "bootstrap_sha256": "52d7a025b9bca8c5843524ed87dc9e3f802f04bb0338ca35e31e31b990d19a9d",
+      "independently_reviewed_captures": 3,
+      "captured_sequence": [
+        "light",
+        "dark",
+        "light"
+      ],
+      "motion": "reduced",
+      "saved_image_dimensions_px": {
+        "width": 1229,
+        "height": 768
+      },
+      "css_viewport_or_dpr_inferred": false,
+      "gate": "Flowchart_condition_theme_colors_update_without_stale_dark_background",
+      "operator_reported_system_dark_intermediate": "not_independently_accepted",
+      "overall_browser_status": "Partial",
+      "complete_browser_input_AT_matrix": "not_completed",
+      "earlier_white_frame_noWindows_cause": "unproven_recovered_without_application_change"
     }
   }
 }

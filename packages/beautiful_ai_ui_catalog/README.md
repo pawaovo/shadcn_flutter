@@ -88,21 +88,18 @@ Web integration uses `flutter drive`, a matching ChromeDriver, and the
 `test_driver/integration_test.dart` adapter because Flutter 3.47 does not run
 `integration_test` through `flutter test -d chrome`.
 
-The current local suite passed **26 Catalog tests** and strict Catalog
-analysis; the library passed 528 tests and its strict analyzer. The complete
-ordinary macOS journey also passed. The third twelve-job
-[run `33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
-finished with 11 successful jobs, one Apple failure and no skips. Quality
-passed 410 behavior, 106 Semantics and 12 golden checks, 19 Catalog tests and
-571 core regressions. The cloud hosted-consumer check again passed all 209
-files, 12 theme observations and 13 required complete notices.
+**Fifth CI `33748054504`, attempt 1, passed all 12 jobs** for validated code
+**`c2bde85dd5da7c33b0f7881234ae312f3be1826c`**. Quality passed 528 library,
+26 Catalog and 571 core tests, strict analysis and Linux golden comparison.
+All native/browser journeys passed, including the actual iOS Flutter driver:
+exit 0 in 50.234s with one whole Catalog journey plus suite setup/teardown,
+followed by successful termination. The original runner's `+3` includes
+those suite hooks and does not mean three independent journey tests.
 
-All six launcher self-tests, simulator build and app installation passed.
-Console VM discovery timed out, but unified logs confirm the app advertised
-its VM and ran the Catalog test. Teardown reported an active `SemanticsHandle`
-without another body assertion failure; the driver did not attach. The next
-fixes target scoped VM discovery and the iOS platform semantics baseline,
-without weakening leak checks. Earlier CI history stays in readiness.
+The [compact final evidence](../../docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json)
+records exact artifact hashes and the hosted-consumer result at the same
+code SHA. Earlier attempts and the fourth run's targeted Edge retry remain
+historical evidence; their failures are distinct from the final full pass.
 
 The Catalog now uses independently drawn launcher/Web artwork. The exact
 source and generated files are recorded in
@@ -112,23 +109,24 @@ complete notices, including 266 flag images and five original Web images.
 The real Flutter `LicenseRegistry` probe verified 13 complete labels.
 
 For native workload measurement, the opt-in
-[`tool/run_p3_profile.sh`](tool/run_p3_profile.sh) runner creates a separate
-profile fixture and saves raw artifacts under `build/p3-profile/`. The historical
-[macOS profile record](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md)
-completed all seven P3 workloads with 4,524 frame samples and 480 RSS samples
-on an M1 Pro/32 GiB machine at 1,728×963 logical pixels, DPR 2, 120 Hz. It
-records measured spikes and process-memory limitations. Run `20260903T080855Z`
-predates the final palette, muted-ticker and hosted-adapter changes. Final
-profile run 4 has not started: the local Mac is locked and Computer Use
-requires manual user unlock. Product budgets, repeatability and other
-platforms remain separate acceptance work.
+[`tool/run_p3_profile.sh`](tool/run_p3_profile.sh) creates a separate profile
+fixture and saves raw artifacts under `build/p3-profile/`. The accepted
+[final-source capture](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/README.md)
+completed all seven workloads and strict finalization with 4,495 frame samples
+and 478 process RSS samples at 1,728×1,080dp, DPR 2, 120 Hz. All 50 runtime/
+build inputs match validated code `c2bde85…`; documentation/evidence changes
+in the worktree are recorded separately. The platform semantics flag is false
+but framework test semantics remains enabled. Budgets, repeatability and
+other-platform or physical-input measurements remain separate acceptance work.
 
-The final 49-image source capture includes the hosted-adapter correction,
-which changed no reviewed image or golden pixels. Eight Linux component
-candidates from run `33736546039` were accepted. Latest portable-source Wasm
-and ordinary macOS release builds passed. Safari's visual recheck after the
-TickerMode fix is unfinished and also requires manual Mac unlock; the next
-CI run must verify driver attachment and strict iOS test teardown.
+The [targeted Safari review](../../docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md)
+accepted three paired screenshot/AX captures of light/dark/light with reduced
+motion. Flowchart buttons correctly restore a light background with dark text,
+closing the pictured regression. Safari remains Partial; the full browser/
+input/AT and timing/performance matrices are not accepted by those captures.
+Earlier white/no-window capture issues ceased without code changes and have
+no established cause. GUI testing is finished; Safari was restored to an
+ordinary window in light theme with reduced motion.
 
 The [49-image review](../../docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md)
 and [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)

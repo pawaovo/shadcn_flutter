@@ -1,0 +1,165 @@
+{
+  "schema": 1,
+  "reviewed_on": "2026-09-03",
+  "local_gate": "closed: Flowchart Canvas condition colors update correctly across the captured light-dark-light sequence while reduced motion is active",
+  "safari_overall_status": "Partial",
+  "method": "Independent view_image inspection of exactly three operator-saved real Safari full-screen JPEGs and read-only comparison with their paired AX text. No GUI operation or retest performed by the reviewer.",
+  "environment": {
+    "browser": "Safari 26.6.1",
+    "release_runtime_source_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+    "runtime_source_provenance": "Operator identified the final release artifact; bootstrap bytes independently rechecked.",
+    "url": "http://127.0.0.1:8096/",
+    "bootstrap_path": "packages/beautiful_ai_ui_catalog/build/web/flutter_bootstrap.js",
+    "bootstrap_sha256": "52d7a025b9bca8c5843524ed87dc9e3f802f04bb0338ca35e31e31b990d19a9d",
+    "window_state": "same stable full-screen Safari window, as reported by the operator",
+    "image_dimensions_note": "1229x768 are saved-image pixels; CSS viewport dimensions and DPR are not inferred."
+  },
+  "sequence": {
+    "captured_and_verified": [
+      "Theme: light",
+      "Theme: dark",
+      "Theme: light"
+    ],
+    "operator_reported_full_sequence": [
+      "light",
+      "dark",
+      "system (dark)",
+      "light"
+    ],
+    "intermediate_system_state": "Reported by the operator; no system-state screenshot is accepted in this record."
+  },
+  "verified_scope": [
+    "All three AX dumps identify Motion: reduced and Stock threshold: Below 40 tubs.",
+    "Canvas remains visibly selected; both workflow nodes, the connector and the condition control remain visible.",
+    "The final light capture shows the condition control restored to a light background with dark readable text; the previously observed stale dark-background mismatch does not appear in this captured sequence."
+  ],
+  "captures": [
+    {
+      "state": "fullscreen-light-before",
+      "theme": "light",
+      "motion": "reduced",
+      "screenshot": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-light-before.jpg",
+        "format": "JPEG",
+        "pixel_width": 1229,
+        "pixel_height": 768,
+        "sha256": "ffdb727cd9213ae408088a22839e67155317c438255ef1c7202c158b66e7e555"
+      },
+      "ax": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-light-before.ax.txt",
+        "sha256": "086600e5f7ae8ed43a1f3a32084f390b38d0e98f3952655559613b5aa25cca39",
+        "matched_labels": {
+          "theme": {
+            "text": "Theme: light",
+            "line": 9
+          },
+          "motion": {
+            "text": "Motion: reduced",
+            "line": 10
+          },
+          "condition": {
+            "text": "Stock threshold: Below 40 tubs",
+            "line": 241
+          },
+          "canvas": {
+            "text": "Canvas",
+            "line": 225,
+            "selected_state": "verified in screenshot; AX export lists the button without a selected flag"
+          }
+        }
+      },
+      "visual_observation": "Light node and condition-control surfaces with readable dark text.",
+      "review_result": "accepted_for_this_local_gate"
+    },
+    {
+      "state": "fullscreen-dark-after",
+      "theme": "dark",
+      "motion": "reduced",
+      "screenshot": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-dark-after.jpg",
+        "format": "JPEG",
+        "pixel_width": 1229,
+        "pixel_height": 768,
+        "sha256": "ffc56dd1398139ca05e78d75aadd06bc5e87e68a829abcc5298e1d981f5fffde"
+      },
+      "ax": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-dark-after.ax.txt",
+        "sha256": "e40bf737ccc1e3ea83d78a9fae932627eb6c31d2c2a983f5331aa2b4c02324ce",
+        "matched_labels": {
+          "theme": {
+            "text": "Theme: dark",
+            "line": 9
+          },
+          "motion": {
+            "text": "Motion: reduced",
+            "line": 10
+          },
+          "condition": {
+            "text": "Stock threshold: Below 40 tubs",
+            "line": 241
+          },
+          "canvas": {
+            "text": "Canvas",
+            "line": 225,
+            "selected_state": "verified in screenshot; AX export lists the button without a selected flag"
+          }
+        }
+      },
+      "visual_observation": "Dark node and condition-control surfaces with readable light text.",
+      "review_result": "accepted_for_this_local_gate"
+    },
+    {
+      "state": "fullscreen-light-after",
+      "theme": "light",
+      "motion": "reduced",
+      "screenshot": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-light-after.jpg",
+        "format": "JPEG",
+        "pixel_width": 1229,
+        "pixel_height": 768,
+        "sha256": "aeea3d01dbde5a6d822ecccb49b4a395fe1d3ba8efbdde9a6f3ae31313fd6165"
+      },
+      "ax": {
+        "path": "packages/beautiful_ai_ui_catalog/build/release_verification/safari/final-source-20260903/fullscreen-light-after.ax.txt",
+        "sha256": "be6daf7d0a2e807067b479c5ab07cbcb1ba4e469a028199a74db21db814ada62",
+        "matched_labels": {
+          "theme": {
+            "text": "Theme: light",
+            "line": 9
+          },
+          "motion": {
+            "text": "Motion: reduced",
+            "line": 10
+          },
+          "condition": {
+            "text": "Stock threshold: Below 40 tubs",
+            "line": 241
+          },
+          "canvas": {
+            "text": "Canvas",
+            "line": 225,
+            "selected_state": "verified in screenshot; AX export lists the button without a selected flag"
+          }
+        }
+      },
+      "visual_observation": "Light node and condition-control surfaces with readable dark text.",
+      "review_result": "accepted_for_this_local_gate"
+    }
+  ],
+  "excluded_attempts": [
+    {
+      "name": "flowchart-light-after.jpg and its AX dump",
+      "reason": "Earlier ineffective attempt still reported Theme: system; explicitly excluded from acceptance."
+    }
+  ],
+  "prior_capture_context": {
+    "operator_report": "Earlier white captures/noWindowsAvailable stopped after opening a new Safari window where version.json was visible, returning to Catalog, and using full-screen mode for stable theme operations.",
+    "causal_conclusion": "Unproven. This record does not attribute earlier symptoms to the component library, Safari SkWasm, Sky, or a particular window-system cause.",
+    "application_change": "No application or bootstrap code change was used for this recovery, as reported by the operator; reviewer made no application changes."
+  },
+  "remaining_scope": [
+    "Safari overall remains Partial; this is a local rendering/theme-transition gate only.",
+    "Full browser/component/input/assistive-technology matrix, actual screen-reader behavior, temporal animation timing, and performance are not accepted by these three captures."
+  ],
+  "artifact_storage": "JPEG and AX artifacts remain in ignored build output. Only this compact index, the Markdown record and local artifact references are intended for version control; no images were edited or copied."
+}

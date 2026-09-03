@@ -1,6 +1,6 @@
 # Multi-platform support matrix
 
-Status: partial platform evidence accepted; stable-release gates remain open
+Status: twelve-job automated validation passed; platform/manual release gates remain open
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 ## Status vocabulary
@@ -32,10 +32,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in run 33742943774 |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33742943774 |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Dedicated journey passed in run 33742943774 |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Post-TickerMode visual recheck awaits manual Mac unlock; remaining compatibility evidence required |
+| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Targeted reduced-motion Flowchart light/dark/light visual regression passed; full browser/input/AT matrix remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 
@@ -102,96 +102,59 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
 
 ## Current evidence snapshot
 
-The current engineering pass is recorded in
-[`quality_evidence/2026-09-03-release-readiness.md`](./quality_evidence/2026-09-03-release-readiness.md).
-It keeps completed evidence separate from the remaining release gates:
+**Validated code: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`.**
+[Fifth CI `33748054504`, attempt 1](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+completed with **12 successful jobs, zero failures and zero skips**. The
+[compact final evidence](./quality_evidence/2026-09-03-final-ci-33748054504.json)
+records exact native-driver and hosted-consumer artifact hashes. A later
+standalone documentation/evidence commit does not replace this tested code SHA.
 
-- All twenty Gallery components are implemented and exported. All 27 registry
-  entries remain `in_progress`; implementation coverage is not full release
-  acceptance.
-- Third-run quality passed 410 behavior, 106 Semantics and 12 golden checks
-  (528 library total), 19 Catalog tests and 571 core regressions; both package
-  scopes passed strict static analysis.
-- The macOS golden suite passed 12 checks; ten current macOS image hashes are
-  recorded. The final 49-image source inventory includes the hosted-adapter
-  correction, with all image pixels unchanged. Eight Linux component
-  candidates from run `33736546039` were explicitly reviewed and accepted;
-  their strict Ubuntu comparison passed in run `33741053163`.
-- Shared action foreground contrast and visible selected states were repaired;
-  Approval uses drawn checks, Sidebar's compact trigger accommodates large
-  text, and numeric/chart controls expose native slider flags. The accepted
-  images cover specific profiles, not the entire temporal/localization matrix.
-- The tested normal subtle-text combinations and light accent text on
-  `accentTint` now meet 4.5:1; the latter measures 4.925:1. Muted ancestor
-  tickers force immediate shared-action color changes, fixing unreadable
-  Flowchart buttons after a reduced-motion theme switch. Four palette and
-  three paint regressions cover these final corrections.
-- Exact font/icon inventory and notices passed: 43 source files, 37 runtime
-  font files, 266 flag images, five original Web images, and 13 full generated
-  LicenseRegistry labels. JavaScript, Wasm, and ordinary macOS release builds
-  and their actual asset audits passed. Verified inherited Geist is the
-  current typography; no Inter or JetBrains Mono files are bundled. The
-  isolated hosted-consumer test now also verifies atomic themes and portable
-  13-label notice delivery without the fork's sibling package or overrides.
-- The ordinary macOS shared Catalog journey passed. Native AX comparison also
-  succeeded without the Web compile flag. Catalog forcing of Web semantics
-  is now gated by `kIsWeb`; native applications use the platform lifecycle.
-  The [native semantics evidence](./quality_evidence/2026-09-03-native-semantics.md)
-  keeps AX inspection separate from a completed VoiceOver user workflow.
-- All seven P3 workloads completed in historical macOS profile baseline
-  `20260903T080855Z` on an
-  M1 Pro/32 GiB machine: 4,524 independent frame samples and 480 process RSS
-  samples at 1,728×963 logical pixels, DPR 2, 120 Hz. Driver, teardown and
-  script completed successfully. Its source predates the last palette,
-  muted-ticker and hosted-adapter fixes. Final profile run 4 has not started
-  because the Mac is locked and Computer Use requires manual user unlock.
-  Product budgets, repeatability,
-  and representative other-platform/device measurements remain open; measured
-  UI-build peaks include frames above 16ms.
-- Latest portable-source Wasm and ordinary macOS release builds passed.
-- The twelve-job [run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
-  on `19c80c17e5346f7415b52af9583ba6770cfbee50` passed Firefox/Edge,
-  Chrome/Linux, Android, Windows native and macOS native journeys, builds and
-  Web asset audits. Quality failed only the eight then-unaccepted Linux
-  goldens; their candidates are now accepted. The run completed with nine
-  successful jobs, two failed jobs, and one skipped job. Apple failed on the
-  iOS simulator launch-step timeout after compilation. Its runner did not
-  report test start/results, so actual execution in that capture is unconfirmed;
-  its macOS journey passed. Publish validation was skipped
-  due to quality. The next result below verifies the quality/publish and
-  portable changes; actual simulator execution remains open.
-- The second [run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
-  on `896bcfe8fd6419382f21ba6a311d37f5f017d875` completed with 11 successful
-  jobs, one failed job and no skips. Strict Linux goldens and publish validation
-  (including the real hosted consumer; 3 MB archive, zero warnings) passed.
-  Apple builds, macOS journey and simulator boot passed, but two of four
-  launcher self-tests failed with process-group cleanup `EPERM`; actual
-  simulator build/journey steps were not reached. The cleanup fix now passes
-  six local regression checks and actionlint; remote simulator execution
-  remains pending, and no all-pass result is claimed.
-- Third [run `33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
-  on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` completed with 11 successful
-  jobs, one Apple failure and no skips. Launcher self-tests, simulator build
-  and app installation passed. Console VM discovery timed out, but unified
-  logs prove the app advertised its VM and ran the Catalog test; only the
-  end-of-test active-SemanticsHandle failure was recorded, with no other body
-  assertion failure. The driver did not attach. Scoped log discovery and
-  native-platform semantics baseline fixes are pending, without leak-check
-  exemptions. Cloud hosted-consumer checks again pass 209 files/12 theme
-  observations/13 required complete notices. This evidence does not establish
-  what the first run's unobserved app did.
-- Safari's visual recheck after the TickerMode repair is unfinished and also
-  requires the user to unlock the local Mac manually. Earlier Safari or
-  profile observations are not promoted to final-source acceptance.
+- Quality passed 528 library tests, 26 Catalog tests and 571 core regressions,
+  together with strict analysis and Ubuntu golden comparison. Ten macOS
+  golden hashes and the eight accepted Linux component baselines are recorded;
+  49 supplemental static images were individually reviewed.
+- All platform builds passed, including Web JavaScript and Wasm. The shared
+  journeys passed on Android, iOS simulator, macOS, Windows and Linux, with
+  Chrome, Edge and Firefox browser jobs also passing.
+- The actual iOS driver ran and passed: exit 0 in 50.234s. Launch took 7.582s;
+  VM discovery took 12.396s including launch and used one scoped history query.
+  One whole Catalog journey with suite setup/teardown passed, and termination
+  completed. This closes the observed native semantics and driver-completion
+  gates for the recorded simulator run.
+- The independent hosted-consumer artifact at the same code SHA passed all
+  209 public-dependency file checks, 12 atomic theme/state/focus observations
+  and 13 complete notice/registry texts. Source/built-asset audits cover the
+  registered fonts, flags and original artwork. This is validation/preflight,
+  not an actual package publication.
+- The current typography is verified inherited Geist Sans/Mono, with no
+  bundled Inter or JetBrains Mono. Shared contrast, selected-state, glyph,
+  large-text and slider-semantics corrections retain their focused evidence.
+- The [final macOS profile](./quality_evidence/performance/2026-09-03-macos-profile-final/README.md)
+  completed 7/7 workloads, strict teardown, driver and finalization: 4,495
+  frame samples and 478 process RSS samples at 1,728×1,080dp, DPR 2, 120 Hz.
+  All 50 runtime/build inputs match the validated code despite documentation/
+  evidence changes in the working tree. Platform semantics was false while
+  framework test semantics remained enabled. Product budgets, repeatability
+  and other-platform performance acceptance remain open.
+- The [Safari review](./quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md)
+  independently accepted three full-screen light/dark/light captures with
+  reduced motion and correctly restored Flowchart condition colors. This
+  closes only that visual regression. The 1,229×768 saved pixels do not imply
+  a CSS viewport/DPR, and the operator-reported system-dark intermediate is
+  not independently accepted. Earlier white/no-window capture symptoms ceased
+  without a code change; their cause remains unproven.
 
-The earlier P3 implementation [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
-passed all ten jobs on `74178098705aa83b5452857aece6a3b10bb3ce4f`, including
-six-platform builds, Web JS/Wasm, Chrome/Linux/Android journeys, quality,
-Ubuntu golden comparison and publish validation. Earlier P1/P2 evidence is
-retained in their dated records. Those commits predate this engineering pass
-and are retained separately from the partial twelve-job result above.
+The [readiness record](./quality_evidence/2026-09-03-release-readiness.md) and
+`toolchain.json` retain the first four failed attempts and the fourth run's
+successful same-SHA targeted Edge retry. The fourth runner's `+3` counts
+setup, one journey and teardown, not three independent journey tests. Those
+historical failures and the unknown cause of the original Edge timeout are
+kept distinct from the fifth run's successful actual driver execution. The
+performance index separately preserves the old `080855Z` success and the
+`113737Z` preparation timeout with zero samples; neither is substituted for
+the final `114308Z` source-matched capture.
 
 Actual TalkBack, VoiceOver, Narrator and Orca task flows, physical-device
-input, remaining browsers and visual/motion combinations, agreed performance
-budgets, and other-platform performance evidence remain release gates. No
-platform is yet marked Verified.
+input, remaining Safari/browser and full visual/localization/motion coverage,
+agreed product budgets and representative performance evidence remain release
+gates. All 27 registry entries stay `in_progress`; no platform is marked Verified.

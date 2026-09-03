@@ -1,0 +1,123 @@
+{
+  "run_id": "20260903T114308Z",
+  "artifact_root_repo_relative": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260903T114308Z",
+  "raw_timeline_files_intentionally_not_committed": true,
+  "files": [
+    {
+      "file": "driver_exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "file": "exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "file": "flutter_version.json",
+      "bytes": 696,
+      "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+    },
+    {
+      "file": "launch.log",
+      "bytes": 2324,
+      "sha256": "a6cb3a398f7e0579afc02f5409759667a11768c8a0d3827783e51cf6aa3c8da2"
+    },
+    {
+      "file": "launch_command.txt",
+      "bytes": 281,
+      "sha256": "299514c01747c00130aecb13ca9c00623e0548c2b969b56f9931ba32a405c341"
+    },
+    {
+      "file": "launcher_metadata.json",
+      "bytes": 1414,
+      "sha256": "e39e0db8ba1b6acebdc3f8964c2e4654ca268b94a7a87acb6a2ffd6b3361d640"
+    },
+    {
+      "file": "p3_frame_samples.json",
+      "bytes": 1169888,
+      "sha256": "104a8d887f5624efa8143debc490af81eab89dfcb0838efa94d65bacd779c223",
+      "repository_copy": "p3_frame_samples.json.gz",
+      "copy_encoding": "gzip",
+      "compressed_bytes": 91870,
+      "compressed_sha256": "c1927b2c6fd7b5b1df20c42defdcbd970038cb289feb6e667e46ded0611d92ed"
+    },
+    {
+      "file": "p3_memory_samples.json",
+      "bytes": 80380,
+      "sha256": "e5d6addec914c177a8c1a3d9970948dccd6946412032414902bb540d7b2d1df8",
+      "repository_copy": "p3_memory_samples.json.gz",
+      "copy_encoding": "gzip",
+      "compressed_bytes": 6024,
+      "compressed_sha256": "92c5e13fc218c1c3ec3848c2af6af5d5d7fbf950ea56e756e2ab98d2fbe7b45b"
+    },
+    {
+      "file": "p3_performance.json",
+      "bytes": 60232,
+      "sha256": "e8f6d10cfa84b10144b69642ebeaa8139f44f9c4fd2e32d8835110f20f177c81"
+    },
+    {
+      "file": "p3_trace_diff_table.timeline.json",
+      "bytes": 8686945,
+      "sha256": "4552e5bc159efa490e4f9e69531a1b719808933f4163722d868f4152e1e444f7"
+    },
+    {
+      "file": "p3_trace_flowchart.timeline.json",
+      "bytes": 8676772,
+      "sha256": "49cca13e855559d872c9c496fd9c3c5de2d246b5b043babd55ebeb5f28c04763"
+    },
+    {
+      "file": "p3_trace_insight_cards.timeline.json",
+      "bytes": 8692713,
+      "sha256": "29791c03b1f3e5948511be936d8437bae4f8485b3bbed9fe1ebfaf9b4cd1dd55"
+    },
+    {
+      "file": "p3_trace_prompt_bar.timeline.json",
+      "bytes": 8674683,
+      "sha256": "2f823a91a23900349506145feb39e29d4e072f16e98e353c15aec22fee6cd255"
+    },
+    {
+      "file": "p3_trace_records_table.timeline.json",
+      "bytes": 8673628,
+      "sha256": "3ba061d8f36d6d1ed36e551d353836e2bf4403e4a4720622bbd6150bb56b6a9f"
+    },
+    {
+      "file": "p3_trace_selection_actions.timeline.json",
+      "bytes": 7986405,
+      "sha256": "5d98d3c5e667e9d58ad5b5ed055be8ebf74db1c3a82c5e4805dd7dc222144f95"
+    },
+    {
+      "file": "p3_trace_sidebar_nav.timeline.json",
+      "bytes": 8707573,
+      "sha256": "18a904507192e57fb285f2eede72d3193c16e27873132c2f3262c0766851b897"
+    }
+  ],
+  "profile_binary_hashes": [
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/macos/Build/Products/Profile/beautiful_ai_ui_catalog.app/Contents/MacOS/beautiful_ai_ui_catalog",
+      "bytes": 193408,
+      "sha256": "541821c55833314c29dfc97ad809ff7872fffaf14307c850aa5883f7487381da"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/macos/Build/Products/Profile/beautiful_ai_ui_catalog.app/Contents/Frameworks/App.framework/Versions/A/App",
+      "bytes": 15889744,
+      "sha256": "b6dd9bf5889c198791d47eca7481ae2ad654be5d5f942ccfdeac80cca25a8ae2"
+    }
+  ],
+  "previous_runs_preserved": [
+    {
+      "run_id": "20260903T080855Z",
+      "classification": "historical_success_earlier_source",
+      "summary_sha256": "30c2d26796e11868841c22eeba966675d18ca2e3909d9a0219259e74211b26d0",
+      "launch_log_sha256": "62200d633098c73c505b45720febbd8eaa8cf13fbd4920c408645a8c35d947e8",
+      "script_exit_code": 0
+    },
+    {
+      "run_id": "20260903T113737Z",
+      "classification": "failed_preparation",
+      "summary_sha256": "58f25305a816da84b26bf90da550a3d3fddddf2ac06119bc09ab4d1c483de357",
+      "launch_log_sha256": "6b954397043b40bb8e909818cf711005b36d1afc27b4f9ed21026b594f1ca4b5",
+      "script_exit_code": 1
+    }
+  ]
+}

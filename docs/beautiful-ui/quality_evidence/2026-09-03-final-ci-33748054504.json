@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-03",
+  "run_id": 33748054504,
+  "run_attempt": 1,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504",
+  "validated_code_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": {
+    "total": 12,
+    "success": 12,
+    "failure": 0,
+    "skipped": 0
+  },
+  "quality": {
+    "library_tests_passed": 528,
+    "catalog_tests_passed": 26,
+    "upstream_core_tests_passed": 571,
+    "strict_linux_goldens": "passed"
+  },
+  "ios_simulator": {
+    "apple_job_id": 100625050615,
+    "artifact_id": 9890828917,
+    "source_result_file": "artifacts/apple/ios-journey.json",
+    "source_result_sha256": "3f178a21ceb6f677f2679a2285cc5342d0fd3b1165590900fc4d4eed4a4d85bd",
+    "passed": true,
+    "launch": {
+      "passed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 7.582
+    },
+    "vm_discovery": {
+      "passed": true,
+      "elapsed_seconds": 12.396,
+      "elapsed_includes_launch": true,
+      "validated_pid": 26615,
+      "scoped_history_queries": 1
+    },
+    "native_driver": {
+      "passed": true,
+      "exit_code": 0,
+      "elapsed_seconds": 50.234,
+      "reported_result": "All tests passed."
+    },
+    "journey_tests_passed": 1,
+    "suite_setup_and_teardown": "passed",
+    "strict_semantics_leak_checks": "preserved",
+    "terminate": {
+      "passed": true,
+      "exit_code": 0
+    }
+  },
+  "hosted_consumer": {
+    "artifact_id": 9890573744,
+    "source_result_file": "result.json",
+    "source_result_sha256": "cfe7abbf71529b044e236fe93b53de05d36e0cfa9f82d3bd3cbd49ba4f28be45",
+    "passed": true,
+    "source_commit": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+    "hosted_dependency": {
+      "source": "hosted",
+      "version": "0.0.54",
+      "sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+      "url": "https://pub.dev"
+    },
+    "unmodified_runtime_files": 209,
+    "theme_observations": 12,
+    "required_complete_notice_labels": 13,
+    "notices_sha256": "fd9ead85153b31917747fa668bff0e0a3921f66f7445d475b7a3074b7b9db84a",
+    "synthetic_license_entries": false
+  },
+  "publication": "Validation/dry-run only; no actual package publication",
+  "remaining_scope": "Physical devices, complete real assistive-technology/browser/visual/localization matrices, agreed performance budgets, repeatability and other-platform measurements remain open. Final macOS source-matched capture and targeted Safari regression are complete.",
+  "publish_dry_run": {
+    "passed": true,
+    "archive_size": "3 MB",
+    "warnings": 0
+  },
+  "completed_local_followup": {
+    "macos_profile": {
+      "run_id": "20260903T114308Z",
+      "evidence": "performance/2026-09-03-macos-profile-final/summary.json",
+      "frame_samples": 4495,
+      "rss_samples": 478,
+      "source_manifest_sha256": "4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac",
+      "source_matches_validated_commit": true
+    },
+    "safari_visual": {
+      "evidence": "2026-09-03-safari-flowchart-theme-reduced.md",
+      "status": "targeted_gate_passed",
+      "captures": 3,
+      "overall_browser_status": "Partial"
+    }
+  }
+}

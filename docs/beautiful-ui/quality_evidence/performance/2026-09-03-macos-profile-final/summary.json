@@ -1,0 +1,1209 @@
+{
+  "schema_version": 1,
+  "run_id": "20260903T114308Z",
+  "status": "complete",
+  "final_source_resample_completed": true,
+  "revision": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "integration_driver_exit_code": 0,
+  "final_script_exit_code": 0,
+  "workload_phase_status": "workloads_complete",
+  "started_at_utc": "2026-09-03T11:43:25.811773Z",
+  "finished_at_utc": "2026-09-03T11:45:22.885559Z",
+  "finalized_at_utc": "2026-09-03T11:45:28.274056Z",
+  "worktree_clean": false,
+  "source_matches_revision": true,
+  "source_worktree_status": "M THIRD_PARTY_NOTICES.md\n M docs/beautiful-ui/parity_manifest.yaml\n M docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md\n M docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md\n M docs/beautiful-ui/quality_evidence/toolchain.json\n M docs/beautiful-ui/support_matrix.md\n M packages/beautiful_ai_ui/CHANGELOG.md\n M packages/beautiful_ai_ui/README.md\n M packages/beautiful_ai_ui_catalog/CHANGELOG.md\n M packages/beautiful_ai_ui_catalog/README.md\n?? docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json\n?? docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final-attempt/\n?? docs/beautiful-ui/quality_evidence/performance/index.json",
+  "source_manifest": "source_hashes.json",
+  "source_manifest_sha256": "4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac",
+  "hardware": {
+    "model": "MacBookPro18,1",
+    "cpu": "Apple M1 Pro",
+    "physical_memory_bytes": 34359738368,
+    "logical_processors": 10
+  },
+  "toolchain": {
+    "frameworkVersion": "3.47.0",
+    "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+    "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+    "dartSdkVersion": "3.13.0"
+  },
+  "runtime": {
+    "operating_system": "macos",
+    "operating_system_version": "Version 15.7.9 (Build 24G830)",
+    "logical_processor_count": 10,
+    "build_mode": "profile",
+    "native_view_physical_px": {
+      "width": 3456.0,
+      "height": 2160.0
+    },
+    "native_view_logical_dp": {
+      "width": 1728.0,
+      "height": 1080.0
+    },
+    "device_pixel_ratio": 2.0,
+    "display_refresh_rate_hz": 120.0,
+    "surface_width_dp": 1696.0,
+    "platform_text_scale_at_14dp": 14.0,
+    "platform_disable_animations": false,
+    "platform_high_contrast": false,
+    "locale": "zh-Hans-CN",
+    "theme": "light",
+    "motion_policy": "system",
+    "platform_semantics_enabled": false,
+    "framework_semantics_requested_by_test": true,
+    "semantics_note": "The original semantics_enabled field reads platformDispatcher.semanticsEnabled. It is false here. Flutter testWidgets separately defaults semanticsEnabled=true and holds its own framework handle; false does not mean no framework semantics tree."
+  },
+  "window_preparation": {
+    "observed_ready_viewport_dp": {
+      "width": 1728.0,
+      "height": 1080.0
+    },
+    "root_ax_zoom_invoked_before_ready": false,
+    "performance_agent_gui_actions": false,
+    "size_origin": "Native observation only; restoration or external adjustment cause was not established."
+  },
+  "renderer_verification": {
+    "backend": "Impeller with Metal surface",
+    "source": "Exact GPUSurfaceMetalImpeller::AcquireFrame events in every native VM timeline, supplementing the unavailable public runtime backend field.",
+    "checks": [
+      {
+        "workload": "diff_table",
+        "event_count": 32572,
+        "time_extent_us": 3527484,
+        "interaction_wall_time_us": 5224338,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 662
+      },
+      {
+        "workload": "flowchart",
+        "event_count": 32584,
+        "time_extent_us": 4971410,
+        "interaction_wall_time_us": 5537271,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 660
+      },
+      {
+        "workload": "insight_cards",
+        "event_count": 32527,
+        "time_extent_us": 3330605,
+        "interaction_wall_time_us": 5966781,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 644
+      },
+      {
+        "workload": "prompt_bar",
+        "event_count": 32574,
+        "time_extent_us": 3160047,
+        "interaction_wall_time_us": 7851351,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 676
+      },
+      {
+        "workload": "records_table",
+        "event_count": 32523,
+        "time_extent_us": 3315309,
+        "interaction_wall_time_us": 11712543,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 662
+      },
+      {
+        "workload": "selection_actions",
+        "event_count": 30129,
+        "time_extent_us": 3669304,
+        "interaction_wall_time_us": 3668228,
+        "returned_extent_shorter_than_interactions": false,
+        "metal_impeller_acquire_frame_events": 608
+      },
+      {
+        "workload": "sidebar_nav",
+        "event_count": 32644,
+        "time_extent_us": 2984134,
+        "interaction_wall_time_us": 6729982,
+        "returned_extent_shorter_than_interactions": true,
+        "metal_impeller_acquire_frame_events": 670
+      }
+    ]
+  },
+  "totals": {
+    "workloads": 7,
+    "frame_samples": 4495,
+    "rss_samples": 478
+  },
+  "comparison_to_historical_baseline": {
+    "run_id": "20260903T080855Z",
+    "same_protocol": true,
+    "different_source_revision": true,
+    "different_native_viewport": true,
+    "different_platform_semantics_flag": true,
+    "direct_performance_regression_comparison_supported": false
+  },
+  "limitations": [
+    "One successful native macOS profile capture of the final code; it is not performance acceptance for all six platforms.",
+    "Programmatic Flutter editing/key input and injected pointer gestures do not replace OS IME, physical-input-device or screen-reader verification.",
+    "Wall durations include input/reveal/settling and remain separate from engine build/raster/total-span durations.",
+    "RSS is whole-process instrumented memory with retained traces, fixtures, caches and engine overhead; sampled peaks can miss sub-100ms spikes and maxRss is a process-lifetime statistic.",
+    "Bounded VM ring timelines can cover only part of an interaction; independent raw FrameTiming arrays are retained and used for all distributions.",
+    "Product performance budgets and repeated-run stability remain separate acceptance decisions. Large individual UI build frames remain in the report."
+  ],
+  "scenarios": [
+    {
+      "id": "prompt_bar",
+      "description": "Filter 1,000 sources, wrap keyboard selection to the last source, edit/scroll/send an exact 10,000-character draft.",
+      "dataset": {
+        "sources": 1000,
+        "draft_utf16_length": 10000
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 491,
+      "mount_wall_time_us": 37724,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 834,
+      "received_frame_count": 835,
+      "excluded_outside_window_frame_count": 1,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 834,
+          "min": 56,
+          "p50": 417,
+          "p90": 991,
+          "p95": 1380,
+          "p99": 4978,
+          "max": 45962,
+          "mean": 822.2769784172662,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 834,
+          "min": 192,
+          "p50": 759,
+          "p90": 1544,
+          "p95": 1843,
+          "p99": 2694,
+          "max": 5336,
+          "mean": 884.9652278177458,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 834,
+          "min": 375,
+          "p50": 1458,
+          "p90": 2983,
+          "p95": 3844,
+          "p99": 36272,
+          "max": 46630,
+          "mean": 2298.218225419664,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 834,
+          "min": 49,
+          "p50": 97,
+          "p90": 145,
+          "p95": 177,
+          "p99": 15586,
+          "max": 38935,
+          "mean": 500.4796163069544,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 7851351,
+      "interaction_steps": [
+        {
+          "name": "source_filter_and_keyboard_selection",
+          "round": 0,
+          "wall_time_us": 576343
+        },
+        {
+          "name": "edit_10000_character_draft",
+          "round": 0,
+          "wall_time_us": 366478
+        },
+        {
+          "name": "scroll_long_draft",
+          "round": 0,
+          "wall_time_us": 543023
+        },
+        {
+          "name": "send_exact_long_draft",
+          "round": 0,
+          "wall_time_us": 1115172
+        },
+        {
+          "name": "source_filter_and_keyboard_selection",
+          "round": 1,
+          "wall_time_us": 591749
+        },
+        {
+          "name": "edit_10000_character_draft",
+          "round": 1,
+          "wall_time_us": 374549
+        },
+        {
+          "name": "scroll_long_draft",
+          "round": 1,
+          "wall_time_us": 551418
+        },
+        {
+          "name": "send_exact_long_draft",
+          "round": 1,
+          "wall_time_us": 1098881
+        },
+        {
+          "name": "source_filter_and_keyboard_selection",
+          "round": 2,
+          "wall_time_us": 575378
+        },
+        {
+          "name": "edit_10000_character_draft",
+          "round": 2,
+          "wall_time_us": 391497
+        },
+        {
+          "name": "scroll_long_draft",
+          "round": 2,
+          "wall_time_us": 550807
+        },
+        {
+          "name": "send_exact_long_draft",
+          "round": 2,
+          "wall_time_us": 1115842
+        }
+      ],
+      "rss_sample_count": 80,
+      "rss_observed_peak_bytes": 174178304,
+      "rss_before_fixture": {
+        "current_rss_bytes": 128565248,
+        "process_lifetime_max_rss_bytes": 128565248
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 129286144,
+        "process_lifetime_max_rss_bytes": 129286144
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 136380416,
+        "process_lifetime_max_rss_bytes": 136380416
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 208896000,
+        "process_lifetime_max_rss_bytes": 224329728
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 196706304,
+        "process_lifetime_max_rss_bytes": 224329728
+      },
+      "outcomes_after_warmup": {
+        "send_callback_count": 1,
+        "last_sent_utf16_length": 9999,
+        "maximum_realized_suggestion_controls": 5
+      },
+      "outcomes_after_measurement": {
+        "send_callback_count": 4,
+        "last_sent_utf16_length": 9999,
+        "maximum_realized_suggestion_controls": 5
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "diff_table",
+      "description": "Review and toggle a 500-record, three-field change set; scroll between records and paginate the 20-row window.",
+      "dataset": {
+        "records": 500,
+        "fields": 3,
+        "page_size": 20
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 1973,
+      "mount_wall_time_us": 51435,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 497,
+      "received_frame_count": 708,
+      "excluded_outside_window_frame_count": 211,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 497,
+          "min": 52,
+          "p50": 832,
+          "p90": 2489,
+          "p95": 3265,
+          "p99": 10988,
+          "max": 17205,
+          "mean": 1227.5835010060362,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 497,
+          "min": 408,
+          "p50": 774,
+          "p90": 1601,
+          "p95": 1952,
+          "p99": 2631,
+          "max": 12186,
+          "mean": 961.4144869215291,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 497,
+          "min": 633,
+          "p50": 1911,
+          "p90": 4551,
+          "p95": 5576,
+          "p99": 13027,
+          "max": 18632,
+          "mean": 2538.3420523138834,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 497,
+          "min": 26,
+          "p50": 143,
+          "p90": 199,
+          "p95": 294,
+          "p99": 6324,
+          "max": 13528,
+          "mean": 268.61770623742456,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 5224338,
+      "interaction_steps": [
+        {
+          "name": "toggle_first_row",
+          "round": 0,
+          "wall_time_us": 332190
+        },
+        {
+          "name": "scroll_review_page",
+          "round": 0,
+          "wall_time_us": 806192
+        },
+        {
+          "name": "next_page_and_toggle_row",
+          "round": 0,
+          "wall_time_us": 428063
+        },
+        {
+          "name": "return_previous_page",
+          "round": 0,
+          "wall_time_us": 257550
+        },
+        {
+          "name": "toggle_first_row",
+          "round": 1,
+          "wall_time_us": 209201
+        },
+        {
+          "name": "scroll_review_page",
+          "round": 1,
+          "wall_time_us": 811890
+        },
+        {
+          "name": "next_page_and_toggle_row",
+          "round": 1,
+          "wall_time_us": 436345
+        },
+        {
+          "name": "return_previous_page",
+          "round": 1,
+          "wall_time_us": 250450
+        },
+        {
+          "name": "toggle_first_row",
+          "round": 2,
+          "wall_time_us": 223403
+        },
+        {
+          "name": "scroll_review_page",
+          "round": 2,
+          "wall_time_us": 802894
+        },
+        {
+          "name": "next_page_and_toggle_row",
+          "round": 2,
+          "wall_time_us": 422805
+        },
+        {
+          "name": "return_previous_page",
+          "round": 2,
+          "wall_time_us": 241219
+        }
+      ],
+      "rss_sample_count": 54,
+      "rss_observed_peak_bytes": 250216448,
+      "rss_before_fixture": {
+        "current_rss_bytes": 196706304,
+        "process_lifetime_max_rss_bytes": 224329728
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 197541888,
+        "process_lifetime_max_rss_bytes": 224329728
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 207568896,
+        "process_lifetime_max_rss_bytes": 224329728
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 276348928,
+        "process_lifetime_max_rss_bytes": 294584320
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 278953984,
+        "process_lifetime_max_rss_bytes": 294584320
+      },
+      "outcomes_after_warmup": {
+        "completed_review_rounds": 1,
+        "maximum_realized_rows": 20
+      },
+      "outcomes_after_measurement": {
+        "completed_review_rounds": 4,
+        "maximum_realized_rows": 20
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "records_table",
+      "description": "Scroll a 1,000×20 lazy grid vertically and horizontally, sort twice, filter to one record and toggle its selection.",
+      "dataset": {
+        "records": 1000,
+        "columns": 20,
+        "typed_cells": 20000,
+        "viewport_height_dp": 400
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 9959,
+      "mount_wall_time_us": 344795,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 1191,
+      "received_frame_count": 1434,
+      "excluded_outside_window_frame_count": 243,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 1191,
+          "min": 31,
+          "p50": 515,
+          "p90": 851,
+          "p95": 1144,
+          "p99": 3845,
+          "max": 22060,
+          "mean": 656.2241813602016,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 1191,
+          "min": 371,
+          "p50": 955,
+          "p90": 2403,
+          "p95": 2838,
+          "p99": 3503,
+          "max": 4545,
+          "mean": 1311.60201511335,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 1191,
+          "min": 554,
+          "p50": 1699,
+          "p90": 3652,
+          "p95": 4356,
+          "p99": 9488,
+          "max": 25838,
+          "mean": 2263.5314861460956,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 1191,
+          "min": 44,
+          "p50": 143,
+          "p90": 199,
+          "p95": 240,
+          "p99": 3687,
+          "max": 9347,
+          "mean": 213.056255247691,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 11712543,
+      "interaction_steps": [
+        {
+          "name": "scroll_lazy_rows",
+          "round": 0,
+          "wall_time_us": 1441958
+        },
+        {
+          "name": "scroll_twenty_columns",
+          "round": 0,
+          "wall_time_us": 1666547
+        },
+        {
+          "name": "sort_numeric_property_twice",
+          "round": 0,
+          "wall_time_us": 295616
+        },
+        {
+          "name": "filter_and_select_one_of_1000",
+          "round": 0,
+          "wall_time_us": 609342
+        },
+        {
+          "name": "scroll_lazy_rows",
+          "round": 1,
+          "wall_time_us": 1449142
+        },
+        {
+          "name": "scroll_twenty_columns",
+          "round": 1,
+          "wall_time_us": 1649920
+        },
+        {
+          "name": "sort_numeric_property_twice",
+          "round": 1,
+          "wall_time_us": 308236
+        },
+        {
+          "name": "filter_and_select_one_of_1000",
+          "round": 1,
+          "wall_time_us": 609012
+        },
+        {
+          "name": "scroll_lazy_rows",
+          "round": 2,
+          "wall_time_us": 1449442
+        },
+        {
+          "name": "scroll_twenty_columns",
+          "round": 2,
+          "wall_time_us": 1649977
+        },
+        {
+          "name": "sort_numeric_property_twice",
+          "round": 2,
+          "wall_time_us": 283163
+        },
+        {
+          "name": "filter_and_select_one_of_1000",
+          "round": 2,
+          "wall_time_us": 300061
+        }
+      ],
+      "rss_sample_count": 119,
+      "rss_observed_peak_bytes": 296386560,
+      "rss_before_fixture": {
+        "current_rss_bytes": 278953984,
+        "process_lifetime_max_rss_bytes": 294584320
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 287719424,
+        "process_lifetime_max_rss_bytes": 294584320
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 278855680,
+        "process_lifetime_max_rss_bytes": 295960576
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 321814528,
+        "process_lifetime_max_rss_bytes": 348028928
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 322519040,
+        "process_lifetime_max_rss_bytes": 348028928
+      },
+      "outcomes_after_warmup": {
+        "selection_callback_count": 1,
+        "sort_callback_count": 2,
+        "query_callback_count": 2,
+        "maximum_realized_rows": 9
+      },
+      "outcomes_after_measurement": {
+        "selection_callback_count": 4,
+        "sort_callback_count": 8,
+        "query_callback_count": 8,
+        "maximum_realized_rows": 9
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "sidebar_nav",
+      "description": "Scroll 1,000 lazy recent items, search a unique last item, activate it and clear the query.",
+      "dataset": {
+        "recent_items": 1000,
+        "presentation": "expanded",
+        "height_dp": 480,
+        "width_dp": 288
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 1575,
+      "mount_wall_time_us": 318381,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 760,
+      "received_frame_count": 982,
+      "excluded_outside_window_frame_count": 222,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 760,
+          "min": 35,
+          "p50": 561,
+          "p90": 1058,
+          "p95": 1231,
+          "p99": 1845,
+          "max": 2925,
+          "mean": 597.2342105263158,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 760,
+          "min": 274,
+          "p50": 1270,
+          "p90": 1736,
+          "p95": 1865,
+          "p99": 2326,
+          "max": 2794,
+          "mean": 1104.3631578947368,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 760,
+          "min": 479,
+          "p50": 2165,
+          "p90": 3138,
+          "p95": 3488,
+          "p99": 8905,
+          "max": 22606,
+          "mean": 2098.786842105263,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 760,
+          "min": 41,
+          "p50": 149,
+          "p90": 212,
+          "p95": 271,
+          "p99": 6777,
+          "max": 21350,
+          "mean": 303.9868421052632,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 6729982,
+      "interaction_steps": [
+        {
+          "name": "scroll_lazy_recents",
+          "round": 0,
+          "wall_time_us": 1438204
+        },
+        {
+          "name": "filter_activate_and_clear",
+          "round": 0,
+          "wall_time_us": 892205
+        },
+        {
+          "name": "scroll_lazy_recents",
+          "round": 1,
+          "wall_time_us": 1432628
+        },
+        {
+          "name": "filter_activate_and_clear",
+          "round": 1,
+          "wall_time_us": 892426
+        },
+        {
+          "name": "scroll_lazy_recents",
+          "round": 2,
+          "wall_time_us": 1449539
+        },
+        {
+          "name": "filter_activate_and_clear",
+          "round": 2,
+          "wall_time_us": 624838
+        }
+      ],
+      "rss_sample_count": 69,
+      "rss_observed_peak_bytes": 332627968,
+      "rss_before_fixture": {
+        "current_rss_bytes": 322519040,
+        "process_lifetime_max_rss_bytes": 348028928
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 322846720,
+        "process_lifetime_max_rss_bytes": 348028928
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 325369856,
+        "process_lifetime_max_rss_bytes": 348028928
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 366559232,
+        "process_lifetime_max_rss_bytes": 410943488
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 366804992,
+        "process_lifetime_max_rss_bytes": 410943488
+      },
+      "outcomes_after_warmup": {
+        "recent_activation_count": 1,
+        "maximum_realized_recent_rows": 8
+      },
+      "outcomes_after_measurement": {
+        "recent_activation_count": 4,
+        "maximum_realized_recent_rows": 8
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "flowchart",
+      "description": "Render a 24-node / 48-edge DAG; accept keyboard and drag moves, then pan and zoom the native canvas.",
+      "dataset": {
+        "nodes": 24,
+        "edges": 48,
+        "viewport_height_dp": 420,
+        "presentation": "expanded canvas"
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 326,
+      "mount_wall_time_us": 38990,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 366,
+      "received_frame_count": 367,
+      "excluded_outside_window_frame_count": 1,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 366,
+          "min": 23,
+          "p50": 274,
+          "p90": 4165,
+          "p95": 4985,
+          "p99": 7041,
+          "max": 8910,
+          "mean": 1285.122950819672,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 366,
+          "min": 984,
+          "p50": 2400,
+          "p90": 3457,
+          "p95": 4513,
+          "p99": 5548,
+          "max": 12968,
+          "mean": 2579.27868852459,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 366,
+          "min": 1309,
+          "p50": 3353,
+          "p90": 6917,
+          "p95": 8022,
+          "p99": 11233,
+          "max": 13419,
+          "mean": 4069.6147540983607,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 366,
+          "min": 39,
+          "p50": 132,
+          "p90": 179,
+          "p95": 201,
+          "p99": 753,
+          "max": 1461,
+          "mean": 140.06830601092895,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 5537271,
+      "interaction_steps": [
+        {
+          "name": "keyboard_node_movement",
+          "round": 0,
+          "wall_time_us": 257358
+        },
+        {
+          "name": "drag_node_and_connectors",
+          "round": 0,
+          "wall_time_us": 925048
+        },
+        {
+          "name": "canvas_pan_and_zoom",
+          "round": 0,
+          "wall_time_us": 670743
+        },
+        {
+          "name": "keyboard_node_movement",
+          "round": 1,
+          "wall_time_us": 257826
+        },
+        {
+          "name": "drag_node_and_connectors",
+          "round": 1,
+          "wall_time_us": 925047
+        },
+        {
+          "name": "canvas_pan_and_zoom",
+          "round": 1,
+          "wall_time_us": 658299
+        },
+        {
+          "name": "keyboard_node_movement",
+          "round": 2,
+          "wall_time_us": 258031
+        },
+        {
+          "name": "drag_node_and_connectors",
+          "round": 2,
+          "wall_time_us": 925006
+        },
+        {
+          "name": "canvas_pan_and_zoom",
+          "round": 2,
+          "wall_time_us": 658243
+        }
+      ],
+      "rss_sample_count": 57,
+      "rss_observed_peak_bytes": 390955008,
+      "rss_before_fixture": {
+        "current_rss_bytes": 366804992,
+        "process_lifetime_max_rss_bytes": 410943488
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 366870528,
+        "process_lifetime_max_rss_bytes": 410943488
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 369688576,
+        "process_lifetime_max_rss_bytes": 410943488
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 427032576,
+        "process_lifetime_max_rss_bytes": 449265664
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 427474944,
+        "process_lifetime_max_rss_bytes": 449265664
+      },
+      "outcomes_after_warmup": {
+        "accepted_graph_edit_count": 30,
+        "first_node_x_dp": 48.0,
+        "first_node_y_dp": 48.0
+      },
+      "outcomes_after_measurement": {
+        "accepted_graph_edit_count": 120,
+        "first_node_x_dp": 48.0,
+        "first_node_y_dp": 48.0
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "insight_cards",
+      "description": "Inspect four exact 512-point series using pointer and keys, then disclose, scroll and hide all textual observations.",
+      "dataset": {
+        "series": 4,
+        "observations_per_series": 512,
+        "text_rows_when_expanded": 512
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 4520,
+      "mount_wall_time_us": 40774,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 544,
+      "received_frame_count": 742,
+      "excluded_outside_window_frame_count": 198,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 544,
+          "min": 27,
+          "p50": 1575,
+          "p90": 2688,
+          "p95": 3818,
+          "p99": 5464,
+          "max": 45395,
+          "mean": 1622.0294117647059,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 544,
+          "min": 566,
+          "p50": 945,
+          "p90": 1475,
+          "p95": 1774,
+          "p99": 4358,
+          "max": 5176,
+          "mean": 1102.9025735294117,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 544,
+          "min": 798,
+          "p50": 2697,
+          "p90": 4660,
+          "p95": 5740,
+          "p99": 40260,
+          "max": 46829,
+          "mean": 3162.3841911764707,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 544,
+          "min": 33,
+          "p50": 144,
+          "p90": 188,
+          "p95": 220,
+          "p99": 837,
+          "max": 45601,
+          "mean": 387.0367647058824,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 5966781,
+      "interaction_steps": [
+        {
+          "name": "pointer_and_keyboard_inspection",
+          "round": 0,
+          "wall_time_us": 875503
+        },
+        {
+          "name": "disclose_and_scroll_512_text_rows",
+          "round": 0,
+          "wall_time_us": 982875
+        },
+        {
+          "name": "collapse_text_data",
+          "round": 0,
+          "wall_time_us": 133299
+        },
+        {
+          "name": "pointer_and_keyboard_inspection",
+          "round": 1,
+          "wall_time_us": 874972
+        },
+        {
+          "name": "disclose_and_scroll_512_text_rows",
+          "round": 1,
+          "wall_time_us": 975022
+        },
+        {
+          "name": "collapse_text_data",
+          "round": 1,
+          "wall_time_us": 133265
+        },
+        {
+          "name": "pointer_and_keyboard_inspection",
+          "round": 2,
+          "wall_time_us": 875437
+        },
+        {
+          "name": "disclose_and_scroll_512_text_rows",
+          "round": 2,
+          "wall_time_us": 982857
+        },
+        {
+          "name": "collapse_text_data",
+          "round": 2,
+          "wall_time_us": 133271
+        }
+      ],
+      "rss_sample_count": 61,
+      "rss_observed_peak_bytes": 466354176,
+      "rss_before_fixture": {
+        "current_rss_bytes": 427474944,
+        "process_lifetime_max_rss_bytes": 449265664
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 428638208,
+        "process_lifetime_max_rss_bytes": 449265664
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 430178304,
+        "process_lifetime_max_rss_bytes": 449265664
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 480575488,
+        "process_lifetime_max_rss_bytes": 512655360
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 480739328,
+        "process_lifetime_max_rss_bytes": 512655360
+      },
+      "outcomes_after_warmup": {
+        "completed_inspection_rounds": 1,
+        "active_plot_count": 1
+      },
+      "outcomes_after_measurement": {
+        "completed_inspection_rounds": 4,
+        "active_plot_count": 1
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    },
+    {
+      "id": "selection_actions",
+      "description": "Scroll a native 20,000-character read-only editor, select its first word with a real pointer drag, request a replacement and accept it through the host.",
+      "dataset": {
+        "document_utf16_length": 20000,
+        "selected_utf16_length": 4,
+        "replacement_utf16_length": 4
+      },
+      "status": "complete",
+      "preparation_wall_time_us": 246,
+      "mount_wall_time_us": 44374,
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "sampled_frame_count": 303,
+      "received_frame_count": 541,
+      "excluded_outside_window_frame_count": 238,
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 303,
+          "min": 26,
+          "p50": 877,
+          "p90": 3537,
+          "p95": 4219,
+          "p99": 4917,
+          "max": 5189,
+          "mean": 1253.016501650165,
+          "percentile_method": "nearest rank"
+        },
+        "raster_us": {
+          "sample_count": 303,
+          "min": 183,
+          "p50": 852,
+          "p90": 1686,
+          "p95": 1844,
+          "p99": 2635,
+          "max": 3525,
+          "mean": 987.3531353135313,
+          "percentile_method": "nearest rank"
+        },
+        "total_span_us": {
+          "sample_count": 303,
+          "min": 270,
+          "p50": 2059,
+          "p90": 5466,
+          "p95": 6073,
+          "p99": 19027,
+          "max": 26654,
+          "mean": 2824.075907590759,
+          "percentile_method": "nearest rank"
+        },
+        "vsync_overhead_us": {
+          "sample_count": 303,
+          "min": 24,
+          "p50": 153,
+          "p90": 201,
+          "p95": 262,
+          "p99": 15318,
+          "max": 23616,
+          "mean": 497.84158415841586,
+          "percentile_method": "nearest rank"
+        }
+      },
+      "interaction_wall_time_us": 3668228,
+      "interaction_steps": [
+        {
+          "name": "scroll_20000_character_native_editor",
+          "round": 0,
+          "wall_time_us": 723027
+        },
+        {
+          "name": "native_pointer_selection",
+          "round": 0,
+          "wall_time_us": 220928
+        },
+        {
+          "name": "request_and_accept_host_replacement",
+          "round": 0,
+          "wall_time_us": 278240
+        },
+        {
+          "name": "scroll_20000_character_native_editor",
+          "round": 1,
+          "wall_time_us": 716528
+        },
+        {
+          "name": "native_pointer_selection",
+          "round": 1,
+          "wall_time_us": 225553
+        },
+        {
+          "name": "request_and_accept_host_replacement",
+          "round": 1,
+          "wall_time_us": 282798
+        },
+        {
+          "name": "scroll_20000_character_native_editor",
+          "round": 2,
+          "wall_time_us": 725456
+        },
+        {
+          "name": "native_pointer_selection",
+          "round": 2,
+          "wall_time_us": 225521
+        },
+        {
+          "name": "request_and_accept_host_replacement",
+          "round": 2,
+          "wall_time_us": 270044
+        }
+      ],
+      "rss_sample_count": 38,
+      "rss_observed_peak_bytes": 497090560,
+      "rss_before_fixture": {
+        "current_rss_bytes": 480739328,
+        "process_lifetime_max_rss_bytes": 512655360
+      },
+      "rss_after_fixture": {
+        "current_rss_bytes": 480788480,
+        "process_lifetime_max_rss_bytes": 512655360
+      },
+      "rss_after_mount": {
+        "current_rss_bytes": 481394688,
+        "process_lifetime_max_rss_bytes": 512655360
+      },
+      "rss_after_workload": {
+        "current_rss_bytes": 519094272,
+        "process_lifetime_max_rss_bytes": 548274176
+      },
+      "rss_after_unmount": {
+        "current_rss_bytes": 519192576,
+        "process_lifetime_max_rss_bytes": 548274176
+      },
+      "outcomes_after_warmup": {
+        "request_callback_count": 1,
+        "accepted_replacement_count": 1,
+        "document_utf16_length": 20000,
+        "last_selected_text": "line"
+      },
+      "outcomes_after_measurement": {
+        "request_callback_count": 4,
+        "accepted_replacement_count": 4,
+        "document_utf16_length": 20000,
+        "last_selected_text": "word"
+      },
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 1080.0
+      }
+    }
+  ]
+}

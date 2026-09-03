@@ -1,0 +1,309 @@
+{
+  "revision": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "worktree_clean": false,
+  "source_matches_revision": true,
+  "scope": "All library/Catalog Dart sources, integration targets/drivers, the official profile script, dependency/toolchain pins, and native macOS window setup/DebugProfile entitlement. Documentation/evidence WIP is recorded separately and is not represented as a clean checkout.",
+  "manifest_sha256": "4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac",
+  "files": [
+    {
+      "path": ".mise.toml",
+      "sha256": "179692f9f15c76e2257ef55395960136cd528edecb0a70c613d582c6a9f58629",
+      "commit_sha256": "179692f9f15c76e2257ef55395960136cd528edecb0a70c613d582c6a9f58629",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/beautiful_ai_ui.dart",
+      "sha256": "01cecc1be1c59895cbd1d4820153b4e12ca295ca879277b46ffce0244cdab6c7",
+      "commit_sha256": "01cecc1be1c59895cbd1d4820153b4e12ca295ca879277b46ffce0244cdab6c7",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/approval_card.dart",
+      "sha256": "665933ef043c9c437074ec8d4b4f4df9903886092af274962c2a87c45bf5bcc2",
+      "commit_sha256": "665933ef043c9c437074ec8d4b4f4df9903886092af274962c2a87c45bf5bcc2",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/chat.dart",
+      "sha256": "d4fd295d03a55441f91006f104a7063b1288195bc112d0d616a075a35c9c5be8",
+      "commit_sha256": "d4fd295d03a55441f91006f104a7063b1288195bc112d0d616a075a35c9c5be8",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/code_block.dart",
+      "sha256": "c6b28d1f0a577a2c7f4552fc9a064d675b58bf5fbffaa780866ac1aef2137d21",
+      "commit_sha256": "c6b28d1f0a577a2c7f4552fc9a064d675b58bf5fbffaa780866ac1aef2137d21",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/context_cards.dart",
+      "sha256": "264b47d0e361e3bbe9ba0457ac537dd2a2ea4335cef426573f456873d0565dec",
+      "commit_sha256": "264b47d0e361e3bbe9ba0457ac537dd2a2ea4335cef426573f456873d0565dec",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/diff_table.dart",
+      "sha256": "1e8a0bfb5e429516435f905fa915d55228f30d288f5dc316cf0e3c41d32a8d19",
+      "commit_sha256": "1e8a0bfb5e429516435f905fa915d55228f30d288f5dc316cf0e3c41d32a8d19",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/filter_table.dart",
+      "sha256": "bd85468b2cc124a5bd081274fa9dbb6ed5eb54cd0450d5fa2e6add4d2a8a7462",
+      "commit_sha256": "bd85468b2cc124a5bd081274fa9dbb6ed5eb54cd0450d5fa2e6add4d2a8a7462",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/fine_tune_card.dart",
+      "sha256": "730472c96a9d4b4707ced8d61ac424f2bf00bb27bc765afda1ac093e404d7436",
+      "commit_sha256": "730472c96a9d4b4707ced8d61ac424f2bf00bb27bc765afda1ac093e404d7436",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/flowchart.dart",
+      "sha256": "9c6b500e0c7c8d64cd99646daa4fd664c17def02ec7b367d9ca87aabc9a4c58f",
+      "commit_sha256": "9c6b500e0c7c8d64cd99646daa4fd664c17def02ec7b367d9ca87aabc9a4c58f",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/insight_cards.dart",
+      "sha256": "7d92688cbe7c228c5eca6938374fda3e8d4aa2e7ed6927e8e58490848ea7a4aa",
+      "commit_sha256": "7d92688cbe7c228c5eca6938374fda3e8d4aa2e7ed6927e8e58490848ea7a4aa",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/loading_state.dart",
+      "sha256": "e5247a5a4073f6242efe393870b036ac76912ac2216e9f1e63d14e00eab14925",
+      "commit_sha256": "e5247a5a4073f6242efe393870b036ac76912ac2216e9f1e63d14e00eab14925",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart",
+      "sha256": "3a07db5becff0598381aa396c940b0f11742f0f5756208736527c0f2f97d0b5d",
+      "commit_sha256": "3a07db5becff0598381aa396c940b0f11742f0f5756208736527c0f2f97d0b5d",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart",
+      "sha256": "4afa8212be5f64e7353e0b5330f91a58d7ab43a66a4a22660eec1895de3ea788",
+      "commit_sha256": "4afa8212be5f64e7353e0b5330f91a58d7ab43a66a4a22660eec1895de3ea788",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/records_table.dart",
+      "sha256": "4dffc08ad0550e8203a5d3c05b657c52616ff681c5e22b649cf26aba79297b2c",
+      "commit_sha256": "4dffc08ad0550e8203a5d3c05b657c52616ff681c5e22b649cf26aba79297b2c",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/search.dart",
+      "sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "commit_sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/selection_actions.dart",
+      "sha256": "028b159db6e32828f2dc799f9f46866bbd9209a1e37ba37cefea623b00a5bd73",
+      "commit_sha256": "028b159db6e32828f2dc799f9f46866bbd9209a1e37ba37cefea623b00a5bd73",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/sidebar_nav.dart",
+      "sha256": "c2eb3539228efe4293c09cf78a0190c5d5280f9a0c931b5d74f758703603eadd",
+      "commit_sha256": "c2eb3539228efe4293c09cf78a0190c5d5280f9a0c931b5d74f758703603eadd",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/streaming_text.dart",
+      "sha256": "ed604ba0c2cc991a8e42e841617bccdac644630596fe7f3a753b740474a55aae",
+      "commit_sha256": "ed604ba0c2cc991a8e42e841617bccdac644630596fe7f3a753b740474a55aae",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/task_rows.dart",
+      "sha256": "2c3712edf8ea9c769e213469558d0443750d7b4e9d5186a1bf09d449a7f9683d",
+      "commit_sha256": "2c3712edf8ea9c769e213469558d0443750d7b4e9d5186a1bf09d449a7f9683d",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/thinking.dart",
+      "sha256": "f72e1e84619443dff5b94ec9f25329d083a39e910e9c1b25a68753a7cf3000d9",
+      "commit_sha256": "f72e1e84619443dff5b94ec9f25329d083a39e910e9c1b25a68753a7cf3000d9",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/tool_chips.dart",
+      "sha256": "04123ce7b3c11305665a4faceec6e679030a5df3060dc32905f3ec5e3d8756b2",
+      "commit_sha256": "04123ce7b3c11305665a4faceec6e679030a5df3060dc32905f3ec5e3d8756b2",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/environment.dart",
+      "sha256": "bd544b79b3432766803fef5e30c6a66e908177a44d5850d94131861265cc11f6",
+      "commit_sha256": "bd544b79b3432766803fef5e30c6a66e908177a44d5850d94131861265cc11f6",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/failure.dart",
+      "sha256": "089bd61f23dc08a866e157cd6ba50fde294c835ae6ad6dcab235edc22666b7dd",
+      "commit_sha256": "089bd61f23dc08a866e157cd6ba50fde294c835ae6ad6dcab235edc22666b7dd",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/layout.dart",
+      "sha256": "8d2deb6adf203e3af26cb41321c0259f1bd2a6e88deb4f350853d18ea5614d10",
+      "commit_sha256": "8d2deb6adf203e3af26cb41321c0259f1bd2a6e88deb4f350853d18ea5614d10",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/motion.dart",
+      "sha256": "6ccfb6f699a953407bd587efd0917f8ce7d5747f7edc367fcb3a23488bd12164",
+      "commit_sha256": "6ccfb6f699a953407bd587efd0917f8ce7d5747f7edc367fcb3a23488bd12164",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/scope.dart",
+      "sha256": "a000a5436d23ba5f88c7e4902cc6fc5054f3da593ad5cb53adadbc4c377fb5b2",
+      "commit_sha256": "a000a5436d23ba5f88c7e4902cc6fc5054f3da593ad5cb53adadbc4c377fb5b2",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/foundation/theme.dart",
+      "sha256": "0ae3b4e3775e42de611a2a3b5d3921008c46e4a6e33ff6b3d03da408282bda5f",
+      "commit_sha256": "0ae3b4e3775e42de611a2a3b5d3921008c46e4a6e33ff6b3d03da408282bda5f",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/implementation/controls/action_control.dart",
+      "sha256": "0c2b7a66e87d9dc1881e1f71c49c6ebbcbde00d42a56b1436c9bf043954804f5",
+      "commit_sha256": "0c2b7a66e87d9dc1881e1f71c49c6ebbcbde00d42a56b1436c9bf043954804f5",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart",
+      "sha256": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938",
+      "commit_sha256": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart",
+      "sha256": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b",
+      "commit_sha256": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart",
+      "sha256": "0c42124075e7d252f9cce43df071a16017e17068f268c2335965142cfcfd9d0c",
+      "commit_sha256": "0c42124075e7d252f9cce43df071a16017e17068f268c2335965142cfcfd9d0c",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui/pubspec.yaml",
+      "sha256": "3f68fd605830d88cf334e534a7a5c1be64a6e26d2f96a91260d1b75db3bd8111",
+      "commit_sha256": "3f68fd605830d88cf334e534a7a5c1be64a6e26d2f96a91260d1b75db3bd8111",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart",
+      "sha256": "f8a784f136309925e3b89b62ab8c54429b7e0e4ca5ce05d2705b083e302f3576",
+      "commit_sha256": "f8a784f136309925e3b89b62ab8c54429b7e0e4ca5ce05d2705b083e302f3576",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/p3_performance_test.dart",
+      "sha256": "18ad13aed6a35ad7f84f7d3cc3ab96522a9742beb328434d0f7e60744576767a",
+      "commit_sha256": "18ad13aed6a35ad7f84f7d3cc3ab96522a9742beb328434d0f7e60744576767a",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/support/catalog_semantics_fixture.dart",
+      "sha256": "dbadbe8703610917d3c575ad3d77df911d151dee6cf18ea798c991855cd54aba",
+      "commit_sha256": "dbadbe8703610917d3c575ad3d77df911d151dee6cf18ea798c991855cd54aba",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/support/interactions.dart",
+      "sha256": "71d201c7a7bd96ed877ca7bbc2de354f3a4ebae4217f77685b6fe5bf34d6596e",
+      "commit_sha256": "71d201c7a7bd96ed877ca7bbc2de354f3a4ebae4217f77685b6fe5bf34d6596e",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/support/p3_performance_measurement.dart",
+      "sha256": "2b3e879a287ea1a38896096912e168160b457d1e9c2e1f7f6c19831e9a599e07",
+      "commit_sha256": "2b3e879a287ea1a38896096912e168160b457d1e9c2e1f7f6c19831e9a599e07",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/integration_test/support/p3_performance_workloads.dart",
+      "sha256": "35b20a4e1540e2890e4673ea98679b8e94bf4712a452678ab37d6624596d28d2",
+      "commit_sha256": "35b20a4e1540e2890e4673ea98679b8e94bf4712a452678ab37d6624596d28d2",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/lib/main.dart",
+      "sha256": "dab1db69bab5608ab1f2a89d2e638ef0a6c51030ed7875413c7e622522a941d6",
+      "commit_sha256": "dab1db69bab5608ab1f2a89d2e638ef0a6c51030ed7875413c7e622522a941d6",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/lib/p2_examples.dart",
+      "sha256": "41310cf91d57d3db50f6a8f7f0e7236b8b6b20d34ba185a24fed08f64c4562ef",
+      "commit_sha256": "41310cf91d57d3db50f6a8f7f0e7236b8b6b20d34ba185a24fed08f64c4562ef",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/lib/p3_examples.dart",
+      "sha256": "4d126305f9d11efcf701b7e770ef3f1cf19ead5261e2b79e2dfee888e5412c6a",
+      "commit_sha256": "4d126305f9d11efcf701b7e770ef3f1cf19ead5261e2b79e2dfee888e5412c6a",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Base.lproj/MainMenu.xib",
+      "sha256": "be9e9ef8469d3262370e0f0b855ed163cbf9c8362c59e330b2ffe63b86fa42f4",
+      "commit_sha256": "be9e9ef8469d3262370e0f0b855ed163cbf9c8362c59e330b2ffe63b86fa42f4",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/DebugProfile.entitlements",
+      "sha256": "658a8d351a819faad03df2a4da417ae52bee8f16d5a10203d50505b3af315a99",
+      "commit_sha256": "658a8d351a819faad03df2a4da417ae52bee8f16d5a10203d50505b3af315a99",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/MainFlutterWindow.swift",
+      "sha256": "65c9613c11bcedfa51416b16c975d8ba6ff12b405fc19d60db8755d92e86d9fe",
+      "commit_sha256": "65c9613c11bcedfa51416b16c975d8ba6ff12b405fc19d60db8755d92e86d9fe",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/pubspec.yaml",
+      "sha256": "51bbdfd9fb0d5d7a534e73a59f8bde263e8fac2744e40313156cac443db7d596",
+      "commit_sha256": "51bbdfd9fb0d5d7a534e73a59f8bde263e8fac2744e40313156cac443db7d596",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/test_driver/integration_test.dart",
+      "sha256": "2f80a384a6d27eaff7c355e92644a0ab171504857103a4d53579236e8ecdb05f",
+      "commit_sha256": "2f80a384a6d27eaff7c355e92644a0ab171504857103a4d53579236e8ecdb05f",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/test_driver/p3_performance_driver.dart",
+      "sha256": "bf0be72dd6b023255ddcef7e6e5c8d42488653a40c1a2486d3d0bc827ad648ee",
+      "commit_sha256": "bf0be72dd6b023255ddcef7e6e5c8d42488653a40c1a2486d3d0bc827ad648ee",
+      "matches_commit": true
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/tool/run_p3_profile.sh",
+      "sha256": "1a8790217dc4c59350931faf8a3632311238017d05368bb0acf1e77fa16faf61",
+      "commit_sha256": "1a8790217dc4c59350931faf8a3632311238017d05368bb0acf1e77fa16faf61",
+      "matches_commit": true
+    },
+    {
+      "path": "pubspec.lock",
+      "sha256": "d0ec0dbd1596364d19acd38fed83976b0cb9049ed40bb800feda49d7526bcc6c",
+      "commit_sha256": "d0ec0dbd1596364d19acd38fed83976b0cb9049ed40bb800feda49d7526bcc6c",
+      "matches_commit": true
+    }
+  ]
+}

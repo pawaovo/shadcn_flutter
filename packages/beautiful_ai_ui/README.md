@@ -15,10 +15,9 @@ validation remains in progress; implementation coverage is not a stable
 support or full-parity claim.
 
 The current engineering pass has verified dependency font/media notices,
-reviewed representative static states, and collected a historical native
-macOS profile baseline for all seven P3 workloads. Final-source profiling
-after the palette/muted-ticker and hosted-adapter fixes has not started;
-desktop execution requires the user to unlock the local Mac. The dated
+reviewed representative static states, completed a source-matched native
+macOS profile for all seven P3 workloads, and accepted the targeted Safari
+Flowchart reduced-motion theme regression. The dated
 [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
 distinguishes these completed checks from remaining release gates.
 
@@ -350,8 +349,11 @@ database, applies a document edit, or changes controlled selections.
 
 ## Status
 
-The current local verification includes **528 library tests, 26 Catalog tests,
-and strict analysis of both packages**. The macOS golden suite passed 12
+**Final automated validation passed all 12 jobs** in
+[CI `33748054504`, attempt 1](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+for code **`c2bde85dd5da7c33b0f7881234ae312f3be1826c`**. The validated suite
+includes **528 library tests, 26 Catalog tests, 571 core regressions, and
+strict analysis**. The macOS golden suite passed 12
 checks, and 49 supplemental images across all twenty modules were individually
 reviewed against the final frozen visual source. Ten current macOS image
 hashes are recorded. The hosted-adapter fix changed no review/golden pixels;
@@ -407,33 +409,36 @@ The package's `LICENSE` and `NOTICES` both belong in the publication surface.
 These checks validate that surface and its independently resolved dependency;
 they do not publish it.
 
-All seven bounded P3 workloads completed in historical profile baseline
-`20260903T080855Z` on an M1
-Pro/32 GiB machine, yielding 4,524 frame samples and 480 process RSS samples.
-The sampled window was 1,728×963 logical pixels at DPR 2 and 120 Hz. The
-[profile record](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md)
-reports measured peaks and limitations. Other platforms, repeated runs, and
-agreed product frame/memory budgets remain to be assessed. That source
-fingerprint predates the final palette, muted-ticker and hosted-adapter
-changes. Final profile run 4 has not started because the Mac session is
-locked and Computer Use requires manual unlock. The post-TickerMode Safari
-visual recheck is also unfinished. Historical measurements remain historical.
+The [final macOS profile](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/README.md)
+completed all seven workloads, teardown, driver and finalization with exit 0:
+**4,495 FrameTiming samples and 478 process RSS samples** at 1,728×1,080dp,
+DPR 2 and 120 Hz on the M1 Pro/32 GiB machine. All 50 runtime/build inputs
+match the validated code while the worktree contains only documentation/
+evidence changes. Recorded build peaks include 45.962ms Prompt, 22.060ms
+Records and 45.395ms Insights; budgets, repeatability and other-platform
+measurements remain unassessed. The earlier success and zero-sample preparation
+failure are preserved separately rather than treated as a controlled comparison.
 
-The complete ordinary macOS Catalog journey and a native AX comparison have
-passed. Third run `33742943774` completed with 11 successful jobs, one Apple
-failure and no skips. Quality passed 410 behavior, 106 Semantics and 12 golden
-checks (528 library total), 19 Catalog tests and 571 core regressions. Cloud
-hosted-consumer checks again pass all 209 files, 12 theme observations and 13
-complete required notices.
+The [Safari 26.6.1 review](../../docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md)
+independently accepted three light/dark/light captures with reduced motion:
+Flowchart condition colors remain readable and return correctly to light.
+The operator-reported system-dark intermediate is outside those three accepted
+captures. This closes the targeted visual regression; Safari's complete
+browser/input/AT and temporal/performance matrices remain open.
 
-Launcher self-tests, simulator build and installation passed. Although
-console VM discovery timed out and the driver did not attach, unified logs
-prove the app and Catalog test ran. Teardown reported an active
-`SemanticsHandle`, with no other body assertion failure recorded. Scoped
-discovery and the iOS platform-handle baseline are being repaired with strict
-leak checks. Earlier runs remain in readiness; no all-pass run is claimed.
-All six platforms are **Partial**, and all 27 registry entries remain
-`in_progress`.
+The fifth CI run passed all platform builds and native/browser journeys,
+including the actual iOS driver: exit 0 in 50.234s, with one whole Catalog
+journey, suite setup/teardown and clean termination. Chrome, Edge, Firefox,
+Android, macOS, Windows and Linux checks also passed. The independent hosted
+consumer at the same code SHA again passed its 209 file checks, 12 theme
+observations and all 13 required notices. Earlier failures and the separate
+Edge retry remain in the readiness history.
+
+This closes the automated native-driver gate, not physical-device, complete
+real screen-reader/visual-matrix, or product performance-budget acceptance.
+All six platforms remain **Partial**, and all 27 entries remain `in_progress`.
+The validated code SHA above remains explicit when these documents are
+committed separately as evidence.
 
 This is an independent implementation. It is not affiliated with or endorsed
 by Beautiful UI, Turbo, or the `shadcn_flutter` authors. See the repository's

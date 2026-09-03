@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "20260903T113737Z",
+  "status": "failed",
+  "final_source_resample_completed": false,
+  "revision": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "source_worktree_status": "M THIRD_PARTY_NOTICES.md\n M docs/beautiful-ui/parity_manifest.yaml\n M docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md\n M docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md\n M docs/beautiful-ui/quality_evidence/toolchain.json\n M docs/beautiful-ui/support_matrix.md\n M packages/beautiful_ai_ui/CHANGELOG.md\n M packages/beautiful_ai_ui/README.md\n M packages/beautiful_ai_ui_catalog/CHANGELOG.md\n M packages/beautiful_ai_ui_catalog/README.md\n?? docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json",
+  "worktree_clean": false,
+  "source_matches_revision": true,
+  "source_manifest": "source_hashes.json",
+  "source_manifest_sha256": "4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac",
+  "started_at_utc": "2026-09-03T11:38:12.349838Z",
+  "finalized_at_utc": "2026-09-03T11:40:14.103401Z",
+  "failure_stage": "setUpAll native viewport preparation",
+  "workload_phase_status": "failed_native_viewport_too_small",
+  "observed_preparation_viewport_dp": {
+    "width": 800.0,
+    "height": 600.0
+  },
+  "required_minimum_viewport_dp": {
+    "width": 1120,
+    "height": 720
+  },
+  "preparation_timeout_seconds": 120,
+  "view_ready_signal_observed": false,
+  "workload_bodies_started": false,
+  "completed_scenarios": 0,
+  "expected_scenarios": 7,
+  "engine_frame_samples": 0,
+  "rss_samples": 0,
+  "integration_driver_exit_code": 0,
+  "final_script_exit_code": 1,
+  "exit_status_note": "The SDK integrationDriver reported success despite setUpAll failure. The unchanged finalizer correctly rejected zero completed scenarios and forced final status failed / script exit 1. No successful profile conclusion is drawn from driver exit 0 alone.",
+  "hardware": {
+    "model": "MacBookPro18,1",
+    "cpu": "Apple M1 Pro",
+    "physical_memory_bytes": 34359738368
+  },
+  "toolchain": {
+    "frameworkVersion": "3.47.0",
+    "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+    "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+    "dartSdkVersion": "3.13.0"
+  },
+  "host_os": "macos",
+  "host_os_version": "Version 15.7.9 (Build 24G830)",
+  "requested_mode": "profile",
+  "requested_renderer": "Impeller",
+  "observed_renderer": null,
+  "command": "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer packages/beautiful_ai_ui_catalog/tool/run_p3_profile.sh macos --no-pub --enable-impeller --dart-define=P3_RENDERER_REQUESTED=Impeller",
+  "attempt_count_for_this_go": 1,
+  "automatic_retry_performed": false,
+  "historical_successful_baseline": {
+    "run_id": "20260903T080855Z",
+    "summary": "../2026-09-03-macos-profile/summary.json",
+    "applicability": "Historical earlier-source baseline; not final-source performance acceptance."
+  },
+  "remaining_requirement": "At the end of this attempt a separate successful final-source profile run was still required; see index.json for the subsequently completed independent attempt.",
+  "root_confirmed_preparation_context": "The visible 800x600 window exposed an AX zoom action; the root task did not execute it within the setup deadline. This is not evidence of a locked machine or an inoperable window."
+}

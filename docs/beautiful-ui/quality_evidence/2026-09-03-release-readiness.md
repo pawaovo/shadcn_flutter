@@ -2,46 +2,60 @@
 
 Date: 2026-09-03 (Asia/Shanghai)
 Toolchain: Flutter `3.47.0`, Dart `3.13.0`
-Status: substantial local engineering evidence accepted; remote refresh and
-manual release gates remain open
+Status: final CI, current-source macOS profile capture and targeted Safari
+visual regression passed; remaining stable-release acceptance stays open
 
-All twenty Gallery components and seven foundation/building-block registry
-items have implementations. **All 27 manifest entries remain `in_progress`.**
-This record adds measured performance, visual review, native interaction, and
-distribution evidence to the implementation milestone; it does not declare a
-stable release or mark any platform `Verified`.
+**Validated code: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`.**
+[Fifth CI `33748054504`, attempt 1](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
+completed successfully with **12 of 12 jobs passing**, including the actual
+iOS native driver, all platform builds/journeys, quality, and publication
+validation. The real iOS driver exited 0 and reported “All tests passed.”
+The final macOS source-matched profile capture and independently reviewed
+Safari Flowchart theme regression are also complete. This evidence may be
+committed separately; the documentation commit does not replace the tested
+code SHA above.
+
+All twenty Gallery components and seven foundation/building-block items have
+implementations. **All 27 entries remain `in_progress`, and all six platforms
+remain `Partial`** because physical-device, full assistive-technology/visual
+matrix and performance-budget acceptance are separate release gates.
 
 ## Current verification
 
-| Area | Accepted evidence for this engineering pass | Limit of the result |
+| Area | Accepted evidence | Remaining boundary |
 |---|---|---|
-| Library behavior and Semantics | 528 passed: 410 behavior, 106 Semantics, 12 goldens | Does not replace complete real screen-reader or physical-device workflows |
-| Catalog | Latest full local suite passed 26 tests, including the seven startup regressions; recorded strict analyzers passed | Third CI remains 19 historically; the enlarged suite has not yet been remotely verified |
-| Golden baselines | macOS checks passed; eight accepted Linux candidates passed strict comparison in run `33741053163` | Future visual/source changes still require proportionate verification |
-| Supplemental visual review | 49 images covering all 20 components individually reviewed | Two specific static profiles; the complete localization/state/motion matrix remains open |
-| Dependency fonts/icons | 43 source files and all 37 runtime declarations checked; full notices verified | Applies to the pinned inventory and inspected artifacts |
-| Other media | 266 transitive flag images and five original Web images verified in release artifacts | Original platform icons and media retain their separate source/hash inventory |
-| Generated licenses | Workspace and independent hosted-consumer probes verified all 13 complete required labels; portable BAI notice delivery passed | BAI is still an unpublished publication-surface copy; dependency scope and artifact boundaries remain explicit |
-| Release builds and assets | Ordinary macOS, Web JavaScript, and Web Wasm builds and their strict asset/notice audits passed | New or independently generated artifacts require proportionate revalidation |
-| Native macOS interaction | Complete shared Catalog journey passed; native AX comparison succeeded without a Web-only compile flag | AX inspection is not a completed VoiceOver user workflow |
-| P3 native profile workloads | Historical baseline `20260903T080855Z` completed seven of seven scenarios, driver, and teardown | Final-source resampling after the palette/muted-ticker fixes is pending; product budgets remain open |
-| Latest portable-source builds | Wasm/macOS releases and the second run's platform builds passed | Actual iOS simulator journey remains unexecuted in the second run |
-| Expanded CI | Run `33742943774` completed with 11 successful jobs, one Apple failure and no skips; quality and publish/hosted-consumer checks passed | App and Catalog test ran; driver VM discovery failed, and teardown reported an active SemanticsHandle |
+| CI and quality | 12/12 jobs; 528 library, 26 Catalog, 571 core tests; strict analysis and Linux goldens passed | Applies to the exact validated code/SDK |
+| Native and browser journeys | Android, iOS simulator, macOS, Windows and Linux; Chrome, Edge and Firefox passed | Physical devices and complete real screen-reader flows remain separate |
+| iOS native driver | Actual driver passed, exit 0, 50.234s; application terminated cleanly | One whole journey with suite setup/teardown, not three independent component tests |
+| Visual review | 49 reviewed images; current macOS and accepted Linux baselines verified | Specific static profiles, not the complete localization/temporal matrix |
+| Dependency assets and notices | 43 source/37 runtime font files, 266 flags, original artwork, 13 required complete notice labels | Pinned acquisition/artifact scope remains explicit |
+| Independent publication surface | Cloud consumer matched 209 hosted files and passed 12 theme observations and all 13 notices | BAI is a tested publication-surface copy, not an actual pub.dev publication |
+| Release builds | Six-platform builds, including Web JavaScript/Wasm, passed | Later source/dependency changes need proportionate validation |
+| Final macOS profile | Run `20260903T114308Z`: 7/7 workloads, 4,495 frames, 478 RSS samples, teardown/driver/finalizer passed | One recorded platform/run; frame/memory budgets and repeatability remain unassessed |
+| Targeted Safari regression | Three independently reviewed light/dark/light captures with reduced motion show correct Flowchart condition colors | Safari is Partial; complete browser/input/AT and temporal/performance matrices remain open |
 
-The earlier fully successful implementation CI was
-[run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
-on `74178098705aa83b5452857aece6a3b10bb3ce4f`, with all ten jobs passing.
-It predates this engineering pass. The expanded twelve-job run
-[`33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
-on `19c80c17e5346f7415b52af9583ba6770cfbee50` now provides the partial
-results described below. The second expanded run
-[`33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
-on `896bcfe8fd6419382f21ba6a311d37f5f017d875` completed with 11 successful
-jobs and one Apple launcher-test failure. The third expanded run
-[`33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
-on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` again has 11 successful jobs
-and one Apple failure, with different evidence described below. No full-green
-expanded run is claimed.
+The [compact final CI evidence](./2026-09-03-final-ci-33748054504.json) records
+run/commit, native driver timings and artifact hashes, and the downloaded
+hosted-consumer result without copying raw logs or service URLs.
+
+## Verified iOS driver completion
+
+Apple job `100625050615`, artifact `9890828917`, contains the actual
+`ios-journey.json` with SHA256
+`3f178a21ceb6f677f2679a2285cc5342d0fd3b1165590900fc4d4eed4a4d85bd`.
+The bounded launch completed in 7.582s. VM discovery took 12.396s **including
+launch**, validated PID 26615, and used one scoped history query. The original
+native Flutter driver then ran for 50.234s, returned exit 0, and reported
+success; termination also passed. The observed iOS semantics-baseline and
+remaining driver-completion gates are closed for this recorded journey.
+
+Cloud hosted artifact `9890573744` is `passed: true` at the same code SHA,
+with 209 unchanged dependency files, 12 theme observations and all 13 required
+complete notice/registry texts. Its result SHA256 is
+`cfe7abbf71529b044e236fe93b53de05d36e0cfa9f82d3bd3cbd49ba4f28be45`.
+Earlier attempts and the separate Edge retry are retained in history below
+and in `toolchain.json`; they are not prerequisites for understanding the
+current successful result.
 
 ## Visual and interaction corrections
 
@@ -99,45 +113,69 @@ eight changed component candidates from run `33736546039` have now been
 The accepted files preserve the reviewed CI bytes, and their strict Ubuntu
 comparison passed in the second run `33741053163`.
 
-## Measured P3 workload evidence
+## Final-source P3 workload capture
 
-The successful **historical native profile baseline** is
-[`performance/2026-09-03-macos-profile/summary.json`](./performance/2026-09-03-macos-profile/summary.json),
-run ID `20260903T080855Z`. It captured **4,524 independent `FrameTiming`
-samples and 480 process RSS samples** across all seven scenarios. Both the
-integration driver and finalized script exited 0 after teardown.
-Its recorded source fingerprint predates the final normal-text palette,
-muted-ticker, and hosted-adapter corrections. Final profile run 4 has not
-started: the local Mac session is locked, and Computer Use requires the user
-to unlock it manually. The statistics below remain historical measurements,
-not final-source results.
+The [final macOS profile](./performance/2026-09-03-macos-profile-final/README.md),
+run `20260903T114308Z`, completed **all seven workloads, strict teardown,
+the integration driver and finalizer with exit 0**. It retained **4,495
+independent FrameTiming samples and 478 process RSS samples**. All 50 runtime
+and build-input files matched validated revision `c2bde85dd5da7c33b0f7881234ae312f3be1826c`
+byte for byte. The source manifest digest is
+`4c4cf5d6606596f8f7ce45f07d4e37a0309aad1d60f42ea7d50d0af850390dac`.
+The working tree was documentation/evidence dirty, not clean; those changes
+did not alter the measured runtime/build sources.
 
-The machine was an Apple M1 Pro MacBook Pro with 32 GiB memory and macOS
-15.7.9. Flutter 3.47.0 ran in profile mode with an Impeller/Metal surface,
-verified by native timeline events. The measured native viewport stayed
-**1,728 × 963 logical pixels, DPR 2, 120 Hz**; this is the sampled window,
-not merely an intended fixture dimension.
+The observed machine was the M1 Pro MacBook Pro with 32 GiB memory and macOS
+15.7.9, Flutter 3.47.0/Dart 3.13.0, using an Impeller/Metal surface. The actual
+native viewport stayed **1,728×1,080 logical pixels, DPR 2, 120 Hz**. Its size
+is an observation: no unrecorded zoom, restoration or external-adjustment
+cause is inferred. The platform semantics flag was false, while the Flutter
+test framework still requested semantics and retained its own handle; this
+was not a semantics-free run.
 
-The workloads exercise 1,000 Prompt suggestions and a 10,000-character draft;
-a 500 × 3 Diff dataset with 20-row pages; 1,000 × 20 Records cells; 1,000
-Sidebar recents; a 24-node/48-edge Flowchart; four 512-point Insight series;
-and a 20,000-character selected-text document. Dataset details, independent
-frame arrays, process samples, source hashes, and artifact hashes are preserved
-with the profile record.
+The unchanged protocol exercises Prompt's 1,000 options/10,000-character
+draft, Diff's 500×3 records and 20-row pages, Records' 1,000×20 grid,
+1,000 Sidebar recents, a 24-node/48-edge Flowchart, four 512-point Insight
+series, and a 20,000-character selected-text document. Individual UI-build
+peaks remain visible: **45.962ms Prompt, 22.060ms Records, 45.395ms Insights**.
+No product frame/memory threshold was invented to mark them acceptable.
 
-Successful workload completion is not a performance-budget pass. Peak UI
-build frames reached **43.082ms for Prompt, 22.708ms for Records, and 37.153ms
-for Insights**. Product frame/memory budgets remain to be set and evaluated,
-and other platforms and representative physical devices remain unmeasured.
-The inputs are programmatic Flutter actions and injected pointer gestures,
-not OS IME, physical keyboard/touch, or assistive-technology acceptance.
+RSS represents the instrumented whole process, including fixtures, engine,
+caches and retained traces; it is not component-exclusive allocation or leak
+evidence. Six raw VM timelines have ring-buffer-limited extents. Complete,
+independently captured frame arrays supply the distributions. Programmatic
+Flutter inputs do not replace OS IME, physical-input or screen-reader tests.
 
-RSS covers the instrumented process, including fixtures, engine caches and
-accumulated trace data; it is not isolated component allocation or proof of a
-leak. Six of seven raw VM timeline windows were limited by the ring buffer.
-The independently collected frame arrays remain complete for the reported
-percentiles, so the timeline limit is retained without discarding that frame
-evidence.
+The [performance index](./performance/index.json) keeps three distinct roles:
+
+| Record | Result and scope |
+|---|---|
+| Historical `20260903T080855Z` | Earlier-source success: 4,524 frames/480 RSS, 1,728×963dp and a different platform semantics flag. Retained unchanged; not a controlled regression comparison with the final capture. |
+| Preparation attempt `20260903T113737Z` | Failed at 800×600dp after the 120s preparation deadline because the available zoom action was not completed in time. Zero workloads/frames/RSS samples. The finalizer correctly rejected this attempt despite driver exit 0. It does not prove the machine could not resize or was locked. |
+| Final `20260903T114308Z` | Independent source-matched success at 1,728×1,080dp; seven workloads and strict finalization complete. |
+
+## Targeted Safari visual regression
+
+The [Safari review](./2026-09-03-safari-flowchart-theme-reduced.md) independently
+checked exactly three real full-screen Safari 26.6.1 screenshots and paired
+AX exports. The accepted captures show **light → dark → light**, with
+**Motion: reduced** throughout and the same stock threshold. Canvas remains
+visibly selected; condition buttons show readable dark text on a light
+surface, then light text on a dark surface, then the correct light treatment
+again. The stale dark-background mismatch is absent in this captured sequence.
+
+The saved images are 1,229×768 pixels; that does not establish CSS viewport
+size or DPR. The operator's intermediate `system (dark)` state is not part
+of the three independently accepted captures. Runtime attribution and the
+independently checked bootstrap hash are recorded in the review.
+
+This closes the specific reduced-motion Flowchart color regression only.
+Safari's overall status is **Partial**. Full component/input/AT coverage,
+spoken screen-reader behavior, transition timing and performance remain open.
+Earlier white frames and `noWindowsAvailable` ceased without application or
+bootstrap changes; their cause remains unproven and is not attributed to the
+library, renderer or capture tool. GUI testing is finished, and Safari was
+restored to an ordinary window with light theme and reduced motion.
 
 ## Distribution and typography
 
@@ -184,101 +222,45 @@ theme tests, and the real production-registry probe all passed. The BAI input
 is an isolated publication-surface copy; this is not a pub.dev publication or
 proof of every later version allowed by its dependency range.
 
-## Remote CI results observed for this pass
+## Earlier CI history
 
-The twelve-job [workflow](../../../.github/workflows/beautiful_ai_ui.yml)
-ran as [run `33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039)
-on `19c80c17e5346f7415b52af9583ba6770cfbee50`. Recorded successes include
-Firefox, Edge, the Chrome/Linux shared journeys, Android, Windows native and
-macOS native journeys, platform builds and Web asset/notice audits.
+| Run / code | Actual result | Evidence retained |
+|---|---|---|
+| [`33736546039`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33736546039) / `19c80c17…` | 9 success, 2 failure, 1 skipped | Eight then-unaccepted Linux goldens; iOS runner timed out without reporting test start/results. Actual app execution in that capture remains unconfirmed. |
+| [`33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163) / `896bcfe8…` | 11 success, 1 failure, 0 skipped | Strict goldens and publish/hosted checks passed. Two of four launcher self-tests failed on cleanup `EPERM`; simulator build/journey steps were skipped. |
+| [`33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774) / `57efe1a3…` | 11 success, 1 failure, 0 skipped | Unified logs confirmed actual VM/test execution, while driver discovery failed and strict teardown reported an active SemanticsHandle. No other body assertion failure was recorded; this is not inferred for the first run. |
+| [`33745883748`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33745883748), attempt 1 / `26d908e0…` | 10 success, 2 failure, 0 skipped | Real whole iOS journey and strict teardown passed after platform semantics readiness, but delayed console PID output prevented the driver stage. Edge failed before tests at window positioning with a 300s renderer timeout. |
 
-GitHub's final API result is `completed/failure`: **nine successful jobs, two
-failed jobs, and one skipped job**. Quality failed only the eight changed
-Linux component goldens; their actual CI candidates were subsequently
-reviewed and accepted. The Apple job failed when the iOS simulator application
-launch step timed out after about 20 minutes after Xcode compilation. Its
-runner did not report widget-test start/results; actual execution is
-unconfirmed in that capture. Its iOS no-codesign build, macOS build, and macOS
-journey steps had already passed. Publish validation was skipped after its
-quality dependency failed.
+In the fourth iOS log, `+3: All tests passed!` counts suite setup, **one whole
+journey**, and suite teardown; it does not mean three independent component
+tests. Driver completion was still missing then and is established only by
+the fifth run above.
 
-The second [run `33741053163`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33741053163)
-on `896bcfe8fd6419382f21ba6a311d37f5f017d875` is also `completed/failure`,
-with **11 successful jobs, one failed job and no skipped jobs**. Quality now
-passes the strict Linux golden comparison. Publish validation passes both
-the real hosted-consumer gate and a 3 MB dry-run with zero warnings.
+The fourth run's same-SHA targeted Edge retry, attempt 2 / job
+`100622856132`, passed with no Edge code/configuration change. The other jobs'
+results were reused, not reexecuted. That retry did not prove the cause of the
+original renderer timeout; the fifth full run now also passes Edge. The
+relevant detailed metadata, earlier cloud artifact hashes, and exact prior
+job counts remain in `toolchain.json`.
 
-Apple's iOS release build, macOS release build/journey, and simulator boot
-passed. Its bounded-launcher self-test ran four cases; two failed with
-`EPERM` during process-group cleanup. Actual simulator build/journey steps
-were skipped after that self-test, so this run does not verify simulator
-execution or resolve the earlier launch result. The cleanup portability fix
-is now implemented: six local regression checks and actionlint passed.
-Remote simulator execution remains pending.
+## Completed local follow-up and preserved history
 
-The downloaded cloud hosted-consumer artifact `9887907974` was independently
-checked: 209 public dependency files match, all 12 theme observations pass,
-and all 13 complete notice/registry texts are present. Its result SHA256 is
-`ff2e38c34a3eb304567c1e40ee0692bddc0f3d0a5d0fcc2191f524281b00ef40`;
-compact cloud metadata is retained in `toolchain.json` alongside the local
-before/after evidence.
-
-The third [run `33742943774`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33742943774)
-on `57efe1a3f9bb72c1a7b8668dec127ad261eaedda` completed with **11 successful
-jobs, one Apple failure and no skips**. All six launcher self-tests passed;
-the simulator build succeeded in about five minutes and installation took
-about 22 seconds. The launcher console did not expose the VM announcement,
-so URI discovery reported a 120-second timeout and the driver did not attach.
-
-Downloaded unified logs nevertheless show the real VM announcement at
-10:27:01 and Catalog test start at 10:27:02. About 46 seconds later,
-`_endOfTestVerifications` reported an active `SemanticsHandle`; no other test
-body assertion failure was recorded, and `failure.png` displayed “Test
-finished”. Thus the app/test did run, while result attachment and teardown
-failed. The earlier run's actual execution remains unconfirmed; this third-run
-Semantics finding is not applied retrospectively to it.
-
-The next fixes target PID/launch-time-scoped unified-log discovery and the
-race between iOS's platform semantics handle from `viewDidAppear` and the
-test's baseline. Leak checks remain strict, with no exemption. Apple artifact
-`9889094131` and job `100608850829` identify this raw evidence.
-The latest complete local Catalog rerun passed 26 tests, including all seven
-new startup regressions (`/tmp/release-fourth-catalog-tests.log`, exit 0).
-Formatting checked three touched files with no changes, and the diff check
-passed. The third CI count below remains 19; remote verification of the
-enlarged suite is still pending.
-
-Third-run quality passed 410 behavior, 106 Semantics and 12 golden checks
-(528 library total), plus 19 Catalog and 571 core tests. The downloaded hosted
-artifact `9888622880` again verifies 209 unchanged dependency files, 12 theme
-observations and all 13 required notice/registry texts. Its result SHA256 is
-`96fc50d78e61c89136129333e7547eb57e6f7b6bd6f7600a2e7f1b1b63b4cb76`.
-Compact metadata and the first two run records remain in `toolchain.json`.
-
-## External execution condition
-
-The current local Mac session is locked. Computer Use explicitly requires
-manual user unlock before desktop interaction can resume. Final profile run
-4 has not started, and Safari's visual recheck after the TickerMode repair has
-not completed. These two tasks remain open because their desktop execution
-condition is unavailable; no historical profile or earlier Safari observation
-is substituted for the missing final-source evidence.
+The earlier locked session delayed local work, but a fresh check at 11:23 UTC
+confirmed an unlocked Mac. The later preparation timeout is a separate
+procedural failure, followed by the successful independent profile attempt.
+Current-source profiling and the targeted Safari review are now complete;
+no current locked/not-started/pending claim is retained for those checks.
+The working tree remains documentation/evidence dirty for this evidence
+commit, with runtime/build inputs verified against the CI code SHA.
 
 ## Remaining stable-release gates
 
-- Verify scoped VM discovery/driver attachment and a stable iOS semantics
-  baseline, then complete strict teardown without a leak exemption. The third
-  run already demonstrates real app/test execution; quality and hosted-consumer
-  checks remain completed evidence.
-- After manual unlock of the local Mac, start and finalize profile run 4
-  against the final source and complete the post-TickerMode Safari visual
-  recheck. Keep `20260903T080855Z` as historical evidence.
 - Complete physical-device checks and actual TalkBack, VoiceOver, Narrator,
   and Orca workflows, including focus, selection, clipboard, IME, and core
   task completion. Native AX tree availability alone does not close this gate.
 - Complete remaining browser and applicable native smoke coverage beyond the
-  successful recorded Firefox/Edge journeys, including the outstanding Safari
-  final visual check and compatibility matrix.
+  successful recorded Firefox/Edge journeys and the targeted Safari visual
+  regression, including the full Safari compatibility/input matrix.
 - Review remaining visual/localization combinations and temporal hover,
   focus, pressed, normal-motion, and reduced-motion behavior.
 - Define product frame and memory budgets, assess measured peaks against
@@ -290,5 +272,6 @@ is substituted for the missing final-source evidence.
 The support matrix therefore records all six advertised platforms as
 `Partial`. The remaining gates describe real missing evidence; completed
 font inventories, accepted static images, and the successful historical
-macOS profile baseline are retained, while the final-source resample is
-explicitly distinguished as unfinished.
+macOS baseline, failed preparation attempt and final-source capture are
+retained distinctly. Only the remaining manual, matrix and budget acceptance
+is described as unfinished.

@@ -54,11 +54,18 @@ definition_of_done:
   - source_license_and_asset_provenance
   - required_platform_evidence
 
+automated_validation:
+  validated_code_commit: c2bde85dd5da7c33b0f7881234ae312f3be1826c
+  run_id: 33748054504
+  run_attempt: 1
+  jobs_passed: 12
+  evidence_path: docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json
+  native_ios_driver: passed_with_strict_teardown_and_successful_termination
+
 release_open_items:
-  - Verify PID and launch-time-scoped VM discovery, driver attachment, and the iOS platform semantics baseline without exempting leaks; run 33742943774 proves app/test execution but fails discovery and strict teardown.
   - Complete physical-device and real TalkBack, VoiceOver, Narrator, and Orca task workflows.
-  - After manual Mac unlock, finish the post-TickerMode Safari visual recheck; remaining browser, localization, visual-state and temporal motion combinations stay open.
-  - Final profile run 4 has not started because Computer Use requires manual unlock of the local Mac; agreed budgets, repeatability and representative other-platform or physical-device measurements remain open.
+  - Complete remaining browser, localization, visual-state and temporal-motion combinations beyond the accepted targeted Safari Flowchart review.
+  - Assess agreed frame and memory budgets, repeated-run stability and representative other-platform or physical-device performance beyond the completed source-matched macOS capture.
 
 items:
   - registry_name: foundation
@@ -77,6 +84,7 @@ items:
       - Verified inherited Geist Sans and Geist Mono are the current typography; Inter and JetBrains Mono are not bundled.
       - Normal subtle text and light accent text on accentTint now meet the tested 4.5 contrast threshold, with four palette regressions.
       - A fresh isolated consumer with unmodified hosted shadcn_flutter 0.0.54 passes atomic theme, state and focus checks and portable delivery of all 13 required notice labels.
+      - Fifth-run native iOS driver completes one whole Catalog journey with suite setup and strict teardown, exit zero and successful termination on validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
@@ -468,16 +476,17 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device IME, clipboard, file, and dictation integration evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-option and 10000-character workloads
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-option and 10000-character workloads
   - registry_name: recommendation-card
     title: Recommendation Card
     source_type: registry:component
@@ -563,16 +572,17 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology change-review evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the paginated 500-record workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the paginated 500-record workload
   - registry_name: records-table
     title: Records Table
     source_type: registry:component
@@ -596,16 +606,17 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology grid and compact-detail evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the lazy 1000-record and 20-column workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the lazy 1000-record and 20-column workload
   - registry_name: filter-table
     title: Filter Table
     source_type: registry:component
@@ -660,17 +671,18 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
       - The compact closed trigger now grows for large text, and its repaired static state was re-rendered and reviewed.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology navigation, drawer, and focus evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-recent history workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-recent history workload
   - registry_name: search
     title: Search
     source_type: registry:component
@@ -723,19 +735,22 @@ items:
       - Measured node bounds anchor connectors; pan and zoom stay bounded and zoom never shrinks controls below their baseline target size.
       - Ordered steps and explicit move actions preserve editing without relying on dragging; graph execution and arbitrary edge creation are excluded.
     accepted_evidence:
+      - Three independently reviewed Safari light/dark/light captures with reduced motion confirm correct condition colors and no stale dark background; the full Safari matrix remains open.
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device canvas or ordered-step editing evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 24-node and 48-edge workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 24-node and 48-edge workload
   - registry_name: insight-cards
     title: Insight Cards
     source_type: registry:component
@@ -758,17 +773,18 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
       - Adjustable controls expose native slider flags and the appropriate value, enabled state, and adjustment actions.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology chart inspection and data-table evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the bounded chart workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the bounded chart workload
   - registry_name: code-block
     title: Code Block
     source_type: registry:component
@@ -859,13 +875,14 @@ items:
       - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
       - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
       - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
-      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette, muted-ticker and hosted-adapter fixes awaits manual Mac unlock.
+      - The corresponding workload completed in final-source macOS run 20260903T114308Z with strict teardown and driver/finalizer success; source and build inputs match validated code c2bde85dd5da7c33b0f7881234ae312f3be1826c.
     evidence_paths:
       - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
       - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
-      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/summary.json
+      - docs/beautiful-ui/quality_evidence/performance/index.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device selection, toolbar, and clipboard evidence
-      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 20000-character document workload
+      - agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 20000-character document workload

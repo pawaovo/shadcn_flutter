@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "current_source_revision": "c2bde85dd5da7c33b0f7881234ae312f3be1826c",
+  "final_source_profile_status": "capture_complete_budgets_and_other_platforms_pending",
+  "final_source_successful_profile": {
+    "run_id": "20260903T114308Z",
+    "status": "complete",
+    "summary": "2026-09-03-macos-profile-final/summary.json"
+  },
+  "previous_final_source_attempt": {
+    "run_id": "20260903T113737Z",
+    "status": "failed_preparation",
+    "summary": "2026-09-03-macos-profile-final-attempt/summary.json"
+  },
+  "historical_successful_baseline": {
+    "run_id": "20260903T080855Z",
+    "status": "historical_success_earlier_source",
+    "summary": "2026-09-03-macos-profile/summary.json"
+  },
+  "policy": "Original raw outputs and historical baseline evidence are preserved. The final-source success is an independent run; no all-platform budget or direct regression comparison is implied."
+}
