@@ -27,7 +27,9 @@ copy/feedback/follow-up actions and retry; a three-question Approval Card;
 Tool Chips with output and changed-file disclosure; both Task Rows variants;
 Chat with context tabs, send, and stop; a status Filter Table; and a controlled
 Fine-tune Card with numeric entry, layout, and type selection. The **Run stream
-demo** action and Chat replies use finite local timers owned by the catalog.
+demo** action uses a finite local timer owned by the catalog. Chat replies stay
+pending until **Complete demonstration response** or **Stop response** is
+selected, allowing either state to be inspected without a time limit.
 Submission and retry examples resolve locally. No AI backend is connected,
 and the excluded Surfer demonstration video is never requested.
 

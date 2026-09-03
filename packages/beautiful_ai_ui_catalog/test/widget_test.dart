@@ -243,6 +243,52 @@ void main() {
     await tester.pump();
   });
 
+  testWidgets('Chat demonstration waits for explicit completion or stop', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const CatalogApp());
+    await tester.pump();
+    final composer = _inside('catalog-chat', find.byType(EditableText));
+    final send = _inside('catalog-chat', find.text('Send'));
+    final stop = _inside('catalog-chat', find.text('Stop response'));
+    final complete = find.text('Complete demonstration response');
+
+    await tester.ensureVisible(composer);
+    await tester.enterText(composer, 'Review seasonal inventory');
+    await tapCatalogTarget(tester, send);
+    await tester.pump(const Duration(seconds: 10));
+    expect(stop, findsOneWidget);
+    expect(complete, findsOneWidget);
+
+    await tapCatalogTarget(tester, complete);
+    await tester.pump();
+    expect(stop, findsNothing);
+    expect(complete, findsNothing);
+    expect(
+      _inside(
+        'catalog-chat',
+        find.textContaining('The demonstration has 7 seasonal SKUs ready'),
+      ),
+      findsOneWidget,
+    );
+
+    await tester.ensureVisible(composer);
+    await tester.enterText(composer, 'Check the supplier lead time');
+    await tapCatalogTarget(tester, send);
+    await tester.pump(const Duration(seconds: 10));
+    expect(stop, findsOneWidget);
+    expect(complete, findsOneWidget);
+    await tapCatalogTarget(tester, stop);
+    await tester.pump();
+    expect(find.text('Demonstration response stopped.'), findsOneWidget);
+    expect(stop, findsNothing);
+    expect(complete, findsNothing);
+    expect(tester.takeException(), isNull);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
+  });
+
   testWidgets('P2 state survives grid resize and finite stream completion', (
     tester,
   ) async {

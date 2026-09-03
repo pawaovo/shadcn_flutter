@@ -391,7 +391,6 @@ final class _CatalogChatExampleState extends State<_CatalogChatExample> {
   var _tab = 'flavors';
   var _generation = 0;
   var _responding = false;
-  Timer? _responseTimer;
   final _messages = <BeautifulChatMessage>[
     const BeautifulChatMessage(
       id: 'initial-user',
@@ -408,14 +407,7 @@ final class _CatalogChatExampleState extends State<_CatalogChatExample> {
     ),
   ];
 
-  @override
-  void dispose() {
-    _responseTimer?.cancel();
-    super.dispose();
-  }
-
   void _send(String text) {
-    _responseTimer?.cancel();
     final generation = ++_generation;
     final responseId = 'reply-$generation';
     setState(() {
@@ -436,17 +428,18 @@ final class _CatalogChatExampleState extends State<_CatalogChatExample> {
         ),
       );
     });
-    _responseTimer = Timer(const Duration(milliseconds: 1600), () {
-      if (!mounted || generation != _generation) return;
-      setState(() {
-        _responding = false;
-        _messages[_messages.length - 1] = BeautifulChatMessage(
-          id: responseId,
-          role: BeautifulChatRole.assistant,
-          text: 'The demonstration has 7 seasonal SKUs ready for review. Confirm supplier quantities before ordering.',
-          detailLabel: 'Catalog demonstration',
-        );
-      });
+  }
+
+  void _completeResponse() {
+    if (!_responding) return;
+    setState(() {
+      _responding = false;
+      _messages[_messages.length - 1] = BeautifulChatMessage(
+        id: 'reply-$_generation',
+        role: BeautifulChatRole.assistant,
+        text: 'The demonstration has 7 seasonal SKUs ready for review. Confirm supplier quantities before ordering.',
+        detailLabel: 'Catalog demonstration',
+      );
     });
   }
 
@@ -455,32 +448,43 @@ final class _CatalogChatExampleState extends State<_CatalogChatExample> {
     return _CatalogCard(
       title: 'Chat',
       caption: 'Active context: $_tab · local demonstration replies',
-      child: BeautifulChat(
-        key: const Key('catalog-chat'),
-        conversationId: 'restock-catalog',
-        messages: List<BeautifulChatMessage>.unmodifiable(_messages),
-        status: _responding
-            ? BeautifulChatStatus.responding
-            : BeautifulChatStatus.idle,
-        responseId: _responding ? 'reply-$_generation' : null,
-        onSend: _send,
-        onStop: (_) {
-          _responseTimer?.cancel();
-          setState(() {
-            _responding = false;
-            _messages[_messages.length - 1] = BeautifulChatMessage(
-              id: 'reply-$_generation',
-              role: BeautifulChatRole.assistant,
-              text: 'Demonstration response stopped.',
-            );
-          });
-        },
-        tabs: const <BeautifulChatTab>[
-          BeautifulChatTab(id: 'flavors', label: 'Flavors'),
-          BeautifulChatTab(id: 'suppliers', label: 'Suppliers'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          BeautifulChat(
+            key: const Key('catalog-chat'),
+            conversationId: 'restock-catalog',
+            messages: List<BeautifulChatMessage>.unmodifiable(_messages),
+            status: _responding
+                ? BeautifulChatStatus.responding
+                : BeautifulChatStatus.idle,
+            responseId: _responding ? 'reply-$_generation' : null,
+            onSend: _send,
+            onStop: (_) {
+              setState(() {
+                _responding = false;
+                _messages[_messages.length - 1] = BeautifulChatMessage(
+                  id: 'reply-$_generation',
+                  role: BeautifulChatRole.assistant,
+                  text: 'Demonstration response stopped.',
+                );
+              });
+            },
+            tabs: const <BeautifulChatTab>[
+              BeautifulChatTab(id: 'flavors', label: 'Flavors'),
+              BeautifulChatTab(id: 'suppliers', label: 'Suppliers'),
+            ],
+            selectedTabId: _tab,
+            onTabChanged: (id) => setState(() => _tab = id),
+          ),
+          if (_responding) ...<Widget>[
+            const SizedBox(height: 12),
+            _CatalogButton(
+              label: 'Complete demonstration response',
+              onPressed: _completeResponse,
+            ),
+          ],
         ],
-        selectedTabId: _tab,
-        onTabChanged: (id) => setState(() => _tab = id),
       ),
     );
   }
