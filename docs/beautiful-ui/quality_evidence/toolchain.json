@@ -136,8 +136,8 @@
     "evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-p3-modules.md",
     "contracts_path": "docs/beautiful-ui/p3_contracts.md",
     "implementation_status": "all_seven_exported_in_progress",
-    "integrated_execution_status": "pending_recorded_results",
-    "remote_ci_status": "not_yet_recorded_for_p3",
+    "integrated_execution_status": "local_results_and_complete_final_remote_results_recorded",
+    "remote_ci_status": "all_10_jobs_passed_run_33726848975_on_74178098705aa83b5452857aece6a3b10bb3ce4f",
     "profile_release_performance": "not_yet_recorded"
   },
   "p3_local_validation": {
@@ -186,5 +186,19 @@
     "quality_goldens_builds_publish": "passed",
     "chrome_journey": "failed_demo_auto_completion_preceded_stop",
     "remediation": "manual_catalog_response_completion_no_reply_timer"
+  },
+  "p3_final_validation": {
+    "run_id": 33726848975,
+    "commit": "74178098705aa83b5452857aece6a3b10bb3ce4f",
+    "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs_passed": 10,
+    "platform_builds": "all_six_passed_including_web_js_and_wasm",
+    "chrome_journey": "passed",
+    "linux_xvfb_journey": "passed",
+    "android_emulator_journey": "passed",
+    "quality_and_goldens": "passed_including_strict_ubuntu_p3_canonical_comparison",
+    "publish_dry_run": "passed"
   }
 }

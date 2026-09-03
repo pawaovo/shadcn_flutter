@@ -355,7 +355,7 @@ items:
       - At-source and slash-command suggestions are lazy and keyboard accessible; selecting a command inserts text without executing a business action.
       - New or reattached files and edits made during an older send survive its completion.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device IME, clipboard, file, and dictation integration evidence
       - profile or release performance evidence for the 1000-option and 10000-character target workloads
   - registry_name: recommendation-card
@@ -424,7 +424,7 @@ items:
       - Explicit old and new labels and Semantics preserve change meaning without color dependence.
       - Pages default to 20 rows and allow at most 100; the deterministic workload exercises 500 records with three fields.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology change-review evidence
       - profile or release performance evidence for the documented paginated workload
   - registry_name: records-table
@@ -447,7 +447,7 @@ items:
       - Sort and filter results are cached; only rows near the bounded viewport are realized for the 1000-record target and at most 20 columns.
       - Native text controls and explicit width actions replace browser popovers and pointer-only controls; no spreadsheet formula engine or database is bundled.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology grid and compact-detail evidence
       - profile or release frame and memory evidence for the documented lazy-record workload
   - registry_name: filter-table
@@ -493,7 +493,7 @@ items:
       - Recent search, text selection, expansion choice, and scroll position survive presentation changes; recent rows are lazy for the 1000-item target.
       - Source portals, fixed workspace data, commercial icons, and source branding are omitted.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology navigation, drawer, and focus evidence
       - profile or release performance evidence for long recent histories
   - registry_name: search
@@ -540,7 +540,7 @@ items:
       - Measured node bounds anchor connectors; pan and zoom stay bounded and zoom never shrinks controls below their baseline target size.
       - Ordered steps and explicit move actions preserve editing without relying on dragging; graph execution and arbitrary edge creation are excluded.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device canvas or ordered-step editing evidence
       - profile or release frame and memory evidence for the 24-node and 48-edge workload
   - registry_name: insight-cards
@@ -562,7 +562,7 @@ items:
       - Only the selected chart is painted; full textual observations are created on request and support touch, keyboard, and Semantics inspection.
       - Work is bounded to 32 pages, four series of 512 points, eight metrics, and twelve allocation segments; no forecasting or synthetic time series is generated.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology chart inspection and data-table evidence
       - profile or release performance evidence beyond diagnostic debug timings
   - registry_name: code-block
@@ -635,6 +635,6 @@ items:
       - Native gestures and guarded clipboard controls share the selection boundary with keyboard and Semantics actions; the source timers, npm icons, and AI simulation are omitted.
       - Plain text uses a bounded read-only editor viewport; rich-text editing and document persistence remain outside the package.
     open_items:
-      - accepted P3 canonical golden and required remote platform evidence
+      - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device selection, toolbar, and clipboard evidence
       - profile or release performance evidence for the 20000-character document workload
