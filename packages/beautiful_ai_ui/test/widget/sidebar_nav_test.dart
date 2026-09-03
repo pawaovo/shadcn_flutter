@@ -20,6 +20,7 @@ BeautifulSidebarNav _sidebar({
   String? selectedRecentId,
   String selectedItemId = 'home',
   String workspaceLabel = 'Research workspace',
+  BeautifulSidebarLabels labels = const BeautifulSidebarLabels(),
 }) => BeautifulSidebarNav(
   key: const ValueKey('sidebar'),
   workspaces: [
@@ -51,6 +52,7 @@ BeautifulSidebarNav _sidebar({
   footerLabel: 'Upgrade',
   onFooterPressed: onFooter ?? () {},
   presentation: presentation,
+  labels: labels,
 );
 
 Widget _app(
@@ -327,6 +329,50 @@ void main() {
     expect(find.text('Alpha project'), findsNothing);
     expect(find.text('Open navigation'), findsOneWidget);
   });
+
+  testWidgets(
+    'closed drawer trigger grows with RTL text scaling and wrapping',
+    (tester) async {
+      final trigger = find.byKey(const ValueKey('beautiful-sidebar-toggle'));
+      Widget app({double scale = 1, BeautifulSidebarLabels? labels}) => _app(
+        _sidebar(
+          presentation: BeautifulSidebarPresentation.drawer,
+          labels: labels ?? const BeautifulSidebarLabels(),
+        ),
+        width: 390,
+        textScaler: TextScaler.linear(scale),
+        direction: TextDirection.rtl,
+        highContrast: true,
+      );
+      await tester.pumpWidget(app());
+      final normalHeight = tester.getSize(trigger).height;
+      await tester.pumpWidget(app(scale: 2));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      final scaledHeight = tester.getSize(trigger).height;
+      expect(scaledHeight, greaterThan(normalHeight));
+      expect(scaledHeight, greaterThanOrEqualTo(48));
+      expect(find.text('Alpha project'), findsNothing);
+      expect(
+        tester.getBottomLeft(trigger).dy,
+        lessThanOrEqualTo(
+          tester.getBottomLeft(find.byType(BeautifulSidebarNav)).dy,
+        ),
+      );
+      const open = 'افتح لوحة التنقل الكاملة الخاصة بمساحة العمل الحالية';
+      await tester.pumpWidget(
+        app(scale: 2, labels: const BeautifulSidebarLabels(open: open)),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(tester.getSize(trigger).height, greaterThan(scaledHeight));
+      expect(find.text(open), findsOneWidget);
+      await tester.tap(trigger);
+      await tester.pumpAndSettle();
+      expect(find.text('Close navigation'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   for (final label in ['Invite users  3/10', 'New chat', 'Upgrade']) {
     testWidgets('$label retains keyboard activation across panel and rail', (

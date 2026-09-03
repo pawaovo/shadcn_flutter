@@ -640,17 +640,30 @@ final class _BeautifulApprovalCardState extends State<BeautifulApprovalCard> {
       children: <Widget>[
         Semantics(
           liveRegion: true,
+          label: '✓ ${widget.sentLabel}',
+          excludeSemantics: true,
           child: Container(
             padding: EdgeInsets.all(theme.spacing.md),
             decoration: BoxDecoration(
               color: theme.colors.successTint,
               borderRadius: BorderRadius.circular(theme.radii.card),
             ),
-            child: Text(
-              '✓ ${widget.sentLabel}',
-              style: theme.typography.label.copyWith(
-                color: theme.colors.success,
-              ),
+            child: Row(
+              children: <Widget>[
+                CustomPaint(
+                  size: const Size(18, 18),
+                  painter: _ApprovalCheckPainter(theme.colors.success),
+                ),
+                SizedBox(width: theme.spacing.sm),
+                Expanded(
+                  child: Text(
+                    widget.sentLabel,
+                    style: theme.typography.label.copyWith(
+                      color: theme.colors.success,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -989,12 +1002,37 @@ final class _ChoiceMark extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   )
-                : Text(
-                    '✓',
-                    textScaler: TextScaler.noScaling,
-                    style: TextStyle(color: theme.colors.surface, fontSize: 12),
+                : CustomPaint(
+                    size: const Size(12, 12),
+                    painter: _ApprovalCheckPainter(theme.colors.surface),
                   )
           : null,
     );
   }
+}
+
+final class _ApprovalCheckPainter extends CustomPainter {
+  const _ApprovalCheckPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawPath(
+      Path()
+        ..moveTo(size.width * .15, size.height * .5)
+        ..lineTo(size.width * .4, size.height * .75)
+        ..lineTo(size.width * .85, size.height * .25),
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.7
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_ApprovalCheckPainter oldDelegate) =>
+      oldDelegate.color != color;
 }

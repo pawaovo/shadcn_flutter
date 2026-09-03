@@ -47,11 +47,37 @@ entries:
     kind: dependency_assets
     distribution_status: inherited
     distributable: true
-    approval_gate: The exact dependency asset and license inventory must pass for the release candidate.
+    inventory: legal/dependency_assets.json
+    audit_tool: tool/audit_dependency_assets.py
+    evidence: docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+    approval_gate: The recorded dependency hashes, complete package notices, and actual release bundle inventory must pass for the release candidate.
     notes:
       - Do not duplicate the files into beautiful_ai_ui without a separate asset record.
-      - Preserve upstream package license notices and review Flutter's generated license registry in release builds.
+      - Preserve upstream package license notices and verify Flutter's generated LicenseRegistry against the complete font and icon notices in packages/shadcn_flutter/NOTICES.
       - Current upstream package metadata lists RadixIcons, BootstrapIcons, LucideIcons, GeistSans, and GeistMono assets.
+      - The runtime declares 34 Geist font files and three icon fonts; six additional source OTF files are inventoried but not declared into the Catalog runtime.
+      - The exact inherited Radix font is pinned by source commit and hash; its original SVG conversion recipe is not reconstructed and is recorded as a provenance limitation.
+
+  - id: country_flags_transitive_media
+    source: country_flags 4.1.2 from the official pub.dev archive pinned by pubspec.lock
+    source_sha256: f022d18337f3861f1f4e319b936cb53920de9259f38cb09e169eace9942e2b79
+    kind: dependency_vector_images
+    distribution_status: inherited
+    distributable: true
+    inventory: legal/transitive_media_assets.json
+    audit_tool: tool/audit_transitive_media.py
+    evidence: legal/transitive_media_assets.md
+    license: MIT
+    license_files:
+      - LICENSES/COUNTRY_FLAGS_4_1_2_MIT.txt
+      - LICENSES/FLAG_ICONS_MIT.txt
+    runtime_destination: packages/country_flags/res/si/
+    approval_gate: All 266 recorded media hashes and both complete MIT notices must match the actual release bundle, and no unregistered media may be present.
+    notes:
+      - These assets arrive through the pinned shadcn_flutter dependency graph; they are not copied into the Beautiful AI UI library.
+      - All 266 scalable images are byte-for-byte matches to the fixed official package archive and total 2601667 bytes.
+      - The package credits lipis/flag-icons without pinning an original SVG revision; this limitation is recorded without claiming that conversion was reproduced.
+      - Flutter's generated LicenseRegistry retains the country_flags notice and the flag-icons notice added through packages/shadcn_flutter/NOTICES.
 
   - id: beautiful_ui_typography_equivalents
     source: Beautiful UI foundation design intent
@@ -98,9 +124,9 @@ entries:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark.png
         sha256: 30374f224b600c29022a3f6fb1a657f494525325bd5e2ba4beedf0f2c23d4fbe
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_light_macos.png
-        sha256: 98ca805603399a56e1db3e8c1973ffa3ccecf13d5bc29c689a98662f761980ef
+        sha256: d61f46b7729bd89c1c01d97270f31ca402d490b941d5e7362972c0f29fabfdd1
       - path: packages/beautiful_ai_ui/test/golden/goldens/p1_components_dark_macos.png
-        sha256: e972274e72c12e0cedf9cd1e374ea4ff8bab4455b753897918bc8b8fbeeb4ab4
+        sha256: 727816a3c5d49388b86325fc7e67eb2ca1483a366bceb2bd5d76a5b9bf7744b5
     notes:
       - Generated entirely from project Dart code and inherited, license-tracked shadcn_flutter fonts.
       - These are deterministic test evidence, not product branding or source-project screenshots.
@@ -120,9 +146,9 @@ entries:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark.png
         sha256: 12a22b2e88f9f11c611757211fcbe26651dc0146fb9a7af003ea81545b19e36a
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_light_macos.png
-        sha256: efbd7c6b59ab835a67213f771e7ea8364a4223af4cca157c9a110a70513f9c87
+        sha256: 90b5012efaf5fe640ad2844b5a35773cbdeadcb2095252c04c02ce700bd25f5a
       - path: packages/beautiful_ai_ui/test/golden/goldens/p2_components_dark_macos.png
-        sha256: 6ae62ff7a1ce40df2759d10b13ba03a7fdf2d39ba9002e960b91be82c6a546eb
+        sha256: 0355532a0982cbcc1a1880a68b7f01f05dde9139a4d7731b49c41f6e17c7d90e
     notes:
       - Generated entirely from project Dart code and inherited, license-tracked fonts, at 1440 by 1400 pixels and DPR 1.
       - Seven P2 components, both Task Rows variants, source and tool disclosures, light and dark themes, and disabled motion are represented.
@@ -147,39 +173,49 @@ entries:
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_dark.png
         sha256: 71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_light_macos.png
-        sha256: ef8770682d81bc1c42e3c4981245747a94c48283eac371675f97f1bc02663c91
+        sha256: 66febbc0067f16f735abb7f3000bcf9321613f5b6c7bf5676f198dcc739398d0
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_content_dark_macos.png
-        sha256: ea33323da2da2790acc736b2d286d550c77d6c2432e3be5b77d0de90bc974637
+        sha256: 2e7bc3ffeea13e52a27117f6c23e2fe2d58e8e8bbef8852214f250720adde626
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_light_macos.png
-        sha256: 14c975cee19a5aae826ad278663a5aa30c82a26916757eaaf46e98e0137ead51
+        sha256: 1021c7707bc32dee70f19aad9550c5ae0cd6dd39b65b7b705cb9ba4e3cd4d6cf
       - path: packages/beautiful_ai_ui/test/golden/goldens/p3_workspace_dark_macos.png
-        sha256: 52c3f5abbba0968dde1fee89dc4918f39e2a9d054df6a33b3c49de4b8009ab51
+        sha256: ac4818a37a83bc1e22a3a328e108d4c7f8d4cee56c3aa790f716cf0a063f098a
     notes:
       - Original Flutter-rendered test evidence using registered dependency fonts; not source-project screenshots or branding.
       - Content fixtures are 1440 by 1180 pixels, workspace fixtures 1440 by 1800 pixels, at DPR 1 with motion disabled.
       - Seven P3 components, both Prompt variants, all three Insight charts, native selection preview, expanded Records grid and Flowchart canvas are represented.
       - All four macOS images and four Ubuntu canonical candidates from run 33723609480 were visually reviewed and accepted.
 
-  - id: flutter_generated_catalog_launcher_assets
-    source: Flutter 3.47.0 flutter create platform templates
-    kind: generated_catalog_launcher_and_launch_images
-    distribution_status: pending_approval
-    distributable: false
-    source_revision: 4cf2416426
+  - id: catalog_original_launcher_assets
+    source: packages/beautiful_ai_ui_catalog/branding/catalog-icon.svg
+    kind: original_catalog_launcher_and_launch_images
+    distribution_status: approved
+    distributable: true
+    creator: Codex AI assistant for the Beautiful AI UI project
+    creation_date: "2026-09-03"
     license: BSD-3-Clause
-    license_file: LICENSES/FLUTTER_SDK_BSD_3_CLAUSE.txt
-    hash_manifest: legal/catalog_template_assets.sha256
+    license_file: LICENSE
+    provenance: legal/catalog_original_assets.json
+    hash_manifest: legal/catalog_original_assets.sha256
+    generator: packages/beautiful_ai_ui_catalog/tool/generate_catalog_icons.py
     destinations:
       - packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-*/ic_launcher.png
+      - packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-*/catalog_launch_mark.png
+      - packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable/launch_background.xml
+      - packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-v21/launch_background.xml
       - packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets
+      - packages/beautiful_ai_ui_catalog/ios/Runner/Base.lproj/LaunchScreen.storyboard
       - packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets
       - packages/beautiful_ai_ui_catalog/web/favicon.png
       - packages/beautiful_ai_ui_catalog/web/icons
+      - packages/beautiful_ai_ui_catalog/web/manifest.json
       - packages/beautiful_ai_ui_catalog/windows/runner/resources/app_icon.ico
     notes:
-      - The catalog is publish_to none; these files come from the pinned Flutter SDK templates.
-      - The generated launcher art includes Flutter branding and is acceptable only for local and CI scaffold validation.
-      - Replace it with independently branded, registered assets before any public app-store, hosted catalog, or branding release; then change this entry to approved.
+      - Original three-panel numeric geometry uses the project palette and no third-party image, font, logo, or trademark text.
+      - The standard-library generator reproduces all PNG and ICO bytes from the editable SVG; all 36 former template-image paths are replaced.
+      - iOS AppIcon and Web maskable images are opaque; the maskable foreground stays inside the safe circle.
+      - Representative launcher, launch, favicon, and independently decoded ICO outputs were visually inspected. Fresh platform builds verify packaging separately.
+      - legal/catalog_template_assets.sha256 is historical evidence of the replaced template files and is not an active release inventory.
 
   - id: future_original_assets
     source: project_created_or_commissioned

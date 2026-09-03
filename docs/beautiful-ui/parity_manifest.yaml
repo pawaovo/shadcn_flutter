@@ -1,5 +1,5 @@
 schema_version: 1
-manifest_status: initial
+manifest_status: in_progress
 updated_at: "2026-09-03"
 
 project:
@@ -54,6 +54,12 @@ definition_of_done:
   - source_license_and_asset_provenance
   - required_platform_evidence
 
+release_open_items:
+  - Current twelve-job CI execution and reviewed Ubuntu golden refresh for the latest shared visual changes.
+  - Complete physical-device and real TalkBack, VoiceOver, Narrator, and Orca task workflows.
+  - Remaining browser, localization, visual-state combinations, and temporal normal or reduced-motion review.
+  - Final-source profile resampling after the last palette and muted-ticker fixes; agreed budgets, repeated runs, and representative other-platform or physical-device measurements.
+
 items:
   - registry_name: foundation
     title: Beautiful UI foundation
@@ -65,9 +71,17 @@ items:
     implementation_paths:
       - packages/beautiful_ai_ui/lib/src/foundation
       - packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Verified inherited Geist Sans and Geist Mono are the current typography; Inter and JetBrains Mono are not bundled.
+      - Normal subtle text and light accent text on accentTint now meet the tested 4.5 contrast threshold, with four palette regressions.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
     open_items:
-      - Inter and JetBrains Mono asset decision
-      - exact bundled font and icon dependency inventory for public release
+      - complete real assistive-technology and physical-device acceptance from the support matrix
+      - remaining visual combinations and temporal motion or interaction-state review
 
   - registry_name: button
     title: Button
@@ -82,6 +96,13 @@ items:
       - packages/beautiful_ai_ui/lib/src/components/context_cards.dart
     intentional_deviations:
       - The source atom is absorbed into a package-private control contract instead of becoming a public shallow wrapper.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Shared action contrast and selection are verified; muted ancestor tickers now force immediate color updates, with three paint regressions including the expanded Flowchart canvas.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
 
   - registry_name: glide-menu
     title: GlideMenu
@@ -94,6 +115,12 @@ items:
       - packages/beautiful_ai_ui/lib/src/components/search.dart
     intentional_deviations:
       - Search keeps the menu behavior internal and exposes only typed search items and callbacks.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
 
   - registry_name: entity-chip
     title: EntityChip
@@ -106,6 +133,12 @@ items:
       - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
     intentional_deviations:
       - Entity presentation is internal to the recommendation composite and is not a separately exported atom.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
 
   - registry_name: value-pill
     title: ValuePill
@@ -118,6 +151,12 @@ items:
       - packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart
     intentional_deviations:
       - Confidence values are rendered by the recommendation composite without a separately exported atom.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
 
   - registry_name: shimmer
     title: Shimmer
@@ -131,6 +170,12 @@ items:
       - packages/beautiful_ai_ui/lib/src/foundation/motion.dart
     intentional_deviations:
       - The shimmer is an internal Loading State treatment and freezes under reduced or disabled motion.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
 
   - registry_name: stream-text
     title: StreamText
@@ -148,6 +193,12 @@ items:
       - The source timer, blur tail, and caret are replaced by immediate rendering of exact caller-owned text snapshots.
       - Text selection and its copy action use Flutter selection infrastructure behind the composite boundary; the primitive is not exported.
       - Incoming chunks never make the full answer a live region.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
     open_items:
       - real assistive-technology and platform text-selection evidence
 
@@ -177,6 +228,14 @@ items:
       - Reduced motion freezes repeating pixels, shimmer, and the code-rendered media fallback; caller media state is preserved under TickerMode.
       - Elapsed time is a separate non-live semantics node so decisecond changes cannot create announcement storms.
       - Label and elapsed text use the stronger muted-ink token instead of source ink-3 so small text can meet contrast guidance.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
 
@@ -205,9 +264,17 @@ items:
       - Compact and large-text layouts may wrap source content that the Web reference truncates.
       - Reduced motion removes continuous shimmer and spinner motion without changing caller state.
       - Disclosure actions use independent localizable labels so the status and button are not announced twice.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
-      - explicit high-contrast behavior evidence
+      - remaining high-contrast combinations and temporal interaction-state review beyond accepted static fixtures
 
   - registry_name: streaming-text
     title: Streaming Text
@@ -230,6 +297,14 @@ items:
       - Source artwork and demo URLs are omitted; host callbacks own source navigation, follow-ups, feedback, and retry.
       - Clipboard and retry requests de-duplicate pending work and ignore obsolete completions after their generation or copy snapshot changes.
       - Native live regions announce localized lifecycle and copy status without announcing every text chunk.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology and physical-device text-selection evidence
       - long-answer streaming and selection performance evidence
@@ -255,6 +330,15 @@ items:
       - Submission passes immutable answers to an asynchronous host callback, de-duplicates pending requests, and ignores stale model completions.
       - Success follows a completed host callback; failures preserve editable drafts and report through the root failure seam.
       - Keyboard navigation, IME-safe custom entry, and scrollable keyboard-constrained layouts replace source browser-specific behavior.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - Selected and submitted checks use native path drawing and are visible with the pinned fonts.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology and physical-device keyboard evidence
       - final normal and reduced-motion transition review
@@ -279,6 +363,14 @@ items:
       - Inline tool and file previews replace portal or hover-only details; Escape closes the focused panel and restores trigger focus.
       - Added and removed lines use visible signs and semantic meaning; collapsed panels leave focus and Semantics traversal.
       - The single source presentation has no artificial variant parameter.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
       - large-output layout and disclosure performance evidence
@@ -305,6 +397,14 @@ items:
       - Stable task and detail IDs preserve disclosure and focus across reordering, resize, and variant changes.
       - Optional host retry is de-duplicated and ignores obsolete snapshot completions; success never invents a task-state transition.
       - Status, progress, and step have localized visible and semantic text; decorative indeterminate rings freeze under reduced motion.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
       - final normal and reduced-motion transition review
@@ -331,6 +431,14 @@ items:
       - Send and stop de-duplicate pending actions; send success clears only the unchanged submitted draft.
       - New messages follow the bottom only when the reader was already there; otherwise an explicit latest action is available.
       - Message bodies are readable without live token announcements; response and error status are announced separately.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology and physical-device keyboard evidence
       - long-transcript layout and scrolling performance evidence
@@ -354,10 +462,20 @@ items:
       - Model and connected-source values are host controlled; local draft and attachment entries have explicit composer identity and stale-result guards.
       - At-source and slash-command suggestions are lazy and keyboard accessible; selecting a command inserts text without executing a business action.
       - New or reattached files and edits made during an older send survive its completion.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device IME, clipboard, file, and dictation integration evidence
-      - profile or release performance evidence for the 1000-option and 10000-character target workloads
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-option and 10000-character workloads
   - registry_name: recommendation-card
     title: Recommendation Card
     source_type: registry:component
@@ -377,6 +495,14 @@ items:
       - A model generation prevents stale success or failure from committing after the recommendation snapshot changes.
       - Collapsed alternatives leave focus and Semantics traversal.
       - Compact and large-text layouts stack actions and make the primary action full width.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
       - explicit normal and reduced-motion acceptance-transition evidence
@@ -401,9 +527,17 @@ items:
       - A source becomes interactive only when the host supplies a callback; the package never launches a URL.
       - Platform targets are enlarged to Android and Apple accessibility guidance.
       - The caller list is defensively snapshotted on insertion and widget updates.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
-      - explicit high-contrast behavior evidence
+      - remaining high-contrast combinations and temporal interaction-state review beyond accepted static fixtures
 
   - registry_name: diff-table
     title: Diff Table
@@ -423,10 +557,20 @@ items:
       - Local inclusion choices span all pages; asynchronous application submits an immutable set of changed row IDs and leaves record mutation to the host.
       - Explicit old and new labels and Semantics preserve change meaning without color dependence.
       - Pages default to 20 rows and allow at most 100; the deterministic workload exercises 500 records with three fields.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology change-review evidence
-      - profile or release performance evidence for the documented paginated workload
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the paginated 500-record workload
   - registry_name: records-table
     title: Records Table
     source_type: registry:component
@@ -446,10 +590,20 @@ items:
       - Save, add, run, and cell activation leave through host callbacks with normalized failures and stale-configuration guards.
       - Sort and filter results are cached; only rows near the bounded viewport are realized for the 1000-record target and at most 20 columns.
       - Native text controls and explicit width actions replace browser popovers and pointer-only controls; no spreadsheet formula engine or database is bundled.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology grid and compact-detail evidence
-      - profile or release frame and memory evidence for the documented lazy-record workload
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the lazy 1000-record and 20-column workload
   - registry_name: filter-table
     title: Filter Table
     source_type: registry:component
@@ -469,6 +623,14 @@ items:
       - Hidden rows leave visible and Semantics trees immediately; matching counts use a native live-region label.
       - Expanded tables expose table, header, row, and cell semantics while smaller layouts preserve every field in list items.
       - The host supplies scrolling for long result sets; the component does not fetch, edit, sort, or virtualize business records.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology table and list navigation evidence
       - documented practical row-count and layout performance evidence
@@ -492,10 +654,21 @@ items:
       - A bounded native inline drawer needs no Navigator and restores focus after dismissal.
       - Recent search, text selection, expansion choice, and scroll position survive presentation changes; recent rows are lazy for the 1000-item target.
       - Source portals, fixed workspace data, commercial icons, and source branding are omitted.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - The compact closed trigger now grows for large text, and its repaired static state was re-rendered and reviewed.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology navigation, drawer, and focus evidence
-      - profile or release performance evidence for long recent histories
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 1000-recent history workload
   - registry_name: search
     title: Search
     source_type: registry:component
@@ -517,9 +690,17 @@ items:
       - Item order and nested keywords are defensively snapshotted; pointer hover never reports semantic selection.
       - Field, clear, and result hit regions remain at least 48dp across all adaptive modes.
       - Result and clear actions explicitly expose enabled Semantics across Web and desktop accessibility bridges.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
-      - explicit high-contrast and normal/reduced transition evidence
+      - remaining high-contrast combinations and temporal normal/reduced transition review beyond accepted static fixtures
 
   - registry_name: flowchart
     title: Flowchart
@@ -539,10 +720,20 @@ items:
       - Release validation rejects missing or duplicate IDs, invalid endpoints, cycles, and data outside the approved node, edge, option, and position bounds.
       - Measured node bounds anchor connectors; pan and zoom stay bounded and zoom never shrinks controls below their baseline target size.
       - Ordered steps and explicit move actions preserve editing without relying on dragging; graph execution and arbitrary edge creation are excluded.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device canvas or ordered-step editing evidence
-      - profile or release frame and memory evidence for the 24-node and 48-edge workload
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 24-node and 48-edge workload
   - registry_name: insight-cards
     title: Insight Cards
     source_type: registry:component
@@ -561,10 +752,21 @@ items:
       - Private Flutter vector painters replace liveline and source autoplay, using exact finite supplied values with dashed and marker distinctions beyond color.
       - Only the selected chart is painted; full textual observations are created on request and support touch, keyboard, and Semantics inspection.
       - Work is bounded to 32 pages, four series of 512 points, eight metrics, and twelve allocation segments; no forecasting or synthetic time series is generated.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+      - Adjustable controls expose native slider flags and the appropriate value, enabled state, and adjustment actions.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology chart inspection and data-table evidence
-      - profile or release performance evidence beyond diagnostic debug timings
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the bounded chart workload
   - registry_name: code-block
     title: Code Block
     source_type: registry:component
@@ -587,9 +789,17 @@ items:
       - Copy is de-duplicated while pending and exposes localized success or failure live feedback.
       - Diff rows announce added, removed, or context meaning instead of relying on color.
       - Copy and header targets are enlarged from the source visual size to Flutter accessibility guidance.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology smoke evidence
-      - explicit high-contrast behavior evidence
+      - remaining high-contrast combinations and temporal interaction-state review beyond accepted static fixtures
       - long-source tokenization and intrinsic-layout benchmark before a stable release
 
   - registry_name: fine-tune-card
@@ -612,6 +822,15 @@ items:
       - Numeric drafts preserve invalid and composing input, commit on Enter, Done, or blur, and restore the accepted value on Escape.
       - Numeric adjustment supports 48dp buttons, arrow keys, Shift acceleration, horizontal pointer scrubbing, and assistive increase and decrease actions.
       - Type choices open inline and restore focus on dismissal; the Edited marker compares accepted values with the initial mounted snapshot.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - Adjustable controls expose native slider flags and the appropriate value, enabled state, and adjustment actions.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
     open_items:
       - real assistive-technology and physical-device numeric input evidence
 
@@ -634,7 +853,17 @@ items:
       - Document identity and meaningful text, range, or instruction changes invalidate obsolete pending UI; initialSelection is a seed rather than a controlled range.
       - Native gestures and guarded clipboard controls share the selection boundary with keyboard and Semantics actions; the source timers, npm icons, and AI simulation are omitted.
       - Plain text uses a bounded read-only editor viewport; rich-text editing and document persistence remain outside the package.
+    accepted_evidence:
+      - Integrated local package tests and strict analysis cover the item directly or through its consuming composites.
+      - Recorded source attribution and complete required dependency notices were verified for the audited release artifacts.
+      - Representative static states were included in the accepted 49-image review; remaining combinations and temporal states stay open.
+      - The corresponding workload completed in historical profile baseline 20260903T080855Z; final-source resampling after palette and muted-ticker fixes is pending.
+    evidence_paths:
+      - docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-license-audit.md
+      - docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md
+      - docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json
     open_items:
       - remaining native and real interaction verification required by docs/beautiful-ui/support_matrix.md
       - real assistive-technology and physical-device selection, toolbar, and clipboard evidence
-      - profile or release performance evidence for the 20000-character document workload
+      - final-source resampling, agreed frame and memory budgets, repeated profiling, and representative other-platform or physical-device measurements for the 20000-character document workload

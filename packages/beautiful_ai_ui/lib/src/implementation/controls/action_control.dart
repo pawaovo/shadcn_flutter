@@ -93,11 +93,15 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
         MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     final duration =
         platformDisablesMotion ||
-            environment.motionPolicy == BeautifulMotionPolicy.none
+            environment.motionPolicy == BeautifulMotionPolicy.none ||
+            // A host may mute an entire subtree to stop continuous motion.
+            // Finite state changes must still commit their painted colors.
+            !TickerMode.valuesOf(context).enabled
         ? Duration.zero
         : theme.motion.quick;
 
     final (background, foreground, border) = _colors(theme, enabled);
+    final selected = widget.selected ?? false;
     final label = Text(
       widget.label,
       maxLines: widget.maxLines,
@@ -169,14 +173,21 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
                 minHeight: widget.minHeight,
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: theme.spacing.md,
-                vertical: theme.spacing.sm,
+                horizontal: theme.spacing.md + 1,
+                vertical: theme.spacing.sm + 1,
               ),
               decoration: BoxDecoration(
                 color: background,
+                borderRadius: BorderRadius.circular(theme.radii.control),
+              ),
+              // Paint state outlines independently of layout so selection and
+              // focus cannot reflow labels or change lazy-menu row extents.
+              foregroundDecoration: BoxDecoration(
                 border: Border.all(
-                  color: _focused ? theme.colors.accent : border,
-                  width: _focused ? 2 : 1,
+                  color: _focused
+                      ? theme.colors.foregroundOn(background)
+                      : border,
+                  width: _focused ? 3 : (selected ? 2 : 1),
                 ),
                 borderRadius: BorderRadius.circular(theme.radii.control),
               ),
@@ -189,35 +200,53 @@ final class _BeautifulActionControlState extends State<BeautifulActionControl> {
   }
 
   (Color, Color, Color) _colors(BeautifulUiThemeData theme, bool enabled) {
+    final colors = theme.colors;
+    final selected = widget.selected ?? false;
     if (!enabled) {
-      return (theme.colors.inset, theme.colors.inkSubtle, theme.colors.line);
+      return (
+        colors.inset,
+        colors.inkSubtle,
+        selected ? colors.foregroundOn(colors.inset) : colors.line,
+      );
     }
-    return switch (widget.tone) {
+    final (background, foreground, border) = switch (widget.tone) {
       BeautifulActionTone.primary => (
-        _hovered ? theme.colors.accentInk : theme.colors.accent,
-        theme.colors.tooltipForeground,
+        _hovered ? colors.accentHover : colors.accent,
+        colors.accentForeground,
         const Color(0x00000000),
       ),
       BeautifulActionTone.success => (
-        theme.colors.success,
-        theme.colors.tooltipForeground,
+        colors.success,
+        colors.successForeground,
         const Color(0x00000000),
       ),
       BeautifulActionTone.destructive => (
-        theme.colors.destructive,
-        theme.colors.tooltipForeground,
+        colors.destructive,
+        colors.destructiveForeground,
         const Color(0x00000000),
       ),
       BeautifulActionTone.secondary => (
-        _hovered ? theme.colors.hoverStrong : theme.colors.inset,
-        theme.colors.ink,
-        theme.colors.lineStrong,
+        _hovered ? colors.hoverStrong : colors.inset,
+        colors.ink,
+        colors.lineStrong,
       ),
       BeautifulActionTone.quiet => (
-        _hovered ? theme.colors.hover : const Color(0x00000000),
-        theme.colors.inkMuted,
+        _hovered ? colors.hover : const Color(0x00000000),
+        colors.inkMuted,
         const Color(0x00000000),
       ),
     };
+    if (!selected) return (background, foreground, border);
+    final selectedBackground = switch (widget.tone) {
+      BeautifulActionTone.secondary || BeautifulActionTone.quiet =>
+        Color.alphaBlend(colors.accentTint, colors.surface),
+      _ => background,
+    };
+    final selectedForeground = switch (widget.tone) {
+      BeautifulActionTone.secondary ||
+      BeautifulActionTone.quiet => colors.foregroundOn(selectedBackground),
+      _ => foreground,
+    };
+    return (selectedBackground, selectedForeground, selectedForeground);
   }
 }

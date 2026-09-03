@@ -12,7 +12,10 @@
   "host": {
     "os": "macOS 15.7.9",
     "architecture": "arm64",
-    "locale": "zh-Hans-CN"
+    "locale": "zh-Hans-CN",
+    "hardware_model": "MacBookPro18,1",
+    "cpu": "Apple M1 Pro",
+    "physical_memory_bytes": 34359738368
   },
   "source_pins": {
     "shadcn_flutter": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
@@ -20,13 +23,17 @@
     "beautiful_ui": "dd1ba4f323c29ef6c383b2dbf1d7100f2c26ccac"
   },
   "local_capabilities": {
-    "chrome_web": "available",
+    "captured_on": "2026-09-03",
+    "chrome_web": "available_with_recorded_prior_local_journey",
     "chrome_version": "152.0.7977.66",
     "chromedriver_version": "152.0.7977.75",
-    "chrome_webdriver_journey": "passed",
-    "android_sdk": "missing",
-    "xcode": "incomplete",
-    "cocoapods": "missing"
+    "macos_release_build": "passed",
+    "macos_native_shared_journey": "passed",
+    "macos_native_ax": "verified_without_web_semantics_compile_flag",
+    "xcode": "available_for_verified_macos_release_build",
+    "android_sdk": "not_rechecked_in_this_pass",
+    "ios_simulator_local_journey": "not_recorded",
+    "cocoapods": "not_rechecked_in_this_pass"
   },
   "golden": {
     "canonical_platform": "Ubuntu 24.04 x64",
@@ -76,6 +83,27 @@
       "p3_content_dark.png": "5664d066076a58ad1f5b845e0a11ef11f852b71de90d7f325a915885febf9584",
       "p3_workspace_light.png": "2492281897444b81199ad37aa56f758182a464c6b9fb81e887323206b7ae57e5",
       "p3_workspace_dark.png": "71be8a58526d0f2ebffec87e9e812351f2d3b52a25f1f00cf4c03d74496435d9"
+    },
+    "release_readiness_refresh": {
+      "verified_on": "2026-09-03",
+      "macos_checks_passed": 12,
+      "updated_supplemental_images": 8,
+      "linux_current_changes": "eight_changed_component_baselines_pending_ci_candidates_and_explicit_acceptance",
+      "historical_baselines": "earlier_hashes_above_are_retained_for_their_original_implementation_runs",
+      "current_supplemental_images": 10,
+      "current_supplemental_sha256": {
+        "loading_state_dark_macos.png": "255dba2d56b0b1f6e1d254bf03a80f6f51b93e709dbe932291fd439d34624112",
+        "loading_state_light_macos.png": "3ae29e4b19b6f507a1b32696e870e1643d0f82ef90103922d83453695d96b262",
+        "p1_components_dark_macos.png": "727816a3c5d49388b86325fc7e67eb2ca1483a366bceb2bd5d76a5b9bf7744b5",
+        "p1_components_light_macos.png": "d61f46b7729bd89c1c01d97270f31ca402d490b941d5e7362972c0f29fabfdd1",
+        "p2_components_dark_macos.png": "0355532a0982cbcc1a1880a68b7f01f05dde9139a4d7731b49c41f6e17c7d90e",
+        "p2_components_light_macos.png": "90b5012efaf5fe640ad2844b5a35773cbdeadcb2095252c04c02ce700bd25f5a",
+        "p3_content_dark_macos.png": "2e7bc3ffeea13e52a27117f6c23e2fe2d58e8e8bbef8852214f250720adde626",
+        "p3_content_light_macos.png": "66febbc0067f16f735abb7f3000bcf9321613f5b6c7bf5676f198dcc739398d0",
+        "p3_workspace_dark_macos.png": "ac4818a37a83bc1e22a3a328e108d4c7f8d4cee56c3aa790f716cf0a063f098a",
+        "p3_workspace_light_macos.png": "1021c7707bc32dee70f19aad9550c5ae0cd6dd39b65b7b705cb9ba4e3cd4d6cf"
+      },
+      "hash_source": "packages/beautiful_ai_ui/build/release_review/macos-golden-final-after.json"
     }
   },
   "p1_journeys": {
@@ -138,7 +166,7 @@
     "implementation_status": "all_seven_exported_in_progress",
     "integrated_execution_status": "local_results_and_complete_final_remote_results_recorded",
     "remote_ci_status": "all_10_jobs_passed_run_33726848975_on_74178098705aa83b5452857aece6a3b10bb3ce4f",
-    "profile_release_performance": "not_yet_recorded"
+    "profile_release_performance": "historical_baseline_20260903T080855Z_passed_final_source_resample_pending"
   },
   "p3_local_validation": {
     "verified_on": "2026-09-03",
@@ -200,5 +228,112 @@
     "android_emulator_journey": "passed",
     "quality_and_goldens": "passed_including_strict_ubuntu_p3_canonical_comparison",
     "publish_dry_run": "passed"
+  },
+  "updated_on": "2026-09-03",
+  "initial_local_capabilities": {
+    "chrome_web": "available",
+    "chrome_version": "152.0.7977.66",
+    "chromedriver_version": "152.0.7977.75",
+    "chrome_webdriver_journey": "passed",
+    "android_sdk": "missing",
+    "xcode": "incomplete",
+    "cocoapods": "missing",
+    "captured_on": "2026-09-02"
+  },
+  "release_readiness_validation": {
+    "verified_on": "2026-09-03",
+    "evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md",
+    "all_registry_statuses": "in_progress",
+    "gallery_implementations": 20,
+    "registry_items": 27,
+    "package_tests_passed": 526,
+    "catalog_tests_passed": 19,
+    "strict_analysis": "final_library_and_catalog_passed",
+    "macos_golden_checks_passed": 12,
+    "supplemental_visual_images_reviewed": 49,
+    "visual_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md",
+    "source_font_files_verified": 43,
+    "runtime_font_files_verified": 37,
+    "transitive_flag_files_verified": 266,
+    "original_web_images_verified": 5,
+    "complete_license_registry_labels_verified": 13,
+    "release_asset_audits": {
+      "macos": "docs/beautiful-ui/quality_evidence/native-release-assets.json",
+      "web_javascript": "docs/beautiful-ui/quality_evidence/web-js-release-assets.json",
+      "web_wasm": "docs/beautiful-ui/quality_evidence/web-wasm-release-assets.json"
+    },
+    "typography_decision": "verified_inherited_GeistSans_and_GeistMono_no_bundled_Inter_or_JetBrainsMono",
+    "native_macos_shared_journey": "passed",
+    "native_macos_ax": "no_flag_A_B_verified_Web_flag_now_gated_by_kIsWeb",
+    "profile": {
+      "evidence_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/summary.json",
+      "run_id": "20260903T080855Z",
+      "status": "historical_baseline_complete",
+      "integration_driver_exit_code": 0,
+      "script_exit_code": 0,
+      "teardown": "completed",
+      "workloads_completed": 7,
+      "frame_samples": 4524,
+      "rss_samples": 480,
+      "native_view_logical_dp": {
+        "width": 1728.0,
+        "height": 963.0
+      },
+      "device_pixel_ratio": 2.0,
+      "display_refresh_rate_hz": 120.0,
+      "renderer": "Impeller_Metal_verified_from_native_timeline",
+      "acceptance_limitations": "single_machine_run_product_budgets_repeatability_and_other_platform_or_device_evidence_open",
+      "readme_path": "docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md",
+      "source_alignment": "predates_final_palette_and_muted_ticker_fixes",
+      "final_source_resample": "pending_separate_followup_evidence_commit",
+      "source_manifest_sha256": "ed8f40f37ddb6e276683e1bfba622d17e13deee272dd5e84af57281e2cbd9637"
+    },
+    "remote_ci": {
+      "workflow": ".github/workflows/beautiful_ai_ui.yml",
+      "configured_jobs": 12,
+      "status": "configured_pending_remote_execution_for_current_changes",
+      "new_native_steps": [
+        "macos",
+        "ios_simulator",
+        "windows"
+      ],
+      "new_browser_jobs": {
+        "firefox": "configured_pending",
+        "edge": "configured_pending"
+      },
+      "current_linux_goldens": "eight_changed_component_baselines_pending_ci_candidates_and_explicit_acceptance"
+    },
+    "native_semantics_evidence_path": "docs/beautiful-ui/quality_evidence/2026-09-03-native-semantics.md",
+    "latest_frozen_source_wasm_release": "passed_after_final_palette_and_muted_ticker_fixes",
+    "final_local_logs": {
+      "package_tests": "/tmp/release-final-package-tests.log",
+      "wasm_build": "/tmp/release-final-wasm-build.log"
+    },
+    "final_visual_capture": {
+      "images_reviewed": 49,
+      "renderer_manifest_sha256": "31612099bcb0a461d0748007528bb71642221d2a11d57d1af70136bf6f04f686",
+      "source_inventory_entries": 249,
+      "source_inventory_fingerprint_sha256": "936fc4800a23a18b044c0be7a3a5aa69fa16073e4bee3ef07e1e1a17ed65349c",
+      "fingerprint_format": "UTF-8 JSON with sorted keys, compact separators and no trailing newline",
+      "captured_at_utc": "2026-09-03T08:48:09.245071+00:00",
+      "source_alignment": "final_frozen_palette_and_muted_ticker_implementation"
+    },
+    "last_frozen_source_fixes": {
+      "normal_ink_subtle": {
+        "light": "#66696f",
+        "dark": "#9c9fa5",
+        "tested_text_minimum_contrast": 4.5
+      },
+      "light_accent_ink": {
+        "value": "#0067cb",
+        "contrast_on_accent_tint": 4.925,
+        "previous_contrast": 4.294,
+        "graphic_accent": "unchanged"
+      },
+      "palette_regressions_added": 4,
+      "muted_ticker_action_color_fix": "Duration.zero when TickerMode.valuesOf(context).enabled is false",
+      "paint_regressions_added": 3,
+      "paint_regression_scope": "includes_real_1200dp_Flowchart_canvas_after_theme_change"
+    }
   }
 }

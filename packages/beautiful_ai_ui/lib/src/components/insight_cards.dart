@@ -1039,6 +1039,7 @@ final class _ChartInspectionState extends State<_ChartInspection> {
       focusable: true,
       focused: _focus.hasFocus,
       slider: widget.count > 1,
+      enabled: true,
       onTap: _focus.requestFocus,
       onIncrease: widget.selected < widget.count - 1 ? () => change(1) : null,
       onDecrease: widget.selected > 0 ? () => change(-1) : null,

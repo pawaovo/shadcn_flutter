@@ -1,0 +1,1783 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-03",
+  "scope": "shadcn_flutter runtime font declarations plus undeclared sibling OTF files; asset permission remains in legal/assets.yaml",
+  "dependency": {
+    "package": "shadcn_flutter",
+    "version": "0.0.54",
+    "pinned_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+    "pubspec": "packages/shadcn_flutter/pubspec.yaml",
+    "notices": "packages/shadcn_flutter/NOTICES"
+  },
+  "counts": {
+    "runtime_declared": 37,
+    "runtime_typography": 34,
+    "runtime_icon_fonts": 3,
+    "undeclared_sibling_fonts": 6
+  },
+  "licenses": [
+    {
+      "id": "shadcn_bsd",
+      "spdx": "BSD-3-Clause",
+      "file": "LICENSES/SHADCN_FLUTTER_CORE_BSD_3_CLAUSE.txt",
+      "sha256": "bba02a925ada3b0bacdd39588d6676e5b67003c2824e1cddafba796fa6bab891",
+      "notice_labels": [
+        "shadcn_flutter"
+      ],
+      "official_source": "https://github.com/sunarya-thito/shadcn_flutter/blob/5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73/packages/shadcn_flutter/LICENSE"
+    },
+    {
+      "id": "geist_151_ofl",
+      "spdx": "OFL-1.1",
+      "file": "LICENSES/GEIST_1_5_1_OFL_1_1.txt",
+      "sha256": "1781d2806a07d91c4edf4740b88449fab7d0eadad53f7c351b94cd4d4eb8c00f",
+      "notice_labels": [
+        "Geist",
+        "Geist Mono"
+      ],
+      "official_source": "https://github.com/vercel/geist-font/blob/3c80bfcc1ba4988ece0eda46a282e15d29e61bbf/OFL.txt"
+    },
+    {
+      "id": "geist_110_ofl",
+      "spdx": "OFL-1.1",
+      "file": "LICENSES/GEIST_1_1_0_OFL_1_1.txt",
+      "sha256": "f38cbd54a72dd027dc854a9bbac9eb5bb8b9b1d6e4b43f037435336ab62a63fc",
+      "notice_labels": [
+        "Geist legacy",
+        "Geist Mono legacy"
+      ],
+      "official_source": "https://github.com/vercel/geist-font/releases/tag/1.1.0"
+    },
+    {
+      "id": "bootstrap_mit",
+      "spdx": "MIT",
+      "file": "LICENSES/BOOTSTRAP_ICONS_1_11_3_MIT.txt",
+      "sha256": "0fb3e11bd57e896c5a512afd64864d28a37de45d19835016c87ca1ad19ead969",
+      "notice_labels": [
+        "Bootstrap Icons"
+      ],
+      "official_source": "https://github.com/twbs/icons/blob/8d88686c03c3768a2d82ba4f20c3c4e1b100fa29/LICENSE"
+    },
+    {
+      "id": "lucide_isc",
+      "spdx": "ISC",
+      "file": "LICENSES/LUCIDE_0_479_0_ISC.txt",
+      "sha256": "1e7290b35280a048667bbf0ebabac1c7fd52a75300e8b2946ac165715997f2bc",
+      "notice_labels": [
+        "Lucide"
+      ],
+      "official_source": "https://github.com/lucide-icons/lucide/blob/aefb710e5c64b3d569b6e3eafa7516c273a1bf4a/LICENSE"
+    },
+    {
+      "id": "feather_mit",
+      "spdx": "MIT",
+      "file": "LICENSES/FEATHER_4_29_2_MIT.txt",
+      "sha256": "308028e93fcf84972523cdf6e616f73168546b4953895f516d01287f16fe7bee",
+      "notice_labels": [
+        "Feather (Lucide-derived icons)"
+      ],
+      "official_source": "https://github.com/feathericons/feather/blob/v4.29.2/LICENSE"
+    },
+    {
+      "id": "radix_mit",
+      "spdx": "MIT",
+      "file": "LICENSES/RADIX_ICONS_MIT.txt",
+      "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
+      "notice_labels": [
+        "Radix Icons"
+      ],
+      "official_source": "https://github.com/radix-ui/icons/blob/112af91ad275a63c3a29b0da2588342af74ef9bf/LICENSE"
+    },
+    {
+      "id": "flag_icons_mit",
+      "spdx": "MIT",
+      "file": "LICENSES/FLAG_ICONS_MIT.txt",
+      "sha256": "8f1195d55a2fd315a07d812328470ca9ba2abb78c8d317ff19619d5125e00cea",
+      "notice_labels": [
+        "flag-icons"
+      ],
+      "official_source": "https://github.com/lipis/flag-icons/blob/086f7e97d657358203916dbe84f61c2bccaa81eb/LICENSE",
+      "scope": "Additional source notice for transitive country_flags images; image files are separately inventoried."
+    }
+  ],
+  "upstream_artifacts": {
+    "geist_1_5_1": {
+      "url": "https://github.com/vercel/geist-font/releases/download/1.5.1/geist-font-1.5.1.zip",
+      "cache_name": "geist-font-1.5.1.zip",
+      "sha256": "2e5495158a952ac839dfbb371d4910d2f6f0ea8e0253f103bc6cf66041886e4c",
+      "format": "zip",
+      "version": "1.5.1",
+      "source_commit": "3c80bfcc1ba4988ece0eda46a282e15d29e61bbf"
+    },
+    "geist_sans_1_1_0": {
+      "url": "https://github.com/vercel/geist-font/releases/download/1.1.0/Geist.zip",
+      "cache_name": "1.1.0_Geist.zip",
+      "sha256": "8f96b6e69f416706cec3293ceaa4cbb41a981cba7a32ed7c92dff14a5a44497e",
+      "format": "zip",
+      "version": "1.1.0",
+      "source_commit": "52e1698a4af006cdd851ad14fda30c23f1ef8841"
+    },
+    "geist_mono_1_1_0": {
+      "url": "https://github.com/vercel/geist-font/releases/download/1.1.0/Geist.Mono.zip",
+      "cache_name": "1.1.0_Geist.Mono.zip",
+      "sha256": "b32e99aa5b5e7828457ce8808e8551a859089aa48d745f1b99b5a43d90dee940",
+      "format": "zip",
+      "version": "1.1.0",
+      "source_commit": "52e1698a4af006cdd851ad14fda30c23f1ef8841"
+    },
+    "lucide_static_0_479_0": {
+      "url": "https://registry.npmjs.org/lucide-static/-/lucide-static-0.479.0.tgz",
+      "cache_name": "lucide-static-0.479.0.tgz",
+      "sha256": "7e8723f3ae63c5748737e4817c504f2febbc45737bbde807f4c923367e34e654",
+      "format": "tar.gz",
+      "version": "0.479.0",
+      "source_commit": "aefb710e5c64b3d569b6e3eafa7516c273a1bf4a"
+    },
+    "bootstrap_1_11_3_woff": {
+      "url": "https://raw.githubusercontent.com/twbs/icons/8d88686c03c3768a2d82ba4f20c3c4e1b100fa29/font/fonts/bootstrap-icons.woff",
+      "cache_name": "bootstrap_1113.woff",
+      "sha256": "bb1de989b83970f6f4e54de1cd974c5cba55b73582da5e1b225a6d0edf029483",
+      "format": "woff",
+      "version": "1.11.3",
+      "source_commit": "8d88686c03c3768a2d82ba4f20c3c4e1b100fa29"
+    },
+    "radix_shadcn_0_0_54": {
+      "url": "https://raw.githubusercontent.com/sunarya-thito/shadcn_flutter/5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73/packages/shadcn_flutter/lib/icons/RadixIcons.otf",
+      "cache_name": "radix_shadcn_0_0_54.otf",
+      "sha256": "581783cc200858b1d9dc57bace8cffc31f419faaa86b748d8b4af080028665af",
+      "format": "raw",
+      "version": "shadcn_flutter 0.0.54",
+      "source_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73"
+    }
+  },
+  "assets": [
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Black.otf",
+      "sha256": "0f3a5a79a1c5c3b788cbe6e1d4608e94bc877564b6d4922a0353b4e949a8cca5",
+      "bytes": 135452,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Black"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Black"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 800,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Black.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-BlackItalic.otf",
+      "sha256": "682aede5acfd98ed29b10f2ee510246aa6532823f3ba3aacf50bf05a340922ef",
+      "bytes": 134924,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Black"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-BlackItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 800,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-BlackItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Bold.otf",
+      "sha256": "9f5cd517a5bfac5097722b29bfd83ff3c5a84808ec5a33207f97b46954d3fd21",
+      "bytes": 133824,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Bold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 700,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Bold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-BoldItalic.otf",
+      "sha256": "39d14c06db9c36be9decee566173e961440560c5addc696cd292c06e55f73ac0",
+      "bytes": 134668,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-BoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 700,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-BoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ExtraBold.otf",
+      "sha256": "ac647e0f65b48b6712f0a6bfe06157f197af14b71d9fd2fb7504c334164968cc",
+      "bytes": 134988,
+      "runtime_declared": false,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist ExtraBold"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-ExtraBold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-ExtraBold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ExtraBoldItalic.otf",
+      "sha256": "18564409e7d3c0f58eff4a849a53cebf8ead286effe2ac0fdb88eeeb079ce72e",
+      "bytes": 135804,
+      "runtime_declared": false,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist ExtraBold"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-ExtraBoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-ExtraBoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ExtraLight.otf",
+      "sha256": "8267b465e6e57632eeacfd5a01b5a09d414981bba446723bd6dc2e9fb29a0528",
+      "bytes": 129740,
+      "runtime_declared": false,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist ExtraLight"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-ExtraLight"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-ExtraLight.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ExtraLightItalic.otf",
+      "sha256": "5ef5f5b5a804c78b02fc9e47d139da96eb164ca1d0bdaf22a359c7dcd9b1cc09",
+      "bytes": 131548,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist ExtraLight"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-ExtraLightItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 200,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-ExtraLightItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Light.otf",
+      "sha256": "811fa7ce5c45bfdeaaeaa58c7f716eb7b4f2264195bad36613de53c719b3d382",
+      "bytes": 128892,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Light"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Light"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 300,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Light.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-LightItalic.otf",
+      "sha256": "d481357ba518d2a871b4f00c864d802f40e0f010603f923503096f214ee0b3ce",
+      "bytes": 131436,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Light"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-LightItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 300,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-LightItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Medium.otf",
+      "sha256": "fc61a2a6108d0cbfaef4ee84bf5e369a2ee626392a0a982eb42e3397c740e53e",
+      "bytes": 130580,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Medium"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Medium"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 500,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Medium.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-MediumItalic.otf",
+      "sha256": "3ee5dba593f1370c8b69c2baf9d4d4861777e25bf1eae4be83715c40f9cf67a5",
+      "bytes": 132672,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Medium"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-MediumItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 500,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-MediumItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Regular.otf",
+      "sha256": "2726f519ac638e54f1c1a2209f708a8d4c2fae6823bc5e1c5fa838c849ee0124",
+      "bytes": 128048,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Regular"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Regular.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-RegularItalic.otf",
+      "sha256": "077f5de7abe1dac3f8cac7df1bbd409070c38ea79d50d31841b3d0f5f17afbec",
+      "bytes": 130504,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Regular"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-RegularItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-RegularItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-SemiBold.otf",
+      "sha256": "bfce1ff06bb4ccc94151c15aa4fb5cb4030bf3c5fe455afc71a4872c3c42c00b",
+      "bytes": 133080,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist SemiBold"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-SemiBold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 600,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-SemiBold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-SemiBoldItalic.otf",
+      "sha256": "534a36abf757d08b2bb3503c19e0abbaeb4f7dadf7bd5751378ff7cce4c79932",
+      "bytes": 134104,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist SemiBold"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-SemiBoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 600,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-SemiBoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Thin.otf",
+      "sha256": "dbd20eea60f883e04623a6cb1c98dde01f1c24d9c5bdc733f58c6a668ba0a0ab",
+      "bytes": 128480,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Thin"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-Thin"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 100,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-Thin.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ThinItalic.otf",
+      "sha256": "cd74b379d6ccab362d1f2b6d42f8288a1014ebe31524aebb63bfff11013dfda0",
+      "bytes": 130340,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Thin"
+        ],
+        "3": [
+          "1.510;VRCL;Geist-ThinItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 100,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/Geist/otf/Geist-ThinItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-UltraBlack.otf",
+      "sha256": "a7398964f79d25a35edec881db301a4b50bd64c9ec8c19d7ed3cfc1f5d7dd9ca",
+      "bytes": 72812,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "1": [
+          "Geist UltraBlack"
+        ],
+        "5": [
+          "Version 1.002;Glyphs 3.1.2 (3151)"
+        ],
+        "3": [
+          "1.002;UKWN;Geist-UltraBlack"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 900,
+      "style": "normal",
+      "upstream_version": "Geist release 1.1.0; font internal version 1.002",
+      "license_ids": [
+        "geist_110_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_sans_1_1_0",
+      "upstream_member": "Geist/Geist-UltraBlack.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-UltraLight.otf",
+      "sha256": "225083b632bdf4d873bbeedc21a6c1eaa10fef5e3f3bea58fe007af789aace69",
+      "bytes": 69988,
+      "runtime_declared": true,
+      "family": "GeistSans",
+      "font_metadata": {
+        "1": [
+          "Geist UltraLight"
+        ],
+        "5": [
+          "Version 1.002;Glyphs 3.1.2 (3151)"
+        ],
+        "3": [
+          "1.002;UKWN;Geist-UltraLight"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 200,
+      "style": "normal",
+      "upstream_version": "Geist release 1.1.0; font internal version 1.002",
+      "license_ids": [
+        "geist_110_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_sans_1_1_0",
+      "upstream_member": "Geist/Geist-UltraLight.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Black.otf",
+      "sha256": "c6715f6f11e2abda99b809e5fcc3833c388d97934f72cb1428c8dfcd33e78c44",
+      "bytes": 148104,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Black"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Black"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 800,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Black.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-BlackItalic.otf",
+      "sha256": "db34589144d5250fb7d3db094ae984574e736aca3ed4b2839b1cec878c06b424",
+      "bytes": 148776,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Black"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-BlackItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 800,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-BlackItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Bold.otf",
+      "sha256": "63d787203a2a0cef4b93bc34664a6762d0be6a0a0eac045b2feb3e806e07e585",
+      "bytes": 147696,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Bold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 700,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Bold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-BoldItalic.otf",
+      "sha256": "b1522b9f7d805aa4be5df622d7ac51b50212e73ed0e914a3f851124200b97708",
+      "bytes": 148628,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-BoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 700,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-BoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ExtraBold.otf",
+      "sha256": "74caec9c43fe04177d9b00b444f9df25beb18dfe8e3c382f2a868d376fe5d8bd",
+      "bytes": 148280,
+      "runtime_declared": false,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono ExtraBold"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-ExtraBold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-ExtraBold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ExtraBoldItalic.otf",
+      "sha256": "a1bc31948ed87b38c017bba331d1f552654ff5d3a294f8e98e356b8ab889a833",
+      "bytes": 149764,
+      "runtime_declared": false,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono ExtraBold"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-ExtraBoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-ExtraBoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ExtraLight.otf",
+      "sha256": "17d719e7042d4f0d06daa04bd1fd1843ebf6e9d367fc01041be82d1947dd2566",
+      "bytes": 143336,
+      "runtime_declared": false,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono ExtraLight"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-ExtraLight"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-ExtraLight.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ExtraLightItalic.otf",
+      "sha256": "abee999f2751f2350e376557475412f5a4213bb819baba9d08a524dd4135ea41",
+      "bytes": 145416,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono ExtraLight"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-ExtraLightItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 200,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-ExtraLightItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Italic.otf",
+      "sha256": "6c886b11161ac2c4a5d1fcf299b28767a51cf4427b8139495a979dd5ad6d48bd",
+      "bytes": 144572,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Italic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Italic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Light.otf",
+      "sha256": "27a3ed21f7d576076cba0530929f37c1000393df35b7750bbe32cff96f38bd0f",
+      "bytes": 143572,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Light"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Light"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 300,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Light.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-LightItalic.otf",
+      "sha256": "9127b50d7dd8c74548eff5954dbc88105815f17b6441761f648a30c4c2fafee0",
+      "bytes": 145020,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Light"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-LightItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 300,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-LightItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Medium.otf",
+      "sha256": "e5dccf9e74ed57529e7e4899499599bd69f6c58fe616e7cc1537e74da595c15c",
+      "bytes": 143104,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Medium"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Medium"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 500,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Medium.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-MediumItalic.otf",
+      "sha256": "1bb9d8524ca63e25e2475f53d9b2ac0f96908cfa610af781e3fa2c313cd345bb",
+      "bytes": 145512,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Medium"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-MediumItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 500,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-MediumItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Regular.otf",
+      "sha256": "75d57d2736b29901634f705eda854e1bb10f75e40ef82e4ca22dd8b4b9052f75",
+      "bytes": 142188,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Regular"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Regular.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-SemiBold.otf",
+      "sha256": "5c3b9131a5506631eb2d641f910272772a77e9b77164f1643ebeb27ba51244be",
+      "bytes": 145708,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono SemiBold"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-SemiBold"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 600,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-SemiBold.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-SemiBoldItalic.otf",
+      "sha256": "e439524f7d182545cefd317dd10598941ef7a4f0d779b06b87e37dfe37fdfdc4",
+      "bytes": 146992,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono SemiBold"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-SemiBoldItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 600,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-SemiBoldItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Thin.otf",
+      "sha256": "86093e50427ae961adfb4ec221fb4285e37b62eb16364156a807de67b5ef398a",
+      "bytes": 143356,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Thin"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-Thin"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 100,
+      "style": "normal",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-Thin.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ThinItalic.otf",
+      "sha256": "d7e63ee2f232760a551c4f7ace86f92c91a0a50aa0d3a827a119f0e80119adcd",
+      "bytes": 145124,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "0": [
+          "Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)"
+        ],
+        "1": [
+          "Geist Mono Thin"
+        ],
+        "3": [
+          "1.510;VRCL;GeistMono-ThinItalic"
+        ],
+        "5": [
+          "Version 1.510"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 100,
+      "style": "italic",
+      "upstream_version": "Geist release 1.5.1; font internal version 1.510",
+      "license_ids": [
+        "geist_151_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_1_5_1",
+      "upstream_member": "geist-font-1.5.1/fonts/GeistMono/otf/GeistMono-ThinItalic.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-UltraBlack.otf",
+      "sha256": "28872e9a8c8939ab6dbf76394a69cc0d94870e6dcb69c700c520f013aed8ed13",
+      "bytes": 70608,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "1": [
+          "Geist Mono UltraBlack"
+        ],
+        "5": [
+          "Version 1.002;Glyphs 3.1.2 (3151)"
+        ],
+        "3": [
+          "1.002;UKWN;GeistMono-UltraBlack"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 900,
+      "style": "normal",
+      "upstream_version": "Geist release 1.1.0; font internal version 1.002",
+      "license_ids": [
+        "geist_110_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_mono_1_1_0",
+      "upstream_member": "Geist.Mono/GeistMono-UltraBlack.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-UltraLight.otf",
+      "sha256": "d940d098ec731ca76ea5b8ba11f2b7969ed5a8e40bc89106b35ceff8f2264ecc",
+      "bytes": 67884,
+      "runtime_declared": true,
+      "family": "GeistMono",
+      "font_metadata": {
+        "1": [
+          "Geist Mono UltraLight"
+        ],
+        "5": [
+          "Version 1.002;Glyphs 3.1.2 (3151)"
+        ],
+        "3": [
+          "1.002;UKWN;GeistMono-UltraLight"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 200,
+      "style": "normal",
+      "upstream_version": "Geist release 1.1.0; font internal version 1.002",
+      "license_ids": [
+        "geist_110_ofl"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "geist_mono_1_1_0",
+      "upstream_member": "Geist.Mono/GeistMono-UltraLight.otf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/BootstrapIcons.otf",
+      "sha256": "497a6cf64228ef94f377a6d1fbd115fa9c8f95f34906e84fce2fd76ca00ec22d",
+      "bytes": 478036,
+      "runtime_declared": true,
+      "family": "BootstrapIcons",
+      "font_metadata": {
+        "1": [
+          "bootstrap-icons"
+        ],
+        "3": [
+          "bootstrap-icons"
+        ],
+        "5": [
+          "Version 1.0"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "normal",
+      "upstream_version": "Bootstrap Icons 1.11.3; generated font name-table Version 1.0 is not the icon release",
+      "license_ids": [
+        "bootstrap_mit"
+      ],
+      "provenance_status": "verified_sfnt_tables_from_official_woff",
+      "upstream_artifact": "bootstrap_1_11_3_woff",
+      "upstream_comparison": "all_sfnt_tables_equal"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/LucideIcons.ttf",
+      "sha256": "b71c60320ddba98adc44e8b0257fb810f6f04b4c74ba46e81569ad9f4449ff95",
+      "bytes": 685840,
+      "runtime_declared": true,
+      "family": "LucideIcons",
+      "font_metadata": {
+        "1": [
+          "lucide"
+        ],
+        "3": [
+          "lucide"
+        ],
+        "5": [
+          "Version 1.0"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "normal",
+      "upstream_version": "lucide-static 0.479.0; generated font name-table Version 1.0 is not the icon release",
+      "license_ids": [
+        "lucide_isc",
+        "feather_mit"
+      ],
+      "provenance_status": "verified_exact_release_bytes",
+      "upstream_artifact": "lucide_static_0_479_0",
+      "upstream_member": "package/font/lucide.ttf",
+      "upstream_comparison": "exact_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/RadixIcons.otf",
+      "sha256": "581783cc200858b1d9dc57bace8cffc31f419faaa86b748d8b4af080028665af",
+      "bytes": 87120,
+      "runtime_declared": true,
+      "family": "RadixIcons",
+      "font_metadata": {
+        "1": [
+          "iconly"
+        ],
+        "3": [
+          "iconly"
+        ],
+        "5": [
+          "Version 1.0"
+        ]
+      },
+      "dependency_version": "shadcn_flutter 0.0.54",
+      "dependency_commit": "5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73",
+      "weight": 400,
+      "style": "normal",
+      "upstream_version": "shadcn_flutter 0.0.54 fixed dependency asset; original Radix icon release unrecorded; generated font internal Version 1.0",
+      "license_ids": [
+        "radix_mit"
+      ],
+      "provenance_status": "verified_pinned_dependency_bytes_and_attribution",
+      "upstream_comparison": "exact_bytes",
+      "upstream_artifact": "radix_shadcn_0_0_54",
+      "provenance_limitation": "The pinned dependency carries an Iconly-generated font and Radix-named Dart constants, but no exact original SVG release or reproducible conversion record. The official Radix MIT notice is preserved without asserting an exact original icon release or conversion recipe.",
+      "attribution_source": "https://github.com/sunarya-thito/shadcn_flutter/blob/5a2376e416fca6c8cc5feb2b5fcf5bf160fa5f73/packages/shadcn_flutter/lib/src/icons/radix_icons.dart"
+    }
+  ],
+  "required_additional_notices": [
+    {
+      "label": "beautiful-ui",
+      "license_file": "LICENSES/BEAUTIFUL_UI_MIT.txt"
+    },
+    {
+      "label": "beautiful_ai_ui",
+      "license_file": "packages/beautiful_ai_ui/LICENSE",
+      "source_label": "beautiful_ai_ui"
+    },
+    {
+      "label": "country_flags",
+      "license_file": "LICENSES/COUNTRY_FLAGS_4_1_2_MIT.txt",
+      "sha256": "cd0268576305886aa32fa26c31787a434761efb0bd0740d20e0434574d66362f"
+    }
+  ],
+  "release_provenance_gaps": [],
+  "exclusions": [
+    "Inter and JetBrains Mono are not bundled.",
+    "Central Icons and source branding/media are not included.",
+    "Flutter generated Catalog launcher artwork is tracked separately in legal/assets.yaml."
+  ],
+  "provenance_limitations": [
+    "Radix original SVG release and Iconly conversion recipe are not recorded. The audited acquisition boundary is the exact attributed font in the pinned shadcn_flutter dependency, consistent with the asset policy requiring a version or hash; no exact original conversion is claimed."
+  ]
+}

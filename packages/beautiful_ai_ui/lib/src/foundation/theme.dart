@@ -35,7 +35,7 @@ final class BeautifulUiColors {
     required this.tooltipBorder,
   });
 
-  /// The light Beautiful UI foundation colors converted from OKLCH to sRGB.
+  /// Source-derived light colors with readable semantic text contrast.
   const BeautifulUiColors.light()
     : this(
         brightness: Brightness.light,
@@ -47,13 +47,13 @@ final class BeautifulUiColors {
         hoverStrong: const Color(0xffe7e9eb),
         ink: const Color(0xff1f2124),
         inkMuted: const Color(0xff62656b),
-        inkSubtle: const Color(0xff9a9da3),
+        inkSubtle: const Color(0xff66696f),
         line: const Color(0xffecedef),
         lineStrong: const Color(0xffe0e2e5),
         lineSoft: const Color(0xfff3f4f5),
         field: const Color(0xfff2f2f3),
         accent: const Color(0xff0285ff),
-        accentInk: const Color(0xff0070dd),
+        accentInk: const Color(0xff0067cb),
         accentTint: const Color(0xffe9f3ff),
         success: const Color(0xff199a4d),
         successTint: const Color(0xffe8f5ed),
@@ -67,7 +67,7 @@ final class BeautifulUiColors {
         tooltipBorder: const Color(0xff3a3c40),
       );
 
-  /// The dark Beautiful UI foundation colors converted from OKLCH to sRGB.
+  /// Source-derived dark colors with readable semantic text contrast.
   const BeautifulUiColors.dark()
     : this(
         brightness: Brightness.dark,
@@ -79,7 +79,7 @@ final class BeautifulUiColors {
         hoverStrong: const Color(0xff313236),
         ink: const Color(0xfff2f3f4),
         inkMuted: const Color(0xffa5a8ad),
-        inkSubtle: const Color(0xff6c6f75),
+        inkSubtle: const Color(0xff9c9fa5),
         line: const Color(0xff2e3033),
         lineStrong: const Color(0xff3a3c40),
         lineSoft: const Color(0xff27282b),
@@ -126,7 +126,10 @@ final class BeautifulUiColors {
   /// Secondary foreground ink.
   final Color inkMuted;
 
-  /// Tertiary foreground ink.
+  /// Tertiary readable text, including metadata and input placeholders.
+  ///
+  /// The default palette retains text contrast on neutral and tinted content
+  /// surfaces; this role is not reserved for inactive or decorative content.
   final Color inkSubtle;
 
   /// Standard hairline color.
@@ -144,7 +147,27 @@ final class BeautifulUiColors {
   /// Primary accent.
   final Color accent;
 
-  /// Accent foreground ink.
+  /// Readable text and icons on filled [accent] controls.
+  ///
+  /// This is distinct from [accentInk], which is accent-colored text on a
+  /// neutral surface, and [tooltipForeground], which belongs to tooltips.
+  Color get accentForeground => foregroundOn(accent);
+
+  /// The filled accent control's hover background.
+  ///
+  /// Moving away from [accentForeground] keeps that same foreground readable
+  /// throughout the color transition. Reusing [accentInk] as a background can
+  /// require the text to switch between dark and light midway through a hover.
+  Color get accentHover {
+    final base = Color.alphaBlend(accent, surface);
+    final foreground = Color.alphaBlend(accentForeground, base);
+    final endpoint = foreground.computeLuminance() < base.computeLuminance()
+        ? const Color(0xffffffff)
+        : const Color(0xff000000);
+    return Color.lerp(base, endpoint, .08)!;
+  }
+
+  /// Accent-colored text on neutral content surfaces and [accentTint].
   final Color accentInk;
 
   /// Low-emphasis accent background.
@@ -152,6 +175,9 @@ final class BeautifulUiColors {
 
   /// Positive state color.
   final Color success;
+
+  /// Readable text and icons on filled [success] controls.
+  Color get successForeground => foregroundOn(success);
 
   /// Positive state background.
   final Color successTint;
@@ -164,6 +190,9 @@ final class BeautifulUiColors {
 
   /// Destructive or error state color.
   final Color destructive;
+
+  /// Readable text and icons on filled [destructive] controls.
+  Color get destructiveForeground => foregroundOn(destructive);
 
   /// Destructive or error state background.
   final Color destructiveTint;
@@ -179,6 +208,30 @@ final class BeautifulUiColors {
 
   /// Floating surface border.
   final Color tooltipBorder;
+
+  /// Chooses a foreground with at least 4.5:1 contrast on [background].
+  ///
+  /// The background is composited over this palette's [surface], which should
+  /// be opaque. Existing semantic ink is retained when it is readable. If
+  /// neither ink nor tooltip ink qualifies, opaque black or white supplies a
+  /// readable fallback without changing accent, chart, or status colors.
+  Color foregroundOn(Color background) {
+    final base = Color.alphaBlend(background, surface);
+    for (final candidate in <Color>[ink, tooltipForeground]) {
+      if (_contrast(Color.alphaBlend(candidate, base), base) >= 4.5) {
+        return candidate;
+      }
+    }
+    const black = Color(0xff000000);
+    const white = Color(0xffffffff);
+    return _contrast(black, base) >= _contrast(white, base) ? black : white;
+  }
+
+  static double _contrast(Color first, Color second) {
+    final a = first.computeLuminance();
+    final b = second.computeLuminance();
+    return a > b ? (a + .05) / (b + .05) : (b + .05) / (a + .05);
+  }
 
   /// Returns a higher-contrast derivative while retaining the same hue roles.
   BeautifulUiColors highContrast() {

@@ -58,6 +58,19 @@ All notable changes to this package will be documented in this file.
   provenance, and `prompt`, `diff`, `records`, and `selection` failure
   operations; keep release acceptance separate from implementation coverage
   (product/main, @pawaovo).
+- Add a finalized macOS profile harness and evidence for all seven P3
+  workloads, including independent engine frame samples, process RSS,
+  measured viewport/renderer, and explicit budget/platform limitations. Keep
+  this successful baseline distinct from the final-source resample pending
+  after the last palette and muted-ticker fixes
+  (product/main, @pawaovo).
+- Add exact inherited font/icon and transitive-media inventories, complete
+  package notices, reproducible asset checks, and a real Flutter
+  `LicenseRegistry` probe; verify JavaScript, Wasm, and macOS release artifacts
+  (product/main, @pawaovo).
+- Add supplemental static accessibility review covering 49 images across all
+  twenty modules and expanded native/browser CI configuration; remote results
+  remain separate from job configuration (product/main, @pawaovo).
 
 ### Fixed
 
@@ -67,6 +80,24 @@ All notable changes to this package will be documented in this file.
   accessibility bridges (product/main, @pawaovo).
 - Preserve editable drafts when a clipboard cut fails, and draw P2 interface
   symbols as vectors to avoid missing glyphs in pinned fonts
+  (product/main, @pawaovo).
+- Choose contrasting foregrounds for filled shared actions and provide a
+  distinct selected fill/border across consuming components
+  (product/main, @pawaovo).
+- Draw Approval selected/submitted checks with native paths and allow the
+  compact Sidebar trigger to grow at large text scales
+  (product/main, @pawaovo).
+- Expose native slider flags, enabled state, values, and adjustment actions
+  for Fine-tune numeric controls and Insight point inspection
+  (product/main, @pawaovo).
+- Strengthen normal placeholder/metadata text with `inkSubtle` values
+  `#66696f`/`#9c9fa5`; use light `accentInk` `#0067cb` to reach 4.925:1 on
+  `accentTint`. Four palette regressions preserve the tested 4.5:1 text
+  threshold without changing the graphic accent color (product/main, @pawaovo).
+- Make shared action color updates immediate when ancestor tickers are muted,
+  fixing stale dark backgrounds with new light-theme text inside a
+  reduced-motion Flowchart. Three paint regressions include a real 1,200dp
+  canvas; the integrated library suite now passes 526 tests
   (product/main, @pawaovo).
 
 ## [0.1.0-dev.1]

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -122,7 +123,7 @@ const _sampleDiff = <BeautifulDiffLine>[
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  if (const bool.fromEnvironment('ENABLE_WEB_SEMANTICS')) {
+  if (kIsWeb && const bool.fromEnvironment('ENABLE_WEB_SEMANTICS')) {
     _semanticsHandle = SemanticsBinding.instance.ensureSemantics();
     assert(_semanticsHandle != null);
   }

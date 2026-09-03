@@ -2402,6 +2402,8 @@ final class _RecordsResizeState extends State<_RecordsResize> {
     final theme = BeautifulUiTheme.of(context);
     final direction = Directionality.of(context) == TextDirection.rtl ? -1 : 1;
     return Semantics(
+      slider: true,
+      enabled: true,
       label: widget.label,
       value: widget.value.round().toString(),
       increasedValue: math.min(800, widget.value + 24).round().toString(),

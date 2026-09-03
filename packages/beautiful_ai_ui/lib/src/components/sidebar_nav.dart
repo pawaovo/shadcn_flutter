@@ -475,7 +475,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
           panel || drawer ? widget.expandedWidth : 64.0,
         );
         final height = drawer && !panel
-            ? 56.0
+            ? null
             : math.min(widget.height, constraints.maxHeight);
         return Semantics(
           container: true,
@@ -516,6 +516,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                   child: PageStorage(
                     bucket: _pageStorage,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),

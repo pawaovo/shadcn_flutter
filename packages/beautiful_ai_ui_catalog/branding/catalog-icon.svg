@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>Beautiful AI UI Catalog original panel mark</title>
+  <desc>Original code-authored geometry: a vertical panel beside two stacked cards. Created by Codex for this project on 2026-09-03. No external artwork, fonts, logos, or trademarks. SPDX-License-Identifier: BSD-3-Clause.</desc>
+  <rect id="background" x="0" y="0" width="1024" height="1024" rx="224" fill="#17181a"/>
+  <rect id="navigation-panel" x="256" y="256" width="160" height="512" rx="48" fill="#80bfff"/>
+  <rect id="upper-card" x="464" y="256" width="304" height="232" rx="48" fill="#cce6ff"/>
+  <rect id="lower-card" x="464" y="536" width="304" height="232" rx="48" fill="#3399ff"/>
+</svg>

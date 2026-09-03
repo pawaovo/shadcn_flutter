@@ -1,0 +1,251 @@
+{
+  "inventory": "legal/dependency_assets.json",
+  "errors": [],
+  "provenance_gaps": [],
+  "provenance_limitations": [
+    "Radix original SVG release and Iconly conversion recipe are not recorded. The audited acquisition boundary is the exact attributed font in the pinned shadcn_flutter dependency, consistent with the asset policy requiring a version or hash; no exact original conversion is claimed."
+  ],
+  "source_assets_checked": 43,
+  "runtime_fonts_checked": 37,
+  "complete_notice_labels_checked": 10,
+  "bundle": "/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/macos/Build/Products/Release/beautiful_ai_ui_catalog.app/Contents/Frameworks/App.framework/Versions/A/Resources/flutter_assets",
+  "notice_sha256": "b49422cd5111fd827b4d7b60d46b3b679c83ecfbbf0eaa8cec7585708fd35b24",
+  "built_assets": [
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Black.otf",
+      "bytes": 135452,
+      "sha256": "0f3a5a79a1c5c3b788cbe6e1d4608e94bc877564b6d4922a0353b4e949a8cca5",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-BlackItalic.otf",
+      "bytes": 134924,
+      "sha256": "682aede5acfd98ed29b10f2ee510246aa6532823f3ba3aacf50bf05a340922ef",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Bold.otf",
+      "bytes": 133824,
+      "sha256": "9f5cd517a5bfac5097722b29bfd83ff3c5a84808ec5a33207f97b46954d3fd21",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-BoldItalic.otf",
+      "bytes": 134668,
+      "sha256": "39d14c06db9c36be9decee566173e961440560c5addc696cd292c06e55f73ac0",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ExtraLightItalic.otf",
+      "bytes": 131548,
+      "sha256": "5ef5f5b5a804c78b02fc9e47d139da96eb164ca1d0bdaf22a359c7dcd9b1cc09",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Light.otf",
+      "bytes": 128892,
+      "sha256": "811fa7ce5c45bfdeaaeaa58c7f716eb7b4f2264195bad36613de53c719b3d382",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-LightItalic.otf",
+      "bytes": 131436,
+      "sha256": "d481357ba518d2a871b4f00c864d802f40e0f010603f923503096f214ee0b3ce",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Medium.otf",
+      "bytes": 130580,
+      "sha256": "fc61a2a6108d0cbfaef4ee84bf5e369a2ee626392a0a982eb42e3397c740e53e",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-MediumItalic.otf",
+      "bytes": 132672,
+      "sha256": "3ee5dba593f1370c8b69c2baf9d4d4861777e25bf1eae4be83715c40f9cf67a5",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Regular.otf",
+      "bytes": 128048,
+      "sha256": "2726f519ac638e54f1c1a2209f708a8d4c2fae6823bc5e1c5fa838c849ee0124",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-RegularItalic.otf",
+      "bytes": 130504,
+      "sha256": "077f5de7abe1dac3f8cac7df1bbd409070c38ea79d50d31841b3d0f5f17afbec",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-SemiBold.otf",
+      "bytes": 133080,
+      "sha256": "bfce1ff06bb4ccc94151c15aa4fb5cb4030bf3c5fe455afc71a4872c3c42c00b",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-SemiBoldItalic.otf",
+      "bytes": 134104,
+      "sha256": "534a36abf757d08b2bb3503c19e0abbaeb4f7dadf7bd5751378ff7cce4c79932",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-Thin.otf",
+      "bytes": 128480,
+      "sha256": "dbd20eea60f883e04623a6cb1c98dde01f1c24d9c5bdc733f58c6a668ba0a0ab",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-ThinItalic.otf",
+      "bytes": 130340,
+      "sha256": "cd74b379d6ccab362d1f2b6d42f8288a1014ebe31524aebb63bfff11013dfda0",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-UltraBlack.otf",
+      "bytes": 72812,
+      "sha256": "a7398964f79d25a35edec881db301a4b50bd64c9ec8c19d7ed3cfc1f5d7dd9ca",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/Geist-UltraLight.otf",
+      "bytes": 69988,
+      "sha256": "225083b632bdf4d873bbeedc21a6c1eaa10fef5e3f3bea58fe007af789aace69",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Black.otf",
+      "bytes": 148104,
+      "sha256": "c6715f6f11e2abda99b809e5fcc3833c388d97934f72cb1428c8dfcd33e78c44",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-BlackItalic.otf",
+      "bytes": 148776,
+      "sha256": "db34589144d5250fb7d3db094ae984574e736aca3ed4b2839b1cec878c06b424",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Bold.otf",
+      "bytes": 147696,
+      "sha256": "63d787203a2a0cef4b93bc34664a6762d0be6a0a0eac045b2feb3e806e07e585",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-BoldItalic.otf",
+      "bytes": 148628,
+      "sha256": "b1522b9f7d805aa4be5df622d7ac51b50212e73ed0e914a3f851124200b97708",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ExtraLightItalic.otf",
+      "bytes": 145416,
+      "sha256": "abee999f2751f2350e376557475412f5a4213bb819baba9d08a524dd4135ea41",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Italic.otf",
+      "bytes": 144572,
+      "sha256": "6c886b11161ac2c4a5d1fcf299b28767a51cf4427b8139495a979dd5ad6d48bd",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Light.otf",
+      "bytes": 143572,
+      "sha256": "27a3ed21f7d576076cba0530929f37c1000393df35b7750bbe32cff96f38bd0f",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-LightItalic.otf",
+      "bytes": 145020,
+      "sha256": "9127b50d7dd8c74548eff5954dbc88105815f17b6441761f648a30c4c2fafee0",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Medium.otf",
+      "bytes": 143104,
+      "sha256": "e5dccf9e74ed57529e7e4899499599bd69f6c58fe616e7cc1537e74da595c15c",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-MediumItalic.otf",
+      "bytes": 145512,
+      "sha256": "1bb9d8524ca63e25e2475f53d9b2ac0f96908cfa610af781e3fa2c313cd345bb",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Regular.otf",
+      "bytes": 142188,
+      "sha256": "75d57d2736b29901634f705eda854e1bb10f75e40ef82e4ca22dd8b4b9052f75",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-SemiBold.otf",
+      "bytes": 145708,
+      "sha256": "5c3b9131a5506631eb2d641f910272772a77e9b77164f1643ebeb27ba51244be",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-SemiBoldItalic.otf",
+      "bytes": 146992,
+      "sha256": "e439524f7d182545cefd317dd10598941ef7a4f0d779b06b87e37dfe37fdfdc4",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-Thin.otf",
+      "bytes": 143356,
+      "sha256": "86093e50427ae961adfb4ec221fb4285e37b62eb16364156a807de67b5ef398a",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-ThinItalic.otf",
+      "bytes": 145124,
+      "sha256": "d7e63ee2f232760a551c4f7ace86f92c91a0a50aa0d3a827a119f0e80119adcd",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-UltraBlack.otf",
+      "bytes": 70608,
+      "sha256": "28872e9a8c8939ab6dbf76394a69cc0d94870e6dcb69c700c520f013aed8ed13",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/fonts/GeistMono-UltraLight.otf",
+      "bytes": 67884,
+      "sha256": "d940d098ec731ca76ea5b8ba11f2b7969ed5a8e40bc89106b35ceff8f2264ecc",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/BootstrapIcons.otf",
+      "bytes": 478036,
+      "sha256": "497a6cf64228ef94f377a6d1fbd115fa9c8f95f34906e84fce2fd76ca00ec22d",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/LucideIcons.ttf",
+      "bytes": 685840,
+      "sha256": "b71c60320ddba98adc44e8b0257fb810f6f04b4c74ba46e81569ad9f4449ff95",
+      "status": "exact_source_bytes"
+    },
+    {
+      "path": "packages/shadcn_flutter/lib/icons/RadixIcons.otf",
+      "bytes": 87120,
+      "sha256": "581783cc200858b1d9dc57bace8cffc31f419faaa86b748d8b4af080028665af",
+      "status": "exact_source_bytes"
+    }
+  ],
+  "font_subset": "/Users/zzz/.local/share/mise/http-tarballs/efd4ef62a8ab6640e4a988e7adaf3147b7a4239d73e402e55a27793896f0ca72_strip_1/bin/cache/artifacts/engine/darwin-x64/font-subset",
+  "built_notice_labels": [
+    "shadcn_flutter",
+    "Geist",
+    "Geist Mono",
+    "Geist legacy",
+    "Geist Mono legacy",
+    "Bootstrap Icons",
+    "Lucide",
+    "Feather (Lucide-derived icons)",
+    "Radix Icons",
+    "flag-icons"
+  ],
+  "passed": true
+}

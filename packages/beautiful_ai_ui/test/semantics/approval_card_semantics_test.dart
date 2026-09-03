@@ -71,6 +71,13 @@ void main() {
           .getSemantics(find.bySemanticsLabel('Chips'))
           .getSemanticsData();
       expect(multiple.flagsCollection.isInMutuallyExclusiveGroup, isFalse);
+      await tester.tap(find.bySemanticsLabel('Chips'));
+      await tester.pump();
+      final selectedMultiple = tester
+          .getSemantics(find.bySemanticsLabel('Chips'))
+          .getSemanticsData();
+      expect(selectedMultiple.label, 'Chips');
+      expect(selectedMultiple.flagsCollection.isChecked, CheckedState.isTrue);
       expect(find.bySemanticsLabel('Scoop shops'), findsNothing);
       expect(find.bySemanticsLabel('Select a market'), findsNothing);
       semantics.dispose();

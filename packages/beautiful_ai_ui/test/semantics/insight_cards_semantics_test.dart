@@ -106,6 +106,7 @@ void main() {
           .getSemantics(find.bySemanticsLabel(label))
           .getSemanticsData();
       expect(data.flagsCollection.isSlider, isTrue);
+      expect(data.flagsCollection.isEnabled, ui.Tristate.isTrue);
       expect(data.value, r'Tuesday. Revenue: $20');
       expect(data.decreasedValue, r'Monday. Revenue: $10');
       expect(data.hasAction(SemanticsAction.increase), isFalse);
@@ -116,6 +117,7 @@ void main() {
           .getSemantics(find.bySemanticsLabel(label))
           .getSemanticsData();
       expect(data.value, r'Monday. Revenue: $10');
+      expect(data.flagsCollection.isEnabled, ui.Tristate.isTrue);
       expect(data.increasedValue, r'Tuesday. Revenue: $20');
       expect(data.hasAction(SemanticsAction.increase), isTrue);
       expect(data.hasAction(SemanticsAction.decrease), isFalse);

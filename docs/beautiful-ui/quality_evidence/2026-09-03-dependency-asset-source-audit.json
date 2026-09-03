@@ -1,0 +1,13 @@
+{
+  "inventory": "legal/dependency_assets.json",
+  "errors": [],
+  "provenance_gaps": [],
+  "provenance_limitations": [
+    "Radix original SVG release and Iconly conversion recipe are not recorded. The audited acquisition boundary is the exact attributed font in the pinned shadcn_flutter dependency, consistent with the asset policy requiring a version or hash; no exact original conversion is claimed."
+  ],
+  "source_assets_checked": 43,
+  "runtime_fonts_checked": 37,
+  "complete_notice_labels_checked": 10,
+  "upstream_assets_verified": 43,
+  "passed": true
+}

@@ -158,7 +158,7 @@ void main() {
       expect(submitted![2].customText, 'Online subscriptions');
       expect(() => submitted!.clear(), throwsUnsupportedError);
       expect(changes.last.customText, 'Online subscriptions');
-      expect(find.text('✓ Answers sent'), findsOneWidget);
+      expect(find.text('Answers sent'), findsOneWidget);
       await _tap(tester, 'Start over');
       expect(find.text('How many flavors?'), findsOneWidget);
       expect(changes.takeLast(3).every((answer) => !answer.hasAnswer), isTrue);
@@ -190,10 +190,10 @@ void main() {
     await _tap(tester, 'Sending…');
     expect(submissions, 1);
     expect(submitted!.single.optionIds, <String>['shops']);
-    expect(find.text('✓ Answers sent'), findsNothing);
+    expect(find.text('Answers sent'), findsNothing);
     completion.complete();
     await tester.pumpAndSettle();
-    expect(find.text('✓ Answers sent'), findsOneWidget);
+    expect(find.text('Answers sent'), findsOneWidget);
   });
 
   testWidgets('restored selections submit in question presentation order', (
@@ -295,7 +295,7 @@ void main() {
     await _tap(tester, 'Skip');
     await _tap(tester, 'Skip');
     expect(find.text('Open approval'), findsOneWidget);
-    expect(find.text('✓ Answers sent'), findsNothing);
+    expect(find.text('Answers sent'), findsNothing);
   });
 
   testWidgets('pending failure preserves answer and retry can succeed', (
@@ -328,7 +328,7 @@ void main() {
     expect(find.text('Send'), findsOneWidget);
     fail = false;
     await _tap(tester, 'Send');
-    expect(find.text('✓ Answers sent'), findsOneWidget);
+    expect(find.text('Answers sent'), findsOneWidget);
   });
 
   for (final oldFails in <bool>[false, true]) {
@@ -367,7 +367,7 @@ void main() {
         }
         await tester.pump();
         expect(find.text('Replacement approval'), findsOneWidget);
-        expect(find.text('✓ Answers sent'), findsNothing);
+        expect(find.text('Answers sent'), findsNothing);
         expect(find.text('Sending…'), findsNothing);
         expect(failures, isEmpty);
       },

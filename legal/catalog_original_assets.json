@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "asset_id": "catalog_original_panel_mark",
+  "created_date": "2026-09-03",
+  "creator": "Codex AI assistant, original code-authored geometry for Beautiful AI UI",
+  "source_inputs": [
+    "Original numeric rounded-rectangle geometry",
+    "Project dark and blue color palette"
+  ],
+  "external_artwork_fonts_logos_or_trademarks": false,
+  "license": "BSD-3-Clause",
+  "license_file": "LICENSE",
+  "source_svg": "packages/beautiful_ai_ui_catalog/branding/catalog-icon.svg",
+  "generator": "packages/beautiful_ai_ui_catalog/tool/generate_catalog_icons.py",
+  "generation_method": "Python standard library SVG rectangle rasterizer; 8 vertical coverage samples; deterministic PNG and ICO",
+  "reproduction_command": "python3 packages/beautiful_ai_ui_catalog/tool/generate_catalog_icons.py --check",
+  "profile_notes": {
+    "icon": "Rounded dark tile with transparent corners; original panel artwork.",
+    "opaque": "RGB dark background; all panels inside the central 80% maskable circle.",
+    "mark": "Transparent panel-only launch mark in a 96dp logical canvas."
+  },
+  "replaces": "flutter_generated_catalog_launcher_assets",
+  "records": [
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-hdpi/catalog_launch_mark.png",
+      "kind": "png",
+      "width": 144,
+      "height": 144,
+      "profile": "mark",
+      "sha256": "49b4536ccb281d88939006687255346965539f01d3bb5570d8a092ee14e2755a"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-mdpi/catalog_launch_mark.png",
+      "kind": "png",
+      "width": 96,
+      "height": 96,
+      "profile": "mark",
+      "sha256": "aa5fd44c3f48e2a12ddc3d92ee6f29944c9b069dbea38dd1ecff4f688a73debf"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-v21/launch_background.xml",
+      "kind": "platform_resource_configuration",
+      "sha256": "8b6e8b9ff9d4a2cdbd01f4c56b826c083420fd6db966a29001f8f347162814b7"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-xhdpi/catalog_launch_mark.png",
+      "kind": "png",
+      "width": 192,
+      "height": 192,
+      "profile": "mark",
+      "sha256": "412f84615c3b94000785e7df84aaecb055e10a396d4b4431b5a068e07c04e5a1"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-xxhdpi/catalog_launch_mark.png",
+      "kind": "png",
+      "width": 288,
+      "height": 288,
+      "profile": "mark",
+      "sha256": "39a92558981c041f286b3760a6a72b1494995e215d39f4bc1cc6fb09b423f06e"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable-xxxhdpi/catalog_launch_mark.png",
+      "kind": "png",
+      "width": 384,
+      "height": 384,
+      "profile": "mark",
+      "sha256": "cbe0f2e7642bf28f8dc2c523fe2f95179c356cdfaff2420f968bace0baf47cdf"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/drawable/launch_background.xml",
+      "kind": "platform_resource_configuration",
+      "sha256": "8b6e8b9ff9d4a2cdbd01f4c56b826c083420fd6db966a29001f8f347162814b7"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "kind": "png",
+      "width": 72,
+      "height": 72,
+      "profile": "icon",
+      "sha256": "d58bdafbb0a702414b5724f8403672361ce9b74c64fd8947cc416a855b49b652"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "kind": "png",
+      "width": 48,
+      "height": 48,
+      "profile": "icon",
+      "sha256": "2deaf90c3689f910c0a8980b7cfd0465a52bd24035dd4186fc582c6d9b451038"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "kind": "png",
+      "width": 96,
+      "height": 96,
+      "profile": "icon",
+      "sha256": "708d6559ef1a571791aeddc51fdfbb358d072eb4929cf929c61f154a3629aff4"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "kind": "png",
+      "width": 144,
+      "height": 144,
+      "profile": "icon",
+      "sha256": "f8f6fd5e93bf1b71fc3c82f67b8b417423fd353faad52c7f1af2383c0405b4bf"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "kind": "png",
+      "width": 192,
+      "height": 192,
+      "profile": "icon",
+      "sha256": "348ad747bf740e1a6c868e58b5b07b84fc6ea5037a7126776c4434682ae42e93"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/branding/catalog-icon.svg",
+      "kind": "source",
+      "sha256": "57bff9cfd3132d315ba8f4cab8ff46b5cc070328ef4aa059256ca82fa78f6909"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png",
+      "kind": "png",
+      "width": 1024,
+      "height": 1024,
+      "profile": "opaque",
+      "sha256": "b0fd0fe65d120fb03f5b2569706fdc62ec221d5a153be1fad0bff35a7fd0208b"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png",
+      "kind": "png",
+      "width": 20,
+      "height": 20,
+      "profile": "opaque",
+      "sha256": "e48740c5865b69a8a124383b7bafb9dcdbb17304e3cc55cfd8c4712b114a40db"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png",
+      "kind": "png",
+      "width": 40,
+      "height": 40,
+      "profile": "opaque",
+      "sha256": "6629aae7e6c62dd9dc5eee3c51d47a2732dc7d28448485cb13fdb4243e3a5bfe"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png",
+      "kind": "png",
+      "width": 60,
+      "height": 60,
+      "profile": "opaque",
+      "sha256": "62e941b56619250477bfef88934242498c32b8bbfe89374d68af8e0b198f3c2d"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png",
+      "kind": "png",
+      "width": 29,
+      "height": 29,
+      "profile": "opaque",
+      "sha256": "263d7037c7ed5397c579d4e98ed71f8b15194c9108b3a513fdcd33c4956dd7ea"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png",
+      "kind": "png",
+      "width": 58,
+      "height": 58,
+      "profile": "opaque",
+      "sha256": "5121b43e203ff6bc2003be2ef679c92335b65a2211200eaa4d26aec41cc86138"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png",
+      "kind": "png",
+      "width": 87,
+      "height": 87,
+      "profile": "opaque",
+      "sha256": "9bf4f3d1624c25aa979b023334360971481c36bbe0660fd864af139994ed2669"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png",
+      "kind": "png",
+      "width": 40,
+      "height": 40,
+      "profile": "opaque",
+      "sha256": "6629aae7e6c62dd9dc5eee3c51d47a2732dc7d28448485cb13fdb4243e3a5bfe"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png",
+      "kind": "png",
+      "width": 80,
+      "height": 80,
+      "profile": "opaque",
+      "sha256": "8f6b7dd7060855d6509c399239c3225efabee6fb5c86462ffb7188abc0f532c7"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png",
+      "kind": "png",
+      "width": 120,
+      "height": 120,
+      "profile": "opaque",
+      "sha256": "299ceaf6d3f73ceacdacc870d784c650309b424ebebdf89dd7baf180850d326f"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png",
+      "kind": "png",
+      "width": 120,
+      "height": 120,
+      "profile": "opaque",
+      "sha256": "299ceaf6d3f73ceacdacc870d784c650309b424ebebdf89dd7baf180850d326f"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png",
+      "kind": "png",
+      "width": 180,
+      "height": 180,
+      "profile": "opaque",
+      "sha256": "130288432162cc7a1a396e385534912626a0e705f71522bf9a826c941c592d6a"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png",
+      "kind": "png",
+      "width": 76,
+      "height": 76,
+      "profile": "opaque",
+      "sha256": "7f6c223ded38640ff85690aa03a5bbe6f128063e1133b00a1456dd9d9b8742d5"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png",
+      "kind": "png",
+      "width": 152,
+      "height": 152,
+      "profile": "opaque",
+      "sha256": "4f6451362045e9b3c92f450e77965e89796929da737b371bc0c31df7bd03d4c3"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png",
+      "kind": "png",
+      "width": 167,
+      "height": 167,
+      "profile": "opaque",
+      "sha256": "491aed062d48b0889c5ae8909a5b495369bae495e5fa8aaa13ef094ff355d722"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png",
+      "kind": "png",
+      "width": 96,
+      "height": 96,
+      "profile": "mark",
+      "sha256": "aa5fd44c3f48e2a12ddc3d92ee6f29944c9b069dbea38dd1ecff4f688a73debf"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png",
+      "kind": "png",
+      "width": 192,
+      "height": 192,
+      "profile": "mark",
+      "sha256": "412f84615c3b94000785e7df84aaecb055e10a396d4b4431b5a068e07c04e5a1"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png",
+      "kind": "png",
+      "width": 288,
+      "height": 288,
+      "profile": "mark",
+      "sha256": "39a92558981c041f286b3760a6a72b1494995e215d39f4bc1cc6fb09b423f06e"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/ios/Runner/Base.lproj/LaunchScreen.storyboard",
+      "kind": "platform_resource_configuration",
+      "sha256": "e2b353bd1cc8f9a3f1309fd0b9ceaa448d1fe2d53a10f3ea2d3b8faf762146fa"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png",
+      "kind": "png",
+      "width": 1024,
+      "height": 1024,
+      "profile": "icon",
+      "sha256": "039840ce78e48f7c37486bd8b14c67001b22ca7a7e351839aa1de66c09815d89"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png",
+      "kind": "png",
+      "width": 128,
+      "height": 128,
+      "profile": "icon",
+      "sha256": "650e5c5ef9319ade74596c61ac06766afd98392485235e7075c83cf88e0612e1"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png",
+      "kind": "png",
+      "width": 16,
+      "height": 16,
+      "profile": "icon",
+      "sha256": "9047546b6ac330abc87c50c09b35c56bcabdec40c62dcea472a3d84c81bf76a6"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png",
+      "kind": "png",
+      "width": 256,
+      "height": 256,
+      "profile": "icon",
+      "sha256": "161b5b93bc2d16e5cb49a5f23b390ea3fc5e595642e6f3553bc19196b0574327"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png",
+      "kind": "png",
+      "width": 32,
+      "height": 32,
+      "profile": "icon",
+      "sha256": "fba26da919a0ab8e4f25352b94b9c5ce0d19b30d3763562e855d20d3de7ee05a"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png",
+      "kind": "png",
+      "width": 512,
+      "height": 512,
+      "profile": "icon",
+      "sha256": "3a9544705ab46240be9e2e1593cd8eb5606711cd7b51ed998af9d5701c470dab"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png",
+      "kind": "png",
+      "width": 64,
+      "height": 64,
+      "profile": "icon",
+      "sha256": "f4c67269689529b5d5e13c0f5eb6356cace603cbccd9bdc80afe77925ee857fc"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/tool/generate_catalog_icons.py",
+      "kind": "source",
+      "sha256": "29f61411362b893234436a66bf136932637ad8b6780c39d30b5206a4dfce19e6"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/favicon.png",
+      "kind": "png",
+      "width": 16,
+      "height": 16,
+      "profile": "icon",
+      "sha256": "9047546b6ac330abc87c50c09b35c56bcabdec40c62dcea472a3d84c81bf76a6"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/icons/Icon-192.png",
+      "kind": "png",
+      "width": 192,
+      "height": 192,
+      "profile": "icon",
+      "sha256": "348ad747bf740e1a6c868e58b5b07b84fc6ea5037a7126776c4434682ae42e93"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/icons/Icon-512.png",
+      "kind": "png",
+      "width": 512,
+      "height": 512,
+      "profile": "icon",
+      "sha256": "3a9544705ab46240be9e2e1593cd8eb5606711cd7b51ed998af9d5701c470dab"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/icons/Icon-maskable-192.png",
+      "kind": "png",
+      "width": 192,
+      "height": 192,
+      "profile": "opaque",
+      "sha256": "84fb1ee52203ea213719a74e0a9980c3a48a7843ff1f56c151d5cfa84ef1e56e"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/icons/Icon-maskable-512.png",
+      "kind": "png",
+      "width": 512,
+      "height": 512,
+      "profile": "opaque",
+      "sha256": "b57fc2f1900d44d8fa37f3ac142c10c710fdad3295e8e85beca9218b17cdd4bc"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/web/manifest.json",
+      "kind": "platform_resource_configuration",
+      "sha256": "48168531131a9563155553afea475cb40c9207a6c877155169f6d330f8e76550"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/windows/runner/resources/app_icon.ico",
+      "kind": "ico",
+      "frames": [
+        256,
+        48,
+        32,
+        16
+      ],
+      "profile": "icon",
+      "sha256": "bacbf567c56cad8350340e7a68feea23cbc9b879177e1c54083f34baf9cd0419"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Multi-platform support matrix
 
-Status: planned contract; no release support claim is implied until evidence is recorded
+Status: partial platform evidence accepted; stable-release gates remain open
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 ## Status vocabulary
@@ -13,29 +13,29 @@ Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 | Degraded | A documented alternative presentation preserves the core task because the full desktop interaction is inappropriate on that platform or input. |
 | Out of scope | No compatibility commitment is made. |
 
-All six Flutter platforms begin as **Planned**. A roadmap entry, successful compilation on another platform, or source-site behavior is not verification.
+All six Flutter platforms are currently **Partial**: build and selected interaction evidence exists, while the full release matrix remains incomplete. A configured CI step, successful compilation on another platform, or source-site behavior is not an executed verification.
 
 ## Release platform targets
 
-| Platform | Window modes | Primary input | Required release evidence | Initial status |
+| Platform | Window modes | Primary input | Required release evidence | Current status |
 |---|---|---|---|---|
-| Android | Compact, medium, expanded/split-screen | Touch; hardware keyboard where present | Build, emulator integration journeys, at least one physical-device smoke pass, TalkBack review | Planned |
-| iOS | Compact, medium, expanded/iPad split view | Touch; hardware keyboard/trackpad where present | No-codesign/simulator build, simulator journeys, physical-device smoke pass, VoiceOver review | Planned |
-| Web | All modes and live resize | Mouse/trackpad, keyboard, touch where present | JS and Wasm builds, Chrome journeys, browser compatibility pass, Web semantics review | Planned |
-| macOS | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, VoiceOver review | Planned |
-| Windows | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, Narrator review | Planned |
-| Linux | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, Orca review | Planned |
+| Android | Compact, medium, expanded/split-screen | Touch; hardware keyboard where present | Build, emulator integration journeys, at least one physical-device smoke pass, TalkBack review | Partial |
+| iOS | Compact, medium, expanded/iPad split view | Touch; hardware keyboard/trackpad where present | No-codesign/simulator build, simulator journeys, physical-device smoke pass, VoiceOver review | Partial |
+| Web | All modes and live resize | Mouse/trackpad, keyboard, touch where present | JS and Wasm builds, Chrome journeys, browser compatibility pass, Web semantics review | Partial |
+| macOS | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, VoiceOver review | Partial |
+| Windows | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, Narrator review | Partial |
+| Linux | Medium and expanded; compact windows remain usable | Mouse/trackpad and keyboard | Native build, desktop journeys, keyboard/focus/scroll review, Orca review | Partial |
 
 Exact minimum OS versions are inherited from the pinned Flutter toolchain and generated platform projects until they are frozen before the first stable release. A future minimum-version decision must be explicit in package metadata and release notes.
 
 ## Web browser targets
 
-| Browser | Evidence expectation | Initial status |
-|---|---|---|
-| Chrome stable | Release-blocking automated journeys for the primary Web path | Planned |
-| Edge stable | Release-candidate compatibility pass | Planned |
-| Firefox stable | Release-candidate compatibility pass | Planned |
-| Safari stable | Release-candidate compatibility pass on macOS/iOS | Planned |
+| Browser | Evidence expectation | Current status | Automation/execution |
+|---|---|---|---|
+| Chrome stable | Release-blocking shared Web journey | Partial | Local and earlier CI journeys passed; current workflow refresh pending |
+| Edge stable | Release-candidate compatibility and shared journey | Planned | Dedicated job configured; remote execution pending |
+| Firefox stable | Release-candidate compatibility and shared journey | Planned | Dedicated job configured; remote execution pending |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Planned | Manual/browser compatibility evidence still required |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 
@@ -80,9 +80,9 @@ Every verified public component must demonstrate:
 
 | Component | Compact/touch presentation allowed for initial release |
 |---|---|
-| Records Table | List/card summary plus row detail; advanced column resizing/configuration may remain expanded-only |
+| Records Table | Lazy cards with complete row detail and accessible property/column controls; expanded mode adds the horizontal grid |
 | Sidebar Nav | Drawer or bottom navigation instead of a persistent sidebar |
-| Flowchart | Read-only overview or ordered stepper; advanced graph editing may remain tablet/desktop-only |
+| Flowchart | Editable ordered steps preserve conditions and movement actions; expanded mode offers the spatial canvas |
 | Selection Actions | System selection toolbar or bottom sheet instead of a pointer-anchored floating panel |
 | Prompt Bar | Core compose/send controls visible; secondary tools move to an accessible menu/sheet |
 | Insight Cards | Single-card flow and textual chart summary when a dense multi-card chart would be unusable |
@@ -102,48 +102,60 @@ Evidence is dated and release-specific. A platform returns to Partial when a too
 
 ## Current evidence snapshot
 
-- CI run `33623501086` passed JavaScript and Wasm Web releases, Android debug
-  APK, iOS release without signing, and macOS, Windows, and Linux release
-  builds for the Loading vertical slice.
-- The P1 shared Catalog journey passes locally through Flutter WebDriver on
-  Chrome 152 with a matching ChromeDriver. The same test is wired for Ubuntu
-  Chrome, Linux/Xvfb, and Android emulator execution in CI. Run
-  [`33634769448`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33634769448)
-  passed all ten jobs on commit `29dc443efe1bc4db67946024bf66f91d98f8128f`,
-  including all three journeys and every P1 platform build. This verifies the
-  explicit enabled Semantics and keyboard Search selection fixes on the
-  committed tree. Canonical P1 Linux goldens retain their accepted origin in
-  run `33632807691`.
-- P2 implementation commit `92992e48ec0f361be9015e443bd15bff95b7b4d6`
-  passed all six platform builds (including Web JS/Wasm) and the expanded
-  Chrome, Linux/Xvfb, and Android emulator journeys in
-  [run `33701530733`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33701530733).
-  That run failed only at the missing P2 Linux golden baselines, exported
-  candidates, and skipped the dependent publish check. Both Ubuntu candidates
-  were visually accepted and registered for the follow-up strict comparison.
-  Final [run `33707996401`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33707996401)
-  passed all ten jobs on `bc6a72959dfa84543abc844fa8fef4fcd15e7629`, including
-  strict Ubuntu golden comparison, publish dry-run, all platform builds, and
-  all three journeys. The missing-baseline issue is resolved for P2.
-  Local verification passed 257 package tests, 7 Catalog tests, 571 upstream
-  tests, and publish dry-run with 0 warnings.
-- All seven P3 implementation contracts are recorded in
-  [`p3_contracts.md`](./p3_contracts.md), covering ownership, adaptive
-  alternatives, input methods, bounded workloads, and source deviations.
-  Their public implementations are present and remain `in_progress`.
-  P3 execution evidence is recorded independently in
-  [`quality_evidence/2026-09-03-p3-modules.md`](./quality_evidence/2026-09-03-p3-modules.md);
-  passing P2 runs do not verify those later changes.
-- P3 implementation commit `a27de98e909fe64a59d4d0f4f3c760f34501efa2` passed every
-  platform build, Web JS/Wasm, and the full P1+P2+P3 Chrome, Linux/Xvfb, and
-  Android emulator journeys in [run `33723609480`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33723609480).
-  The four missing P3 Linux golden files were the only first-run failures.
-  Their generated candidates were visually accepted and registered for
-  ordinary comparison in the follow-up workflow. Local validation passed
-  457 package tests, 12 Catalog tests, 571 upstream tests and a zero-warning
-  publish dry-run. All 20 gallery components now have Flutter implementations.
-- Widget and Semantics suites cover P1, P2 and P3 at adaptive boundaries,
-  200% text scale, RTL, reduced motion, pointer, keyboard, and assistive action
-  paths.
-- Physical-device smoke passes and real TalkBack, VoiceOver, Narrator, and
-  Orca reviews remain release gates, so no platform is yet marked Verified.
+The current engineering pass is recorded in
+[`quality_evidence/2026-09-03-release-readiness.md`](./quality_evidence/2026-09-03-release-readiness.md).
+It keeps completed evidence separate from the remaining release gates:
+
+- All twenty Gallery components are implemented and exported. All 27 registry
+  entries remain `in_progress`; implementation coverage is not full release
+  acceptance.
+- The integrated library suite passed 526 tests, the Catalog passed 19 tests,
+  and both package scopes passed strict static analysis.
+- The macOS golden suite passed 12 checks; ten current macOS image hashes are
+  recorded, including eight updated component images. The final 49-image
+  review matches the frozen palette/muted-ticker source. Eight changed Linux
+  component baselines need CI candidates and explicit review.
+- Shared action foreground contrast and visible selected states were repaired;
+  Approval uses drawn checks, Sidebar's compact trigger accommodates large
+  text, and numeric/chart controls expose native slider flags. The accepted
+  images cover specific profiles, not the entire temporal/localization matrix.
+- The tested normal subtle-text combinations and light accent text on
+  `accentTint` now meet 4.5:1; the latter measures 4.925:1. Muted ancestor
+  tickers force immediate shared-action color changes, fixing unreadable
+  Flowchart buttons after a reduced-motion theme switch. Four palette and
+  three paint regressions cover these final corrections.
+- Exact font/icon inventory and notices passed: 43 source files, 37 runtime
+  font files, 266 flag images, five original Web images, and 13 full generated
+  LicenseRegistry labels. JavaScript, Wasm, and ordinary macOS release builds
+  and their actual asset audits passed. Verified inherited Geist is the
+  current typography; no Inter or JetBrains Mono files are bundled.
+- The ordinary macOS shared Catalog journey passed. Native AX comparison also
+  succeeded without the Web compile flag. Catalog forcing of Web semantics
+  is now gated by `kIsWeb`; native applications use the platform lifecycle.
+  The [native semantics evidence](./quality_evidence/2026-09-03-native-semantics.md)
+  keeps AX inspection separate from a completed VoiceOver user workflow.
+- All seven P3 workloads completed in historical macOS profile baseline
+  `20260903T080855Z` on an
+  M1 Pro/32 GiB machine: 4,524 independent frame samples and 480 process RSS
+  samples at 1,728×963 logical pixels, DPR 2, 120 Hz. Driver, teardown and
+  script completed successfully. Its source predates the last palette and
+  muted-ticker fixes; final-source resampling is pending. Product budgets, repeatability,
+  and representative other-platform/device measurements remain open; measured
+  UI-build peaks include frames above 16ms.
+- The latest Wasm release build passed after the final source fixes.
+- CI now has twelve configured jobs. macOS, iOS simulator and Windows native
+  journeys join the existing native jobs; Firefox and Edge each have a new
+  browser job. These additions and current golden refresh are configured,
+  pending remote execution. No new remote pass is inferred from configuration.
+
+The earlier P3 implementation [run `33726848975`](https://github.com/pawaovo/shadcn_flutter/actions/runs/33726848975)
+passed all ten jobs on `74178098705aa83b5452857aece6a3b10bb3ce4f`, including
+six-platform builds, Web JS/Wasm, Chrome/Linux/Android journeys, quality,
+Ubuntu golden comparison and publish validation. Earlier P1/P2 evidence is
+retained in their dated records. Those commits predate this engineering pass
+and do not establish a passing run for the current twelve-job workflow.
+
+Actual TalkBack, VoiceOver, Narrator and Orca task flows, physical-device
+input, remaining browsers and visual/motion combinations, agreed performance
+budgets, and other-platform performance evidence remain release gates. No
+platform is yet marked Verified.

@@ -1,0 +1,125 @@
+{
+  "artifact_root_repo_relative": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260903T080855Z",
+  "raw_artifacts_retained_locally": true,
+  "raw_timeline_files_intentionally_not_committed": true,
+  "files": [
+    {
+      "file": "driver_exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "file": "exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "file": "flutter_version.json",
+      "bytes": 696,
+      "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+    },
+    {
+      "file": "launch.log",
+      "bytes": 2323,
+      "sha256": "62200d633098c73c505b45720febbd8eaa8cf13fbd4920c408645a8c35d947e8"
+    },
+    {
+      "file": "launch_command.txt",
+      "bytes": 281,
+      "sha256": "299514c01747c00130aecb13ca9c00623e0548c2b969b56f9931ba32a405c341"
+    },
+    {
+      "file": "launcher_metadata.json",
+      "bytes": 1414,
+      "sha256": "e39e0db8ba1b6acebdc3f8964c2e4654ca268b94a7a87acb6a2ffd6b3361d640"
+    },
+    {
+      "file": "p3_frame_samples.json",
+      "bytes": 1173786,
+      "sha256": "41d634c30cf8716f9c4a8fd90c17c228a3565f5640ec74493696c6cee9559848",
+      "repository_copy": "p3_frame_samples.json.gz",
+      "copy_encoding": "gzip",
+      "compressed_bytes": 85628,
+      "compressed_sha256": "049af75b2f42c5e6b9fd599e05f7eb68be535428e5543d6dd33d5a77f7bfa5f1"
+    },
+    {
+      "file": "p3_memory_samples.json",
+      "bytes": 80719,
+      "sha256": "997384588347359416b0894236d11f76000937de70f7ab32ce48cd566e16b89f",
+      "repository_copy": "p3_memory_samples.json.gz",
+      "copy_encoding": "gzip",
+      "compressed_bytes": 6069,
+      "compressed_sha256": "67ffb15427af97c2f73d942d03ec09afa88949dc83155113f144e6e56a651e9d"
+    },
+    {
+      "file": "p3_performance.json",
+      "bytes": 67432,
+      "sha256": "30c2d26796e11868841c22eeba966675d18ca2e3909d9a0219259e74211b26d0"
+    },
+    {
+      "file": "p3_trace_diff_table.timeline.json",
+      "bytes": 8708968,
+      "sha256": "b67cf54fbed3ea69ddcaf2b6e887735bfdad4b0dbbf6f1d24075e7acdb0ec7cc"
+    },
+    {
+      "file": "p3_trace_flowchart.timeline.json",
+      "bytes": 8651990,
+      "sha256": "6139eda41d022942308d7577716ddfac1168d416d0896abaecddc096db1bf985"
+    },
+    {
+      "file": "p3_trace_insight_cards.timeline.json",
+      "bytes": 8692531,
+      "sha256": "259d48c226bbcbb851f3cf368b6112409c54b13bec5ccf1af9073b5918898c8f"
+    },
+    {
+      "file": "p3_trace_prompt_bar.timeline.json",
+      "bytes": 8693560,
+      "sha256": "41cf00de844d53f96048532a08520ebdd3644c89b6e7a92bff68c4fc6e4b8fb4"
+    },
+    {
+      "file": "p3_trace_records_table.timeline.json",
+      "bytes": 8695399,
+      "sha256": "1d94ed3a2235bdf752af6e8f6803e0dd5225edbc9f071c787764e85757426821"
+    },
+    {
+      "file": "p3_trace_selection_actions.timeline.json",
+      "bytes": 7969586,
+      "sha256": "0424fb666a5e5b985e25f759dead05fbad59d9395f1cd471823bb11f93f9553c"
+    },
+    {
+      "file": "p3_trace_sidebar_nav.timeline.json",
+      "bytes": 8668043,
+      "sha256": "00ba57ec44ad20fcb30ef060b4cfba02134ca2e0cbe1d80692b729edd63dd9b2"
+    }
+  ],
+  "failed_attempts_preserved": [
+    {
+      "run_id": "20260903T074846Z",
+      "acceptance_status": "failed",
+      "driver_exit_code": 1,
+      "summary_sha256": "8ad2938a4a11d892d2d8cd4d5ff80ad20aee259c234cf560f50de8f9355876d1",
+      "launch_log_sha256": "e4bc1c8fe5c5e0ead8ef400b6c3a8e7141799302fa05f307363a87803ab20f75",
+      "reason": "Profile helper key-name/text-client assumptions and missing DebugProfile network.client entitlement."
+    },
+    {
+      "run_id": "20260903T075336Z",
+      "acceptance_status": "failed",
+      "driver_exit_code": 1,
+      "summary_sha256": "41d73b842d78ed04f7fc77d2ad7865c0e94ef763a4f81eb249bd5d3baa91ae79",
+      "launch_log_sha256": "04592bac0defd6c34f2c716554d167503bc0aceca074d3ea0f5f1636a575f37a",
+      "reason": "Seven workload bodies captured data, but native AX enabled a platform SemanticsHandle after the test baseline and teardown failed. Original body-only status is not accepted as overall success."
+    }
+  ],
+  "profile_binary_hashes": [
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/macos/Build/Products/Profile/beautiful_ai_ui_catalog.app/Contents/MacOS/beautiful_ai_ui_catalog",
+      "bytes": 193408,
+      "sha256": "b281b08c336783dcf8f91954397a3cc16412ffd917bdf91c52e15272a3600734"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/macos/Build/Products/Profile/beautiful_ai_ui_catalog.app/Contents/Frameworks/App.framework/Versions/A/App",
+      "bytes": 15889744,
+      "sha256": "54de0f83597a350ff6811f8003a6b01ec3ae9c80a032ab4647b2b4b56bd01d83"
+    }
+  ]
+}

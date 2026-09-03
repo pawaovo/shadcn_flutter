@@ -12,11 +12,13 @@ void main() {
     tester,
   ) async {
     final handle = tester.ensureSemantics();
-    await tester.pumpWidget(_app(onChanged: (_) {}));
+    final changes = <BeautifulFineTuneSettings>[];
+    await tester.pumpWidget(_app(onChanged: changes.add));
     final slider = tester
         .getSemantics(find.bySemanticsLabel('Opacity'))
         .getSemanticsData();
     expect(slider.flagsCollection.isSlider, isTrue);
+    expect(slider.flagsCollection.isEnabled, ui.Tristate.isTrue);
     expect(slider.value, '50%');
     expect(slider.increasedValue, '55%');
     expect(slider.decreasedValue, '45%');
@@ -28,6 +30,17 @@ void main() {
     expect(field.flagsCollection.isTextField, isTrue);
     expect(field.value, '50');
     expect(field.hasAction(SemanticsAction.setText), isTrue);
+    tester.semantics.increase(find.semantics.byLabel('Opacity'));
+    await tester.pump();
+    expect(changes.single.fields.single.value, 55);
+    expect(
+      tester
+          .getSemantics(find.bySemanticsLabel('Opacity'))
+          .getSemanticsData()
+          .flagsCollection
+          .isEnabled,
+      ui.Tristate.isTrue,
+    );
     handle.dispose();
   });
 

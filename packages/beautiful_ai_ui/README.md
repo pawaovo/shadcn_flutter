@@ -14,6 +14,13 @@ are available. Release-level platform, assistive-technology, and performance
 validation remains in progress; implementation coverage is not a stable
 support or full-parity claim.
 
+The current engineering pass has verified dependency font/media notices,
+reviewed representative static states, and collected a historical native
+macOS profile baseline for all seven P3 workloads. Final-source profiling
+after the last palette/muted-ticker fixes is pending. The dated
+[release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
+distinguishes these completed checks from remaining release gates.
+
 ## Quick start
 
 Install `BeautifulUiScope` below an app widget that provides `MediaQuery`, then
@@ -342,11 +349,56 @@ database, applies a document edit, or changes controlled selections.
 
 ## Status
 
+The current local verification includes **526 library tests, 19 Catalog tests,
+and strict analysis of both packages**. The macOS golden suite passed 12
+checks, and 49 supplemental images across all twenty modules were individually
+reviewed against the final frozen visual source. Ten current macOS image
+hashes are recorded, including eight updated component images; the eight
+changed Ubuntu component baselines await CI candidates and acceptance.
+
+Filled actions derive a contrasting foreground from the theme. Selected
+actions have a distinct fill/border, Approval checks use drawn paths, and
+Sidebar's compact trigger accommodates enlarged text. Fine-tune and Insight
+adjustable controls expose slider flags and native adjustment semantics.
+These improvements have focused evidence; they do not replace complete
+screen-reader, physical-device, localization, or temporal-motion review.
+
+The final text-palette corrections make tested normal placeholder/metadata
+pairs meet 4.5:1 and raise light accent text on its tinted background to
+4.925:1. Shared actions also apply colors immediately when an ancestor mutes
+tickers, preserving readable Flowchart buttons when themes change under
+reduced motion. Four palette and three actual-paint regressions cover these
+last fixes; the latest Wasm release build passed afterward.
+
+The current typography uses verified inherited **Geist Sans and Geist Mono**.
+No Inter or JetBrains Mono files are bundled. Exact source/runtime font hashes
+and complete generated notices were checked, including a real 13-label
+Flutter `LicenseRegistry` probe. Fresh JavaScript, Wasm, and macOS release
+asset audits passed; the resource inventories remain authoritative for those
+specific files and versions.
+
+All seven bounded P3 workloads completed in historical profile baseline
+`20260903T080855Z` on an M1
+Pro/32 GiB machine, yielding 4,524 frame samples and 480 process RSS samples.
+The sampled window was 1,728×963 logical pixels at DPR 2 and 120 Hz. The
+[profile record](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile/README.md)
+reports measured peaks and limitations. Other platforms, repeated runs, and
+agreed product frame/memory budgets remain to be assessed. That source
+fingerprint predates the final palette and muted-ticker changes; a separate
+profile of the final source is pending and will not reuse the historical
+baseline's measurements as current results.
+
+The complete ordinary macOS Catalog journey and a native AX comparison have
+passed. The twelve-job CI configuration adds native macOS/iOS simulator/
+Windows journeys and dedicated Firefox/Edge jobs; current remote execution
+is pending. All six platforms are **Partial**, and all 27 registry entries
+remain `in_progress`.
+
 This is an independent implementation. It is not affiliated with or endorsed
 by Beautiful UI, Turbo, or the `shadcn_flutter` authors. See the repository's
 `THIRD_PARTY_NOTICES.md` and provenance manifests for source attribution.
 
 The repository's [parity manifest](../../docs/beautiful-ui/parity_manifest.yaml)
-and [P3 evidence](../../docs/beautiful-ui/quality_evidence/2026-09-03-p3-modules.md)
+and [release-readiness evidence](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
 track implementation and verification separately. Successful automated tests
 do not by themselves establish stable support across all six platforms.

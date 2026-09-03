@@ -98,6 +98,15 @@ jobs:
       - name: Resolve workspace dependencies
         run: flutter pub get --enforce-lockfile
 
+      - name: Verify asset provenance, notices, and original artwork
+        shell: bash
+        run: |
+          mkdir -p artifacts/asset-audits
+          python3 tool/audit_dependency_assets.py --require-complete-provenance \
+            --json-output artifacts/asset-audits/source-dependency-assets.json > /dev/null
+          python3 tool/audit_transitive_media.py > artifacts/asset-audits/source-media.json
+          python3 packages/beautiful_ai_ui_catalog/tool/generate_catalog_icons.py --check
+
       - name: Verify pub workspace
         run: dart pub workspace list
 
@@ -209,6 +218,15 @@ jobs:
         working-directory: packages/shadcn_flutter
         run: flutter test --no-pub
 
+      - name: Upload source asset audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-asset-audits
+          path: artifacts/asset-audits/
+          if-no-files-found: warn
+          retention-days: 7
+
   web-build:
     name: Build Web catalog
     needs: detect-targets
@@ -234,9 +252,39 @@ jobs:
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter build web --release --no-pub --dart-define=ENABLE_WEB_SEMANTICS=true
 
+      - name: Verify JavaScript bundle assets and notices
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          mkdir -p artifacts/asset-audits
+          python3 ../../tool/audit_dependency_assets.py --bundle build/web/assets \
+            --require-complete-provenance \
+            --json-output artifacts/asset-audits/web-js-dependency-assets.json > /dev/null
+          python3 ../../tool/audit_transitive_media.py --bundle build/web \
+            > artifacts/asset-audits/web-js-media.json
+
       - name: Build WebAssembly release
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter build web --release --wasm --no-pub --dart-define=ENABLE_WEB_SEMANTICS=true
+
+      - name: Verify WebAssembly bundle assets and notices
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          python3 ../../tool/audit_dependency_assets.py --bundle build/web/assets \
+            --require-complete-provenance \
+            --json-output artifacts/asset-audits/web-wasm-dependency-assets.json > /dev/null
+          python3 ../../tool/audit_transitive_media.py --bundle build/web \
+            > artifacts/asset-audits/web-wasm-media.json
+
+      - name: Upload Web asset audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-asset-audits
+          path: packages/beautiful_ai_ui_catalog/artifacts/asset-audits/
+          if-no-files-found: warn
+          retention-days: 7
 
   android-build:
     name: Build Android catalog
@@ -316,6 +364,176 @@ jobs:
       - name: Run Linux desktop journey
         working-directory: packages/beautiful_ai_ui_catalog
         run: xvfb-run --auto-servernum flutter test integration_test/catalog_journey_test.dart --device-id=linux --no-pub
+
+  firefox-journey:
+    name: Run Firefox journey
+    needs: detect-targets
+    if: needs.detect-targets.outputs.web == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Run shared journey in installed Firefox
+        timeout-minutes: 20
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/firefox
+          firefox --version | tee artifacts/firefox/browser-version.txt
+          "$GECKOWEBDRIVER/geckodriver" --version | tee artifacts/firefox/driver-version.txt
+          "$GECKOWEBDRIVER/geckodriver" --host 127.0.0.1 --port 4444 \
+            > artifacts/firefox/geckodriver.log 2>&1 &
+          webdriver_pid=$!
+          cleanup() {
+            if kill -0 "$webdriver_pid" 2>/dev/null; then
+              kill "$webdriver_pid"
+              for attempt in {1..25}; do
+                if ! kill -0 "$webdriver_pid" 2>/dev/null; then
+                  break
+                fi
+                sleep 0.2
+              done
+              if kill -0 "$webdriver_pid" 2>/dev/null; then
+                kill -KILL "$webdriver_pid"
+              fi
+              wait "$webdriver_pid" 2>/dev/null || true
+            fi
+          }
+          trap cleanup EXIT
+          ready=false
+          for attempt in {1..60}; do
+            if ! kill -0 "$webdriver_pid" 2>/dev/null; then
+              cat artifacts/firefox/geckodriver.log
+              exit 1
+            fi
+            if curl --fail --silent --max-time 2 http://127.0.0.1:4444/status \
+              | jq --exit-status '.value.ready == true' > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 0.5
+          done
+          if [ "$ready" != true ]; then
+            echo '::error::Firefox WebDriver did not become ready.'
+            exit 1
+          fi
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/catalog_journey_test.dart \
+            --device-id=web-server --browser-name=firefox --headless \
+            --driver-port=4444 --browser-dimension=1440x900 \
+            --no-pub 2>&1 | tee artifacts/firefox/journey.log
+
+      - name: Upload Firefox journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-journey
+          path: packages/beautiful_ai_ui_catalog/artifacts/firefox/
+          if-no-files-found: warn
+          retention-days: 7
+
+  edge-journey:
+    name: Run Edge journey
+    needs: detect-targets
+    if: needs.detect-targets.outputs.web == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify the narrow Edge protocol adapter
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_flutter_edge_webdriver.py'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+
+      - name: Run shared journey in installed Microsoft Edge
+        timeout-minutes: 20
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/edge
+          python3 ../../.github/scripts/flutter_edge_webdriver.py \
+            --driver "$EDGEWEBDRIVER/msedgedriver" \
+            --binary "$(command -v microsoft-edge)" \
+            --log artifacts/edge/msedgedriver.log \
+            --evidence artifacts/edge/browser-identity.json \
+            > artifacts/edge/adapter.log 2>&1 &
+          adapter_pid=$!
+          cleanup() {
+            if kill -0 "$adapter_pid" 2>/dev/null; then
+              kill "$adapter_pid"
+              for attempt in {1..60}; do
+                if ! kill -0 "$adapter_pid" 2>/dev/null; then
+                  break
+                fi
+                sleep 0.2
+              done
+              if kill -0 "$adapter_pid" 2>/dev/null; then
+                kill -KILL "$adapter_pid"
+              fi
+              wait "$adapter_pid" 2>/dev/null || true
+            fi
+          }
+          trap cleanup EXIT
+          ready=false
+          for attempt in {1..60}; do
+            if ! kill -0 "$adapter_pid" 2>/dev/null; then
+              cat artifacts/edge/adapter.log
+              exit 1
+            fi
+            if curl --fail --silent --max-time 2 http://127.0.0.1:4444/status \
+              | jq --exit-status '.value.ready == true' > /dev/null; then
+              ready=true
+              break
+            fi
+            sleep 0.5
+          done
+          if [ "$ready" != true ]; then
+            echo '::error::Microsoft Edge WebDriver did not become ready.'
+            exit 1
+          fi
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/catalog_journey_test.dart \
+            --device-id=web-server --browser-name=edge \
+            --driver-port=4444 --browser-dimension=1440x900 \
+            --no-pub 2>&1 | tee artifacts/edge/journey.log
+          test -s artifacts/edge/browser-identity.json
+
+      - name: Upload Edge journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: edge-journey
+          path: packages/beautiful_ai_ui_catalog/artifacts/edge/
+          if-no-files-found: warn
+          retention-days: 7
 
   android-journey:
     name: Run Android journey
@@ -401,6 +619,114 @@ jobs:
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter build macos --release --no-pub
 
+      - name: Run macOS desktop journey
+        if: needs.detect-targets.outputs.macos == 'true'
+        timeout-minutes: 15
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: bash
+        run: |
+          mkdir -p artifacts/apple
+          uname -m
+          xcodebuild -version
+          flutter devices --device-timeout=30
+          flutter test integration_test/catalog_journey_test.dart \
+            --device-id=macos --no-pub --timeout=10m --reporter=expanded \
+            --file-reporter=json:artifacts/apple/macos-journey.json
+
+      - name: Select an installed iOS simulator
+        if: needs.detect-targets.outputs.ios == 'true'
+        id: ios-simulator
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          inventory = json.loads(subprocess.check_output(
+              ["xcrun", "simctl", "list", "--json"], text=True,
+          ))
+          Path(os.environ["RUNNER_TEMP"], "beautiful-ios-simulators.json").write_text(
+              json.dumps(inventory, indent=2), encoding="utf-8",
+          )
+          runtimes = [
+              runtime for runtime in inventory["runtimes"]
+              if runtime.get("isAvailable")
+              and runtime["identifier"].startswith("com.apple.CoreSimulator.SimRuntime.iOS-")
+          ]
+          runtimes.sort(
+              key=lambda runtime: tuple(int(part) for part in runtime["version"].split(".")),
+              reverse=True,
+          )
+          for runtime in runtimes:
+              phones = [
+                  device for device in inventory["devices"].get(runtime["identifier"], [])
+                  if device.get("isAvailable") and device.get("deviceTypeIdentifier", "").startswith(
+                      "com.apple.CoreSimulator.SimDeviceType.iPhone-",
+                  )
+              ]
+              if phones:
+                  device = min(phones, key=lambda item: (
+                      item["state"] != "Booted", item["name"], item["udid"],
+                  ))
+                  break
+          else:
+              raise SystemExit("No available iPhone in an installed iOS runtime; no runtime will be downloaded.")
+
+          print(f"Selected {runtime['name']}: {device['name']} ({device['udid']})")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"device_id={device['udid']}\n")
+              output.write(f"shutdown_after={str(device['state'] != 'Booted').lower()}\n")
+          PY
+
+      - name: Boot the selected iOS simulator
+        if: needs.detect-targets.outputs.ios == 'true'
+        id: boot-ios-simulator
+        timeout-minutes: 5
+        env:
+          SIMULATOR_UDID: ${{ steps.ios-simulator.outputs.device_id }}
+          SIMULATOR_NEEDS_BOOT: ${{ steps.ios-simulator.outputs.shutdown_after }}
+        shell: bash
+        run: |
+          if [ "$SIMULATOR_NEEDS_BOOT" = 'true' ]; then
+            xcrun simctl boot "$SIMULATOR_UDID"
+          fi
+          xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+          flutter devices --device-timeout=30
+
+      - name: Run iOS simulator journey
+        if: needs.detect-targets.outputs.ios == 'true'
+        timeout-minutes: 20
+        working-directory: packages/beautiful_ai_ui_catalog
+        env:
+          SIMULATOR_UDID: ${{ steps.ios-simulator.outputs.device_id }}
+        shell: bash
+        run: |
+          mkdir -p artifacts/apple
+          flutter test integration_test/catalog_journey_test.dart \
+            --device-id="$SIMULATOR_UDID" --no-pub --timeout=10m --reporter=expanded \
+            --file-reporter=json:artifacts/apple/ios-journey.json
+
+      - name: Shut down the simulator started by this job
+        if: always() && steps.boot-ios-simulator.outcome == 'success' && steps.ios-simulator.outputs.shutdown_after == 'true'
+        timeout-minutes: 2
+        env:
+          SIMULATOR_UDID: ${{ steps.ios-simulator.outputs.device_id }}
+        run: xcrun simctl shutdown "$SIMULATOR_UDID"
+
+      - name: Upload Apple journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apple-native-journeys
+          path: |
+            packages/beautiful_ai_ui_catalog/artifacts/apple/
+            ${{ runner.temp }}/beautiful-ios-simulators.json
+          if-no-files-found: warn
+          retention-days: 7
+
   windows-build:
     name: Build Windows catalog
     needs: detect-targets
@@ -425,6 +751,30 @@ jobs:
       - name: Build Windows release
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter build windows --release --no-pub
+
+      - name: Run Windows desktop journey
+        timeout-minutes: 20
+        working-directory: packages/beautiful_ai_ui_catalog
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts/windows | Out-Null
+          Write-Output "Interactive session: $([Environment]::UserInteractive)"
+          Get-Process -Id $PID | Select-Object ProcessName, SessionId
+          Get-CimInstance Win32_VideoController | Select-Object Name, DriverVersion
+          flutter devices --device-timeout=30
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          flutter test integration_test/catalog_journey_test.dart `
+            --device-id=windows --no-pub --timeout=10m --reporter=expanded `
+            --file-reporter=json:artifacts/windows/catalog-journey.json
+
+      - name: Upload Windows journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-native-journey
+          path: packages/beautiful_ai_ui_catalog/artifacts/windows/
+          if-no-files-found: warn
+          retention-days: 7
 
   linux-build:
     name: Build Linux catalog

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-09-03",
+  "scope": "Actual fresh Catalog JavaScript and Wasm Web media audits; fonts audited separately.",
+  "verifier": "tool/audit_transitive_media.py",
+  "inventory": "legal/transitive_media_assets.json",
+  "reports": [
+    {
+      "build_flavor": "js",
+      "source_log": "/tmp/release-web-js-media.log",
+      "source_log_sha256": "846a9bbf877eb0fd5c5ca49cddcbe2c56c50ebf212b37cd5ea4d41265c9c67e1",
+      "source_log_modified_utc": "2026-09-03T08:06:15.251976+00:00",
+      "audit": {
+        "status": "passed",
+        "source_media_files": 266,
+        "source_media_bytes": 2601667,
+        "bundle": {
+          "bundle_media_files": 271,
+          "transitive_images": 266,
+          "original_images": 5,
+          "audio": 0,
+          "video": 0,
+          "complete_notices": [
+            "NOTICES:country_flags_mit",
+            "NOTICES:flag_icons_mit"
+          ]
+        }
+      }
+    },
+    {
+      "build_flavor": "wasm",
+      "source_log": "/tmp/release-web-wasm-media.log",
+      "source_log_sha256": "846a9bbf877eb0fd5c5ca49cddcbe2c56c50ebf212b37cd5ea4d41265c9c67e1",
+      "source_log_modified_utc": "2026-09-03T08:08:26.409278+00:00",
+      "audit": {
+        "status": "passed",
+        "source_media_files": 266,
+        "source_media_bytes": 2601667,
+        "bundle": {
+          "bundle_media_files": 271,
+          "transitive_images": 266,
+          "original_images": 5,
+          "audio": 0,
+          "video": 0,
+          "complete_notices": [
+            "NOTICES:country_flags_mit",
+            "NOTICES:flag_icons_mit"
+          ]
+        }
+      }
+    }
+  ],
+  "latest_bundle_read_only_recheck": {
+    "build_flavor": "wasm",
+    "bundle": "packages/beautiful_ai_ui_catalog/build/web",
+    "registered_media_hashes_matched": 271,
+    "complete_mit_bodies_matched": 2,
+    "notices_sha256": "490f72033cd29e11a4d401e74863d3f2dd1ce0ee2ddae397dddad722d549e911",
+    "new_build_or_test_run": false
+  }
+}

@@ -233,8 +233,33 @@ void main() {
       final resize = tester
           .getSemantics(find.bySemanticsLabel('Resize column: Categories'))
           .getSemanticsData();
+      expect(resize.flagsCollection.isSlider, isTrue);
+      expect(resize.flagsCollection.isEnabled, ui.Tristate.isTrue);
       expect(resize.hasAction(SemanticsAction.increase), isTrue);
       expect(resize.hasAction(SemanticsAction.decrease), isTrue);
+      expect(resize.value, '220');
+      tester.semantics.increase(
+        find.semantics.byLabel('Resize column: Categories'),
+      );
+      await tester.pump();
+      expect(
+        tester
+            .getSemantics(find.bySemanticsLabel('Resize column: Categories'))
+            .getSemanticsData()
+            .value,
+        '244',
+      );
+      tester.semantics.decrease(
+        find.semantics.byLabel('Resize column: Categories'),
+      );
+      await tester.pump();
+      expect(
+        tester
+            .getSemantics(find.bySemanticsLabel('Resize column: Categories'))
+            .getSemanticsData()
+            .value,
+        '220',
+      );
       tester.semantics.tap(
         find.semantics.byLabel('Sort: Categories. Ascending'),
       );
