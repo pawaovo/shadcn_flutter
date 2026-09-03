@@ -1,4 +1,4 @@
-"""Exercise console-start boundaries without macOS, an app, or a simulator."""
+"""Exercise launch/discovery boundaries without an app or a simulator."""
 
 import json
 import errno
@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 from run_ios_catalog_journey import (
-    Journey, LoggedProcess, discover_service, query_unified_service, redact,
+    Journey, LoggedProcess, discover_service, launch_pid, query_unified_service, redact,
     service_uri, unified_service_uri,
 )
 
@@ -24,27 +24,20 @@ class IOSLaunchTests(unittest.TestCase):
         self.addCleanup(self.directory.cleanup)
         self.path = Path(self.directory.name)
 
-    def test_mounted_console_without_vm_is_a_bounded_failure(self):
-        process = LoggedProcess([sys.executable, "-u", "-c",
-                                 "import time; print('app launched'); time.sleep(30)"],
-                                self.path / "launch.log")
+    def test_hung_launch_command_is_a_bounded_failure(self):
+        journey = Journey(self.path, "fixture-device")
         start = time.monotonic()
-        try:
-            with self.assertRaisesRegex(TimeoutError, "No Dart VM Service"):
-                process.wait_for_service(0.1)
-        finally:
-            process.close()
+        with self.assertRaisesRegex(RuntimeError, "launch failed"):
+            journey.run("launch", [sys.executable, "-c", "import time; time.sleep(30)"], 0.1)
+        self.assertEqual(journey.report["stages"][0]["exit_code"], 124)
         self.assertLess(time.monotonic() - start, 2)
 
-    def test_console_vm_uri_is_real_loopback_and_stored_without_credential(self):
+    def test_vm_uri_is_loopback_and_process_logs_are_stored_without_credential(self):
         uri = "http://127.0.0.1:54321/sensitive-token=/"
-        process = LoggedProcess([sys.executable, "-u", "-c",
-                                 f"print('The Dart VM service is listening on {uri}')"],
-                                self.path / "launch.log")
-        try:
-            self.assertEqual(process.wait_for_service(1), uri)
-        finally:
-            process.close()
+        journey = Journey(self.path, "fixture-device")
+        journey.run("launch", [sys.executable, "-c",
+                               f"print('The Dart VM service is listening on {uri}')"], 1)
+        self.assertEqual(service_uri(f"The Dart VM service is listening on {uri}"), uri)
         self.assertNotIn("sensitive-token", (self.path / "launch.log").read_text())
         self.assertNotIn("sensitive-token", redact(f"--use-existing-app={uri}"))
         with self.assertRaisesRegex(ValueError, "non-loopback"):
@@ -106,20 +99,34 @@ class IOSLaunchTests(unittest.TestCase):
         launched_at = datetime(2026, 9, 3, 10, 26, 59, tzinfo=timezone.utc)
         uri = "http://127.0.0.1:52715/fixture-credential=/"
         event = f"2026-09-03 10:27:01.266 Df Runner[31511:17d7d] (Flutter) flutter: The Dart VM service is listening on {uri}\n"
-        console = LoggedProcess([sys.executable, "-u", "-c",
-                                 "import time; print('fixture.catalog: 31511'); time.sleep(30)"],
-                                self.path / "console.log")
         details = {}
-        try:
-            with patch("run_ios_catalog_journey.query_unified_service", return_value=([event], 0)) as query:
-                result = discover_service(console, "device", "fixture.catalog", "Runner", self.path,
-                                          launched_at, time.monotonic() + 10, details)
-            self.assertEqual(result, uri)
-            self.assertEqual(query.call_args.args[1:3], (31511, launched_at))
-            self.assertEqual(details["source"], "unified-log-history")
-            self.assertNotIn("fixture-credential", json.dumps(details))
-        finally:
-            console.close(grace=0.05)
+        with patch("run_ios_catalog_journey.query_unified_service", return_value=([event], 0)) as query:
+            result = discover_service(31511, "device", "Runner", self.path,
+                                      launched_at, time.monotonic() + 10, details)
+        self.assertEqual(result, uri)
+        self.assertEqual(query.call_args.args[1:3], (31511, launched_at))
+        self.assertEqual(details["source"], "unified-log-history")
+        self.assertNotIn("fixture-credential", json.dumps(details))
+
+    def test_completed_non_u_child_yields_buffered_bundle_pid(self):
+        journey = Journey(self.path, "fixture-device")
+        # This child deliberately uses ordinary block-buffered stdout: neither
+        # -u nor flush=True is present. EOF, not live output, releases the PID.
+        command = [sys.executable, "-c",
+                   "import time; print('fixture.catalog: 26703'); time.sleep(0.05)"]
+        output = journey.run("launch", command, 1)
+        self.assertEqual(launch_pid(output, "fixture.catalog"), 26703)
+        self.assertEqual(journey.report["stages"][0]["exit_code"], 0)
+        self.assertIn("fixture.catalog: 26703", (self.path / "launch.log").read_text())
+        for invalid in (
+            "Warning: Runner[26703] started",
+            "other.catalog: 26703",
+            "All tests passed.",
+            "fixture.catalog: 0",
+            "fixture.catalog: 26703\nfixture.catalog: 26704",
+        ):
+            with self.assertRaisesRegex(RuntimeError, "exactly one valid PID"):
+                launch_pid(invalid, "fixture.catalog")
 
     def test_unified_history_rejects_other_pid_and_events_before_this_launch(self):
         launched_at = datetime(2026, 9, 3, 10, 26, 59, tzinfo=timezone.utc)
@@ -157,19 +164,13 @@ class IOSLaunchTests(unittest.TestCase):
                 self.assertNotIn("private-fixture-token", log.read_text())
 
     def test_history_discovery_keeps_one_global_deadline(self):
-        console = LoggedProcess([sys.executable, "-u", "-c",
-                                 "import time; print('fixture.catalog: 31511'); time.sleep(30)"],
-                                self.path / "deadline.log")
         start = time.monotonic()
-        try:
-            with patch("run_ios_catalog_journey.query_unified_service") as query:
-                with self.assertRaisesRegex(TimeoutError, "launch deadline"):
-                    discover_service(console, "device", "fixture.catalog", "Runner", self.path,
-                                     datetime.now(timezone.utc), start + 0.05, {})
-                query.assert_not_called()  # Insufficient time for query + bounded cleanup.
-            self.assertLess(time.monotonic() - start, 1)
-        finally:
-            console.close(grace=0.05)
+        with patch("run_ios_catalog_journey.query_unified_service") as query:
+            with self.assertRaisesRegex(TimeoutError, "launch deadline"):
+                discover_service(31511, "device", "Runner", self.path,
+                                 datetime.now(timezone.utc), start + 0.05, {})
+            query.assert_not_called()  # Insufficient time for query + bounded cleanup.
+        self.assertLess(time.monotonic() - start, 1)
 
     @unittest.skipUnless(hasattr(os, "fork"), "CLI process groups require POSIX")
     def test_exited_leader_does_not_hide_term_ignoring_child(self):

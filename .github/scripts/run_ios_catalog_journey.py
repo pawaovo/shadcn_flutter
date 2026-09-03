@@ -2,9 +2,9 @@
 """Launch the real iOS Catalog, discover its VM Service, then native Flutter drive.
 
 Flutter 3.47's simulator startApp waits without a separate deadline for filtered
-unified logs to announce the VM Service. This launcher bounds discovery across
-the console and PID/time-scoped unified log history, then connects the unchanged
-integration driver to the discovered authenticated loopback service.
+unified logs to announce the VM Service. This launcher waits for a bounded,
+non-console launch command to exit, validates its bundle/PID response, and reads
+PID/time-scoped unified history before connecting the unchanged native driver.
 """
 
 import argparse
@@ -40,6 +40,15 @@ def service_uri(line):
     if parsed.hostname not in ("127.0.0.1", "::1", "localhost") or not parsed.port:
         raise ValueError("Simulator announced a non-loopback VM Service")
     return uri
+
+
+def launch_pid(output, bundle_id):
+    matches = [re.fullmatch(re.escape(bundle_id) + r":\s*(\d+)", line.strip())
+               for line in output.splitlines()]
+    pids = [int(match[1]) for match in matches if match]
+    if len(pids) != 1 or pids[0] <= 1:
+        raise RuntimeError("simctl launch did not return exactly one valid PID for the expected bundle")
+    return pids[0]
 
 
 def unified_service_uri(line, pid, executable, launched_at):
@@ -84,45 +93,29 @@ def query_unified_service(device, pid, launched_at, path, timeout):
     return lines if code == 0 else [], code
 
 
-def discover_service(console, device, bundle_id, executable, directory,
+def discover_service(pid, device, executable, directory,
                      launched_at, deadline, details):
-    pid = None
-    next_query = 0
+    details["application_pid"] = pid
     attempts = details.setdefault("history_queries", [])
     while time.monotonic() < deadline:
-        try:
-            line = console.lines.get(timeout=min(0.1, max(0.001, deadline - time.monotonic())))
-        except queue.Empty:
-            line = ""
-        if time.monotonic() >= deadline:
-            break
-        if line is None:
-            raise RuntimeError("simctl console exited before VM Service discovery")
-        uri = service_uri(line)
-        if uri:
-            details["source"] = "application-console"
-            return uri
-        launch = re.fullmatch(re.escape(bundle_id) + r":\s*(\d+)", line.strip())
-        if launch:
-            pid = int(launch[1])
-            details["application_pid"] = pid
         remaining = deadline - time.monotonic()
         # Reserve eight seconds for forced query-process cleanup. Each lookup
         # consumes this same discovery deadline; retries never reset it.
-        if pid is not None and time.monotonic() >= next_query and remaining > 8:
-            budget = min(15, remaining - 8)
-            path = directory / f"vm-service-history-{len(attempts) + 1}.log"
-            print(f"[ios-journey] inspect unified VM log for PID {pid}", flush=True)
-            lines, code = query_unified_service(device, pid, launched_at, path, budget)
-            attempts.append({"exit_code": code, "log": path.name, "timeout_seconds": round(budget, 3)})
-            if time.monotonic() >= deadline:
-                break
-            for event in lines:
-                uri = unified_service_uri(event, pid, executable, launched_at)
-                if uri:
-                    details["source"] = "unified-log-history"
-                    return uri
-            next_query = time.monotonic() + 1
+        if remaining <= 8:
+            break
+        budget = min(15, remaining - 8)
+        path = directory / f"vm-service-history-{len(attempts) + 1}.log"
+        print(f"[ios-journey] inspect unified VM log for PID {pid}", flush=True)
+        lines, code = query_unified_service(device, pid, launched_at, path, budget)
+        attempts.append({"exit_code": code, "log": path.name, "timeout_seconds": round(budget, 3)})
+        if time.monotonic() >= deadline:
+            break
+        for event in lines:
+            uri = unified_service_uri(event, pid, executable, launched_at)
+            if uri:
+                details["source"] = "unified-log-history"
+                return uri
+        time.sleep(min(1, max(0, deadline - time.monotonic())))
     raise TimeoutError("No matching Dart VM Service discovered before the launch deadline")
 
 
@@ -146,20 +139,6 @@ class LoggedProcess:
             self.output.append(clean)
             self.lines.put(line)
         self.lines.put(None)
-
-    def wait_for_service(self, timeout):
-        deadline = time.monotonic() + timeout
-        while time.monotonic() < deadline:
-            try:
-                line = self.lines.get(timeout=min(0.2, max(0.001, deadline - time.monotonic())))
-            except queue.Empty:
-                continue
-            if line is None:
-                raise RuntimeError(f"simctl console exited before VM Service (exit {self.process.poll()})")
-            uri = service_uri(line)
-            if uri:
-                return uri
-        raise TimeoutError(f"No Dart VM Service announced within {timeout} seconds of console launch")
 
     def close(self, grace=5):
         # Stop the whole CLI process group, including log-reader/compiler children.
@@ -265,7 +244,6 @@ def main():
     args = parser.parse_args()
     args.artifacts.mkdir(parents=True, exist_ok=True)
     journey = Journey(args.artifacts.resolve(), args.device)
-    console = None
     bundle_id = None
     executable = "Runner"
     try:
@@ -282,20 +260,23 @@ def main():
         journey.report.update(bundle_id=bundle_id, bundle=str(bundle), executable=executable)
         journey.run("install", ["xcrun", "simctl", "install", args.device, str(bundle)], 60)
 
-        command = ["xcrun", "simctl", "launch", "--console-pty", "--terminate-running-process",
+        command = ["xcrun", "simctl", "launch", "--terminate-running-process",
                    args.device, bundle_id, "--enable-dart-profiling", "--enable-checked-mode",
                    "--verify-entry-points"]
         launched_at = datetime.now(timezone.utc)
-        stage = {"name": "console-launch-and-vm-service", "command": command,
+        start = time.monotonic()
+        # Non-console simctl returns after launch, so even block-buffered PID
+        # output is collected at EOF. Do not wait for a long-lived PTY to flush.
+        output = journey.run("launch", command, 30)
+        pid = launch_pid(output, bundle_id)
+        stage = {"name": "vm-service-discovery",
                  "required": True, "passed": False, "launched_at": launched_at.isoformat(),
                  "discovery": {}}
         journey.report["stages"].append(stage)
         journey.save()
-        print("[ios-journey] console launch: VM Service must appear within 120s", flush=True)
-        start = time.monotonic()
-        console = LoggedProcess(command, journey.directory / "application-console.log")
+        print(f"[ios-journey] launched PID {pid}; VM deadline is 120s from launch start", flush=True)
         uri = discover_service(
-            console, args.device, bundle_id, executable, journey.directory,
+            pid, args.device, executable, journey.directory,
             launched_at, start + 120, stage["discovery"],
         )
         stage.update(passed=True, elapsed_seconds=round(time.monotonic() - start, 3),
@@ -320,11 +301,6 @@ def main():
         try:
             if bundle_id is not None:
                 journey.run("terminate", ["xcrun", "simctl", "terminate", args.device, bundle_id], 15, required=False)
-        except (OSError, RuntimeError, subprocess.SubprocessError) as error:
-            journey.report.update(passed=False, cleanup_error=redact(str(error)))
-        try:
-            if console is not None:
-                console.close()
         except (OSError, RuntimeError, subprocess.SubprocessError) as error:
             journey.report.update(passed=False, cleanup_error=redact(str(error)))
         journey.save()
