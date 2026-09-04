@@ -713,8 +713,11 @@ no simulated activity was used to bypass the lock.
 
 The [device/AT acceptance package](../device-acceptance/README.md) provides
 repeatable preparation, actual-device journey and manual recording entry points.
-The September 3 local inventory found no eligible Android/iOS physical device;
-that dated observation is not a fresh inventory or a simulator substitute.
+The [September 4 discovery refresh](./2026-09-04-local-device-inventory.md)
+successfully queries CoreDevice and finds zero known devices. No current ADB
+query was possible through the probed shell/project/default SDK paths; this is
+not a claim that Android hardware is absent. The earlier September 3 inventory
+retains its own dated scope, and no simulator result replaces a physical smoke.
 The [VoiceOver capability attempt](./2026-09-03-local-at-capability.md) could start
 VoiceOver but could not observe its output reliably, so it accepted no spoken
 task flow. Native AX/UIA/AT-SPI trees, synthetic composition, Unicode WebDriver

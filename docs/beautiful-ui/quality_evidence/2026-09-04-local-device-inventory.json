@@ -1,0 +1,29 @@
+{
+  "observed_file_mtime_utc": "2026-09-04T10:56:25.652182+00:00",
+  "scope": "Read-only local device discovery; no device interaction or acceptance task",
+  "apple_coredevice": {
+    "outcome": "success",
+    "tool_version": "506.6",
+    "known_device_count": 0,
+    "devices": [],
+    "raw_path": "/tmp/beautiful-device-inventory-20260904-current/coredevice.json",
+    "sha256": "de54c0d63ed66fe813d0647d4aaa86ad57927aa650ad29d5162f1bf1d67061d2",
+    "bytes": 458
+  },
+  "android_discovery": {
+    "adb_on_current_shell_path": false,
+    "tested_sdk_adb_paths": [
+      {
+        "path": "/Users/zzz/Library/Android/sdk/platform-tools/adb",
+        "is_file": false
+      }
+    ],
+    "project_sdk_dir_found": false,
+    "device_query_executed": false,
+    "meaning": "These tool probes did not provide adb; no absence of Android hardware is inferred."
+  },
+  "acceptance": {
+    "physical_device_smoke_performed": false,
+    "input_method_or_screen_reader_task_performed": false
+  }
+}
