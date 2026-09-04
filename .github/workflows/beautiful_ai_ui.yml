@@ -629,8 +629,9 @@ jobs:
           python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p 'test_build.py' -v
           cd packages/beautiful_ai_ui_catalog
           dart test_driver/android_candidate_http_fixture.dart
+          dart test_driver/android_candidate_stage_driver_fixture.dart
 
-      - name: Run the full journey with one real Android candidate commit
+      - name: Run the full journey with three fixed Android candidate commits
         uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
         env:
           CANDIDATE_SOURCE_SHA: ${{ github.sha }}

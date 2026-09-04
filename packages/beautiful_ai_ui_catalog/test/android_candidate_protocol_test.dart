@@ -23,6 +23,8 @@ void main() {
     'action': name,
     'nonce': nonce,
     'source_sha': source,
+    'stage_id': 'chat_send',
+    'stage_nonce': nonce,
   };
   Map<String, Object?> composing() => <String, Object?>{
     'input': <String, Object?>{

@@ -8,7 +8,10 @@ message. Its complete integration response then fails the P3 slash-command
 assertion: `/rest` remains unchanged instead of becoming `/restock `.
 That failure's live composition/menu state was not captured and its cause is
 not inferred from the text alone. All other main jobs, including iOS and the
-complete Edge journey, pass. The separate input/AT checkpoint remains the
+complete Edge journey, pass. The later `864ac59b` Android observation passes
+slash selection and then records composition changing to `[21,28]` during the
+original Prompt Send operation, with a disabled Send and no host receipt. Its
+full response remains failed. The separate input/AT checkpoint remains the
 completed `5edbcab7` **4/9**, with four complete W3C suites and three native
 framework input jobs passing, while retaining four framework composition
 failures and the hosted Narrator limitation. It was not rerun at `75594991`.
@@ -30,6 +33,7 @@ changing those decisions or rewriting earlier records.
 | Source snapshot | Evidence and meaning |
 | --- | --- |
 | Current main `7559499112dcc5c5d9b0370ba1d6b0eb34743f45` | Main CI **11/12**; library 658, Catalog 147 and core 571 tests pass. Android's actual candidate commit and original Chat Send pass, then the complete response fails the P3 `/rest` command assertion. All other main jobs pass. Input/AT was not rerun. |
+| Android observation `864ac59b523c278ef7ca99d7aad7d0c13015f377` | Native Chat commit/Send pass; slash Enter passes; actual Prompt composition changes to `[21,28]` during its original Send operation, with no host receipt. The complete original response fails. No P3 native candidate tree was inspected. |
 | Runtime/performance `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. Production runtime inputs are unchanged through `75594991`. |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
 | Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
@@ -72,6 +76,19 @@ production Dart and assets, package manifests/lockfile and generated platform
 runners between `5edbcab7` and `75594991`. The earlier release artifacts and
 native performance capture retain that runtime boundary. The new workflow and
 integration fixtures are separately bound to their own tested source.
+
+The [later passive Android observation at 864ac59b](../../../.github/evidence/android-candidate-864ac59b.md)
+records the unchanged original P3 actions without additional input or frames.
+Slash Enter sees empty composition, primary focus and one enabled restock
+option; the actual key event produces `/restock `. A native composing update
+arrives afterward. For Prompt Send, the initial full text and empty composition
+change to composing `[21,28]` during the original Send operation. The final
+state retains text and focus, with Send disabled and no host receipt. Controller
+and focus identities are stable, both observers report zero errors, and the
+complete original response fails. No exact P3 pointer-down timestamp was
+captured, and this run does not retrospectively identify the earlier slash
+failure's cause. The next fixed-stage native fixture retains all original
+words/actions and requires actual candidate evidence at each declared edit.
 
 ## Earlier completed runtime checkpoint at 5edbcab7
 
@@ -741,12 +758,14 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Resolve the P3 Android slash-command failure in the original full journey.
-  The native Chat candidate/commit boundary and original single Send now have
-  actual passing evidence at `75594991`; its complete response then fails the
-  unchanged `/restock ` assertion. Observe the live Prompt composition, menu,
-  focus and key/submission state before choosing the next repair. Keep the
-  component's active-composition protection and original input/actions intact.
+- Complete the original Android P3 journey with explicit native commit evidence.
+  Chat's native candidate/commit and original single Send pass. The `864ac59b`
+  passive record verifies slash selection, then demonstrates native composition
+  returning during Prompt Send while text and focus stay stable. A fixed,
+  ordered native-candidate fixture is being prepared for the three original
+  edit/action points; every actual candidate and complete original response
+  must be observed before acceptance. Keep active-composition protection and
+  all original text, key/tap counts and assertions intact.
 - Extend the actual Android English candidate evidence to Chinese OS IME
   pre-edit and cross-platform candidate/commit observation. Four-browser
   W3C input passes, but those Unicode key events are not an IME workflow. The

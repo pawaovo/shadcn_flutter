@@ -230,10 +230,11 @@ def build(args: argparse.Namespace, output: Path, log: Diagnostics) -> dict:
     java, env = locate_java(args.java_home)
     source_dir = base / "src" / Path(*PACKAGE.split("."))
     sources = [require_file(source_dir / name, "probe Java source")
-               for name in ("ProbeInstrumentation.java", "Protocol.java")]
+               for name in ("ProbeInstrumentation.java", "Protocol.java", "StageSpec.java")]
     protocol_test = require_file(base / "tests" / "ProtocolTest.java", "protocol test source")
+    stage_test = require_file(base / "tests" / "StageSpecTest.java", "stage allowlist test source")
     manifest = require_file(base / "AndroidManifest.xml", "probe manifest")
-    input_files = [*sources, protocol_test, manifest, Path(__file__).resolve(),
+    input_files = [*sources, protocol_test, stage_test, manifest, Path(__file__).resolve(),
                    require_file(base / "tests" / "test_build.py", "process ownership test source")]
     source_paths = {str(path.relative_to(base)): path for path in input_files}
     for name in ("run_catalog_input_acceptance.py", "run_ios_catalog_journey.py",
@@ -275,8 +276,9 @@ def build(args: argparse.Namespace, output: Path, log: Diagnostics) -> dict:
         "zipalign": "Android SDK Build-Tools " + tools["zipalign"].parent.name,
     }
     run([java["javac"], "-encoding", "UTF-8", "-source", "8", "-target", "8",
-         "-d", test_classes, source_dir / "Protocol.java", protocol_test])
+         "-d", test_classes, source_dir / "Protocol.java", source_dir / "StageSpec.java", protocol_test, stage_test])
     run([java["java"], "-cp", test_classes, PACKAGE + ".ProtocolTest"])
+    run([java["java"], "-cp", test_classes, PACKAGE + ".StageSpecTest"])
     run([java["javac"], "-encoding", "UTF-8", "-source", "8", "-target", "8",
          "-bootclasspath", android_jar, "-classpath", android_jar,
          "-d", classes, *sources, identity])
@@ -320,6 +322,7 @@ def build(args: argparse.Namespace, output: Path, log: Diagnostics) -> dict:
     source_hashes["generated/" + str(identity.relative_to(work / "generated"))] = file_sha256(identity)
     final_apk = output / "android-candidate-probe.apk"
     result = {"apk": str(final_apk), "source_sha": args.source_sha,
+              "protocol_version": 2,
               "package": PACKAGE, "component": COMPONENT, "apk_sha256": apk_sha256,
               "tool_paths": {name: str(path) for name, path in {**java, **tools}.items()},
               "tool_versions": tool_versions,

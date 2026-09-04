@@ -25,7 +25,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -38,7 +37,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public final class ProbeInstrumentation extends Instrumentation {
     private static final String TAG = "AndroidCandidateProbe";
     private static final String APP = "dev.beautifulai.beautiful_ai_ui_catalog";
-    private static final String CANDIDATE = "inventory";
     private static final long LIFETIME_MS = 600000;
     private static final long TICKET_MS = 2000;
     private static final int MAX_NODES = 4096;
@@ -52,8 +50,11 @@ public final class ProbeInstrumentation extends Instrumentation {
     private volatile Socket activeSocket;
     private volatile JSONObject lastDiagnostics = new JSONObject();
     private volatile String nonce;
+    private volatile String stageNonce;
+    private StageSpec stageSpec;
     private UiAutomation automation;
     private FileOutputStream eventLog;
+    private String eventLogName;
     private long lifetimeDeadline;
     private boolean inspected;
     private boolean tapAttempted;
@@ -61,14 +62,23 @@ public final class ProbeInstrumentation extends Instrumentation {
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
-        nonce = arguments == null ? null : arguments.getString("nonce");
+        String requestedNonce = arguments == null ? null : arguments.getString("nonce");
+        String requestedStageNonce = arguments == null ? null : arguments.getString("stage_nonce");
+        String requestedStage = arguments == null ? null : arguments.getString("stage_id");
         String sha = arguments == null ? null : arguments.getString("source_sha");
-        if (nonce == null || !nonce.matches("[a-fA-F0-9]{32,128}")
-                || sha == null || !sha.matches("[a-f0-9]{40}")
+        if (!StageSpec.validIdentity(requestedNonce, requestedStageNonce, sha)
                 || !BuildIdentity.SOURCE_SHA.equals(sha)) {
-            finishProbe(1, "invalid_arguments", "Expected a hexadecimal nonce and matching compiled source SHA");
+            finishProbe(1, "invalid_arguments", "Expected distinct run/stage nonces and matching compiled source SHA");
             return;
         }
+        try { stageSpec = StageSpec.require(requestedStage); }
+        catch (IllegalArgumentException error) {
+            finishProbe(1, "invalid_stage", "An exact compiled candidate stage is required");
+            return;
+        }
+        nonce = requestedNonce;
+        stageNonce = requestedStageNonce;
+        eventLogName = "probe-events-" + stageSpec.id + "-" + stageNonce + ".jsonl";
         start();
     }
 
@@ -85,7 +95,7 @@ public final class ProbeInstrumentation extends Instrumentation {
         watchdog.setDaemon(true);
         watchdog.start();
         try {
-            eventLog = getContext().openFileOutput("probe-events.jsonl", android.content.Context.MODE_PRIVATE);
+            eventLog = getContext().openFileOutput(eventLogName, android.content.Context.MODE_PRIVATE);
             automation = getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES);
             AccessibilityServiceInfo info = automation.getServiceInfo();
             if (info == null) throw failure("accessibility_unavailable", "No automation service information");
@@ -99,10 +109,18 @@ public final class ProbeInstrumentation extends Instrumentation {
             ready.putInt("port", server.getLocalPort());
             ready.putInt("pid", android.os.Process.myPid());
             ready.putString("nonce", nonce);
-            ready.putInt("protocol_version", 1);
+            ready.putString("run_nonce", nonce);
+            ready.putString("stage_nonce", stageNonce);
+            ready.putString("stage_id", stageSpec.id);
+            ready.putString("expected_text", stageSpec.expectedText);
+            ready.putString("candidate_text", stageSpec.candidateText);
+            ready.putInt("composing_base", stageSpec.composingBase);
+            ready.putInt("composing_extent", stageSpec.composingExtent);
+            ready.putInt("selection_offset", stageSpec.selectionOffset);
+            ready.putInt("protocol_version", 2);
             ready.putString("source_sha", BuildIdentity.SOURCE_SHA);
             ready.putLong("device_elapsed_ms", now());
-            ready.putString("event_log", "files/probe-events.jsonl");
+            ready.putString("event_log", "files/" + eventLogName);
             sendStatus(100, ready);
             int requests = 0;
             while (running && now() < lifetimeDeadline) {
@@ -142,7 +160,7 @@ public final class ProbeInstrumentation extends Instrumentation {
             operation = request.path.substring(1);
             Map<String, String> body = Protocol.fields(request.body);
             authenticate(body);
-            validateKeys(body, operation.equals("tap"));
+            Protocol.validateRequestFields(body, operation.equals("tap"));
             if (now() >= lifetimeDeadline) throw failure("lifetime_expired", "Probe deadline reached");
             if (operation.equals("inspect")) {
                 response = inspect();
@@ -176,19 +194,8 @@ public final class ProbeInstrumentation extends Instrumentation {
     }
 
     private void authenticate(Map<String, String> body) throws Protocol.Error {
-        Object value = body.get("nonce");
-        if (!(value instanceof String) || !((String) value).matches("[a-fA-F0-9]{32,128}")
-                || !MessageDigest.isEqual(nonce.getBytes(StandardCharsets.US_ASCII),
-                    ((String) value).getBytes(StandardCharsets.US_ASCII))) {
-            throw new Protocol.Error(403, "invalid_nonce", "Authentication failed");
-        }
-    }
-
-    private static void validateKeys(Map<String, String> body, boolean tap) throws Protocol.Error {
-        for (String key : body.keySet()) {
-            if (!key.equals("nonce") && !(tap && key.equals("candidate_id"))) {
-                throw failure("unexpected_argument", "Unexpected request field");
-            }
+        if (!stageSpec.matchesIdentity(body, nonce, stageNonce, BuildIdentity.SOURCE_SHA)) {
+            throw new Protocol.Error(403, "stage_identity_mismatch", "Run, stage, or source identity does not match this helper");
         }
     }
 
@@ -199,7 +206,7 @@ public final class ProbeInstrumentation extends Instrumentation {
         Snapshot snapshot = scan();
         long expires = Math.min(started + TICKET_MS, lifetimeDeadline);
         if (expires - now() < 150) throw failure("inspection_expired", "Inspection exhausted its ticket deadline");
-        ticket = new Ticket(randomId(), snapshot, expires);
+        ticket = new Ticket(randomId(), snapshot, expires, stageSpec, nonce, stageNonce);
         JSONObject response = base("inspect", true);
         copySnapshot(response, snapshot);
         put(response, "candidate_id", ticket.id);
@@ -213,8 +220,17 @@ public final class ProbeInstrumentation extends Instrumentation {
         tapAttempted = true;
         Ticket current = ticket;
         if (current == null || !current.id.equals(id)) throw failure("ticket_mismatch", "No matching inspection ticket");
-        JSONObject action = object("used_candidate_id", id, "expires_at_device_ms", current.expires,
-                "injected_down", false, "injected_up", false, "cancelled", false);
+        if (current.spec != stageSpec || !current.runNonce.equals(nonce)
+                || !current.stageNonce.equals(stageNonce) || !current.sourceSha.equals(BuildIdentity.SOURCE_SHA)) {
+            throw failure("ticket_identity_mismatch", "The ticket does not belong to this exact run, stage, and source");
+        }
+        JSONObject action = new JSONObject();
+        putIdentity(action);
+        put(action, "used_candidate_id", id);
+        put(action, "expires_at_device_ms", current.expires);
+        put(action, "injected_down", false);
+        put(action, "injected_up", false);
+        put(action, "cancelled", false);
         lastDiagnostics = object("action", action, "inspection", lastDiagnostics);
         if (current.expires - now() < 150) throw failure("ticket_expired", "Ticket has less than 150 ms remaining");
         Snapshot fresh = scan();
@@ -375,7 +391,7 @@ public final class ProbeInstrumentation extends Instrumentation {
                         "text", clipped(text), "description", clipped(description),
                         "visible", node.isVisibleToUser(), "enabled", node.isEnabled(),
                         "clickable", node.isClickable(), "bounds", boundsJson(bounds)));
-                if ((CANDIDATE.equals(text) || CANDIDATE.equals(description))
+                if ((stageSpec.candidateText.equals(text) || stageSpec.candidateText.equals(description))
                         && node.isVisibleToUser() && node.isEnabled()
                         && imePackage.equals(string(node.getPackageName()))) {
                     Rect target = clickableBounds(node, imePackage, imeWindowId, owned);
@@ -394,7 +410,8 @@ public final class ProbeInstrumentation extends Instrumentation {
             }
             put(details, "matching_candidates", matches.size());
             put(details, "scan_finished_device_ms", now());
-            if (matches.size() != 1) throw failure("candidate_not_unique", "Expected exactly one visible enabled inventory candidate");
+            if (matches.size() != 1) throw failure("candidate_not_unique",
+                    "Expected exactly one visible enabled " + stageSpec.candidateText + " candidate for " + stageSpec.id);
             String latest = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
             if (!component.equals(latest)) throw failure("ime_changed_during_scan", "Default input method changed during inspection");
             Rect bounds = matches.get(0);
@@ -442,8 +459,25 @@ public final class ProbeInstrumentation extends Instrumentation {
     }
 
     private JSONObject base(String operation, boolean ok) {
-        return object("ok", ok, "operation", operation, "protocol_version", 1,
-                "source_sha", BuildIdentity.SOURCE_SHA, "device_elapsed_ms", now());
+        JSONObject result = object("ok", ok, "operation", operation, "protocol_version", 2,
+                "device_elapsed_ms", now());
+        putIdentity(result);
+        return result;
+    }
+
+    private void putIdentity(JSONObject result) {
+        put(result, "source_sha", BuildIdentity.SOURCE_SHA);
+        put(result, "nonce", nonce);
+        put(result, "run_nonce", nonce);
+        put(result, "stage_nonce", stageNonce);
+        put(result, "stage_id", stageSpec == null ? null : stageSpec.id);
+        if (stageSpec != null) {
+            put(result, "expected_text", stageSpec.expectedText);
+            put(result, "candidate_text", stageSpec.candidateText);
+            put(result, "composing_base", stageSpec.composingBase);
+            put(result, "composing_extent", stageSpec.composingExtent);
+            put(result, "selection_offset", stageSpec.selectionOffset);
+        }
     }
 
     private void finishProbe(int code, String reason, String message) {
@@ -460,7 +494,7 @@ public final class ProbeInstrumentation extends Instrumentation {
         JSONObject summary = base("finish", code == 0);
         put(summary, "reason", reason);
         put(summary, "message", message);
-        put(summary, "event_log", "files/probe-events.jsonl");
+        put(summary, "event_log", eventLogName == null ? null : "files/" + eventLogName);
         bundle.putString("result_json", summary.toString());
         synchronized (this) {
             try { if (eventLog != null) eventLog.close(); } catch (IOException ignored) { }
@@ -526,9 +560,14 @@ public final class ProbeInstrumentation extends Instrumentation {
         final Snapshot snapshot;
         final long expires;
         final Protocol.GestureGate guard;
-        Ticket(String id, Snapshot snapshot, long expires) {
+        final StageSpec spec;
+        final String runNonce;
+        final String stageNonce;
+        final String sourceSha = BuildIdentity.SOURCE_SHA;
+        Ticket(String id, Snapshot snapshot, long expires, StageSpec spec, String runNonce, String stageNonce) {
             this.id = id; this.snapshot = snapshot; this.expires = expires;
             this.guard = new Protocol.GestureGate(expires);
+            this.spec = spec; this.runNonce = runNonce; this.stageNonce = stageNonce;
         }
     }
 }

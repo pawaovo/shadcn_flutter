@@ -7,7 +7,9 @@ Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-
 The completed `75594991` main CI is **11/12**, with library 658, Catalog 147 and
 core 571 tests passing. Its Android job verifies an actual LatinIME candidate
 commit and one original Chat Send, then receives a complete failed response at
-the P3 `/rest` command assertion. The live Prompt cause remains unverified.
+the P3 `/rest` command assertion. A later passive `864ac59b` run passes slash
+selection but records native composition returning during Prompt Send, with no
+host receipt. It does not infer the earlier slash failure's cause.
 iOS and the complete Edge journey pass. The separate input/AT checkpoint remains
 `5edbcab7` **4/9**, including all three native input bridges and four complete
 independent W3C suites; it was not rerun at `75594991`.

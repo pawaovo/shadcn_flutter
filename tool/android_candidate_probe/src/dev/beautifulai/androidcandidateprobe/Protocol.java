@@ -14,6 +14,7 @@ final class Protocol {
     static final int MAX_BODY_BYTES = 4096;
     static final int MAX_LINE_BYTES = 2048;
     static final int MAX_HEADERS = 32;
+    static final int MAX_JSON_FIELDS = 5;
 
     static final class Error extends IOException {
         final int status;
@@ -138,7 +139,7 @@ final class Protocol {
                 whitespace(body, cursor);
                 String value = jsonString(body, cursor);
                 if (result.put(key, value) != null) throw new Error(400, "duplicate_json_key", "Duplicate JSON field");
-                if (result.size() > 2) throw new Error(400, "too_many_json_fields", "At most two fields are accepted");
+                if (result.size() > MAX_JSON_FIELDS) throw new Error(400, "too_many_json_fields", "At most five fields are accepted");
                 whitespace(body, cursor);
                 if (peek(body, cursor) != ',') break;
                 cursor[0]++;
@@ -149,6 +150,15 @@ final class Protocol {
         whitespace(body, cursor);
         if (cursor[0] != body.length()) throw new Error(400, "invalid_json", "Trailing JSON data");
         return result;
+    }
+
+    static void validateRequestFields(Map<String, String> fields, boolean tap) throws Error {
+        for (String key : fields.keySet()) {
+            if (!key.equals("nonce") && !key.equals("stage_nonce") && !key.equals("stage_id")
+                    && !key.equals("source_sha") && !(tap && key.equals("candidate_id"))) {
+                throw new Error(409, "unexpected_argument", "Unexpected request field");
+            }
+        }
     }
 
     private static String jsonString(String body, int[] cursor) throws Error {

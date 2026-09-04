@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""One Android IME-candidate commit around the original full journey.
+"""Three fixed Android IME-candidate commits around the original full journey.
 
-Native input is restricted to one observed exact candidate; no text, composing,
+Each fixed stage is restricted to one observed exact candidate; no text, composing,
 focus, keyboard or Send mutation is issued by this supervisor. Public VM state
 and an earlier device-monotonic ticket bind permission to invoke an action.
 Android can delay delivery inside
@@ -34,7 +34,13 @@ CATALOG = ROOT / "packages/beautiful_ai_ui_catalog"
 APP = "dev.beautifulai.beautiful_ai_ui_catalog"
 HELPER = "dev.beautifulai.androidcandidateprobe"
 EXTENSION = "ext.beautiful.androidCandidate"
-TEXT = "Check cone inventory"
+STAGES = ("chat_send", "prompt_command", "prompt_send")
+STAGE_SPECS = {
+    "chat_send": ("Check cone inventory", "inventory", 11, 20, 20),
+    "prompt_command": ("/rest", "rest", 1, 5, 5),
+    "prompt_send": ("Prepare the seasonal restock", "restock", 21, 28, 28),
+}
+TEXT = STAGE_SPECS["chat_send"][0]
 MAX_JSON = 512 * 1024
 SOURCE_SCOPES = (
     "pubspec.yaml", "pubspec.lock", "packages/beautiful_ai_ui/pubspec.yaml",
@@ -43,6 +49,7 @@ SOURCE_SCOPES = (
     "packages/shadcn_flutter/lib", "packages/shadcn_flutter/assets",
     "packages/beautiful_ai_ui_catalog/lib", "packages/beautiful_ai_ui_catalog/assets",
     "packages/beautiful_ai_ui_catalog/android", "packages/beautiful_ai_ui_catalog/integration_test",
+    "packages/beautiful_ai_ui_catalog/test_driver",
     "tool/android_candidate_probe", ".github/scripts/run_android_candidate_diagnostic.py",
     ".github/scripts/run_catalog_input_acceptance.py", ".github/scripts/run_ios_catalog_journey.py",
     ".github/workflows/beautiful_ai_ui.yml",
@@ -78,24 +85,36 @@ def checked_vm_url(raw):
     return urllib.parse.urlunsplit(("http", parsed.netloc, path, "", ""))
 
 
-def validate_stage(state, nonce, source_sha, *, claimed=False, candidate_id=None, lease_id=None):
-    if (state.get("protocol_version") != 1 or state.get("nonce") != nonce
-            or state.get("source_sha") != source_sha or state.get("terminal") is True):
-        raise ValueError("VM stage identity is absent, stale or terminal")
+def stage_identity(state, nonce, source_sha, stage_id, stage_nonce):
+    if (stage_id not in STAGES or not isinstance(stage_nonce, str)
+            or not re.fullmatch(r"[0-9a-f]{32}", stage_nonce) or stage_nonce == nonce
+            or state.get("protocol_version") != 2 or state.get("nonce") != nonce
+            or state.get("run_nonce") != nonce or state.get("source_sha") != source_sha
+            or state.get("stage_id") != stage_id or state.get("stage_nonce") != stage_nonce):
+        raise ValueError("VM stage identity is absent, stale or mismatched")
+
+
+def validate_stage(state, nonce, source_sha, *, stage_id, stage_nonce,
+                   claimed=False, candidate_id=None, lease_id=None):
+    stage_identity(state, nonce, source_sha, stage_id, stage_nonce)
     expected = "action_claimed" if claimed else "awaiting_candidate"
-    if state.get("stage") != expected:
-        raise ValueError(f"Expected VM stage {expected}, got {state.get('stage')}")
+    if state.get("stage") != expected or state.get("journey_status") != "running":
+        raise ValueError(f"Expected live VM stage {expected}, got {state.get('stage')}")
+    text, _candidate, start, end, selection = STAGE_SPECS[stage_id]
     snapshot = state.get("snapshot", {})
     editing = snapshot.get("input", {})
-    if (editing.get("text") != TEXT or editing.get("selectionBase") != 20
-            or editing.get("selectionExtent") != 20 or editing.get("composingBase") != 11
-            or editing.get("composingExtent") != 20
+    if (editing.get("text") != text or editing.get("selectionBase") != selection
+            or editing.get("selectionExtent") != selection or editing.get("composingBase") != start
+            or editing.get("composingExtent") != end
             or snapshot.get("editor_primary_focus") is not True
             or snapshot.get("send_count") != 1
             or snapshot.get("send_enabled_semantics") != "isFalse"
             or not isinstance(snapshot.get("view_insets_bottom_physical"), (int, float))
             or snapshot["view_insets_bottom_physical"] <= 0):
         raise ValueError("Live VM input/focus/composition/keyboard/Send state changed")
+    if stage_id == "prompt_send" and (snapshot.get("selected_model_id") != "precise"
+                                      or snapshot.get("inventory_attachment_count") != 1):
+        raise ValueError("Original Prompt model or attachment changed")
     if claimed and (state.get("can_click") is not True
                     or not isinstance(lease_id, str) or not lease_id
                     or state.get("candidate_id") != candidate_id
@@ -129,16 +148,21 @@ class Runner:
         self.server = None
         self.server_thread = None
         self.helper_reader = None
+        self.native_child = None
+        self.native_stages = []
+        self.current_native = None
+        self.chat_stage_nonce = uuid.uuid4().hex
         self.http_errors = []
         self.active = True
         self.native_stopped = False
         self.owned_packages = set()
-        self.report = {"schema_version": 1, "scope": "original_full_journey_with_one_native_IME_candidate_tap",
+        self.report = {"schema_version": 1, "scope": "original_full_journey_with_three_fixed_native_IME_candidate_commits",
                        "source_sha": args.source_sha, "nonce": self.nonce, "status": "started",
                        "application_acceptance": "not_accepted", "human_IME_acceptance": "not_accepted",
                        "workflow": os.environ.get("GITHUB_WORKFLOW"),
                        "workflow_ref": os.environ.get("GITHUB_WORKFLOW_REF"),
-                       "job": os.environ.get("GITHUB_JOB"), "errors": [], "cleanup_errors": []}
+                       "job": os.environ.get("GITHUB_JOB"), "native_stages": self.native_stages,
+                       "errors": [], "cleanup_errors": []}
         write_json(self.output / "owner.json", {"pid": os.getpid(), "nonce": self.nonce,
                                                "source_sha": args.source_sha, "device": args.device})
 
@@ -228,13 +252,21 @@ class Runner:
             raise RuntimeError("Protocol response exceeded the evidence bound")
         return json.loads(raw)
 
+    def native_identity(self):
+        if self.current_native is None:
+            raise RuntimeError("No owned native stage is prepared")
+        return {"nonce": self.nonce, "source_sha": self.args.source_sha,
+                "stage_id": self.current_native["stage_id"],
+                "stage_nonce": self.current_native["stage_nonce"]}
+
     def native(self, route, payload=None, *, timeout=1):
         if self.native_url is None:
             raise RuntimeError("Native helper has no owned forwarded endpoint")
-        value = self.request_json(self.native_url + route,
-                                  {"nonce": self.nonce, **(payload or {})}, timeout=timeout)
-        if value.get("source_sha") != self.args.source_sha or value.get("protocol_version") != 1:
-            raise RuntimeError("Native helper response source/protocol mismatch")
+        identity = self.native_identity()
+        value = self.request_json(self.native_url + route, {**identity, **(payload or {})}, timeout=timeout)
+        if (value.get("protocol_version") != 2 or value.get("run_nonce") != self.nonce
+                or any(value.get(key) != item for key, item in identity.items())):
+            raise RuntimeError("Native helper response source/protocol/stage mismatch")
         return value
 
     def state(self):
@@ -245,7 +277,11 @@ class Runner:
         reply = self.request_json(self.vm_url + EXTENSION + "?" + query)
         if reply.get("error") is not None:
             raise RuntimeError(f"VM service refused state query: {reply['error']}")
-        return reply.get("result", reply)
+        value = reply.get("result", reply)
+        if (value.get("protocol_version") != 2 or value.get("nonce") != self.nonce
+                or value.get("run_nonce") != self.nonce or value.get("source_sha") != self.args.source_sha):
+            raise RuntimeError("VM state source/run identity mismatch")
+        return value
 
     def process_identity(self, package):
         raw = self.adb("shell", "pidof", package, name="pid-" + package.rsplit(".", 1)[-1], timeout=1, check=False)
@@ -275,80 +311,187 @@ class Runner:
         self.checkpoint()
         return {"ok": True}
 
-    def inspect_native(self):
-        if not self.active:
-            raise RuntimeError("Native action authorization has been revoked")
-        if self.inspection is not None:
-            raise RuntimeError("A native candidate inspection ticket already exists")
+    def body_stage(self, body):
+        if (body.get("nonce") != self.nonce or body.get("source_sha") != self.args.source_sha
+                or body.get("stage_id") not in STAGES
+                or not isinstance(body.get("stage_nonce"), str)
+                or not re.fullmatch(r"[0-9a-f]{32}", body["stage_nonce"])
+                or body["stage_nonce"] == self.nonce):
+            raise RuntimeError("Native action stage identity mismatch")
+        return body["stage_id"], body["stage_nonce"]
+
+    def require_current_native(self, body):
+        stage_id, stage_nonce = self.body_stage(body)
+        if (self.current_native is None or self.current_native["stage_id"] != stage_id
+                or self.current_native["stage_nonce"] != stage_nonce):
+            raise RuntimeError("Native request belongs to an old or different helper instance")
+        return self.current_native
+
+    def stage_file(self, name):
+        directory = self.output / "native-stages" / self.current_native["stage_id"]
+        directory.mkdir(parents=True, exist_ok=True)
+        return directory / name
+
+    def completed_prefix(self, state, count):
+        expected = list(STAGES[:count])
+        if state.get("completed_stage_ids", []) != expected:
+            raise RuntimeError("Prior original actions have not passed in fixed order")
+        results = state.get("stage_results", [])
+        if not isinstance(results, list) or len(results) != count:
+            raise RuntimeError("Prior stage results are incomplete")
+        for index, result in enumerate(results):
+            record = self.native_stages[index] if index < len(self.native_stages) else {}
+            if (result.get("protocol_version") != 2 or result.get("nonce") != self.nonce
+                    or result.get("run_nonce") != self.nonce or result.get("source_sha") != self.args.source_sha
+                    or result.get("stage_id") != STAGES[index]
+                    or result.get("stage_nonce") != record.get("stage_nonce")
+                    or result.get("stage") != "stage_done"
+                    or any(result.get(key) is not True for key in
+                           ("original_action_passed", "native_click_acknowledged", "native_drained",
+                            "send_activation_checked"))):
+                raise RuntimeError("Prior original action/native stage proof mismatched")
+
+    def prepare_native(self, body):
+        if not self.active or time.monotonic() >= self.deadline:
+            raise RuntimeError("Native action authorization has been revoked or expired")
+        stage_id, stage_nonce = self.body_stage(body)
+        index = STAGES.index(stage_id)
+        if self.process_identity(APP) != self.app_identity:
+            raise RuntimeError("Catalog process changed before helper preparation")
+        current = self.state()
+        validate_stage(current, self.nonce, self.args.source_sha,
+                       stage_id=stage_id, stage_nonce=stage_nonce)
+        self.completed_prefix(current, index)
+        if index == 0:
+            record = self.require_current_native(body)
+            if record.get("prepared_by_driver") or record.get("cleanup_verified"):
+                raise RuntimeError("Initial helper preparation is never repeated")
+        else:
+            if (len(self.native_stages) != index or self.current_native is None
+                    or self.current_native.get("cleanup_verified") is not True):
+                raise RuntimeError("Previous helper must be completely cleaned before next preparation")
+            if any(record["stage_nonce"] == stage_nonce for record in self.native_stages):
+                raise RuntimeError("Stage nonce cannot be reused")
+            self.start_native_helper(stage_id, stage_nonce)
+            record = self.current_native
+        if self.process_identity(HELPER) != record["helper_process"]:
+            raise RuntimeError("Prepared helper process changed")
+        fresh = self.state()
+        validate_stage(fresh, self.nonce, self.args.source_sha,
+                       stage_id=stage_id, stage_nonce=stage_nonce)
+        self.completed_prefix(fresh, index)
+        record["prepared_by_driver"] = True
+        write_json(self.stage_file("vm-after-native-prepare.json"), fresh)
+        self.checkpoint()
+        return {"ok": True, **self.native_identity(), "prepared": True}
+
+    def inspect_native(self, body):
+        record = self.require_current_native(body)
+        if not self.active or not record.get("prepared_by_driver") or record.get("cleanup_verified"):
+            raise RuntimeError("Native action authorization is not active and prepared")
+        if record.get("inspection_attempted"):
+            raise RuntimeError("A native candidate inspection is never retried")
         if self.process_identity(APP) != self.app_identity:
             raise RuntimeError("Catalog process changed before native inspection")
         before = self.state()
-        validate_stage(before, self.nonce, self.args.source_sha)
-        write_json(self.output / "vm-before-native-inspect.json", before)
+        validate_stage(before, self.nonce, self.args.source_sha, stage_id=record["stage_id"],
+                       stage_nonce=record["stage_nonce"])
+        self.completed_prefix(before, STAGES.index(record["stage_id"]))
+        write_json(self.stage_file("vm-before-native-inspect.json"), before)
+        record["inspection_attempted"] = True
         started = time.monotonic()
         candidate = self.native("/inspect", timeout=1)
-        write_json(self.output / "native-inspection.json", candidate)
+        write_json(self.stage_file("native-inspection.json"), candidate)
         if candidate.get("ok") is not True:
             raise RuntimeError(f"Native candidate inspection failed: {candidate.get('error')}")
+        text, label, start, end, selection = STAGE_SPECS[record["stage_id"]]
         if (not candidate.get("candidate_id") or candidate.get("focused_app_package") != APP
                 or not candidate.get("ime_package") or not candidate.get("ime_component")
+                or candidate.get("expected_text") != text or candidate.get("candidate_text") != label
+                or candidate.get("composing_base") != start or candidate.get("composing_extent") != end
+                or candidate.get("selection_offset") != selection
                 or not isinstance(candidate.get("expires_at_device_ms"), int)
                 or not isinstance(candidate.get("device_elapsed_ms"), int)
                 or not 0 < candidate["expires_at_device_ms"] - candidate["device_elapsed_ms"] <= 2000):
-            raise RuntimeError("Native candidate ticket is incomplete or expired")
+            raise RuntimeError("Native fixed-stage candidate ticket is incomplete or expired")
         self.inspection, self.inspected_at = candidate, started
         return candidate
 
     def click_native(self, body):
-        if not self.active:
+        record = self.require_current_native(body)
+        if not self.active or record.get("cleanup_verified"):
             raise RuntimeError("Native action authorization has been revoked")
         if self.click_attempted:
             raise RuntimeError("Native candidate tap is never retried")
         if self.inspection is None or time.monotonic() - self.inspected_at > 1.4:
             raise RuntimeError("Native candidate inspection is missing or stale")
-        if body.get("nonce") != self.nonce or body.get("source_sha") != self.args.source_sha:
-            raise RuntimeError("Native action identity mismatch")
         candidate = body.get("candidate", {})
         claim = body.get("claim", {})
         if candidate.get("candidate_id") != self.inspection["candidate_id"]:
             raise RuntimeError("Driver changed the native candidate identity")
         fresh = self.state()
-        write_json(self.output / "vm-immediately-before-native-tap.json", fresh)
+        write_json(self.stage_file("vm-immediately-before-native-tap.json"), fresh)
         validate_stage(fresh, self.nonce, self.args.source_sha, claimed=True,
+                       stage_id=record["stage_id"], stage_nonce=record["stage_nonce"],
                        candidate_id=self.inspection["candidate_id"], lease_id=claim.get("lease_id"))
+        self.completed_prefix(fresh, STAGES.index(record["stage_id"]))
         if time.monotonic() - self.inspected_at > 1.4:
             raise RuntimeError("Candidate expired while revalidating the VM lease")
-        # The device rejects expired invocations. Android may then block inside
-        # injection; only its completed response/serial STOP proves drain.
         self.click_attempted = True
-        self.report["native_tap_attempts"] = 1
+        record["native_tap_attempts"] = 1
+        record["native_call_drained"] = False
+        self.report["native_tap_attempts"] = sum(x.get("native_tap_attempts", 0) for x in self.native_stages)
         self.checkpoint()
         response = self.native("/tap", {"candidate_id": self.inspection["candidate_id"]}, timeout=1)
-        self.report["native_call_drained"] = True
-        write_json(self.output / "native-tap.json", response)
+        record["native_call_drained"] = True
+        write_json(self.stage_file("native-tap.json"), response)
         if (response.get("ok") is not True or response.get("injected_down") is not True
                 or response.get("injected_up") is not True or response.get("cancelled") is not False
                 or response.get("used_candidate_id") != self.inspection["candidate_id"]):
             raise RuntimeError(f"Native candidate tap failed: {response.get('error')}")
-        self.report["native_tap"] = response
+        record["native_tap"] = response
         self.checkpoint()
         return {**response, "clicked": True, "native_drained": True}
 
+    def finish_native(self, body):
+        record = self.require_current_native(body)
+        if record.get("cleanup_verified"):
+            return {"ok": True, **self.native_identity(), "native_drained": True,
+                    "native_helper_stopped": True, "helper_stopped": True, "cleanup_verified": True}
+        state = self.state()
+        count = len(state.get("completed_stage_ids", []))
+        if count <= STAGES.index(record["stage_id"]):
+            raise RuntimeError("Original action must pass before native stage retirement")
+        self.completed_prefix(state, count)
+        self.retire_native()
+        self.checkpoint()
+        return {"ok": True, **self.native_identity(), "native_drained": True,
+                "native_helper_stopped": True, "helper_stopped": True, "cleanup_verified": True}
+
     def abort(self, body):
-        if body.get("nonce") != self.nonce or body.get("source_sha") != self.args.source_sha:
-            raise RuntimeError("Abort identity mismatch")
+        stage_id, stage_nonce = self.body_stage(body)
+        matches = [x for x in self.native_stages
+                   if x["stage_id"] == stage_id and x["stage_nonce"] == stage_nonce]
+        if not matches:
+            raise RuntimeError("Abort does not identify an owned native stage")
+        record = matches[0]
+        if record is not self.current_native:
+            if not record.get("cleanup_verified"):
+                raise RuntimeError("Old native stage drain was not verified")
+            return {"ok": True, "stage_id": stage_id, "stage_nonce": stage_nonce,
+                    "native_drained": True, "native_helper_stopped": True,
+                    "cleanup_verified": True, "scope": "already retired stage only"}
         self.active = False
-        result = {"ok": True, "native_authorization_revoked": True,
-                  "native_drained": self.report.get("native_call_drained", False)}
+        result = {"ok": True, "stage_id": stage_id, "stage_nonce": stage_nonce,
+                  "native_authorization_revoked": True,
+                  "native_drained": record.get("native_call_drained", False)}
         if self.native_url and not self.native_stopped:
             try:
-                # The helper processes requests serially. Its STOP response
-                # proves a preceding injection call has actually returned;
-                # HTTP timeout by itself is never called a native cancellation.
                 reply = self.native("/stop", timeout=35)
                 if reply.get("ok") is not True:
                     raise RuntimeError(str(reply))
                 self.native_stopped = True
+                record["native_call_drained"] = True
                 result["native_helper_stopped"] = True
                 result["native_drained"] = True
             except Exception as error:
@@ -356,7 +499,7 @@ class Runner:
                 result["native_drained"] = False
                 result["drain_scope"] = "unverified; owned fresh emulator teardown required before any later run"
                 self.report["cleanup_errors"].append("Driver abort: " + result["secondary_error"])
-        self.report["driver_abort"] = {**result, "reason": body.get("error")}
+        self.report["driver_abort"] = {**result, "reason": body.get("reason", body.get("error"))}
         self.checkpoint()
         return result
 
@@ -406,8 +549,12 @@ class Runner:
                             raise RuntimeError("Native action authorization has been revoked")
                         elif self.path == "/attach" and self.command == "POST":
                             result = owner.attach(body)
-                        elif self.path == "/native/inspect" and self.command == "GET":
-                            result = owner.inspect_native()
+                        elif self.path == "/native/prepare" and self.command == "POST":
+                            result = owner.prepare_native(body)
+                        elif self.path == "/native/finish" and self.command == "POST":
+                            result = owner.finish_native(body)
+                        elif self.path == "/native/inspect" and self.command == "POST":
+                            result = owner.inspect_native(body)
                         elif self.path == "/native/click" and self.command == "POST":
                             result = owner.click_native(body)
                         else:
@@ -424,16 +571,30 @@ class Runner:
         self.server_thread.start()
         return f"http://127.0.0.1:{self.server.server_port}"
 
-    def start_native_helper(self):
+    def start_native_helper(self, stage_id, stage_nonce):
+        if stage_id != STAGES[len(self.native_stages)]:
+            raise RuntimeError("Helpers must start in the fixed stage order")
+        record = {"stage_id": stage_id, "stage_nonce": stage_nonce,
+                  "event_log": f"files/probe-events-{stage_id}-{stage_nonce}.jsonl"}
+        self.native_stages.append(record)
+        self.current_native = record
+        self.inspection = None
+        self.inspected_at = None
+        self.click_attempted = False
+        self.native_stopped = False
+        self.native_url = None
+        self.forward = None
         command = [self.args.adb, "-s", self.args.device, "shell", "am", "instrument", "-w", "-r",
                    "-e", "nonce", self.nonce, "-e", "source_sha", self.args.source_sha,
+                   "-e", "stage_id", stage_id, "-e", "stage_nonce", stage_nonce,
                    HELPER + "/.ProbeInstrumentation"]
         child = start_owned_process(command, stdin=subprocess.DEVNULL,
                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         self.children.append(child)
+        self.native_child = child
         fields = {}
         ready = threading.Event()
-        log = (self.output / "native-instrumentation.log").open("wb")
+        log = self.stage_file("native-instrumentation.log").open("wb")
         self.handles.append(log)
         def read():
             for line in iter(child.stdout.readline, b""):
@@ -442,13 +603,16 @@ class Runner:
                 match = re.match(rb"INSTRUMENTATION_STATUS: ([a-z_]+)=(.*)\r?\n", line)
                 if match:
                     fields[match.group(1).decode()] = match.group(2).decode().strip()
-                    if all(key in fields for key in ("port", "source_sha", "nonce", "pid")):
+                    if all(key in fields for key in ("port", "source_sha", "nonce", "pid", "stage_id", "stage_nonce", "event_log", "protocol_version", "run_nonce")):
                         ready.set()
         self.helper_reader = threading.Thread(target=read, daemon=True)
         self.helper_reader.start()
         if not ready.wait(20) or child.poll() is not None:
             raise RuntimeError("Native instrumentation did not expose a live owned endpoint")
-        if fields["source_sha"] != self.args.source_sha or fields["nonce"] != self.nonce:
+        if (fields["source_sha"] != self.args.source_sha or fields["nonce"] != self.nonce
+                or fields["stage_id"] != stage_id or fields["stage_nonce"] != stage_nonce
+                or fields["event_log"] != record["event_log"]
+                or fields.get("protocol_version") != "2" or fields.get("run_nonce") != self.nonce):
             raise RuntimeError("Native instrumentation source/nonce differs")
         port = int(fields["port"])
         if not 1024 <= port <= 65535:
@@ -456,12 +620,57 @@ class Runner:
         identity = self.process_identity(HELPER)
         if identity["pid"] != int(fields["pid"]):
             raise RuntimeError("Instrumentation reported a different Android process")
-        self.report["helper_process"] = identity
+        record["helper_process"] = identity
         allocated = self.adb("forward", "tcp:0", f"tcp:{port}", name="forward-owned-helper").strip()
         if not allocated.isdigit() or not 1024 <= int(allocated) <= 65535:
             raise RuntimeError("ADB did not allocate an owned helper forward")
         self.forward = "tcp:" + allocated
         self.native_url = "http://127.0.0.1:" + allocated
+
+    def retire_native(self):
+        record = self.current_native
+        if record is None or record.get("cleanup_verified"):
+            return
+        try:
+            if self.native_url and not self.native_stopped:
+                reply = self.native("/stop", timeout=35)
+                if reply.get("ok") is not True:
+                    raise RuntimeError(str(reply))
+                self.native_stopped = True
+                record["native_call_drained"] = True
+            elif self.click_attempted and record.get("native_call_drained") is not True:
+                raise RuntimeError("Native call drain cannot be verified")
+            self.adb("shell", "am", "force-stop", HELPER, name="retire-owned-helper")
+            if self.adb("shell", "pidof", HELPER, name="retire-helper-pid", check=False).strip():
+                raise RuntimeError("Old helper process remains alive")
+            raw = self.adb("exec-out", "run-as", HELPER, "cat", record["event_log"],
+                           name="native-stage-event-log", timeout=5)
+            self.stage_file("native-helper-events.jsonl").write_text(raw)
+            if not raw.strip():
+                raise RuntimeError("Old helper did not retain its complete stage event log")
+            if self.forward:
+                self.adb("forward", "--remove", self.forward, name="retire-owned-forward")
+                forwards = self.adb("forward", "--list", name="verify-retired-forward")
+                if any(len(parts) >= 2 and parts[0] == self.args.device and parts[1] == self.forward
+                       for parts in (line.split() for line in forwards.splitlines())):
+                    raise RuntimeError("Old owned adb forward remains")
+                self.forward = None
+            if self.native_child is not None:
+                stop_owned_process(self.native_child, grace=1, kill_timeout=2)
+            if self.helper_reader:
+                self.helper_reader.join(timeout=3)
+                if self.helper_reader.is_alive():
+                    raise RuntimeError("Old native helper reader did not reach EOF")
+            if self.native_child is not None and self.native_child.stdout is not None:
+                self.native_child.stdout.close()
+            self.native_url = None
+            record["cleanup_verified"] = True
+            record["retired_epoch_ns"] = time.time_ns()
+        except Exception as error:
+            record.setdefault("cleanup_errors", []).append(f"{type(error).__name__}: {error}")
+            raise
+        finally:
+            self.checkpoint()
 
     def execute(self):
         if sys.platform != "linux" or os.environ.get("GITHUB_ACTIONS") != "true":
@@ -477,7 +686,7 @@ class Runner:
             raise RuntimeError("Diagnostic requires the pinned Flutter 3.47 SDK source")
         self.report["flutter_sdk"] = sdk
         helper = json.loads(self.args.helper_report.read_text())
-        if (helper.get("source_sha") != self.args.source_sha
+        if (helper.get("protocol_version") != 2 or helper.get("source_sha") != self.args.source_sha
                 or helper.get("apk_sha256", helper.get("sha256")) != digest(self.args.helper_apk)):
             raise RuntimeError("Fresh helper APK does not match its source build report")
         self.report["helper_build"] = helper
@@ -492,7 +701,7 @@ class Runner:
         self.adb("shell", "atrace", "--list_categories", name="atrace-categories")
         self.owned_packages.add(HELPER)
         self.adb("install", "-t", str(self.args.helper_apk.resolve()), name="install-fresh-helper", timeout=30)
-        self.start_native_helper()
+        self.start_native_helper("chat_send", self.chat_stage_nonce)
         host_url = self.serve()
         self.spawn([self.args.adb, "-s", self.args.device, "logcat", "-v", "monotonic"], "android-logcat")
         self.trace_attempted = True
@@ -506,6 +715,7 @@ class Runner:
                    "--target=integration_test/catalog_android_candidate_test.dart", "--device-id=" + self.args.device,
                    "--dart-define=CATALOG_ANDROID_CANDIDATE=true",
                    "--dart-define=CATALOG_ANDROID_CANDIDATE_NONCE=" + self.nonce,
+                   "--dart-define=CATALOG_ANDROID_CANDIDATE_CHAT_STAGE_NONCE=" + self.chat_stage_nonce,
                    "--dart-define=CATALOG_ANDROID_CANDIDATE_SOURCE_SHA=" + self.args.source_sha,
                    "--dart-define=INTEGRATION_TEST_SHOULD_REPORT_RESULTS_TO_NATIVE=false",
                    "--no-pub"]
@@ -521,8 +731,10 @@ class Runner:
         self.report["driver_summary"] = driver
         if (driver.get("status") != "passed" or driver.get("all_tests_passed") is not True
                 or driver.get("source_sha") != self.args.source_sha
-                or driver.get("nonce") != self.nonce or not self.report.get("native_tap")
-                or self.report.get("native_tap_attempts") != 1 or self.http_errors):
+                or driver.get("nonce") != self.nonce or len(self.native_stages) != 3
+                or self.report.get("native_tap_attempts") != 3 or driver.get("native_click_count") != 3
+                or self.http_errors
+                or any(not x.get("native_tap") or not x.get("cleanup_verified") for x in self.native_stages)):
             raise RuntimeError("Required complete driver/native candidate evidence is absent")
         self.report["source_inputs_after"] = self.sources("after")
         if self.report["source_inputs_before"] != self.report["source_inputs_after"]:
@@ -555,13 +767,8 @@ class Runner:
                                for line in entries):
                         raise RuntimeError("No owned-app native commit/finish dispatch slice was captured")
             clean("stock input trace", stop_trace)
-        if self.native_url and not self.native_stopped:
-            def stop_native():
-                reply = self.native("/stop", timeout=2)
-                if reply.get("ok") is not True:
-                    raise RuntimeError(str(reply))
-                self.native_stopped = True
-            clean("native helper stop", stop_native)
+        if self.current_native and not self.current_native.get("cleanup_verified"):
+            clean("native stage retirement", self.retire_native)
         for package in sorted(self.owned_packages):
             def stop_app(package=package):
                 self.adb("shell", "am", "force-stop", package, name="stop-owned-" + package.rsplit(".", 1)[-1])
@@ -569,14 +776,6 @@ class Runner:
                 if live:
                     raise RuntimeError(f"Owned Android process remains: {package}: {live}")
             clean(package + " cleanup", stop_app)
-        if HELPER in self.owned_packages:
-            def preserve_native_events():
-                raw = self.adb("exec-out", "run-as", HELPER, "cat", "files/probe-events.jsonl",
-                               name="native-private-event-log", timeout=5, check=False)
-                (self.output / "native-helper-events.jsonl").write_text(raw)
-                if self.native_url is not None and not raw.strip():
-                    raise RuntimeError("Started native helper did not retain its complete event log")
-            clean("native event evidence", preserve_native_events)
         if self.forward:
             clean("owned adb forward", lambda: self.adb("forward", "--remove", self.forward, name="remove-owned-forward"))
         for child in reversed(self.children):

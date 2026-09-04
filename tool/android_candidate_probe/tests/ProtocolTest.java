@@ -2,6 +2,7 @@ package dev.beautifulai.androidcandidateprobe;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /** Runs against the actual request parser without an emulator or Android classes. */
 public final class ProtocolTest {
@@ -14,6 +15,23 @@ public final class ProtocolTest {
             throw new AssertionError("Valid request did not round-trip");
         }
         checks++;
+        Map<String, String> identity = Protocol.fields("{\"nonce\":\"a\",\"stage_nonce\":\"b\",\"stage_id\":\"chat_send\",\"source_sha\":\"c\"}");
+        Protocol.validateRequestFields(identity, false);
+        checks++;
+        for (String forbidden : new String[] {"text", "candidate", "composing_base", "x", "reset", "run_nonce"}) {
+            identity.put(forbidden, "arbitrary");
+            try { Protocol.validateRequestFields(identity, true); throw new AssertionError("Arbitrary request field accepted"); }
+            catch (Protocol.Error expected) {
+                if (!expected.code.equals("unexpected_argument")) throw expected;
+                checks++;
+            }
+            identity.remove(forbidden);
+        }
+        identity.put("candidate_id", "d");
+        Protocol.validateRequestFields(identity, true);
+        checks++;
+        try { Protocol.validateRequestFields(identity, false); throw new AssertionError("Ticket accepted by non-tap route"); }
+        catch (Protocol.Error expected) { checks++; }
         if (!"aabb".equals(Protocol.fields(" { \"nonce\" : \"aabb\", \"candidate_id\":\"ccdd\" } ").get("nonce"))) {
             throw new AssertionError("Strict JSON fields did not round-trip");
         }
@@ -24,7 +42,11 @@ public final class ProtocolTest {
         rejectJson("{\"nonce\":\"a\",}", "invalid_json");
         rejectJson("{\"nonce\":123}", "invalid_json");
         rejectJson("{/*comment*/\"nonce\":\"a\"}", "invalid_json");
-        rejectJson("{\"nonce\":\"a\",\"candidate_id\":\"b\",\"extra\":\"c\"}", "too_many_json_fields");
+        if (Protocol.fields("{\"nonce\":\"a\",\"stage_nonce\":\"b\",\"stage_id\":\"chat_send\",\"source_sha\":\"c\",\"candidate_id\":\"d\"}").size() != 5) {
+            throw new AssertionError("Valid five-field tap identity rejected");
+        }
+        checks++;
+        rejectJson("{\"nonce\":\"a\",\"stage_nonce\":\"b\",\"stage_id\":\"chat_send\",\"source_sha\":\"c\",\"candidate_id\":\"d\",\"extra\":\"e\"}", "too_many_json_fields");
         gestureDecisions();
         reject(valid.replace("Content-Length: 2", "Content-Length: 2\r\ncontent-length: 2"), "duplicate_header");
         reject(valid.replace("Content-Length: 2", "Transfer-Encoding: chunked\r\nContent-Length: 2"), "unsupported_encoding");

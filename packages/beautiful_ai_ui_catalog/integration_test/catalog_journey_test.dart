@@ -12,6 +12,7 @@ import 'support/chat_send_diagnostics.dart';
 import 'support/catalog_semantics_fixture.dart';
 import 'support/trusted_clipboard_action.dart';
 import 'support/prompt_input_diagnostics.dart';
+import 'support/android_candidate_protocol.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -250,6 +251,9 @@ Future<void> _runP2Journey(WidgetTester tester) async {
     find.text('Active context: suppliers · local demonstration replies'),
     findsOneWidget,
   );
+  if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+    completeAndroidCandidateStage('chat_send');
+  }
 
   await tap(
     'catalog-filter-table',
@@ -289,13 +293,21 @@ Future<void> _runP2Journey(WidgetTester tester) async {
 }
 
 Future<void> _runP3Journey(WidgetTester tester) async {
-  Future<void> tap(String key, Finder target) async {
+  Future<void> tap(
+    String key,
+    Finder target, {
+    void Function()? beforeActivation,
+  }) async {
     final finder = _inside(key, target);
-    await tapCatalogTarget(tester, finder);
+    await tapCatalogTarget(tester, finder, beforeActivation: beforeActivation);
     await tester.pump(const Duration(milliseconds: 180));
   }
 
-  final prompt = _inside('catalog-prompt-bar', find.byType(EditableText));
+  final promptRoot = find.byKey(const Key('catalog-prompt-bar'));
+  final prompt = find.descendant(
+    of: promptRoot,
+    matching: find.byType(EditableText),
+  );
   CatalogPromptInputObserver? observePrompt(String action) =>
       const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')
       ? CatalogPromptInputObserver(
@@ -315,14 +327,26 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     await enterCatalogText(tester, prompt, '/rest');
     slashObservation?.sample('after_edit');
     await tester.pump();
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      await awaitAndroidCandidateStage(tester, promptRoot, 'prompt_command');
+    }
     slashObservation?.sample('before_enter');
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      guardAndroidCandidateStage(tester, promptRoot, 'prompt_command');
+    }
     final handled = await tester.sendKeyEvent(LogicalKeyboardKey.enter);
     slashObservation?.sample('after_enter', keyDownHandled: handled);
     await tester.pump();
     slashObservation?.sample('after_enter_pump');
     expect(tester.widget<EditableText>(prompt).controller.text, '/restock ');
   } finally {
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      androidCandidateAfterStageAction?.call('prompt_command');
+    }
     slashObservation?.finish();
+  }
+  if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+    completeAndroidCandidateStage('prompt_command');
   }
   await tap(
     'catalog-prompt-bar',
@@ -347,10 +371,16 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     sendObservation?.sample('before_edit');
     await enterCatalogText(tester, prompt, 'Prepare the seasonal restock');
     sendObservation?.sample('after_edit');
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      await awaitAndroidCandidateStage(tester, promptRoot, 'prompt_send');
+    }
     sendObservation?.sample('before_send');
     await tap(
       'catalog-prompt-bar',
       find.byKey(const Key('beautiful-prompt-send')),
+      beforeActivation: const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')
+          ? () => guardAndroidCandidateStage(tester, promptRoot, 'prompt_send')
+          : null,
     );
     sendObservation?.sample('after_send');
     expect(
@@ -361,7 +391,13 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     );
     expect(tester.widget<EditableText>(prompt).controller.text, isEmpty);
   } finally {
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      androidCandidateAfterStageAction?.call('prompt_send');
+    }
     sendObservation?.finish();
+  }
+  if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+    completeAndroidCandidateStage('prompt_send');
   }
 
   await tap(

@@ -1,121 +1,120 @@
 # Android native candidate fixture and diagnostic
 
-The Android journey uses this fixture to commit the actual `inventory` candidate
-before Send. The target wraps and runs the **entire original Catalog journey**,
-adding one explicitly enabled native candidate step before its existing single
-Chat Send. The regular main Android job and the separate manual diagnostic use
-the same supervisor, helper and target. Earlier failures remain recorded with
-their original source and run; this English LatinIME fixture does not constitute
-human Chinese-IME acceptance.
+The fixture runs the **entire original Catalog journey** with three fixed native
+candidate commits before the original actions. The regular main Android job and
+the manual diagnostic use the same supervisor, helper, driver and target.
+Earlier failures retain their original source/run. This English LatinIME fixture
+does not constitute human Chinese-IME or physical-device acceptance.
 
-For an independent diagnostic, dispatch `beautiful_ai_ui_android_candidate.yml`
-with an exact 40-character `source_sha` containing these files. The workflow checks out and verifies that
-commit, uses Flutter 3.47.0 and a freshly created API 35 x86_64 emulator, compiles
-a fresh helper APK, and runs the target once. No physical device, existing local
-emulator or already-installed Catalog/helper is accepted by the supervisor.
-The main job binds the same inputs to `github.sha`. All build, driver and native
-failures remain failures; there is no retry path. Missing composition or a
-missing/ambiguous candidate fails the fixture rather than skipping its commit
-requirement or substituting an input action.
+| Stage | Exact original draft | Candidate and composing range | Original action retained |
+|---|---|---|---|
+| `chat_send` | `Check cone inventory` | `inventory`, [11,20], selection 20 | One Chat Send; original Stop response and subsequent Chat assertions |
+| `prompt_command` | `/rest` | `rest`, [1,5], selection 5 | One Enter selecting `/restock ` |
+| `prompt_send` | `Prepare the seasonal restock` | `restock`, [21,28], selection 28 | One Prompt Send with the original precise model and inventory attachment |
+
+These stages and strings are compiled allowlists in Dart, Python and Java.
+Callers cannot supply arbitrary drafts, candidate text, ranges, coordinates or
+native operations. Missing composition or a missing/ambiguous candidate fails
+the attempt. There is no fallback word, whitespace normalization, composing
+clear, keyboard hide, focus move, mocked input peer or repeated click.
+
+For an independent run, dispatch `beautiful_ai_ui_android_candidate.yml` with
+an exact 40-character `source_sha` containing the fixture. The workflow checks
+out and verifies that commit, uses Flutter 3.47.0 and a fresh API 35 x86_64
+default Pixel 6 emulator, builds a fresh helper APK, and runs once. The main job
+binds the same inputs to `github.sha`. Existing local emulators, physical devices,
+or already installed Catalog/helper packages are not accepted by the supervisor.
 
 The target is `integration_test/catalog_android_candidate_test.dart`. Its
-compile-time `CATALOG_ANDROID_CANDIDATE` flag defaults to false in the shared
-test helper. The original journey's text, disclosure operations, clipboard,
-single Send and host assertions remain present. The host driver uses the public
-VM service extension `ext.beautiful.androidCandidate`; `requestData` remains the
-authority for the original integration test's final result.
+`CATALOG_ANDROID_CANDIDATE` flag defaults to false in the shared journey.
+The original input text, Enter/Send counts, disclosure operations, clipboard,
+pump durations and assertions remain. Only this explicit fixture adds native
+commit handoffs. The public VM extension is `ext.beautiful.androidCandidate`;
+one original `requestData` response remains the full journey's authority.
 
-While the live editor observer is installed, VM requests enter a FIFO queue.
-The owning test handles them synchronously after its awaited widget pump, and
-again immediately before Send activation. This keeps actual widget/semantics
-reads inside the test's guarded execution scope. Before Chat, requests read only
-the preparation record; after the final tap or a terminal failure, they read a
-frozen record that cannot authorize another candidate claim.
+Protocol v2 has a fixed ordered stage ledger. Each stage gets an independent
+nonce, protocol, FIFO queue, helper instance and one-use candidate ticket.
+The first helper retains its original lifetime before Flutter starts; the host
+passes its preallocated chat nonce to the target. Later stage nonces are created
+by the target. Preparing the first helper only acknowledges that same live
+instance. Later preparation requires the previous original action/assertions
+and complete helper retirement. Old-stage state, claim, result or drain requests
+cannot authorize the current stage.
 
-The same flag enables a passive observer around the original P3 slash Enter and
-Prompt Send. It records editing values, composition, focus, rendered menus and
-Send state, framework key delivery and visible host receipts in the full
-integration response. Listener callbacks read held controller/focus objects;
-only explicit test-owned checkpoints query widgets and semantics. It consumes
-no key and adds no input, focus change, pump, delay or retry. Observation failures
-remain in the report without replacing the original action/assertion failure.
+While a live widget observer is installed, VM requests queue until the test's
+own awaited pump finishes. The test handles requests synchronously in its owning
+zone and drains pending aborts immediately before activation. Claims and final
+activation read current controller, focus and semantics. Frozen observations
+cannot authorize another claim. The five-second action lease remains mandatory
+until the actual action's activation check; the overall 600-second target and
+driver deadlines do not restart between stages or disappear after the last
+stage. A final target deadline check includes the rest of P3.
 
-At the candidate stage the actual editor must contain exactly
-`Check cone inventory`, with selection `[20,20]`, composing `[11,20]`, primary
-focus, a visible keyboard and a disabled Send. The independent native helper
-targets **its own instrumentation package**, creates no Activity, and does not
-restart Catalog. It reads the current IME identity and all accessible windows,
-then requires one visible, enabled, unobscured candidate whose text or accessible
-description is exactly `inventory`. Only that candidate can receive one native
-touch; no fallback key, alternate word, whitespace normalization, controller
-write, composition clear, focus move or keyboard hide is used.
+Preparation requires the exact original full text, selection, composing range,
+primary focus, visible keyboard and disabled Send. Prompt Send also preserves
+the selected model and attachment. The independent instrumentation targets its
+own package, creates no Activity and never restarts Catalog. It inspects the
+currently selected IME and requires exactly one visible, enabled, unobscured
+candidate with the exact text/description. It independently rechecks the
+focused Catalog window, IME identity, candidate and bounds before its single
+touch.
 
-The host binds VM PID, app process start time, nonce, source SHA and the actual
-candidate ticket. Immediately before requesting the native action it rechecks
-the live VM stage and complete editor state. The helper independently rechecks
-the current focused application, IME identity, candidate and bounds. Its earlier
-two-second monotonic ticket prevents an expired **invocation**, and is consumed
-before DOWN. If the guard expires before UP, the helper requests CANCEL instead
-of a business UP; it never retries the touch.
+The device's two-second monotonic ticket limits invocation. A checked DOWN/UP
+is never retried; expiry before UP requests CANCEL. Public UiAutomation can
+block inside injection, so invocation timestamps are not OS delivery deadlines
+and HTTP timeout is not cancellation. A real native return or serial STOP
+response establishes drain. Unverified drain fails the attempt and requires
+teardown of the exclusively owned emulator before another run.
 
-Android's public injection API can wait inside the call. Invocation timestamps
-are therefore not claimed as OS delivery deadlines, and an HTTP timeout is not
-called cancellation. Dart keeps the fixture mounted while native drain is
-unconfirmed, rejects Send after expiry/abort, and accepts a cleanup-only drain
-acknowledgment without restoring success. The helper serves `/stop` serially
-after any `/tap`; a completed stop response is a real drain barrier. If that
-cannot be observed, the attempt fails with unverified drain and the workflow's
-owned emulator is torn down before any later run. This isolation is required.
+Each helper retires through serial STOP, verified helper PID absence, preservation
+of its unique stage JSONL, removal and verification of its adb forward, and
+owned host process-group/reader EOF cleanup. No new helper starts before these
+conditions pass. Chat completion is reported after its original Stop response,
+stopped-result and Suppliers assertions, preserving the Send-to-Stop timing.
+The final helper remains alive through the full original response/test teardown
+and is retired before the driver can report overall success. The Catalog process
+and VM isolate remain bound throughout.
 
-After the actual native candidate response, Dart must observe the unchanged
-full text, empty composition, retained focus and enabled Send. It then reaches
-the original send helper. A fixture-only synchronous activation guard checks
-the live widget/controller/semantics again immediately before the existing
-single tap, so reveal-time abort or re-composition cannot become Send. The
-five-second action lease also remains mandatory until that activation check;
-after the checked tap, the remaining journey uses its original overall deadline.
-The real-widget expiration regression verifies zero pointer events and zero host
-messages when the lease expires during reveal. The default helper has no extra
-wait or action. A final successful driver response
-requires all original P1/P2/P3 assertions, one native tap and verified drain.
+After each candidate the actual full text/selection must be unchanged,
+composition empty, focus retained and Send enabled. Before command Enter the
+actual Commands menu and enabled restock option must be present. Synchronous
+activation guards recheck the real state after reveal/pump work. Three candidate
+receipts alone cannot pass: all three original actions, the complete original
+response, every native drain and resource cleanup are required.
 
-The supervisor captures stock Android `atrace` category `input`, preserving the
-raw trace and owned-app `InputConnection#…` slices. Such a slice identifies an
-Android dispatch attempt; it does not by itself prove an accepted callback or
-exact causation. Native action records and the actual Dart editing/host results
-remain separate required evidence. Ordinary `ime tracing` is not substituted
-for these mutator dispatch slices.
+The passive P3 observer records editing values, focus/controller identities,
+rendered menus/Send, framework key delivery and visible host receipts in the
+full response. It consumes no key and adds no input, focus change, frame, delay
+or retry. Listener callbacks read held objects; only explicit test-owned
+checkpoints query widgets/semantics. Observation failures do not replace the
+original action/assertion failure.
 
-Relevant tracked source files, package manifests, lockfile and resolved package
-configuration are hashed before and after the run. Full workspace status is
-also recorded; unrelated generated workspace targets are not mistaken for an
-Android source mutation. The helper build binds its APK, Java sources, Android
-jar and tool hashes. Reports include the exact source commit and all command
-exits; generated artifacts must use a fresh output directory.
+The supervisor also preserves stock Android `atrace input` and owned-app
+`InputConnection#...` dispatch slices. A slice alone is not acceptance or exact
+causation. Native action records and actual editing/host results remain separate.
+Relevant source inputs, package manifests/lockfile, resolved package configuration,
+both workflow files and driver fixtures are hashed; unrelated generated workspace
+files are recorded without being mistaken for Android source mutation.
 
-The uploaded artifact includes:
+Uploaded evidence includes the helper APK/JVM/compiler report, per-stage native
+records and unique logs, VM snapshots, full original driver/response, raw
+logcat/input trace, process identities, cleanup and a complete file/hash manifest.
+GitHub ZIP digests are reported separately from independently verified extracted
+file hashes.
 
-- `helper-build/`: signed helper APK, build report, actual JVM protocol test and
-  compiler logs. The temporary signing key is removed after building.
-- `run/summary.json`, source inventories and workspace status, device/IME/process
-  identity records, original Flutter drive output and `driver/` reports.
-- Complete native window/candidate responses, the helper's private JSONL event
-  log, raw logcat and original input trace.
-- Independent cleanup errors and a final file/hash manifest. Owned host process
-  groups, helper/Catalog processes and the allocated adb forward are checked;
-  the adb server and unrelated devices/processes are not stopped.
-
-Local protocol checks do not prove Android delivery or IME acceptance:
+Local checks exercise implementation and rejection paths, not native delivery:
 
 ```sh
 python3 -B -m unittest discover -s .github/scripts -p test_android_candidate_diagnostic.py -v
 python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p test_build.py -v
 cd packages/beautiful_ai_ui_catalog
-flutter test test/android_candidate_protocol_test.dart test/catalog_chat_send_diagnostics_test.dart --no-pub
+flutter test test/android_candidate_protocol_test.dart test/android_candidate_sequence_test.dart test/catalog_chat_send_diagnostics_test.dart test/prompt_input_diagnostics_test.dart --no-pub
+dart test_driver/android_candidate_http_fixture.dart
+dart test_driver/android_candidate_stage_driver_fixture.dart
 ```
 
-The [native helper documentation](../tool/android_candidate_probe/README.md)
-describes its public APIs, exact HTTP contract, production-used gesture-gate
-tests and bounded build command. Both workflows compile/run those JVM
-tests before APK compilation; no simulated input connection is accepted as a
-successful native candidate run.
+The [native helper contract](../tool/android_candidate_probe/README.md) documents
+its strict public APIs and production-used gate tests. Both workflows compile
+and execute the actual JVM checks before APK construction. Real candidate
+existence and the full Android outcome must still come from a new source-bound
+run; local fixtures never substitute for that evidence.

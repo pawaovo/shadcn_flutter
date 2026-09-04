@@ -11,6 +11,15 @@ import 'package:integration_test/integration_test.dart';
 import 'catalog_journey_test.dart' as original;
 import 'support/android_candidate_protocol.dart';
 
+String? _enabled(WidgetTester tester, Finder finder, int count) => count == 1
+    ? tester
+          .getSemantics(finder)
+          .getSemanticsData()
+          .flagsCollection
+          .isEnabled
+          .name
+    : null;
+
 /// Reads the actual Catalog state for candidate gates and final observation.
 Map<String, Object?> readAndroidCandidateSnapshot(
   WidgetTester tester,
@@ -28,15 +37,10 @@ Map<String, Object?> readAndroidCandidateSnapshot(
     'input': editor.controller.value.toJSON(),
     'editor_primary_focus': editor.focusNode.hasPrimaryFocus,
     'send_count': sendCount,
-    'send_enabled_semantics': sendCount == 1
-        ? tester
-              .getSemantics(send)
-              .getSemanticsData()
-              .flagsCollection
-              .isEnabled
-              .name
-        : null,
+    'send_enabled_semantics': _enabled(tester, send, sendCount),
     'view_insets_bottom_physical': tester.view.viewInsets.bottom,
+    'platform_semantics_enabled':
+        tester.binding.platformDispatcher.semanticsEnabled,
     'device_pixel_ratio': tester.view.devicePixelRatio,
     'host_status': host.status.name,
     'host_messages': <Map<String, Object?>>[
@@ -47,51 +51,96 @@ Map<String, Object?> readAndroidCandidateSnapshot(
   };
 }
 
-/// The complete, unchanged Catalog journey with one explicit native candidate
-/// handoff before its original Chat Send. This is Android debug diagnosis only.
+Map<String, Object?> readAndroidCandidateStageSnapshot(
+  WidgetTester tester,
+  Finder root,
+  AndroidCandidateStageSpec spec,
+) {
+  if (spec == AndroidCandidateStageSpec.chatSend) {
+    return readAndroidCandidateSnapshot(tester, root);
+  }
+  Finder inside(Finder finder) => find.descendant(of: root, matching: finder);
+  final editor = tester.widget<EditableText>(inside(find.byType(EditableText)));
+  final component = tester.widget<BeautifulPromptBar>(root);
+  final send = inside(find.byKey(const Key('beautiful-prompt-send')));
+  final sendCount = send.evaluate().length;
+  final option = inside(
+    find.byKey(const Key('beautiful-prompt-option-command-restock')),
+  );
+  final optionCount = option.evaluate().length;
+  return <String, Object?>{
+    'input': editor.controller.value.toJSON(),
+    'editor_primary_focus': editor.focusNode.hasPrimaryFocus,
+    'send_count': sendCount,
+    'send_enabled_semantics': _enabled(tester, send, sendCount),
+    'view_insets_bottom_physical': tester.view.viewInsets.bottom,
+    'platform_semantics_enabled':
+        tester.binding.platformDispatcher.semanticsEnabled,
+    'device_pixel_ratio': tester.view.devicePixelRatio,
+    'selected_model_id': component.selectedModelId,
+    'inventory_attachment_count': inside(find.text('Remove inventory-1.csv'))
+        .evaluate()
+        .length,
+    'commands_label_count': inside(find.text(component.commandsLabel))
+        .evaluate()
+        .length,
+    'restock_option_count': optionCount,
+    'restock_option_enabled': _enabled(tester, option, optionCount),
+    'host_prompt_received': <String>[
+      for (final text in tester.widgetList<Text>(
+        find.textContaining('Prompt received:'),
+      ))
+        if (text.data != null) text.data!,
+    ],
+    'observation_error': null,
+  };
+}
+
+/// The original full journey with exactly three fixed native candidate stages.
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   final clock = Stopwatch()..start();
-  final inputTrace = <Map<String, Object?>>[];
-  final report = <String, Object?>{
-    'suite': 'catalog_android_candidate',
-    'scope': 'original full Catalog journey with one native IME candidate',
-    'status': 'started',
-    'input_trace': inputTrace,
-  };
-  binding.reportData = <String, dynamic>{'android_candidate': report};
-  Map<String, Object?> Function() readSnapshot = () => <String, Object?>{
-    'observation_error': 'The original journey has not reached Chat yet.',
-  };
-  final protocol = AndroidCandidateProtocol(
+  String randomNonce() {
+    final random = Random.secure();
+    return List<String>.generate(
+      16,
+      (_) => random.nextInt(256).toRadixString(16).padLeft(2, '0'),
+    ).join();
+  }
+
+  final sequence = AndroidCandidateSequence(
     nonce: const String.fromEnvironment('CATALOG_ANDROID_CANDIDATE_NONCE'),
     sourceSha: const String.fromEnvironment(
       'CATALOG_ANDROID_CANDIDATE_SOURCE_SHA',
     ),
-    deadlineMilliseconds: 600000,
+    initialStageNonce: const String.fromEnvironment(
+      'CATALOG_ANDROID_CANDIDATE_CHAT_STAGE_NONCE',
+    ),
     elapsedMilliseconds: () => clock.elapsedMilliseconds,
-    readSnapshot: () => readSnapshot(),
-    newLeaseId: () {
-      final random = Random.secure();
-      return List<String>.generate(
-        16,
-        (_) => random.nextInt(256).toRadixString(16).padLeft(2, '0'),
-      ).join();
-    },
+    newStageNonce: randomNonce,
+    newLeaseId: randomNonce,
   );
-  final rpc = AndroidCandidateRpcQueue(protocol);
-  report['events'] = protocol.events;
+  final stages = <Map<String, Object?>>[];
+  final report = <String, Object?>{
+    'suite': 'catalog_android_candidate',
+    'scope':
+        'original full Catalog journey with three fixed native IME candidates',
+    'status': 'started',
+    'stages': stages,
+  };
+  binding.reportData = <String, dynamic>{'android_candidate': report};
+  String? activeId;
+  void Function()? activeFreeze;
+  void Function(Object, Object)? activeGuard;
 
   developer.registerExtension(AndroidCandidateProtocol.extensionName, (
     method,
     parameters,
   ) async {
-    // Deferring alone does not join WidgetTester's guarded async zone. While
-    // live getters are installed, only the owning test loop handles the queue.
     await Future<void>.delayed(Duration.zero);
     try {
       return developer.ServiceExtensionResponse.result(
-        jsonEncode(await rpc.request(parameters)),
+        jsonEncode(await sequence.request(parameters)),
       );
     } catch (error) {
       return developer.ServiceExtensionResponse.error(
@@ -100,7 +149,6 @@ void main() {
       );
     }
   });
-
   setUpAll(() {
     if (!kDebugMode ||
         kIsWeb ||
@@ -112,159 +160,193 @@ void main() {
     }
   });
 
-  androidCandidateBeforeSend = (testerObject, chatObject, expectedText) async {
-    final tester = testerObject as WidgetTester;
-    final chat = chatObject as Finder;
-    if (expectedText != AndroidCandidateProtocol.expectedText) {
-      throw StateError('The original Chat draft changed.');
-    }
-    protocol.beginCandidateWindow();
-    final composer = find.descendant(
-      of: chat,
-      matching: find.byType(EditableText),
-    );
-    final send = find.descendant(of: chat, matching: find.text('Send'));
-    final controller = tester.widget<EditableText>(composer).controller;
-    rpc.beginLiveObservation();
-    readSnapshot = () => readAndroidCandidateSnapshot(tester, chat);
-    final readActivationSnapshot = readSnapshot;
-    void freezeObservation() {
-      try {
-        final last = readActivationSnapshot();
-        report['after_tap_or_terminal_snapshot'] = last;
-        readSnapshot = () => last;
-      } catch (error) {
-        // Preserve the original tap failure if its final observer also fails.
-        protocol.fail('Final candidate observer failed: $error');
-        report['final_observer_error'] = '$error';
-        readSnapshot = () => <String, Object?>{'observation_error': '$error'};
-      } finally {
-        rpc.freeze();
-        androidCandidateBeforeActivation = null;
-        androidCandidateAfterTap = null;
-      }
-    }
-
-    androidCandidateAfterTap = freezeObservation;
-    androidCandidateBeforeActivation = (testerObject, chatObject, text) {
-      // An abort queued during the final reveal must win before any pointer.
-      rpc.drain();
-      if (!identical(testerObject, tester) ||
-          !identical(chatObject, chat) ||
-          text != expectedText) {
-        protocol.fail('The original Send activation target changed.');
-        throw StateError('The original Send activation target changed.');
-      }
-      // Keep a separate binding to the actual widget getter. No preserved VM
-      // snapshot may authorize a pointer after asynchronous reveal/pump work.
-      final fresh = readActivationSnapshot();
-      protocol.guardSendActivation(fresh);
-      report['send_activation_snapshot'] = fresh;
-    };
-    void recordInput() {
-      if (inputTrace.length >= 128) {
-        protocol.fail('Unexpectedly many actual editing updates.');
-        return;
-      }
-      inputTrace.add(<String, Object?>{
-        'elapsed_ms': clock.elapsedMilliseconds,
-        'input': controller.value.toJSON(),
-      });
-      if (controller.text != AndroidCandidateProtocol.expectedText) {
-        protocol.fail('The native candidate changed the original Chat text.');
-      }
-    }
-
-    controller.addListener(recordInput);
-    recordInput();
-    Object? primaryError;
-
-    Future<void> until(bool Function() condition) async {
-      while (true) {
-        rpc.drain();
-        if (protocol.stage == 'failed') {
-          throw StateError('${protocol.state()['failure']}');
+  androidCandidateBeforeStageAction =
+      (testerObject, rootObject, stageId) async {
+        final tester = testerObject as WidgetTester;
+        final root = rootObject as Finder;
+        final session = sequence.enterStage(stageId);
+        final spec = session.spec;
+        final protocol = session.protocol;
+        final rpc = session.rpc;
+        protocol.beginCandidateWindow();
+        final composer = find.descendant(
+          of: root,
+          matching: find.byType(EditableText),
+        );
+        final controller = tester.widget<EditableText>(composer).controller;
+        final inputTrace = <Map<String, Object?>>[];
+        final stageReport = <String, Object?>{
+          'stage_id': spec.id,
+          'stage_nonce': session.stageNonce,
+          'events': protocol.events,
+          'input_trace': inputTrace,
+        };
+        stages.add(stageReport);
+        activeId = stageId;
+        rpc.beginLiveObservation();
+        session.readSnapshot = () =>
+            readAndroidCandidateStageSnapshot(tester, root, spec);
+        final readActivationSnapshot = session.readSnapshot;
+        var frozen = false;
+        void freezeObservation() {
+          if (frozen) return;
+          try {
+            final last = readActivationSnapshot();
+            stageReport['after_action_or_terminal_snapshot'] = last;
+            session.readSnapshot = () => last;
+            protocol.state();
+          } catch (error) {
+            protocol.fail('Final candidate observer failed: $error');
+            stageReport['final_observer_error'] = '$error';
+            session.readSnapshot = () => <String, Object?>{
+              'observation_error': '$error',
+            };
+          } finally {
+            frozen = true;
+            rpc.freeze();
+            activeGuard = null;
+          }
         }
-        if (controller.text != expectedText ||
-            !tester.widget<EditableText>(composer).focusNode.hasPrimaryFocus) {
-          throw StateError('The original focused Chat draft changed.');
-        }
-        if (condition()) return;
-        await tester.pump(const Duration(milliseconds: 40));
-      }
-    }
 
-    try {
-      // Reveal the same target that the original one-tap helper will reveal.
-      // There is no pointer, new edit, focus request, or composing clear here.
-      await Scrollable.ensureVisible(tester.element(send), alignment: 0.5);
-      await tester.pump(const Duration(milliseconds: 16));
-      await until(
-        () => AndroidCandidateProtocol.isComposingCandidate(readSnapshot()),
-      );
-      protocol.offerCandidate();
-      await until(
-        () =>
-            protocol.stage == 'awaiting_commit' &&
-            AndroidCandidateProtocol.isCommittedCandidate(readSnapshot()),
-      );
-      // A successful result confirms that the native call actually returned.
-      // The original Send is permitted only while its action lease is live.
-      protocol.beginSend();
-      report['before_original_send'] = protocol.state();
-    } catch (error, stack) {
-      primaryError = error;
-      protocol.fail('$error');
-      report.addAll(<String, Object?>{
-        'status': 'failed',
-        'error': '$error',
-        'stack': '$stack',
-      });
-      rethrow;
-    } finally {
-      try {
-        while (protocol.nativeCallPending) {
-          await tester.pump(const Duration(milliseconds: 40));
+        activeFreeze = freezeObservation;
+        activeGuard = (activationTester, activationRoot) {
           rpc.drain();
+          if (frozen ||
+              !identical(tester, activationTester) ||
+              !identical(root, activationRoot) ||
+              sequence.current != session) {
+            throw StateError(
+              'The original action no longer owns this candidate stage.',
+            );
+          }
+          final fresh = readActivationSnapshot();
+          protocol.guardSendActivation(fresh);
+          stageReport['activation_snapshot'] = fresh;
+        };
+        void recordInput() {
+          if (inputTrace.length >= 128) {
+            protocol.fail('Unexpectedly many actual editing updates.');
+            return;
+          }
+          inputTrace.add(<String, Object?>{
+            'elapsed_ms': clock.elapsedMilliseconds,
+            'input': controller.value.toJSON(),
+          });
+          if (controller.text != spec.text) {
+            protocol.fail('The native candidate changed the original text.');
+          }
         }
-      } catch (error, stack) {
-        // Public UiAutomation may block beyond a checked deadline. Time passing
-        // is not a drain acknowledgment. Even if pumping fails, keep the target
-        // mounted and the VM event loop alive until a matching real drain. If
-        // none arrives, the outer owner must destroy this disposable run.
-        report['native_drain_wait_error'] = '$error';
-        protocol.fail('$error');
-        // Terminal handlers never read widgets. A real native drained RPC must
-        // still complete even when another pump cannot be safely performed.
-        rpc.freeze();
-        while (protocol.nativeCallPending) {
-          await Future<void>.delayed(const Duration(milliseconds: 40));
-        }
-        if (primaryError == null) Error.throwWithStackTrace(error, stack);
-      } finally {
-        controller.removeListener(recordInput);
-        // A successful hook keeps the live getter through the final activation.
-        // Freeze only after the tap finally callback, or a terminal hook failure.
-        if (protocol.isTerminal) freezeObservation();
-      }
-    }
-  };
 
-  // Reuse all original P1/P2/P3 operations, one Send, and host assertions.
+        controller.addListener(recordInput);
+        recordInput();
+        Object? primaryError;
+        Future<void> until(bool Function() condition) async {
+          while (true) {
+            rpc.drain();
+            if (protocol.stage == 'failed') {
+              throw StateError('${protocol.state()['failure']}');
+            }
+            if (controller.text != spec.text ||
+                !tester
+                    .widget<EditableText>(composer)
+                    .focusNode
+                    .hasPrimaryFocus) {
+              throw StateError('The original focused draft changed.');
+            }
+            if (condition()) return;
+            await tester.pump(const Duration(milliseconds: 40));
+          }
+        }
+
+        try {
+          if (spec == AndroidCandidateStageSpec.chatSend) {
+            final send = find.descendant(of: root, matching: find.text('Send'));
+            await Scrollable.ensureVisible(
+              tester.element(send),
+              alignment: 0.5,
+            );
+            await tester.pump(const Duration(milliseconds: 16));
+          }
+          await until(() => protocol.matchesComposing(session.readSnapshot()));
+          protocol.offerCandidate();
+          await until(
+            () =>
+                protocol.stage == 'awaiting_commit' &&
+                protocol.matchesCommitted(session.readSnapshot()),
+          );
+          protocol.beginSend();
+          stageReport['before_original_action'] = protocol.state();
+        } catch (error, stack) {
+          primaryError = error;
+          protocol.fail('$error');
+          stageReport.addAll(<String, Object?>{
+            'error': '$error',
+            'stack': '$stack',
+          });
+          rethrow;
+        } finally {
+          try {
+            while (protocol.nativeCallPending) {
+              await tester.pump(const Duration(milliseconds: 40));
+              rpc.drain();
+            }
+          } catch (error, stack) {
+            stageReport['native_drain_wait_error'] = '$error';
+            protocol.fail('$error');
+            rpc.freeze();
+            while (protocol.nativeCallPending) {
+              await Future<void>.delayed(const Duration(milliseconds: 40));
+            }
+            if (primaryError == null) Error.throwWithStackTrace(error, stack);
+          } finally {
+            controller.removeListener(recordInput);
+            if (protocol.isTerminal) freezeObservation();
+          }
+        }
+      };
+  androidCandidateGuardStageAction = (tester, root, stageId) {
+    if (activeId != stageId ||
+        sequence.current.spec.id != stageId ||
+        activeGuard == null) {
+      throw StateError('The action does not own the current candidate stage.');
+    }
+    activeGuard!(tester, root);
+  };
+  androidCandidateAfterStageAction = (stageId) {
+    if (activeId == stageId) activeFreeze?.call();
+  };
+  androidCandidateStageCompleted = (stageId) {
+    sequence.completeStage(stageId);
+    stages.last['final_state'] = sequence.state();
+  };
+  androidCandidateBeforeSend = (tester, chat, text) {
+    if (text != AndroidCandidateStageSpec.chatSend.text) {
+      throw StateError('The original Chat text changed.');
+    }
+    return awaitAndroidCandidateStage(tester, chat, 'chat_send');
+  };
+  androidCandidateBeforeActivation = (tester, chat, text) {
+    if (text != AndroidCandidateStageSpec.chatSend.text) {
+      throw StateError('The original Chat text changed.');
+    }
+    guardAndroidCandidateStage(tester, chat, 'chat_send');
+  };
+  androidCandidateAfterTap = () =>
+      androidCandidateAfterStageAction?.call('chat_send');
+
   original.main();
   tearDownAll(() {
-    if (binding.failureMethodsDetails.isEmpty &&
-        binding.results.isNotEmpty &&
-        protocol.stage == 'sending') {
-      protocol.pass(captureSnapshot: false);
-      report['status'] = 'passed';
-    } else {
-      protocol.fail('The original complete Catalog journey did not pass.');
-      report['status'] = 'failed';
-    }
-    report['final_state'] = protocol.state();
+    sequence.finishJourney(
+      binding.failureMethodsDetails.isEmpty && binding.results.isNotEmpty,
+    );
+    report['status'] = sequence.journeyStatus;
+    report['final_state'] = sequence.state();
     androidCandidateBeforeSend = null;
     androidCandidateBeforeActivation = null;
     androidCandidateAfterTap = null;
+    androidCandidateBeforeStageAction = null;
+    androidCandidateGuardStageAction = null;
+    androidCandidateAfterStageAction = null;
+    androidCandidateStageCompleted = null;
   });
 }
