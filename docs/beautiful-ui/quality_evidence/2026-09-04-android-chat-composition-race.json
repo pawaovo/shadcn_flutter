@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "scope": "Original Android shared framework journey; failed, not OS IME acceptance",
+  "source_commit": "153412b3014192b2d6c4c15e377161a5a862a968",
+  "run_id": 33847999343,
+  "job_id": 100944201351,
+  "job_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201351",
+  "original_log": {
+    "local_path": "/tmp/beautiful-ci-153412b3/main/job-100944201351-android.log",
+    "size_bytes": 60326,
+    "sha256": "ca26e02fa90fbe74ef5433d8c32b8c154b3bf6f8361ee518975230225f5591aa"
+  },
+  "records": [
+    {
+      "raw_line": 573,
+      "runner_timestamp": "2026-09-04T07:22:16.5999757Z",
+      "diagnostic": {
+        "expected_text": "Check cone inventory",
+        "scope": "framework_touch_one_send_tap",
+        "pointer_snapshots": "rendered widget and semantics state; no frame is forced",
+        "sample": {
+          "phase": "before_tap",
+          "utc_epoch_us": 1788506534758748,
+          "elapsed_us": 352,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "primary_focus": "BeautifulChat composer",
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "observation_error": null,
+          "send_rect": [
+            72.0,
+            574.0238095238092,
+            267.42857142857144,
+            19.0
+          ],
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "id": "initial-user",
+              "role": "user",
+              "text": "What should we restock this week?",
+              "resolving": false
+            },
+            {
+              "id": "initial-assistant",
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand.",
+              "resolving": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "raw_line": 574,
+      "runner_timestamp": "2026-09-04T07:22:16.6011303Z",
+      "diagnostic": {
+        "expected_text": "Check cone inventory",
+        "scope": "framework_touch_one_send_tap",
+        "pointer_snapshots": "rendered widget and semantics state; no frame is forced",
+        "sample": {
+          "phase": "pointer_down",
+          "utc_epoch_us": 1788506535441553,
+          "elapsed_us": 683027,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 11,
+            "composingExtent": 20
+          },
+          "editor_primary_focus": true,
+          "primary_focus": "BeautifulChat composer",
+          "send_count": 1,
+          "send_enabled_semantics": "isFalse",
+          "observation_error": null,
+          "send_rect": [
+            72.0,
+            523.0238095238092,
+            267.42857142857144,
+            19.0
+          ],
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "id": "initial-user",
+              "role": "user",
+              "text": "What should we restock this week?",
+              "resolving": false
+            },
+            {
+              "id": "initial-assistant",
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand.",
+              "resolving": false
+            }
+          ],
+          "pointer": 23,
+          "kind": "touch",
+          "position": [
+            205.71428571428572,
+            532.5238095238092
+          ]
+        }
+      }
+    },
+    {
+      "raw_line": 575,
+      "runner_timestamp": "2026-09-04T07:22:16.6023097Z",
+      "diagnostic": {
+        "expected_text": "Check cone inventory",
+        "scope": "framework_touch_one_send_tap",
+        "pointer_snapshots": "rendered widget and semantics state; no frame is forced",
+        "sample": {
+          "phase": "pointer_up",
+          "utc_epoch_us": 1788506535557072,
+          "elapsed_us": 798546,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 11,
+            "composingExtent": 20
+          },
+          "editor_primary_focus": true,
+          "primary_focus": "BeautifulChat composer",
+          "send_count": 1,
+          "send_enabled_semantics": "isFalse",
+          "observation_error": null,
+          "send_rect": [
+            72.0,
+            523.0238095238092,
+            267.42857142857144,
+            19.0
+          ],
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "id": "initial-user",
+              "role": "user",
+              "text": "What should we restock this week?",
+              "resolving": false
+            },
+            {
+              "id": "initial-assistant",
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand.",
+              "resolving": false
+            }
+          ],
+          "pointer": 23,
+          "kind": "touch",
+          "position": [
+            205.71428571428572,
+            532.5238095238092
+          ]
+        }
+      }
+    },
+    {
+      "raw_line": 576,
+      "runner_timestamp": "2026-09-04T07:22:16.6030284Z",
+      "diagnostic": {
+        "expected_text": "Check cone inventory",
+        "scope": "framework_touch_one_send_tap",
+        "pointer_snapshots": "rendered widget and semantics state; no frame is forced",
+        "sample": {
+          "phase": "after_tap",
+          "utc_epoch_us": 1788506536080837,
+          "elapsed_us": 1322312,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 11,
+            "composingExtent": 20
+          },
+          "editor_primary_focus": true,
+          "primary_focus": "BeautifulChat composer",
+          "send_count": 1,
+          "send_enabled_semantics": "isFalse",
+          "observation_error": null,
+          "send_rect": [
+            72.0,
+            523.0238095238092,
+            267.42857142857144,
+            19.0
+          ],
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "id": "initial-user",
+              "role": "user",
+              "text": "What should we restock this week?",
+              "resolving": false
+            },
+            {
+              "id": "initial-assistant",
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand.",
+              "resolving": false
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "failure": {
+    "operation": "sendCatalogChatOnce host acceptance",
+    "expected_matching_user_messages": 1,
+    "actual_matching_user_messages": 0,
+    "host_status": "idle"
+  },
+  "earlier_pass": {
+    "source_commit": "abd6293b066f2df56108cebfe3689fcc5b9a0a13",
+    "run_id": 33843835738,
+    "scope": "Earlier complete Android journey passed; not this source and not evidence this race is resolved"
+  },
+  "conclusions": [
+    "Composing changes from [-1,-1] to [11,20] after the first observation and before the one pointer down; text, selection, focus and native inset stay equal.",
+    "At pointer down and up, Send is disabled. The observed target rectangle contains both pointer coordinates.",
+    "Current Chat composition protection matches the manifest. No production patch is justified by this failure alone.",
+    "The observer does not identify the exact native IME callback or establish genuine human composition; native peer re-composition is an inference to be distinguished by further native protocol evidence.",
+    "No commit action, extra tap, keyboard hiding, composing clear, timeout change or substituted controlled-input gate was introduced."
+  ]
+}

@@ -112,11 +112,21 @@ void main() {
     },
   );
 
-  for (final composing in <bool>[true, false]) {
+  for (final compositionPhase in <String>[
+    'before_tap',
+    'during_reveal',
+    'none',
+  ]) {
+    final composing = compositionPhase != 'none';
     testWidgets(
-      composing
-          ? 'draft-only text cannot pass host acceptance after disabled Send'
-          : 'one Android touch sends once and records pointer focus and geometry',
+      switch (compositionPhase) {
+        'before_tap' =>
+          'draft-only text cannot pass host acceptance after disabled Send',
+        'during_reveal' =>
+          'delayed composition disables Send between observation and pointer',
+        _ =>
+          'one Android touch sends once and records pointer focus and geometry',
+      },
       (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.android;
         final semantics = tester.ensureSemantics();
@@ -130,8 +140,9 @@ void main() {
           );
           await tester.ensureVisible(composer);
           await enterCatalogText(tester, composer, 'Check cone inventory');
-          if (composing) {
-            // Deliberate negative control, not an observed Android CI event.
+          void beginComposition() {
+            // This injected platform update replays the actual 153412b3 value.
+            // It is not itself evidence of an OS IME session.
             tester.testTextInput.updateEditingValue(
               const TextEditingValue(
                 text: 'Check cone inventory',
@@ -139,7 +150,17 @@ void main() {
                 composing: TextRange(start: 11, end: 20),
               ),
             );
+          }
+
+          if (compositionPhase == 'before_tap') {
+            beginComposition();
             await tester.pump();
+          } else if (compositionPhase == 'during_reveal') {
+            // Match the observed race: the first diagnostic sees a committed
+            // draft, then the platform changes only composition while the
+            // unchanged tap helper is revealing its target. No pointer has
+            // been sent yet, and the component must reject the later tap.
+            tester.binding.addPostFrameCallback((_) => beginComposition());
           }
           Map<String, Object?>? diagnostic;
           final send = sendCatalogChatOnce(
@@ -194,8 +215,27 @@ void main() {
           expect(up['editor_primary_focus'], isTrue);
           expect(
             samples.first['send_enabled_semantics'],
+            compositionPhase == 'before_tap' ? 'isFalse' : 'isTrue',
+          );
+          expect(
+            down['send_enabled_semantics'],
             composing ? 'isFalse' : 'isTrue',
           );
+          if (compositionPhase == 'during_reveal') {
+            final before = samples.first['input']! as Map<String, dynamic>;
+            final atPointer = down['input']! as Map<String, dynamic>;
+            expect(before['composingBase'], -1);
+            expect(before['composingExtent'], -1);
+            expect(atPointer['text'], before['text']);
+            expect(atPointer['selectionBase'], before['selectionBase']);
+            expect(atPointer['selectionExtent'], before['selectionExtent']);
+            expect(atPointer['composingBase'], 11);
+            expect(atPointer['composingExtent'], 20);
+            expect(
+              tester.widget<EditableText>(composer).controller.value.composing,
+              const TextRange(start: 11, end: 20),
+            );
+          }
           var previousOffset = -1;
           for (final sample in samples) {
             expect(

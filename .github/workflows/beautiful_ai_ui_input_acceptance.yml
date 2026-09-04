@@ -36,8 +36,28 @@ jobs:
           node --test .github/scripts/test_catalog_browser_bridge.mjs .github/scripts/test_catalog_browser_readiness.mjs
           dart --packages=.dart_tool/package_config.json .github/scripts/test_catalog_browser_input_protocol.dart
           python3 -B -m unittest discover -s .github/scripts -p 'test_run_catalog_input_acceptance.py'
+      - name: Verify Edge setup evidence boundaries
+        if: matrix.browser == 'edge'
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_prepare_edge_ci.py'
+      - name: Record one bounded Edge ELF preread as CI setup
+        if: matrix.browser == 'edge'
+        timeout-minutes: 2
+        run: >-
+          python3 -B .github/scripts/prepare_edge_ci.py preread
+          --executable /opt/microsoft/msedge/msedge --timeout 60
+          --output artifacts/input-edge/startup-condition
       - name: Run framework and trusted browser input suites
+        id: input_suites
         run: python3 .github/scripts/run_catalog_input_acceptance.py --platform ${{ matrix.browser }} --artifacts artifacts/input-${{ matrix.browser }}
+      - name: Bind preread to actual Edge sessions after owned cleanup
+        if: always() && matrix.browser == 'edge'
+        timeout-minutes: 2
+        run: >-
+          python3 -B .github/scripts/prepare_edge_ci.py verify
+          --output artifacts/input-edge/startup-condition
+          --suite artifacts/input-edge/framework --suite artifacts/input-edge/browser
+          --input-summary artifacts/input-edge/input-acceptance-summary.json
+          --run-outcome '${{ steps.input_suites.outcome }}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

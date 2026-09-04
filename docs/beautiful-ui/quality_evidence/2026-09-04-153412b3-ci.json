@@ -1,0 +1,1156 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-04",
+  "captured_at_utc": "2026-09-04T07:39:58.086423+00:00",
+  "repository": "pawaovo/shadcn_flutter",
+  "validated_code_commit": "153412b3014192b2d6c4c15e377161a5a862a968",
+  "scope": "Completed source-specific main and input CI evidence; results are not superseded by later local edits or separate diagnostic passes.",
+  "main": {
+    "run_id": 33847999343,
+    "run_attempt": 1,
+    "name": "Beautiful AI UI",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at_utc": "2026-09-04T07:16:45Z",
+    "completed_at_utc": "2026-09-04T07:35:23Z",
+    "metadata_updated_at_utc": "2026-09-04T07:35:24Z",
+    "job_counts": {
+      "total": 12,
+      "success": 10,
+      "failure": 2,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    "jobs": [
+      {
+        "databaseId": 100944166524,
+        "name": "Detect generated targets",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:48Z",
+        "completedAt": "2026-09-04T07:16:54Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944166524",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201213,
+        "name": "Run Firefox journey",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:57Z",
+        "completedAt": "2026-09-04T07:20:29Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201213",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201227,
+        "name": "Format, analyze, and test",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:17:03Z",
+        "completedAt": "2026-09-04T07:22:18Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201227",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201238,
+        "name": "Build Web catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:58Z",
+        "completedAt": "2026-09-04T07:19:25Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201238",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201257,
+        "name": "Run Edge journey",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:56Z",
+        "completedAt": "2026-09-04T07:24:00Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201257",
+        "failed_steps": [
+          "Run shared journey in installed Microsoft Edge"
+        ]
+      },
+      {
+        "databaseId": 100944201264,
+        "name": "Build Apple catalogs",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:58Z",
+        "completedAt": "2026-09-04T07:35:23Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201264",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201271,
+        "name": "Build Linux catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:57Z",
+        "completedAt": "2026-09-04T07:18:34Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201271",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201272,
+        "name": "Run Chrome and Linux journeys",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:56Z",
+        "completedAt": "2026-09-04T07:21:55Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201272",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201341,
+        "name": "Build Android catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:57Z",
+        "completedAt": "2026-09-04T07:20:57Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201341",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944201351,
+        "name": "Run Android journey",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:56Z",
+        "completedAt": "2026-09-04T07:22:25Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201351",
+        "failed_steps": [
+          "Run journey on Android emulator"
+        ]
+      },
+      {
+        "databaseId": 100944201373,
+        "name": "Build Windows catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:58Z",
+        "completedAt": "2026-09-04T07:23:51Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100944201373",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100945447302,
+        "name": "Validate pub.dev package",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:22:20Z",
+        "completedAt": "2026-09-04T07:23:33Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/job/100945447302",
+        "failed_steps": []
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 9927741290,
+        "name": "apple-native-journeys",
+        "bytes": 152167,
+        "github_archive_digest": "sha256:f2fd8d24bcfe265884e7ab23dcf8822415988b5c288dc33b1833b2dbaaabbda7",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927741290"
+      },
+      {
+        "id": 9927433753,
+        "name": "edge-journey",
+        "bytes": 140618,
+        "github_archive_digest": "sha256:8a4b4893af0c6b82d0b368b380edf2737983aeb9c6dc33c255d70ad0dae8ebb7",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927433753"
+      },
+      {
+        "id": 9927428229,
+        "name": "windows-native-journey",
+        "bytes": 1584,
+        "github_archive_digest": "sha256:db0413d0314aa59025eb83334025e29793a289c7cf877050216c60948adeee97",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927428229"
+      },
+      {
+        "id": 9927421195,
+        "name": "isolated-hosted-consumer",
+        "bytes": 10376,
+        "github_archive_digest": "sha256:add9c61787d8e10fdae72d55dafe39ddcc27c7086b5e4d031f4497da5a308611",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927421195"
+      },
+      {
+        "id": 9927386705,
+        "name": "source-asset-audits",
+        "bytes": 882,
+        "github_archive_digest": "sha256:37514408886304f5de355ebc427eb39a5824e18e1d08ef4e49cfb802ec8facd7",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927386705"
+      },
+      {
+        "id": 9927376186,
+        "name": "chrome-trusted-journey",
+        "bytes": 1128,
+        "github_archive_digest": "sha256:10bcf0b6ac222b49ab0b0ba8d7e67390d84d8d6eb1ef761ae2cbb26731fd4eac",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927376186"
+      },
+      {
+        "id": 9927336915,
+        "name": "firefox-journey",
+        "bytes": 19577,
+        "github_archive_digest": "sha256:20be9a3361ea521312604ff4b7cdfd6e81e63ede0e64f8204bb6ab09c5d01426",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927336915"
+      },
+      {
+        "id": 9927307259,
+        "name": "web-asset-audits",
+        "bytes": 6364,
+        "github_archive_digest": "sha256:66bde853132da1f01b34faedee4a1e32149ca3b68cbb8503af2a6d06b2ef1b16",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999343/artifacts/9927307259"
+      }
+    ],
+    "download": {
+      "repository": "pawaovo/shadcn_flutter",
+      "run_id": 33847999343,
+      "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "started_at": "2026-09-04T07:37:01.393672+00:00",
+      "attempts": 1,
+      "exit_code": 0,
+      "completed_at": "2026-09-04T07:37:13.051989+00:00",
+      "stdout": "",
+      "stderr": ""
+    },
+    "metadata_files": [
+      {
+        "path": "/tmp/beautiful-ci-153412b3/main/workflow-run.json",
+        "bytes": 12376,
+        "sha256": "8d70501f2ad5358a04acd254b4bb2d2876cef1ed38238b5f993c784df2212054"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/main/run.json",
+        "bytes": 25430,
+        "sha256": "648a8faa005aae29ce341d93e0dae3a50dc7b21978b25ff86c6122c6eb8a826e"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/main/artifacts.json",
+        "bytes": 5563,
+        "sha256": "bbff15f3444035b00016edd30badb860f1fd8fd257e912ada29aed135bd5fa10"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/main/run.log",
+        "bytes": 1329681,
+        "sha256": "9fef18ef2f54e0952475582e07a11bff117dcecb937a2db7f4a575c9f818e959"
+      }
+    ],
+    "quality": {
+      "format_files": 164,
+      "format_changed": 0,
+      "strict_package_analysis": "passed for all three packages",
+      "library_tests": {
+        "behavior": 537,
+        "semantics": 109,
+        "strict_linux_golden": 12,
+        "total_disjoint": 658
+      },
+      "catalog_tests": 109,
+      "upstream_core_tests": 571,
+      "evidence_note": "Counts read from the completed run log. The behavior command excludes test/semantics and test/golden."
+    },
+    "ios": {
+      "passed": true,
+      "source": {
+        "path": "/tmp/beautiful-ci-153412b3/main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+        "bytes": 3122,
+        "sha256": "76958d50482c9196d4bd3f020e1cf4e3e6272bc4753d70429bb82165a88480f7"
+      },
+      "application_pid": 28589,
+      "stages": [
+        {
+          "name": "selected-xcode",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 0.656,
+          "exit_code": 0
+        },
+        {
+          "name": "simulator-sdk",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 0.013,
+          "exit_code": 0
+        },
+        {
+          "name": "install",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 34.177,
+          "exit_code": 0
+        },
+        {
+          "name": "launch",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 8.174,
+          "exit_code": 0
+        },
+        {
+          "name": "vm-service-discovery",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 18.078
+        },
+        {
+          "name": "native-flutter-driver",
+          "required": true,
+          "passed": true,
+          "elapsed_seconds": 70.256,
+          "exit_code": 0
+        },
+        {
+          "name": "terminate",
+          "required": false,
+          "passed": true,
+          "elapsed_seconds": 8.707,
+          "exit_code": 0
+        }
+      ],
+      "discovery_elapsed_includes_launch": true,
+      "history_query": {
+        "exit_code": 0,
+        "timed_out": false,
+        "stdout_eof": true,
+        "bytes_read": 227,
+        "host_group_clean": true,
+        "final_drain_complete": true,
+        "host_returncode": 0,
+        "elapsed_seconds": 9.678
+      },
+      "history_query_source": {
+        "path": "/tmp/beautiful-ci-153412b3/main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.json",
+        "bytes": 198,
+        "sha256": "bbf80d066a0b2268eb61bb967edb8b8b735a81a50a60a154a8c0bb0a095ef521"
+      },
+      "native_driver_log": {
+        "path": "/tmp/beautiful-ci-153412b3/main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/native-flutter-driver.log",
+        "bytes": 625797,
+        "sha256": "5ff528a7c926614b62ac9c8e71c92fab43a9a3f6feb2005f0131f5be817f16c0"
+      },
+      "native_driver_reported_result": "All tests passed."
+    },
+    "failures": [
+      {
+        "job_id": 100944201351,
+        "kind": "application_journey_assertion",
+        "scenario": "Chat single framework touch send",
+        "expected": "one sent user message with Check cone inventory",
+        "actual": "zero matching sent messages; only initial user and assistant remain",
+        "assertion": "integration_test/support/chat_send_diagnostics.dart:140",
+        "called_from": "integration_test/catalog_journey_test.dart:236",
+        "build_and_install": "passed",
+        "observations": {
+          "before_tap": {
+            "composing": [
+              -1,
+              -1
+            ],
+            "send_enabled_semantics": "isTrue"
+          },
+          "pointer_down_up_and_after_tap": {
+            "composing": [
+              11,
+              20
+            ],
+            "send_enabled_semantics": "isFalse"
+          }
+        },
+        "boundary": "Actual Android journey assertion failure; the observations alone do not establish the complete cause. This is separate from the web framework composing-preservation checks.",
+        "source": {
+          "path": "/tmp/beautiful-ci-153412b3/main/job-100944201351-android.log",
+          "bytes": 60326,
+          "sha256": "ca26e02fa90fbe74ef5433d8c32b8c154b3bf6f8361ee518975230225f5591aa"
+        }
+      },
+      {
+        "job_id": 100944201257,
+        "kind": "browser_startup_renderer_timeout",
+        "request_id": 4,
+        "method": "POST",
+        "endpoint": "/session/<id>/window/rect",
+        "parameters": {
+          "x": 0,
+          "y": 0
+        },
+        "http_status": 500,
+        "elapsed_seconds": 300.057,
+        "diagnostic_url": "about:blank",
+        "browser_version": "151.0.4129.101",
+        "driver_version": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+        "boundary": "Failed before Catalog navigation; no application assertion or framework composing check was reached. Main run uses Edge 151; the separately retained paired diagnostic uses Edge 152.",
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/main/edge-journey/diagnostics/failure-4.json",
+            "bytes": 1493,
+            "sha256": "c5da4531b460cb2b0f75a35716124e97ff1d530e5a9a04441717f5e73286160b"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/main/edge-journey/browser-identity.json",
+            "bytes": 1036,
+            "sha256": "24d82a8b7b0463a3e6e5a3a26d443a278462f5c7d47dc51b4c87b737031aaa36"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/main/edge-journey/adapter.log",
+            "bytes": 2410,
+            "sha256": "0fc30d8d10deeb4c04deb5c0e0d9bc267619e6228e487a34b1ab519eb5a008d4"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/main/edge-journey/journey.log",
+            "bytes": 3034,
+            "sha256": "b594a9ba047b41a8cb62fcaee9b7e08b9c4c7a6d9cffc380fb69e77b2af38c6a"
+          }
+        ]
+      }
+    ],
+    "publication_validation": {
+      "publish_dry_run": "passed",
+      "warnings": 0,
+      "archive_size": "3 MB",
+      "published": false,
+      "consumer_passed": true,
+      "consumer_repository_head": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "hosted_shadcn_dependency": {
+        "source": "hosted",
+        "version": "0.0.54",
+        "sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+        "url": "https://pub.dev"
+      },
+      "hosted_runtime_files_unmodified": 209,
+      "theme_observations": 12,
+      "required_license_labels": 13,
+      "publication_surface_sha256": "53bc4e80638bf7d4173c6b4182203f9a9c44d5a24b6a982e3fb462a47a33e6e2",
+      "source": {
+        "path": "/tmp/beautiful-ci-153412b3/main/isolated-hosted-consumer/result.json",
+        "bytes": 13032,
+        "sha256": "148ef32ea04a10b3f62ac5892a0c8ca9fae513c6ca2450f427c7d47bf8229b75"
+      }
+    }
+  },
+  "input": {
+    "run_id": 33847999382,
+    "run_attempt": 1,
+    "name": "Beautiful AI UI input and AT capability evidence",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at_utc": "2026-09-04T07:16:45Z",
+    "completed_at_utc": "2026-09-04T07:25:56Z",
+    "metadata_updated_at_utc": "2026-09-04T07:25:57Z",
+    "job_counts": {
+      "total": 9,
+      "success": 4,
+      "failure": 5,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    "jobs": [
+      {
+        "databaseId": 100944166501,
+        "name": "Real Narrator capability probe (not app acceptance)",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:51Z",
+        "completedAt": "2026-09-04T07:17:27Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166501",
+        "failed_steps": [
+          "Observe actual Narrator, interactive desktop and audio endpoint"
+        ]
+      },
+      {
+        "databaseId": 100944166648,
+        "name": "Native windows input bridge",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:48Z",
+        "completedAt": "2026-09-04T07:19:46Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166648",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944166682,
+        "name": "Real firefox input",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:53Z",
+        "completedAt": "2026-09-04T07:20:36Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166682",
+        "failed_steps": [
+          "Run framework and trusted browser input suites"
+        ]
+      },
+      {
+        "databaseId": 100944166700,
+        "name": "Real Orca capability probe (not app acceptance)",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:48Z",
+        "completedAt": "2026-09-04T07:17:29Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166700",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944166738,
+        "name": "Real Safari full journey and input",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:54Z",
+        "completedAt": "2026-09-04T07:25:56Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166738",
+        "failed_steps": [
+          "Run original full journey and real Safari input"
+        ]
+      },
+      {
+        "databaseId": 100944166763,
+        "name": "Native macos input bridge",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:49Z",
+        "completedAt": "2026-09-04T07:20:33Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166763",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944166779,
+        "name": "Real chrome input",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:48Z",
+        "completedAt": "2026-09-04T07:19:48Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166779",
+        "failed_steps": [
+          "Run framework and trusted browser input suites"
+        ]
+      },
+      {
+        "databaseId": 100944166789,
+        "name": "Native linux input bridge",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T07:16:48Z",
+        "completedAt": "2026-09-04T07:18:27Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166789",
+        "failed_steps": []
+      },
+      {
+        "databaseId": 100944166875,
+        "name": "Real edge input",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T07:16:49Z",
+        "completedAt": "2026-09-04T07:20:41Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/job/100944166875",
+        "failed_steps": [
+          "Run framework and trusted browser input suites"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 9927482205,
+        "name": "input-safari",
+        "bytes": 13668,
+        "github_archive_digest": "sha256:128557c3d373f7986b75d21a2fa8b6e6e2871388c974d534e74d4ddea1775419",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927482205"
+      },
+      {
+        "id": 9927342511,
+        "name": "input-edge",
+        "bytes": 146306,
+        "github_archive_digest": "sha256:5cd457de923f7c7b4bed5dccba8490b9a0202b13a148e45dfc52008f1830b4b8",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927342511"
+      },
+      {
+        "id": 9927340237,
+        "name": "input-firefox",
+        "bytes": 35893,
+        "github_archive_digest": "sha256:93c2235618c75104c7d16c876d873e6ef6dede8b16a6cd83c483ee411705f14b",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927340237"
+      },
+      {
+        "id": 9927333323,
+        "name": "input-macos",
+        "bytes": 16276,
+        "github_archive_digest": "sha256:d36a706c68b1f6cbb38b9cf42121a2186411c49a3886b514f9e4e496472bdbc2",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927333323"
+      },
+      {
+        "id": 9927318660,
+        "name": "input-chrome",
+        "bytes": 798737,
+        "github_archive_digest": "sha256:d7f4b9859072ca99a231ff5145709aa2da2aa12a4dd32c762b74bd9de9b49990",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927318660"
+      },
+      {
+        "id": 9927316448,
+        "name": "input-windows",
+        "bytes": 15779,
+        "github_archive_digest": "sha256:ce099bc409d963fa9722315d9e86ced2ee5db1ac50c5dbb857d9c97416f75d66",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927316448"
+      },
+      {
+        "id": 9927280373,
+        "name": "input-linux",
+        "bytes": 15797,
+        "github_archive_digest": "sha256:adf49e0a6a82a0e683c41e50580ecb0158d0ddbb13e3fa0a5a718bea6d7902d7",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927280373"
+      },
+      {
+        "id": 9927254820,
+        "name": "real-at-linux-capability",
+        "bytes": 483669,
+        "github_archive_digest": "sha256:9cd8657045128801fe240010e3e66a2ee6082bd4de538f2c99808f48c79b0108",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927254820"
+      },
+      {
+        "id": 9927251813,
+        "name": "real-at-windows-capability",
+        "bytes": 5813,
+        "github_archive_digest": "sha256:beda1b02d5424d9a891902e713b85466965e07518bfba44d3ad047aa608b6aed",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33847999382/artifacts/9927251813"
+      }
+    ],
+    "download": {
+      "repository": "pawaovo/shadcn_flutter",
+      "run_id": 33847999382,
+      "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "started_at": "2026-09-04T07:28:01.033144+00:00",
+      "attempts": 1,
+      "exit_code": 0,
+      "completed_at": "2026-09-04T07:28:14.465187+00:00",
+      "stdout": "",
+      "stderr": ""
+    },
+    "metadata_files": [
+      {
+        "path": "/tmp/beautiful-ci-153412b3/input/workflow-run.json",
+        "bytes": 12426,
+        "sha256": "63886ad195b3e78eda735c246867e3270e08269aa17b16d488f5a01d4652c29e"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/input/run.json",
+        "bytes": 18420,
+        "sha256": "32d53a298618fad0327d6f50739b815e9134564fb3fceddec182bf54eb62eba0"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/input/artifacts.json",
+        "bytes": 6222,
+        "sha256": "1e980e86c749ec5522b5d884d51d22c2f4a30202054e09d8ebcd6f8068d312e0"
+      },
+      {
+        "path": "/tmp/beautiful-ci-153412b3/input/run.log",
+        "bytes": 11235983,
+        "sha256": "da34f1958cdb13eef291dd7e0192d1f4971a292e8f90e193fd0f24080083f956"
+      }
+    ],
+    "platform_results": [
+      {
+        "platform": "chrome",
+        "combined_status": "failed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "failed",
+            "exit_code": 1,
+            "cleanup_status": "verified"
+          },
+          {
+            "suite": "browser",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "failed",
+            "error": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-chrome/input-acceptance-summary.json",
+            "bytes": 1666,
+            "sha256": "60a6bdc86d24c752d839a285eeaf75ad8f45b0b2bbe84a4f0913d7ea1aec77f5"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-chrome/framework/framework-input.json",
+            "bytes": 51276,
+            "sha256": "804b8d9d0f943f5d6ca68d08259d8d88d0f133a0cea3b697ca5341bf4649d229"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-chrome/browser/browser-input.json",
+            "bytes": 28753,
+            "sha256": "1d9d79180eda87b5928248b17f1a42e250da321596a448019b4dae9c4e7c9b6a"
+          }
+        ],
+        "real_browser_input": {
+          "status": "passed",
+          "stages": 26,
+          "version": "152.0.7977.64",
+          "input_delivery": "W3C pointer and key actions, without JS text injection",
+          "clipboard": "real browser clipboard; no permission overrides or mocks",
+          "os_ime": "not tested; Unicode key insertion is not OS IME acceptance"
+        }
+      },
+      {
+        "platform": "firefox",
+        "combined_status": "failed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "failed",
+            "exit_code": 1,
+            "cleanup_status": "verified"
+          },
+          {
+            "suite": "browser",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "failed",
+            "error": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-firefox/input-acceptance-summary.json",
+            "bytes": 1553,
+            "sha256": "a9166d91f17531c8eda62c1df0ba362963f2c8f7b829ac5b97d4ca71ffe1d571"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-firefox/framework/framework-input.json",
+            "bytes": 51276,
+            "sha256": "3c7c16c5f8be7283c5ea5575143842cbf72ccb0e5cab0d29f0e35e6afde01023"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-firefox/browser/browser-input.json",
+            "bytes": 28610,
+            "sha256": "5c6df72ca52dc7d5194cae97e28a75a7c2839e68f8203719d7ce307bc7b05035"
+          }
+        ],
+        "real_browser_input": {
+          "status": "passed",
+          "stages": 26,
+          "version": "154.0.1",
+          "input_delivery": "W3C pointer and key actions, without JS text injection",
+          "clipboard": "real browser clipboard; no permission overrides or mocks",
+          "os_ime": "not tested; Unicode key insertion is not OS IME acceptance"
+        }
+      },
+      {
+        "platform": "edge",
+        "combined_status": "failed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "failed",
+            "exit_code": 1,
+            "cleanup_status": "verified"
+          },
+          {
+            "suite": "browser",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "failed",
+            "error": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-edge/input-acceptance-summary.json",
+            "bytes": 1532,
+            "sha256": "19106e4767b4d749177b03b1b2e7d7b631cf0b5a908a042cb0d0ea8cdf7f2925"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-edge/framework/framework-input.json",
+            "bytes": 51276,
+            "sha256": "4dffe9b7eefbf5eff9c330d8120e8e786dce73115ac7dfda03903c0dde40377e"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-edge/browser/browser-input.json",
+            "bytes": 28712,
+            "sha256": "73c0cc533da378173723e7785f6fa9c26f2534f150d77b1a10094edb415f6c01"
+          }
+        ],
+        "real_browser_input": {
+          "status": "passed",
+          "stages": 26,
+          "version": "152.0.4191.53",
+          "input_delivery": "W3C pointer and key actions, without JS text injection",
+          "clipboard": "real browser clipboard; no permission overrides or mocks",
+          "os_ime": "not tested; Unicode key insertion is not OS IME acceptance"
+        }
+      },
+      {
+        "platform": "safari",
+        "combined_status": "failed",
+        "suites": [
+          {
+            "suite": "journey",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          },
+          {
+            "suite": "framework",
+            "status": "failed",
+            "exit_code": 1,
+            "cleanup_status": "verified"
+          },
+          {
+            "suite": "browser",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "passed"
+          },
+          {
+            "id": "numeric_draft_cancel_adjust_and_bounds",
+            "status": "passed"
+          },
+          {
+            "id": "synthetic_resize_preserves_prompt_draft",
+            "status": "failed",
+            "error": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文 inventory draft├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: ┤中文 inventory draft├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-safari/input-acceptance-summary.json",
+            "bytes": 2184,
+            "sha256": "9bad45622e9b60524a7d56093fad1b33fdd171e353518c42e7b01a2a97dbe60b"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-safari/framework/framework-input.json",
+            "bytes": 119443,
+            "sha256": "e7dc1d5e8fa63c2005d31a142c7fcd50c36c6257e56c79b25579bc1ef32603fa"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-safari/browser/browser-input.json",
+            "bytes": 28426,
+            "sha256": "d7e48a3af823981922debda8d0bb839efa1dcbeb0f78a09d7f03cac91c9e47b0"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-safari/journey/trusted-journey.json",
+            "bytes": 857,
+            "sha256": "72286cf16d030c00cb614297132de1c6c054d201487c51e60a3183dc384aa745"
+          }
+        ],
+        "real_browser_input": {
+          "status": "passed",
+          "stages": 26,
+          "version": "26.6.2",
+          "input_delivery": "W3C pointer and key actions, without JS text injection",
+          "clipboard": "real browser clipboard; no permission overrides or mocks",
+          "os_ime": "not tested; Unicode key insertion is not OS IME acceptance"
+        },
+        "original_journey": {
+          "status": "passed",
+          "trusted_clipboard_clicks": [
+            "journey-code-copy",
+            "journey-stream-copy"
+          ],
+          "other_inputs": "Original Flutter-injected full Catalog journey"
+        }
+      },
+      {
+        "platform": "linux",
+        "combined_status": "passed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "passed"
+          },
+          {
+            "id": "numeric_draft_cancel_adjust_and_bounds",
+            "status": "passed"
+          },
+          {
+            "id": "synthetic_resize_preserves_prompt_draft",
+            "status": "passed"
+          },
+          {
+            "id": "pointer_selection_replaces_exact_repeated_range",
+            "status": "passed"
+          },
+          {
+            "id": "native_clipboard_copy_and_paste",
+            "status": "passed"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-linux/input-acceptance-summary.json",
+            "bytes": 711,
+            "sha256": "f6032e8109a579abd784081a38fdadc007ec07e3d1d22eaa0b151f2607f3dee3"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-linux/framework/framework-input.json",
+            "bytes": 126275,
+            "sha256": "babb6025259214198bbb7bdc913e0b620d336f2ca831af6b85e1f2ebf95ae0f6"
+          }
+        ]
+      },
+      {
+        "platform": "macos",
+        "combined_status": "passed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "passed"
+          },
+          {
+            "id": "numeric_draft_cancel_adjust_and_bounds",
+            "status": "passed"
+          },
+          {
+            "id": "synthetic_resize_preserves_prompt_draft",
+            "status": "passed"
+          },
+          {
+            "id": "pointer_selection_replaces_exact_repeated_range",
+            "status": "passed"
+          },
+          {
+            "id": "native_clipboard_copy_and_paste",
+            "status": "passed"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-macos/input-acceptance-summary.json",
+            "bytes": 666,
+            "sha256": "a66f3d0c3e3e4aaf0b1dc43b317540df4934f3fede4349a98e1fa81743538371"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-macos/framework/framework-input.json",
+            "bytes": 134675,
+            "sha256": "3000b612187f64a74590b0f6ad8152beced643956107ab7876a2a88d1f992c75"
+          }
+        ]
+      },
+      {
+        "platform": "windows",
+        "combined_status": "passed",
+        "suites": [
+          {
+            "suite": "framework",
+            "status": "passed",
+            "exit_code": 0,
+            "cleanup_status": "verified"
+          }
+        ],
+        "framework_scenarios": [
+          {
+            "id": "prompt_keyboard_menus_and_focus",
+            "status": "passed"
+          },
+          {
+            "id": "prompt_composing_and_submission",
+            "status": "passed"
+          },
+          {
+            "id": "numeric_draft_cancel_adjust_and_bounds",
+            "status": "passed"
+          },
+          {
+            "id": "synthetic_resize_preserves_prompt_draft",
+            "status": "passed"
+          },
+          {
+            "id": "pointer_selection_replaces_exact_repeated_range",
+            "status": "passed"
+          },
+          {
+            "id": "native_clipboard_copy_and_paste",
+            "status": "passed"
+          }
+        ],
+        "sources": [
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-windows/input-acceptance-summary.json",
+            "bytes": 692,
+            "sha256": "e11f983d4820b8b22513489ff3487266d15d82d047a7592b18748d569944a9d7"
+          },
+          {
+            "path": "/tmp/beautiful-ci-153412b3/input/input-windows/framework/framework-input.json",
+            "bytes": 128191,
+            "sha256": "fcb465ccc2363159ba449a24b792b34abd356add5591519adc9ee353dd55dd1a"
+          }
+        ]
+      }
+    ],
+    "assistive_technology": [
+      {
+        "platform": "windows",
+        "scope": "native_fixture_capability",
+        "status": "not_accepted",
+        "application_acceptance": "not_accepted",
+        "errors": [
+          "Exception calling \"Prepare\" with \"5\" argument(s): \"Owned Narrator window does not support safe minimization\""
+        ],
+        "layers": {
+          "native_accessibility": "observed",
+          "at_navigation": "not_accepted",
+          "utterance_output": "not_accepted",
+          "synthesized_audio": "not_accepted",
+          "human_review": "not_accepted"
+        },
+        "audio_inventory": {
+          "flow": "eRender",
+          "state_mask": "DEVICE_STATEMASK_ALL (0xF)",
+          "error": null,
+          "endpoint_count": 0,
+          "endpoints": [],
+          "defaults": [
+            {
+              "role": "eConsole",
+              "id": null,
+              "error": "inventory.default[eConsole].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+              "state": null
+            },
+            {
+              "role": "eMultimedia",
+              "id": null,
+              "error": "inventory.default[eMultimedia].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+              "state": null
+            },
+            {
+              "role": "eCommunications",
+              "id": null,
+              "error": "inventory.default[eCommunications].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+              "state": null
+            }
+          ]
+        },
+        "synthesized_audio": {
+          "status": "not_accepted",
+          "reason": "Not observed"
+        },
+        "source": {
+          "path": "/tmp/beautiful-ci-153412b3/input/real-at-windows-capability/report.json",
+          "bytes": 26822,
+          "sha256": "f4a424db40dba8ecec021276c17ca772cfdf9c6740e0386c53593d7896f9e283"
+        }
+      },
+      {
+        "platform": "linux",
+        "scope": "native_fixture_capability",
+        "status": "capability_observed",
+        "application_acceptance": "not_accepted",
+        "errors": [],
+        "layers": {
+          "native_accessibility": "observed",
+          "at_navigation": "observed",
+          "utterance_output": "observed",
+          "synthesized_audio": "observed",
+          "human_review": "not_accepted"
+        },
+        "audio_inventory": null,
+        "synthesized_audio": {
+          "status": "observed",
+          "frames": 53755,
+          "rms": 3810.714370918401,
+          "sample_rate": 16000,
+          "capture": "private PulseAudio monitor with real Speech Dispatcher espeak-ng",
+          "limitation": "PCM confirms synthesis in this isolated session; a human must assess words and intelligibility"
+        },
+        "source": {
+          "path": "/tmp/beautiful-ci-153412b3/input/real-at-linux-capability/report.json",
+          "bytes": 1211602,
+          "sha256": "642b93881aa362e3decf09169544b65bbb77c552de3810707a77a2086f7e00f5"
+        }
+      }
+    ]
+  },
+  "paired_edge_diagnostic": {
+    "run_id": 33848023805,
+    "documentation": "../diagnostics/edge-startup/2026-09-04-153412b3-pair.md",
+    "machine_record": "../diagnostics/edge-startup/2026-09-04-153412b3-pair.json",
+    "main_edge_version": "151.0.4129.101",
+    "pair_edge_version": "152.0.4191.53",
+    "boundary": "The pair matched its own actual versions and post-run hashes, but used different runner regions; it neither replaces the failed main job nor establishes a preread fix."
+  },
+  "preservation": {
+    "raw_roots": [
+      "/tmp/beautiful-ci-153412b3/main",
+      "/tmp/beautiful-ci-153412b3/input"
+    ],
+    "downloads_per_run": 1,
+    "ci_dispatches_or_retries": 0,
+    "historical_evidence_modified": false,
+    "hash_note": "File SHA-256 values are computed from locally extracted originals. GitHub artifact digests identify uploaded archives and are recorded separately."
+  },
+  "acceptance_limits": [
+    "No actual package publication occurred.",
+    "No real OS IME acceptance follows from Unicode WebDriver input or Flutter-injected composing ranges.",
+    "Native clipboard tests include Flutter-injected events; they do not establish every OS input path.",
+    "Orca native fixture capability does not accept the Flutter application or human review. Narrator navigation, utterance and synthesized audio remain not accepted.",
+    "This archive does not claim complete platform, assistive technology, visual or performance acceptance."
+  ]
+}

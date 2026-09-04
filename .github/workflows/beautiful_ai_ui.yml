@@ -474,6 +474,7 @@ jobs:
         run: |
           python3 -B -m unittest discover -s .github/scripts -p 'test_flutter_edge_webdriver.py'
           python3 -B -m unittest discover -s .github/scripts -p 'test_edge_resource_observation.py'
+          python3 -B -m unittest discover -s .github/scripts -p 'test_prepare_edge_ci.py'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -486,7 +487,15 @@ jobs:
         working-directory: packages/beautiful_ai_ui_catalog
         run: flutter pub get --enforce-lockfile
 
+      - name: Record one bounded Edge ELF preread as CI setup
+        timeout-minutes: 2
+        run: >-
+          python3 -B .github/scripts/prepare_edge_ci.py preread
+          --executable /opt/microsoft/msedge/msedge --timeout 60
+          --output packages/beautiful_ai_ui_catalog/artifacts/edge/startup-condition
+
       - name: Run shared journey in installed Microsoft Edge
+        id: edge_journey
         timeout-minutes: 20
         working-directory: packages/beautiful_ai_ui_catalog
         shell: bash
@@ -544,6 +553,15 @@ jobs:
             --driver-port=4444 --browser-dimension=1440x900 \
             --no-pub 2>&1 | tee artifacts/edge/journey.log
           test -s artifacts/edge/browser-identity.json
+
+      - name: Bind preread to actual Edge session after observed processes stop
+        if: always()
+        timeout-minutes: 2
+        run: >-
+          python3 -B .github/scripts/prepare_edge_ci.py verify
+          --output packages/beautiful_ai_ui_catalog/artifacts/edge/startup-condition
+          --suite packages/beautiful_ai_ui_catalog/artifacts/edge
+          --run-outcome '${{ steps.edge_journey.outcome }}'
 
       - name: Upload Edge journey evidence
         if: always()

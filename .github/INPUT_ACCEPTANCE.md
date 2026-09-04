@@ -90,6 +90,25 @@ temporary macOS runner with a bounded command and records Safari/macOS/driver
 versions. It does not change the local user's Safari permissions. Any inability
 to enable automation or execute the session is retained as a failing job.
 
+The two Linux Edge CI jobs explicitly read the actual installed Edge ELF once,
+with a 60-second setup deadline before the existing adapter startup deadline.
+This provisional startup condition follows the recorded `153412b3` pair
+(baseline pre-navigation failure, preread full-journey pass) and earlier Linux
+I/O observations; it does not establish causality or a reproduction rate.
+Browser flags, timeouts, original suites, input actions and assertions remain
+unchanged. There is no browser retry. `startup-condition/` retains setup timing,
+bytes, SHA-256 and failures; failed setup leaves the original suites not started.
+
+Post-run evidence binds the preread to each session's actual browser PID and
+sampled executable, then checks its post-run hash. Missing evidence, changed
+identity/hash, live recorded processes or uncertain `/proc` reads fail that step
+without rewriting the original suite outcome. The main journey records only
+`observed_identity_no_live_processes` after its existing cleanup, distinguishing
+absent, reused and zombie PIDs; this does not prove that unobserved descendants
+exited. Input acceptance additionally requires its existing verified owned-group
+cleanup. Post-run hashing starts only after these
+checks. The manual baseline/preread experiment retains its original conditions.
+
 Mobile entry points require an explicit currently connected device or simulator:
 
 ```sh

@@ -1,0 +1,586 @@
+{
+  "schema_version": 1,
+  "source_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+  "analysis_date_utc": "2026-09-04",
+  "analysis": "Documentation derived only from the downloaded originals of one completed manual pair; no new run, retry, source change or browser launch.",
+  "artifact_root": "/tmp/beautiful-edge-pair-153412b3-33848023805",
+  "run": {
+    "repository": "pawaovo/shadcn_flutter",
+    "id": 33848023805,
+    "name": "Beautiful AI UI Edge full journey pair (manual only)",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33848023805",
+    "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+    "head_branch": "product/main",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at_utc": "2026-09-04T07:17:06Z",
+    "final_metadata_updated_at_utc": "2026-09-04T07:24:40Z",
+    "jobs": [
+      {
+        "id": 100944254349,
+        "name": "Full Edge journey - preread",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33848023805/job/100944254349",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at_utc": "2026-09-04T07:17:10Z",
+        "completed_at_utc": "2026-09-04T07:20:51Z",
+        "checkout_head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+        "head_evidence": "Full checkout HEAD printed in retained run.log; journey jobs also run the recorded HEAD equality check",
+        "condition": "preread",
+        "worker_id": "391097c7-3262-4e1d-b612-984db7d04dcd",
+        "region": "westcentralus",
+        "worker_line": 7,
+        "region_line": 8,
+        "checkout_head_line": 131,
+        "head_equality_check_line": 142
+      },
+      {
+        "id": 100944254622,
+        "name": "Full Edge journey - baseline",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33848023805/job/100944254622",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at_utc": "2026-09-04T07:17:10Z",
+        "completed_at_utc": "2026-09-04T07:24:26Z",
+        "checkout_head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+        "head_evidence": "Full checkout HEAD printed in retained run.log; journey jobs also run the recorded HEAD equality check",
+        "condition": "baseline",
+        "worker_id": "f8131e8d-0244-4334-9531-36542737cc79",
+        "region": "centralus",
+        "worker_line": 402,
+        "region_line": 403,
+        "checkout_head_line": 526,
+        "head_equality_check_line": 537
+      },
+      {
+        "id": 100945952958,
+        "name": "Check actual pair provenance and retain both outcomes",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33848023805/job/100945952958",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at_utc": "2026-09-04T07:24:29Z",
+        "completed_at_utc": "2026-09-04T07:24:39Z",
+        "checkout_head_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+        "head_evidence": "Full checkout HEAD printed in retained run.log; journey jobs also run the recorded HEAD equality check",
+        "condition": "comparison_only",
+        "worker_id": "56a63508-7e25-4ff8-aeef-9e8ae197a5df",
+        "region": "westus",
+        "worker_line": 792,
+        "region_line": 793,
+        "checkout_head_line": 908
+      }
+    ]
+  },
+  "comparison": {
+    "status": "provenance_matched",
+    "blockers": [],
+    "shared_provenance": {
+      "source_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "image": {
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260831.293.1",
+        "RUNNER_OS": "Linux",
+        "RUNNER_ARCH": "X64"
+      },
+      "browser_version": "152.0.4191.53",
+      "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+      "browser_sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a",
+      "driver_sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b"
+    },
+    "preread_browser_read_matches_both_post_run_browser_hashes": true,
+    "different_runner_regions": {
+      "baseline": "centralus",
+      "preread": "westcentralus"
+    },
+    "interpretation": "Matching provenance permits inspecting this one pair; it does not establish causality, a repair, or a reproduction rate. Every original outcome remains visible."
+  },
+  "conditions": {
+    "baseline": {
+      "source_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "status": "failed",
+      "upstream_status": "failed",
+      "evidence_status": "recorded",
+      "suite": "journey",
+      "suite_exit_code": 1,
+      "scope": "one original full Catalog journey; no automatic retry",
+      "original_command": [
+        "/opt/hostedtoolcache/flutter/stable-3.47.0-x64/flutter/bin/flutter",
+        "drive",
+        "--driver=integration_test/driver/catalog_trusted_journey_driver.dart",
+        "--target=integration_test/catalog_journey_test.dart",
+        "--device-id=web-server",
+        "--browser-name=edge",
+        "--driver-port=4444",
+        "--browser-dimension=1440x900",
+        "--no-pub",
+        "--dart-define=CATALOG_TRUSTED_BROWSER_COPY=true"
+      ],
+      "cleanup_status": "verified",
+      "overall_elapsed_seconds_including_preread_and_cleanup": 382.602219,
+      "runner": {
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260831.293.1",
+        "RUNNER_OS": "Linux",
+        "RUNNER_ARCH": "X64",
+        "GITHUB_RUN_ID": "33848023805",
+        "GITHUB_RUN_ATTEMPT": "1"
+      },
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "session_id": "d8e77cb631320955067d6813848ccbed",
+      "browser_name": "MicrosoftEdge",
+      "browser_version": "152.0.4191.53",
+      "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+      "executable_hash_timing": "after journey and owned cleanup; preread hashes its one intentional read",
+      "browser_executable_after_run": {
+        "pid": 2529,
+        "start_ticks": 19569,
+        "path": "/opt/microsoft/msedge/msedge",
+        "resolved": "/opt/microsoft/msedge/msedge",
+        "bytes": 398466384,
+        "sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a"
+      },
+      "driver_executable_after_run": {
+        "pid": 2466,
+        "start_ticks": 16737,
+        "path": "/usr/local/share/edge_driver/msedgedriver",
+        "resolved": "/usr/local/share/edge_driver/msedgedriver",
+        "bytes": 23867976,
+        "sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b"
+      },
+      "first_webdriver_responses": [
+        {
+          "request_id": 1,
+          "method": "GET",
+          "path": "/status",
+          "status": 200,
+          "elapsed_seconds": 0.001,
+          "source_line": 5
+        },
+        {
+          "request_id": 2,
+          "method": "POST",
+          "path": "/session",
+          "status": 200,
+          "elapsed_seconds": 41.254,
+          "source_line": 7
+        },
+        {
+          "request_id": 3,
+          "method": "GET",
+          "path": "/session/d8e77cb631320955067d6813848ccbed/window",
+          "status": 200,
+          "elapsed_seconds": 0.0,
+          "source_line": 10
+        },
+        {
+          "request_id": 4,
+          "method": "POST",
+          "path": "/session/d8e77cb631320955067d6813848ccbed/window/rect",
+          "parameters": "{\"x\":0,\"y\":0}",
+          "status": 500,
+          "elapsed_seconds": 300.051,
+          "source_line": 12
+        }
+      ],
+      "report_path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/report.json",
+      "webdriver_log_path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/webdriver.log",
+      "failure_boundary": {
+        "phase": "browser initialization before Catalog navigation",
+        "request_id": 4,
+        "method": "POST",
+        "path": "/session/d8e77cb631320955067d6813848ccbed/window/rect",
+        "parameters": {
+          "x": 0,
+          "y": 0
+        },
+        "status": 500,
+        "elapsed_seconds": 300.051,
+        "error": "Timed out receiving message from renderer: 300.000",
+        "diagnostic_url": "about:blank",
+        "screenshot_diagnostic_error": "timed out",
+        "catalog_navigation_request_observed": false,
+        "catalog_journey_executed": false,
+        "application_assertion_failure_observed": false,
+        "dart_compile_error_observed": false,
+        "framework_composing_stage_reached": false,
+        "source_path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/diagnostics/failure-4.json",
+        "run_log_error_line": 8
+      }
+    },
+    "preread": {
+      "source_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+      "status": "passed",
+      "upstream_status": "passed",
+      "evidence_status": "recorded",
+      "suite": "journey",
+      "suite_exit_code": 0,
+      "scope": "one original full Catalog journey; no automatic retry",
+      "original_command": [
+        "/opt/hostedtoolcache/flutter/stable-3.47.0-x64/flutter/bin/flutter",
+        "drive",
+        "--driver=integration_test/driver/catalog_trusted_journey_driver.dart",
+        "--target=integration_test/catalog_journey_test.dart",
+        "--device-id=web-server",
+        "--browser-name=edge",
+        "--driver-port=4444",
+        "--browser-dimension=1440x900",
+        "--no-pub",
+        "--dart-define=CATALOG_TRUSTED_BROWSER_COPY=true"
+      ],
+      "cleanup_status": "verified",
+      "overall_elapsed_seconds_including_preread_and_cleanup": 182.153274,
+      "runner": {
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260831.293.1",
+        "RUNNER_OS": "Linux",
+        "RUNNER_ARCH": "X64",
+        "GITHUB_RUN_ID": "33848023805",
+        "GITHUB_RUN_ATTEMPT": "1"
+      },
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "session_id": "031a45faf8c824286493c4e5978c0486",
+      "browser_name": "MicrosoftEdge",
+      "browser_version": "152.0.4191.53",
+      "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+      "executable_hash_timing": "after journey and owned cleanup; preread hashes its one intentional read",
+      "browser_executable_after_run": {
+        "pid": 2773,
+        "start_ticks": 10786,
+        "path": "/opt/microsoft/msedge/msedge",
+        "resolved": "/opt/microsoft/msedge/msedge",
+        "bytes": 398466384,
+        "sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a"
+      },
+      "driver_executable_after_run": {
+        "pid": 2708,
+        "start_ticks": 6980,
+        "path": "/usr/local/share/edge_driver/msedgedriver",
+        "resolved": "/usr/local/share/edge_driver/msedgedriver",
+        "bytes": 23867976,
+        "sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b"
+      },
+      "first_webdriver_responses": [
+        {
+          "request_id": 1,
+          "method": "GET",
+          "path": "/status",
+          "status": 200,
+          "elapsed_seconds": 0.0,
+          "source_line": 5
+        },
+        {
+          "request_id": 2,
+          "method": "POST",
+          "path": "/session",
+          "status": 200,
+          "elapsed_seconds": 2.28,
+          "source_line": 7
+        },
+        {
+          "request_id": 3,
+          "method": "GET",
+          "path": "/session/031a45faf8c824286493c4e5978c0486/window",
+          "status": 200,
+          "elapsed_seconds": 0.001,
+          "source_line": 10
+        },
+        {
+          "request_id": 4,
+          "method": "POST",
+          "path": "/session/031a45faf8c824286493c4e5978c0486/window/rect",
+          "parameters": "{\"x\":0,\"y\":0}",
+          "status": 200,
+          "elapsed_seconds": 0.016,
+          "source_line": 12
+        },
+        {
+          "request_id": 5,
+          "method": "POST",
+          "path": "/session/031a45faf8c824286493c4e5978c0486/window/rect",
+          "parameters": "{\"width\":1440,\"height\":900}",
+          "status": 200,
+          "elapsed_seconds": 0.022,
+          "source_line": 14
+        },
+        {
+          "request_id": 6,
+          "method": "POST",
+          "path": "/session/031a45faf8c824286493c4e5978c0486/url",
+          "status": 200,
+          "elapsed_seconds": 4.844,
+          "source_line": 16
+        }
+      ],
+      "report_path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/report.json",
+      "webdriver_log_path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/webdriver.log",
+      "preread": {
+        "status": "read_complete",
+        "path": "/opt/microsoft/msedge/msedge",
+        "started_epoch": 1788506264.4529867,
+        "bytes_read": 398466384,
+        "condition": "preread_actual_browser_executable_once",
+        "resolved": "/opt/microsoft/msedge/msedge",
+        "sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a",
+        "bytes": 398466384,
+        "elapsed_seconds": 6.668552,
+        "completed_epoch": 1788506271.1215398
+      },
+      "journey_result": {
+        "status": "passed",
+        "trusted_clipboard_clicks": [
+          "journey-code-copy",
+          "journey-stream-copy"
+        ],
+        "other_inputs": "Original Flutter-injected full Catalog journey",
+        "integration_data": null,
+        "all_tests_passed_log_line": 10,
+        "scope_limit": "Two trusted browser clipboard clicks; remaining original journey inputs are Flutter-injected. This is not a complete native-input or IME acceptance claim."
+      }
+    }
+  },
+  "limits": [
+    "One original full-journey attempt per condition, on different fresh runners and different Azure regions; no automatic retry. This one matched-provenance pair does not establish causality, a fix or a failure/reproduction rate.",
+    "Matching image, platform and executable identity does not match the host, region, filesystem cache residency or instantaneous resource load.",
+    "The original failure is preserved: baseline exits before Catalog navigation; preread completes the original journey. Their overall elapsed times include preread and cleanup and are not comparable successful-path performance measurements.",
+    "No source-file or Flutter build-artifact before/after hash manifests exist in this downloaded artifact set. Same checkout HEAD is not evidence that all runtime source/build bytes were unchanged throughout the job.",
+    "Baseline browser and both drivers have post-run executable hashes only. Only preread browser has the intentional pre-run read hash matching its post-run hash.",
+    "GitHub artifact digests identify uploaded archives; they are not source/build manifests or runtime executable hashes. The archives were downloaded and extracted once; their compressed bytes were not retained for independent digest recomputation.",
+    "The passing journey records two trusted browser clipboard clicks; remaining inputs are Flutter-injected. No complete native-input, IME or framework-composing acceptance claim follows.",
+    "Resource snapshots are retained as originals but this bounded outcome/provenance record makes no resource-cause claim.",
+    "Absolute /tmp paths locate the retained local originals and are not a durable remote archive. API metadata records artifact expiry on 2026-09-18."
+  ],
+  "artifact_metadata_snapshot": {
+    "total_count": 3,
+    "artifacts": [
+      {
+        "id": 9927450327,
+        "name": "edge-full-pair-comparison",
+        "size_in_bytes": 2283,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927450327",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927450327/zip",
+        "digest": "sha256:fb2d419f180b98c0447c67d05cfcbbb5c8a87a8fe95dd58c1aca7996716810d3",
+        "created_at": "2026-09-04T07:24:36Z",
+        "expires_at": "2026-09-18T07:24:35Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 33848023805,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968"
+        }
+      },
+      {
+        "id": 9927445206,
+        "name": "edge-full-baseline",
+        "size_in_bytes": 143928,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927445206",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927445206/zip",
+        "digest": "sha256:f40663b8736b1a9454964a6fb19dbc568053604ef094c137310010f7f259063c",
+        "created_at": "2026-09-04T07:24:25Z",
+        "expires_at": "2026-09-18T07:24:24Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 33848023805,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968"
+        }
+      },
+      {
+        "id": 9927346945,
+        "name": "edge-full-preread",
+        "size_in_bytes": 125249,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927346945",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9927346945/zip",
+        "digest": "sha256:cdafac6c7636a7fa90acda0b68a2eea6c0c51aa4bdbb3e3a9e033554c6709ed8",
+        "created_at": "2026-09-04T07:20:48Z",
+        "expires_at": "2026-09-18T07:20:47Z",
+        "expired": false,
+        "workflow_run": {
+          "id": 33848023805,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "153412b3014192b2d6c4c15e377161a5a862a968"
+        }
+      }
+    ]
+  },
+  "original_evidence": {
+    "download_count": 1,
+    "original_file_count": 27,
+    "original_total_bytes": 8224394,
+    "file_manifest": {
+      "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/downloaded-files-manifest.json",
+      "bytes": 5109,
+      "sha256": "3a86d612e02872c5bd456e44440c245c5c484d9aeae3597dc5cb32c478d2715a"
+    },
+    "files": [
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/artifacts-metadata.json",
+        "relative_path": "artifacts-metadata.json",
+        "bytes": 2111,
+        "sha256": "3e054306c40b61ea672885e53601e90779d5b81517befe6b904d47877ee8930a"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/input-acceptance-owner.json",
+        "relative_path": "edge-full-baseline/acceptance/input-acceptance-owner.json",
+        "bytes": 79,
+        "sha256": "7d39d5dd7635422ceaf791048e46add7751b6a5c72bc98f06d1881adc7cd9cc4"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/input-acceptance-summary.json",
+        "relative_path": "edge-full-baseline/acceptance/input-acceptance-summary.json",
+        "bytes": 1067,
+        "sha256": "4f3f459410fc789b40765237ec34f2a6e1db70a3bfd7cc6bde8b7e2507a593e6"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/browser-identity.json",
+        "relative_path": "edge-full-baseline/acceptance/journey/browser-identity.json",
+        "bytes": 1034,
+        "sha256": "bcde8c6f4e9907f9bac8ff5cfbc1074476aa685d501c5899c757d0aa0d8d1b54"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/command.json",
+        "relative_path": "edge-full-baseline/acceptance/journey/command.json",
+        "bytes": 395,
+        "sha256": "2a93a0136356d475f6a62f354a321ccc6d68bfc3d8341565670ef83397f717e4"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/diagnostics/failure-4.json",
+        "relative_path": "edge-full-baseline/acceptance/journey/diagnostics/failure-4.json",
+        "bytes": 1492,
+        "sha256": "c506a76c741af66f9b03faf7c231858f6ebf416fd6c985d47e914cf6cec460d5"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/msedgedriver.log",
+        "relative_path": "edge-full-baseline/acceptance/journey/msedgedriver.log",
+        "bytes": 285820,
+        "sha256": "f371ea410b78eabf5a549780027d9d4e69874c28a36f031feecacf59adcf6e2c"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/resources/observation.json",
+        "relative_path": "edge-full-baseline/acceptance/journey/resources/observation.json",
+        "bytes": 820,
+        "sha256": "ed8fa3bf6292dcf74e5dd619958b996b18feb001ae73773de5d59270bc6d4f4e"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/resources/resources.jsonl",
+        "relative_path": "edge-full-baseline/acceptance/journey/resources/resources.jsonl",
+        "bytes": 4517125,
+        "sha256": "df1df9c7b57af2565cbf6e33ceb010845b65b67d6a4e46a7649d12d4ade00eba"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/run.log",
+        "relative_path": "edge-full-baseline/acceptance/journey/run.log",
+        "bytes": 3033,
+        "sha256": "5092ae4cc55d27a5fd19a01dccb2667bdd01e287fc2296aba7c28d96b811b880"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/acceptance/journey/webdriver.log",
+        "relative_path": "edge-full-baseline/acceptance/journey/webdriver.log",
+        "bytes": 2404,
+        "sha256": "2719565cfad9803914ef407c93de3252e66c3f8a2608074ab55931a9427edb40"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-baseline/report.json",
+        "relative_path": "edge-full-baseline/report.json",
+        "bytes": 4038,
+        "sha256": "badfc1066c9442079ed2224f3f541350228fac937a5287869f78ea6a1d09e12b"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-pair-comparison/pair.json",
+        "relative_path": "edge-full-pair-comparison/pair.json",
+        "bytes": 10194,
+        "sha256": "c7ad97f0981f49c1e4de07bddf58e7e773c743220e44e93281816c11ba0451b1"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/input-acceptance-owner.json",
+        "relative_path": "edge-full-preread/acceptance/input-acceptance-owner.json",
+        "bytes": 79,
+        "sha256": "7c0ec2912f939b06d936bd4095d4ed133b98391c6aae66c9afaebed1d0fd0a79"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/input-acceptance-summary.json",
+        "relative_path": "edge-full-preread/acceptance/input-acceptance-summary.json",
+        "bytes": 714,
+        "sha256": "a6a49b499a0dab05c768913caea523bf677189c7bde11c63262845b536001436"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/browser-identity.json",
+        "relative_path": "edge-full-preread/acceptance/journey/browser-identity.json",
+        "bytes": 1034,
+        "sha256": "4dc0499a9cabf22b9d2fd36322c7bd663ee28d18d345137bfecfaf3566532a91"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/command.json",
+        "relative_path": "edge-full-preread/acceptance/journey/command.json",
+        "bytes": 395,
+        "sha256": "2a93a0136356d475f6a62f354a321ccc6d68bfc3d8341565670ef83397f717e4"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/msedgedriver.log",
+        "relative_path": "edge-full-preread/acceptance/journey/msedgedriver.log",
+        "bytes": 1029236,
+        "sha256": "8654f68b02871e8d0933c1ee3397ed3338cce671c1da049e907154e6eacf4bc9"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/resources/observation.json",
+        "relative_path": "edge-full-preread/acceptance/journey/resources/observation.json",
+        "bytes": 744,
+        "sha256": "e5ceec4125f8731c0b829aab18d21bd4fec2f534a8521d0f68ae50a1e4029be4"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/resources/resources.jsonl",
+        "relative_path": "edge-full-preread/acceptance/journey/resources/resources.jsonl",
+        "bytes": 2129101,
+        "sha256": "d699206daacf21de78e91e491573712d1453b455c497c85c592a535704efb129"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/run.log",
+        "relative_path": "edge-full-preread/acceptance/journey/run.log",
+        "bytes": 1249,
+        "sha256": "b46c3aab654ed889abf51d85c16c5eb3e059f44c532458c47956d0fcaac43a22"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/trusted-journey.json",
+        "relative_path": "edge-full-preread/acceptance/journey/trusted-journey.json",
+        "bytes": 1188,
+        "sha256": "591ef46b7a62a26f957c822a097246884fc3bf9529c06d9924a63f3c124b047e"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/acceptance/journey/webdriver.log",
+        "relative_path": "edge-full-preread/acceptance/journey/webdriver.log",
+        "bytes": 66975,
+        "sha256": "92e14e304464717f418ccf7dde723cb11382a72efd5e172893e4ec48bca11592"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/preread.json",
+        "relative_path": "edge-full-preread/preread.json",
+        "bytes": 417,
+        "sha256": "319ccc0e49099f74307d692d72c04aa449dfcf35b488f1cc6e4028be75f912ec"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/edge-full-preread/report.json",
+        "relative_path": "edge-full-preread/report.json",
+        "bytes": 3914,
+        "sha256": "e65a16a45ff68fdad8ea8a1584e6be96f883ba22f6b20054cfdfa72fe31f5da4"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/run-jobs.json",
+        "relative_path": "run-jobs.json",
+        "bytes": 6072,
+        "sha256": "a488d0e3de4674f8ed7c223da32cbe276b1f5cde2713a886759c7e82cb846572"
+      },
+      {
+        "path": "/tmp/beautiful-edge-pair-153412b3-33848023805/run.log",
+        "relative_path": "run.log",
+        "bytes": 153664,
+        "sha256": "fd167863a3ea34ac673309b15ab72cb3377ddbecf510fd03ae72262d8eb690d2"
+      }
+    ]
+  }
+}
