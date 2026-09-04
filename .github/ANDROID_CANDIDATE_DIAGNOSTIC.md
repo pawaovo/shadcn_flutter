@@ -1,19 +1,22 @@
-# Android native candidate diagnostic
+# Android native candidate fixture and diagnostic
 
-This manual-only workflow investigates the retained Android journey failure
-where composition appears over `inventory` before Send. The new native trace
-is intended to identify the input-method calls behind that transition. The
-original main Android job is unchanged. The independent target wraps and runs
-the **entire original Catalog journey**, adding one explicitly enabled native
-candidate step before its existing single Chat Send. It does not replace the
-original failed result or constitute human Chinese-IME acceptance.
+The Android journey uses this fixture to commit the actual `inventory` candidate
+before Send. The target wraps and runs the **entire original Catalog journey**,
+adding one explicitly enabled native candidate step before its existing single
+Chat Send. The regular main Android job and the separate manual diagnostic use
+the same supervisor, helper and target. Earlier failures remain recorded with
+their original source and run; this English LatinIME fixture does not constitute
+human Chinese-IME acceptance.
 
-Dispatch `beautiful_ai_ui_android_candidate.yml` with an exact 40-character
-`source_sha` containing these files. The workflow checks out and verifies that
+For an independent diagnostic, dispatch `beautiful_ai_ui_android_candidate.yml`
+with an exact 40-character `source_sha` containing these files. The workflow checks out and verifies that
 commit, uses Flutter 3.47.0 and a freshly created API 35 x86_64 emulator, compiles
 a fresh helper APK, and runs the target once. No physical device, existing local
 emulator or already-installed Catalog/helper is accepted by the supervisor.
-All build, driver and native failures remain failures; there is no retry path.
+The main job binds the same inputs to `github.sha`. All build, driver and native
+failures remain failures; there is no retry path. Missing composition or a
+missing/ambiguous candidate fails the fixture rather than skipping its commit
+requirement or substituting an input action.
 
 The target is `integration_test/catalog_android_candidate_test.dart`. Its
 compile-time `CATALOG_ANDROID_CANDIDATE` flag defaults to false in the shared
@@ -21,6 +24,13 @@ test helper. The original journey's text, disclosure operations, clipboard,
 single Send and host assertions remain present. The host driver uses the public
 VM service extension `ext.beautiful.androidCandidate`; `requestData` remains the
 authority for the original integration test's final result.
+
+While the live editor observer is installed, VM requests enter a FIFO queue.
+The owning test handles them synchronously after its awaited widget pump, and
+again immediately before Send activation. This keeps actual widget/semantics
+reads inside the test's guarded execution scope. Before Chat, requests read only
+the preparation record; after the final tap or a terminal failure, they read a
+frozen record that cannot authorize another candidate claim.
 
 At the candidate stage the actual editor must contain exactly
 `Check cone inventory`, with selection `[20,20]`, composing `[11,20]`, primary
@@ -51,7 +61,7 @@ owned emulator is torn down before any later run. This isolation is required.
 
 After the actual native candidate response, Dart must observe the unchanged
 full text, empty composition, retained focus and enabled Send. It then reaches
-the original send helper. A diagnostic-only synchronous activation guard checks
+the original send helper. A fixture-only synchronous activation guard checks
 the live widget/controller/semantics again immediately before the existing
 single tap, so reveal-time abort or re-composition cannot become Send. The
 default helper has no extra wait or action. A final successful driver response
@@ -94,6 +104,6 @@ flutter test test/android_candidate_protocol_test.dart test/catalog_chat_send_di
 
 The [native helper documentation](../tool/android_candidate_probe/README.md)
 describes its public APIs, exact HTTP contract, production-used gesture-gate
-tests and bounded build command. The manual workflow compiles/runs those JVM
+tests and bounded build command. Both workflows compile/run those JVM
 tests before APK compilation; no simulated input connection is accepted as a
 successful native candidate run.

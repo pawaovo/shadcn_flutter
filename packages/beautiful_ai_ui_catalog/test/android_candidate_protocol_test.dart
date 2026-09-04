@@ -8,6 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../integration_test/support/android_candidate_protocol.dart';
 import '../integration_test/support/interactions.dart';
+import '../integration_test/support/chat_send_diagnostics.dart';
+import '../integration_test/catalog_android_candidate_test.dart'
+    show readAndroidCandidateSnapshot;
 
 void main() {
   const nonce = '0123456789abcdef0123456789abcdef';
@@ -309,6 +312,58 @@ void main() {
     snapshot = committed();
     expect(protocol.beginSend, throwsStateError);
     expect(protocol.stage, 'action_claimed');
+  });
+
+  testWidgets('final observer records the real Send to Stop transition', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    try {
+      await tester.pumpWidget(const CatalogApp());
+      final chat = find.byKey(const Key('catalog-chat'));
+      final composer = find.descendant(
+        of: chat,
+        matching: find.byType(EditableText),
+      );
+      await tester.ensureVisible(composer);
+      await enterCatalogText(
+        tester,
+        composer,
+        AndroidCandidateProtocol.expectedText,
+      );
+      final before = readAndroidCandidateSnapshot(tester, chat);
+      expect(before['send_count'], 1);
+      expect(before['send_enabled_semantics'], 'isTrue');
+      await sendCatalogChatOnce(
+        tester,
+        chat,
+        AndroidCandidateProtocol.expectedText,
+        onDiagnostic: (_) {},
+      );
+      final after = readAndroidCandidateSnapshot(tester, chat);
+      expect(after['send_count'], 0);
+      expect(after['send_enabled_semantics'], isNull);
+      expect(after['host_status'], 'responding');
+      expect((after['input']! as Map)['text'], isEmpty);
+      expect(
+        (after['host_messages']! as List).where(
+          (message) =>
+              (message as Map)['role'] == 'user' &&
+              message['text'] == AndroidCandidateProtocol.expectedText,
+        ),
+        hasLength(1),
+      );
+      expect(
+        find.descendant(of: chat, matching: find.text('Stop response')),
+        findsOneWidget,
+      );
+      expect(after['observation_error'], isNull);
+      expect(tester.takeException(), isNull);
+    } finally {
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump();
+      semantics.dispose();
+    }
   });
 
   testWidgets('cross-zone RPC waits for the actual WidgetTester pump', (

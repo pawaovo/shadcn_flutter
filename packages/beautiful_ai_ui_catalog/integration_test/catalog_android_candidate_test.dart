@@ -11,6 +11,42 @@ import 'package:integration_test/integration_test.dart';
 import 'catalog_journey_test.dart' as original;
 import 'support/android_candidate_protocol.dart';
 
+/// Reads the actual Catalog state for candidate gates and final observation.
+Map<String, Object?> readAndroidCandidateSnapshot(
+  WidgetTester tester,
+  Finder chat,
+) {
+  final composer = find.descendant(
+    of: chat,
+    matching: find.byType(EditableText),
+  );
+  final send = find.descendant(of: chat, matching: find.text('Send'));
+  final sendCount = send.evaluate().length;
+  final editor = tester.widget<EditableText>(composer);
+  final host = tester.widget<BeautifulChat>(chat);
+  return <String, Object?>{
+    'input': editor.controller.value.toJSON(),
+    'editor_primary_focus': editor.focusNode.hasPrimaryFocus,
+    'send_count': sendCount,
+    'send_enabled_semantics': sendCount == 1
+        ? tester
+              .getSemantics(send)
+              .getSemanticsData()
+              .flagsCollection
+              .isEnabled
+              .name
+        : null,
+    'view_insets_bottom_physical': tester.view.viewInsets.bottom,
+    'device_pixel_ratio': tester.view.devicePixelRatio,
+    'host_status': host.status.name,
+    'host_messages': <Map<String, Object?>>[
+      for (final message in host.messages)
+        <String, Object?>{'role': message.role.name, 'text': message.text},
+    ],
+    'observation_error': null,
+  };
+}
+
 /// The complete, unchanged Catalog journey with one explicit native candidate
 /// handoff before its original Chat Send. This is Android debug diagnosis only.
 void main() {
@@ -90,29 +126,7 @@ void main() {
     final send = find.descendant(of: chat, matching: find.text('Send'));
     final controller = tester.widget<EditableText>(composer).controller;
     rpc.beginLiveObservation();
-    readSnapshot = () {
-      final editor = tester.widget<EditableText>(composer);
-      final host = tester.widget<BeautifulChat>(chat);
-      return <String, Object?>{
-        'input': editor.controller.value.toJSON(),
-        'editor_primary_focus': editor.focusNode.hasPrimaryFocus,
-        'send_count': send.evaluate().length,
-        'send_enabled_semantics': tester
-            .getSemantics(send)
-            .getSemanticsData()
-            .flagsCollection
-            .isEnabled
-            .name,
-        'view_insets_bottom_physical': tester.view.viewInsets.bottom,
-        'device_pixel_ratio': tester.view.devicePixelRatio,
-        'host_status': host.status.name,
-        'host_messages': <Map<String, Object?>>[
-          for (final message in host.messages)
-            <String, Object?>{'role': message.role.name, 'text': message.text},
-        ],
-        'observation_error': null,
-      };
-    };
+    readSnapshot = () => readAndroidCandidateSnapshot(tester, chat);
     final readActivationSnapshot = readSnapshot;
     void freezeObservation() {
       try {

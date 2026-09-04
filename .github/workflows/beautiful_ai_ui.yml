@@ -581,6 +581,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
 
       - name: Set up Java
         uses: actions/setup-java@v5
@@ -615,15 +618,43 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Run journey on Android emulator
+      - name: Verify the native candidate fixture
+        env:
+          CANDIDATE_SOURCE_SHA: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SOURCE_SHA"
+          mkdir -p artifacts/android-candidate
+          printf '%s\n' "$CANDIDATE_SOURCE_SHA" > artifacts/android-candidate/source-sha.txt
+          python3 -B -m unittest discover -s .github/scripts -p 'test_android_candidate_diagnostic.py' -v
+          python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p 'test_build.py' -v
+          cd packages/beautiful_ai_ui_catalog
+          dart test_driver/android_candidate_http_fixture.dart
+
+      - name: Run the full journey with one real Android candidate commit
         uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
+        env:
+          CANDIDATE_SOURCE_SHA: ${{ github.sha }}
         with:
           api-level: 35
           arch: x86_64
+          target: default
           profile: pixel_6
+          force-avd-creation: true
+          enable-hw-keyboard: false
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
-          script: cd packages/beautiful_ai_ui_catalog && flutter test integration_test/catalog_journey_test.dart --device-id=emulator-5554 --no-pub
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -wipe-data
+          script: |
+            python3 tool/android_candidate_probe/build.py --sdk-root "$ANDROID_SDK_ROOT" --source-sha "$CANDIDATE_SOURCE_SHA" --output-dir artifacts/android-candidate/helper-build
+            python3 -B .github/scripts/run_android_candidate_diagnostic.py --source-sha "$CANDIDATE_SOURCE_SHA" --helper-apk artifacts/android-candidate/helper-build/android-candidate-probe.apk --helper-report artifacts/android-candidate/helper-build/build-report.json --output artifacts/android-candidate/run
+
+      - name: Upload original Android journey and candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-native-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/android-candidate/
+          if-no-files-found: error
+          retention-days: 14
 
   apple-builds:
     name: Build Apple catalogs

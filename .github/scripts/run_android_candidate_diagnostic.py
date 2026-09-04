@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""One manual Android IME-candidate experiment around the original full journey.
+"""One Android IME-candidate commit around the original full journey.
 
-The original Android gate is unchanged. Native input is restricted to one
-observed exact candidate; no text, composing, focus, keyboard or Send mutation
-is issued by this supervisor. Public VM state and an earlier device-monotonic
-ticket bind permission to invoke an action. Android can delay delivery inside
+Native input is restricted to one observed exact candidate; no text, composing,
+focus, keyboard or Send mutation is issued by this supervisor. Public VM state
+and an earlier device-monotonic ticket bind permission to invoke an action.
+Android can delay delivery inside
 its public API; the Dart fixture stays mounted until actual native drain, and
 an unverified drain requires teardown of this exclusively owned emulator.
 """
@@ -45,6 +45,7 @@ SOURCE_SCOPES = (
     "packages/beautiful_ai_ui_catalog/android", "packages/beautiful_ai_ui_catalog/integration_test",
     "tool/android_candidate_probe", ".github/scripts/run_android_candidate_diagnostic.py",
     ".github/scripts/run_catalog_input_acceptance.py", ".github/scripts/run_ios_catalog_journey.py",
+    ".github/workflows/beautiful_ai_ui.yml",
     ".github/workflows/beautiful_ai_ui_android_candidate.yml",
 )
 
@@ -462,7 +463,7 @@ class Runner:
 
     def execute(self):
         if sys.platform != "linux" or os.environ.get("GITHUB_ACTIONS") != "true":
-            raise RuntimeError("Live execution requires the fresh manual Linux GitHub Actions emulator")
+            raise RuntimeError("Live execution requires the fresh Linux GitHub Actions emulator")
         if not re.fullmatch(r"[0-9a-f]{40}", self.args.source_sha):
             raise ValueError("An exact source SHA is required")
         actual = self.command(["git", "rev-parse", "HEAD"], "source-head").strip()
