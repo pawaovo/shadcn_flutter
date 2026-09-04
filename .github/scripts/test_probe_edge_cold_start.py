@@ -1,15 +1,19 @@
 """Real adapter/HTTP protocol checks, with an explicitly synthetic upstream."""
 
 import io
+import hashlib
 import json
 from pathlib import Path
 import tempfile
 import threading
+import time
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from unittest.mock import patch
 
 from flutter_edge_webdriver import EdgeAdapter
-from probe_edge_cold_start import Client, SESSION_REQUEST, WebDriverFailure, log_signals, run_cases, startup
+from probe_edge_cold_start import (Client, SESSION_REQUEST, WebDriverFailure,
+                                  log_signals, preread_executable, run_cases, startup)
 
 
 class SyntheticDriver(BaseHTTPRequestHandler):
@@ -160,6 +164,89 @@ class EdgeColdStartTests(unittest.TestCase):
         counts = signals["initial_rectangle_cdp_counts"]
         self.assertEqual(counts["DevTools WebSocket Response: Runtime.evaluate"], 1)
         self.assertEqual(counts["Browser.setWindowBounds"], 0)
+
+
+class EdgePrereadTests(unittest.TestCase):
+    def setUp(self):
+        self.directory = tempfile.TemporaryDirectory()
+        self.addCleanup(self.directory.cleanup)
+        self.output = Path(self.directory.name).resolve()
+        self.executable = self.output / "synthetic-browser-elf"
+        self.payload = b"\x7fELF" + b"synthetic fixture, never executed\n" * 40000
+        self.executable.write_bytes(self.payload)
+        self.executable.chmod(0o755)
+
+    def make_case(self, index, *_):
+        directory = self.output / f"session-{index}"
+        directory.mkdir()
+        (directory / "post-startup-processes.json").write_text(json.dumps({"processes": [
+            {"pid": index + 100, "exe": str(self.executable), "start_ticks": index},
+        ]}))
+        return {"index": index, "status": "passed", "cleanup_status": "verified",
+                "session": {"capabilities": {"goog:processID": index + 100}}}
+
+    def test_preread_is_one_sequential_pass_before_all_three_sessions(self):
+        opened = []
+        bytes_read = []
+        real_open = Path.open
+        class CountedReader:
+            def __init__(self, source):
+                self.source = source
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                self.source.close()
+            def fileno(self):
+                return self.source.fileno()
+            def read(self, count):
+                data = self.source.read(count)
+                bytes_read.append(len(data))
+                return data
+        def open_path(path, *args, **kwargs):
+            source = real_open(path, *args, **kwargs)
+            if path == self.executable:
+                opened.append(str(path))
+                return CountedReader(source)
+            return source
+        calls = []
+        def execute(index, *args):
+            calls.append(index)
+            self.assertEqual(sum(bytes_read), len(self.payload))
+            preread = json.loads((self.output / "preread.json").read_text())
+            self.assertLessEqual(preread["completed_epoch"], time.time())
+            return self.make_case(index, *args)
+        with patch.object(Path, "open", open_path):
+            report = run_cases(self.output, "/edge", "/driver", execute,
+                               preread_path=self.executable)
+        self.assertEqual(calls, [1, 2, 3])
+        self.assertEqual(opened, [str(self.executable)])
+        self.assertEqual(sum(bytes_read), len(self.payload))
+        self.assertEqual(report["preread"]["sha256"], hashlib.sha256(self.payload).hexdigest())
+        self.assertEqual(report["status"], "passed")
+        self.assertTrue(all(r["preread_identity"]["status"] == "verified" for r in report["sessions"]))
+
+    def test_shell_launcher_is_not_accepted_as_actual_browser(self):
+        self.executable.write_text("#!/bin/sh\nexec /actual/edge\n")
+        with self.assertRaisesRegex(ValueError, "ELF browser"):
+            preread_executable(self.executable, self.output)
+        self.assertEqual(json.loads((self.output / "preread.json").read_text())["status"], "failed")
+
+    def test_other_process_matching_preread_cannot_substitute_for_browser_pid(self):
+        def execute(index, *args):
+            report = self.make_case(index, *args)
+            report["session"]["capabilities"]["goog:processID"] = 999
+            return report
+        report = run_cases(self.output, "/edge", "/driver", execute,
+                           preread_path=self.executable)
+        self.assertEqual(report["status"], "failed")
+        self.assertTrue(all("preread_identity_error" in r for r in report["sessions"]))
+
+    def test_baseline_does_not_preread(self):
+        with patch("probe_edge_cold_start.preread_executable", side_effect=AssertionError("must not preread")):
+            report = run_cases(self.output, "/edge", "/driver", self.make_case)
+        self.assertEqual(report["status"], "passed")
+        self.assertEqual(report["startup_condition"], "baseline_no_preread")
+        self.assertFalse((self.output / "preread.json").exists())
 
 
 if __name__ == "__main__":

@@ -12,8 +12,8 @@ startup requests captured from Flutter 3.47 before its Dart test driver starts.
 It does not compile or navigate Catalog, recreate concurrent compiler activity,
 reboot the runner, flush filesystem caches, or claim a full browser journey pass.
 Three passing sessions mean only that this baseline did not reproduce the failure.
-Any later controlled-load comparison must be separately specified; this workflow
-does not introduce one or automatically repeat until success.
+The optional preread condition below is the only additional experimental variable.
+The workflow never automatically repeats until success or adds compiler/CPU load.
 
 The older `codex/edge-152-diagnostic` experiment at `d97a2e12` used three separate
 runners, explicitly installed distribution hashes for Edge 152, and ran complete
@@ -52,6 +52,58 @@ only and does not replace or relax any existing acceptance workflow. Its 50-minu
 outer step bound leaves five minutes for artifact upload within the job bound.
 Cancellation/outer timeout is failure or incomplete evidence, never a passing case.
 
+## One-variable executable preread experiment
+
+The unmodified baseline at source `d1c44cce0bede4355bb4456a1280af34dce00ec5`,
+[run 33838225726](https://github.com/pawaovo/shadcn_flutter/actions/runs/33838225726),
+completed all three sessions. Session creation took 32.634 s, 0.262 s and 0.278 s;
+all original geometry commands and cleanup passed. In session 1, the actual
+browser PID was sampled 32 times: 26 observations had state `D` and wait channel
+`folio_wait_bit_common`. I/O pressure cumulative `some` increased about 25.15 s,
+while its main-thread scheduler queue delay was about 1.53 ms. These observations
+support investigating executable page/I/O waits in that slow successful startup.
+They do not establish the cause of the earlier 300-second navigation timeout.
+The baseline artifacts and every earlier failure remain unchanged.
+
+The experimental command adds one sequential read of the actual browser ELF,
+**once before all three startups**:
+
+```sh
+python3 -B .github/scripts/probe_edge_cold_start.py \
+  --output artifacts/edge-preread-new-run \
+  --preread-browser-executable /opt/microsoft/msedge/msedge
+```
+
+This path was observed through the baseline browser's `/proc/{pid}/exe`; it is not
+the `/usr/bin/microsoft-edge` shell launcher. The diagnostic rejects a shell/non-ELF
+target and records elapsed time, bytes and SHA-256 from the same single sequential
+pass in `preread.json`. Each later session must bind that path to its actual
+`goog:processID` in the post-startup `/proc` snapshot. A different or unavailable
+actual browser identity makes the experiment fail. Normal post-session executable
+hashing must also match the bytes read before startup. No executable is modified.
+
+To explicitly select this condition for one manual run, append
+`-f preread_browser=true` to the dispatch command above. The default is false:
+omitting it preserves the baseline with no preread. Installed-version checks,
+three independent profiles, request sequence/options, 300-second navigation
+deadline, 900-second transport watchdog, observations and cleanup remain the same.
+There is no automatic control rerun or retry of a failed case.
+
+Compare the first session's page/I/O waiting and startup time, plus all failures,
+against the retained baseline; report preread cost separately and alongside total
+elapsed time rather than hiding it as setup. The pre-read intentionally changes
+file-cache residency, not browser settings or the actual startup command. The
+read is a diagnostic intervention, not a proposed production repair. Differences
+between fresh CI runners and a potentially updated browser distribution limit
+causal conclusions; compare recorded versions and executable hashes first. Three
+successful preread sessions still do not resolve the original 300-second failure.
+
+The pinned Flutter 3.47 source also rules out invented initial compile concurrency:
+`DriveCommand` awaits `driverService.start` before `startTest`; the web runner
+awaits `_updateDevFS`, synchronously caches the dill, then completes its app-started
+signal. Only then is the Edge session created. The resident Flutter tool/server
+can remain alive, but this does not mean the initial compile overlaps startup.
+
 ## Preserved protocol and evidence
 
 The harness sends `GET /status`, the captured legacy `POST /session`,
@@ -85,6 +137,8 @@ Each session directory retains:
 `provenance.json` binds source, relevant scripts, runner image, configured executable
 paths and versions. It also hashes actual executable paths observed through
 `/proc/{pid}/exe`, after the sessions finish so hashing does not add startup load.
+In preread mode the one intentional earlier pass is timed and hashed separately;
+the baseline never performs that pass.
 Missing executable files are recorded, not replaced with guessed identities.
 `summary.json` retains all three planned cases and every observed failure.
 
@@ -115,3 +169,6 @@ error, absence of later size requests after that error, rejection of changed
 deadlines, failure retention across three cases, and stopping on unverified
 cleanup. They do not reproduce a real Edge startup failure. Actual Linux runs are
 required before claiming the cold-start bug is reproduced or repaired.
+Additional preread regressions verify one sequential pass before all three cases,
+shell rejection, binding to the browser PID rather than another process, and no
+preread in baseline mode. They use a synthetic ELF-header file that is never run.

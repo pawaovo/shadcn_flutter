@@ -7,6 +7,11 @@ on:
         description: Exact 40-character commit containing the diagnostic
         required: true
         type: string
+      preread_browser:
+        description: Explicit one-variable experiment; preread the actual Edge ELF once before all sessions
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -34,7 +39,14 @@ jobs:
           python3 -B -m unittest discover -s .github/scripts -p 'test_flutter_edge_webdriver.py' -v
       - name: Run exactly three independent sessions with installed Edge and driver
         timeout-minutes: 50
-        run: python3 -B .github/scripts/probe_edge_cold_start.py --output artifacts/edge-cold-start
+        env:
+          DIAGNOSTIC_PREREAD_BROWSER: ${{ inputs.preread_browser }}
+        run: |
+          options=()
+          if [[ "$DIAGNOSTIC_PREREAD_BROWSER" == true ]]; then
+            options+=(--preread-browser-executable /opt/microsoft/msedge/msedge)
+          fi
+          python3 -B .github/scripts/probe_edge_cold_start.py --output artifacts/edge-cold-start "${options[@]}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

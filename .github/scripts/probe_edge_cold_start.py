@@ -15,6 +15,7 @@ from pathlib import Path
 import platform
 import signal
 import socket
+import stat
 import subprocess
 import sys
 import threading
@@ -44,6 +45,56 @@ def file_identity(path):
             digest.update(chunk)
     return {"path": str(path), "resolved": str(resolved),
             "bytes": resolved.stat().st_size, "sha256": digest.hexdigest()}
+
+
+def preread_executable(path, output):
+    """One sequential pass, including its hash, before any measured startup."""
+    started = time.monotonic()
+    report = {"status": "started", "path": str(path), "started_epoch": time.time(),
+              "bytes_read": 0, "condition": "preread_actual_browser_executable_once"}
+    try:
+        resolved = Path(path).resolve(strict=True)
+        report["resolved"] = str(resolved)
+        if not resolved.is_file() or not os.access(resolved, os.X_OK):
+            raise ValueError("Preread target must be an executable regular file")
+        digest = hashlib.sha256()
+        with resolved.open("rb") as source:
+            before = os.fstat(source.fileno())
+            if not stat.S_ISREG(before.st_mode):
+                raise ValueError("Preread target is not a regular file")
+            first = True
+            while chunk := source.read(1024 * 1024):
+                if first and not chunk.startswith(b"\x7fELF"):
+                    raise ValueError("Preread target must be the ELF browser, not its shell launcher")
+                first = False
+                digest.update(chunk)
+                report["bytes_read"] += len(chunk)
+            after = os.fstat(source.fileno())
+        if first or report["bytes_read"] != before.st_size or (
+            before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns
+        ) != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns):
+            raise ValueError("Preread executable changed during the sequential read")
+        report.update(status="read_complete", sha256=digest.hexdigest(),
+                      bytes=after.st_size)
+        return report
+    except BaseException as error:
+        report.update(status="failed", error=f"{type(error).__name__}: {error}")
+        raise
+    finally:
+        report["elapsed_seconds"] = round(time.monotonic() - started, 6)
+        report["completed_epoch"] = time.time()
+        write_json(output / "preread.json", report)
+
+
+def verify_preread_target(preread, report, directory):
+    """Bind the target to the actual session browser PID, not any child process."""
+    pid = report.get("session", {}).get("capabilities", {}).get("goog:processID")
+    snapshot = json.loads((directory / "post-startup-processes.json").read_text())
+    matches = [row for row in snapshot["processes"] if row["pid"] == pid]
+    if len(matches) != 1 or matches[0].get("exe") != preread["resolved"]:
+        raise ValueError(f"Preread target was not verified as this session's actual browser executable: PID {pid}")
+    return {"status": "verified", "pid": pid, "exe": matches[0]["exe"],
+            "start_ticks": matches[0]["start_ticks"]}
 
 
 class WebDriverFailure(RuntimeError):
@@ -349,16 +400,31 @@ def run_case(index, output, binary, driver):
     return report
 
 
-def run_cases(output, binary, driver, execute_case=run_case):
+def run_cases(output, binary, driver, execute_case=run_case, preread_path=None):
+    started = time.monotonic()
     summary = {"status": "started", "planned_sessions": CASE_COUNT,
+               "started_epoch": time.time(),
+               "startup_condition": "baseline_no_preread" if preread_path is None else "preread_browser_once",
                "sessions": [{"index": index, "status": "not_run"} for index in range(1, CASE_COUNT + 1)]}
     try:
+        preread = preread_executable(preread_path, output) if preread_path is not None else None
+        if preread is not None:
+            summary["preread"] = preread
         for index in range(1, CASE_COUNT + 1):
             report = execute_case(index, output, binary, driver)
             summary["sessions"][index - 1] = report
             write_json(output / "summary.json", summary)
             if report.get("cleanup_status") != "verified":
                 raise RuntimeError("Cleanup not verified; remaining independent sessions must not run")
+            if preread is not None:
+                try:
+                    report["preread_identity"] = verify_preread_target(
+                        preread, report, output / f"session-{index}")
+                except Exception as error:
+                    # Keep any original startup error; a mismatched experiment
+                    # target must not turn into a passing comparison.
+                    report.update(status="failed", preread_identity_error=str(error))
+                write_json(output / f"session-{index}" / "report.json", report)
         summary["status"] = "passed" if all(
             item["status"] == "passed" for item in summary["sessions"]
         ) else "failed"
@@ -367,6 +433,7 @@ def run_cases(output, binary, driver, execute_case=run_case):
         if not isinstance(error, Exception):
             raise
     finally:
+        summary["elapsed_seconds_including_preread_and_cleanup"] = round(time.monotonic() - started, 6)
         write_json(output / "summary.json", summary)
     return summary
 
@@ -376,6 +443,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--binary")
     parser.add_argument("--driver")
+    parser.add_argument("--preread-browser-executable", type=Path,
+                        help="Explicit experiment: read this actual ELF browser once before all three sessions")
     args = parser.parse_args()
     if sys.platform != "linux":
         parser.error("Real cold sessions require Linux /proc; use protocol unit tests elsewhere")
@@ -398,6 +467,8 @@ def main():
                       ".github/scripts/test_probe_edge_cold_start.py", ".github/workflows/beautiful_ai_ui_edge_cold_start.yml")],
                   "baseline": "Fresh browser process/profile each time; OS page cache is not flushed",
                   "sampling": "1 Hz /proc; disappearance is not a process exit code; executable hashing happens after sessions"}
+    provenance["startup_condition"] = (
+        "baseline_no_preread" if args.preread_browser_executable is None else "preread_browser_once")
     write_json(output / "provenance.json", provenance)
     try:
         binary = args.binary or executable("microsoft-edge")
@@ -406,7 +477,7 @@ def main():
         provenance["configured_binary"] = binary
         provenance["configured_driver"] = driver
         write_json(output / "provenance.json", provenance)
-        summary = run_cases(output, binary, driver)
+        summary = run_cases(output, binary, driver, preread_path=args.preread_browser_executable)
         paths = {binary, driver}
         for report in summary["sessions"]:
             paths.update(report.get("observed_executables", []))
@@ -417,6 +488,12 @@ def main():
             except OSError as error:
                 provenance["executables"].append({"path": path, "error": str(error)})
         write_json(output / "provenance.json", provenance)
+        if summary.get("preread"):
+            actual = next((item for item in provenance["executables"] if
+                           item.get("resolved") == summary["preread"]["resolved"]), None)
+            if actual is None or actual.get("sha256") != summary["preread"]["sha256"]:
+                summary.update(status="failed", preread_content_error="Actual executable hash did not match the preread bytes")
+                write_json(output / "summary.json", summary)
         return 0 if summary["status"] == "passed" else 1
     except Exception as error:
         write_json(output / "setup-error.json", {"status": "failed", "error": str(error)})
