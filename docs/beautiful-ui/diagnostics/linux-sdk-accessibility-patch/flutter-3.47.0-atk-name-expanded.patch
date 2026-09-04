@@ -1,0 +1,75 @@
+--- a/engine/src/flutter/shell/platform/linux/fl_accessible_node.cc
++++ b/engine/src/flutter/shell/platform/linux/fl_accessible_node.cc
+@@ -54,6 +54,7 @@
+   GWeakRef parent;
+ 
+   int32_t node_id;
++  gboolean name_initialized;
+   gchar* name;
+   gint index;
+   gint x, y, width, height;
+@@ -118,6 +119,16 @@
+ // Returns TRUE if [flags] indicate this element is enabled.
+ static gboolean is_enabled(FlutterSemanticsFlags flags) {
+   return flags.is_enabled == kFlutterTristateTrue;
++}
++
++// Returns TRUE if [flags] describe an expandable element.
++static gboolean is_expandable(FlutterSemanticsFlags flags) {
++  return flags.is_expanded != kFlutterTristateNone;
++}
++
++// Returns TRUE if [flags] describe an expanded element.
++static gboolean is_expanded(FlutterSemanticsFlags flags) {
++  return flags.is_expanded == kFlutterTristateTrue;
+ }
+ 
+ // Returns TRUE if [action] is set in [actions].
+@@ -279,6 +290,12 @@
+   if (is_selected(priv->flags)) {
+     atk_state_set_add_state(state_set, ATK_STATE_SELECTED);
+   }
++  if (is_expandable(priv->flags)) {
++    atk_state_set_add_state(state_set, ATK_STATE_EXPANDABLE);
++  }
++  if (is_expanded(priv->flags)) {
++    atk_state_set_add_state(state_set, ATK_STATE_EXPANDED);
++  }
+   if (is_enabled(priv->flags)) {
+     atk_state_set_add_state(state_set, ATK_STATE_ENABLED);
+   }
+@@ -364,8 +381,19 @@
+ static void fl_accessible_node_set_name_impl(FlAccessibleNode* self,
+                                              const gchar* name) {
+   FlAccessibleNodePrivate* priv = FL_ACCESSIBLE_NODE_GET_PRIVATE(self);
++  // Track assignment independently: clearing the name must not make the next
++  // assignment look like initialization again.
++  const gboolean had_name = priv->name_initialized;
++  priv->name_initialized = TRUE;
++  if (g_strcmp0(priv->name, name) == 0) {
++    return;
++  }
++  // Like atk_object_set_name, do not notify for initial name assignment.
+   g_free(priv->name);
+   priv->name = g_strdup(name);
++  if (had_name) {
++    g_object_notify(G_OBJECT(self), "accessible-name");
++  }
+ }
+ 
+ // Implements FlAccessibleNode::set_extents.
+@@ -422,6 +450,14 @@
+   if (flag_changed(is_selected(old_flags), is_selected(priv->flags))) {
+     atk_object_notify_state_change(ATK_OBJECT(self), ATK_STATE_SELECTED,
+                                    is_selected(priv->flags));
++  }
++  if (flag_changed(is_expandable(old_flags), is_expandable(priv->flags))) {
++    atk_object_notify_state_change(ATK_OBJECT(self), ATK_STATE_EXPANDABLE,
++                                   is_expandable(priv->flags));
++  }
++  if (flag_changed(is_expanded(old_flags), is_expanded(priv->flags))) {
++    atk_object_notify_state_change(ATK_OBJECT(self), ATK_STATE_EXPANDED,
++                                   is_expanded(priv->flags));
+   }
+   if (flag_changed(is_sensitive(old_flags), is_sensitive(priv->flags))) {
+     atk_object_notify_state_change(ATK_OBJECT(self), ATK_STATE_SENSITIVE,

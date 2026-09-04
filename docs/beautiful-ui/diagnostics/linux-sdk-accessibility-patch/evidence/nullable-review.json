@@ -1,0 +1,7 @@
+{
+  "candidate_before_fix_patch_sha256": "5dd6824d3ddb1f7cb15b05b826f17cd98f7e7a4ccd6d94870a6c72daed2efcaa",
+  "defect": "Using current name != nullptr as the initialization test suppresses clear/reassign and explicit initial-null updates.",
+  "tests": 2,
+  "failures": 2,
+  "correction": "Private name_initialized flag preserves nullable values and distinguishes first assignment from subsequent changes."
+}

@@ -1,0 +1,206 @@
+{
+  "tests": 10,
+  "failures": 8,
+  "disabled": 0,
+  "errors": 0,
+  "timestamp": "2026-09-04T04:38:43Z",
+  "time": "0s",
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "NativeAtkSourceTest",
+      "tests": 10,
+      "failures": 8,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2026-09-04T04:38:43Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "ChangedNameReachesRealPropertyListenersWithUpdatedValue",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 86,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:92\nExpected equality of these values:\n  notify_names\n    Which is: {}\n  std::vector<std::string>({\"Theme: light\"})\n    Which is: { \"Theme: light\" }\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:93\nExpected equality of these values:\n  property_names\n    Which is: {}\n  std::vector<std::string>({\"Theme: light\"})\n    Which is: { \"Theme: light\" }\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "InitialNameIsSilentLikeAtkObjectSetName",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 96,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "EqualNameIsSilent",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 103,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "EmptyAndUnicodeNamesKeepTheirActualValues",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 113,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:119\nExpected equality of these values:\n  notify_names\n    Which is: {}\n  std::vector<std::string>({\"主题：浅色\", \"\"})\n    Which is: { \"\\xE4\\xB8\\xBB\\xE9\\xA2\\x98\\xEF\\xBC\\x9A\\xE6\\xB5\\x85\\xE8\\x89\\xB2\"\n    As Text: \"主题：浅色\", \"\" }\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "PropertyFreezeCoalescesThroughRealGObjectNotification",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 123,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:131\nExpected equality of these values:\n  notify_names\n    Which is: {}\n  std::vector<std::string>({\"Theme: light\"})\n    Which is: { \"Theme: light\" }\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "ClearingNameDoesNotSuppressLaterReassignment",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 135,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:140\nExpected equality of these values:\n  notify_names\n    Which is: {}\n  std::vector<std::string>({\"<null>\", \"Theme: light\"})\n    Which is: { \"<null>\", \"Theme: light\" }\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "ExplicitInitialNullStillPublishesLaterName",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 144,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:148\nExpected equality of these values:\n  notify_names\n    Which is: {}\n  std::vector<std::string>({\"Theme: light\"})\n    Which is: { \"Theme: light\" }\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "TristateExpansionMapsAndNotifiesEveryTransition",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 152,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:67\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)\n    Which is: false\n  expandable\n    Which is: true\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:72\nExpected equality of these values:\n  state_events.size()\n    Which is: 0\n  1u\n    Which is: 1\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:67\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)\n    Which is: false\n  expandable\n    Which is: true\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:68\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDED) != (0)\n    Which is: false\n  expanded\n    Which is: true\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:72\nExpected equality of these values:\n  state_events.size()\n    Which is: 0\n  1u\n    Which is: 1\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:67\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)\n    Which is: false\n  expandable\n    Which is: true\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:72\nExpected equality of these values:\n  state_events.size()\n    Which is: 0\n  1u\n    Which is: 1\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:72\nExpected equality of these values:\n  state_events.size()\n    Which is: 0\n  1u\n    Which is: 1\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "RemovingExpandedCapabilityPublishesCoherentFinalState",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 176,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:181\nExpected equality of these values:\n  state_events.size()\n    Which is: 0\n  2u\n    Which is: 2\n",
+              "type": ""
+            }
+          ]
+        },
+        {
+          "name": "ExpansionPreservesExistingEnabledFocusAndRoleMapping",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 191,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:43Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest",
+          "failures": [
+            {
+              "failure": "\/proof\/native_source_test.cc:67\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)\n    Which is: false\n  expandable\n    Which is: true\n",
+              "type": ""
+            },
+            {
+              "failure": "\/proof\/native_source_test.cc:68\nExpected equality of these values:\n  atk_state_set_contains_state(states, ATK_STATE_EXPANDED) != (0)\n    Which is: false\n  expanded\n    Which is: true\n",
+              "type": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

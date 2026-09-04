@@ -1,0 +1,122 @@
+{
+  "tests": 10,
+  "failures": 0,
+  "disabled": 0,
+  "errors": 0,
+  "timestamp": "2026-09-04T04:38:44Z",
+  "time": "0s",
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "NativeAtkSourceTest",
+      "tests": 10,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2026-09-04T04:38:44Z",
+      "time": "0s",
+      "testsuite": [
+        {
+          "name": "ChangedNameReachesRealPropertyListenersWithUpdatedValue",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 86,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "InitialNameIsSilentLikeAtkObjectSetName",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 96,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "EqualNameIsSilent",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 103,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "EmptyAndUnicodeNamesKeepTheirActualValues",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 113,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "PropertyFreezeCoalescesThroughRealGObjectNotification",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 123,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "ClearingNameDoesNotSuppressLaterReassignment",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 135,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "ExplicitInitialNullStillPublishesLaterName",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 144,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "TristateExpansionMapsAndNotifiesEveryTransition",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 152,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "RemovingExpandedCapabilityPublishesCoherentFinalState",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 176,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        },
+        {
+          "name": "ExpansionPreservesExistingEnabledFocusAndRoleMapping",
+          "file": "\/proof\/native_source_test.cc",
+          "line": 191,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-09-04T04:38:44Z",
+          "time": "0s",
+          "classname": "NativeAtkSourceTest"
+        }
+      ]
+    }
+  ]
+}

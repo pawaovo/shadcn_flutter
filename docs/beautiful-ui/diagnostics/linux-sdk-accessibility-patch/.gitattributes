@@ -1,0 +1,2 @@
+# Unified diffs encode an empty context line as a single significant space.
+flutter-3.47.0-atk-name-expanded.patch whitespace=-blank-at-eol

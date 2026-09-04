@@ -1,0 +1,27 @@
+{
+  "name": "/beautiful-atk-sdk-proof-20260904",
+  "id": "e8b83f15b8151d68a2835fd799febc8902cd0c5f87e45ee8cff063e182f09f89",
+  "cpu_limit": 2.0,
+  "memory_limit_bytes": 2147483648,
+  "image_id": "sha256:5b8c0c14690ed170da4e663fe0bae0d58efe59661e791296ffab28ed2113b650",
+  "image_repo_digests": [
+    "ubuntu@sha256:33ceb71981b602c1a7443a53469e4dba065f7503eab3078a2d7a57a2ab987517"
+  ],
+  "image_architecture": "arm64",
+  "image_os": "linux",
+  "mounts": [
+    {
+      "destination": "/sdk",
+      "read_write": false
+    },
+    {
+      "destination": "/proof",
+      "read_write": false
+    },
+    {
+      "destination": "/work",
+      "read_write": true
+    }
+  ],
+  "source_scope": "Installed SDK was mounted read-only; original and patched complete source units compiled only in disposable output directories."
+}

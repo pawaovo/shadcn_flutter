@@ -1,0 +1,14 @@
+{
+  "framework_version": "3.47.0",
+  "framework_revision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+  "original_file_sha256": {
+    "engine/src/flutter/shell/platform/linux/fl_accessible_node.cc": "8fe18d11f896a26c3236c80411b7eaca25a7f755803f3e3cee19ada89a3a861f",
+    "engine/src/flutter/shell/platform/linux/fl_accessible_node.h": "b444d174a84d459b661ab8fdd7a9b7a10b0e7305019d144969841153ecc72a63",
+    "engine/src/flutter/shell/platform/linux/fl_engine_private.h": "fa415c458e27f83e4e567603868fcc7f4166d172b6e0811996a2e0ad09acd1a0",
+    "engine/src/flutter/shell/platform/embedder/embedder.h": "94122469b254a932394bb5bb5c625317426eefd6e23d4366e32372c70ac5be37"
+  },
+  "patched_source_sha256": "dbb1e3bf353dd6ec2b8f85866854cc09c6befe2e3990f213a97ca79c48426ded",
+  "patch_sha256": "edff45421907b259cd3b31330816e5f5c35d3ec83e31847d41aaacab773d4394",
+  "installed_sdk_mutated": false,
+  "scope": "Source-level unit proof; no app, Dart engine or screen-reader acceptance"
+}

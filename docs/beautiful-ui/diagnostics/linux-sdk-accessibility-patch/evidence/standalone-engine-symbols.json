@@ -1,0 +1,22 @@
+{
+  "source_engine_revision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+  "url": "https://storage.googleapis.com/flutter_infra_release/flutter/5f77625673248ee5846fbcaf5d3e1a3878386fd7/linux-arm64/linux-arm64-embedder.zip",
+  "download_bytes": 14825981,
+  "archive_sha256": "20e2d781a1ba58b40362c519c1a9039cdfb5fd551797727c5ee102312aa3bff9",
+  "elf_bytes": 41608784,
+  "elf_sha256": "340899cd9f600989ff217cb0663d2485c373ddd348c5cd32dbef0e3a10a92839",
+  "elf_machine": 183,
+  "archive_members": [
+    "LICENSE.embedder-archive.md",
+    "flutter_embedder.h",
+    "libflutter_engine.so"
+  ],
+  "defined_default_or_protected_dynamic_symbols": 113,
+  "required_symbols": {
+    "FlutterEngineGetProcAddresses": true,
+    "Dart_CurrentIsolate": false,
+    "Dart_EnterIsolate": false,
+    "Dart_ExitIsolate": false
+  },
+  "scope": "Read-only ELF dynamic symbol inspection. No runtime loading, symbol modification, interposition or hidden-symbol use."
+}

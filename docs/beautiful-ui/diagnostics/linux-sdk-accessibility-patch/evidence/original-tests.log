@@ -1,0 +1,160 @@
+Running main() from ./googletest/src/gtest_main.cc
+[==========] Running 10 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 10 tests from NativeAtkSourceTest
+[ RUN      ] NativeAtkSourceTest.ChangedNameReachesRealPropertyListenersWithUpdatedValue
+/proof/native_source_test.cc:92: Failure
+Expected equality of these values:
+  notify_names
+    Which is: {}
+  std::vector<std::string>({"Theme: light"})
+    Which is: { "Theme: light" }
+
+/proof/native_source_test.cc:93: Failure
+Expected equality of these values:
+  property_names
+    Which is: {}
+  std::vector<std::string>({"Theme: light"})
+    Which is: { "Theme: light" }
+
+[  FAILED  ] NativeAtkSourceTest.ChangedNameReachesRealPropertyListenersWithUpdatedValue (0 ms)
+[ RUN      ] NativeAtkSourceTest.InitialNameIsSilentLikeAtkObjectSetName
+[       OK ] NativeAtkSourceTest.InitialNameIsSilentLikeAtkObjectSetName (0 ms)
+[ RUN      ] NativeAtkSourceTest.EqualNameIsSilent
+[       OK ] NativeAtkSourceTest.EqualNameIsSilent (0 ms)
+[ RUN      ] NativeAtkSourceTest.EmptyAndUnicodeNamesKeepTheirActualValues
+/proof/native_source_test.cc:119: Failure
+Expected equality of these values:
+  notify_names
+    Which is: {}
+  std::vector<std::string>({"主题：浅色", ""})
+    Which is: { "\xE4\xB8\xBB\xE9\xA2\x98\xEF\xBC\x9A\xE6\xB5\x85\xE8\x89\xB2"
+    As Text: "主题：浅色", "" }
+
+[  FAILED  ] NativeAtkSourceTest.EmptyAndUnicodeNamesKeepTheirActualValues (0 ms)
+[ RUN      ] NativeAtkSourceTest.PropertyFreezeCoalescesThroughRealGObjectNotification
+/proof/native_source_test.cc:131: Failure
+Expected equality of these values:
+  notify_names
+    Which is: {}
+  std::vector<std::string>({"Theme: light"})
+    Which is: { "Theme: light" }
+
+[  FAILED  ] NativeAtkSourceTest.PropertyFreezeCoalescesThroughRealGObjectNotification (0 ms)
+[ RUN      ] NativeAtkSourceTest.ClearingNameDoesNotSuppressLaterReassignment
+/proof/native_source_test.cc:140: Failure
+Expected equality of these values:
+  notify_names
+    Which is: {}
+  std::vector<std::string>({"<null>", "Theme: light"})
+    Which is: { "<null>", "Theme: light" }
+
+[  FAILED  ] NativeAtkSourceTest.ClearingNameDoesNotSuppressLaterReassignment (0 ms)
+[ RUN      ] NativeAtkSourceTest.ExplicitInitialNullStillPublishesLaterName
+/proof/native_source_test.cc:148: Failure
+Expected equality of these values:
+  notify_names
+    Which is: {}
+  std::vector<std::string>({"Theme: light"})
+    Which is: { "Theme: light" }
+
+[  FAILED  ] NativeAtkSourceTest.ExplicitInitialNullStillPublishesLaterName (0 ms)
+[ RUN      ] NativeAtkSourceTest.TristateExpansionMapsAndNotifiesEveryTransition
+/proof/native_source_test.cc:67: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)
+    Which is: false
+  expandable
+    Which is: true
+
+/proof/native_source_test.cc:72: Failure
+Expected equality of these values:
+  state_events.size()
+    Which is: 0
+  1u
+    Which is: 1
+
+/proof/native_source_test.cc:67: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)
+    Which is: false
+  expandable
+    Which is: true
+
+/proof/native_source_test.cc:68: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDED) != (0)
+    Which is: false
+  expanded
+    Which is: true
+
+/proof/native_source_test.cc:72: Failure
+Expected equality of these values:
+  state_events.size()
+    Which is: 0
+  1u
+    Which is: 1
+
+/proof/native_source_test.cc:67: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)
+    Which is: false
+  expandable
+    Which is: true
+
+/proof/native_source_test.cc:72: Failure
+Expected equality of these values:
+  state_events.size()
+    Which is: 0
+  1u
+    Which is: 1
+
+/proof/native_source_test.cc:72: Failure
+Expected equality of these values:
+  state_events.size()
+    Which is: 0
+  1u
+    Which is: 1
+
+[  FAILED  ] NativeAtkSourceTest.TristateExpansionMapsAndNotifiesEveryTransition (0 ms)
+[ RUN      ] NativeAtkSourceTest.RemovingExpandedCapabilityPublishesCoherentFinalState
+/proof/native_source_test.cc:181: Failure
+Expected equality of these values:
+  state_events.size()
+    Which is: 0
+  2u
+    Which is: 2
+
+[  FAILED  ] NativeAtkSourceTest.RemovingExpandedCapabilityPublishesCoherentFinalState (0 ms)
+[ RUN      ] NativeAtkSourceTest.ExpansionPreservesExistingEnabledFocusAndRoleMapping
+/proof/native_source_test.cc:67: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDABLE) != (0)
+    Which is: false
+  expandable
+    Which is: true
+
+/proof/native_source_test.cc:68: Failure
+Expected equality of these values:
+  atk_state_set_contains_state(states, ATK_STATE_EXPANDED) != (0)
+    Which is: false
+  expanded
+    Which is: true
+
+[  FAILED  ] NativeAtkSourceTest.ExpansionPreservesExistingEnabledFocusAndRoleMapping (0 ms)
+[----------] 10 tests from NativeAtkSourceTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 10 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 8 tests, listed below:
+[  FAILED  ] NativeAtkSourceTest.ChangedNameReachesRealPropertyListenersWithUpdatedValue
+[  FAILED  ] NativeAtkSourceTest.EmptyAndUnicodeNamesKeepTheirActualValues
+[  FAILED  ] NativeAtkSourceTest.PropertyFreezeCoalescesThroughRealGObjectNotification
+[  FAILED  ] NativeAtkSourceTest.ClearingNameDoesNotSuppressLaterReassignment
+[  FAILED  ] NativeAtkSourceTest.ExplicitInitialNullStillPublishesLaterName
+[  FAILED  ] NativeAtkSourceTest.TristateExpansionMapsAndNotifiesEveryTransition
+[  FAILED  ] NativeAtkSourceTest.RemovingExpandedCapabilityPublishesCoherentFinalState
+[  FAILED  ] NativeAtkSourceTest.ExpansionPreservesExistingEnabledFocusAndRoleMapping
+
+ 8 FAILED TESTS
