@@ -23,6 +23,7 @@ import time
 import wave
 
 from probe_real_at_linux import Probe
+from owned_pty_capture import OwnedPtyCapture
 from run_catalog_input_acceptance import start_owned_process, stop_owned_process
 
 
@@ -71,6 +72,7 @@ def source_inventory() -> dict[str, str]:
         "packages/beautiful_ai_ui/pubspec.yaml", "packages/beautiful_ai_ui_catalog/pubspec.yaml",
         "packages/shadcn_flutter/pubspec.yaml",
         ".github/scripts/probe_catalog_orca_linux.py", ".github/scripts/probe_real_at_linux.py",
+        ".github/scripts/owned_pty_capture.py",
         ".github/scripts/run_catalog_input_acceptance.py", ".github/scripts/run_ios_catalog_journey.py",
     ))
     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(paths)}
@@ -181,6 +183,7 @@ class CatalogProbe(Probe):
         self.root.mkdir(parents=True, exist_ok=False)
         super().__init__(self.root / "capability-preflight", seconds)
         self.named_children = {}
+        self.orca_capture = None
         self.current_task = None
         self.provenance = provenance.resolve()
         self.app = {
@@ -195,14 +198,39 @@ class CatalogProbe(Probe):
         }
 
     def spawn(self, argv, name, *, stdout=None):
-        child = super().spawn(argv, name, stdout=stdout)
+        if name == "orca":
+            debug_files = [arg.split("=", 1)[1] for arg in argv if arg.startswith("--debug-file=")]
+            if len(debug_files) != 1 or stdout is not None:
+                raise RuntimeError("The pilot requires exactly one owned Orca debug destination")
+            debug_path = Path(debug_files[0])
+            command = ["--debug-file=/dev/stdout" if arg.startswith("--debug-file=") else arg for arg in argv]
+            error_log = (self.output / "orca.log").open("wb")
+            self.handles.append(error_log)
+            self.orca_capture = OwnedPtyCapture(command, debug_path, env=self.env, stderr=error_log)
+            child = self.orca_capture.process
+            self.children.append(child)
+            self.app["orca_debug_transport"] = {
+                "kind": "owned_raw_pty", "producer_debug_file": "/dev/stdout",
+                "captured_log": str(debug_path.relative_to(self.root)),
+                "content_policy": "Original diagnostic bytes; no injected utterances or handler records",
+            }
+        else:
+            child = super().spawn(argv, name, stdout=stdout)
         self.named_children[name] = child
         return child
+
+    def stop(self, child):
+        if self.orca_capture is not None and child is self.orca_capture.process:
+            self.orca_capture.close(grace=1, kill_timeout=1)
+        else:
+            super().stop(child)
 
     def checkpoint(self) -> None:
         write_json(self.root / "catalog-report.json", self.app)
 
     def alive(self) -> None:
+        if self.orca_capture is not None and self.orca_capture.error is not None:
+            raise RuntimeError(f"Real Orca diagnostic capture failed: {self.orca_capture.error}")
         dead = {name: self.named_children[name].poll() for name in
                 ("pulseaudio", "speech-dispatcher", "orca", "catalog")
                 if name in self.named_children and self.named_children[name].poll() is not None}
@@ -516,6 +544,13 @@ class CatalogProbe(Probe):
             self.app["errors"].append(f"Private runtime cleanup: {error}")
         if self.app["errors"]:
             self.app["status"] = "not_observed"
+        if self.orca_capture is not None:
+            self.app["orca_debug_transport"].update({
+                "bytes_captured": self.orca_capture.bytes_written,
+                "eof_verified": self.orca_capture.eof,
+                "reader_stopped": not self.orca_capture.reader_alive,
+                "capture_error": str(self.orca_capture.error) if self.orca_capture.error else None,
+            })
         self.app["elapsed_seconds"] = round(time.monotonic() - self.started, 3)
         self.app["cleanup"] = "verified" if not any("cleanup:" in error for error in self.app["errors"]) else "failed"
         self.checkpoint()

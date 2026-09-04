@@ -33,7 +33,7 @@ jobs:
         run: flutter pub get --enforce-lockfile
       - name: Verify actual browser input protocol and failure propagation
         run: |
-          node --test .github/scripts/test_catalog_browser_bridge.mjs
+          node --test .github/scripts/test_catalog_browser_bridge.mjs .github/scripts/test_catalog_browser_readiness.mjs
           dart --packages=.dart_tool/package_config.json .github/scripts/test_catalog_browser_input_protocol.dart
           python3 -B -m unittest discover -s .github/scripts -p 'test_run_catalog_input_acceptance.py'
       - name: Run framework and trusted browser input suites

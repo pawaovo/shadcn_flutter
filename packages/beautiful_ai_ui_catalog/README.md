@@ -5,8 +5,10 @@ Multi-platform visual, interaction, accessibility, and integration harness for
 
 Current release evidence and open gates are summarized in
 [September 4 release readiness](../../docs/beautiful-ui/quality_evidence/2026-09-04-release-readiness.md).
-The `c2bde85` results below are dated historical observations, not acceptance
-of later source. All 27 registry entries remain `in_progress` and all six
+Candidate `87299572` passed main CI **12/12** and all three native framework
+input jobs; P1/P2 native budgets passed **8/8**, while P3 and independent Web/AT
+gates remain open. The `c2bde85` results below are dated historical observations,
+not acceptance of later source. All 27 registry entries remain `in_progress` and all six
 platforms remain `Partial`.
 
 Run on the Web:

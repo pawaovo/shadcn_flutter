@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:integration_test/common.dart';
 
 import '../../packages/beautiful_ai_ui_catalog/integration_test/driver/catalog_browser_input_driver.dart';
 
@@ -139,5 +142,254 @@ Future<void> main() async {
   } finally {
     driver.close();
     await server.close(force: true);
+  }
+  await _exerciseDriverMain();
+}
+
+/// Run the actual entry point against an HTTP fixture, including its reporting
+/// and process exit behavior. No browser, clipboard, or product action runs.
+Future<void> _exerciseDriverMain() async {
+  final root = File.fromUri(Platform.script).parent.parent.parent;
+  final entryPoint =
+      Platform.environment['BROWSER_PROTOCOL_DRIVER_UNDER_TEST'] ??
+      '${root.path}/packages/beautiful_ai_ui_catalog/integration_test/driver/'
+          'catalog_browser_input_driver.dart';
+  final evidence = await Directory.systemTemp.createTemp(
+    'catalog-browser-input-protocol-',
+  );
+  final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+  const originalFailure = 'Original Flutter assertion: exact selected text 中文';
+  const acknowledgement = 'fixture-copy-ack';
+  const typedText = 'browser 中文 draft';
+  final terminalResult = jsonEncode(<String, Object?>{
+    'isError': false,
+    'response': <String, Object?>{
+      'message': Response.someTestsFailed(
+        <Failure>[Failure('real browser input fixture', originalFailure)],
+        data: <String, dynamic>{'fixture_target_failure': true},
+      ).toJson(),
+    },
+  });
+  var clicks = 0;
+  var readinessSamplesAfterClick = 0;
+  var ready = false;
+  var typedBeforeReady = false;
+  var terminalAvailable = false;
+  var terminalSnapshots = 0;
+  final typedBatches = <String>[];
+  final fixtureErrors = <String>[];
+
+  Map<String, Object?> state() => <String, Object?>{
+    'stage': 'prompt-type',
+    'x': 40,
+    'y': 80,
+    'width': 1440,
+    'height': 900,
+    'draft': '',
+    'focused': readinessSamplesAfterClick > 1,
+    'selectionStart': 0,
+    'selectionEnd': 0,
+  };
+
+  server.listen((request) async {
+    request.response.headers.contentType = ContentType.json;
+    try {
+      final raw = await utf8.decoder.bind(request).join();
+      final body = raw.isEmpty
+          ? <String, dynamic>{}
+          : jsonDecode(raw) as Map<String, dynamic>;
+      Object? value;
+      if (request.uri.path == '/session/fixture/url') {
+        value = null;
+      } else if (request.uri.path == '/session/fixture/actions') {
+        final source = (body['actions'] as List).single as Map;
+        if (source['type'] == 'pointer') {
+          clicks++;
+        } else if (source['type'] == 'key') {
+          if (!ready) {
+            typedBeforeReady = true;
+            throw StateError('Fixture rejected typing before focus was ready');
+          }
+          final actions = source['actions'] as List;
+          final expectedActions = <Map<String, String>>[
+            for (final rune in typedText.runes) ...<Map<String, String>>[
+              <String, String>{
+                'type': 'keyDown',
+                'value': String.fromCharCode(rune),
+              },
+              <String, String>{
+                'type': 'keyUp',
+                'value': String.fromCharCode(rune),
+              },
+            ],
+          ];
+          if (jsonEncode(actions) != jsonEncode(expectedActions)) {
+            throw StateError(
+              'Expected one complete, balanced initial text batch',
+            );
+          }
+          typedBatches.add(
+            actions
+                .where((action) => action['type'] == 'keyDown')
+                .map((action) => action['value'] as String)
+                .join(),
+          );
+          terminalAvailable = true;
+        } else {
+          throw StateError('Unexpected W3C input source: $source');
+        }
+      } else if (request.uri.path == '/session/fixture/execute/sync') {
+        final script = body['script'] as String;
+        if (script.contains(r'typeof window.$flutterDriver') ||
+            script.startsWith(r'window.$flutterDriver(arguments[0])')) {
+          value = true;
+        } else if (script.contains('__beautifulInputAcceptance')) {
+          if (clicks > 0 && !terminalAvailable) {
+            readinessSamplesAfterClick++;
+            // Flutter focus can arrive before the active DOM editor is ready.
+            ready = readinessSamplesAfterClick > 2;
+          }
+          final snapshot = <String, Object?>{
+            'stage': terminalAvailable ? null : state(),
+            'result': terminalAvailable ? terminalResult : null,
+            'acknowledgement': terminalAvailable ? acknowledgement : null,
+            'activeEditor': <String, Object?>{
+              'ready': ready,
+              'tagName': 'TEXTAREA',
+              'value': terminalAvailable ? typedText : '',
+              'selectionStart': terminalAvailable ? typedText.length : 0,
+              'selectionEnd': terminalAvailable ? typedText.length : 0,
+            },
+          };
+          if (script.contains(r'$flutterDriverResult')) {
+            if (terminalAvailable) terminalSnapshots++;
+            value = snapshot;
+          } else {
+            // Keep the pre-fix driver's stage-only polling supported so the
+            // same fixture catches its missing readiness wait.
+            value = snapshot['stage'];
+          }
+        } else {
+          throw StateError('Unexpected driver script: $script');
+        }
+      } else {
+        throw StateError('Unexpected WebDriver route: ${request.uri.path}');
+      }
+      request.response.write(jsonEncode(<String, Object?>{'value': value}));
+    } catch (error) {
+      fixtureErrors.add('$error');
+      request.response.statusCode = HttpStatus.internalServerError;
+      request.response.write(
+        jsonEncode(<String, Object?>{
+          'value': <String, Object?>{
+            'error': 'unknown error',
+            'message': '$error',
+          },
+        }),
+      );
+    } finally {
+      await request.response.close();
+    }
+  });
+
+  Process? process;
+  var exited = false;
+  try {
+    final elapsed = Stopwatch()..start();
+    process = await Process.start(
+      Platform.resolvedExecutable,
+      <String>[
+        '--packages=${root.path}/.dart_tool/package_config.json',
+        entryPoint,
+      ],
+      workingDirectory: root.path,
+      environment: <String, String>{
+        'DRIVER_SESSION_URI': 'http://127.0.0.1:${server.port}/',
+        'DRIVER_SESSION_ID': 'fixture',
+        'DRIVER_SESSION_CAPABILITIES': jsonEncode(<String, String>{
+          'browserName': 'firefox',
+          'browserVersion': 'fixture',
+          'platformName': 'linux',
+        }),
+        'BEAUTIFUL_INPUT_BROWSER': 'firefox',
+        'BEAUTIFUL_INPUT_EVIDENCE': evidence.path,
+        'VM_SERVICE_URL': 'http://127.0.0.1/catalog-fixture',
+      },
+    );
+    final stdoutText = utf8.decoder.bind(process.stdout).join();
+    final stderrText = utf8.decoder.bind(process.stderr).join();
+    final code = await process.exitCode.timeout(const Duration(seconds: 10));
+    exited = true;
+    final output = '${await stdoutText}\n${await stderrText}';
+    void check(bool condition, String description) {
+      if (!condition) throw StateError('$description\nDriver output: $output');
+    }
+
+    check(
+      !typedBeforeReady,
+      'Driver typed before focus readiness was observed',
+    );
+    check(fixtureErrors.isEmpty, 'Unexpected fixture errors: $fixtureErrors');
+    check(clicks == 1, 'Initial input must click exactly once, saw $clicks');
+    check(
+      readinessSamplesAfterClick >= 3,
+      'Driver must wait for both Flutter focus and active DOM editor readiness',
+    );
+    check(
+      typedBatches.length == 1 && typedBatches.single == typedText,
+      'Driver must send the original text once after readiness: $typedBatches',
+    );
+    check(code != 0, 'Original Flutter failure must make driver.main fail');
+    check(
+      terminalSnapshots == 1 && elapsed.elapsed < const Duration(seconds: 10),
+      'Driver must stop on the first terminal failure instead of polling 65s',
+    );
+    final report = jsonDecode(
+      await File('${evidence.path}/browser-input.json').readAsString(),
+    ) as Map<String, dynamic>;
+    check(report['status'] == 'failed', 'Evidence must retain failed status');
+    check(
+      '${report['error']}'.contains(originalFailure) &&
+          '${report['original_failure']}'.contains(originalFailure),
+      'Evidence must preserve the original Flutter failure details',
+    );
+    check(
+      (report['integration_data'] as Map?)?['fixture_target_failure'] == true,
+      'Evidence must retain the original integration response data',
+    );
+    final lastState = report['last_non_null_state'] as Map?;
+    check(
+      lastState?['stage'] == 'prompt-type' && lastState?['focused'] == true,
+      'A null terminal stage must retain the last ready Flutter state',
+    );
+    check(
+      report['last_acknowledgement'] == acknowledgement,
+      'Evidence must retain the terminal acknowledgement',
+    );
+    check(
+      (report['last_snapshot'] as Map?)?['result'] == terminalResult,
+      'Evidence must retain the original terminal snapshot',
+    );
+    print(
+      'Driver main checks passed: one click, delayed focus readiness, exact '
+      'text once, immediate original failure, retained state and acknowledgement.',
+    );
+  } on TimeoutException {
+    throw StateError('Driver ignored the early terminal result for 10 seconds');
+  } finally {
+    try {
+      if (process != null && !exited) {
+        process.kill();
+        try {
+          await process.exitCode.timeout(const Duration(seconds: 2));
+        } on TimeoutException {
+          process.kill(ProcessSignal.sigkill);
+          await process.exitCode.timeout(const Duration(seconds: 2));
+        }
+      }
+    } finally {
+      await server.close(force: true);
+      await evidence.delete(recursive: true);
+    }
   }
 }

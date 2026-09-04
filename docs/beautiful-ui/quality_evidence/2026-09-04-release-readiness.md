@@ -1,9 +1,11 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. Completed cloud and native
-performance runs contain real failures; subsequent local fixes still need a
-frozen-source cloud run and new native performance evidence.
+Status: **not ready for stable-release sign-off**. The main workflow at
+`8729957220c011329022bafc7a0f7402434ce15e` passed all 12 jobs, all three native
+framework input jobs passed, and the eight P1/P2 native workloads passed the
+fixed engineering budget. Independent Web input, P3 frame budgets, full real
+assistive-technology review and physical-device acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
 implementations. **All 27 registry entries remain `in_progress`; all six Flutter
@@ -15,15 +17,70 @@ changing those decisions or rewriting earlier records.
 | Source snapshot | Evidence and meaning |
 | --- | --- |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
-| `36142500c9ad91dc307b6c8005e78add357f080b` | The latest completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
-| Local changes after `3614250` | P1 performance repairs, input/CI repairs and lossless timeline transport have completed local verification: 640 library tests, 59 Catalog tests, strict analysis and 141-file formatting. Final commit identity, publication dry-run after commit and subsequent cloud/native results are pending. Local passes are not promoted to later-SHA runtime acceptance. |
+| Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
+| Candidate `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See the current checkpoint below. |
+| Local changes after `3614250`, now committed in `87299572` | P1 performance repairs, input/CI repairs and lossless timeline transport have completed local verification: 640 library tests, 59 Catalog tests, strict analysis and 141-file formatting. The exact committed source, clean dry-run and subsequent cloud/native observations are recorded in the current checkpoint. They do not accept future changes automatically. |
 
 The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 `toolchain.json` retain their dated historical scope. This record is the current
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Completed cloud checkpoint at 3614250
+## Current checkpoint at 87299572
+
+[Compact CI evidence](../../../.github/evidence/87299572-ci.md) and its
+[JSON manifest](../../../.github/evidence/87299572-ci.json) preserve job IDs,
+uploaded artifact hashes and the actual driver results.
+
+| Verification | Actual result | Boundary |
+| --- | --- | --- |
+| [Main CI 33820302952](https://github.com/pawaovo/shadcn_flutter/actions/runs/33820302952) | **12/12 jobs passed**, including the actual iOS simulator driver, six platform builds and browser/native journeys | Exact recorded source and toolchain; physical devices and full AT are separate. |
+| [Input/AT 33820302929](https://github.com/pawaovo/shadcn_flutter/actions/runs/33820302929) | **4 passed, 5 failed**. Linux/macOS/Windows framework input, including actual native clipboard, and GTK Orca capability passed | Four Web jobs and the Narrator capability job failed. Native framework injection is not physical keyboard or OS IME proof. |
+| [Catalog Orca pilot 33820333356](https://github.com/pawaovo/shadcn_flutter/actions/runs/33820333356) | Release build bound to the exact source; GTK preflight observation timed out | Catalog never started and all three tasks remain `not_observed`. Actual audio existed, but the required live handler/utterance correlation was not complete. |
+| Local publication dry-run after commit | **Exit 0, zero warnings**, reported archive 3 MB, clean working tree | Validation only; no pub.dev publication. The earlier dirty-tree warning remains historical. |
+| [Native performance](./performance/2026-09-04-87299572-native-profile.md) | P1/P2 **8/8 pass**, 5,212 frames / 504 RSS samples; P3 **1 pass / 6 fail**, 4,543 frames / 569 RSS samples | Both are valid complete captures; all sampled RSS budgets pass. P3 frame failures remain accepted evidence of this run. |
+
+The four Web framework reports show that the initial view-focus transition
+redirected focus to `Hide steps thinking details` after the editor request.
+The subsequent test-only repair prepares actual view focus before requesting
+editor focus. Its minimized loop reproduces the old ordering and verifies the
+new ordering, including an existing primary scope and an already focused view.
+
+In the independent W3C suites, Chrome and Edge lost the initial `b` before the
+exact first-text assertion; **Shift+Enter was never sent**. Firefox terminated
+after Escape, before copy, and Safari terminated after copy, before clear.
+Their old driver did not capture the original early target failure. The next
+candidate waits for actual Flutter/DOM editor readiness before typing once,
+observes exact selection and reads the original terminal test result alongside
+every stage. The original action payloads and text assertions remain intact.
+These repairs have local protocol/DOM regressions; their real-browser result
+still needs the next CI run.
+
+Narrator's fixture now compiles, exposes UIA and responds to Tab/Space, but the
+hosted runner has no WASAPI render endpoint. Narrator navigation, utterance and
+audio remain unaccepted. The Catalog Orca pilot has a separate pending fix for
+live debug transport: a raw owned PTY makes producer lines observable without
+changing their bytes or substituting audio for the required utterance evidence.
+
+P1/P2 build peaks improved from 28.981 to 2.089 ms (Code), 77.294 to 6.923 ms
+(Tool), 11.279 to 1.104 ms (Chat) and 38.296 to 5.306 ms (Filter). Whole-suite
+peak sampled RSS is 387.96875 MiB; individual Search/Code RSS increases remain
+in the data. No component-exclusive memory or leak claim is made.
+
+P3's IINA and video-decoder process starts overlap the Records sampling window;
+later scenarios also slowed. This is a timing association, not established
+causality. Diff's 5/495 over-interval frames already exceeded the 1% budget
+before those processes started. A same-source playback-paused comparison has
+been requested but has not been executed. The separate failed P3 preparation
+attempt measured zero workloads and is not a comparison or a budget pass.
+
+A later local macOS release-input attempt built successfully but could not
+establish native editor focus through the current UI-control surface; no text
+was observed after typing. It is recorded as unaccepted, with no product cause
+inferred. The owned app was closed. This does not weaken the passing cloud
+native-clipboard evidence or establish OS keyboard/IME acceptance.
+
+## Earlier completed cloud checkpoint at 3614250
 
 | Workflow | Actual result | Failed jobs / surviving evidence |
 | --- | --- | --- |
@@ -87,7 +144,7 @@ retains the exact results and runtime source hashes:
 | Lossless timeline transport | 7 focused tests and 3 real Dart finalizer tests passed; targeted analysis clean; independent review found no defect | No new native frame/RSS result exists for the compressed transport. |
 | Assets and media | Current source asset audit reports no errors; media audit passed; icon checks cover 47 hashes, 40 PNGs, an ICO and two manifests | Final publication/artifact correspondence remains tied to the candidate checks. |
 | Web release and local preview | Release build exited **0 in 37.4 seconds**; source and built-bundle asset/media audits passed. The local preview on port 8096 served `index.html`, `main.dart.js` and `flutter_bootstrap.js` byte-identical to the new build | This establishes the recorded build/HTTP preview correspondence, not a new GUI visual inspection or browser-input pass. |
-| Publication dry-run | Current attempt exited **65** with the dirty-tracked-files warning | It is not a pass. Re-run after the source commit and retain the actual result. No package publication is claimed. |
+| Publication dry-run | Dirty-tree precheck exited **65**; the subsequent clean `87299572` check exited **0 with zero warnings** | Both outcomes are preserved. No package publication is claimed. |
 
 The CI tooling manifest's documentation hashes precede this readiness/README
 update. Its validation applies to the recorded scripts and workflows; it does
@@ -96,8 +153,8 @@ not claim that these later Markdown edits were present during those checks.
 Search virtualization and measurement invalidation, Records row/header reuse,
 and the Prompt editor's shared tap-region group have their recorded behavioral
 and visual evidence. Subsequent P1 long-content fixes and the input focus/paste
-repairs are local candidate work; the earlier captures do not measure their
-final result. Tool output retention keeps the first-open layout cost and its
+repairs are included in `87299572`; the older `3614250` captures do not measure
+them, while the current checkpoint records the later observations. Tool output retention keeps the first-open layout cost and its
 memory tradeoff explicit instead of deleting content from the workload.
 
 The new timeline transport compresses the complete returned JSON only after
@@ -127,7 +184,7 @@ and [targeted Safari Flowchart review](./2026-09-03-safari-flowchart-theme-reduc
 remain dated, bounded evidence. The latter is a three-capture visual regression,
 not the complete Safari input or screen-reader matrix.
 
-## Native performance: complete captures, failed budgets
+## Earlier native performance at 3614250: complete captures, failed budgets
 
 The [3614250 baseline](./performance/2026-09-04-3614250-native-baseline.md) and
 [machine-readable data](./performance/2026-09-04-3614250-native-baseline.json)
@@ -162,9 +219,9 @@ leaks and repeated-run stability remain unassessed.
 
 The locked attempt expired at the unchanged 120-second preparation deadline,
 with driver/script exit 1 and no measurement. It does not prove the cause of the
-earlier P3 slowdown. Further native work requires the user to unlock the Mac,
-then a newly frozen source and a fresh result directory. Lock/sleep settings
-were not changed and no simulated activity was used to bypass the lock.
+earlier P3 slowdown. The desktop later became available and the separate
+`87299572` captures above completed. Lock/sleep settings were not changed and
+no simulated activity was used to bypass the lock.
 
 ## Physical devices, assistive technology and distribution
 
@@ -195,18 +252,20 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Commit the locally verified candidate, complete its post-commit publication dry-run,
-  then record the actual main and independent input/AT cloud outcomes. Retain
-  iOS, Edge and input failures until a corresponding run supplies new evidence.
-- After user unlock, capture the unchanged representative workloads on the
-  new source, keep prior failures, and assess the fixed engineering defaults.
-  Agree product budgets separately and retain the repeated-run/device limits.
-- Complete actual physical-device, OS IME, clipboard, screen-reader task-flow
-  and human-review evidence for the advertised platforms and applicable host
-  integrations. A capability probe or prepared script is insufficient.
-- Reconcile the final candidate with the bounded visual/localization/temporal,
-  asset, notice and publication evidence, adding proportionate checks wherever
-  later changes invalidate the prior source scope.
+- Run the subsequent view-focus, W3C-readiness and live-Orca-log repairs on
+  real CI; preserve original assertions and capture any remaining target error.
+  Main CI and clean packaging at `87299572` are already complete.
+- Complete the requested same-source P3 comparison with video playback paused,
+  investigate remaining frame-budget failures, and keep both prior observations.
+  Product budget approval, repeatability and other-device measurements remain
+  separate from the engineering defaults used here.
+- Complete actual physical-device, OS IME, direct keyboard/clipboard and full
+  screen-reader task-flow review for the advertised platforms and applicable
+  host integrations. Narrator needs a host with an available audio endpoint;
+  a capability probe or prepared script is insufficient.
+- Reconcile future runtime changes with the bounded visual/localization,
+  performance, asset, notice and publication evidence. The pending input/PTY
+  repairs alter test/diagnostic infrastructure, not the component library.
 
 The [support matrix](../support_matrix.md) and [parity manifest](../parity_manifest.yaml)
 therefore retain six `Partial` platforms and 27 `in_progress` entries. No later

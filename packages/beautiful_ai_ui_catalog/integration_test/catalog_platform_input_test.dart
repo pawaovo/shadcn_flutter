@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ui' show PointerDeviceKind;
+import 'dart:ui' show PointerDeviceKind, ViewFocusDirection, ViewFocusState;
 
 import 'package:beautiful_ai_ui_catalog/main.dart' as catalog;
 import 'package:flutter/foundation.dart';
@@ -31,6 +31,7 @@ void main() {
     'target_platform': defaultTargetPlatform.name,
     'native_clipboard_applicable': !kIsWeb,
     'evidence_boundaries': <String>[
+      'Web view focus is prepared through PlatformDispatcher.requestViewFocusChange before requesting editor focus; it is not a browser pointer event.',
       'Editor focus and its text-input connection are requested through EditableTextState.requestKeyboard before editing-value injection.',
       'TextEditingValue updates use EditableTextState.userUpdateTextEditingValue, including an injected composing range.',
       'Keyboard events use Flutter KeyEventSimulator with explicit physical key mappings; they are not OS or WebDriver keyboard events.',
@@ -66,6 +67,7 @@ void main() {
         find.text('Beautiful AI UI · P1 + P2 + P3 Catalog'),
         findsOneWidget,
       );
+      await actions.prepareWebViewFocus();
       await actions.tap(find.text('Motion: system'));
       await actions.tap(find.text('Motion: reduced'));
       expect(find.text('Motion: none'), findsOneWidget);
@@ -498,6 +500,28 @@ final class _CatalogInputActions {
   final WidgetTester tester;
   final List<Map<String, Object?>> inputTrace;
   EditableTextState? _lastEditor;
+
+  Future<void> prepareWebViewFocus() async {
+    if (!kIsWeb) return;
+    final dispatcher = tester.binding.platformDispatcher;
+    final viewId = tester.view.viewId;
+    // This read-only test binding state is updated by the actual platform
+    // onViewFocusChange callback. A pre-existing root/child primary focus is
+    // insufficient; an already focused view need not emit a second event.
+    if (dispatcher.currentlyFocusedViewIdTestValue != viewId) {
+      dispatcher.requestViewFocusChange(
+        viewId: viewId,
+        state: ViewFocusState.focused,
+        direction: ViewFocusDirection.undefined,
+      );
+      await until(
+        () => dispatcher.currentlyFocusedViewIdTestValue == viewId,
+        'The web view must finish its initial focus transition before editor input.',
+      );
+    }
+    await tester.pump();
+    _record('prepare web view focus');
+  }
 
   void _record(
     String operation, {

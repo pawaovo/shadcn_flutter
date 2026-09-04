@@ -35,6 +35,26 @@ driver sends W3C actions and window commands to the original session created by
 `flutter drive`, then requires the original integration-test completion result.
 Live device pointer propagation is enabled only for this test and restored.
 
+Before its single initial text action, the driver waits after the single pointer
+click for both the published Prompt focus and an actual active Flutter editing
+element. The DOM check follows active elements through shadow roots and rejects
+unrelated, disabled, or read-only fields; it reads state without focusing an
+element or inserting text through JavaScript. Prompt paste targets use the same
+readiness boundary. Select-all before keyboard copy waits for the exact full
+selection, with no repeated key action.
+
+Every stage/readiness wait also reads the original `$flutterDriverResult`.
+An early target assertion is saved and propagated immediately, together with the
+last non-null application state and acknowledgement. Post-Escape and post-copy
+snapshots preserve the observed application and DOM selection state. A `stages`
+entry means the driver observed that stage before sending its actions; it is not
+a claim that the target completed the stage.
+
+The framework target separately prepares web view focus through the public
+platform request and waits for the binding's actual focused-view event state
+before requesting editor input. An already focused view needs no second event.
+This setup remains framework input, not W3C pointer acceptance.
+
 The Catalog's CodeBlock and StreamingText host callbacks now await real
 `Clipboard.setData`; success feedback follows that completion. Acceptance checks
 the exact text pasted into the actual Prompt editor, including code newlines

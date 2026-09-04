@@ -59,29 +59,17 @@ Future<void> main() async {
         .toLowerCase();
     final modifier = platform.contains('mac') ? '\uE03D' : '\uE009';
     final stages = report['stages'] as List<Object?>;
+    final monitor = BrowserAcceptanceMonitor(driver, report);
+    Future<Map<String, dynamic>> stage(String name) =>
+        monitor.waitForStage(name);
 
-    Future<Map<String, dynamic>> stage(String name) async {
-      Map<String, dynamic>? state;
-      await driver.waitFor(() async {
-        final value = await driver.script(
-          'return window.__beautifulInputAcceptance || null;',
-        );
-        if (value is Map && value['stage'] == name) {
-          state = Map<String, dynamic>.from(value);
-          return true;
-        }
-        return false;
-      }, name);
-      stages.add(<String, Object?>{'stage': name, 'state': state});
-      return state!;
-    }
-
-    Future<void> clickStage(String name) async {
-      final state = await stage(name);
+    Future<void> clickStage(String name, {bool editor = false}) async {
+      final state = await monitor.waitForStage(name);
       await driver.click(
         (state['x'] as num).round(),
         (state['y'] as num).round(),
       );
+      if (editor) await monitor.waitForEditorReady(name);
     }
 
     Future<void> acknowledge(String name) => driver
@@ -91,7 +79,7 @@ Future<void> main() async {
         )
         .then((_) {});
 
-    await clickStage('prompt-type');
+    await clickStage('prompt-type', editor: true);
     await driver.keys('browser 中文 draft');
     await stage('shift-enter');
     await driver.chord('\uE008', '\uE006');
@@ -99,11 +87,15 @@ Future<void> main() async {
     await clickStage('model-open');
     await stage('model-escape');
     await driver.keys('\uE00C');
+    await monitor.observe('after model Escape key acknowledgement');
 
     await stage('keyboard-copy');
     await driver.chord(modifier, 'a');
+    await monitor.waitForFullSelection('keyboard-copy');
     await driver.chord(modifier, 'c');
+    await monitor.observe('after keyboard copy key acknowledgement');
     await acknowledge('keyboard-copy');
+    await monitor.observe('after keyboard-copy acknowledgement');
     await stage('keyboard-clear');
     await driver.chord(modifier, 'a');
     await driver.keys('\uE003');
@@ -133,7 +125,7 @@ Future<void> main() async {
     for (final source in <String>['code', 'stream']) {
       await clickStage('$source-copy');
       await acknowledge('$source-copy');
-      await clickStage('$source-paste');
+      await clickStage('$source-paste', editor: true);
       await driver.chord(modifier, 'v');
       await stage('$source-clear');
       await driver.chord(modifier, 'a');
@@ -154,29 +146,12 @@ Future<void> main() async {
       await driver.chord(modifier, operation == 'cut' ? 'x' : 'v');
       await acknowledge(name);
     }
-    await clickStage('readonly-paste');
+    await clickStage('readonly-paste', editor: true);
     await driver.chord(modifier, 'v');
     await stage('complete');
     await acknowledge('complete');
 
-    String? encodedResult;
-    await driver.waitFor(() async {
-      encodedResult = await driver.script(
-        r'return window.$flutterDriverResult;',
-      ) as String?;
-      return encodedResult != null;
-    }, 'original integration_test completion');
-    final envelope = jsonDecode(encodedResult!) as Map<String, dynamic>;
-    if (envelope['isError'] != false) {
-      throw StateError('Driver extension failed: $envelope');
-    }
-    final response = Response.fromJson(
-      (envelope['response'] as Map)['message'] as String,
-    );
-    report['integration_data'] = response.data;
-    if (!response.allTestsPassed) {
-      throw StateError(response.formattedFailureDetails);
-    }
+    await monitor.waitForCompletion();
     report['status'] = 'passed';
     print('All tests passed. Real browser input acceptance completed.');
   } catch (error, stack) {
@@ -190,6 +165,160 @@ Future<void> main() async {
     await File('${evidence.path}/browser-input.json')
         .writeAsString(const JsonEncoder.withIndent('  ').convert(report));
   }
+}
+
+/// Read-only page snapshot. The active editor may be inside Flutter's shadow
+/// root; a focused Flutter node alone does not prove browser text input is ready.
+const browserAcceptanceSnapshotScript = r'''
+let active = document.activeElement;
+while (active && active.shadowRoot && active.shadowRoot.activeElement) {
+  active = active.shadowRoot.activeElement;
+}
+function belongsToFlutter(element) {
+  let node = element;
+  while (node) {
+    if (String(node.tagName || '').toLowerCase() === 'flutter-view' ||
+        (node.classList && node.classList.contains('flt-text-editing'))) {
+      return true;
+    }
+    const root = node.getRootNode ? node.getRootNode() : null;
+    node = node.parentElement || (root && root.host) || null;
+  }
+  return false;
+}
+const tagName = String(active && active.tagName || '').toLowerCase();
+const editable = tagName === 'input' || tagName === 'textarea' ||
+  !!(active && active.isContentEditable);
+const inFlutterView = belongsToFlutter(active);
+const readOnly = !!(active && active.readOnly);
+const disabled = !!(active && active.disabled);
+return {
+  stage: window.__beautifulInputAcceptance || null,
+  result: window.$flutterDriverResult || null,
+  acknowledgement: window.__beautifulInputAcknowledgement || null,
+  activeEditor: {
+    ready: inFlutterView && editable && !readOnly && !disabled,
+    tagName, inFlutterView, readOnly, disabled,
+    selectionStart: active && typeof active.selectionStart === 'number' ? active.selectionStart : null,
+    selectionEnd: active && typeof active.selectionEnd === 'number' ? active.selectionEnd : null,
+    value: inFlutterView && editable && typeof active.value === 'string' ? active.value : null
+  }
+};
+''';
+
+/// Watches page state and the original target result together. An early Flutter
+/// failure must retain its assertion instead of becoming a later stage timeout.
+final class BrowserAcceptanceMonitor {
+  BrowserAcceptanceMonitor(this.driver, this.report);
+
+  final BrowserInputDriver driver;
+  final Map<String, Object?> report;
+
+  Future<Map<String, dynamic>> _snapshot(
+    String boundary, {
+    bool allowTerminalSuccess = false,
+  }) async {
+    final value = Map<String, dynamic>.from(
+      await driver.script(browserAcceptanceSnapshotScript) as Map,
+    );
+    report['last_snapshot'] = value;
+    if (value['stage'] is Map) {
+      report['last_non_null_state'] = value['stage'];
+    }
+    report['last_acknowledgement'] = value['acknowledgement'];
+    if (value['result'] case final String encoded) {
+      report['terminal_result_received_at_boundary'] = boundary;
+      final envelope = jsonDecode(encoded) as Map<String, dynamic>;
+      report['original_integration_result'] = envelope;
+      if (envelope['isError'] != false) {
+        final failure = 'Driver extension failed: $envelope';
+        report['original_failure'] = failure;
+        throw StateError(failure);
+      }
+      final response = Response.fromJson(
+        (envelope['response'] as Map)['message'] as String,
+      );
+      report['integration_data'] = response.data;
+      if (!response.allTestsPassed) {
+        report['original_failure'] = response.formattedFailureDetails;
+        throw StateError(response.formattedFailureDetails);
+      }
+      if (!allowTerminalSuccess) {
+        throw StateError(
+          'The integration target completed before the driver reached $boundary.',
+        );
+      }
+    }
+    return value;
+  }
+
+  Future<Map<String, dynamic>> waitForStage(String name) async {
+    Map<String, dynamic>? state;
+    await driver.waitFor(() async {
+      final snapshot = await _snapshot(name);
+      if (snapshot['stage'] case final Map stage when stage['stage'] == name) {
+        state = Map<String, dynamic>.from(stage);
+        return true;
+      }
+      return false;
+    }, name);
+    (report['stages'] as List<Object?>).add(<String, Object?>{
+      'stage': name,
+      'state': state,
+      'observed_before_driver_actions': true,
+    });
+    return state!;
+  }
+
+  Future<void> waitForEditorReady(String name) async {
+    await driver.waitFor(() async {
+      final snapshot = await _snapshot('$name editor readiness');
+      final state = snapshot['stage'];
+      final active = snapshot['activeEditor'];
+      return state is Map &&
+          state['stage'] == name &&
+          state['focused'] == true &&
+          active is Map &&
+          active['ready'] == true;
+    }, '$name editor readiness after its single pointer click');
+    _recordObservation('editor ready for $name');
+  }
+
+  Future<void> waitForFullSelection(String name) async {
+    await driver.waitFor(() async {
+      final snapshot = await _snapshot('$name select-all');
+      final state = snapshot['stage'];
+      return state is Map &&
+          state['stage'] == name &&
+          state['focused'] == true &&
+          state['draft'] is String &&
+          state['selectionStart'] == 0 &&
+          state['selectionEnd'] == (state['draft'] as String).length;
+    }, '$name exact selection after its single select-all action');
+    _recordObservation('full selection for $name');
+  }
+
+  Future<void> observe(String boundary) async {
+    await _snapshot(boundary);
+    _recordObservation(boundary);
+  }
+
+  void _recordObservation(String boundary) {
+    final observations =
+        report.putIfAbsent('observations', () => <Object?>[]) as List<Object?>;
+    observations.add(<String, Object?>{
+      'boundary': boundary,
+      'snapshot': report['last_snapshot'],
+    });
+  }
+
+  Future<void> waitForCompletion() => driver.waitFor(() async {
+    final snapshot = await _snapshot(
+      'original integration_test completion',
+      allowTerminalSuccess: true,
+    );
+    return snapshot['result'] is String;
+  }, 'original integration_test completion');
 }
 
 /// Small W3C client: any upstream status/error remains a test failure.

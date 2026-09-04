@@ -28,27 +28,37 @@ for (const file of [
 ]) {
   const source = readFileSync(new URL(`driver/${file}`, integration), 'utf8');
   // Execute the real driver expressions rather than a copy of their protocol.
-  const scripts = [...source.matchAll(/r?'([^'\n]*__beautifulInput[^'\n]*)'/g)].map(
+  const singleLineScripts = [...source.matchAll(/r?'([^'\n]*__beautifulInput[^'\n]*)'/g)].map(
     (match) => match[1],
   );
+  const stageScripts = file === 'catalog_browser_input_driver.dart'
+    ? [...source.matchAll(
+        /const\s+browserAcceptanceSnapshotScript\s*=\s*r'''([\s\S]*?)''';/g,
+      )].map((match) => match[1])
+    : singleLineScripts.filter((script) =>
+        script.includes('__beautifulInputAcceptance'),
+      );
   assert.equal(
-    scripts.length,
-    2,
-    `${file}: expected one state read and one acknowledgement write`,
+    stageScripts.length,
+    1,
+    `${file}: expected exactly one actual state snapshot script`,
   );
-  const [readStage] = scripts.filter((script) =>
-    script.includes('__beautifulInputAcceptance'),
+  const [readStage] = stageScripts;
+  const acknowledgementScripts = singleLineScripts.filter((script) =>
+    /__beautifulInputAcknowledgement\s*=\s*arguments\[0\]/.test(script),
   );
-  const [acknowledge] = scripts.filter((script) =>
-    script.includes('__beautifulInputAcknowledgement'),
-  );
+  assert.equal(acknowledgementScripts.length, 1);
+  const [acknowledge] = acknowledgementScripts;
 
   for (const separateRealm of [false, true]) {
     const realm = separateRealm
       ? 'a fresh WebDriver sandbox'
       : 'a shared window realm';
     test(`${file}: page sees acknowledgements with ${realm}`, () => {
-      const page = { $flutterDriverResult: null };
+      const page = {
+        document: { activeElement: null },
+        $flutterDriverResult: null,
+      };
       page.window = page;
       const pageContext = vm.createContext(page);
       const inPage = (script) => vm.runInContext(script, pageContext);
@@ -80,6 +90,10 @@ for (const file of [
           id,
           'A successful WebDriver script must acknowledge in the application page',
         );
+        const acknowledged = execute(readStage);
+        if (Object.hasOwn(acknowledged, 'acknowledgement')) {
+          assert.equal(acknowledged.acknowledgement, id);
+        }
 
         // Match the bridge reset between actions. A later script must not see
         // state or acknowledgement left behind in a previous execution realm.

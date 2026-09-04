@@ -1,0 +1,661 @@
+{
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "source_sha": "8729957220c011329022bafc7a0f7402434ce15e",
+  "recorded_at_utc": "2026-09-04T00:37:18.251756+00:00",
+  "scope": "Historical exact-commit CI evidence; not acceptance of subsequent changes",
+  "runs": {
+    "main": {
+      "run_id": 33820302952,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33820302952",
+      "head_sha": "8729957220c011329022bafc7a0f7402434ce15e",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "job_id": 100861348624,
+          "name": "Detect generated targets",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384351,
+          "name": "Run Edge journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384390,
+          "name": "Build Android catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384391,
+          "name": "Run Android journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384411,
+          "name": "Build Web catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384433,
+          "name": "Build Windows catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384456,
+          "name": "Format, analyze, and test",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384491,
+          "name": "Run Chrome and Linux journeys",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384502,
+          "name": "Build Linux catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384564,
+          "name": "Build Apple catalogs",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861384621,
+          "name": "Run Firefox journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100862372413,
+          "name": "Validate pub.dev package",
+          "conclusion": "success"
+        }
+      ],
+      "complete_job_log_sha256": "d1d3eebb24dcaa9699cc839b69af44d990a278372b2f3b294eef146d096c1f11"
+    },
+    "input": {
+      "run_id": 33820302929,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33820302929",
+      "head_sha": "8729957220c011329022bafc7a0f7402434ce15e",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "job_id": 100861348151,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861348461,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100861348491,
+          "name": "Real Safari full journey and input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100861348532,
+          "name": "Real edge input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100861348541,
+          "name": "Real firefox input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100861348557,
+          "name": "Native linux input bridge",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861348584,
+          "name": "Native macos input bridge",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100861348632,
+          "name": "Real chrome input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100861348638,
+          "name": "Native windows input bridge",
+          "conclusion": "success"
+        }
+      ],
+      "complete_job_log_sha256": "3202e6df0921b2a584965aea6b25699d83ece54000ea16d4bd7488380023ff81"
+    },
+    "orca-pilot": {
+      "run_id": 33820333356,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33820333356",
+      "head_sha": "8729957220c011329022bafc7a0f7402434ce15e",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "job_id": 100861442116,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "conclusion": "failure"
+        }
+      ],
+      "complete_job_log_sha256": "6b9c0db353f3395e1b98840e3ba53e222a69080bfb5a0658fb3b9b4ac1222c4d"
+    }
+  },
+  "artifacts": [
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384351,
+      "artifact_id": 9918111293,
+      "name": "edge-journey",
+      "github_zip_sha256": "91e7bf271a7367a72faa39af825e07520fff02e07b0aedf119d1d689592cec76",
+      "download_manifest_sha256": "473b8d4133f8e1ddc49acf91ce62156214823e9680a0da2e976bce6707dbad56",
+      "files": 5
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384411,
+      "artifact_id": 9918067082,
+      "name": "web-asset-audits",
+      "github_zip_sha256": "6499865e4bb804164503dfe7c68b263682cebfe482f7ac38965dacd20562b29a",
+      "download_manifest_sha256": "b7f2d195e137d30ef124a3ac723979dfcf0d327406586a183eb197b0f7369fd9",
+      "files": 4
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384433,
+      "artifact_id": 9918149638,
+      "name": "windows-native-journey",
+      "github_zip_sha256": "7a37915b2e9737976ea31dc8940ea5f59a9c2f36474b06e7604f9670790dbcec",
+      "download_manifest_sha256": "45da62a80ae2ac408a831d45cb672afaf292bb35e15ebb922043c55efa8c743c",
+      "files": 1
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384456,
+      "artifact_id": 9918124651,
+      "name": "source-asset-audits",
+      "github_zip_sha256": "229bfd6d966a4d1abc73545db8d088e058c6801489ce1e80438819120344bdb3",
+      "download_manifest_sha256": "e5c2a6910a8d453c584f4a3f76b9a5a3c581522976e12e10acd08af9e7c47c60",
+      "files": 2
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384491,
+      "artifact_id": 9918127697,
+      "name": "chrome-trusted-journey",
+      "github_zip_sha256": "ce606fa636c094a4083ac8356ef3d056fb03ffaf364cc43205cd62f31cdf610a",
+      "download_manifest_sha256": "d0afe796efd53b745b6323e5858fb7e8400f4d0fecd95fcf3c405f98db557fba",
+      "files": 2
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384564,
+      "artifact_id": 9918412088,
+      "name": "apple-native-journeys",
+      "github_zip_sha256": "f7d45acd57489b65b7de9576d7277431fddfc6f959be8fc4c9de5854d0ffcb92",
+      "download_manifest_sha256": "008122ccbaec3b5c43864aa10a29322313c3ca1d0ab40681e268a10114ee0e69",
+      "files": 12
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100861384621,
+      "artifact_id": 9918113065,
+      "name": "firefox-journey",
+      "github_zip_sha256": "2129e8cf81a38e38de722c523b75e938088b65d4d1ec99b6dd29dae47ac751c4",
+      "download_manifest_sha256": "e17a2eedc6ef2da7ca1c8e08d18152b966935d48c7bbbbf54337be0a5efc193c",
+      "files": 5
+    },
+    {
+      "run_id": 33820302952,
+      "job_id": 100862372413,
+      "artifact_id": 9918158769,
+      "name": "isolated-hosted-consumer",
+      "github_zip_sha256": "8ed69e06b87a88f0f1a996d11f2d654b3d33be2788384d10f9a4a642a0e70679",
+      "download_manifest_sha256": "0a5625d1dde9640558bcf656d789b33f00784a7deac801c471ace6a82937e9eb",
+      "files": 7
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348151,
+      "artifact_id": 9918028175,
+      "name": "real-at-linux-capability",
+      "github_zip_sha256": "84b9028e410f1c20db1e074caa06f05bd495fc0c57762473750351e8d34b68d7",
+      "download_manifest_sha256": "69669c164b7af542e1bb9fe24e925d07eb8ca412b4e258f54d4091095682fdaa",
+      "files": 13
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348461,
+      "artifact_id": 9918026029,
+      "name": "real-at-windows-capability",
+      "github_zip_sha256": "86f8282a107d425316140eee0d19ba514fef9c59c5fedb4b9970a53fd30481ee",
+      "download_manifest_sha256": "4bb7cc3e56e077191e54d9a76d6d7029e4b99f6d06dc8117ff58bc461c1a3384",
+      "files": 6
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348491,
+      "artifact_id": 9918171544,
+      "name": "input-safari",
+      "github_zip_sha256": "3b148999796293837057741da787a215ab69499febe9f061df097189d13a30b2",
+      "download_manifest_sha256": "2830e38c9daaaa244abc20a105a817323c6daf7b403eb4d32b3d8ca2c780e359",
+      "files": 18
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348532,
+      "artifact_id": 9918123801,
+      "name": "input-edge",
+      "github_zip_sha256": "d75a47b22d4f03592ce6e621c23321efded9a13b99a1ef8551a185f9af924b87",
+      "download_manifest_sha256": "e6714ba628a069d398c91b3afbbe2d57b6357e49815922d19d7d858ddddf5895",
+      "files": 14
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348541,
+      "artifact_id": 9918124463,
+      "name": "input-firefox",
+      "github_zip_sha256": "ee7bc46928d708265b1791db7219cec6bcc659fd12ddfae4a79ae023f2aad631",
+      "download_manifest_sha256": "18a6079c2cb826707aaf1287e6f3f2da06214d3bf165e7c5342cd2230ad60ddc",
+      "files": 10
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348557,
+      "artifact_id": 9918053797,
+      "name": "input-linux",
+      "github_zip_sha256": "b106a5dbd235072e089539665fb99b18f8a3c68899554d0ebda7c62ef45b6cdb",
+      "download_manifest_sha256": "a7c0af3c0a229cbe833393ac302c877af462520f112a868491bcb896206b8fdb",
+      "files": 6
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348584,
+      "artifact_id": 9918091822,
+      "name": "input-macos",
+      "github_zip_sha256": "3a2048ccedfb501cab67463ec8596cdb6304829b35caee88a95c660564e8786e",
+      "download_manifest_sha256": "2801a037dc200f6c02f335075385e582ed3198d6791e1d4e277bfaf6f5a3513d",
+      "files": 6
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348632,
+      "artifact_id": 9918114414,
+      "name": "input-chrome",
+      "github_zip_sha256": "2bf4312a95547b10b53cc629fcf900c19083bc8fa872dff7aa1efd90ece03e7a",
+      "download_manifest_sha256": "ce386b7f2c03659b9e8a656c9fbce1a0e285cc7c4ba9391746a3d033a5f67594",
+      "files": 10
+    },
+    {
+      "run_id": 33820302929,
+      "job_id": 100861348638,
+      "artifact_id": 9918094600,
+      "name": "input-windows",
+      "github_zip_sha256": "ec070422b2fb673df971773dfac15a73f2caa0863b4f11ec9bdd37340ee2785a",
+      "download_manifest_sha256": "6103be7a183b4297463d73bc81ee7b36a2728af5ef3dfe28adccd9bcab69192f",
+      "files": 6
+    },
+    {
+      "run_id": 33820333356,
+      "job_id": 100861442116,
+      "artifact_id": 9918076345,
+      "name": "catalog-orca-pilot-33820333356-1",
+      "github_zip_sha256": "0cca8b58b6add6489d352427e58f72dd492ce76c0d3f75bd8ba453d858435a1b",
+      "download_manifest_sha256": "e4ce1fd4a792ac73b6e98beeb1fc615a3d6fde3b2951d72838acb5ae2c662ab2",
+      "files": 17
+    }
+  ],
+  "artifact_hash_provenance": {
+    "github_zip_sha256": "SHA256 printed by actions/upload-artifact for that exact finalized artifact ID",
+    "download_manifest_sha256": "SHA256 of UTF-8 canonical JSON {relative_path:{bytes,sha256}}, keys sorted, separators comma/colon",
+    "limitation": "ZIP digests are GitHub upload-log evidence; downloaded files were hashed separately, not recompressed to claim the same ZIP hash"
+  },
+  "main_actual_ios_driver": {
+    "device_kind": "iOS simulator",
+    "report_sha256": "d365fa9dcc69a1971af80dbdef41b691a967dec29458a19181ec3980d84be2cf",
+    "passed": true,
+    "stages": [
+      {
+        "name": "selected-xcode",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "name": "simulator-sdk",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "name": "install",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "name": "launch",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "name": "vm-service-discovery",
+        "passed": true,
+        "exit_code": null
+      },
+      {
+        "name": "native-flutter-driver",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "name": "terminate",
+        "passed": true,
+        "exit_code": 0
+      }
+    ]
+  },
+  "input_layers": {
+    "chrome": {
+      "summary_sha256": "7511581541efe3359ad15153a1a093f3d715ca4d45de4dd219d68cc194eb3e91",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "failed",
+        "report_sha256": "9ddaccc941a54af9122021c9afe26f54eca7776e4137a50e47e8ff9e4b01a27d",
+        "failure": "Primary keyboard focus precondition failed before text injection"
+      },
+      "trusted_w3c": {
+        "status": "failed",
+        "report_sha256": "4ca28046415cee876977a73d6fbc820e822733b81a7716914bc0d066033210b9",
+        "last_observed_stage": "prompt-type",
+        "actions_sent": [
+          "prompt pointer click",
+          "initial text key actions"
+        ],
+        "not_issued": [
+          "Shift+Enter"
+        ],
+        "waiting_for_stage": "shift-enter",
+        "driver_error": "TimeoutException: Browser acceptance did not reach shift-enter",
+        "terminal_integration_error_captured": false,
+        "interpretation": "Waiting for a subsequent stage timed out; this does not prove the unissued action failed. Original terminal integration failure was not captured by this driver."
+      }
+    },
+    "edge": {
+      "summary_sha256": "b8251dba6663497ad9f901797478c3fa3950412d272c1fb5750da24310a4709c",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "failed",
+        "report_sha256": "36231182cffbfa4e41781df1e2316eff9e7a8ad88c597c5bc69a7b3d63980f9d",
+        "failure": "Primary keyboard focus precondition failed before text injection"
+      },
+      "trusted_w3c": {
+        "status": "failed",
+        "report_sha256": "d5c05e8a33b7c555c7fd39f810fa13aec6bc1f732e3ed5283bf43ace172b194e",
+        "last_observed_stage": "prompt-type",
+        "actions_sent": [
+          "prompt pointer click",
+          "initial text key actions"
+        ],
+        "not_issued": [
+          "Shift+Enter"
+        ],
+        "waiting_for_stage": "shift-enter",
+        "driver_error": "TimeoutException: Browser acceptance did not reach shift-enter",
+        "terminal_integration_error_captured": false,
+        "interpretation": "Waiting for a subsequent stage timed out; this does not prove the unissued action failed. Original terminal integration failure was not captured by this driver."
+      }
+    },
+    "firefox": {
+      "summary_sha256": "d9327ee8b5f9c073d8ed2ebc4cb4a9b5bb0867f42efb9986c660a95f7a956410",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "failed",
+        "report_sha256": "f6f7cd53d5d666a2dad99de5f9a22d16a40c901fe772262234a4c341e06f0e87",
+        "failure": "Primary keyboard focus precondition failed before text injection"
+      },
+      "trusted_w3c": {
+        "status": "failed",
+        "report_sha256": "9f1af19bc8aa72e4119dfcba066143f3c191ce144dc133e5598f6f47d7880e26",
+        "last_observed_stage": "model-escape",
+        "actions_sent": [
+          "initial text",
+          "Shift+Enter",
+          "second line",
+          "open model",
+          "Escape"
+        ],
+        "not_issued": [
+          "keyboard copy"
+        ],
+        "waiting_for_stage": "keyboard-copy",
+        "driver_error": "TimeoutException: Browser acceptance did not reach keyboard-copy",
+        "terminal_integration_error_captured": false,
+        "interpretation": "Waiting for a subsequent stage timed out; this does not prove the unissued action failed. Original terminal integration failure was not captured by this driver."
+      }
+    },
+    "safari": {
+      "summary_sha256": "2d353ad28eea5e74312407584428f22b14ad934076d51daa6ce7d2853f5bdc10",
+      "suites": [
+        {
+          "suite": "journey",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "failed",
+        "report_sha256": "e6f6335469886bf2503db2e5d014664d4a33b78ee4069eaa294c2ec6e39c8349",
+        "failure": "Primary keyboard focus precondition failed before text injection"
+      },
+      "trusted_w3c": {
+        "status": "failed",
+        "report_sha256": "dbbdd6c79068c434557f805040cddcc5639b8781570cdf05ffb56dc5c324053a",
+        "last_observed_stage": "keyboard-copy",
+        "actions_sent": [
+          "initial text",
+          "Shift+Enter",
+          "second line",
+          "open model",
+          "Escape",
+          "select-all and copy",
+          "copy acknowledgement"
+        ],
+        "not_issued": [
+          "keyboard clear/delete"
+        ],
+        "waiting_for_stage": "keyboard-clear",
+        "driver_error": "TimeoutException: Browser acceptance did not reach keyboard-clear",
+        "terminal_integration_error_captured": false,
+        "interpretation": "Waiting for a subsequent stage timed out; this does not prove the unissued action failed. Original terminal integration failure was not captured by this driver."
+      },
+      "original_full_journey": {
+        "status": "passed",
+        "report_sha256": "9dd2515ef8fe4e7e61951f0a40e391f46dce54d782fd37bb85ca68533d394fce",
+        "trusted_clipboard_clicks": [
+          "journey-code-copy",
+          "journey-stream-copy"
+        ]
+      }
+    },
+    "linux": {
+      "summary_sha256": "962c3d944a4535aa7760fbf4c5fa3d7a93f9d47152367df6bf4c05fac200d51f",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "passed",
+        "report_sha256": "c15b36a0e96e58dd8d027f46552e1fcfe15f141a44610c2a7ea0be4e1135f677",
+        "passed_scenarios": [
+          "prompt_keyboard_menus_and_focus",
+          "prompt_composing_and_submission",
+          "numeric_draft_cancel_adjust_and_bounds",
+          "synthetic_resize_preserves_prompt_draft",
+          "pointer_selection_replaces_exact_repeated_range",
+          "native_clipboard_copy_and_paste"
+        ]
+      }
+    },
+    "macos": {
+      "summary_sha256": "2f0490178a1c25f87b29361ac9f75709d52ac8799c3c973d8b5eccdda2434016",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "passed",
+        "report_sha256": "978495e9682307c9d2026b11d7fb0dd15f5eabe04355720b33a4ccb7c58a67e2",
+        "passed_scenarios": [
+          "prompt_keyboard_menus_and_focus",
+          "prompt_composing_and_submission",
+          "numeric_draft_cancel_adjust_and_bounds",
+          "synthetic_resize_preserves_prompt_draft",
+          "pointer_selection_replaces_exact_repeated_range",
+          "native_clipboard_copy_and_paste"
+        ]
+      }
+    },
+    "windows": {
+      "summary_sha256": "f4b355b7e29b6c8424775a59e17b30f0c64e81e0e6e473c60601b65eb3d42c30",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ],
+      "framework": {
+        "status": "passed",
+        "report_sha256": "c467ddae59d777ec9e38fc45dba2476134eca86018d6331b237ec6a3b86df3bc",
+        "passed_scenarios": [
+          "prompt_keyboard_menus_and_focus",
+          "prompt_composing_and_submission",
+          "numeric_draft_cancel_adjust_and_bounds",
+          "synthetic_resize_preserves_prompt_draft",
+          "pointer_selection_replaces_exact_repeated_range",
+          "native_clipboard_copy_and_paste"
+        ]
+      }
+    }
+  },
+  "narrator_capability": {
+    "status": "not_accepted",
+    "report_sha256": "b1c784b577dfb54bd5993ea87207913d823b1355800c0bebad2c2da8e628b840",
+    "runtime": {
+      "os": "Microsoft Windows NT 10.0.26100.0",
+      "powershell": "5.1.26100.33296",
+      "image": "20260824.214.3",
+      "session_id": 2,
+      "user_interactive": true,
+      "narrator_path": "C:\\Windows\\System32\\Narrator.exe",
+      "narrator_version": "10.0.26100.33296 (WinBuild.160101.0800)"
+    },
+    "observed": [
+      "compiled fixture",
+      "native accessibility",
+      "Tab/Space keyboard response",
+      "Narrator process"
+    ],
+    "environment_blocker": "No default WASAPI render endpoint; HRESULT 0x80070490 (Element not found)",
+    "utterance_observed": false,
+    "audio_observed": false,
+    "at_navigation_accepted": false,
+    "focus_evidence_limit": "Fixture events show beta then alpha, without phase timestamps; neither the reset cause nor beta focus at the Narrator command is proven.",
+    "application_acceptance": "not_accepted",
+    "human_review": "not_accepted"
+  },
+  "orca_gtk_capability_job": {
+    "status": "capability_observed",
+    "report_sha256": "174abf9c9e438ae0755df9710b2d6dd4f5d30feaf677c8b25a0e00fef3c4d33c",
+    "layers": {
+      "native_accessibility": "observed",
+      "at_navigation": "observed",
+      "utterance_output": "observed",
+      "synthesized_audio": "observed",
+      "human_review": "not_accepted"
+    },
+    "application_acceptance": "not_accepted"
+  },
+  "orca_catalog_pilot": {
+    "status": "not_observed",
+    "selected_source_sha_verified": "8729957220c011329022bafc7a0f7402434ce15e",
+    "runner_report_sha256": "e547b1f55aeef83e07b5237d9796834ed4b62db3a30d9d1ddde6b3ebcd9829f4",
+    "build_provenance_sha256": "15ab58aa223bd381d669d76727e5c14eab1822c8148c91802e7ae1e1bd58b101",
+    "catalog_report_sha256": "352db11f650b7aa44cf1466cdd7c9d33eb309c02da45d1298fefefd39e6cdc6a",
+    "pilot_artifact_manifest_sha256": "0e4bf3997abd9975a0a01a239c40f527aa024ae259afb2316d2db03cd07f9432",
+    "manifest_files_verified": 13,
+    "build_status": "compiled_snapshot_bound",
+    "catalog_process_started": false,
+    "catalog_tasks_executed": 0,
+    "failure_boundary": "GTK capability preflight waited for post-Where-Am-I SPEECH OUTPUT in the live diagnostic file",
+    "handler_observed": true,
+    "post_handler_speech_output_observed": false,
+    "backend_synthesis_events_and_nonzero_pcm_observed": true,
+    "spoken_words_verified": false,
+    "cleanup": "verified",
+    "application_acceptance": "not_accepted",
+    "human_review": "not_accepted",
+    "future_fix_boundary": "PTY diagnostic observer is a later unexecuted change and does not retroactively accept this run"
+  }
+}

@@ -1,0 +1,1586 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-04T00:31:14.401825+00:00",
+  "status": "p1p2_observed_budget_pass_p3_valid_budget_failure",
+  "source_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+  "source_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+  "source_manifest_file_count": 303,
+  "source_validation": {
+    "four_valid_capture_manifests_identical": true,
+    "manifest_digests_independently_recomputed": true,
+    "recorded_worktree_status": " M packages/docs/ios/Flutter/Debug.xcconfig\n M packages/docs/ios/Flutter/Release.xcconfig\n M packages/docs/macos/Flutter/Flutter-Debug.xcconfig\n M packages/docs/macos/Flutter/Flutter-Release.xcconfig\n?? packages/docs/ios/Podfile\n?? packages/docs/macos/Podfile\n",
+    "scope_note": "Recorded runtime/build inputs are stable. The unchanged packages/docs generated-file differences mean the whole worktree was not clean.",
+    "tracked_inputs_matching_commit_blob_sha256_and_bytes": 302,
+    "tracked_input_mismatches": 0,
+    "generated_input_not_in_commit": {
+      "path": "packages/beautiful_ai_ui_catalog/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Package.swift",
+      "bytes": 978,
+      "sha256": "6d5df483b7d8a2d32e69b8b108cb2373a5b4d7cf5789389921dff4645454606f",
+      "same_in_all_four_manifests": true
+    },
+    "git_blob_validation_method": "One read-only git cat-file --batch lookup at the recorded full revision; SHA-256 and byte length compared for every tracked input."
+  },
+  "budget": {
+    "schema_version": 1,
+    "budget_id": "engineering_budget_v1",
+    "approval_status": "engineering_default_not_product_approved",
+    "all_platform_release_accepted": false,
+    "frame_budget": {
+      "basis": "1000000 / observed_display_refresh_rate_hz",
+      "build_p95_max_frame_intervals": 1,
+      "raster_p95_max_frame_intervals": 1,
+      "build_or_raster_over_interval_max_fraction": 0.01,
+      "build_max_frame_intervals": 2,
+      "raster_max_frame_intervals": 2,
+      "total_span_p95_max_frame_intervals": 2
+    },
+    "measured_process_rss": {
+      "sample_peak_max_bytes": 536870912,
+      "positive_end_minus_start_max_bytes": 67108864,
+      "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+    },
+    "evidence_requirements": {
+      "minimum_warmup_rounds": 1,
+      "minimum_measured_rounds": 3,
+      "minimum_frame_samples_per_scenario": 100,
+      "minimum_rss_samples_per_scenario": 10
+    },
+    "interpretation": [
+      "These are explicit engineering defaults, not official Flutter thresholds or a user-approved product budget.",
+      "Frame percentiles use nearest rank and the complete independent FrameTiming arrays, not bounded VM timeline retention.",
+      "Build and raster stages are assessed separately because rendering is pipelined; totalSpan includes scheduling and is not a count of displayed dropped frames.",
+      "The fixed measured-process RSS limits are a desktop harness risk gate; component memory and leak assessment remain unassessed even when it passes.",
+      "One passing observed run does not establish repeat-run stability or acceptance on other devices, platforms, accessibility configurations or physical input."
+    ]
+  },
+  "all_platform_release_accepted": false,
+  "valid_runs": [
+    {
+      "run_id": "20260904-87299572-p1p2",
+      "raw_directory": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2",
+      "suite": "p1p2",
+      "capture_status": "complete",
+      "workload_phase_status": "workloads_complete",
+      "driver_exit_code": 0,
+      "script_exit_code": 0,
+      "budget_status": "pass",
+      "source_integrity": {
+        "schema_version": 1,
+        "status": "verified_unchanged",
+        "revision_unchanged": true,
+        "before_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+        "after_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+        "before_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+        "after_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+        "before_file_count": 303,
+        "after_file_count": 303,
+        "changed_paths": [],
+        "source_worktree_status_unchanged": true,
+        "scope_note": "Acceptance checks the listed build/runtime inputs and git revision. Changes to out-of-scope documentation/tests are reported by worktree status and do not alter this manifest."
+      },
+      "runtime": {
+        "operating_system": "macos",
+        "operating_system_version": "Version 15.7.9 (Build 24G830)",
+        "dart_vm_version": "3.13.0 (stable) (Wed Aug 5 00:28:05 2026 -0700) on \"macos_arm64\"",
+        "logical_processor_count": 10,
+        "build_mode": "profile",
+        "application_lifecycle_state": "resumed",
+        "frames_enabled": true,
+        "native_view_physical_px": {
+          "width": 3456.0,
+          "height": 2160.0
+        },
+        "native_view_logical_dp": {
+          "width": 1728.0,
+          "height": 1080.0
+        },
+        "device_pixel_ratio": 2.0,
+        "display_refresh_rate_hz": 120.0,
+        "surface_width_dp": 1696.0,
+        "platform_text_scale_at_14dp": 14.0,
+        "platform_disable_animations": false,
+        "platform_high_contrast": false,
+        "semantics_enabled": true,
+        "platform_semantics_enabled": true,
+        "framework_semantics_enabled": true,
+        "locale": "zh-Hans-CN",
+        "platform_locale": "zh-Hans-CN",
+        "widget_locale": "en-US",
+        "legacy_metadata_note": "locale and semantics_enabled retain the historical platform-dispatcher meaning; widget locale and framework Semantics are recorded independently.",
+        "theme": "light",
+        "motion_policy": "system",
+        "renderer": {
+          "observed_backend": null,
+          "requested_backend": "platform default",
+          "observation_status": "Not exposed by the Flutter public runtime API; inspect the saved engine launch log."
+        },
+        "device_label": "macos"
+      },
+      "native_preparation": {
+        "status": "ready",
+        "wall_time_us": 11549058,
+        "explicit_start_epoch_us": 1788480550697688,
+        "ready_epoch_us": 1788480551742451,
+        "stable_duration_us": 1044758,
+        "completed_framework_frames_since_start": 10,
+        "native_view_physical_px": {
+          "width": 3456.0,
+          "height": 2160.0
+        },
+        "native_view_logical_dp": {
+          "width": 1728.0,
+          "height": 1080.0
+        },
+        "device_pixel_ratio": 2.0,
+        "application_lifecycle_state": "resumed",
+        "frames_enabled": true,
+        "platform_semantics_enabled": true,
+        "framework_semantics_enabled": true,
+        "observation_note": "Readiness requires observed resumed lifecycle, frame progression and stable geometry/semantics flags after explicit Start. It is preparation evidence, not measured frame timing or independent proof of window visibility."
+      },
+      "scenario_count": 8,
+      "frame_samples": 5212,
+      "rss_samples": 504,
+      "sampled_rss_peak_bytes": 406814720,
+      "process_lifetime_max_across_recorded_snapshots_bytes": 470056960,
+      "scenarios": [
+        {
+          "id": "search_long_catalog",
+          "status": "pass",
+          "frame_samples": 1302,
+          "rss_samples": 115,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "entries": 1000,
+            "unique_queries_per_round": 12,
+            "broad_match_keyboard_moves_per_round": 10
+          },
+          "round_zero_steps": [
+            "filter_1000_and_select_last"
+          ],
+          "build_p95_us": 1838,
+          "build_max_us": 4279,
+          "raster_p95_us": 1854,
+          "raster_max_us": 3190,
+          "total_span_p95_us": 3783,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 195887104,
+          "signed_rss_end_minus_start_bytes": 32047104,
+          "maximum_rss_sample_gap_us": 102830,
+          "sampling_start_epoch_us": 1788480557700278,
+          "sampling_end_epoch_us": 1788480569101909,
+          "sampling_start_utc": "2026-09-04T00:09:17.700278Z",
+          "sampling_end_utc": "2026-09-04T00:09:29.101909Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5740597,
+            "gzip_bytes": 255431,
+            "base64_characters": 340576,
+            "json_sha256": "372c50ef2d0fb478002d28993d2190f7b8fcf85f20d89247437544c1d6600664",
+            "trace_event_count": 32450,
+            "compression_start_epoch_us": 1788480571215006,
+            "compression_end_epoch_us": 1788480571339824,
+            "compression_wall_time_us": 124815,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "code_block_long_source",
+          "status": "pass",
+          "frame_samples": 731,
+          "rss_samples": 81,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "lines": 1000,
+            "source_utf16_length": 62779
+          },
+          "round_zero_steps": [
+            "scroll_1000_source_lines",
+            "copy_exact_source"
+          ],
+          "build_p95_us": 824,
+          "build_max_us": 2089,
+          "raster_p95_us": 3328,
+          "raster_max_us": 9351,
+          "total_span_p95_us": 4219,
+          "build_or_raster_over_interval_count": 1,
+          "build_or_raster_over_interval_fraction": 0.0013679890560875513,
+          "sampled_rss_peak_bytes": 355598336,
+          "signed_rss_end_minus_start_bytes": -4014080,
+          "maximum_rss_sample_gap_us": 113585,
+          "sampling_start_epoch_us": 1788480578337419,
+          "sampling_end_epoch_us": 1788480586242272,
+          "sampling_start_utc": "2026-09-04T00:09:38.337419Z",
+          "sampling_end_utc": "2026-09-04T00:09:46.242272Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5756488,
+            "gzip_bytes": 244238,
+            "base64_characters": 325652,
+            "json_sha256": "356b88d264342eb31221d4064ccf3a6cd837c4105e578fc1427c1e91e479d29d",
+            "trace_event_count": 32586,
+            "compression_start_epoch_us": 1788480588377366,
+            "compression_end_epoch_us": 1788480588491132,
+            "compression_wall_time_us": 113761,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "thinking_long_trace",
+          "status": "pass",
+          "frame_samples": 621,
+          "rss_samples": 58,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "steps": 200
+          },
+          "round_zero_steps": [
+            "disclose_and_scroll_200_steps"
+          ],
+          "build_p95_us": 916,
+          "build_max_us": 2762,
+          "raster_p95_us": 1927,
+          "raster_max_us": 2671,
+          "total_span_p95_us": 2934,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 330334208,
+          "signed_rss_end_minus_start_bytes": -6602752,
+          "maximum_rss_sample_gap_us": 103497,
+          "sampling_start_epoch_us": 1788480594794693,
+          "sampling_end_epoch_us": 1788480600400590,
+          "sampling_start_utc": "2026-09-04T00:09:54.794693Z",
+          "sampling_end_utc": "2026-09-04T00:10:00.400590Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5747369,
+            "gzip_bytes": 248340,
+            "base64_characters": 331120,
+            "json_sha256": "b0e07aa2625151fada949d21389988bd2e22782ecf1eed692d9632d3923d6680",
+            "trace_event_count": 32640,
+            "compression_start_epoch_us": 1788480602520827,
+            "compression_end_epoch_us": 1788480602644263,
+            "compression_wall_time_us": 123433,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "streaming_long_answer",
+          "status": "pass",
+          "frame_samples": 775,
+          "rss_samples": 69,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "snapshots_per_round": 50,
+            "answer_utf16_length": 20000
+          },
+          "round_zero_steps": [
+            "apply_50_caller_snapshots",
+            "scroll_and_copy_long_answer"
+          ],
+          "build_p95_us": 5661,
+          "build_max_us": 6418,
+          "raster_p95_us": 2861,
+          "raster_max_us": 4873,
+          "total_span_p95_us": 6957,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 358219776,
+          "signed_rss_end_minus_start_bytes": -868352,
+          "maximum_rss_sample_gap_us": 103452,
+          "sampling_start_epoch_us": 1788480608957375,
+          "sampling_end_epoch_us": 1788480615734050,
+          "sampling_start_utc": "2026-09-04T00:10:08.957375Z",
+          "sampling_end_utc": "2026-09-04T00:10:15.734050Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5754721,
+            "gzip_bytes": 240483,
+            "base64_characters": 320644,
+            "json_sha256": "d6941f6cc2afbb51cb8a18e6d4e0fce01fbba45e54b4433bdb8a82338c72b1db",
+            "trace_event_count": 32610,
+            "compression_start_epoch_us": 1788480617850456,
+            "compression_end_epoch_us": 1788480617963512,
+            "compression_wall_time_us": 113053,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "tool_chips_large_output",
+          "status": "pass",
+          "frame_samples": 541,
+          "rss_samples": 52,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "operations": 1,
+            "output_lines": 1000
+          },
+          "round_zero_steps": [
+            "disclose_scroll_and_collapse_1000_lines"
+          ],
+          "build_p95_us": 2983,
+          "build_max_us": 6923,
+          "raster_p95_us": 1226,
+          "raster_max_us": 3273,
+          "total_span_p95_us": 4423,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 376471552,
+          "signed_rss_end_minus_start_bytes": 835584,
+          "maximum_rss_sample_gap_us": 111932,
+          "sampling_start_epoch_us": 1788480623536075,
+          "sampling_end_epoch_us": 1788480628542564,
+          "sampling_start_utc": "2026-09-04T00:10:23.536075Z",
+          "sampling_end_utc": "2026-09-04T00:10:28.542564Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5749290,
+            "gzip_bytes": 246383,
+            "base64_characters": 328512,
+            "json_sha256": "45f6d7a0ba24f0fe248af23a4c061af7c21c3bd8b53641939ad2d27ab731f19a",
+            "trace_event_count": 32566,
+            "compression_start_epoch_us": 1788480630671290,
+            "compression_end_epoch_us": 1788480630795274,
+            "compression_wall_time_us": 123981,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "chat_long_transcript",
+          "status": "pass",
+          "frame_samples": 313,
+          "rss_samples": 35,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "messages": 500,
+            "transcript_utf16_length": 118390,
+            "height_dp": 560
+          },
+          "round_zero_steps": [
+            "scroll_long_transcript_and_return_latest",
+            "edit_and_send_composer"
+          ],
+          "build_p95_us": 448,
+          "build_max_us": 1104,
+          "raster_p95_us": 765,
+          "raster_max_us": 1345,
+          "total_span_p95_us": 1663,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 389431296,
+          "signed_rss_end_minus_start_bytes": 1179648,
+          "maximum_rss_sample_gap_us": 101202,
+          "sampling_start_epoch_us": 1788480636263003,
+          "sampling_end_epoch_us": 1788480639600485,
+          "sampling_start_utc": "2026-09-04T00:10:36.263003Z",
+          "sampling_end_utc": "2026-09-04T00:10:39.600485Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5638702,
+            "gzip_bytes": 254282,
+            "base64_characters": 339044,
+            "json_sha256": "3f6dc5063dca34dbd3d7b2f70ea01b5ff6e7cc6cad9fac52fc91ce60272d1187",
+            "trace_event_count": 31916,
+            "compression_start_epoch_us": 1788480641715442,
+            "compression_end_epoch_us": 1788480641837812,
+            "compression_wall_time_us": 122367,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "filter_table_large_dataset",
+          "status": "pass",
+          "frame_samples": 361,
+          "rss_samples": 40,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "rows": 200,
+            "completed_rows": 66,
+            "virtualized": false
+          },
+          "round_zero_steps": [
+            "scroll_and_filter_200_rows"
+          ],
+          "build_p95_us": 3174,
+          "build_max_us": 5306,
+          "raster_p95_us": 1736,
+          "raster_max_us": 2755,
+          "total_span_p95_us": 5102,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 402472960,
+          "signed_rss_end_minus_start_bytes": 7815168,
+          "maximum_rss_sample_gap_us": 111415,
+          "sampling_start_epoch_us": 1788480647254725,
+          "sampling_end_epoch_us": 1788480651133701,
+          "sampling_start_utc": "2026-09-04T00:10:47.254725Z",
+          "sampling_end_utc": "2026-09-04T00:10:51.133701Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5761952,
+            "gzip_bytes": 253209,
+            "base64_characters": 337612,
+            "json_sha256": "2e6b45fd4ac99c9f604e0edb22f6f384f85e87a60a87119e375360080c65d4d5",
+            "trace_event_count": 32602,
+            "compression_start_epoch_us": 1788480653250444,
+            "compression_end_epoch_us": 1788480653372903,
+            "compression_wall_time_us": 122456,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "task_rows_large_workflow",
+          "status": "pass",
+          "frame_samples": 568,
+          "rss_samples": 54,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "tasks": 100,
+            "details_per_task": 10,
+            "variant": "list"
+          },
+          "round_zero_steps": [
+            "scroll_disclose_and_collapse_100_tasks"
+          ],
+          "build_p95_us": 2440,
+          "build_max_us": 5300,
+          "raster_p95_us": 1517,
+          "raster_max_us": 7377,
+          "total_span_p95_us": 3937,
+          "build_or_raster_over_interval_count": 0,
+          "build_or_raster_over_interval_fraction": 0.0,
+          "sampled_rss_peak_bytes": 406814720,
+          "signed_rss_end_minus_start_bytes": -1671168,
+          "maximum_rss_sample_gap_us": 101568,
+          "sampling_start_epoch_us": 1788480659204218,
+          "sampling_end_epoch_us": 1788480664425973,
+          "sampling_start_utc": "2026-09-04T00:10:59.204218Z",
+          "sampling_end_utc": "2026-09-04T00:11:04.425973Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5768288,
+            "gzip_bytes": 246090,
+            "base64_characters": 328120,
+            "json_sha256": "a5122ee570ca19b19b258dbc87622dfaff1d08e35a764c21f303c75819267d2b",
+            "trace_event_count": 32652,
+            "compression_start_epoch_us": 1788480666548717,
+            "compression_end_epoch_us": 1788480666668386,
+            "compression_wall_time_us": 119665,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_performance.json",
+          "bytes": 96969,
+          "sha256": "96c4a020a850a7de8115312404d7be56e16a6a0090d51435db131c749d95ee42"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_frame_samples.json",
+          "bytes": 1356219,
+          "sha256": "057fcce96c3659a422610a6c2e3678ca8dae405b7a85003e204e177adac0a31e"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_memory_samples.json",
+          "bytes": 84831,
+          "sha256": "1e4106c7b518d13bc88bb68660cce1b32c1cc937f25c42cd580e6f73fc382256"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/budget-assessment.json",
+          "bytes": 231777,
+          "sha256": "a9b230f14b4761262ba8027f2be91e024e818e3618c6979b8c7f7ae51ba8c9b1"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/source_before.json",
+          "bytes": 61860,
+          "sha256": "0e747cddac3442d3db095519c5b0245f9d420aef75a905cb219564e6002b889c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/source_after.json",
+          "bytes": 61860,
+          "sha256": "94f9f25c62b1ad59cc5c5cc936d0572827a4904f6f16bf18f39a64d0a8e26c01"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/source_integrity.json",
+          "bytes": 727,
+          "sha256": "afa96c6287a5d1bfbf9cab99ef6936aaa58a596795e03ad77b0f7fdf92af0f0f"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/runner_status.json",
+          "bytes": 56,
+          "sha256": "1a9461e2f384338e56a58e7aee20020ff7dba7a944114e8058c60b0fb7e230d3"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/driver_exit_code.txt",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/exit_code.txt",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/launch.log",
+          "bytes": 2590,
+          "sha256": "d7a7d14912c27c7223b42653ab5ecd4be3029dd9f92a4a057bafaa3b9d672b0b"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/launch_command.txt",
+          "bytes": 256,
+          "sha256": "dd72f3847cfb3432cb2b4664b770a63ed85d33f5cf8ffeabc002390a3406c8de"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/flutter_version.json",
+          "bytes": 696,
+          "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/launcher_metadata.json",
+          "bytes": 1389,
+          "sha256": "4fc74a74732b90755c4c716039c9cae2cbba872d980c71ffc3d854a0bc2c6a55"
+        }
+      ],
+      "restored_timeline_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_chat_long_transcript.timeline.json",
+          "bytes": 8517270,
+          "sha256": "1f6fbfc09b15217141e95f0a63d0706f54481f3bdfef29f7085d81df5f356cf9"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_code_block_long_source.timeline.json",
+          "bytes": 8688955,
+          "sha256": "98dc0fe7bf8acbde43a0d117e5c4f2787afab9bc75b34353bbc347a7656186e5"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_filter_table_large_dataset.timeline.json",
+          "bytes": 8698267,
+          "sha256": "28077cf6021adaee911bd5ec5fcbd3d4e610d254811677c7abc43af86c86e207"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_search_long_catalog.timeline.json",
+          "bytes": 8666516,
+          "sha256": "9656cccc8e41167bd8cc716b21beedd063237e6911047dceafa6c8ec29b84604"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_streaming_long_answer.timeline.json",
+          "bytes": 8685238,
+          "sha256": "9c68cf1bb566282bae5d06224be92268205cbdc4ec083551a442d8de42ef5935"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_task_rows_large_workflow.timeline.json",
+          "bytes": 8708280,
+          "sha256": "61aaad9c43d6845cda5263f434c825b7f122b28d0bee1a899f9442f80b6bfb38"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_thinking_long_trace.timeline.json",
+          "bytes": 8679047,
+          "sha256": "e769b18160a58b35a3681a4332e46bb9cb50a22d50f8e41d9c35589e5621796f"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p1p2/p3_trace_tool_chips_large_output.timeline.json",
+          "bytes": 8679207,
+          "sha256": "e192909d97274044d458ab9be1ab64364ddca7af724c61929e15dc14a30e959e"
+        }
+      ]
+    },
+    {
+      "run_id": "20260904-87299572-p3-foreground",
+      "raw_directory": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground",
+      "suite": "p3",
+      "capture_status": "complete",
+      "workload_phase_status": "workloads_complete",
+      "driver_exit_code": 0,
+      "script_exit_code": 0,
+      "budget_status": "budget_fail",
+      "source_integrity": {
+        "schema_version": 1,
+        "status": "verified_unchanged",
+        "revision_unchanged": true,
+        "before_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+        "after_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+        "before_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+        "after_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+        "before_file_count": 303,
+        "after_file_count": 303,
+        "changed_paths": [],
+        "source_worktree_status_unchanged": true,
+        "scope_note": "Acceptance checks the listed build/runtime inputs and git revision. Changes to out-of-scope documentation/tests are reported by worktree status and do not alter this manifest."
+      },
+      "runtime": {
+        "operating_system": "macos",
+        "operating_system_version": "Version 15.7.9 (Build 24G830)",
+        "dart_vm_version": "3.13.0 (stable) (Wed Aug 5 00:28:05 2026 -0700) on \"macos_arm64\"",
+        "logical_processor_count": 10,
+        "build_mode": "profile",
+        "application_lifecycle_state": "resumed",
+        "frames_enabled": true,
+        "native_view_physical_px": {
+          "width": 3456.0,
+          "height": 2160.0
+        },
+        "native_view_logical_dp": {
+          "width": 1728.0,
+          "height": 1080.0
+        },
+        "device_pixel_ratio": 2.0,
+        "display_refresh_rate_hz": 120.0,
+        "surface_width_dp": 1696.0,
+        "platform_text_scale_at_14dp": 14.0,
+        "platform_disable_animations": false,
+        "platform_high_contrast": false,
+        "semantics_enabled": true,
+        "platform_semantics_enabled": true,
+        "framework_semantics_enabled": true,
+        "locale": "zh-Hans-CN",
+        "platform_locale": "zh-Hans-CN",
+        "widget_locale": "en-US",
+        "legacy_metadata_note": "locale and semantics_enabled retain the historical platform-dispatcher meaning; widget locale and framework Semantics are recorded independently.",
+        "theme": "light",
+        "motion_policy": "system",
+        "renderer": {
+          "observed_backend": null,
+          "requested_backend": "platform default",
+          "observation_status": "Not exposed by the Flutter public runtime API; inspect the saved engine launch log."
+        },
+        "device_label": "macos"
+      },
+      "native_preparation": {
+        "status": "ready",
+        "wall_time_us": 23029484,
+        "explicit_start_epoch_us": 1788481051178228,
+        "ready_epoch_us": 1788481052247452,
+        "stable_duration_us": 1069215,
+        "completed_framework_frames_since_start": 10,
+        "native_view_physical_px": {
+          "width": 3456.0,
+          "height": 2160.0
+        },
+        "native_view_logical_dp": {
+          "width": 1728.0,
+          "height": 1080.0
+        },
+        "device_pixel_ratio": 2.0,
+        "application_lifecycle_state": "resumed",
+        "frames_enabled": true,
+        "platform_semantics_enabled": true,
+        "framework_semantics_enabled": true,
+        "observation_note": "Readiness requires observed resumed lifecycle, frame progression and stable geometry/semantics flags after explicit Start. It is preparation evidence, not measured frame timing or independent proof of window visibility."
+      },
+      "scenario_count": 7,
+      "frame_samples": 4543,
+      "rss_samples": 569,
+      "sampled_rss_peak_bytes": 304742400,
+      "process_lifetime_max_across_recorded_snapshots_bytes": 367853568,
+      "scenarios": [
+        {
+          "id": "prompt_bar",
+          "status": "pass",
+          "frame_samples": 869,
+          "rss_samples": 80,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "sources": 1000,
+            "draft_utf16_length": 10000
+          },
+          "round_zero_steps": [
+            "source_filter_and_keyboard_selection",
+            "edit_10000_character_draft",
+            "scroll_long_draft",
+            "send_exact_long_draft"
+          ],
+          "build_p95_us": 876,
+          "build_max_us": 10899,
+          "raster_p95_us": 948,
+          "raster_max_us": 3288,
+          "total_span_p95_us": 2626,
+          "build_or_raster_over_interval_count": 1,
+          "build_or_raster_over_interval_fraction": 0.0011507479861910242,
+          "sampled_rss_peak_bytes": 155549696,
+          "signed_rss_end_minus_start_bytes": 6684672,
+          "maximum_rss_sample_gap_us": 115364,
+          "sampling_start_epoch_us": 1788481057113501,
+          "sampling_end_epoch_us": 1788481064984399,
+          "sampling_start_utc": "2026-09-04T00:17:37.113501Z",
+          "sampling_end_utc": "2026-09-04T00:17:44.984399Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5737045,
+            "gzip_bytes": 244960,
+            "base64_characters": 326616,
+            "json_sha256": "1c41ef7f7bc34bf1c31e1ff5533541f91574a773cbdda7e528784ddfd91e390c",
+            "trace_event_count": 32508,
+            "compression_start_epoch_us": 1788481067114776,
+            "compression_end_epoch_us": 1788481067234453,
+            "compression_wall_time_us": 119674,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": []
+        },
+        {
+          "id": "diff_table",
+          "status": "budget_fail",
+          "frame_samples": 495,
+          "rss_samples": 53,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "records": 500,
+            "fields": 3,
+            "page_size": 20
+          },
+          "round_zero_steps": [
+            "toggle_first_row",
+            "scroll_review_page",
+            "next_page_and_toggle_row",
+            "return_previous_page"
+          ],
+          "build_p95_us": 2485,
+          "build_max_us": 15071,
+          "raster_p95_us": 1787,
+          "raster_max_us": 5002,
+          "total_span_p95_us": 4744,
+          "build_or_raster_over_interval_count": 5,
+          "build_or_raster_over_interval_fraction": 0.010101010101010102,
+          "sampled_rss_peak_bytes": 200900608,
+          "signed_rss_end_minus_start_bytes": 8585216,
+          "maximum_rss_sample_gap_us": 118781,
+          "sampling_start_epoch_us": 1788481072973777,
+          "sampling_end_epoch_us": 1788481078168118,
+          "sampling_start_utc": "2026-09-04T00:17:52.973777Z",
+          "sampling_end_utc": "2026-09-04T00:17:58.168118Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5770410,
+            "gzip_bytes": 248303,
+            "base64_characters": 331072,
+            "json_sha256": "5f4b69748eb6390abfff4d638e869610baec2055a1f58740466ae9289b515d52",
+            "trace_event_count": 32648,
+            "compression_start_epoch_us": 1788481080306152,
+            "compression_end_epoch_us": 1788481080425055,
+            "compression_wall_time_us": 118899,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.010101010101010102,
+              "maximum": 0.01,
+              "passed": false
+            }
+          ]
+        },
+        {
+          "id": "records_table",
+          "status": "budget_fail",
+          "frame_samples": 1066,
+          "rss_samples": 129,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "records": 1000,
+            "columns": 20,
+            "typed_cells": 20000,
+            "viewport_height_dp": 400
+          },
+          "round_zero_steps": [
+            "scroll_lazy_rows",
+            "scroll_twenty_columns",
+            "sort_numeric_property_twice",
+            "filter_and_select_one_of_1000"
+          ],
+          "build_p95_us": 1939,
+          "build_max_us": 111941,
+          "raster_p95_us": 8864,
+          "raster_max_us": 23720,
+          "total_span_p95_us": 18853,
+          "build_or_raster_over_interval_count": 72,
+          "build_or_raster_over_interval_fraction": 0.0675422138836773,
+          "sampled_rss_peak_bytes": 267239424,
+          "signed_rss_end_minus_start_bytes": 16334848,
+          "maximum_rss_sample_gap_us": 226233,
+          "sampling_start_epoch_us": 1788481088834856,
+          "sampling_end_epoch_us": 1788481101793095,
+          "sampling_start_utc": "2026-09-04T00:18:08.834856Z",
+          "sampling_end_utc": "2026-09-04T00:18:21.793095Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5749769,
+            "gzip_bytes": 257140,
+            "base64_characters": 342856,
+            "json_sha256": "13eb5c6dd0c3859d8260944a3f88fe0149debae9a37af2d10b36a791746eb452",
+            "trace_event_count": 32502,
+            "compression_start_epoch_us": 1788481103932295,
+            "compression_end_epoch_us": 1788481104687192,
+            "compression_wall_time_us": 754884,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_max_us",
+              "observed": 111941,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "raster_p95_us",
+              "observed": 8864,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "raster_max_us",
+              "observed": 23720,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.0675422138836773,
+              "maximum": 0.01,
+              "passed": false
+            },
+            {
+              "name": "total_span_p95_us",
+              "observed": 18853,
+              "maximum": 16666.666666666668,
+              "passed": false
+            }
+          ]
+        },
+        {
+          "id": "sidebar_nav",
+          "status": "budget_fail",
+          "frame_samples": 775,
+          "rss_samples": 73,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "recent_items": 1000,
+            "presentation": "expanded",
+            "height_dp": 480,
+            "width_dp": 288
+          },
+          "round_zero_steps": [
+            "scroll_lazy_recents",
+            "filter_activate_and_clear"
+          ],
+          "build_p95_us": 1348,
+          "build_max_us": 20413,
+          "raster_p95_us": 5379,
+          "raster_max_us": 18524,
+          "total_span_p95_us": 11285,
+          "build_or_raster_over_interval_count": 15,
+          "build_or_raster_over_interval_fraction": 0.01935483870967742,
+          "sampled_rss_peak_bytes": 272072704,
+          "signed_rss_end_minus_start_bytes": -11173888,
+          "maximum_rss_sample_gap_us": 125233,
+          "sampling_start_epoch_us": 1788481111525789,
+          "sampling_end_epoch_us": 1788481118681003,
+          "sampling_start_utc": "2026-09-04T00:18:31.525789Z",
+          "sampling_end_utc": "2026-09-04T00:18:38.681003Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5753895,
+            "gzip_bytes": 246548,
+            "base64_characters": 328732,
+            "json_sha256": "f9f6dfb9f524d8944836b6565bfcc9aaa667a530d7855ddad90c698d2ca08062",
+            "trace_event_count": 32549,
+            "compression_start_epoch_us": 1788481120850893,
+            "compression_end_epoch_us": 1788481121716268,
+            "compression_wall_time_us": 865364,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_max_us",
+              "observed": 20413,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "raster_max_us",
+              "observed": 18524,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.01935483870967742,
+              "maximum": 0.01,
+              "passed": false
+            }
+          ]
+        },
+        {
+          "id": "flowchart",
+          "status": "budget_fail",
+          "frame_samples": 349,
+          "rss_samples": 77,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "nodes": 24,
+            "edges": 48,
+            "viewport_height_dp": 420,
+            "presentation": "expanded canvas"
+          },
+          "round_zero_steps": [
+            "keyboard_node_movement",
+            "drag_node_and_connectors",
+            "canvas_pan_and_zoom"
+          ],
+          "build_p95_us": 25655,
+          "build_max_us": 149748,
+          "raster_p95_us": 23998,
+          "raster_max_us": 573478,
+          "total_span_p95_us": 62753,
+          "build_or_raster_over_interval_count": 190,
+          "build_or_raster_over_interval_fraction": 0.5444126074498568,
+          "sampled_rss_peak_bytes": 291717120,
+          "signed_rss_end_minus_start_bytes": -2605056,
+          "maximum_rss_sample_gap_us": 656318,
+          "sampling_start_epoch_us": 1788481128326620,
+          "sampling_end_epoch_us": 1788481136440484,
+          "sampling_start_utc": "2026-09-04T00:18:48.326620Z",
+          "sampling_end_utc": "2026-09-04T00:18:56.440484Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5770272,
+            "gzip_bytes": 269205,
+            "base64_characters": 358940,
+            "json_sha256": "7b410f393e290554ad74cc117ca2c398164c9d61c2ca37de51a4ee3d29ff1474",
+            "trace_event_count": 32621,
+            "compression_start_epoch_us": 1788481139340515,
+            "compression_end_epoch_us": 1788481140081299,
+            "compression_wall_time_us": 740767,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_p95_us",
+              "observed": 25655,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "build_max_us",
+              "observed": 149748,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "raster_p95_us",
+              "observed": 23998,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "raster_max_us",
+              "observed": 573478,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.5444126074498568,
+              "maximum": 0.01,
+              "passed": false
+            },
+            {
+              "name": "total_span_p95_us",
+              "observed": 62753,
+              "maximum": 16666.666666666668,
+              "passed": false
+            }
+          ]
+        },
+        {
+          "id": "insight_cards",
+          "status": "budget_fail",
+          "frame_samples": 731,
+          "rss_samples": 117,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "series": 4,
+            "observations_per_series": 512,
+            "text_rows_when_expanded": 512
+          },
+          "round_zero_steps": [
+            "pointer_and_keyboard_inspection",
+            "disclose_and_scroll_512_text_rows",
+            "collapse_text_data"
+          ],
+          "build_p95_us": 17347,
+          "build_max_us": 93585,
+          "raster_p95_us": 16114,
+          "raster_max_us": 52947,
+          "total_span_p95_us": 44886,
+          "build_or_raster_over_interval_count": 336,
+          "build_or_raster_over_interval_fraction": 0.45964432284541723,
+          "sampled_rss_peak_bytes": 300728320,
+          "signed_rss_end_minus_start_bytes": 7225344,
+          "maximum_rss_sample_gap_us": 136145,
+          "sampling_start_epoch_us": 1788481148397938,
+          "sampling_end_epoch_us": 1788481159923671,
+          "sampling_start_utc": "2026-09-04T00:19:08.397938Z",
+          "sampling_end_utc": "2026-09-04T00:19:19.923671Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 5926466,
+            "gzip_bytes": 265407,
+            "base64_characters": 353876,
+            "json_sha256": "1d5eb4e85ffb30dbfa57fd7e0962b9fcf920be79a18ca97056c54fbf8f5ed72d",
+            "trace_event_count": 32573,
+            "compression_start_epoch_us": 1788481163096946,
+            "compression_end_epoch_us": 1788481164055714,
+            "compression_wall_time_us": 958754,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_p95_us",
+              "observed": 17347,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "build_max_us",
+              "observed": 93585,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "raster_p95_us",
+              "observed": 16114,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "raster_max_us",
+              "observed": 52947,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.45964432284541723,
+              "maximum": 0.01,
+              "passed": false
+            },
+            {
+              "name": "total_span_p95_us",
+              "observed": 44886,
+              "maximum": 16666.666666666668,
+              "passed": false
+            }
+          ]
+        },
+        {
+          "id": "selection_actions",
+          "status": "budget_fail",
+          "frame_samples": 258,
+          "rss_samples": 40,
+          "warmup_rounds": 1,
+          "measured_rounds": 3,
+          "dataset": {
+            "document_utf16_length": 20000,
+            "selected_utf16_length": 4,
+            "replacement_utf16_length": 4
+          },
+          "round_zero_steps": [
+            "scroll_20000_character_native_editor",
+            "native_pointer_selection",
+            "request_and_accept_host_replacement"
+          ],
+          "build_p95_us": 11880,
+          "build_max_us": 28426,
+          "raster_p95_us": 10318,
+          "raster_max_us": 27373,
+          "total_span_p95_us": 29641,
+          "build_or_raster_over_interval_count": 27,
+          "build_or_raster_over_interval_fraction": 0.10465116279069768,
+          "sampled_rss_peak_bytes": 304742400,
+          "signed_rss_end_minus_start_bytes": 4227072,
+          "maximum_rss_sample_gap_us": 154622,
+          "sampling_start_epoch_us": 1788481169530370,
+          "sampling_end_epoch_us": 1788481173364517,
+          "sampling_start_utc": "2026-09-04T00:19:29.530370Z",
+          "sampling_end_utc": "2026-09-04T00:19:33.364517Z",
+          "native_environment_status": "verified_stable",
+          "native_environment_changes": [],
+          "timeline_transport": {
+            "encoding": "gzip_base64_json_v1",
+            "json_bytes": 4525836,
+            "gzip_bytes": 202494,
+            "base64_characters": 269992,
+            "json_sha256": "13f1c2539b2f6fdcc6a1bd52fbdbaa80e25372c339b86af3d8c448fc0ca79725",
+            "trace_event_count": 25778,
+            "compression_start_epoch_us": 1788481175846543,
+            "compression_end_epoch_us": 1788481177137263,
+            "compression_wall_time_us": 1290702,
+            "scope": "Lossless encoding after the measured window and timing flush; the driver restores the original timeline object before writing .timeline.json. Counts describe retained VM events only. No garbage collection is forced."
+          },
+          "failed_gates": [
+            {
+              "name": "build_p95_us",
+              "observed": 11880,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "build_max_us",
+              "observed": 28426,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "raster_p95_us",
+              "observed": 10318,
+              "maximum": 8333.333333333334,
+              "passed": false
+            },
+            {
+              "name": "raster_max_us",
+              "observed": 27373,
+              "maximum": 16666.666666666668,
+              "passed": false
+            },
+            {
+              "name": "build_or_raster_over_interval_fraction",
+              "observed": 0.10465116279069768,
+              "maximum": 0.01,
+              "passed": false
+            },
+            {
+              "name": "total_span_p95_us",
+              "observed": 29641,
+              "maximum": 16666.666666666668,
+              "passed": false
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_performance.json",
+          "bytes": 94925,
+          "sha256": "098f7e6aeb770a2883eadca764bf11bc71bff4d9548ac25e460a410a6a00ea5f"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_frame_samples.json",
+          "bytes": 1185116,
+          "sha256": "df3c067e7d43db181ae1cda7fe41696f6b87df73a1d4f2c16b0c7f61ab5fd4bd"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_memory_samples.json",
+          "bytes": 95701,
+          "sha256": "bb720424731238bb986f36a661367eca59d74a52edb2cefc4d87d9595b7bbf02"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/budget-assessment.json",
+          "bytes": 202806,
+          "sha256": "39c495c423d4a799ef831e0f304e2022a283ba444774a646afc974c82f361e44"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/source_before.json",
+          "bytes": 61860,
+          "sha256": "7278dd77b7c3169f9c2c24c3880ec8578e6ea47117eebb77e6cfca09f5eb4d81"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/source_after.json",
+          "bytes": 61860,
+          "sha256": "f57d14ca0b9967ca8fa269f145859a34a24ce7313ec686a5f4dbd467e42fc6db"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/source_integrity.json",
+          "bytes": 727,
+          "sha256": "afa96c6287a5d1bfbf9cab99ef6936aaa58a596795e03ad77b0f7fdf92af0f0f"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/runner_status.json",
+          "bytes": 56,
+          "sha256": "1a9461e2f384338e56a58e7aee20020ff7dba7a944114e8058c60b0fb7e230d3"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/driver_exit_code.txt",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/exit_code.txt",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/launch.log",
+          "bytes": 2428,
+          "sha256": "10f3b18ba0c6fdd2c6b3da26d52fcdf75ad96a18e79faea24735cc86724588be"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/launch_command.txt",
+          "bytes": 249,
+          "sha256": "5232304aed867fed0edd17331347ae46b2c066cdac3dfcb87591235a2752a9d9"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/flutter_version.json",
+          "bytes": 696,
+          "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/launcher_metadata.json",
+          "bytes": 1382,
+          "sha256": "0a60c36893f9b69f0e19d8b65d80245dd715dc35c41c39befc304e8c25db9c00"
+        }
+      ],
+      "restored_timeline_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_diff_table.timeline.json",
+          "bytes": 8709134,
+          "sha256": "e11a4c173742d0e0fc91254a59a03bca07a78b19f951f3f4f75c4f0316ad5706"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_flowchart.timeline.json",
+          "bytes": 8712078,
+          "sha256": "0a4404958e8334d22ac0038a324d7770fba0e6c48b633f461d02a39363963426"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_insight_cards.timeline.json",
+          "bytes": 8933248,
+          "sha256": "08202d858696eb25f03a0176dcadd0cc6253975183b9d66237ebec548e31d4b9"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_prompt_bar.timeline.json",
+          "bytes": 8664332,
+          "sha256": "5c7f3060445e61f4334c122963d869ddb10edc3f8caf7d16833547ee259f4383"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_records_table.timeline.json",
+          "bytes": 8677281,
+          "sha256": "545afb89f48c3697c19bd3c0fd62d729df8677a795c0e5f92050051509e00141"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_selection_actions.timeline.json",
+          "bytes": 6837726,
+          "sha256": "64745a1db32c317b79fc14cef72eac693f9c13eb2e919b6199d68cb038954acd"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3-foreground/p3_trace_sidebar_nav.timeline.json",
+          "bytes": 8682951,
+          "sha256": "05254e140a6024cc3287b8496b02a3e1a9b212ca0a8b5f18819c17da8e3b405a"
+        }
+      ]
+    }
+  ],
+  "p1p2_comparison_to_3614250": {
+    "old_revision": "36142500c9ad91dc307b6c8005e78add357f080b",
+    "old_run_id": "20260903T231449Z-p1p2",
+    "old_assessment_artifact": {
+      "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260903T231449Z-p1p2/budget-assessment.json",
+      "bytes": 230266,
+      "sha256": "792dec78c09fa60d85190c7bc977ddaaadac849c23cc8761c40cbd516de9b863"
+    },
+    "old_max_sampled_rss_bytes": 625459200,
+    "new_max_sampled_rss_bytes": 406814720,
+    "scenarios": [
+      {
+        "id": "search_long_catalog",
+        "old_status": "pass",
+        "new_status": "pass",
+        "old_build_max_us": 4880,
+        "new_build_max_us": 4279,
+        "old_sampled_rss_peak_bytes": 146948096,
+        "new_sampled_rss_peak_bytes": 195887104,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "code_block_long_source",
+        "old_status": "budget_fail",
+        "new_status": "pass",
+        "old_build_max_us": 28981,
+        "new_build_max_us": 2089,
+        "old_sampled_rss_peak_bytes": 344571904,
+        "new_sampled_rss_peak_bytes": 355598336,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "thinking_long_trace",
+        "old_status": "pass",
+        "new_status": "pass",
+        "old_build_max_us": 2727,
+        "new_build_max_us": 2762,
+        "old_sampled_rss_peak_bytes": 367329280,
+        "new_sampled_rss_peak_bytes": 330334208,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "streaming_long_answer",
+        "old_status": "pass",
+        "new_status": "pass",
+        "old_build_max_us": 6335,
+        "new_build_max_us": 6418,
+        "old_sampled_rss_peak_bytes": 428326912,
+        "new_sampled_rss_peak_bytes": 358219776,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "tool_chips_large_output",
+        "old_status": "budget_fail",
+        "new_status": "pass",
+        "old_build_max_us": 77294,
+        "new_build_max_us": 6923,
+        "old_sampled_rss_peak_bytes": 496254976,
+        "new_sampled_rss_peak_bytes": 376471552,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "chat_long_transcript",
+        "old_status": "budget_fail",
+        "new_status": "pass",
+        "old_build_max_us": 11279,
+        "new_build_max_us": 1104,
+        "old_sampled_rss_peak_bytes": 541900800,
+        "new_sampled_rss_peak_bytes": 389431296,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "filter_table_large_dataset",
+        "old_status": "budget_fail",
+        "new_status": "pass",
+        "old_build_max_us": 38296,
+        "new_build_max_us": 5306,
+        "old_sampled_rss_peak_bytes": 581566464,
+        "new_sampled_rss_peak_bytes": 402472960,
+        "same_recorded_dataset_and_step_sequence": true
+      },
+      {
+        "id": "task_rows_large_workflow",
+        "old_status": "budget_fail",
+        "new_status": "pass",
+        "old_build_max_us": 5426,
+        "new_build_max_us": 5300,
+        "old_sampled_rss_peak_bytes": 625459200,
+        "new_sampled_rss_peak_bytes": 406814720,
+        "same_recorded_dataset_and_step_sequence": true
+      }
+    ],
+    "interpretation": "Observed before/after values for unchanged recorded datasets and step sequences. Component repairs and harness trace storage both changed; this is not isolated attribution to any one change."
+  },
+  "preparation_failure": {
+    "run_id": "20260904-87299572-p3",
+    "raw_directory": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3",
+    "report_status": "failed",
+    "workload_phase_status": "started",
+    "scenario_count": 0,
+    "frame_samples": 0,
+    "rss_samples": 0,
+    "driver_exit_code": 1,
+    "script_exit_code": 1,
+    "report_native_preparation": null,
+    "report_runtime": null,
+    "direct_saved_evidence": [
+      "Initial foreground attempt returned open exit 1.",
+      "WAITING was logged; no READY appeared before the original 120-second timeout.",
+      "The subsequent workload failed its preparation precondition; raw frame and memory objects are empty."
+    ],
+    "operator_reported_lifecycle": "hidden",
+    "lifecycle_provenance": "Contemporaneous CUA observation reported by the root operator; hidden is not persisted in the failed report.",
+    "source_integrity": {
+      "schema_version": 1,
+      "status": "verified_unchanged",
+      "revision_unchanged": true,
+      "before_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+      "after_revision": "8729957220c011329022bafc7a0f7402434ce15e",
+      "before_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+      "after_manifest_sha256": "9ef9ceb6da0ee9cc7624c2ac6ba3ee41944fe06063ff345bcd6f6c49a85718b8",
+      "before_file_count": 303,
+      "after_file_count": 303,
+      "changed_paths": [],
+      "source_worktree_status_unchanged": true,
+      "scope_note": "Acceptance checks the listed build/runtime inputs and git revision. Changes to out-of-scope documentation/tests are reported by worktree status and do not alter this manifest."
+    },
+    "artifacts": [
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/p3_performance.json",
+        "bytes": 3488,
+        "sha256": "f7fed435a8fdb3e5cc2ddefd986f568af63aabddae823368e5612b04bc26deda"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/p3_frame_samples.json",
+        "bytes": 2,
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/p3_memory_samples.json",
+        "bytes": 2,
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/source_integrity.json",
+        "bytes": 727,
+        "sha256": "afa96c6287a5d1bfbf9cab99ef6936aaa58a596795e03ad77b0f7fdf92af0f0f"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/launch.log",
+        "bytes": 6430,
+        "sha256": "60b7627f991c97a29807a9297a488aba3bec5cb57384dbbcfa6f5b4292797ce7"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/driver_exit_code.txt",
+        "bytes": 2,
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-87299572-p3/exit_code.txt",
+        "bytes": 2,
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    ]
+  },
+  "operator_reported_preparation_sequence": {
+    "unconnected_profile_process": {
+      "pid": 53936,
+      "timed_capture": false,
+      "description": "After the failed preparation, a system open command started an app without a connected driver. The operator verified its absolute app path and sole owned process, then sent SIGTERM before starting the foreground capture. No measured evidence is attributed to it."
+    },
+    "valid_foreground_run": "The initial driver foreground attempt returned open exit 1. Before WAITING, the operator used system open -a successfully, then Window menu makeKeyAndOrderFront; actual resumed state, explicit Start and READY were observed before measurement.",
+    "scope": "Operator report of setup actions; no LaunchServices cause is established."
+  },
+  "external_process_observation": {
+    "source_artifact": {
+      "path": "/tmp/beautiful-ci-87299572/host-process-observation.json",
+      "bytes": 771,
+      "sha256": "608f8499b3f0000ab6816a59878a321ee4f5d4672159f6c8a5bc6cf2d644900f"
+    },
+    "embedded_original_observation": {
+      "observed_after_capture_at_utc": "2026-09-04T00:26:53.869525+00:00",
+      "command": [
+        "ps",
+        "-p",
+        "54418,54424",
+        "-o",
+        "pid,ppid,lstart,etime,pcpu,comm"
+      ],
+      "exit_code": 0,
+      "stdout": "  PID  PPID STARTED                      ELAPSED  %CPU COMM\n54418     1 Fri Sep  4 08:18:09 2026       08:44  27.8 /Applications/IINA.app/Contents/MacOS/IINA\n54424     1 Fri Sep  4 08:18:10 2026       08:43   4.9 /System/Library/Frameworks/VideoToolbox.framework/Versions/A/XPCServices/VTDecoderXPCService.xpc/Contents/MacOS/VTDecoderXPCService\n",
+      "stderr": "",
+      "scope": "Post-capture process observation; process start times overlap the recorded P3 run, CPU usage here is not a measurement from that run. No playback content was read or controlled."
+    },
+    "time_zone_for_ps_lstart": "Asia/Shanghai (UTC+08:00)",
+    "processes": [
+      {
+        "name": "IINA",
+        "pid": 54418,
+        "reported_process_start_local": "2026-09-04T08:18:09+08:00",
+        "reported_process_start_utc": "2026-09-04T00:18:09Z"
+      },
+      {
+        "name": "VTDecoderXPCService",
+        "pid": 54424,
+        "reported_process_start_local": "2026-09-04T08:18:10+08:00",
+        "reported_process_start_utc": "2026-09-04T00:18:10Z"
+      }
+    ],
+    "records_sampling_interval_utc": [
+      "2026-09-04T00:18:08.834856Z",
+      "2026-09-04T00:18:21.793095Z"
+    ],
+    "records_environment_monitor_interval_utc": [
+      "2026-09-04T00:18:08.834857Z",
+      "2026-09-04T00:18:21.793099Z"
+    ],
+    "interpretation": "Both reported process starts fall inside Records sampling, after Prompt and Diff. Every Records-and-later workload failed, while Diff had already failed its 5/495 over-interval gate before these starts. This is a temporal association, not proof of CPU/GPU causality or grounds for discarding valid failures. ps CPU percentages were read after capture and are not capture-time measurements.",
+    "operator_control": "The operator asked the user to pause video temporarily for a prospective same-source comparison. No agent controlled IINA or inspected playback content; no comparison result is claimed."
+  },
+  "measurement_conditions": {
+    "agent_cli_during_sampling": "All other CI/diagnostic agents were paused; activation CUA actions preceded READY, and assessment commands followed completion, per operator report.",
+    "other_user_applications": "Left open; there was no claim of whole-machine isolation.",
+    "native_environment": "All15 monitor records are verified_stable with no changes.",
+    "rss_scope": "Whole instrumented process. Sampled peaks may miss shorter spikes; lifetime max includes outside-window work.",
+    "trace_scope": "Driver decoding completed without failures. Lossless transport does not recover VM events evicted before retrieval; this summary makes no full VM-history claim.",
+    "repeat_run_stability": "Not established.",
+    "component_memory_and_leak_assessment": "Unassessed."
+  },
+  "historical_evidence": {
+    "baseline_summary": "2026-09-04-3614250-native-baseline.json",
+    "prior_valid_p3": {
+      "run_id": "20260903T231943Z-p3",
+      "revision": "36142500c9ad91dc307b6c8005e78add357f080b",
+      "frame_samples": 4547,
+      "rss_samples": 560,
+      "budget_status": "budget_fail",
+      "passed_scenario": "sidebar_nav",
+      "failed_scenarios": 6,
+      "assessment_artifact": {
+        "path": "packages/beautiful_ai_ui_catalog/build/p3-profile/20260903T231943Z-p3/budget-assessment.json",
+        "bytes": 203176,
+        "sha256": "c7127fa9289ec26e952b3fd88c26f673023d1a4fcfe5c32b2ae67956b33dd21d"
+      }
+    },
+    "prior_locked_isolated_attempt": {
+      "run_id": "20260903T233401Z-p3-isolated",
+      "measured_scenarios": 0,
+      "comparison_executed": false
+    },
+    "preservation": "Historical valid failures and failed preparations remain unchanged; no best-of-runs aggregation is made."
+  },
+  "independent_audit": {
+    "source_manifest_identity": "passed",
+    "raw_counts_and_frame_accounting": "passed",
+    "frame_monotonicity_uniqueness_and_sampling_windows": "passed",
+    "nearest_rank_distributions_report_and_assessment": "passed",
+    "rss_phases_counts_peaks_growth_and_sampling_coverage": "passed",
+    "exact_scenario_ids_and_three_ordered_rounds": "passed",
+    "all_native_environment_records": "passed",
+    "all_budget_gate_recomputation": "passed",
+    "evidence_invalidating_inconsistencies_found": []
+  }
+}
