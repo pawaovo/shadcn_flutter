@@ -43,19 +43,19 @@ void main() {
       ).join();
     },
   );
+  final rpc = AndroidCandidateRpcQueue(protocol);
   report['events'] = protocol.events;
 
   developer.registerExtension(AndroidCandidateProtocol.extensionName, (
     method,
     parameters,
   ) async {
-    // VM callbacks arrive out-of-band. Use the same outer-event-loop defer
-    // as Flutter's extension wrapper before reading widgets. The subsequent
-    // snapshot validation and claim have no asynchronous gap.
+    // Deferring alone does not join WidgetTester's guarded async zone. While
+    // live getters are installed, only the owning test loop handles the queue.
     await Future<void>.delayed(Duration.zero);
     try {
       return developer.ServiceExtensionResponse.result(
-        jsonEncode(protocol.handle(parameters)),
+        jsonEncode(await rpc.request(parameters)),
       );
     } catch (error) {
       return developer.ServiceExtensionResponse.error(
@@ -89,6 +89,7 @@ void main() {
     );
     final send = find.descendant(of: chat, matching: find.text('Send'));
     final controller = tester.widget<EditableText>(composer).controller;
+    rpc.beginLiveObservation();
     readSnapshot = () {
       final editor = tester.widget<EditableText>(composer);
       final host = tester.widget<BeautifulChat>(chat);
@@ -124,6 +125,7 @@ void main() {
         report['final_observer_error'] = '$error';
         readSnapshot = () => <String, Object?>{'observation_error': '$error'};
       } finally {
+        rpc.freeze();
         androidCandidateBeforeActivation = null;
         androidCandidateAfterTap = null;
       }
@@ -131,6 +133,8 @@ void main() {
 
     androidCandidateAfterTap = freezeObservation;
     androidCandidateBeforeActivation = (testerObject, chatObject, text) {
+      // An abort queued during the final reveal must win before any pointer.
+      rpc.drain();
       if (!identical(testerObject, tester) ||
           !identical(chatObject, chat) ||
           text != expectedText) {
@@ -163,6 +167,7 @@ void main() {
 
     Future<void> until(bool Function() condition) async {
       while (true) {
+        rpc.drain();
         if (protocol.stage == 'failed') {
           throw StateError('${protocol.state()['failure']}');
         }
@@ -206,6 +211,7 @@ void main() {
       try {
         while (protocol.nativeCallPending) {
           await tester.pump(const Duration(milliseconds: 40));
+          rpc.drain();
         }
       } catch (error, stack) {
         // Public UiAutomation may block beyond a checked deadline. Time passing
@@ -214,6 +220,9 @@ void main() {
         // none arrives, the outer owner must destroy this disposable run.
         report['native_drain_wait_error'] = '$error';
         protocol.fail('$error');
+        // Terminal handlers never read widgets. A real native drained RPC must
+        // still complete even when another pump cannot be safely performed.
+        rpc.freeze();
         while (protocol.nativeCallPending) {
           await Future<void>.delayed(const Duration(milliseconds: 40));
         }

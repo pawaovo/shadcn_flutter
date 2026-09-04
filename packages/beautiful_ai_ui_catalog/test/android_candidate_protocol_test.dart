@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
 import 'package:beautiful_ai_ui_catalog/main.dart';
 import 'package:flutter/foundation.dart';
@@ -309,6 +311,171 @@ void main() {
     expect(protocol.stage, 'action_claimed');
   });
 
+  testWidgets('cross-zone RPC waits for the actual WidgetTester pump', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const Directionality(
+        textDirection: TextDirection.ltr,
+        child: Text('actual live widget'),
+      ),
+    );
+    final testZone = Zone.current;
+    final rpcZone = testZone.fork();
+    Zone? readZone;
+    var reads = 0;
+    protocol = AndroidCandidateProtocol(
+      nonce: nonce,
+      sourceSha: source,
+      elapsedMilliseconds: () => now,
+      newLeaseId: () => 'one-lease',
+      readSnapshot: () {
+        reads++;
+        readZone = Zone.current;
+        return <String, Object?>{
+          'live_text': tester.widget<Text>(find.byType(Text)).data,
+        };
+      },
+    );
+    final rpc = AndroidCandidateRpcQueue(protocol)..beginLiveObservation();
+    Object? requestError;
+    Map<String, Object?>? response;
+    var pumpFinished = false;
+    final pumping = tester.pump().then((_) => pumpFinished = true);
+    final request = rpcZone.run(() => rpc.request(action('state')));
+    final observed = request.then<void>(
+      (value) => response = value,
+      onError: (Object error) {
+        requestError = error;
+      },
+    );
+    if (pumpFinished) {
+      throw StateError('The regression requires a pending real pump.');
+    }
+    await pumping;
+    rpc.drain();
+    await observed;
+    expect(
+      requestError,
+      isNull,
+      reason: 'VM requests must not call tester.widget from another zone during pump.',
+    );
+    expect(reads, 1);
+    expect(readZone, same(testZone));
+    expect((response!['snapshot']! as Map)['live_text'], 'actual live widget');
+    expect(tester.takeException(), isNull);
+  });
+
+  test(
+    'placeholder RPCs respond without waiting for the Chat test loop',
+    () async {
+      final rpc = AndroidCandidateRpcQueue(protocol);
+      final state = await Zone.current.fork().run(
+        () => rpc.request(action('state')),
+      );
+      expect(state['stage'], 'preparing');
+      expect(state['snapshot'], same(snapshot));
+    },
+  );
+
+  test('freeze resolves queued state and refuses queued and later claims', () async {
+    protocol.offerCandidate();
+    final rpc = AndroidCandidateRpcQueue(protocol)..beginLiveObservation();
+    final rpcZone = Zone.current.fork();
+    final state = rpcZone.run(() => rpc.request(action('state')));
+    Object? claimError;
+    final claimResult = rpcZone
+        .run(
+          () => rpc.request(
+            action('claim')..['candidate_id'] = 'actual-native-ticket',
+          ),
+        )
+        .then<void>(
+          (_) {},
+          onError: (Object error) {
+            claimError = error;
+          },
+        );
+    // This fixture's getter already returns a plain record. The target installs
+    // its afterTap record or enters a terminal state before freezing the queue.
+    rpc.freeze();
+    expect((await state)['stage'], 'awaiting_candidate');
+    await claimResult;
+    expect(claimError, isA<StateError>());
+    expect(protocol.state()['lease_id'], isNull);
+    await expectLater(
+      rpcZone.run(
+        () => rpc.request(
+          action('claim')..['candidate_id'] = 'actual-native-ticket',
+        ),
+      ),
+      throwsStateError,
+    );
+    expect(
+      (await rpcZone.run(() => rpc.request(action('state'))))['stage'],
+      'awaiting_candidate',
+    );
+  });
+
+  test(
+    'a queued claim reads current input at drain rather than enqueue time',
+    () async {
+      protocol.offerCandidate();
+      final rpc = AndroidCandidateRpcQueue(protocol)..beginLiveObservation();
+      Object? error;
+      final result = Zone.current
+          .fork()
+          .run(
+            () => rpc.request(
+              action('claim')..['candidate_id'] = 'actual-native-ticket',
+            ),
+          )
+          .then<void>(
+            (_) {},
+            onError: (Object value) {
+              error = value;
+            },
+          );
+      snapshot = committed();
+      rpc.drain();
+      await result;
+      expect(error, isA<StateError>());
+      expect(protocol.stage, 'failed');
+      expect(protocol.state()['lease_id'], isNull);
+    },
+  );
+
+  test(
+    'terminal freeze permits real drained RPC without live getter access',
+    () async {
+      var forbidReads = false;
+      protocol = AndroidCandidateProtocol(
+        nonce: nonce,
+        sourceSha: source,
+        readSnapshot: () {
+          if (forbidReads) {
+            throw StateError('Live widget reads are no longer safe.');
+          }
+          return snapshot;
+        },
+        elapsedMilliseconds: () => now,
+        newLeaseId: () => 'one-lease',
+      );
+      protocol.offerCandidate();
+      claim();
+      final rpc = AndroidCandidateRpcQueue(protocol)..beginLiveObservation();
+      protocol.fail('pump failed');
+      forbidReads = true;
+      final drained = Zone.current.fork().run(
+        () => rpc.request(action('drained')..['lease_id'] = 'one-lease'),
+      );
+      rpc.freeze();
+      expect((await drained)['native_drained'], isTrue);
+      expect(protocol.stage, 'failed');
+      expect(protocol.nativeCallPending, isFalse);
+    },
+  );
+
   for (final failure in <String>['guard_throw', 'abort', 'composition']) {
     testWidgets('final activation $failure sends no pointer or host message', (
       tester,
@@ -319,6 +486,9 @@ void main() {
       var pointerDowns = 0;
       var guardCalls = 0;
       var revealChanged = false;
+      var abortWasQueued = false;
+      Object? abortError;
+      Future<void>? abortResult;
       void observePointer(PointerEvent event) {
         if (event is PointerDownEvent) pointerDowns++;
       }
@@ -380,6 +550,8 @@ void main() {
         await tester.pump();
         acknowledge();
         protocol.beginSend();
+        final rpc = AndroidCandidateRpcQueue(protocol)..beginLiveObservation();
+        final rpcZone = Zone.current.fork();
         tester.binding.pointerRouter.addGlobalRoute(observePointer);
         await expectLater(
           tapCatalogTarget(
@@ -390,9 +562,19 @@ void main() {
               if (!revealChanged) {
                 revealChanged = true;
                 if (failure == 'abort') {
-                  protocol.handle(
-                    action('abort')..['error'] = 'abort during reveal',
-                  );
+                  abortResult = rpcZone
+                      .run(
+                        () => rpc.request(
+                          action('abort')..['error'] = 'abort during reveal',
+                        ),
+                      )
+                      .then<void>(
+                        (_) {},
+                        onError: (Object error) {
+                          abortError = error;
+                        },
+                      );
+                  abortWasQueued = protocol.stage == 'sending';
                 } else if (failure == 'composition') {
                   beginComposition();
                   await tester.pump();
@@ -401,6 +583,7 @@ void main() {
             },
             beforeActivation: () {
               guardCalls++;
+              rpc.drain();
               if (failure == 'guard_throw') {
                 throw StateError('Activation rejected.');
               }
@@ -410,6 +593,11 @@ void main() {
           throwsStateError,
         );
         expect(guardCalls, 1);
+        if (failure == 'abort') {
+          await abortResult;
+          expect(abortWasQueued, isTrue);
+          expect(abortError, isNull);
+        }
         expect(pointerDowns, 0);
         final host = tester.widget<BeautifulChat>(chat);
         expect(

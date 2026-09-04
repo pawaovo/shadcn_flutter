@@ -1,3 +1,77 @@
+import 'dart:async';
+import 'dart:collection';
+
+/// VM requests are delivered outside the test's WidgetTester async scope.
+final class AndroidCandidateRpcQueue {
+  AndroidCandidateRpcQueue(this.protocol);
+
+  final AndroidCandidateProtocol protocol;
+  final Queue<_AndroidCandidateRequest> _pending =
+      Queue<_AndroidCandidateRequest>();
+  Zone? _testZone;
+  bool _live = false;
+  bool _frozen = false;
+
+  /// Call in the owning test zone immediately before installing live getters.
+  void beginLiveObservation() {
+    if (_testZone != null || _frozen) {
+      throw StateError('The live candidate observation can only start once.');
+    }
+    _testZone = Zone.current;
+    _live = true;
+  }
+
+  Future<Map<String, Object?>> request(Map<String, String> parameters) {
+    final copied = Map<String, String>.of(parameters);
+    if (!_live) return Future<Map<String, Object?>>.sync(() => _handle(copied));
+    final request = _AndroidCandidateRequest(copied);
+    _pending.add(request);
+    return request.result.future;
+  }
+
+  /// The owner calls this only after its guarded pump completes, or immediately
+  /// before the final activation. Handling stays synchronous and FIFO.
+  void drain() {
+    if (_testZone != null && !identical(Zone.current, _testZone)) {
+      throw StateError(
+        'Only the owning test zone may drain live candidate RPCs.',
+      );
+    }
+    while (_pending.isNotEmpty) {
+      final request = _pending.removeFirst();
+      try {
+        request.result.complete(_handle(request.parameters));
+      } catch (error, stack) {
+        request.result.completeError(error, stack);
+      }
+    }
+  }
+
+  /// Install a record-only getter (or enter a terminal protocol state) first.
+  /// Pending requests then finish without widget access. Future claims cannot
+  /// authorize actions from the frozen record, even if it looks eligible.
+  void freeze() {
+    _frozen = true;
+    _live = false;
+    drain();
+  }
+
+  Map<String, Object?> _handle(Map<String, String> parameters) {
+    if (_frozen && parameters['action'] == 'claim') {
+      throw StateError('A frozen candidate observation cannot issue a claim.');
+    }
+    return protocol.handle(parameters);
+  }
+}
+
+final class _AndroidCandidateRequest {
+  _AndroidCandidateRequest(this.parameters);
+
+  final Map<String, String> parameters;
+  final Completer<Map<String, Object?>> result =
+      Completer<Map<String, Object?>>();
+}
+
 typedef AndroidCandidateBeforeSend = Future<void> Function(
   Object tester,
   Object chat,
