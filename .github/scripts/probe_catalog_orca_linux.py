@@ -115,6 +115,12 @@ def build_catalog(output: Path, flutter: str) -> int:
     return 0 if report["status"] == "compiled_snapshot_bound" else 2
 
 
+def read_interface_text(atspi, interface) -> str:
+    """Read text through the GI text interface without changing app state."""
+    count = atspi.Text.get_character_count(interface)
+    return atspi.Text.get_text(interface, 0, min(count, 1024))
+
+
 def inspect_catalog(pid: int) -> None:
     """Read only. No AT-SPI focus, action, selection or text mutation APIs."""
     import gi
@@ -153,7 +159,7 @@ def inspect_catalog(pid: int) -> None:
                 try:
                     text = node.get_text_iface()
                     if text is not None:
-                        record["text"] = text.get_text(0, min(text.get_character_count(), 1024))
+                        record["text"] = read_interface_text(Atspi, text)
                 except Exception as error:
                     record["text_read_error"] = str(error)
             nodes.append(record)

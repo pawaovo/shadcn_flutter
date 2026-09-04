@@ -51,8 +51,10 @@ jobs:
           }
           Path('artifacts/catalog-orca-run/runner.json').write_text(json.dumps(report, indent=2))
           PY
-      - name: Verify live diagnostic capture without launching AT
-        run: python3 -B -m unittest discover -s .github/scripts -p 'test_owned_pty_capture.py' -v
+      - name: Verify observer APIs and live diagnostic capture without launching AT
+        run: |
+          python3 -B -m unittest discover -s .github/scripts -p 'test_probe_catalog_orca_linux.py' -v
+          python3 -B -m unittest discover -s .github/scripts -p 'test_owned_pty_capture.py' -v
       - name: Install real AT, speech and native build dependencies
         run: |
           sudo apt-get update

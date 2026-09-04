@@ -53,6 +53,14 @@ void main() {
     try {
       await tester.pumpWidget(const CatalogApp());
       await tester.pump();
+      expect(
+        _data(tester, 'Theme: system').flagsCollection.isEnabled,
+        ui.Tristate.isTrue,
+      );
+      expect(
+        _data(tester, 'Motion: system').flagsCollection.isEnabled,
+        ui.Tristate.isTrue,
+      );
       // Establish a deterministic origin, then traverse using actual key events.
       Focus.of(tester.element(find.text('Motion: system'))).requestFocus();
       await tester.pump();
@@ -75,6 +83,10 @@ void main() {
       await tester.pump();
       expect(
         _data(tester, 'Theme: light').flagsCollection.isFocused,
+        ui.Tristate.isTrue,
+      );
+      expect(
+        _data(tester, 'Theme: light').flagsCollection.isEnabled,
         ui.Tristate.isTrue,
       );
       expect(
@@ -104,6 +116,10 @@ void main() {
         _data(tester, 'Motion: reduced').flagsCollection.isFocused,
         ui.Tristate.isTrue,
       );
+      expect(
+        _data(tester, 'Motion: reduced').flagsCollection.isEnabled,
+        ui.Tristate.isTrue,
+      );
       expect(tester.takeException(), isNull);
     } finally {
       await tester.pumpWidget(const SizedBox.shrink());
@@ -130,6 +146,10 @@ void main() {
           kind: ui.PointerDeviceKind.mouse,
         );
         await tester.pump();
+        expect(
+          _data(tester, 'Theme: light').flagsCollection.isEnabled,
+          ui.Tristate.isTrue,
+        );
         expect(
           Focus.of(tester.element(find.text('Theme: light'))).hasFocus,
           isFalse,
@@ -173,6 +193,10 @@ void main() {
         expect(
           _data(tester, 'Motion: reduced').flagsCollection.isFocused,
           ui.Tristate.isFalse,
+        );
+        expect(
+          _data(tester, 'Motion: reduced').flagsCollection.isEnabled,
+          ui.Tristate.isTrue,
         );
         expect(
           _data(tester, 'Theme: dark').flagsCollection.isFocused,

@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "source_sha": "351d7c4f54b66d93749028c8053cc01840bd5328",
+  "scope": "Exact-commit historical evidence; subsequent product and observer fixes are not validated by these runs",
+  "runs": {
+    "main": {
+      "run_id": 33822860857,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33822860857",
+      "conclusion": "success",
+      "job_results": [
+        {
+          "id": 100869122268,
+          "name": "Detect generated targets",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154767,
+          "name": "Build Apple catalogs",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154840,
+          "name": "Build Linux catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154846,
+          "name": "Build Web catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154848,
+          "name": "Format, analyze, and test",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154866,
+          "name": "Run Firefox journey",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154867,
+          "name": "Run Android journey",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154900,
+          "name": "Run Edge journey",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154902,
+          "name": "Build Windows catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154915,
+          "name": "Run Chrome and Linux journeys",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869154928,
+          "name": "Build Android catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869924026,
+          "name": "Validate pub.dev package",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "input": {
+      "run_id": 33822860845,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33822860845",
+      "conclusion": "failure",
+      "job_results": [
+        {
+          "id": 100869121896,
+          "name": "Native linux input bridge",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869121899,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100869121927,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100869121964,
+          "name": "Real firefox input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100869121980,
+          "name": "Native windows input bridge",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869121981,
+          "name": "Native macos input bridge",
+          "conclusion": "success"
+        },
+        {
+          "id": 100869122011,
+          "name": "Real edge input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100869122068,
+          "name": "Real chrome input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100869122206,
+          "name": "Real Safari full journey and input",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    "orca-pilot": {
+      "run_id": 33822866666,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33822866666",
+      "conclusion": "failure",
+      "job_results": [
+        {
+          "id": 100869151926,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  },
+  "core_reports": {
+    "main_run_snapshot": {
+      "file": "main-final.json",
+      "sha256": "d1ab0ee679b6774d40d8dc7ef3ab59320dab9d90fc374c749276e2b24eef4113"
+    },
+    "input_run_snapshot": {
+      "file": "input-final.json",
+      "sha256": "99c5c5badffc8578e1d06528aa0e0cc3424df34254cfdeb747d6950f566cc5bf"
+    },
+    "orca-pilot_run_snapshot": {
+      "file": "orca-pilot-final.json",
+      "sha256": "9f472150acb233290e53113748c577949034b4176e5d5af0d7e6f3e6a3b4a434"
+    },
+    "ios_journey": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+      "sha256": "0368b8e22bcaf2215eaf6b39a16790eaadccc23c1e96deaa6e93190ba3b1ad51"
+    },
+    "chrome_framework": {
+      "file": "input/input-chrome/framework/framework-input.json",
+      "sha256": "7ed9ea459ae22fb4911ff5226c10c451a544d689cfb86e65fc890a060a5586b3"
+    },
+    "chrome_w3c": {
+      "file": "input/input-chrome/browser/browser-input.json",
+      "sha256": "ef6c9b581852bea8b6a98c084f681656438c62f49c7ed8d4584c70dd4bb97c87"
+    },
+    "edge_framework": {
+      "file": "input/input-edge/framework/framework-input.json",
+      "sha256": "4eb91c55cc01db63f681ccc3b12bb8e469eaff4022cfbc52aed4c2bfd0249d03"
+    },
+    "edge_w3c": {
+      "file": "input/input-edge/browser/browser-input.json",
+      "sha256": "bf7f1aacf0e133fb5eb8b1bf27c9bf5456da8cf9dad39102f60a037ddac7bf70"
+    },
+    "firefox_framework": {
+      "file": "input/input-firefox/framework/framework-input.json",
+      "sha256": "740269c8587d888ab36f44351a6a0b6d25648fea6126c4280294d0452539fa94"
+    },
+    "firefox_w3c": {
+      "file": "input/input-firefox/browser/browser-input.json",
+      "sha256": "59d29618c65bfe2d2f0be719861302d6b587133e13bc53173cfe9fa866ff74d5"
+    },
+    "safari_framework": {
+      "file": "input/input-safari/framework/framework-input.json",
+      "sha256": "c6425c04ea17c8ca809acdbed0917b0a5069a24a7c34729925e351ee5747a1aa"
+    },
+    "safari_w3c": {
+      "file": "input/input-safari/browser/browser-input.json",
+      "sha256": "6ca4cea922cec7de3c67e9f03cf5b9ecdd83f73aa4587a47916c2e89e75ce0ee"
+    },
+    "safari_original_journey": {
+      "file": "input/input-safari/journey/trusted-journey.json",
+      "sha256": "72286cf16d030c00cb614297132de1c6c054d201487c51e60a3183dc384aa745"
+    },
+    "linux_at_capability": {
+      "file": "input/real-at-linux-capability/report.json",
+      "sha256": "c91fa9be2b358dc39eb1d1a633d0c69499564c6283ba250f118b36d558a63ff8"
+    },
+    "windows_at_capability": {
+      "file": "input/real-at-windows-capability/report.json",
+      "sha256": "b16b3c927ba2c85817907203755bb9f90a5bc8b2977c555363519b371144217f"
+    },
+    "pilot_runner": {
+      "file": "orca-pilot/catalog-orca-pilot-33822866666-1/catalog-orca-run/runner.json",
+      "sha256": "838e4fef4a798d274205d5e139be8d4d1449f037542f1ecc6ecbd7db75955578"
+    },
+    "pilot_build": {
+      "file": "orca-pilot/catalog-orca-pilot-33822866666-1/catalog-orca-build/build-provenance.json",
+      "sha256": "b4120d3f3d4224af8d296bdc95ae8c3141e8d0695c5c3e1ead00fe6a29e80d61"
+    },
+    "pilot_catalog": {
+      "file": "orca-pilot/catalog-orca-pilot-33822866666-1/catalog-orca-three-tasks/catalog-report.json",
+      "sha256": "f4b5887abf06f8bbf38fc2ef2652a68c6f36172a98e6b9a345f1581cdffb2677"
+    },
+    "pilot_native_tree": {
+      "file": "orca-pilot/catalog-orca-pilot-33822866666-1/catalog-orca-three-tasks/last-native-tree.json",
+      "sha256": "2285ddcc22281e2294a58ade1215d673ec8fb094c5e34ac634495d859a197b12"
+    }
+  },
+  "findings": {
+    "main": {
+      "passed_jobs": 12,
+      "total_jobs": 12,
+      "actual_ios_simulator_driver_exit": 0,
+      "physical_device_acceptance": false,
+      "ios_stages": [
+        {
+          "name": "selected-xcode",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "simulator-sdk",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "install",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "launch",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "vm-service-discovery",
+          "passed": true,
+          "exit_code": null
+        },
+        {
+          "name": "native-flutter-driver",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "terminate",
+          "passed": true,
+          "exit_code": 0
+        }
+      ]
+    },
+    "input": {
+      "passed_jobs": 3,
+      "total_jobs": 9,
+      "passed_native_framework_platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "web": {
+        "chrome": {
+          "framework_status": "failed",
+          "framework_error": "Expected: '/compare '\n  Actual: ''\n   Which: is different. Both strings start the same, but the actual value is missing the following trailing characters: /compare \n",
+          "w3c_status": "failed",
+          "stages": [
+            "prompt-type",
+            "shift-enter",
+            "model-open",
+            "model-escape"
+          ],
+          "terminal_boundary": "keyboard-copy",
+          "original_terminal_captured": true,
+          "failure_summary": "Failure in method: real browser keyboard clipboard focus and window acceptance\n══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞═════════════════\nThe following message was thrown:\nMultiple exceptions (2) were detected during the running of the\ncurrent test, and at least one was unexpected.\n═════════════════════════════════════════════════════════════════\n\nend of failure 1\n\n\n"
+        },
+        "edge": {
+          "framework_status": "failed",
+          "framework_error": "Expected: '/compare '\n  Actual: ''\n   Which: is different. Both strings start the same, but the actual value is missing the following trailing characters: /compare \n",
+          "w3c_status": "failed",
+          "stages": [
+            "prompt-type",
+            "shift-enter",
+            "model-open",
+            "model-escape"
+          ],
+          "terminal_boundary": "after model Escape key acknowledgement",
+          "original_terminal_captured": true,
+          "failure_summary": "Failure in method: real browser keyboard clipboard focus and window acceptance\n══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞═════════════════\nThe following TestFailure was thrown running a test:\nExpected: 'browser 中文 draft\\n'\n            'second line'\n  Actual: ''\n   Which: is different. Both strings start the same, but the\nactual value is missing the following trailing characters:\nbrowser 中文 ...\n\nWhen the exception was thrown, this was the stack:\ndart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 274:3       throw_\npackage:matcher/src/expect/expect.dart 187:31                                     fail\npackage:matcher/src/expect/expect.dart 182:3                         "
+        },
+        "firefox": {
+          "framework_status": "failed",
+          "framework_error": "Expected: '/compare '\n  Actual: ''\n   Which: is different. Both strings start the same, but the actual value is missing the following trailing characters: /compare \n",
+          "w3c_status": "failed",
+          "stages": [
+            "prompt-type",
+            "shift-enter",
+            "model-open",
+            "model-escape"
+          ],
+          "terminal_boundary": "keyboard-copy",
+          "original_terminal_captured": true,
+          "failure_summary": "Failure in method: real browser keyboard clipboard focus and window acceptance\n══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞═════════════════\nThe following message was thrown:\nMultiple exceptions (2) were detected during the running of the\ncurrent test, and at least one was unexpected.\n═════════════════════════════════════════════════════════════════\n\nend of failure 1\n\n\n"
+        },
+        "safari": {
+          "framework_status": "failed",
+          "framework_error": "Expected: '/compare '\n  Actual: ''\n   Which: is different. Both strings start the same, but the actual value is missing the following trailing characters: /compare \n",
+          "w3c_status": "failed",
+          "stages": [
+            "prompt-type",
+            "shift-enter",
+            "model-open",
+            "model-escape",
+            "keyboard-copy"
+          ],
+          "terminal_boundary": "keyboard-clear",
+          "original_terminal_captured": true,
+          "failure_summary": "Failure in method: real browser keyboard clipboard focus and window acceptance\n══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞═════════════════\nThe following TestFailure was thrown running a test:\nExpected: 'browser 中文 draft\\n'\n            'second line'\n  Actual: ''\n   Which: is different. Both strings start the same, but the\nactual value is missing the following trailing characters:\nbrowser 中文 ...\n\nWhen the exception was thrown, this was the stack:\ndart-sdk/lib/_internal/js_dev_runtime/private/ddc_runtime/errors.dart 274:28  throw_\npackage:matcher/src/expect/expect.dart 182:3                                  _expect\npackage:matcher/src/expect/expect.dart 65:3                               ",
+          "original_complete_journey": "passed"
+        }
+      },
+      "interpretation": "Readiness diagnostics now capture terminal integration responses; a pending next stage is not treated as an issued action."
+    },
+    "linux_at_capability": {
+      "status": "not_accepted",
+      "errors": [
+        "TimeoutExpired: Command '['/usr/bin/python3', '-c', \"import gi, pyatspi, speechd; gi.require_version('Gtk', '3.0'); from gi.repository import Gtk\"]' timed out after 5 seconds"
+      ],
+      "layers": {
+        "native_accessibility": "not_accepted",
+        "at_navigation": "not_accepted",
+        "utterance_output": "not_accepted",
+        "synthesized_audio": "not_accepted",
+        "human_review": "not_accepted"
+      }
+    },
+    "windows_at_capability": {
+      "status": "not_accepted",
+      "errors": [
+        "No usable loopback audio endpoint: Exception calling \".ctor\" with \"1\" argument(s): \"Element not found. (Exception from HRESULT: 0x80070490)\""
+      ],
+      "layers": {
+        "native_accessibility": "observed",
+        "at_navigation": "not_accepted",
+        "utterance_output": "not_accepted",
+        "synthesized_audio": "not_accepted",
+        "human_review": "not_accepted"
+      }
+    },
+    "catalog_orca_pilot": {
+      "status": "not_observed",
+      "selected_source_sha_verified": "351d7c4f54b66d93749028c8053cc01840bd5328",
+      "gtk_preflight": "observed separately; not evidence that Catalog tasks passed",
+      "catalog_pid": 5920,
+      "native_nodes": 421,
+      "native_tree_errors": [],
+      "native_tree_truncated": false,
+      "transport": {
+        "kind": "owned_raw_pty",
+        "producer_debug_file": "/dev/stdout",
+        "captured_log": "capability-preflight/orca-debug.log",
+        "content_policy": "Original diagnostic bytes; no injected utterances or handler records",
+        "bytes_captured": 1165603,
+        "eof_verified": true,
+        "reader_stopped": true,
+        "capture_error": null
+      },
+      "cleanup": "verified",
+      "elapsed_seconds": 241.196,
+      "tasks": [
+        {
+          "id": "theme_keyboard_toggle",
+          "status": "not_observed",
+          "key_command_count": 96,
+          "errors": [
+            "RuntimeError: Target not reached using at most 96 Tab keys: Theme: system"
+          ],
+          "reader_checkpoints": 0
+        },
+        {
+          "id": "thinking_disclosure",
+          "status": "not_observed",
+          "key_command_count": 29,
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/home/runner/work/shadcn_flutter/shadcn_flutter/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '5920']' timed out after 0.15346874499999785 seconds",
+            "Failure snapshot: Probe deadline exceeded"
+          ],
+          "reader_checkpoints": 0
+        },
+        {
+          "id": "search_query_and_selection",
+          "status": "not_observed",
+          "key_command_count": 0,
+          "errors": [
+            "TimeoutError: Probe deadline exceeded",
+            "Failure snapshot: Probe deadline exceeded"
+          ],
+          "reader_checkpoints": 0
+        }
+      ],
+      "theme_native_node": {
+        "path": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "name": "Theme: system",
+        "role": "push button",
+        "pid": 5920,
+        "focused": false,
+        "selected": false,
+        "expanded": false,
+        "expandable": false,
+        "showing": true,
+        "enabled": false,
+        "editable": false
+      },
+      "focused_native_nodes": [
+        {
+          "path": [
+            1,
+            0,
+            0
+          ],
+          "name": "",
+          "role": "panel",
+          "pid": 5920,
+          "focused": true,
+          "selected": false,
+          "expanded": false,
+          "expandable": false,
+          "showing": true,
+          "enabled": true,
+          "editable": false
+        }
+      ],
+      "search_text_observer_error": "Atspi.Accessible.get_text() takes exactly 1 argument (3 given)",
+      "application_acceptance": "not_accepted",
+      "human_review": "not_accepted",
+      "interpretation": "PTY and GTK preflight passed, but Theme never gained an accepted native focused node; Thinking traversal exhausted the total deadline and Search issued no commands. No task was accepted."
+    }
+  }
+}

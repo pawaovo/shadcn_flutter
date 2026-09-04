@@ -923,6 +923,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
               SizedBox(height: theme.spacing.sm),
             ],
             DecoratedBox(
+              key: const ValueKey<String>('beautiful-prompt-composer'),
               decoration: BoxDecoration(
                 color: theme.colors.surface,
                 border: Border.all(

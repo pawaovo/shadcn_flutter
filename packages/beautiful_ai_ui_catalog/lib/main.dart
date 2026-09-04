@@ -598,6 +598,7 @@ final class _CatalogButtonState extends State<_CatalogButton> {
     final theme = BeautifulUiTheme.of(context);
     return Semantics(
       button: true,
+      enabled: true,
       focusable: true,
       focused: _hasFocus,
       excludeSemantics: true,

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'support/browser_input_bridge.dart';
+import 'support/catalog_error_capture.dart';
 
 const _typed = 'browser 中文 draft';
 const _multiline = '$_typed\nsecond line';
@@ -27,12 +28,15 @@ void main() {
   testWidgets('real browser keyboard clipboard focus and window acceptance', (
     tester,
   ) async {
+    final flutterErrors = <Map<String, Object?>>[];
+    binding.reportData = <String, dynamic>{'flutter_errors': flutterErrors};
+    addTearDown(captureCatalogFlutterErrors(flutterErrors));
     expect(kIsWeb, isTrue, reason: 'Use the browser-input driver on a browser');
     final semantics = tester.ensureSemantics();
     final previousDevicePointers = binding.shouldPropagateDevicePointerEvents;
     binding.shouldPropagateDevicePointerEvents = true;
     final completed = <String>[];
-    binding.reportData = <String, dynamic>{
+    binding.reportData!.addAll(<String, dynamic>{
       'delivery': 'W3C WebDriver native browser pointer and keyboard events',
       'clipboard':
           'real browser clipboard copied by Catalog and pasted into Prompt',
@@ -40,7 +44,7 @@ void main() {
       'ime_boundary':
           'Unicode insertion; actual operating-system IME is separate',
       'completed': completed,
-    };
+    });
     try {
       await tester.pumpWidget(const catalog.CatalogApp());
       await tester.pump(const Duration(milliseconds: 500));

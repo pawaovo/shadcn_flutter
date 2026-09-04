@@ -2,9 +2,9 @@
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
 Status: **not ready for stable-release sign-off**. The main workflow at
-`8729957220c011329022bafc7a0f7402434ce15e` passed all 12 jobs, all three native
-framework input jobs passed, and the eight P1/P2 native workloads passed the
-fixed engineering budget. Independent Web input, P3 frame budgets, full real
+`351d7c4f54b66d93749028c8053cc01840bd5328` passed all 12 jobs, all three native
+framework input jobs passed, and the eight P1/P2 native workloads at the
+preceding `87299572` runtime snapshot passed the fixed engineering budget. Independent Web input, P3 frame budgets, full real
 assistive-technology review and physical-device acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
@@ -26,7 +26,49 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Current checkpoint at 87299572
+## Subsequent checkpoint at 351d7c4f and the next repair
+
+[The compact 351d7c4f report](../../../.github/evidence/351d7c4f-ci.md) and
+[its JSON](../../../.github/evidence/351d7c4f-ci.json) bind the following results
+to `351d7c4f54b66d93749028c8053cc01840bd5328`:
+
+- Main workflow **12/12 passed**, including the actual iOS driver again.
+- Independent input/AT workflow **3/9 passed**: all three native framework
+  input/clipboard jobs succeeded. Four Web jobs failed. The ordinary Orca
+  capability probe timed out during the initial dependency import; Narrator
+  again had no WASAPI render endpoint. Those are separate capability failures.
+- The Catalog pilot's **5 PTY tests and actual GTK preflight passed**. Its live
+  diagnostic stream captured 1,165,603 original bytes with verified EOF and
+  reader shutdown. The real Catalog started and exposed 421 native nodes, but
+  none of the three complete tasks was accepted. The observer's GI text getter
+  collision and missing enabled semantics on Theme/Motion were then identified.
+
+The browser diagnostics now expose the actual failure: opening/dismissing
+Prompt menus clears the browser editor. An Edge terminal assertion expects the
+full multiline draft after Escape and receives an empty string, before any
+clipboard-copy action. A mechanism regression reproduces changing Prompt
+semantic node IDs even while the EditableText state, controller, input client,
+focus and selection stay stable. The next product repair gives the composer
+container a stable key. Its semantic identity stays stable through command
+and model menus, and all original input assertions remain.
+
+The next candidate also explicitly marks the Catalog's always-enabled header
+buttons as enabled. Flutter's Linux bridge maps the previous unspecified flag
+to absent ATK ENABLED/SENSITIVE state; the existing focus tests reproduce that
+flag and pass with the fix. This does not establish why Tab traversal was still
+observed on the panel. The read-only observer now calls the explicit GI Text
+interface, with two regression cases, and does not change focus requirements,
+AT-SPI cache settings or task timeouts.
+
+Local verification of these pending product repairs is **641/641 library tests,
+61/61 Catalog tests, strict analysis clean, and 144 Git-source Dart files with
+zero format changes**. The next real-browser run must verify that the original
+draft-clearing symptom is gone. The new error recorder forwards the original
+Flutter handler while preserving each error before aggregation; it does not
+consume or suppress failures. The component and Catalog changes require their
+new CI result; the older evidence remains scoped to its recorded source.
+
+## Runtime checkpoint at 87299572
 
 [Compact CI evidence](../../../.github/evidence/87299572-ci.md) and its
 [JSON manifest](../../../.github/evidence/87299572-ci.json) preserve job IDs,
@@ -252,9 +294,10 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Run the subsequent view-focus, W3C-readiness and live-Orca-log repairs on
-  real CI; preserve original assertions and capture any remaining target error.
-  Main CI and clean packaging at `87299572` are already complete.
+- Run the Prompt semantic-identity, Catalog enabled-state and explicit GI
+  Text repairs on real CI; preserve original assertions and capture any
+  remaining target error. Main CI at `351d7c4f` and the earlier clean packaging
+  check are already complete.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain
@@ -264,8 +307,8 @@ default Catalog samples do not accept those capabilities.
   host integrations. Narrator needs a host with an available audio endpoint;
   a capability probe or prepared script is insufficient.
 - Reconcile future runtime changes with the bounded visual/localization,
-  performance, asset, notice and publication evidence. The pending input/PTY
-  repairs alter test/diagnostic infrastructure, not the component library.
+  performance, asset, notice and publication evidence. The pending Prompt repair changes component semantic identity, while the
+  header and observer repairs have their separate Catalog/diagnostic scope.
 
 The [support matrix](../support_matrix.md) and [parity manifest](../parity_manifest.yaml)
 therefore retain six `Partial` platforms and 27 `in_progress` entries. No later
