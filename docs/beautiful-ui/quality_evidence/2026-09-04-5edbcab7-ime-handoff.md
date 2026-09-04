@@ -1,5 +1,9 @@
 # Exportable native input observation at 5edbcab7
 
+Follow-up: the [user's later Chinese-text submission](2026-09-04-user-chinese-submit.md)
+is now recorded and corroborated against the live in-app browser. The initial
+handoff state and ordinary-key export below remain historical observations.
+
 The [current local observer](http://127.0.0.1:63120/) is ready for a real Chinese
 candidate/pre-edit/commit workflow. Its Prompt is empty and focused. It now has
 a **Save observed trace** button whose actual browser download has been verified.

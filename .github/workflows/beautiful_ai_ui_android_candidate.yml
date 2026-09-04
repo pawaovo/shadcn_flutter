@@ -1,0 +1,81 @@
+name: Beautiful AI UI Android native candidate diagnostic (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-character source commit containing the independent diagnostic
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  android-candidate:
+    name: Original journey with one observed native IME candidate tap
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Require an exact source commit
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$DIAGNOSTIC_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - name: Verify source and host protocol rejection paths
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIAGNOSTIC_SOURCE_SHA"
+          mkdir -p artifacts/android-candidate
+          printf '%s\n' "$DIAGNOSTIC_SOURCE_SHA" > artifacts/android-candidate/source-sha.txt
+          python3 -B -m unittest discover -s .github/scripts -p 'test_android_candidate_diagnostic.py' -v
+          python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p 'test_build.py' -v
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.0"
+          channel: stable
+          cache: true
+      - name: Resolve the unchanged package lock and validate Dart protocol
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter test test/android_candidate_protocol_test.dart test/catalog_chat_send_diagnostics_test.dart --no-pub
+          flutter analyze --fatal-infos --fatal-warnings --no-pub integration_test/catalog_android_candidate_test.dart integration_test/support/android_candidate_protocol.dart integration_test/driver/catalog_android_candidate_driver.dart
+      - name: Enable KVM for this fresh disposable runner
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Build fresh helper and run exactly one candidate diagnostic
+        timeout-minutes: 35
+        uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        with:
+          api-level: 35
+          arch: x86_64
+          target: default
+          profile: pixel_6
+          force-avd-creation: true
+          enable-hw-keyboard: false
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -wipe-data
+          script: |
+            python3 tool/android_candidate_probe/build.py --sdk-root "$ANDROID_SDK_ROOT" --source-sha "$DIAGNOSTIC_SOURCE_SHA" --output-dir artifacts/android-candidate/helper-build
+            python3 -B .github/scripts/run_android_candidate_diagnostic.py --source-sha "$DIAGNOSTIC_SOURCE_SHA" --helper-apk artifacts/android-candidate/helper-build/android-candidate-probe.apk --helper-report artifacts/android-candidate/helper-build/build-report.json --output artifacts/android-candidate/run
+      - name: Upload all original build, protocol, native and journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-native-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/android-candidate/
+          if-no-files-found: error
+          retention-days: 14

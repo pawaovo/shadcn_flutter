@@ -5,15 +5,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'interactions.dart';
+import 'android_candidate_protocol.dart';
 
 /// Observes the original one-tap Chat send, then verifies host acceptance.
-/// No edit, focus change, extra frame, retry, or IME commit is performed here.
+/// Default observations add no edit, focus change, frame, retry, or IME commit.
+/// The explicit Android diagnostic first waits for an external native candidate;
+/// the original tap and host acceptance guards below remain unchanged.
 Future<void> sendCatalogChatOnce(
   WidgetTester tester,
   Finder chat,
   String expectedText, {
   void Function(Map<String, Object?>)? onDiagnostic,
 }) async {
+  if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+    await awaitAndroidCandidateBeforeSend(tester, chat, expectedText);
+  }
   final elapsed = Stopwatch()..start();
   final composer = find.descendant(
     of: chat,
@@ -102,7 +108,17 @@ Future<void> sendCatalogChatOnce(
   samples.add(snapshot('before_tap'));
   tester.binding.pointerRouter.addGlobalRoute(observePointer);
   try {
-    await tapCatalogTarget(tester, send);
+    await tapCatalogTarget(
+      tester,
+      send,
+      beforeActivation: const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')
+          ? () => guardAndroidCandidateBeforeActivation(
+              tester,
+              chat,
+              expectedText,
+            )
+          : null,
+    );
     // This is the existing P2 journey post-tap frame, with its original duration.
     await tester.pump(const Duration(milliseconds: 180));
   } finally {
@@ -134,6 +150,9 @@ Future<void> sendCatalogChatOnce(
         'elapsed_us': elapsed.elapsedMicroseconds,
         'observation_error': '${error.runtimeType}: $error',
       });
+    }
+    if (const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')) {
+      androidCandidateAfterTap?.call();
     }
   }
   final host = tester.widget<BeautifulChat>(chat);

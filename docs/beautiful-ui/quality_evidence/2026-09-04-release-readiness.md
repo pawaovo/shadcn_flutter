@@ -73,10 +73,13 @@ app opens and switches Theme from system to light in a scoped native smoke
 test. The Linux three-task reader evidence ZIP remains available separately.
 
 The [exportable input-method handoff](./2026-09-04-5edbcab7-ime-handoff.md)
-provides an empty focused Prompt and a verified JSON download button at
-`http://127.0.0.1:63120/`. Its actual downloaded trace contains 26 events and
-ordinary trusted `n` insertion, with zero composition events. Real Chinese
-candidate/pre-edit/commit observation remains unaccepted.
+provides a verified JSON download button at `http://127.0.0.1:63120/`.
+The [user's subsequent Chinese-input record](./2026-09-04-user-chinese-submit.md)
+contains 54 events, trusted `你` insertion in both controls and one actual Prompt
+submission followed by draft clearing. Its state identities and exact download
+filename match the live in-app browser page. No composition lifecycle is present;
+candidate/pre-edit protection remains distinct from this accepted committed-text
+path. The earlier 26-event ordinary `n` record is preserved.
 
 ## Completed Linux runtime repair and earlier source-153 validation
 
@@ -706,9 +709,9 @@ default Catalog samples do not accept those capabilities.
 - Complete real OS IME candidate, pre-edit and commit observation. Four-browser
   W3C input passes, but those Unicode key events are not an IME workflow. The
   retained synthetic composing checks still fail in web framework suites, and
-  the stock Flutter control reproduces that channel limitation. The new local
-  observation identifies WeType as the current input source but has so far
-  captured only ordinary trusted `n` insertion, not active composition.
+  the stock Flutter control reproduces that channel limitation. The user's
+  in-app browser trace now verifies committed Chinese insertion and submission;
+  no active composition or input-method identity is recorded in that run.
 - Complete actual physical-device, direct keyboard/clipboard and full reader
   task-flow review for advertised platforms and applicable host integrations.
   Linux's three original representative reader tasks are complete at `79fbcdd1`

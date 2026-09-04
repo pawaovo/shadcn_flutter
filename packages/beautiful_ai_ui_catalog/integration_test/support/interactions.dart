@@ -39,6 +39,7 @@ Future<void> tapCatalogTarget(
   Duration timeout = const Duration(seconds: 2),
   Duration frameInterval = const Duration(milliseconds: 16),
   Future<void> Function(Duration)? pump,
+  void Function()? beforeActivation,
 }) async {
   assert(timeout > Duration.zero);
   assert(frameInterval > Duration.zero);
@@ -82,6 +83,7 @@ Future<void> tapCatalogTarget(
     if (stableFrames >= 3) {
       // Keep normal missed-hit diagnostics enabled. There is no pointer event
       // until this point, and no retry after this single activation.
+      beforeActivation?.call();
       await tester.tap(target);
       return;
     }
