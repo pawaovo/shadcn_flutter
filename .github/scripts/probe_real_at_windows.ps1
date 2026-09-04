@@ -74,6 +74,8 @@ public static class AtCapability {
     [DllImport("user32.dll", SetLastError=true)] static extern uint SendInput(uint count, INPUT[] inputs, int size);
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr window);
     [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr window, out uint processId);
+    [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr window);
     [DllImport("user32.dll", SetLastError=true)] static extern IntPtr OpenInputDesktop(uint flags, bool inherit, uint access);
     [DllImport("user32.dll")] static extern bool CloseDesktop(IntPtr desktop);
     public static bool InputDesktopAvailable() {
@@ -113,6 +115,74 @@ public static class AtCapability {
         System.Windows.Forms.Timer timer=new System.Windows.Forms.Timer(); timer.Interval=55000;
         timer.Tick += delegate { form.Close(); }; timer.Start();
         Application.Run(form);
+    }
+}
+
+public sealed class AtOwnedWindowState {
+    public int owner_pid, native_owner_pid;
+    public long native_window_handle;
+    public bool owner_alive, pattern_available, can_minimize, is_modal, ready;
+    public bool minimized, hidden;
+}
+public sealed class AtWindowPreparation {
+    public bool minimize_started;
+    public AtOwnedWindowState before, after;
+}
+public static class AtWindowGuard {
+    static void RequireOwner(int expectedPid, AtOwnedWindowState state) {
+        if(state==null || expectedPid<=0 || !state.owner_alive ||
+            state.owner_pid!=expectedPid || state.native_owner_pid!=expectedPid)
+            throw new InvalidOperationException("Narrator window ownership was not verified");
+    }
+    public static void Prepare(int expectedPid, Func<AtOwnedWindowState> readBefore,
+        Action minimize, Func<AtOwnedWindowState> readAfter, AtWindowPreparation result) {
+        result.before=readBefore();
+        RequireOwner(expectedPid,result.before);
+        if(!result.before.pattern_available || !result.before.can_minimize ||
+            result.before.is_modal || !result.before.ready)
+            throw new InvalidOperationException("Owned Narrator window does not support safe minimization");
+        if(!result.before.minimized && !result.before.hidden) {
+            result.minimize_started=true;
+            minimize(); // Once only. A failed action or observation is never retried.
+        }
+        result.after=readAfter();
+        RequireOwner(expectedPid,result.after);
+        if(!result.after.minimized && !result.after.hidden)
+            throw new InvalidOperationException("Owned Narrator window remained visible after preparation");
+    }
+}
+public sealed class AtFixtureFocus {
+    public int process_id;
+    public bool fixture_alive, fixture_foreground, has_keyboard_focus;
+    public string control_name;
+}
+public sealed class AtInputAttempt {
+    public bool send_started;
+    public AtFixtureFocus focus;
+}
+public static class AtInputGuard {
+    static void Validate(int expectedPid, string expectedName, AtFixtureFocus focus) {
+        if(focus==null || expectedPid<=0 || String.IsNullOrEmpty(expectedName) ||
+            !focus.fixture_alive || !focus.fixture_foreground || !focus.has_keyboard_focus ||
+            focus.process_id!=expectedPid || focus.control_name!=expectedName)
+            throw new InvalidOperationException("Actual fixture focus was not verified for "+expectedName);
+    }
+    public static AtFixtureFocus RequireFocus(int expectedPid, string expectedName,
+        Func<AtFixtureFocus> observe) {
+        AtFixtureFocus focus=observe();
+        Validate(expectedPid,expectedName,focus);
+        return focus;
+    }
+    public static uint Send(int expectedPid, string expectedName, Func<AtFixtureFocus> observe,
+        Func<uint> send, AtInputAttempt attempt) {
+        attempt.focus=observe();
+        Validate(expectedPid,expectedName,attempt.focus);
+        attempt.send_started=true;
+        return send();
+    }
+    public static uint Chord(int expectedPid, string expectedName, Func<AtFixtureFocus> observe,
+        ushort[] keys, AtInputAttempt attempt) {
+        return Send(expectedPid,expectedName,observe,delegate { return AtCapability.Chord(keys); },attempt);
     }
 }
 
@@ -330,6 +400,119 @@ public sealed class AtLoopback : IDisposable {
 }
 '@
 
+function Get-FixtureFocus {
+    $focus = New-Object AtFixtureFocus
+    $fixture.Refresh()
+    $focus.fixture_alive = -not $fixture.HasExited
+    $focus.fixture_foreground = [AtCapability]::GetForegroundWindow() -eq $window
+    $focused = [Windows.Automation.AutomationElement]::FocusedElement
+    if ($null -ne $focused) {
+        $focus.process_id = $focused.Current.ProcessId
+        if ($focus.process_id -eq $fixture.Id) {
+            $focus.control_name = $focused.Current.Name
+            $focus.has_keyboard_focus = $focused.Current.HasKeyboardFocus
+        }
+    }
+    return $focus
+}
+
+function Get-OwnedNarratorWindowState($Element, $Pattern) {
+    $state = New-Object AtOwnedWindowState
+    $narrator.Refresh()
+    $state.owner_alive = -not $narrator.HasExited
+    $pidValue = $Element.GetCurrentPropertyValue([Windows.Automation.AutomationElement]::ProcessIdProperty, $true)
+    if ($pidValue -eq [Windows.Automation.AutomationElement]::NotSupported) {
+        throw 'Owned Narrator window does not report its process ID'
+    }
+    $state.owner_pid = [int]$pidValue
+    $handle = [IntPtr]$Element.Current.NativeWindowHandle
+    $state.native_window_handle = $handle.ToInt64()
+    [uint32]$windowOwner = 0
+    $null = [AtCapability]::GetWindowThreadProcessId($handle, [ref]$windowOwner)
+    $state.native_owner_pid = [int]$windowOwner
+    $state.hidden = -not [AtCapability]::IsWindowVisible($handle)
+    $state.pattern_available = $null -ne $Pattern
+    if ($state.pattern_available) {
+        $info = $Pattern.Current
+        $state.can_minimize = $info.CanMinimize
+        $state.is_modal = $info.IsModal
+        $state.ready = $info.WindowInteractionState -eq [Windows.Automation.WindowInteractionState]::ReadyForUserInteraction
+        $state.minimized = $info.WindowVisualState -eq [Windows.Automation.WindowVisualState]::Minimized
+    }
+    return $state
+}
+
+function Prepare-OwnedNarratorHome {
+    $deadline = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 8)
+    $preparation = [ordered]@{
+        status = 'started'; expected_owner_pid = $narrator.Id
+        utc_started = [DateTime]::UtcNow.ToString('o')
+        deadline_elapsed_seconds = $deadline; minimize_requests = 0; observations = @()
+    }
+    $report.evidence.narrator_preparation = $preparation
+    $result = New-Object AtWindowPreparation
+    try {
+        $condition = New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::ProcessIdProperty, $narrator.Id)
+        $candidate = $null
+        do {
+            $narrator.Refresh()
+            if ($narrator.HasExited) { throw 'The owned Narrator process exited during startup preparation' }
+            $ownedElements = [Windows.Automation.AutomationElement]::RootElement.FindAll([Windows.Automation.TreeScope]::Children, $condition)
+            $windows = @($ownedElements | Where-Object { $_.Current.ControlType -eq [Windows.Automation.ControlType]::Window })
+            if ($windows.Count -gt 1) { throw 'Multiple owned Narrator windows were found; no window will be chosen implicitly' }
+            if ($windows.Count -eq 1) { $candidate = $windows[0]; break }
+            Start-Sleep -Milliseconds 120
+        } while ($started.Elapsed.TotalSeconds -lt $deadline)
+        if ($null -eq $candidate) { throw 'No top-level window belonging to the owned Narrator PID was observed before the startup deadline' }
+        $patternObject = $null
+        $hasPattern = $candidate.TryGetCurrentPattern([Windows.Automation.WindowPattern]::Pattern, [ref]$patternObject)
+        $pattern = if ($hasPattern) { [Windows.Automation.WindowPattern]$patternObject } else { $null }
+        $readBefore = [Func[AtOwnedWindowState]] {
+            do {
+                if ($started.Elapsed.TotalSeconds -ge $deadline) { throw 'Narrator preparation deadline exceeded before minimization' }
+                $state = Get-OwnedNarratorWindowState $candidate $pattern
+                $verifiedOwner = $state.owner_alive -and $state.owner_pid -eq $narrator.Id -and $state.native_owner_pid -eq $narrator.Id
+                if ($verifiedOwner) { $preparation.owned_window_name = $candidate.Current.Name }
+                $preparation.observations += @{ utc = [DateTime]::UtcNow.ToString('o'); state = $state }
+                if (-not $verifiedOwner -or -not $state.pattern_available -or -not $state.can_minimize -or $state.is_modal -or $state.ready) {
+                    return $state
+                }
+                # Wait only for a supported owned window to become interactive.
+                # No action is retried while the provider finishes startup.
+                Start-Sleep -Milliseconds 120
+            } while ($true)
+        }
+        $minimize = [Action] {
+            # The guard verified both UIA and native HWND ownership immediately
+            # before this single action. It never selects a window by title.
+            if ($started.Elapsed.TotalSeconds -ge $deadline) { throw 'Narrator preparation deadline exceeded before the window action' }
+            $preparation.minimize_requests++
+            $pattern.SetWindowVisualState([Windows.Automation.WindowVisualState]::Minimized)
+        }
+        $readAfter = [Func[AtOwnedWindowState]] {
+            do {
+                if ($started.Elapsed.TotalSeconds -ge $deadline) { throw 'Narrator preparation deadline exceeded while verifying the window state' }
+                $state = Get-OwnedNarratorWindowState $candidate $pattern
+                $preparation.observations += @{ utc = [DateTime]::UtcNow.ToString('o'); state = $state }
+                if (-not $state.owner_alive -or $state.owner_pid -ne $narrator.Id -or $state.native_owner_pid -ne $narrator.Id) {
+                    throw 'Narrator window ownership changed after minimization'
+                }
+                if ($state.minimized -or $state.hidden) { return $state }
+                Start-Sleep -Milliseconds 120
+            } while ($true)
+        }
+        [AtWindowGuard]::Prepare($narrator.Id, $readBefore, $minimize, $readAfter, $result)
+        $preparation.status = 'owned_window_prepared'
+    } catch {
+        $preparation.status = 'failed'
+        $preparation.error = $_.Exception.Message
+        throw
+    } finally {
+        $preparation.result = $result
+        $preparation.utc_finished = [DateTime]::UtcNow.ToString('o')
+    }
+}
+
 function Record-CommandBoundary([string]$Phase, $Inserted = $null) {
     # Only name/type/value information belonging to the owned fixture is read.
     # For any other focused application retain only the fact that focus differs.
@@ -358,9 +541,22 @@ function Record-CommandBoundary([string]$Phase, $Inserted = $null) {
     $snapshot.elapsed_ms_finished = $started.ElapsedMilliseconds
     $report.evidence.command_trace += $snapshot
 }
-function Invoke-ProbeChord([string]$Name, [System.UInt16[]]$Keys) {
+function Invoke-ProbeChord([string]$Name, [System.UInt16[]]$Keys, [string]$ExpectedControl = 'Narrator capability beta') {
     Record-CommandBoundary ($Name + ':before')
-    $inserted = [AtCapability]::Chord($Keys)
+    $attempt = New-Object AtInputAttempt
+    $entry = [ordered]@{ command = $Name; expected_control = $ExpectedControl; status = 'started'; attempt = $attempt }
+    $report.evidence.input_attempts += $entry
+    try {
+        Assert-Time
+        $inserted = [AtInputGuard]::Chord($fixture.Id, $ExpectedControl, [Func[AtFixtureFocus]] { Get-FixtureFocus }, $Keys, $attempt)
+        $entry.status = 'sent'
+        $entry.keyboard_events_inserted = $inserted
+    } catch {
+        $entry.status = if ($attempt.send_started) { 'send_failed' } else { 'input_not_sent' }
+        $entry.error = $_.Exception.Message
+        Record-CommandBoundary ($Name + ':' + $entry.status)
+        throw
+    }
     Record-CommandBoundary ($Name + ':after_send') $inserted
     return $inserted
 }
@@ -383,6 +579,7 @@ try {
     $report.evidence.audio_inventory = [AtAudioDiagnostics]::Inventory()
     $report.evidence.audio_capture_policy = 'Original eRender/eConsole shared loopback only; inventory does not choose, activate or create an endpoint.'
     $report.evidence.command_trace = @()
+    $report.evidence.input_attempts = @()
 
     $sourcePath = Join-Path $temporary 'fixture.cs'
     $fixturePath = Join-Path $temporary 'fixture.exe'
@@ -410,6 +607,7 @@ try {
     [IO.File]::WriteAllText($events, '')
     $fixture = Start-Process $fixturePath -ArgumentList ('"' + $events + '"') -PassThru
     $owned.Add($fixture)
+    $null = $fixture.Handle
     Wait-Probe { (Test-Path $events) -and ([IO.File]::ReadAllText($events).Contains('ready')) }
     $fixture.Refresh()
     $window = $fixture.MainWindowHandle
@@ -424,7 +622,7 @@ try {
         if ($null -ne $element) { $controls += @{ name = $element.Current.Name; type = $element.Current.ControlType.ProgrammaticName } }
     }
     if ($controls.Count -eq 2) { Observe 'native_accessibility' @{ controls = $controls; source = 'UI Automation' } }
-    $count = Invoke-ProbeChord 'ordinary Tab' ([System.UInt16[]]@(0x09))
+    $count = Invoke-ProbeChord 'ordinary Tab' ([System.UInt16[]]@(0x09)) 'Narrator capability alpha'
     $report.evidence.keyboard_events_inserted = $count
     Wait-Probe { [IO.File]::ReadAllText($events).Contains('focus=beta') }
     Record-CommandBoundary 'ordinary Tab:response_observed'
@@ -436,13 +634,27 @@ try {
     Assert-Time
     $narrator = Start-Process $narratorPath -PassThru
     $owned.Add($narrator)
-    Start-Sleep -Milliseconds 2200
+    $null = $narrator.Handle
     $narrator.Refresh()
     if ($narrator.HasExited) { throw 'The owned Narrator process exited; no arbitrary replacement process will be adopted' }
     $report.evidence.narrator_pid = $narrator.Id
     $report.evidence.narrator_session_id = $narrator.SessionId
+    Prepare-OwnedNarratorHome
+    # One startup preparation. Commands below never refocus or retry after a
+    # lost-focus guard fails, and they still use Narrator's own invocation.
     [AtCapability]::SetForegroundWindow($window) | Out-Null
     Wait-Probe { [AtCapability]::GetForegroundWindow() -eq $window }
+    $betaCondition = New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty, 'Narrator capability beta')
+    $beta = $root.FindFirst([Windows.Automation.TreeScope]::Descendants, $betaCondition)
+    if ($null -eq $beta -or $beta.Current.ProcessId -ne $fixture.Id) { throw 'The owned fixture beta control was not found after Narrator preparation' }
+    $beta.SetFocus()
+    Wait-Probe {
+        $focus = Get-FixtureFocus
+        $focus.fixture_alive -and $focus.fixture_foreground -and $focus.process_id -eq $fixture.Id -and
+            $focus.has_keyboard_focus -and $focus.control_name -eq 'Narrator capability beta'
+    }
+    $report.evidence.narrator_preparation.fixture_focus_prepared = $true
+    Record-CommandBoundary 'Narrator startup:fixture_focus_prepared'
     try {
         $recording = New-Object AtLoopback((Join-Path $output 'narrator-task.wav'))
         $report.evidence.audio_endpoint = $recording.EndpointId
@@ -452,7 +664,8 @@ try {
     }
 
     # Narrator+Tab reads the current item. Then Narrator+Ctrl+X copies its own
-    # most recent utterance; unsupported builds leave our sentinel unchanged.
+    # most recent utterance. Focus guards prevent sending to a different window.
+    $null = [AtInputGuard]::RequireFocus($fixture.Id, 'Narrator capability beta', [Func[AtFixtureFocus]] { Get-FixtureFocus })
     [Windows.Forms.Clipboard]::SetText('probe-no-narrator-output')
     Invoke-ProbeChord 'Narrator+Tab' ([System.UInt16[]]@(0x2D, 0x09)) | Out-Null
     $until = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 4)
@@ -463,6 +676,7 @@ try {
     Record-CommandBoundary 'Narrator+Tab:observation_window_finished'
     Invoke-ProbeChord 'Narrator+Ctrl+X' ([System.UInt16[]]@(0x2D, 0x11, 0x58)) | Out-Null
     Start-Sleep -Milliseconds 350
+    $null = [AtInputGuard]::RequireFocus($fixture.Id, 'Narrator capability beta', [Func[AtFixtureFocus]] { Get-FixtureFocus })
     $utterance = [Windows.Forms.Clipboard]::GetText()
     Record-CommandBoundary 'Narrator+Ctrl+X:clipboard_observed'
     [IO.File]::WriteAllText((Join-Path $output 'narrator-utterance.txt'), $utterance)
@@ -470,7 +684,7 @@ try {
     if ($spoken) {
         Observe 'utterance_output' @{ source = 'Narrator copy-last-phrase command'; utterance = $utterance; limitation = 'Transcript alone does not establish audio playback' }
     } else {
-        $report.layers.utterance_output.reason = 'Narrator copy-last-phrase did not return the fixture control; the installed build may not support this command'
+        $report.layers.utterance_output.reason = 'Narrator copy-last-phrase did not return the expected fixture control; inspect the recorded utterance and focus boundaries'
     }
     $beforeInvoke = [IO.File]::ReadAllText($events)
     Invoke-ProbeChord 'Narrator+Enter' ([System.UInt16[]]@(0x2D, 0x0D)) | Out-Null # Narrator invoke, not UIA InvokePattern.

@@ -23,6 +23,102 @@ public static class NarratorDiagnosticRegression {
         if(!passed) throw new Exception(reason);
         checks++;
     }
+    static AtOwnedWindowState Window() {
+        return new AtOwnedWindowState { owner_pid=42, native_owner_pid=42,
+            owner_alive=true, pattern_available=true, can_minimize=true, ready=true };
+    }
+    static AtFixtureFocus Focus() {
+        return new AtFixtureFocus { process_id=17, fixture_alive=true,
+            fixture_foreground=true, has_keyboard_focus=true, control_name="beta" };
+    }
+    static bool Rejects(Action action) {
+        try { action(); return false; }
+        catch(InvalidOperationException) { return true; }
+    }
+    static void GuardChecks() {
+        AtOwnedWindowState wrongOwner=Window(); wrongOwner.owner_pid=99;
+        AtOwnedWindowState unknownNativeOwner=Window(); unknownNativeOwner.native_owner_pid=0;
+        AtOwnedWindowState deadOwner=Window(); deadOwner.owner_alive=false;
+        foreach(AtOwnedWindowState state in new AtOwnedWindowState[] { null, wrongOwner, unknownNativeOwner, deadOwner }) {
+            int actions=0, afterReads=0; AtWindowPreparation result=new AtWindowPreparation();
+            bool rejected=Rejects(delegate { AtWindowGuard.Prepare(42,delegate { return state; },
+                delegate { actions++; },delegate { afterReads++; return Window(); },result); });
+            Require(rejected && actions==0 && afterReads==0 && !result.minimize_started,
+                "Unknown, changed or exited ownership must not invoke a window action");
+        }
+        AtOwnedWindowState noPattern=Window(); noPattern.pattern_available=false;
+        AtOwnedWindowState noMinimize=Window(); noMinimize.can_minimize=false;
+        AtOwnedWindowState modal=Window(); modal.is_modal=true;
+        AtOwnedWindowState busy=Window(); busy.ready=false;
+        foreach(AtOwnedWindowState state in new AtOwnedWindowState[] { noPattern, noMinimize, modal, busy }) {
+            int actions=0;
+            Require(Rejects(delegate { AtWindowGuard.Prepare(42,delegate { return state; },
+                delegate { actions++; },delegate { return Window(); },new AtWindowPreparation()); }) && actions==0,
+                "Unsupported, modal or noninteractive windows must not be minimized");
+        }
+        int minimized=0, rereads=0;
+        AtWindowPreparation completed=new AtWindowPreparation();
+        AtWindowGuard.Prepare(42,delegate { return Window(); },delegate { minimized++; },delegate {
+            rereads++; AtOwnedWindowState state=Window(); state.minimized=true; return state;
+        },completed);
+        Require(minimized==1 && rereads==1 && completed.after.minimized,
+            "Preparation must minimize once and verify actual resulting state");
+        minimized=0;
+        Require(Rejects(delegate { AtWindowGuard.Prepare(42,delegate { return Window(); },
+            delegate { minimized++; },delegate { return Window(); },new AtWindowPreparation()); }) && minimized==1,
+            "An unchanged visible window must fail after a single action, without retry");
+        minimized=0;
+        Require(Rejects(delegate { AtWindowGuard.Prepare(42,delegate { return Window(); },
+            delegate { minimized++; },delegate { return wrongOwner; },new AtWindowPreparation()); }) && minimized==1,
+            "Ownership must be checked again after minimization");
+        AtOwnedWindowState hidden=Window(); hidden.hidden=true;
+        minimized=0;
+        AtWindowGuard.Prepare(42,delegate { return hidden; },delegate { minimized++; },
+            delegate { return hidden; },new AtWindowPreparation());
+        Require(minimized==0,"An already hidden owned window needs no repeat minimize action");
+
+        Exception original=new COMException("minimize API failed",unchecked((int)0x80004005));
+        Exception observed=null; minimized=0; rereads=0;
+        try { AtWindowGuard.Prepare(42,delegate { return Window(); },delegate { minimized++; throw original; },
+            delegate { rereads++; return Window(); },new AtWindowPreparation()); }
+        catch(Exception error) { observed=error; }
+        Require(Object.ReferenceEquals(original,observed) && minimized==1 && rereads==0,
+            "A minimize exception must be preserved and must not trigger recovery/retry");
+        original=new InvalidOperationException("state observation failed"); observed=null; minimized=0;
+        try { AtWindowGuard.Prepare(42,delegate { return Window(); },delegate { minimized++; },
+            delegate { throw original; },new AtWindowPreparation()); }
+        catch(Exception error) { observed=error; }
+        Require(Object.ReferenceEquals(original,observed) && minimized==1,
+            "An observation failure after the action must retain its original exception");
+
+        AtFixtureFocus wrongPid=Focus(); wrongPid.process_id=99;
+        AtFixtureFocus noForeground=Focus(); noForeground.fixture_foreground=false;
+        AtFixtureFocus noKeyboardFocus=Focus(); noKeyboardFocus.has_keyboard_focus=false;
+        AtFixtureFocus wrongControl=Focus(); wrongControl.control_name="alpha";
+        AtFixtureFocus deadFixture=Focus(); deadFixture.fixture_alive=false;
+        foreach(AtFixtureFocus state in new AtFixtureFocus[] { null, wrongPid, noForeground, noKeyboardFocus, wrongControl, deadFixture }) {
+            int sends=0; AtInputAttempt attempt=new AtInputAttempt();
+            bool rejected=Rejects(delegate { AtInputGuard.Send(17,"beta",delegate { return state; },
+                delegate { sends++; return 4; },attempt); });
+            Require(rejected && sends==0 && !attempt.send_started,
+                "Every invalid actual-focus condition must prevent SendInput entirely");
+        }
+        int sent=0, focusReads=0; AtInputAttempt accepted=new AtInputAttempt();
+        uint count=AtInputGuard.Send(17,"beta",delegate { focusReads++; return Focus(); },
+            delegate { sent++; return 4; },accepted);
+        Require(count==4 && sent==1 && focusReads==1 && accepted.send_started,
+            "A valid focus observation allows exactly one input action and preserves its result");
+        AtInputAttempt failed=new AtInputAttempt(); original=new COMException("focus query failed"); observed=null; sent=0;
+        try { AtInputGuard.Send(17,"beta",delegate { throw original; },delegate { sent++; return 4; },failed); }
+        catch(Exception error) { observed=error; }
+        Require(Object.ReferenceEquals(original,observed) && sent==0 && !failed.send_started,
+            "A focus observation error must be preserved without sending input");
+        failed=new AtInputAttempt(); original=new COMException("send failed"); observed=null; sent=0;
+        try { AtInputGuard.Send(17,"beta",delegate { return Focus(); },delegate { sent++; throw original; },failed); }
+        catch(Exception error) { observed=error; }
+        Require(Object.ReferenceEquals(original,observed) && sent==1 && failed.send_started,
+            "A send error must not be misreported as input_not_sent or be retried");
+    }
     public static int Run() {
         int missing=unchecked((int)0x80070490);
         AtAudioDiagnostics.Calls.Clear();
@@ -67,6 +163,7 @@ public static class NarratorDiagnosticRegression {
             AtAudioDiagnostics.Calls[4].stage=="test.packet.failure" &&
             AtAudioDiagnostics.Calls[4].hresult==missing,
             "Packet failures must retain stage/HRESULT even when successes are suppressed");
+        GuardChecks();
         return checks;
     }
 }

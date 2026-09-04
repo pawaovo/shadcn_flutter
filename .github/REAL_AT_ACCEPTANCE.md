@@ -73,12 +73,35 @@ from its log. Fixture events carry their own UTC and elapsed time. An immediate
 Narrator processing; later response/window snapshots retain that distinction.
 Names of focused controls outside the owned fixture are not read or recorded.
 
+After launching its owned Narrator process, the probe allows up to eight seconds
+within the existing overall budget to find one top-level window belonging to
+that exact PID. UIA process identity and the native HWND owner must agree, and
+the process handle must remain alive. A nonmodal window with a supported,
+interactive WindowPattern can receive one minimize request. The probe then
+reads the actual state again, requiring the same owner and a minimized or hidden
+window. Missing/ambiguous ownership, unsupported windows, API errors or an
+expired deadline fail preparation. No startup preference or registry setting is
+changed and no descendant or existing Narrator is adopted by name.
+
+The fixture and beta control are focused once after startup preparation. Before
+every subsequent chord, a fresh observation must show the live fixture window
+foreground and the expected actual keyboard focus: alpha before ordinary Tab,
+beta for Space and each Narrator command. A failed guard records
+`input_not_sent` and throws without calling SendInput; it does not restore focus
+or repeat the action. Clipboard access also requires fixture focus. Preparation
+and input attempts are recorded separately from the original AT acceptance
+conditions. A zero-endpoint inventory still leaves real speech unaccepted.
+
 Before running a changed Windows probe, validate its complete embedded C# and
 PowerShell diagnostic serialization without launching a reader or device:
 
 ```powershell
 powershell -NoProfile -STA -File .github/scripts/test_probe_real_at_windows.ps1
 ```
+
+The pure checks exercise ownership, unsupported-window and focus failures with
+side-effect counters, including preservation of original exceptions. They do
+not launch or minimize a window and do not call SendInput.
 
 Use a job timeout as a final guard around platform APIs. Normal script work is
 bounded to 50 seconds with short process cleanup. Upload the output directory
@@ -114,6 +137,9 @@ process, or transcript alone cannot establish that result.
   requires a rendering endpoint and captures its shared audio stream.
 - [Microsoft's Windows SDK MMDevice declarations](https://github.com/microsoft/win32metadata/blob/main/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h)
   define the read-only collection ABI, endpoint state flags and default roles.
+- [UIA WindowPattern](https://learn.microsoft.com/en-us/dotnet/api/system.windows.automation.windowpattern.setwindowvisualstate)
+  exposes actual minimize support and window visual state; the requested action
+  must still be verified on the owned runtime window.
 - [Orca 46 speech implementation](https://github.com/GNOME/orca/blob/gnome-46/src/orca/speech.py#L143)
   emits `SPEECH OUTPUT` even when there is no speech server. This is why a debug
   transcript is checked separately from actual PCM.
