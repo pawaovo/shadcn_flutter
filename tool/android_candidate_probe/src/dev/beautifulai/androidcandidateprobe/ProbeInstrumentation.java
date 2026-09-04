@@ -74,11 +74,13 @@ public final class ProbeInstrumentation extends Instrumentation {
 
     @Override public void onStart() {
         lifetimeDeadline = now() + LIFETIME_MS;
-        Thread watchdog = new Thread(() -> {
-            while (running && now() < lifetimeDeadline) {
-                SystemClock.sleep(Math.max(1, Math.min(1000, lifetimeDeadline - now())));
+        Thread watchdog = new Thread(new Runnable() {
+            @Override public void run() {
+                while (running && now() < lifetimeDeadline) {
+                    SystemClock.sleep(Math.max(1, Math.min(1000, lifetimeDeadline - now())));
+                }
+                if (running) finishProbe(1, "lifetime_expired", "Probe exceeded its 600 second lifetime");
             }
-            if (running) finishProbe(1, "lifetime_expired", "Probe exceeded its 600 second lifetime");
         }, "candidate-probe-deadline");
         watchdog.setDaemon(true);
         watchdog.start();

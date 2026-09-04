@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "scope": "Independent manual Android candidate diagnostic; compilation failure before native app/action",
+  "source_sha": "920f1dd88510da3847187b616cd0a4f25ddbe740",
+  "run_id": 33858129746,
+  "job_id": 100976074669,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858129746",
+  "job_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858129746/job/100976074669",
+  "conclusion": "failure",
+  "run": {
+    "conclusion": "failure",
+    "createdAt": "2026-09-04T09:23:51Z",
+    "headSha": "920f1dd88510da3847187b616cd0a4f25ddbe740",
+    "jobs": [
+      {
+        "completedAt": "2026-09-04T09:26:21Z",
+        "conclusion": "failure",
+        "databaseId": 100976074669,
+        "name": "Original journey with one observed native IME candidate tap",
+        "startedAt": "2026-09-04T09:23:54Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-04T09:23:57Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-04T09:23:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:23:57Z",
+            "conclusion": "success",
+            "name": "Require an exact source commit",
+            "number": 2,
+            "startedAt": "2026-09-04T09:23:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:23:59Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 3,
+            "startedAt": "2026-09-04T09:23:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:24:04Z",
+            "conclusion": "success",
+            "name": "Verify source and host protocol rejection paths",
+            "number": 4,
+            "startedAt": "2026-09-04T09:23:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:24:05Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-java@v5",
+            "number": 5,
+            "startedAt": "2026-09-04T09:24:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:24:20Z",
+            "conclusion": "success",
+            "name": "Run subosito/flutter-action@v2",
+            "number": 6,
+            "startedAt": "2026-09-04T09:24:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:24:55Z",
+            "conclusion": "success",
+            "name": "Resolve the unchanged package lock and validate Dart protocol",
+            "number": 7,
+            "startedAt": "2026-09-04T09:24:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:24:55Z",
+            "conclusion": "success",
+            "name": "Enable KVM for this fresh disposable runner",
+            "number": 8,
+            "startedAt": "2026-09-04T09:24:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:19Z",
+            "conclusion": "failure",
+            "name": "Build fresh helper and run exactly one candidate diagnostic",
+            "number": 9,
+            "startedAt": "2026-09-04T09:24:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:20Z",
+            "conclusion": "success",
+            "name": "Upload all original build, protocol, native and journey evidence",
+            "number": 10,
+            "startedAt": "2026-09-04T09:26:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:20Z",
+            "conclusion": "success",
+            "name": "Post Run subosito/flutter-action@v2",
+            "number": 18,
+            "startedAt": "2026-09-04T09:26:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:20Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-java@v5",
+            "number": 19,
+            "startedAt": "2026-09-04T09:26:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:20Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 20,
+            "startedAt": "2026-09-04T09:26:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:26:20Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-04T09:26:20Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858129746/job/100976074669"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-09-04T09:26:22Z",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858129746"
+  },
+  "artifact": {
+    "id": 9931083659,
+    "node_id": "MDg6QXJ0aWZhY3Q5OTMxMDgzNjU5",
+    "name": "android-native-candidate-33858129746-1",
+    "size_in_bytes": 11924,
+    "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9931083659",
+    "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9931083659/zip",
+    "expired": false,
+    "digest": "sha256:f1242c3b396f0f41a016dbefab27104d55d97ffa5e822324cb683ed12eb5187a",
+    "created_at": "2026-09-04T09:26:20Z",
+    "updated_at": "2026-09-04T09:26:20Z",
+    "expires_at": "2026-09-18T09:26:19Z",
+    "workflow_run": {
+      "id": 33858129746,
+      "repository_id": 1354580211,
+      "head_repository_id": 1354580211,
+      "head_branch": "product/main",
+      "head_sha": "920f1dd88510da3847187b616cd0a4f25ddbe740"
+    }
+  },
+  "artifact_download_count": 1,
+  "archive_digest_scope": "GitHub-provided archive digest; extracted file hashes computed locally, ZIP not retained by gh",
+  "artifact_files": {
+    "helper-build/build.log": {
+      "bytes": 8452,
+      "sha256": "30224e665edbe647fb07dffbc4c03b05b7ab42aad1fbc94600c55c6fd26968d1"
+    },
+    "helper-build/intermediates/generated/dev/beautifulai/androidcandidateprobe/BuildIdentity.java": {
+      "bytes": 203,
+      "sha256": "cfdc57aaacf0d3abae166f6526ff5f78b9ade61f9cb72d53365ce4490881d950"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/Protocol$Error.class": {
+      "bytes": 489,
+      "sha256": "1a4e958921358a09ddfa26658ab03f612a635631636c9e73194b3e122c7c301f"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/Protocol$GestureGate$Decision.class": {
+      "bytes": 1451,
+      "sha256": "3d2caddbfd27a00fa0a508e2a48fd76a72e493a5ea2d1c3286efa0194c78b338"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/Protocol$GestureGate.class": {
+      "bytes": 1249,
+      "sha256": "f9c4f5d025b88665a3d68c49aff5ab18bc0f28f9b231a3866fe105012ee1fb22"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/Protocol$Request.class": {
+      "bytes": 464,
+      "sha256": "d2e514b6c97d4cc71de6195430bf51716265f49f68fb9cdac5e111518b23033f"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/Protocol.class": {
+      "bytes": 5959,
+      "sha256": "30839b993a8ab95995f7c35008f4b6c217ea7e61342e4ad4f5cb09ec4f86a093"
+    },
+    "helper-build/intermediates/protocol-test-classes/dev/beautifulai/androidcandidateprobe/ProtocolTest.class": {
+      "bytes": 5887,
+      "sha256": "3753d382a19b0a99f8e3684ea55b80107f40fb09e8bb74d2edadca2ab3e26b82"
+    },
+    "source-sha.txt": {
+      "bytes": 41,
+      "sha256": "4d0d1a8f0a58ec1a990cdc2cfe7dc4a0ebf23c33550f9abae6fe37bfc3143108"
+    }
+  },
+  "download_root": "/tmp/beautiful-android-candidate-920f1dd8-33858129746",
+  "job_log": {
+    "path": "/tmp/beautiful-android-candidate-920f1dd8-33858129746/job-100976074669.log",
+    "bytes": 79477,
+    "sha256": "3a80767141536a7680bffb893bc5dd167438aa0c3b3bbb96ae1392bf899f1ab8"
+  },
+  "validation": {
+    "host_protocol_tests": {
+      "passed": 10
+    },
+    "build_process_cleanup_tests": {
+      "passed": 3
+    },
+    "dart_protocol_and_original_helper_tests": {
+      "passed": 36
+    },
+    "dart_analysis": "passed",
+    "actual_jvm_protocol": {
+      "passed_checks": 36,
+      "exit_code": 0,
+      "java": "Temurin 17.0.20.1"
+    },
+    "android_api35_compilation": {
+      "status": "failed",
+      "javac_exit_code": 3,
+      "source_line": "ProbeInstrumentation.java:77",
+      "error": "cannot find symbol: method metafactory(Lookup,String,MethodType,MethodType,MethodHandle,MethodType); location: interface LambdaMetafactory",
+      "fatal_error": "Unable to find method metafactory",
+      "build_tools": "37.0.0",
+      "android_platform": "android-35/android.jar",
+      "flags": [
+        "-source",
+        "8",
+        "-target",
+        "8",
+        "-bootclasspath",
+        "android-35/android.jar",
+        "-classpath",
+        "android-35/android.jar"
+      ]
+    },
+    "apk": "not_produced",
+    "native_candidate": "not_started",
+    "actual_draft_commit": "not_started",
+    "stock_input_trace": "not_started",
+    "original_full_native_journey": "not_started"
+  },
+  "cleanup": {
+    "compiler_owned_process_group": "verified in original command-result",
+    "emulator_finalizer": "Executed adb -s emulator-5554 emu kill; received OK: killing emulator, bye bye; finalizer completed",
+    "candidate_supervisor": "not_started; no helper APK installation or Catalog launch occurred"
+  },
+  "root_authorized_next_patch": "Replace only the watchdog Thread lambda with equivalent anonymous Runnable; strict Android API bootclasspath, original behavior, deadlines and assertions retained. New actual Android compilation remains pending a new source/run; this failure is not rerun or overwritten."
+}
