@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
-Local acceptance on 2026-09-04 passes 648 library tests and strict analysis.
+Local acceptance on 2026-09-04 passes 655 library tests and strict analysis.
 The supplemental visual review covers 78 P1/P2 images and 127 P3 images;
 1,008 P3 layout/interaction combinations passed. Real device, screen-reader,
 current cloud input and performance-budget acceptance are recorded separately.
@@ -94,6 +94,12 @@ acceptance remain separate; this is validation, not a package publication.
   input/AT and temporal/performance limitations (product/main, @pawaovo).
 
 ### Fixed
+
+- Reuse Diff Table change totals across page navigation while refreshing totals
+  after inclusion or proposal changes; keep empty-table semantics valid.
+- Retain the Flowchart scene during viewport pan and zoom, and refresh the zoom
+  toolbar only when scale changes. Host data, callbacks, theme and selection
+  continue to update normally; native performance-budget acceptance is separate.
 
 - Expose enabled semantics on interactive Thinking disclosures, search links
   and code rows while retaining static semantics when an action is absent.

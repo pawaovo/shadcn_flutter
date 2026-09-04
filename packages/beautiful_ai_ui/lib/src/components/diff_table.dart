@@ -259,11 +259,25 @@ final class _BeautifulDiffTableState extends State<BeautifulDiffTable> {
   List<BeautifulDiffColumn> _columns = const [];
   List<BeautifulDiffRow> _rows = const [];
   Set<String> _included = <String>{};
+  Map<BeautifulDiffChange, int>? _includedCounts;
   var _page = 0;
   var _generation = 0;
   var _pending = false;
   var _applied = false;
   var _failed = false;
+  int _debugSummaryComputations = 0;
+  int _debugSummaryRowVisits = 0;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    assert(() {
+      properties
+        ..add(IntProperty('summaryComputations', _debugSummaryComputations))
+        ..add(IntProperty('summaryRowVisits', _debugSummaryRowVisits));
+      return true;
+    }());
+  }
 
   int get _pages => math.max(1, (_rows.length / widget.pageSize).ceil());
 
@@ -322,6 +336,7 @@ final class _BeautifulDiffTableState extends State<BeautifulDiffTable> {
         ..addAll(changedIds.difference(oldIds));
     }
     if (changed) {
+      _includedCounts = null;
       _generation++;
       _pending = false;
       _applied = false;
@@ -335,6 +350,7 @@ final class _BeautifulDiffTableState extends State<BeautifulDiffTable> {
     if (_pending || _applied) return;
     setState(() {
       if (!_included.add(id)) _included.remove(id);
+      _includedCounts = null;
       _failed = false;
     });
   }
@@ -420,7 +436,11 @@ final class _BeautifulDiffTableState extends State<BeautifulDiffTable> {
                     key: const ValueKey<String>('diff-table-records'),
                     container: true,
                     explicitChildNodes: true,
-                    role: expanded ? SemanticsRole.table : SemanticsRole.list,
+                    role: _rows.isEmpty
+                        ? null
+                        : expanded
+                        ? SemanticsRole.table
+                        : SemanticsRole.list,
                     label: widget.title,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -554,16 +574,31 @@ final class _BeautifulDiffTableState extends State<BeautifulDiffTable> {
     final labels = widget.labels;
     if (_pending) return labels.applying;
     if (_applied) return '${labels.applied}: ${_included.length}';
-    final counts = <BeautifulDiffChange, int>{};
-    for (final row in _rows) {
-      if (_included.contains(row.id)) {
-        counts.update(row.kind, (count) => count + 1, ifAbsent: () => 1);
-      }
-    }
+    // Pagination and inherited/label changes do not alter these quantities.
+    // Format using current labels and status instead of caching visible text.
+    final counts = _includedCounts ??= _countIncludedChanges();
     return '${labels.selected}: ${_included.length}. '
         '${labels.removed}: ${counts[BeautifulDiffChange.removed] ?? 0}, '
         '${labels.added}: ${counts[BeautifulDiffChange.added] ?? 0}, '
         '${labels.modified}: ${counts[BeautifulDiffChange.modified] ?? 0}';
+  }
+
+  Map<BeautifulDiffChange, int> _countIncludedChanges() {
+    assert(() {
+      _debugSummaryComputations++;
+      return true;
+    }());
+    final counts = <BeautifulDiffChange, int>{};
+    for (final row in _rows) {
+      assert(() {
+        _debugSummaryRowVisits++;
+        return true;
+      }());
+      if (_included.contains(row.id)) {
+        counts.update(row.kind, (count) => count + 1, ifAbsent: () => 1);
+      }
+    }
+    return Map<BeautifulDiffChange, int>.unmodifiable(counts);
   }
 
   Widget _headings(BeautifulUiThemeData theme) => Semantics(

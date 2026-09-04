@@ -458,6 +458,7 @@ final class BeautifulFlowchart extends StatefulWidget {
 
 final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
   final _transform = TransformationController();
+  final _zoomScale = ValueNotifier<double>(1);
   final _sizes = <String, Size>{};
   final _cardKeys = <String, GlobalKey>{};
   final _nodeFocus = <String, FocusNode>{};
@@ -474,7 +475,14 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
   @override
   void initState() {
     super.initState();
+    _transform.addListener(_updateZoomScale);
     _syncIdentity();
+  }
+
+  void _updateZoomScale() {
+    // Pan changes the matrix without changing any toolbar content. Avoid
+    // rebuilding its ordered-node controls on every drag or inertia frame.
+    _zoomScale.value = _transform.value.getMaxScaleOnAxis();
   }
 
   @override
@@ -526,7 +534,9 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
 
   @override
   void dispose() {
+    _transform.removeListener(_updateZoomScale);
     _transform.dispose();
+    _zoomScale.dispose();
     for (final node in <FocusNode>[
       ..._nodeFocus.values,
       ..._fieldFocus.values,
@@ -638,11 +648,11 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
       math.min(0.0, _viewport.height - extent.height * scale),
       0.0,
     );
-    setState(() {
-      _transform.value = Matrix4.identity()
-        ..translateByDouble(x.toDouble(), y.toDouble(), 0, 1)
-        ..scaleByDouble(scale, scale, 1, 1);
-    });
+    // InteractiveViewer owns transform rendering. The graph scene has not
+    // changed, so only the scale-dependent toolbar needs a notification.
+    _transform.value = Matrix4.identity()
+      ..translateByDouble(x.toDouble(), y.toDouble(), 0, 1)
+      ..scaleByDouble(scale, scale, 1, 1);
   }
 
   void _pan(Offset delta) {
@@ -762,7 +772,11 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
                       ),
                     )
                   else if (_canvas) ...<Widget>[
-                    _canvasToolbar(theme),
+                    ValueListenableBuilder<double>(
+                      valueListenable: _zoomScale,
+                      builder: (context, scale, _) =>
+                          _canvasToolbar(theme, scale),
+                    ),
                     _canvasView(theme, width),
                   ] else
                     _steps(theme),
@@ -789,11 +803,10 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
     onPressed: onPressed,
   );
 
-  Widget _canvasToolbar(BeautifulUiThemeData theme) {
+  Widget _canvasToolbar(BeautifulUiThemeData theme, double scale) {
     final ordered = widget.data._orderedNodes;
     final index = ordered.indexWhere((node) => node.id == _selected);
     final selected = index < 0 ? null : ordered[index];
-    final scale = _transform.value.getMaxScaleOnAxis();
     void navigate(int next) {
       final node = ordered[next];
       _select(node.id, reveal: true);
@@ -935,7 +948,6 @@ final class _BeautifulFlowchartState extends State<BeautifulFlowchart> {
             alignment: Alignment.topLeft,
             minScale: 1,
             maxScale: 2,
-            onInteractionEnd: (_) => setState(() {}),
             child: SizedBox.fromSize(
               key: const Key('beautiful-flowchart-canvas-extent'),
               size: extent,
