@@ -24,6 +24,7 @@ import time
 import wave
 
 from run_catalog_input_acceptance import start_owned_process, stop_owned_process
+from owned_pty_capture import OwnedPtyCapture
 
 
 TITLE = "Real Orca capability fixture"
@@ -99,6 +100,7 @@ class Probe:
         self.deadline = self.started + seconds
         self.children: list[subprocess.Popen] = []
         self.handles = []
+        self.orca_capture = None
         self.runtime = tempfile.TemporaryDirectory(prefix="orca-probe-")
         self.temp = Path(self.runtime.name)
         self.env = os.environ.copy()
@@ -127,6 +129,24 @@ class Probe:
     def spawn(self, argv: list[str], name: str, *, stdout=None):
         log = (self.output / (name + ".log")).open("wb")
         self.handles.append(log)
+        if name == "orca":
+            debug_files = [arg.split("=", 1)[1] for arg in argv if arg.startswith("--debug-file=")]
+            if len(debug_files) != 1 or stdout is not None:
+                raise RuntimeError("The probe requires exactly one owned Orca debug destination")
+            debug_path = Path(debug_files[0]).resolve()
+            captured_log = str(debug_path.relative_to(self.output))
+            # Orca opens its debug file independently; PYTHONUNBUFFERED cannot
+            # flush that file. A PTY selects line buffering for /dev/stdout.
+            command = ["--debug-file=/dev/stdout" if arg.startswith("--debug-file=") else arg for arg in argv]
+            self.orca_capture = OwnedPtyCapture(command, debug_path, env=self.env, stderr=log)
+            child = self.orca_capture.process
+            self.children.append(child)
+            self.report["evidence"]["orca_debug_transport"] = {
+                "kind": "owned_raw_pty", "producer_debug_file": "/dev/stdout",
+                "captured_log": captured_log,
+                "content_policy": "Original diagnostic bytes; no injected utterances or handler records",
+            }
+            return child
         child = start_owned_process(argv, env=self.env, stdin=subprocess.DEVNULL,
                                     stdout=stdout if stdout is not None else log,
                                     stderr=log)
@@ -146,6 +166,9 @@ class Probe:
 
     def stop(self, child) -> None:
         # An exited leader can leave a live speech/backend descendant behind.
+        if self.orca_capture is not None and child is self.orca_capture.process:
+            self.orca_capture.close(grace=1, kill_timeout=1)
+            return
         stop_owned_process(child, grace=1, kill_timeout=1)
 
     def execute(self) -> None:

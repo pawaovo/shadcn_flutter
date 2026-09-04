@@ -1,0 +1,55 @@
+test_live_orca_file_output_is_visible_before_process_exit (test_probe_real_at_linux.LinuxATSupervisorTests.test_live_orca_file_output_is_visible_before_process_exit) ... ERROR
+
+======================================================================
+ERROR: test_live_orca_file_output_is_visible_before_process_exit (test_probe_real_at_linux.LinuxATSupervisorTests.test_live_orca_file_output_is_visible_before_process_exit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/zzz/build/design/shadcn_flutter/.github/scripts/test_probe_real_at_linux.py", line 43, in test_live_orca_file_output_is_visible_before_process_exit
+    self.probe.wait_for(lambda: debug.exists() and expected in debug.read_bytes(), 0.5)
+  File "/Users/zzz/build/design/shadcn_flutter/.github/scripts/probe_real_at_linux.py", line 142, in wait_for
+    raise TimeoutError("Timed out waiting for a capability response")
+TimeoutError: Timed out waiting for a capability response
+
+----------------------------------------------------------------------
+Ran 1 test in 0.907s
+
+FAILED (errors=1)
+{
+  "schema_version": 1,
+  "platform": "linux",
+  "scope": "native_fixture_capability",
+  "status": "not_accepted",
+  "application_acceptance": "not_accepted",
+  "explanation": "A GTK fixture cannot accept the Flutter catalog or replace human review.",
+  "runtime": {
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Aug  7 2026, 02:15:23) [Clang 22.1.3 ]",
+    "runner_image": null,
+    "display": null
+  },
+  "layers": {
+    "native_accessibility": {
+      "status": "not_accepted",
+      "reason": "Not observed"
+    },
+    "at_navigation": {
+      "status": "not_accepted",
+      "reason": "Not observed"
+    },
+    "utterance_output": {
+      "status": "not_accepted",
+      "reason": "Not observed"
+    },
+    "synthesized_audio": {
+      "status": "not_accepted",
+      "reason": "Not observed"
+    },
+    "human_review": {
+      "status": "not_accepted",
+      "reason": "No human listened or completed a Flutter task"
+    }
+  },
+  "evidence": {},
+  "errors": [],
+  "elapsed_seconds": 0.905
+}

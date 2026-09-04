@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-04T05:42:53.193224+00:00",
+  "scope": "Standalone native GTK Orca capability probe diagnostic transport; no application or human acceptance",
+  "source_revision_of_original_failure": "f15f27eb671086444f137475f1cf4e9de3eb6328",
+  "original_ci_run": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973",
+  "original_raw_directory": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability",
+  "original_outcome": {
+    "status": "not_accepted",
+    "application_acceptance": "not_accepted",
+    "layers": {
+      "native_accessibility": {
+        "status": "observed",
+        "controls": [
+          {
+            "name": "Real Orca capability fixture",
+            "role": "frame",
+            "focused": false,
+            "checked": false
+          },
+          {
+            "name": "Orca capability alpha",
+            "role": "push button",
+            "focused": true,
+            "checked": false
+          },
+          {
+            "name": "Orca capability beta",
+            "role": "check box",
+            "focused": false,
+            "checked": false
+          }
+        ]
+      },
+      "at_navigation": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "utterance_output": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "synthesized_audio": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "human_review": {
+        "status": "not_accepted",
+        "reason": "No human listened or completed a Flutter task"
+      }
+    },
+    "errors": [
+      "TimeoutError: Timed out waiting for a capability response"
+    ],
+    "elapsed_seconds": 13.452
+  },
+  "observations": {
+    "orca_version": "46.1",
+    "fixture_events": [
+      "ready",
+      "focus=alpha",
+      "focus=beta"
+    ],
+    "where_am_i_handler": "05:18:45.306945 - KEYBOARD EVENT: Handler is Perform the basic Where Am I operation (enabled: True)",
+    "generated_content": [
+      "Orca capability beta",
+      "check box",
+      "not checked"
+    ],
+    "debug_log_bytes": 101678,
+    "debug_log_ends_with_newline": false,
+    "debug_tail_last_token": "'PAUSE'",
+    "command_tail_contains_new_speech_output": false,
+    "speech_dispatcher_playback_end": "05:18:48.179732",
+    "pcm": {
+      "bytes": 214392,
+      "frames": 107196,
+      "sample_format": "signed little-endian 16-bit mono",
+      "sample_rate": 16000,
+      "rms_recomputed": 4152.469439894912
+    },
+    "interpretation": "A real command handler and generated words are recorded. Dispatcher playback and nonzero PCM contradict an assumption of total silence, but neither identifies the words heard or accepts the command/human task. The existing report remains not_accepted."
+  },
+  "upstream_inspection": [
+    {
+      "url": "https://raw.githubusercontent.com/GNOME/orca/ORCA_46_1/src/orca/orca_bin.py.in",
+      "sha256": "a67b96b7b55d0f421851c6d8f696c8c01170be424b473ae3fbe976869f78160d",
+      "lines": [
+        236,
+        239
+      ],
+      "finding": "The CLI uses open(args.debug_file, 'w') without selecting line buffering."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/GNOME/orca/ORCA_46_1/src/orca/debug.py",
+      "sha256": "58c2c01dc8606c5ddd4c19b366a56addc529d9b988591b656a0613107c8d3061",
+      "lines": [
+        306,
+        314
+      ],
+      "finding": "println uses writelines with newline and no explicit flush."
+    }
+  ],
+  "upstream_boundary": "Read-only GNOME ORCA_46_1 source inspection; the CI installed Python source bytes were not separately exported. CI reports Orca 46.1. No container package environment was modified.",
+  "fix": {
+    "scope": "Probe.spawn/stop now reuse the existing OwnedPtyCapture used by CatalogProbe. Orca writes /dev/stdout attached to a raw PTY; the observer copies and flushes original bytes to orca-debug.log. Existing owned process cleanup and EOF/error verification remain mandatory.",
+    "preserved": [
+      "Tab focus check",
+      "new beta SPEECH OUTPUT after KP_Enter",
+      "Space checked=true",
+      "real isolated Speech Dispatcher/espeak-ng PCM checks",
+      "5-second focus utterance timeout",
+      "6-second command utterance timeout",
+      "50-second default overall bound",
+      "native fixture scope and human/application non-acceptance"
+    ],
+    "not_changed": [
+      "Orca code or settings behavior",
+      "component code",
+      "Catalog pilot override",
+      "CI gates/budgets",
+      "original failure report and audio"
+    ],
+    "failure_boundary": "This fixes a reproduced live-log transport defect. Buffered contents from the original killed process cannot be reconstructed; the original failed run is not retroactively accepted."
+  },
+  "verification": {
+    "red": {
+      "tests": 1,
+      "result": "error",
+      "reason": "Timed out reading the completed unflushed line while its writer stayed alive"
+    },
+    "green": {
+      "tests": 3,
+      "result": "pass"
+    },
+    "owned_pty_regression": {
+      "tests": 5,
+      "result": "pass"
+    },
+    "method": "Real local Python subprocess fixtures; no GUI, AT, synthesis, container build or CI rerun",
+    "real_capability_after_fix": "not_yet_executed",
+    "independent_review": {
+      "reviewer": "finish_ci",
+      "method": "Static review of base Probe, CatalogProbe inheritance and OwnedPtyCapture ownership",
+      "result": "No blocking findings; no duplicate capture or cleanup, original gates preserved"
+    }
+  },
+  "local_test_logs": [
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/diagnostics/orca-capability-log-transport/red.log",
+      "bytes": 2158,
+      "sha256": "d9a159581248355ece0b5625be14402af194ea2067993af069e2ec090fa30ab8"
+    },
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/diagnostics/orca-capability-log-transport/green.log",
+      "bytes": 5072,
+      "sha256": "757a7863201766333defb23bc7ab54b0d13b8519e5f0ab5d6f23d363abc44c17"
+    },
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/docs/beautiful-ui/diagnostics/orca-capability-log-transport/owned-pty-regression.log",
+      "bytes": 991,
+      "sha256": "15fe877869766d5673484bb631e36c76bdd3c39e6c4ca113ed6f81edd6b9d037"
+    }
+  ],
+  "modified_and_reused_sources": [
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/.github/scripts/probe_real_at_linux.py",
+      "bytes": 19404,
+      "sha256": "cefc0d000ff30c753617b830b4b6edf33b60cb7092ae8fe2b2645a278037ab56"
+    },
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/.github/scripts/test_probe_real_at_linux.py",
+      "bytes": 3912,
+      "sha256": "719772bce941b23cc1046ebefb1624864af6c294c11c598156a77784c62a0d3a"
+    },
+    {
+      "path": "/Users/zzz/build/design/shadcn_flutter/.github/scripts/owned_pty_capture.py",
+      "bytes": 4687,
+      "sha256": "4e49c1c6febd260b8ff384d83c0349fdee3d132eb3b2ae56794fd1a581f2a4fe"
+    }
+  ],
+  "original_raw_artifacts": [
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/audio-capture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/fixture-events.log",
+      "bytes": 29,
+      "sha256": "bd1099921653da0a1f20ac81db69e0b2842889e548af5f12f8800efea95c2f94"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/fixture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/orca-debug.log",
+      "bytes": 101678,
+      "sha256": "01e86dd609dfd01d7f1f27d29b47b1fe5229e795e99432a9aef933c02231f50c"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/orca-task.pcm",
+      "bytes": 214392,
+      "sha256": "0845b9602b3f85f4df69dc73e19d5c3ceaf87c5e8fd8ed27504bb7fec46ebb4b"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/orca.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/pulseaudio.log",
+      "bytes": 9997,
+      "sha256": "99d7dae45dbcad26f2ecadc149e97fc451893ea51c383017e469300cdb046749"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/report.json",
+      "bytes": 1208207,
+      "sha256": "1f5f4c190dee9ac12501adfad2568d515aa4f0fbe506c50c7c91358f7c0a250f"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/speech-dispatcher.log",
+      "bytes": 1232820,
+      "sha256": "67d987b14e569724d25340d5fe05062e7c538a5ff35b2f113bc6bea7565799e5"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/speechd-logs/espeak-ng.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/beautiful-ci-f15f27eb/input/real-at-linux-capability/speechd-logs/speech-dispatcher.log",
+      "bytes": 1248902,
+      "sha256": "bf6cc9e0692ffc45a2340b403e7d86b2568465563eead3f400b43a5a84554ff5"
+    }
+  ]
+}

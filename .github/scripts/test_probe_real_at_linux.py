@@ -22,6 +22,30 @@ class LinuxATSupervisorTests(unittest.TestCase):
         self.probe = probe_module.Probe(self.output, 30)
         self.addCleanup(self.probe.finish)
 
+    def test_live_orca_file_output_is_visible_before_process_exit(self):
+        debug = self.output / "orca-debug.log"
+        ready = self.output / "writer-ready"
+        expected = "SPEECH OUTPUT: 'Orca capability beta 中文'\n".encode()
+        # Orca 46.1 opens its --debug-file with open(path, 'w') and uses
+        # writelines without flush. A regular file hides this idle tail.
+        script = (
+            "import sys,time\nfrom pathlib import Path\n"
+            "destination = next(a.split('=', 1)[1] for a in sys.argv if a.startswith('--debug-file='))\n"
+            "with open(destination, 'w', encoding='utf-8') as log:\n"
+            " log.writelines([\"SPEECH OUTPUT: 'Orca capability beta 中文'\", '\\n'])\n"
+            " Path(sys.argv[1]).touch()\n"
+            " time.sleep(60)\n"
+        )
+        process = self.probe.spawn(
+            [sys.executable, "-c", script, str(ready), "--debug-file=" + str(debug)], "orca")
+        self.probe.wait_for(ready.exists, 3)
+        self.assertIsNone(process.poll())
+        self.probe.wait_for(lambda: debug.exists() and expected in debug.read_bytes(), 0.5)
+        self.assertEqual(debug.read_bytes(), expected)
+        self.assertIsNone(process.poll(), "Live evidence must not depend on process shutdown")
+        self.probe.stop(process)
+        self.assertEqual(live_group_members(process.pid), [])
+
     def test_exited_at_leader_does_not_hide_live_backend(self):
         ready = self.output / "backend.pid"
         script = (

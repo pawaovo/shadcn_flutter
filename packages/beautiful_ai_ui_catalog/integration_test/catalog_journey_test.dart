@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'support/interactions.dart';
+import 'support/chat_send_diagnostics.dart';
 import 'support/catalog_semantics_fixture.dart';
 import 'support/trusted_clipboard_action.dart';
 
@@ -232,7 +233,11 @@ Future<void> _runP2Journey(WidgetTester tester) async {
   await Scrollable.ensureVisible(tester.element(composer), alignment: 0.5);
   await tester.pump();
   await enterCatalogText(tester, composer, 'Check cone inventory');
-  await tap('catalog-chat', find.text('Send'));
+  await sendCatalogChatOnce(
+    tester,
+    find.byKey(const Key('catalog-chat')),
+    'Check cone inventory',
+  );
   expect(
     _inside('catalog-chat', find.text('Check cone inventory')),
     findsOneWidget,
