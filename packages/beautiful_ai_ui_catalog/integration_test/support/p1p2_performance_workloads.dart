@@ -132,7 +132,7 @@ P3PerformanceWorkload _code() {
         expect(copies, before + 1);
         // The product's existing copy feedback timer must finish before the
         // next repeat. This wall-time wait is not a frame-duration estimate.
-        await actions.tester.pump(const Duration(milliseconds: 1600));
+        await actions.pump(const Duration(milliseconds: 1600));
       });
     },
     outcomes: () => <String, Object?>{'copy_callback_count': copies},
@@ -219,11 +219,11 @@ P3PerformanceWorkload _streaming() {
           text = '';
           status = BeautifulStreamingStatus.streaming;
         });
-        await actions.tester.pump();
+        await actions.pump();
         for (final chunk in chunks) {
           update(() => text += chunk);
           updates++;
-          await actions.tester.pump(const Duration(milliseconds: 16));
+          await actions.pump(const Duration(milliseconds: 16));
         }
         update(() => status = BeautifulStreamingStatus.complete);
         await actions.settle();

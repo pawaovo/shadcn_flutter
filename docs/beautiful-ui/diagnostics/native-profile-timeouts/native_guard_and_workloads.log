@@ -1,0 +1,44 @@
+package:skeletonizer has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+package:country_flags has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+00:00 +0: loading /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_async_guard_test.dart
+00:00 +0: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_checkpoint_test.dart: checkpoint is frozen, reannounced, and only acknowledgement releases it
+00:00 +1: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_async_guard_test.dart: unreturned pump has a real deadline and late completion cannot repump
+00:00 +2: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_async_guard_test.dart: unreturned pump has a real deadline and late completion cannot repump
+00:00 +3: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +4: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +5: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +6: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +7: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +8: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +9: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +10: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +11: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 1 times out
+00:00 +12: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after pump 3 times out
+00:00 +13: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: timed drag cannot dispatch after its delayed record times out
+00:00 +14: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart: successful timed drag retains SDK 60Hz sequence and end position
+00:02 +15: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/interactions_test.dart: waits through obstruction and reflow before one activation
+00:02 +16: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/interactions_test.dart: waits through obstruction and reflow before one activation
+00:02 +17: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/interactions_test.dart: waits through obstruction and reflow before one activation
+00:02 +18: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/interactions_test.dart: waits through obstruction and reflow before one activation
+00:02 +19: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_recorder_failure_test.dart: real recorder keeps frames and first failure when trace/outcomes/cleanup fail
+00:02 +20: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_recorder_failure_test.dart: real recorder keeps frames and first failure when trace/outcomes/cleanup fail
+00:02 +21: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_recorder_failure_test.dart: real recorder keeps frames and first failure when trace/outcomes/cleanup fail
+00:02 +22: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_recorder_failure_test.dart: real recorder keeps frames and first failure when trace/outcomes/cleanup fail
+00:03 +23: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 0 completes its scripted input
+00:03 +24: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 0 completes its scripted input
+00:03 +25: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 0 completes its scripted input
+00:04 +26: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 0 repeats correctly
+00:05 +27: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 1 completes its scripted input
+00:05 +28: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 1 repeats correctly
+00:06 +29: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 2 completes its scripted input
+00:07 +30: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 2 repeats correctly
+00:07 +31: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 2 repeats correctly
+00:07 +32: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 4 completes its scripted input
+00:08 +33: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 4 completes its scripted input
+00:09 +34: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 4 repeats correctly
+00:09 +35: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p3_performance_workloads_smoke_test.dart: profile workload 5 completes its scripted input
+00:10 +36: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 5 repeats correctly
+00:10 +37: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 5 repeats correctly
+00:11 +38: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 6 repeats correctly
+00:12 +39: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/p1p2_performance_workloads_smoke_test.dart: P1/P2 profile workload 7 repeats correctly
+00:13 +40: All tests passed!

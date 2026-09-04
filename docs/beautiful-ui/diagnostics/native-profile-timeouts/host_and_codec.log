@@ -1,0 +1,33 @@
+package:skeletonizer has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+package:country_flags has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+00:00 +0: loading /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart
+00:00 +0: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: diagnostic file write failure cannot replace the original frame error
+00:00 +1: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: synchronous late completion is rejected for overall connect and close cap
+00:00 +2: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: request deadline is real even when transport Future never completes
+00:00 +3: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: connect deadline returns and closes a subsequently connected transport
+00:00 +4: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: checkpoint is atomic and durable before ack; repeated events do not read again
+00:00 +5: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: checkpoint write failure never acknowledges or invents recoverable data
+00:00 +6: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: checkpoint trace stop failure preserves the checkpoint and withholds ACK
+00:00 +7: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: disconnect while stopping a checkpoint cannot acknowledge a next workload
+00:00 +8: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: terminal remains primary when checkpoint trace stop fails
+00:00 +9: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: final trace stop has a real deadline and cannot overwrite request failure
+00:00 +10: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: terminal checkpoint saves then acks and stops pending normal response
+00:00 +11: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: terminal observed during response persistence wins over SDK success
+00:00 +12: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: terminal failure remains primary when ack and close also fail
+00:00 +13: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: disconnect retains only a checkpoint whose save completed
+00:00 +14: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: request failure stays primary when close never completes
+00:00 +15: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: checkpoint error arriving during cleanup remains a secondary failure
+00:00 +16: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: connect and request share one deadline rather than receiving separate budgets
+00:00 +17: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: native response validation failure is recorded before secondary close failure
+00:00 +18: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: checkpoint recovery writes partial failed evidence without changing the checkpoint
+00:00 +19: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: mismatching checkpoint is rejected before persistence and ack
+00:00 +20: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart: raw response frames and RSS precede metadata; secondary errors remain visible
+00:00 +21: loading /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart
+00:00 +21: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: timeline transport preserves complete JSON bytes and event ordering
+00:00 +22: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: empty and partial timelines retain their exact events and metadata
+00:00 +23: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: repeated event data uses a smaller envelope without filtering
+00:00 +24: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: only the completed report trace is replaced, with no raw graph copy
+00:00 +25: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: encoding failure leaves the raw graph and independent samples intact
+00:00 +26: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: unknown, corrupt and contradictory envelopes are rejected
+00:00 +27: /Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/test/profile_timeline_codec_test.dart: driver preserves other traces, all samples and bad payload before failing
+00:01 +28: All tests passed!

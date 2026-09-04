@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "headless_harness_failure_path_validation",
+  "created_at_utc": "2026-09-04T06:15:11.042434+00:00",
+  "git_head": "f1dd9b43cfe3af6f554674d176b7c66fc8b04707",
+  "native_profile_capture_performed": false,
+  "tests_passed": 68,
+  "native_guard_and_existing_workloads_tests": 40,
+  "host_writer_and_codec_tests": 28,
+  "format_files_checked": 17,
+  "format_changes": 0,
+  "legacy_pointer_probe": {
+    "expected_failures": 3,
+    "successful_sequence_test_passed": 1,
+    "production_source_restored_exactly": true
+  },
+  "logs": {
+    "native_guard_and_workloads": {
+      "path": "/tmp/beautiful-profile-guard-workloads-tests.log",
+      "sha256": "571f21d740e5cb7a0f10086afa4ef0ddfe8c261f01443e45362995246aad458c",
+      "tests_passed": 40
+    },
+    "native_analyze": {
+      "path": "/tmp/beautiful-profile-guard-analysis.log",
+      "sha256": "baa2c9a45e98e1b08e342158d9943d6161f512e9bf1060ea50a5dfc81f121aae"
+    },
+    "host_and_codec": {
+      "path": "/tmp/beautiful-profile-host-final.pI9Bl3/tests.log",
+      "sha256": "3dc53803bd015af46f58b22f5ced45f23a2e7bdfeca170482917bc3da2ed1abf",
+      "tests_passed": 28
+    },
+    "host_analyze": {
+      "path": "/tmp/beautiful-profile-host-final.pI9Bl3/analyze.log",
+      "sha256": "5c411efd65fcbcc9f3591cac7530bf81b77db5f0e2039df30bc96397d2a550f7"
+    },
+    "legacy_pointer_red_probe": {
+      "path": "/tmp/beautiful-profile-pointer-red-probe.log",
+      "sha256": "1fdaec771f757eefc3049e1352a158f0cbf9c93c205518620a10f99e8bbf9168"
+    }
+  },
+  "owned_file_sha256": {
+    "docs/beautiful-ui/quality_evidence/performance/engineering_acceptance.md": "8472d4c73b1219ba140e522c9dcb602509e7ca903fc33239a757985e527d78e3",
+    "packages/beautiful_ai_ui_catalog/integration_test/p3_performance_test.dart": "cd2f6a7dec8f7100ae46943196a1db434a76040ac2497ecf7cdb457a92466791",
+    "packages/beautiful_ai_ui_catalog/integration_test/release_performance_test.dart": "6e924ff0cab2c42ffe1e24b75a65376f14ca87f8919172bdc3316dfcf3a623ea",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/interactions.dart": "8495f0a7f170595aa375025d52556f1c972ca820bc0f844a581be10ce4abd34d",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/native_performance_environment.dart": "73b799edd9b7f299d5f5822c37084ad1f2d3ba5c621b13c9d871cbb06140e572",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/p1p2_performance_workloads.dart": "f2405f79e52eace80852370195f6690edb78315bc9ad85b25010d87f88ea8648",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/p3_performance_measurement.dart": "a4f8b9f95f6edfea02e5fbe5c7079db62c2f899494ca0b54f013a38ab375da62",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/p3_performance_workloads.dart": "2ccfdad5202558e1500d49aa7a5c6d2e600e62fa786f1222139907ad9b078613",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/profile_async_guard.dart": "529407507e577ebf6d7162853a8133629457c35973efbc6df7691817613404d4",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/profile_checkpoint.dart": "ce0d21e25905e46ab308664056cfcc5e9c5d19dcfbf246522fb631dd331ff2ab",
+    "packages/beautiful_ai_ui_catalog/integration_test/support/profile_pointer_controller.dart": "fb0b4f399374acedd3832960bd0af80a36cba0d7d9485742d62220ad4205598e",
+    "packages/beautiful_ai_ui_catalog/pubspec.yaml": "bfef4934fd23072ebd1b1685eda99847e544b8486059fc0f8c1240d7ff7cab02",
+    "packages/beautiful_ai_ui_catalog/test/profile_async_guard_test.dart": "20fa0262f1019203f6a243a332402c54e89ee0649b02723d8321ec4e1162c7e5",
+    "packages/beautiful_ai_ui_catalog/test/profile_checkpoint_test.dart": "cb7057e317aaaea8bfc4a132b902927959b03e36854c10edc17533fd72b09d19",
+    "packages/beautiful_ai_ui_catalog/test/profile_driver_adapter_test.dart": "e399bff214e88af65ec53f82f4565bcafb9896560209117b57293bb7701a26d2",
+    "packages/beautiful_ai_ui_catalog/test/profile_pointer_controller_test.dart": "438020645429ef558a13370d877f3f0cd67c309dd6fd5176b007765c2b943a1d",
+    "packages/beautiful_ai_ui_catalog/test/profile_recorder_failure_test.dart": "f08158486fca76dfce9ca2ca9348db20b05b1f2b4271d7432c640782959c0af6",
+    "packages/beautiful_ai_ui_catalog/test_driver/p3_performance_driver.dart": "c6bc8d1ebd1015df5748870012d0ce66092b470e5201cc9676841464111a6ca1",
+    "packages/beautiful_ai_ui_catalog/test_driver/profile_driver_adapter.dart": "7a2610c118ce3cc5bf44d9cd102ec0fda543b922ebe40bcd326f34dceea27588"
+  },
+  "limits": [
+    "No new native frame-budget result is asserted.",
+    "Future.timeout does not cancel the underlying SDK Future; terminal guards prohibit further UI work.",
+    "The host 25-minute deadline excludes Flutter build and Flutter tool native-process shutdown.",
+    "Failed VM trace-stop RPCs are recorded as failures, never claimed as acknowledged cleanup."
+  ],
+  "format_note": "Final pinned-SDK formatter normalized one host adapter wrapping-only change; subsequent 17-file check passed with zero changes."
+}

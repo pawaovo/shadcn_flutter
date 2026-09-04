@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'support/p3_performance_measurement.dart';
 import 'support/performance_preparation.dart';
+import 'support/profile_checkpoint.dart';
 import 'support/p3_performance_workloads.dart';
 import 'support/p1p2_performance_workloads.dart';
 import 'support/performance_suite.dart';
@@ -46,6 +46,9 @@ void main() {
     'scenarios': <Map<String, Object?>>[],
   };
   binding.reportData = <String, dynamic>{'p3_performance': report};
+  final checkpoints = ProfileCheckpointPublisher(
+    reportData: () => binding.reportData!,
+  )..register();
 
   group('Release native profile suite', () {
     // Native accessibility inspection and window resizing happen before the
@@ -79,25 +82,13 @@ void main() {
       addTearDown(
         () => WidgetController.hitTestWarningShouldBeFatal = previousFatal,
       );
-      await tester.pumpWidget(
-        p3PerformanceApp('Starting measurements', const SizedBox(height: 48)),
+      final failures = await runNativeProfileWorkloads(
+        binding,
+        tester,
+        report,
+        factories,
+        checkpoints,
       );
-      report['runtime'] = p3RuntimeMetadata(tester);
-      report['status'] = 'measuring';
-      final recorder = P3PerformanceRecorder(binding, tester, report);
-      final failures = <String>[];
-      for (final create in factories) {
-        try {
-          await recorder.run(create);
-        } catch (error) {
-          failures.add(error.toString());
-          debugPrint('P3_PROFILE_FAILURE: $error');
-        }
-      }
-      report['finished_at_utc'] = DateTime.now().toUtc().toIso8601String();
-      report['status'] = failures.isEmpty ? 'workloads_complete' : 'failed';
-      report['failure_count'] = failures.length;
-      await tester.pumpWidget(const SizedBox.shrink());
       expect(failures, isEmpty, reason: failures.join('\n\n'));
     }, timeout: const Timeout(Duration(minutes: 20)));
   });

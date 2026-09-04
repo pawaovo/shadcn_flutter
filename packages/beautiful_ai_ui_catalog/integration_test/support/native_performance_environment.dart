@@ -100,18 +100,26 @@ final class NativePerformanceEnvironmentMonitor with WidgetsBindingObserver {
   void _onSemantics() => check('framework_semantics_callback');
 
   Map<String, Object?> finish() {
-    check('after_interactions');
-    binding.removeObserver(this);
-    binding.removeSemanticsEnabledListener(_onSemantics);
-    _started = false;
-    return <String, Object?>{
-      'status': _valid ? 'verified_stable' : 'invalid_environment_changed',
-      'start_epoch_us': _startEpochUs,
-      'end_epoch_us': DateTime.now().microsecondsSinceEpoch,
-      'initial': nativePerformanceEnvironmentData(_initial!),
-      'final': nativePerformanceEnvironmentData(_latest!),
-      'changes': _changes,
-      'observation_note': 'Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run.',
-    };
+    try {
+      check('after_interactions');
+      return <String, Object?>{
+        'status': _valid ? 'verified_stable' : 'invalid_environment_changed',
+        'start_epoch_us': _startEpochUs,
+        'end_epoch_us': DateTime.now().microsecondsSinceEpoch,
+        'initial': nativePerformanceEnvironmentData(_initial!),
+        'final': nativePerformanceEnvironmentData(_latest!),
+        'changes': _changes,
+        'observation_note': 'Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run.',
+      };
+    } finally {
+      // A final platform read can fail independently of the interaction. It
+      // must not leave either observer attached after sampling has closed.
+      try {
+        binding.removeObserver(this);
+      } finally {
+        _started = false;
+        binding.removeSemanticsEnabledListener(_onSemantics);
+      }
+    }
   }
 }

@@ -181,6 +181,36 @@ Flutter exposes no separate public platform-semantics listener while the test
 already holds a framework semantics handle, so platform flag changes between
 those polling points are not claimed to be exhaustively observed.
 
+Every awaited frame now has an eight-second real-time deadline, independent of
+the binding's frame clock. Settling keeps its original eight-second total and
+16ms cadence. A pending native pump cannot defeat that deadline. If a deadline
+expires, the suite becomes terminal: it does not mount the next workload or
+perform frame-dependent cleanup. Pointer replay checks the terminal state after
+each internal pump/delay and before dispatch, so a late original Future cannot
+resume gestures. This does not cancel that Future. Ordinary, completed workload
+assertions can still be recorded before continuing an independent scenario.
+
+Failure finalization closes the sampling window, cancels the RSS timer and
+removes timing/environment listeners. It saves received in-window raw frames,
+RSS, steps and round boundaries before optional widget metadata and outcomes;
+secondary evidence or cleanup errors cannot replace the first failure. Timeline
+setup and retrieval each have a separate 15-second real deadline. Between
+workloads, the app publishes a frozen checkpoint and waits at most 15 seconds
+for its host acknowledgement. The host saves it atomically, stops VM timeline
+streams through the public VM service, and only then acknowledges the next
+workload. Trace-stop success or failure is recorded in `driver_transport.json`.
+Checkpoint serialization and notifications occur outside measured windows.
+
+The host has a shared 25-minute monotonic deadline for connection, request data,
+checkpoint transport and close; individual cleanup calls are capped at five
+seconds within it. A late request response cannot overwrite a terminal failure.
+If the final response is unavailable, recovery uses the last durably saved
+checkpoint and explicitly reports `failed_partial_transport`. A disconnected
+or unresponsive VM cannot provide samples that never reached a checkpoint.
+The Flutter launch/build and Flutter tool's own native process shutdown are
+outside this driver deadline. These robustness tests are headless failure-path
+tests, not a replacement for native frame-budget acceptance.
+
 Each runner invocation requires a new or empty output directory. It records
 preflight failures in `runner_status.json` and `exit_code.txt`, so a failed
 dependency step cannot inherit a previous run's success. The checked-in

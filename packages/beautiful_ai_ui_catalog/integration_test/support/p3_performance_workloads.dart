@@ -459,7 +459,7 @@ P3PerformanceWorkload _flowchart() {
             LogicalKeyboardKey.arrowRight,
             PhysicalKeyboardKey.arrowRight,
           );
-          await tester.pump();
+          await actions.pump();
         }
         expect(accepted.nodes.first.position, before + const Offset(64, 0));
         expect(edits, greaterThanOrEqualTo(beforeEdits + 4));
@@ -468,7 +468,7 @@ P3PerformanceWorkload _flowchart() {
             LogicalKeyboardKey.arrowLeft,
             PhysicalKeyboardKey.arrowLeft,
           );
-          await tester.pump();
+          await actions.pump();
         }
         expect(accepted.nodes.first.position, before);
         expect(edits, greaterThanOrEqualTo(beforeEdits + 8));
@@ -590,7 +590,7 @@ P3PerformanceWorkload _insights() {
             LogicalKeyboardKey.arrowRight,
             PhysicalKeyboardKey.arrowRight,
           );
-          await tester.pump();
+          await actions.pump();
         }
         expect(inspectedPoint(), afterTap + 8);
         final afterKeys = inspectedPoint();
@@ -639,7 +639,7 @@ P3PerformanceWorkload _insights() {
             curve: Curves.linear,
           );
           await actions.settle();
-          await movement;
+          await actions.guard.wait('insight.scroll_animation', () => movement);
           if (_key('beautiful-insight-datum-comparison-p511')
               .evaluate()
               .isNotEmpty) {
@@ -654,7 +654,7 @@ P3PerformanceWorkload _insights() {
           curve: Curves.linear,
         );
         await actions.settle();
-        await back;
+        await actions.guard.wait('insight.return_scroll_animation', () => back);
         verifyRow(0);
       });
       await actions.step('collapse_text_data', () async {
@@ -718,10 +718,16 @@ P3PerformanceWorkload _selection() {
           curve: Curves.linear,
         );
         await actions.settle();
-        await scrolling;
+        await actions.guard.wait(
+          'selection.return_scroll_animation',
+          () => scrolling,
+        );
       });
       await actions.step('native_pointer_selection', () async {
-        await tester.ensureVisible(document);
+        await actions.guard.wait(
+          'selection.ensureVisible',
+          () => tester.ensureVisible(document),
+        );
         await actions.settle();
         final editor = tester.state<EditableTextState>(document);
         Offset caret(int offset) => editor.renderEditable.localToGlobal(
@@ -731,10 +737,13 @@ P3PerformanceWorkload _selection() {
         );
         final start = caret(0);
         final end = caret(4);
-        await tester.dragFrom(
-          start,
-          end - start,
-          kind: PointerDeviceKind.mouse,
+        await actions.guard.wait(
+          'selection.pointer_drag',
+          () => tester.dragFrom(
+            start,
+            end - start,
+            kind: PointerDeviceKind.mouse,
+          ),
         );
         await actions.settle();
         expect(

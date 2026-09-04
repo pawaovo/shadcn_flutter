@@ -38,6 +38,7 @@ Future<void> tapCatalogTarget(
   Finder target, {
   Duration timeout = const Duration(seconds: 2),
   Duration frameInterval = const Duration(milliseconds: 16),
+  Future<void> Function(Duration)? pump,
 }) async {
   assert(timeout > Duration.zero);
   assert(frameInterval > Duration.zero);
@@ -56,7 +57,7 @@ Future<void> tapCatalogTarget(
       );
     }
     await Scrollable.ensureVisible(matches.single, alignment: 0.5);
-    await tester.pump(frameInterval);
+    await (pump?.call(frameInterval) ?? tester.pump(frameInterval));
 
     if (target.evaluate().length != 1) {
       previousRect = null;
