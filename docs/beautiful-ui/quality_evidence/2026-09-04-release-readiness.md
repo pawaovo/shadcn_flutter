@@ -1,19 +1,18 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. At the completed `153412b3`
+Status: **not ready for stable-release sign-off**. At the completed `5edbcab7`
 checkpoint, all four browsers pass the complete trusted W3C input journey, and
-all three native framework input jobs pass. Main CI is **10/12**: the actual
-iOS journey now passes, while Android's composing-protected Send and Edge's
-pre-navigation startup fail. Input/AT is **4/9**, retaining four framework
-composition failures and the hosted Narrator limitation. Linux's original three
+all three native framework input jobs pass. Main CI is **11/12**: iOS and the
+original full Edge journey now pass; Android again receives an active composing
+range before Send and fails its original host assertion. Input/AT is **4/9**,
+retaining four framework composition failures and the hosted Narrator limitation. Linux's original three
 Catalog/Orca machine tasks now pass **3/3** at `79fbcdd1` with the explicitly
-rebuilt SDK and patched native bridge. P1/P2 engineering budgets
-passed at the earlier `87299572` runtime snapshot. A complete, stable native P3
-capture at `f15f27eb` now passes **7/7 unchanged engineering budgets**. Actual OS
-IME and full device/AT acceptance remain open. The attempted newer all-suite
-native capture could not start while the Mac was locked; it produced no new
-measurements.
+rebuilt SDK and patched native bridge. After desktop interaction became
+available, a new complete native capture at `5edbcab7` passes **15/15 unchanged
+engineering budgets and 120/120 gates**, with the new durable checkpoint success
+path verified. Actual OS IME and full device/AT acceptance remain open. The older
+locked `abd6293b` attempt remains a failed preparation with no measurements.
 
 All 20 Gallery components and seven foundation/building-block items have
 implementations. **All 27 registry entries remain `in_progress`; all six Flutter
@@ -24,6 +23,7 @@ changing those decisions or rewriting earlier records.
 
 | Source snapshot | Evidence and meaning |
 | --- | --- |
+| Current `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails again. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
 | Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
 | Earlier runtime `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See its recorded runtime checkpoint below. |
@@ -34,7 +34,51 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Completed Linux runtime repair and current validation boundary
+## Current completed checkpoint at 5edbcab7
+
+[The exact-source CI record](../../../.github/evidence/5edbcab7-ci.md) preserves
+the new main **11/12** and input/AT **4/9** results, both original attempt 1.
+Library **658/658**, Catalog **110/110** and core **571/571** tests pass, as do
+strict analysis, all platform builds, publication dry-run with zero warnings
+and the isolated hosted-consumer check. No package was published.
+
+The original full Edge journey now passes on actual Edge/driver **151.0.4129.101**.
+Its explicit once-only 398,196,048-byte executable read takes **13.285643 seconds**;
+the actual process identity and post-run hash match. The input job uses Edge
+**152.0.4191.53** and independently verifies its preparation and cleanup, while
+retaining its composing-assertion failure and complete W3C pass. The browser
+flags, page-load deadline and journey assertions remain unchanged. This is a
+verified prepared-run result, with old cold failures retained; it does not prove
+a universal startup repair or a failure rate.
+
+iOS completes its actual driver in **32.738 seconds**, with successful discovery,
+EOF, cleanup, final drain and application termination. Android again records
+`[-1,-1]` before Send and `[11,20]` by pointer down, so its original host message
+assertion fails. The component's composition protection is preserved.
+
+[The new complete native performance capture](./performance/2026-09-04-5edbcab7-all-performance.md)
+passes **15/15 original engineering budgets and 120/120 gates** with **10,311
+frames and 1,020 RSS samples**. Every scenario records a stable visible native
+environment. Its 310 captured input files match before, after and at archival;
+16 durable checkpoints and all 17 timeline-stop acknowledgements are verified.
+The final checkpoint, integration response and independent raw response data
+agree. The earlier locked preparation is preserved and no longer blocks this
+successful path. Product-approved budgets and other-platform/human acceptance
+remain separate from this single macOS engineering capture.
+
+[Local delivery artifacts](./2026-09-04-5edbcab7-local-artifacts.md) include a
+checked **21.2 MB macOS ZIP** for Intel and Apple Silicon, with 333 file/symlink
+entries verified, and the source-equivalent local Web preview. The new release
+app opens and switches Theme from system to light in a scoped native smoke
+test. The Linux three-task reader evidence ZIP remains available separately.
+
+The [exportable input-method handoff](./2026-09-04-5edbcab7-ime-handoff.md)
+provides an empty focused Prompt and a verified JSON download button at
+`http://127.0.0.1:63120/`. Its actual downloaded trace contains 26 events and
+ordinary trusted `n` insertion, with zero composition events. Real Chinese
+candidate/pre-edit/commit observation remains unaccepted.
+
+## Completed Linux runtime repair and earlier source-153 validation
 
 The complete public library passes **658/658 tests** after
 [Thinking's named focus-owner repair](./2026-09-04-thinking-focus-owner.md).
@@ -70,17 +114,17 @@ non-composing control, but the original cloud journey is still failed. The
 [single matched Edge pair](../diagnostics/edge-startup/2026-09-04-153412b3-pair.md)
 preserves baseline failure and preread success on Edge 152 with different
 hosted runners/regions. Main CI used Edge 151; the pair's version match does not
-extend to that main job. An explicit CI preread is now implemented as a startup
-mitigation, with 11 passing checks and valid workflow syntax. It leaves the
-original journey unchanged and requires a new actual CI result; the old failure
-remains unaccepted.
+extend to that main job. The explicit CI preread has 11 passing checks and valid
+workflow syntax; its new actual source-5ed result is recorded above. The old
+source-153 failure remains unaccepted.
 
 The native profile recovery changes pass **68 headless checks**. Their first
 [actual VM connection at abd6293b](./performance/2026-09-04-abd6293b-native-preparation.md)
 correctly saves a failed response and exits 1 after the original preparation
 deadline while the Mac is locked. No Start action, checkpoint or measured
-workload occurs. The successful checkpoint path and a fresh complete native
-capture require an unlocked Mac and a stable visible window.
+workload occurs. That attempt did not validate a successful checkpoint path;
+the new source-5ed capture above completes it with an actual stable visible
+window.
 
 [Narrator's 30 guard checks](../../../.github/evidence/narrator-b179fbf2.md)
 compile and pass on Windows PowerShell 5.1. The latest real probe finds an owned
@@ -652,37 +696,34 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- The original full Android journey at `153412b3` records a new composing
-  range between the committed framework injection and its single Send tap. The
-  exact host message assertion fails. Active composition must remain protected;
-  clearing it, hiding the keyboard, retrying Send or substituting a mocked input
-  peer would not accept this original execution. The earlier `abd6293b` Android
-  pass remains scoped to that run.
-- Edge's original shared journey again fails before Catalog navigation. The
-  explicitly recorded single baseline/preread pair matches source, image and
-  browser/driver binaries, with baseline failure and preread success, but uses
-  different hosted runners and regions. Its result supports further startup
-  preparation work; it does not establish a causal repair or repetition rate.
-- The P3-only `f15f27eb` native capture passes all seven original engineering
-  budgets. A new complete 15-workload capture and the new durable checkpoint
-  success path remain unverified because the subsequent Mac preparation attempt
-  was locked and never started. The former interrupted baseline is preserved.
-  Product budget approval, repeatability and other-device measurements remain
-  separate from the engineering defaults.
-- Linux's three original representative reader tasks are complete at `79fbcdd1`
-  in the explicitly rebuilt SDK/AT-SPI debug runtime. Stock SDK/release,
-  all-component and human listening review remain separate. Windows Narrator's
-  current hosted runner has zero audio render endpoints; its owned startup
-  window also lacks the required WindowPattern, so no minimization or reader
-  input was sent in the latest guarded probe.
-- Complete actual physical-device, OS IME, direct keyboard/clipboard and full
-  screen-reader task-flow review for the advertised platforms and applicable
-  host integrations. Four browsers passing W3C input does not establish a real
-  IME candidate workflow. The stock Flutter web control reproduces the synthetic
-  composing-marker loss, while all three native framework suites pass.
+- Resolve the native input-commit boundary in the original full Android journey.
+  Both `153412b3` and `5edbcab7` record a new composing range after the committed
+  framework injection but before the single Send tap. The host message
+  assertion fails. Active composition must remain protected; clearing it,
+  hiding the keyboard, retrying Send or substituting a mocked input peer would
+  not accept those executions. A native candidate/commit observation is needed
+  before choosing another fixture or product change.
+- Complete real OS IME candidate, pre-edit and commit observation. Four-browser
+  W3C input passes, but those Unicode key events are not an IME workflow. The
+  retained synthetic composing checks still fail in web framework suites, and
+  the stock Flutter control reproduces that channel limitation. The new local
+  observation identifies WeType as the current input source but has so far
+  captured only ordinary trusted `n` insertion, not active composition.
+- Complete actual physical-device, direct keyboard/clipboard and full reader
+  task-flow review for advertised platforms and applicable host integrations.
+  Linux's three original representative reader tasks are complete at `79fbcdd1`
+  in the explicitly rebuilt SDK/AT-SPI debug runtime; stock SDK/release,
+  all-component and human listening review remain separate. The Windows hosted
+  runner has zero audio render endpoints and its owned Narrator window lacks
+  the required WindowPattern, so no reader commands are accepted there.
+- The complete 15-workload macOS engineering budget and durable checkpoint
+  success path are now verified at `5edbcab7`. Product budget approval and
+  representative other-platform/device evidence remain separate from this
+  single native capture. Repeatability or leak claims are not inferred.
 - Reconcile future runtime changes with the bounded visual/localization,
-  performance, asset, notice and publication evidence. Existing local tests,
-  builds and older runtime observations retain their precise source boundaries.
+  performance, asset, notice and publication evidence. The current local Web
+  preview and macOS release artifact have unchanged runtime inputs relative to
+  the completed source-5ed verification. No stable package publication occurred.
 
 The [support matrix](../support_matrix.md) and [parity manifest](../parity_manifest.yaml)
 therefore retain six `Partial` platforms and 27 `in_progress` entries. No later

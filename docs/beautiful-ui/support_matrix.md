@@ -1,20 +1,21 @@
 # Multi-platform support matrix
 
-Status: four-browser W3C input, source-scoped P1/P2/P3 engineering budgets and three repaired-runtime Linux reader tasks pass; remaining journey and device/AT gates keep all six platforms Partial
+Status: four-browser W3C input, complete P1/P2/P3 engineering budgets and three repaired-runtime Linux reader tasks pass; remaining journey and device/AT gates keep all six platforms Partial
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `153412b3` checkpoint has main CI **10/12** and input/AT **4/9**,
+The completed `5edbcab7` checkpoint has main CI **11/12** and input/AT **4/9**,
 including all three native input bridges and four complete independent W3C
-suites. iOS completes its actual journey and strict cleanup. Android records a
-new composing range before its single Send tap and fails the original host
-message assertion; Edge fails a startup window request before application
-navigation. P1/P2 budgets passed **8/8** at `87299572`; the later P3-only native
-capture passes **7/7** at `f15f27eb`. Linux's original three Catalog/Orca tasks
-pass **3/3** at `79fbcdd1` with its explicitly rebuilt Flutter SDK and AT-SPI
-bridge; stock SDK/release and full human review remain unaccepted. The
-`c2bde85` twelve-job pass retained below is historical, not current-candidate
-acceptance. All 27 registry entries remain `in_progress`.
+suites. iOS completes its actual journey and strict cleanup. The original Edge
+journey passes with explicit once-only executable preread and actual identity
+verification. Android again records active composition before its single Send
+and fails the original host message assertion. The complete native P1/P2/P3
+capture passes **15/15 engineering budgets and 120/120 gates**, with 310 source
+inputs and 16 durable checkpoints verified. Linux's three Catalog/Orca tasks
+pass **3/3** at `79fbcdd1` in its explicitly rebuilt Flutter SDK/AT-SPI runtime;
+stock SDK/release and full human review remain unaccepted. Older CI/performance
+observations retain their original source scope. All 27 registry entries remain
+`in_progress`.
 
 ## Status vocabulary
 
@@ -45,10 +46,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Main journey and complete independent W3C input pass at 153412b3; retained framework composition check fails |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Complete independent W3C input passes at 153412b3; original main startup fails before Catalog navigation, framework reaches and fails the composing check; a separately recorded preread journey passes on a different runner/version |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at 153412b3; retained framework composition check fails |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Complete shared journey and independent W3C input pass at 153412b3; retained synthetic resize composition check fails; OS/device/AT acceptance remains open |
+| Chrome stable | Release-blocking shared Web journey | Partial | Main journey and complete independent W3C input pass at 5edbcab7; retained framework composition check fails |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Original full journey and complete W3C input pass at 5edbcab7 with explicit preread and actual identity checks; retained framework composing check fails; main Edge 151 and input Edge 152 retain distinct provenance |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at 5edbcab7; retained framework composition check fails |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Complete shared journey and independent W3C input pass at 5edbcab7; retained synthetic resize composition check fails; OS/device/AT acceptance remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 

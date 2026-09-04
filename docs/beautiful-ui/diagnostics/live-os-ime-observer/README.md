@@ -41,3 +41,16 @@ python3 -m http.server 0 --bind 127.0.0.1 \
 Use the printed local address and actual native input. Record candidate/pre-edit
 and commit events separately from ordinary trusted keyboard insertion; input
 source identity alone does not prove the language mode or IME participation.
+
+## Exportable handoff
+
+The separate [exportable_live_os_ime_probe.dart](exportable_live_os_ime_probe.dart)
+wrapper leaves the historical observer unchanged and adds **Save observed
+trace**. Its actual download was verified in the
+[source-5ed handoff record](../../quality_evidence/2026-09-04-5edbcab7-ime-handoff.md).
+The download contains the observer's full current report (up to its existing
+300-event retention limit); it does not generate input or accept an IME result.
+
+Copy both Dart files into the same ignored build-source directory, then build
+the wrapper as the target. The current live entry point is
+`http://127.0.0.1:63120/`; use a fresh output directory and file for a new run.

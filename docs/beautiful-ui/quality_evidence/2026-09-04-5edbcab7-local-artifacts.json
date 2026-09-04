@@ -1,0 +1,49 @@
+{
+  "source_sha": "5edbcab7edc5c058cf9354c6109df917846fb4e8",
+  "build_command": "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer /opt/homebrew/bin/mise exec -- flutter build macos --release --no-pub",
+  "build_exit_code": 0,
+  "build_log": "/tmp/beautiful-macos-5edbcab7-release-build.log",
+  "bundle_id": "dev.beautifulai.beautifulAiUiCatalog",
+  "version": "0.1.0",
+  "build": "1",
+  "minimum_macos": "12.0",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "codesign_verify_deep_strict": "passed",
+  "native_gui_acceptance_after_build": "scoped_launch_and_theme_smoke_observed",
+  "archive": {
+    "path": "/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/deliverables/beautiful-ai-ui-catalog-macos-5edbcab7.zip",
+    "bytes": 21245687,
+    "sha256": "bf290f03944a428b76a8ea0a80b12944512fa834eb40c3b159113bf863f0fff9",
+    "verified_file_and_symlink_entries": 333
+  },
+  "full_local_manifest": {
+    "path": "/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/deliverables/beautiful-ai-ui-catalog-macos-5edbcab7.json",
+    "bytes": 102479,
+    "sha256": "da91c50f8e0bb6d83309a05ded99e74bc86248fa55519de28dfe9ef4c13ac552"
+  },
+  "selected_source_before_after": {
+    "count": 67,
+    "matching": true,
+    "scope": "Beautiful AI UI library, Catalog Dart and native macOS project plus selected pubspec/lock inputs; not a complete toolchain/dependency inventory",
+    "recorded_before_build": "/tmp/beautiful-macos-5edbcab7-source-before.json"
+  },
+  "build_log_sha256": "d245d064c5f7267d2caa98829a8273ba76fb7002410590de4452648f4bb29655",
+  "preview": {
+    "source_sha": "153412b3014192b2d6c4c15e377161a5a862a968",
+    "url": "http://127.0.0.1:8096/",
+    "main_dart_js_sha256": "d459756e5a146b4dfdd19f57351cc8a3b76159f14ba57e52099d5ea0786eb5e1",
+    "runtime_diff_to_5edbcab7": "empty for Beautiful AI UI library, Catalog Dart/assets/native macOS project, Catalog pubspec and lockfile"
+  },
+  "native_gui_smoke": {
+    "app": "built macOS release application at source 5edbcab7",
+    "catalog_title_observed": "Beautiful AI UI \u00b7 P1 + P2 + P3 Catalog",
+    "theme_before": "Theme: system",
+    "action": "one native Computer Use click on the Theme button",
+    "theme_after": "Theme: light",
+    "full_gui_acceptance": false,
+    "cleanup": "exact owned release app PID 48191 terminated before native profiling"
+  }
+}

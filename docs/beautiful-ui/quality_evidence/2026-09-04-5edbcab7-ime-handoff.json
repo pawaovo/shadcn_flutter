@@ -1,0 +1,135 @@
+{
+  "library_source_sha": "5edbcab7edc5c058cf9354c6109df917846fb4e8",
+  "observer_wrapper": "new diagnostic wrapper, separately hashed; not part of the library source SHA",
+  "url": "http://127.0.0.1:63120/",
+  "delivery": "one native Computer Use click, native n key, then actual Save observed trace click/download",
+  "input_source_observed_before_exportable_run": {
+    "id": "com.tencent.inputmethod.wetype.pinyin",
+    "mode": "com.tencent.inputmethod.wetype.pinyin",
+    "name": "微信输入法"
+  },
+  "input_source_identity_does_not_prove_language_mode": true,
+  "native_shift_attempt_on_previous_nonexportable_run": "rejected before execution: modifier-only key unsupported",
+  "result": "ordinary_native_input_and_trace_export_verified; OS_IME_preedit_not_accepted",
+  "events_total": 26,
+  "captured_event_types": [
+    "beforeinput",
+    "input",
+    "keydown",
+    "keyup"
+  ],
+  "trusted_noncomposing_input_events": 2,
+  "composition_events": 0,
+  "submissions": [],
+  "latest": {
+    "stock": {
+      "text": "n",
+      "selectionStart": 1,
+      "selectionEnd": 1,
+      "selectionBase": 1,
+      "selectionExtent": 1,
+      "composingStart": -1,
+      "composingEnd": -1,
+      "readOnly": false,
+      "primary": true,
+      "state_id": 523246804,
+      "controller_id": 1361865
+    },
+    "product": {
+      "text": "",
+      "selectionStart": 0,
+      "selectionEnd": 0,
+      "selectionBase": 0,
+      "selectionExtent": 0,
+      "composingStart": -1,
+      "composingEnd": -1,
+      "readOnly": false,
+      "primary": false,
+      "state_id": 657837465,
+      "controller_id": 371548203
+    },
+    "primary_focus_label": null,
+    "primary_focus": "Instance of 'minified:Aw'",
+    "active_dom": {
+      "tag": "TEXTAREA",
+      "id": "",
+      "label": "Stock live IME input",
+      "active": true,
+      "readOnly": false,
+      "disabled": false,
+      "text": "n",
+      "selectionStart": 1,
+      "selectionEnd": 1,
+      "selectionDirection": "none"
+    },
+    "dom_editors": [
+      {
+        "tag": "TEXTAREA",
+        "id": "",
+        "label": "Stock live IME input",
+        "active": true,
+        "readOnly": false,
+        "disabled": false,
+        "text": "n",
+        "selectionStart": 1,
+        "selectionEnd": 1,
+        "selectionDirection": "none"
+      },
+      {
+        "tag": "TEXTAREA",
+        "id": "",
+        "label": "Prompt",
+        "active": false,
+        "readOnly": false,
+        "disabled": false,
+        "text": "",
+        "selectionStart": 0,
+        "selectionEnd": 0,
+        "selectionDirection": "none"
+      }
+    ]
+  },
+  "download_original": "/Users/zzz/Downloads/live-os-ime-observed-2026-09-04T08-14-59.634Z.json",
+  "download_bytes": 61795,
+  "download_sha256": "ece542a26b8109a10e62089f054b513ce2a9c3d4067a4c5877c4432008ded88c",
+  "download_copy_byte_exact": true,
+  "export_click_focus_observation": "native AX still focused Stock live IME input after the download; no programmatic focus/controller change",
+  "sources_and_artifacts": [
+    {
+      "path": "docs/beautiful-ui/diagnostics/live-os-ime-observer/live_os_ime_probe.dart",
+      "bytes": 16322,
+      "sha256": "3e00285fdde66ebf08f82ddd742f25eca474237ea1e8346dd4c996dabae0ae9b"
+    },
+    {
+      "path": "docs/beautiful-ui/diagnostics/live-os-ime-observer/exportable_live_os_ime_probe.dart",
+      "bytes": 4435,
+      "sha256": "27fe563f5d21575205f5414acb77be65bc67760635bf8c6edb663ad82d89ecd3"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime-export-5edbcab7/main.dart.js",
+      "bytes": 2082603,
+      "sha256": "f1290a557910aa3e3f133b8e5a35dcccf387756e36d829b3aa31bbb84f6acebd"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime-export-5edbcab7/flutter_bootstrap.js",
+      "bytes": 13094,
+      "sha256": "0fc561707c4cb9fad8745b5ee5f909ff14bb572310abc99df02bcd2261986503"
+    },
+    {
+      "path": "pubspec.lock",
+      "bytes": 40701,
+      "sha256": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae"
+    },
+    {
+      "path": "/tmp/beautiful-live-os-ime-export-5edbcab7-build.log",
+      "bytes": 2058,
+      "sha256": "6db0b931dc439aa0102429c1e96dc35fc6d891b7a191f2cbb44bb3567d897977"
+    },
+    {
+      "path": "docs/beautiful-ui/diagnostics/live-os-ime-observer/2026-09-04-5edbcab7-exported-trace.json",
+      "bytes": 61795,
+      "sha256": "ece542a26b8109a10e62089f054b513ce2a9c3d4067a4c5877c4432008ded88c"
+    }
+  ],
+  "historical_observer_source_unchanged": true
+}
