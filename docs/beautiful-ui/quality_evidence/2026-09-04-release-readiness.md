@@ -1,17 +1,15 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. The completed `75594991`
-main CI is **11/12**. Android now verifies one actual LatinIME `inventory`
-candidate commit, unchanged draft, one original Chat Send and its new host
-message. Its complete integration response then fails the P3 slash-command
-assertion: `/rest` remains unchanged instead of becoming `/restock `.
-That failure's live composition/menu state was not captured and its cause is
-not inferred from the text alone. All other main jobs, including iOS and the
-complete Edge journey, pass. The later `864ac59b` Android observation passes
-slash selection and then records composition changing to `[21,28]` during the
-original Prompt Send operation, with a disabled Send and no host receipt. Its
-full response remains failed. The separate input/AT checkpoint remains the
+Status: **not ready for stable-release sign-off**. The complete original
+Android P1/P2/P3 journey now **passes at `f149ec29`**, with three actual LatinIME
+candidate commits, all original actions/assertions, a successful full response
+and verified stage/final cleanup. The actual driver finishes in **79.353 seconds**.
+This is a separate source-bound execution of the same Android entry configured
+in main. The most recent whole-main run remains the historical `75594991`
+**11/12** result; its old Android failure is preserved, and no new 12/12 main run
+is claimed. All its other main jobs, including iOS and the complete Edge
+journey, passed. The separate input/AT checkpoint remains the
 completed `5edbcab7` **4/9**, with four complete W3C suites and three native
 framework input jobs passing, while retaining four framework composition
 failures and the hosted Narrator limitation. It was not rerun at `75594991`.
@@ -32,9 +30,10 @@ changing those decisions or rewriting earlier records.
 
 | Source snapshot | Evidence and meaning |
 | --- | --- |
-| Current main `7559499112dcc5c5d9b0370ba1d6b0eb34743f45` | Main CI **11/12**; library 658, Catalog 147 and core 571 tests pass. Android's actual candidate commit and original Chat Send pass, then the complete response fails the P3 `/rest` command assertion. All other main jobs pass. Input/AT was not rerun. |
+| Current Android `f149ec298a701d806661ab8ed4eb6085a037b70f` | Complete original P1/P2/P3 journey **passes**, three fixed native candidate commits and original actions pass, full response succeeds, and every helper/final cleanup is verified. The configured main and diagnostic Android entrypoints match; this does not rewrite the prior main run. |
+| Most recent whole main `7559499112dcc5c5d9b0370ba1d6b0eb34743f45` | Main CI **11/12**; library 658, Catalog 147 and core 571 tests pass. Android's actual candidate commit and original Chat Send pass, then the complete response fails the P3 `/rest` command assertion. All other main jobs pass. Input/AT was not rerun. |
 | Android observation `864ac59b523c278ef7ca99d7aad7d0c13015f377` | Native Chat commit/Send pass; slash Enter passes; actual Prompt composition changes to `[21,28]` during its original Send operation, with no host receipt. The complete original response fails. No P3 native candidate tree was inspected. |
-| Runtime/performance `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. Production runtime inputs are unchanged through `75594991`. |
+| Runtime/performance `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. Production runtime inputs are unchanged through `f149ec29`. |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
 | Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
 | Earlier runtime `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See its recorded runtime checkpoint below. |
@@ -45,7 +44,44 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Current completed main checkpoint at 75594991
+## Completed original Android journey at f149ec29
+
+[The actual Android evidence](../../../.github/evidence/android-candidate-f149ec29.md)
+binds successful run `33869603924`, attempt 1, to exact source
+`f149ec298a701d806661ab8ed4eb6085a037b70f`. The complete original integration
+response succeeds with no failure details, and the driver reports
+`all_tests_passed=true`. This includes the rest of P3 after Prompt Send.
+
+| Fixed stage | Actual native commit and original result |
+|---|---|
+| Chat | One `inventory` candidate touch clears composition without changing `Check cone inventory`; the original Send creates its one host message and clears the editor, followed by the original Stop/Suppliers checks |
+| Command | One `rest` candidate touch preserves `/rest`, clears composition and exposes one enabled restock option; the original Enter produces `/restock ` with caret 9 |
+| Prompt Send | One `restock` candidate touch preserves the full original request and clears composition; the original Send reports the exact request with one file and the precise model, then clears the editor |
+
+Catalog remains the same PID **2392** and process start identity throughout.
+The three independently owned helper PIDs **2330, 2511 and 2570** each perform
+one native DOWN/UP with no cancellation or repeat. Their nonces, tickets,
+native results, original action ledger and cleanup all verify. Driver and
+supervisor error/cleanup arrays are empty; all **232** runner-manifest files
+match their recorded hashes and source inputs match before/after.
+
+The [entrypoint/source comparison](../../../.github/evidence/android-entrypoint-equivalence-f149ec29.json)
+verifies the same emulator action, settings and native build/runner commands in
+main and the diagnostic, normalizing only their exact-source variable names.
+Public/core/Catalog runtime, assets, manifests/lockfile and platform runners
+remain unchanged from `5edbcab7`. This closes the original Android journey gap
+for the verified fixture and source; it is not physical-device or human Chinese
+IME acceptance and is not a new execution of the whole main workflow.
+
+The failed [9e14317c wire run](../../../.github/evidence/android-candidate-9e14317c.md)
+is retained with zero native touches. Its minimal flat-field repair has an
+actual production-Dart-to-Python HTTP red/green regression covering preparation,
+inspection, click and finish. The VM/native endpoints in that local regression
+are explicitly fixtures. The current successful Android run supplies the real
+native evidence, in addition to 50 Flutter, 35 stage-driver, 19 host and three
+cross-language wire checks.
+
+## Earlier completed main checkpoint at 75594991
 
 [The exact-source main CI record](../../../.github/evidence/75594991-ci.md)
 preserves run `33863483982`, attempt 1, with **11 successful jobs and one Android
@@ -758,14 +794,6 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Complete the original Android P3 journey with explicit native commit evidence.
-  Chat's native candidate/commit and original single Send pass. The `864ac59b`
-  passive record verifies slash selection, then demonstrates native composition
-  returning during Prompt Send while text and focus stay stable. A fixed,
-  ordered native-candidate fixture is being prepared for the three original
-  edit/action points; every actual candidate and complete original response
-  must be observed before acceptance. Keep active-composition protection and
-  all original text, key/tap counts and assertions intact.
 - Extend the actual Android English candidate evidence to Chinese OS IME
   pre-edit and cross-platform candidate/commit observation. Four-browser
   W3C input passes, but those Unicode key events are not an IME workflow. The
@@ -784,10 +812,12 @@ default Catalog samples do not accept those capabilities.
   success path are now verified at `5edbcab7`. Product budget approval and
   representative other-platform/device evidence remain separate from this
   single native capture. Repeatability or leak claims are not inferred.
-- Reconcile future runtime changes with the bounded visual/localization,
-  performance, asset, notice and publication evidence. The current local Web
-  preview and macOS release artifact have unchanged runtime inputs relative to
-  the completed source-5ed verification. No stable package publication occurred.
+
+The current local Web preview and macOS release artifact retain unchanged
+runtime inputs relative to the completed source-5ed verification. Visual,
+localization, asset, notice and publication evidence keeps its recorded scope;
+later runtime changes require a proportionate refresh. No stable package
+publication occurred.
 
 The [support matrix](../support_matrix.md) and [parity manifest](../parity_manifest.yaml)
 therefore retain six `Partial` platforms and 27 `in_progress` entries. No later

@@ -1,16 +1,16 @@
 # Multi-platform support matrix
 
-Status: four-browser W3C input, complete P1/P2/P3 engineering budgets and three repaired-runtime Linux reader tasks pass; remaining journey and device/AT gates keep all six platforms Partial
+Status: original Android P1/P2/P3 journey, four-browser W3C input, complete engineering budgets and three repaired-runtime Linux reader tasks pass; device/IME/AT sign-off keeps all six platforms Partial
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `75594991` main CI is **11/12**, with library 658, Catalog 147 and
-core 571 tests passing. Its Android job verifies an actual LatinIME candidate
-commit and one original Chat Send, then receives a complete failed response at
-the P3 `/rest` command assertion. A later passive `864ac59b` run passes slash
-selection but records native composition returning during Prompt Send, with no
-host receipt. It does not infer the earlier slash failure's cause.
-iOS and the complete Edge journey pass. The separate input/AT checkpoint remains
+The complete original Android journey **passes at `f149ec29`** with three fixed
+actual LatinIME candidate commits, the original Chat Send, command Enter and
+Prompt Send, all remaining P3 assertions and verified cleanup. Main and the
+independent diagnostic use the same native entry configuration. The earlier
+`75594991` whole-main run remains **11/12**, with library 658, Catalog 147 and
+core 571 tests passing; its original Android failure is not relabelled. Its
+iOS and complete Edge journeys pass. The separate input/AT checkpoint remains
 `5edbcab7` **4/9**, including all three native input bridges and four complete
 independent W3C suites; it was not rerun at `75594991`.
 The complete native P1/P2/P3

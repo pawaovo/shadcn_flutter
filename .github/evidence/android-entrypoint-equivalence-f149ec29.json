@@ -1,0 +1,50 @@
+{
+  "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+  "scope": "Configuration and source comparison, not a new main-workflow execution",
+  "main_workflow": ".github/workflows/beautiful_ai_ui.yml",
+  "diagnostic_workflow": ".github/workflows/beautiful_ai_ui_android_candidate.yml",
+  "emulator_action": "ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d",
+  "identical_emulator_settings": {
+    "api-level": "35",
+    "arch": "x86_64",
+    "target": "default",
+    "profile": "pixel_6",
+    "force-avd-creation": "true",
+    "enable-hw-keyboard": "false",
+    "disable-animations": "true",
+    "emulator-options": "-no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -wipe-data"
+  },
+  "identical_native_build_and_journey_commands_after_source_variable_name_normalization": [
+    "python3 tool/android_candidate_probe/build.py --sdk-root \"$ANDROID_SDK_ROOT\" --source-sha \"<exact_source_sha>\" --output-dir artifacts/android-candidate/helper-build",
+    "python3 -B .github/scripts/run_android_candidate_diagnostic.py --source-sha \"<exact_source_sha>\" --helper-apk artifacts/android-candidate/helper-build/android-candidate-probe.apk --helper-report artifacts/android-candidate/helper-build/build-report.json --output artifacts/android-candidate/run"
+  ],
+  "source_bindings": {
+    "main": "github.sha with explicit checkout",
+    "diagnostic": "inputs.source_sha with exact checkout"
+  },
+  "runtime_comparison": {
+    "baseline": "5edbcab7edc5c058cf9354c6109df917846fb4e8",
+    "paths": [
+      "pubspec.yaml",
+      "pubspec.lock",
+      "packages/beautiful_ai_ui/lib",
+      "packages/beautiful_ai_ui/assets",
+      "packages/beautiful_ai_ui/pubspec.yaml",
+      "packages/shadcn_flutter/lib",
+      "packages/shadcn_flutter/assets",
+      "packages/shadcn_flutter/pubspec.yaml",
+      "packages/beautiful_ai_ui_catalog/lib",
+      "packages/beautiful_ai_ui_catalog/assets",
+      "packages/beautiful_ai_ui_catalog/pubspec.yaml",
+      "packages/beautiful_ai_ui_catalog/android",
+      "packages/beautiful_ai_ui_catalog/ios",
+      "packages/beautiful_ai_ui_catalog/macos",
+      "packages/beautiful_ai_ui_catalog/windows",
+      "packages/beautiful_ai_ui_catalog/linux",
+      "packages/beautiful_ai_ui_catalog/web"
+    ],
+    "changed_files": []
+  },
+  "main_workflow_rerun": false,
+  "meaning": "The completed independent Android run exercises the same native supervisor/target entry configured in main. The previous main 11/12 result is not rewritten as 12/12."
+}

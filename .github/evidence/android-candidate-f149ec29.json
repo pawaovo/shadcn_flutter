@@ -1,0 +1,1442 @@
+{
+  "schema_version": 1,
+  "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+  "run_id": 33869603924,
+  "job_id": 101012200460,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33869603924",
+  "job_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33869603924/job/101012200460",
+  "conclusion": "success",
+  "run_created_at": "2026-09-04T11:47:30Z",
+  "job_started_at": "2026-09-04T11:47:34Z",
+  "job_completed_at": "2026-09-04T11:55:29Z",
+  "scope": "Independent manual diagnostic executing the same complete original Android Catalog P1/P2/P3 journey, with three fixed genuine native candidate commits",
+  "main_ci_boundary": "This is not a new main workflow result. Historical 75594991 main remains 11/12 with its original Android failure. No other platform/input/AT run is attributed to f149ec29.",
+  "artifact": {
+    "id": 9935554325,
+    "node_id": "MDg6QXJ0aWZhY3Q5OTM1NTU0MzI1",
+    "name": "android-native-candidate-33869603924-1",
+    "size_in_bytes": 919124,
+    "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9935554325",
+    "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9935554325/zip",
+    "expired": false,
+    "digest": "sha256:2e965eb7744ee3028c01f221e4ac204fe1495317b7ee651850affbb35fb2708f",
+    "created_at": "2026-09-04T11:55:25Z",
+    "updated_at": "2026-09-04T11:55:25Z",
+    "expires_at": "2026-09-18T11:55:24Z",
+    "workflow_run": {
+      "id": 33869603924,
+      "repository_id": 1354580211,
+      "head_repository_id": 1354580211,
+      "head_branch": "product/main",
+      "head_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f"
+    }
+  },
+  "artifact_download_count": 1,
+  "verified_original_run_manifest_files": 232,
+  "driver": {
+    "status": "passed",
+    "elapsed_ms": 79353,
+    "all_tests_passed": true,
+    "native_click_count": 3,
+    "cleanup_errors": [],
+    "final_target_elapsed_ms": 78817,
+    "journey_status": "passed",
+    "completed_stage_ids": [
+      "chat_send",
+      "prompt_command",
+      "prompt_send"
+    ]
+  },
+  "original_response": {
+    "received": true,
+    "result": "true",
+    "failureDetails": [],
+    "candidate_report_status": "passed"
+  },
+  "catalog_process": {
+    "package": "dev.beautifulai.beautiful_ai_ui_catalog",
+    "pid": 2392,
+    "start_ticks": 24739
+  },
+  "stages": [
+    {
+      "stage_id": "chat_send",
+      "stage_nonce": "acef211b7c2346088e64457100b14d59",
+      "helper_process": {
+        "package": "dev.beautifulai.androidcandidateprobe",
+        "pid": 2330,
+        "start_ticks": 6178
+      },
+      "native_inspection": {
+        "ok": true,
+        "operation": "inspect",
+        "protocol_version": 2,
+        "device_elapsed_ms": 280982,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "acef211b7c2346088e64457100b14d59",
+        "stage_id": "chat_send",
+        "expected_text": "Check cone inventory",
+        "candidate_text": "inventory",
+        "composing_base": 11,
+        "composing_extent": 20,
+        "selection_offset": 20,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 3,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "candidate_id": "13ade322ae9cdb33ad076644f7062aee",
+        "inspect_started_device_ms": 280851,
+        "expires_at_device_ms": 282851
+      },
+      "actual_unique_candidate": {
+        "index": 48,
+        "depth": 9,
+        "package": "com.android.inputmethod.latin",
+        "view_id": null,
+        "class": "android.widget.TextView",
+        "text": "inventory",
+        "description": "inventory",
+        "visible": true,
+        "enabled": true,
+        "clickable": true,
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        }
+      },
+      "native_tap": {
+        "ok": true,
+        "operation": "tap",
+        "protocol_version": 2,
+        "device_elapsed_ms": 282158,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "acef211b7c2346088e64457100b14d59",
+        "stage_id": "chat_send",
+        "expected_text": "Check cone inventory",
+        "candidate_text": "inventory",
+        "composing_base": 11,
+        "composing_extent": 20,
+        "selection_offset": 20,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 3,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "used_candidate_id": "13ade322ae9cdb33ad076644f7062aee",
+        "expires_at_device_ms": 282851,
+        "injected_down": true,
+        "injected_up": true,
+        "cancelled": false,
+        "down_device_elapsed_ms": 281879,
+        "down_dispatch_attempted": true,
+        "down_injection_returned_device_elapsed_ms": 281983,
+        "up_device_elapsed_ms": 281983,
+        "up_injection_returned_device_elapsed_ms": 282158
+      },
+      "actual_input_trace": [
+        {
+          "elapsed_ms": 26717,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        },
+        {
+          "elapsed_ms": 26739,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 11,
+            "composingExtent": 20
+          }
+        },
+        {
+          "elapsed_ms": 30263,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        }
+      ],
+      "before_original_action": {
+        "protocol_version": 2,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "chat_send",
+        "stage_nonce": "acef211b7c2346088e64457100b14d59",
+        "stage": "sending",
+        "elapsed_ms": 30770,
+        "remaining_ms": 569230,
+        "expected_text": "Check cone inventory",
+        "candidate_text": "inventory",
+        "composing_base": 11,
+        "composing_extent": 20,
+        "selection_offset": 20,
+        "snapshot": {
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "view_insets_bottom_physical": 901.0,
+          "platform_semantics_enabled": true,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "role": "user",
+              "text": "What should we restock this week?"
+            },
+            {
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand."
+            }
+          ],
+          "observation_error": null
+        },
+        "candidate_id": "13ade322ae9cdb33ad076644f7062aee",
+        "lease_id": "9f4203f6ec5e081a918b5bb89e5df746",
+        "claimed_elapsed_ms": 29334,
+        "lease_remaining_ms": 3564,
+        "can_click": false,
+        "native_click_acknowledged": true,
+        "native_drained": true,
+        "native_call_pending": false,
+        "send_activation_checked": false,
+        "failure": null
+      },
+      "final_activation_snapshot": {
+        "input": {
+          "text": "Check cone inventory",
+          "selectionBase": 20,
+          "selectionExtent": 20,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 1,
+        "send_enabled_semantics": "isTrue",
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "host_status": "idle",
+        "host_messages": [
+          {
+            "role": "user",
+            "text": "What should we restock this week?"
+          },
+          {
+            "role": "assistant",
+            "text": "Start with pistachio and waffle cones. Both have rising demand."
+          }
+        ],
+        "observation_error": null
+      },
+      "after_original_action_snapshot": {
+        "input": {
+          "text": "",
+          "selectionBase": 0,
+          "selectionExtent": 0,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 0,
+        "send_enabled_semantics": null,
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "host_status": "responding",
+        "host_messages": [
+          {
+            "role": "user",
+            "text": "What should we restock this week?"
+          },
+          {
+            "role": "assistant",
+            "text": "Start with pistachio and waffle cones. Both have rising demand."
+          },
+          {
+            "role": "user",
+            "text": "Check cone inventory"
+          },
+          {
+            "role": "assistant",
+            "text": "Checking the catalog examples…"
+          }
+        ],
+        "observation_error": null
+      },
+      "original_action_passed": true,
+      "stage_completed_at_target_ms": 33624,
+      "native_event_operations": [
+        "inspect",
+        "tap",
+        "stop",
+        "finish"
+      ],
+      "retired_epoch_ns": 1788522876928017070,
+      "native_finish": {
+        "ok": true,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "chat_send",
+        "stage_nonce": "acef211b7c2346088e64457100b14d59",
+        "native_drained": true,
+        "native_helper_stopped": true,
+        "helper_stopped": true,
+        "cleanup_verified": true
+      },
+      "cleanup_verified": true
+    },
+    {
+      "stage_id": "prompt_command",
+      "stage_nonce": "d617a97362c59454fc7ee30eaff49894",
+      "helper_process": {
+        "package": "dev.beautifulai.androidcandidateprobe",
+        "pid": 2511,
+        "start_ticks": 29300
+      },
+      "native_inspection": {
+        "ok": true,
+        "operation": "inspect",
+        "protocol_version": 2,
+        "device_elapsed_ms": 294409,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "d617a97362c59454fc7ee30eaff49894",
+        "stage_id": "prompt_command",
+        "expected_text": "/rest",
+        "candidate_text": "rest",
+        "composing_base": 1,
+        "composing_extent": 5,
+        "selection_offset": 5,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 11,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "candidate_id": "ba40cb4a563e6c9056c3c147712860d1",
+        "inspect_started_device_ms": 294304,
+        "expires_at_device_ms": 296304
+      },
+      "actual_unique_candidate": {
+        "index": 48,
+        "depth": 9,
+        "package": "com.android.inputmethod.latin",
+        "view_id": null,
+        "class": "android.widget.TextView",
+        "text": "rest",
+        "description": "rest",
+        "visible": true,
+        "enabled": true,
+        "clickable": true,
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        }
+      },
+      "native_tap": {
+        "ok": true,
+        "operation": "tap",
+        "protocol_version": 2,
+        "device_elapsed_ms": 295722,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "d617a97362c59454fc7ee30eaff49894",
+        "stage_id": "prompt_command",
+        "expected_text": "/rest",
+        "candidate_text": "rest",
+        "composing_base": 1,
+        "composing_extent": 5,
+        "selection_offset": 5,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 11,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "used_candidate_id": "ba40cb4a563e6c9056c3c147712860d1",
+        "expires_at_device_ms": 296304,
+        "injected_down": true,
+        "injected_up": true,
+        "cancelled": false,
+        "down_device_elapsed_ms": 295407,
+        "down_dispatch_attempted": true,
+        "down_injection_returned_device_elapsed_ms": 295515,
+        "up_device_elapsed_ms": 295515,
+        "up_injection_returned_device_elapsed_ms": 295722
+      },
+      "actual_input_trace": [
+        {
+          "elapsed_ms": 39499,
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        },
+        {
+          "elapsed_ms": 39596,
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 1,
+            "composingExtent": 5
+          }
+        },
+        {
+          "elapsed_ms": 43874,
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        }
+      ],
+      "before_original_action": {
+        "protocol_version": 2,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "prompt_command",
+        "stage_nonce": "d617a97362c59454fc7ee30eaff49894",
+        "stage": "sending",
+        "elapsed_ms": 44551,
+        "remaining_ms": 555449,
+        "expected_text": "/rest",
+        "candidate_text": "rest",
+        "composing_base": 1,
+        "composing_extent": 5,
+        "selection_offset": 5,
+        "snapshot": {
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "view_insets_bottom_physical": 901.0,
+          "platform_semantics_enabled": true,
+          "device_pixel_ratio": 2.625,
+          "selected_model_id": "balanced",
+          "inventory_attachment_count": 0,
+          "commands_label_count": 1,
+          "restock_option_count": 1,
+          "restock_option_enabled": "isTrue",
+          "host_prompt_received": [],
+          "observation_error": null
+        },
+        "candidate_id": "ba40cb4a563e6c9056c3c147712860d1",
+        "lease_id": "57ef9a280c2628b1131885d929fa0f2c",
+        "claimed_elapsed_ms": 42804,
+        "lease_remaining_ms": 3253,
+        "can_click": false,
+        "native_click_acknowledged": true,
+        "native_drained": true,
+        "native_call_pending": false,
+        "send_activation_checked": false,
+        "failure": null
+      },
+      "final_activation_snapshot": {
+        "input": {
+          "text": "/rest",
+          "selectionBase": 5,
+          "selectionExtent": 5,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 1,
+        "send_enabled_semantics": "isTrue",
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "selected_model_id": "balanced",
+        "inventory_attachment_count": 0,
+        "commands_label_count": 1,
+        "restock_option_count": 1,
+        "restock_option_enabled": "isTrue",
+        "host_prompt_received": [],
+        "observation_error": null
+      },
+      "after_original_action_snapshot": {
+        "input": {
+          "text": "/restock ",
+          "selectionBase": 9,
+          "selectionExtent": 9,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 1,
+        "send_enabled_semantics": "isTrue",
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "selected_model_id": "balanced",
+        "inventory_attachment_count": 0,
+        "commands_label_count": 0,
+        "restock_option_count": 0,
+        "restock_option_enabled": null,
+        "host_prompt_received": [],
+        "observation_error": null
+      },
+      "original_action_passed": true,
+      "stage_completed_at_target_ms": 44822,
+      "native_event_operations": [
+        "inspect",
+        "tap",
+        "stop",
+        "finish"
+      ],
+      "retired_epoch_ns": 1788522887890606319,
+      "native_finish": {
+        "ok": true,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "prompt_command",
+        "stage_nonce": "d617a97362c59454fc7ee30eaff49894",
+        "native_drained": true,
+        "native_helper_stopped": true,
+        "helper_stopped": true,
+        "cleanup_verified": true
+      },
+      "cleanup_verified": true
+    },
+    {
+      "stage_id": "prompt_send",
+      "stage_nonce": "7aa8f500f18a1634c61f7c95e44e40fd",
+      "helper_process": {
+        "package": "dev.beautifulai.androidcandidateprobe",
+        "pid": 2570,
+        "start_ticks": 30308
+      },
+      "native_inspection": {
+        "ok": true,
+        "operation": "inspect",
+        "protocol_version": 2,
+        "device_elapsed_ms": 304895,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "7aa8f500f18a1634c61f7c95e44e40fd",
+        "stage_id": "prompt_send",
+        "expected_text": "Prepare the seasonal restock",
+        "candidate_text": "restock",
+        "composing_base": 21,
+        "composing_extent": 28,
+        "selection_offset": 28,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 27,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "candidate_id": "ee43d46460fe06c7cffa05b9ce1905c0",
+        "inspect_started_device_ms": 304741,
+        "expires_at_device_ms": 306741
+      },
+      "actual_unique_candidate": {
+        "index": 48,
+        "depth": 9,
+        "package": "com.android.inputmethod.latin",
+        "view_id": null,
+        "class": "android.widget.TextView",
+        "text": "restock",
+        "description": "restock",
+        "visible": true,
+        "enabled": true,
+        "clickable": true,
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        }
+      },
+      "native_tap": {
+        "ok": true,
+        "operation": "tap",
+        "protocol_version": 2,
+        "device_elapsed_ms": 305925,
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "stage_nonce": "7aa8f500f18a1634c61f7c95e44e40fd",
+        "stage_id": "prompt_send",
+        "expected_text": "Prepare the seasonal restock",
+        "candidate_text": "restock",
+        "composing_base": 21,
+        "composing_extent": 28,
+        "selection_offset": 28,
+        "ime_component": "com.android.inputmethod.latin/.LatinIME",
+        "ime_package": "com.android.inputmethod.latin",
+        "ime_window_id": 27,
+        "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+        "bounds": {
+          "left": 380,
+          "top": 1503,
+          "right": 698,
+          "bottom": 1604
+        },
+        "used_candidate_id": "ee43d46460fe06c7cffa05b9ce1905c0",
+        "expires_at_device_ms": 306741,
+        "injected_down": true,
+        "injected_up": true,
+        "cancelled": false,
+        "down_device_elapsed_ms": 305618,
+        "down_dispatch_attempted": true,
+        "down_injection_returned_device_elapsed_ms": 305732,
+        "up_device_elapsed_ms": 305732,
+        "up_injection_returned_device_elapsed_ms": 305925
+      },
+      "actual_input_trace": [
+        {
+          "elapsed_ms": 49277,
+          "input": {
+            "text": "Prepare the seasonal restock",
+            "selectionBase": 28,
+            "selectionExtent": 28,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        },
+        {
+          "elapsed_ms": 49601,
+          "input": {
+            "text": "Prepare the seasonal restock",
+            "selectionBase": 28,
+            "selectionExtent": 28,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 21,
+            "composingExtent": 28
+          }
+        },
+        {
+          "elapsed_ms": 54070,
+          "input": {
+            "text": "Prepare the seasonal restock",
+            "selectionBase": 28,
+            "selectionExtent": 28,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          }
+        }
+      ],
+      "before_original_action": {
+        "protocol_version": 2,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "run_nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "prompt_send",
+        "stage_nonce": "7aa8f500f18a1634c61f7c95e44e40fd",
+        "stage": "sending",
+        "elapsed_ms": 54541,
+        "remaining_ms": 545459,
+        "expected_text": "Prepare the seasonal restock",
+        "candidate_text": "restock",
+        "composing_base": 21,
+        "composing_extent": 28,
+        "selection_offset": 28,
+        "snapshot": {
+          "input": {
+            "text": "Prepare the seasonal restock",
+            "selectionBase": 28,
+            "selectionExtent": 28,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "view_insets_bottom_physical": 901.0,
+          "platform_semantics_enabled": true,
+          "device_pixel_ratio": 2.625,
+          "selected_model_id": "precise",
+          "inventory_attachment_count": 1,
+          "commands_label_count": 0,
+          "restock_option_count": 0,
+          "restock_option_enabled": null,
+          "host_prompt_received": [],
+          "observation_error": null
+        },
+        "candidate_id": "ee43d46460fe06c7cffa05b9ce1905c0",
+        "lease_id": "6d76cc3c3b845dce821a5737fb6afca2",
+        "claimed_elapsed_ms": 53341,
+        "lease_remaining_ms": 3800,
+        "can_click": false,
+        "native_click_acknowledged": true,
+        "native_drained": true,
+        "native_call_pending": false,
+        "send_activation_checked": false,
+        "failure": null
+      },
+      "final_activation_snapshot": {
+        "input": {
+          "text": "Prepare the seasonal restock",
+          "selectionBase": 28,
+          "selectionExtent": 28,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 1,
+        "send_enabled_semantics": "isTrue",
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "selected_model_id": "precise",
+        "inventory_attachment_count": 1,
+        "commands_label_count": 0,
+        "restock_option_count": 0,
+        "restock_option_enabled": null,
+        "host_prompt_received": [],
+        "observation_error": null
+      },
+      "after_original_action_snapshot": {
+        "input": {
+          "text": "",
+          "selectionBase": 0,
+          "selectionExtent": 0,
+          "selectionAffinity": "TextAffinity.downstream",
+          "selectionIsDirectional": false,
+          "composingBase": -1,
+          "composingExtent": -1
+        },
+        "editor_primary_focus": true,
+        "send_count": 1,
+        "send_enabled_semantics": "isFalse",
+        "view_insets_bottom_physical": 901.0,
+        "platform_semantics_enabled": true,
+        "device_pixel_ratio": 2.625,
+        "selected_model_id": "precise",
+        "inventory_attachment_count": 0,
+        "commands_label_count": 0,
+        "restock_option_count": 0,
+        "restock_option_enabled": null,
+        "host_prompt_received": [
+          "Prompt received: Prepare the seasonal restock · 1 files · precise"
+        ],
+        "observation_error": null
+      },
+      "original_action_passed": true,
+      "stage_completed_at_target_ms": 55738,
+      "native_event_operations": [
+        "inspect",
+        "tap",
+        "stop",
+        "finish"
+      ],
+      "retired_epoch_ns": 1788522921482588307,
+      "native_finish": {
+        "ok": true,
+        "nonce": "1b3018a1cc4e4bb89228182dfc7e4881",
+        "source_sha": "f149ec298a701d806661ab8ed4eb6085a037b70f",
+        "stage_id": "prompt_send",
+        "stage_nonce": "7aa8f500f18a1634c61f7c95e44e40fd",
+        "native_drained": true,
+        "native_helper_stopped": true,
+        "helper_stopped": true,
+        "cleanup_verified": true
+      },
+      "cleanup_verified": true
+    }
+  ],
+  "prompt_observations": [
+    {
+      "action": "slash_enter",
+      "observer_errors": [],
+      "sample_count": 14,
+      "checkpoints": [
+        {
+          "phase": "before_enter",
+          "sequence": 7,
+          "utc_epoch_us": 1788522886866979,
+          "elapsed_us": 5946045,
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": null,
+          "composer_id": "catalog-restock-prompt",
+          "editor_widget_id": 458035641,
+          "controller_id": 202693330,
+          "focus_id": 626154633,
+          "editor_read_only": false,
+          "prompt_enabled": true,
+          "commands": [
+            {
+              "id": "restock",
+              "label": "restock"
+            },
+            {
+              "id": "compare",
+              "label": "compare"
+            }
+          ],
+          "commands_label_count": 1,
+          "sources_label_count": 0,
+          "models_label_count": 0,
+          "no_matches_count": 0,
+          "restock_option": {
+            "count": 1,
+            "label": "/restock\nDraft a restock plan",
+            "enabled": "isTrue"
+          },
+          "send_control": {
+            "count": 1,
+            "label": "Send",
+            "enabled": "isTrue"
+          },
+          "sending_label_count": 0,
+          "view_insets_bottom_physical": 901.0,
+          "host_prompt_received": []
+        },
+        {
+          "phase": "keyboard_event",
+          "sequence": 8,
+          "utc_epoch_us": 1788522886939825,
+          "elapsed_us": 6018890,
+          "input": {
+            "text": "/rest",
+            "selectionBase": 5,
+            "selectionExtent": 5,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [
+            4294967309
+          ],
+          "physical_keys_pressed": [
+            458792
+          ],
+          "key_down_handled_by_framework": null,
+          "key": {
+            "type": "KeyDownEvent",
+            "logical_key": 4294967309,
+            "logical_label": "Enter",
+            "physical_key": 458792,
+            "character": null,
+            "synthesized": false,
+            "timestamp_us": 0
+          }
+        },
+        {
+          "phase": "keyboard_event",
+          "sequence": 10,
+          "utc_epoch_us": 1788522886942597,
+          "elapsed_us": 6021661,
+          "input": {
+            "text": "/restock ",
+            "selectionBase": 9,
+            "selectionExtent": 9,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": null,
+          "key": {
+            "type": "KeyUpEvent",
+            "logical_key": 4294967309,
+            "logical_label": "Enter",
+            "physical_key": 458792,
+            "character": null,
+            "synthesized": false,
+            "timestamp_us": 0
+          }
+        },
+        {
+          "phase": "after_enter",
+          "sequence": 11,
+          "utc_epoch_us": 1788522886942909,
+          "elapsed_us": 6021973,
+          "input": {
+            "text": "/restock ",
+            "selectionBase": 9,
+            "selectionExtent": 9,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": true,
+          "composer_id": "catalog-restock-prompt",
+          "editor_widget_id": 458035641,
+          "controller_id": 202693330,
+          "focus_id": 626154633,
+          "editor_read_only": false,
+          "prompt_enabled": true,
+          "commands": [
+            {
+              "id": "restock",
+              "label": "restock"
+            },
+            {
+              "id": "compare",
+              "label": "compare"
+            }
+          ],
+          "commands_label_count": 1,
+          "sources_label_count": 0,
+          "models_label_count": 0,
+          "no_matches_count": 0,
+          "restock_option": {
+            "count": 1,
+            "label": "/restock\nDraft a restock plan",
+            "enabled": "isTrue"
+          },
+          "send_control": {
+            "count": 1,
+            "label": "Send",
+            "enabled": "isTrue"
+          },
+          "sending_label_count": 0,
+          "view_insets_bottom_physical": 901.0,
+          "host_prompt_received": []
+        },
+        {
+          "phase": "after_enter_pump",
+          "sequence": 12,
+          "utc_epoch_us": 1788522887031227,
+          "elapsed_us": 6110293,
+          "input": {
+            "text": "/restock ",
+            "selectionBase": 9,
+            "selectionExtent": 9,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": null,
+          "composer_id": "catalog-restock-prompt",
+          "editor_widget_id": 251564384,
+          "controller_id": 202693330,
+          "focus_id": 626154633,
+          "editor_read_only": false,
+          "prompt_enabled": true,
+          "commands": [
+            {
+              "id": "restock",
+              "label": "restock"
+            },
+            {
+              "id": "compare",
+              "label": "compare"
+            }
+          ],
+          "commands_label_count": 0,
+          "sources_label_count": 0,
+          "models_label_count": 0,
+          "no_matches_count": 0,
+          "restock_option": {
+            "count": 0
+          },
+          "send_control": {
+            "count": 1,
+            "label": "Send",
+            "enabled": "isTrue"
+          },
+          "sending_label_count": 0,
+          "view_insets_bottom_physical": 901.0,
+          "host_prompt_received": []
+        }
+      ]
+    },
+    {
+      "action": "prompt_send",
+      "observer_errors": [],
+      "sample_count": 10,
+      "checkpoints": [
+        {
+          "phase": "before_send",
+          "sequence": 6,
+          "utc_epoch_us": 1788522896857294,
+          "elapsed_us": 5645544,
+          "input": {
+            "text": "Prepare the seasonal restock",
+            "selectionBase": 28,
+            "selectionExtent": 28,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": null,
+          "composer_id": "catalog-restock-prompt",
+          "editor_widget_id": 279026803,
+          "controller_id": 202693330,
+          "focus_id": 626154633,
+          "editor_read_only": false,
+          "prompt_enabled": true,
+          "commands": [
+            {
+              "id": "restock",
+              "label": "restock"
+            },
+            {
+              "id": "compare",
+              "label": "compare"
+            }
+          ],
+          "commands_label_count": 0,
+          "sources_label_count": 0,
+          "models_label_count": 0,
+          "no_matches_count": 0,
+          "restock_option": {
+            "count": 0
+          },
+          "send_control": {
+            "count": 1,
+            "label": "Send",
+            "enabled": "isTrue"
+          },
+          "sending_label_count": 0,
+          "view_insets_bottom_physical": 901.0,
+          "host_prompt_received": []
+        },
+        {
+          "phase": "after_send",
+          "sequence": 8,
+          "utc_epoch_us": 1788522897780294,
+          "elapsed_us": 6568545,
+          "input": {
+            "text": "",
+            "selectionBase": 0,
+            "selectionExtent": 0,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "bound_controller_id": 202693330,
+          "bound_focus_id": 626154633,
+          "editor_has_focus": true,
+          "editor_primary_focus": true,
+          "editor_focus_label": "BeautifulPromptBar editor",
+          "primary_focus_id": 626154633,
+          "primary_focus_label": "BeautifulPromptBar editor",
+          "shift_pressed": false,
+          "logical_keys_pressed": [],
+          "physical_keys_pressed": [],
+          "key_down_handled_by_framework": null,
+          "composer_id": "catalog-restock-prompt",
+          "editor_widget_id": 1005665575,
+          "controller_id": 202693330,
+          "focus_id": 626154633,
+          "editor_read_only": false,
+          "prompt_enabled": true,
+          "commands": [
+            {
+              "id": "restock",
+              "label": "restock"
+            },
+            {
+              "id": "compare",
+              "label": "compare"
+            }
+          ],
+          "commands_label_count": 0,
+          "sources_label_count": 0,
+          "models_label_count": 0,
+          "no_matches_count": 0,
+          "restock_option": {
+            "count": 0
+          },
+          "send_control": {
+            "count": 1,
+            "label": "Send",
+            "enabled": "isFalse"
+          },
+          "sending_label_count": 0,
+          "view_insets_bottom_physical": 901.0,
+          "host_prompt_received": [
+            "Prompt received: Prepare the seasonal restock · 1 files · precise"
+          ]
+        }
+      ]
+    }
+  ],
+  "late_p3_completion": {
+    "basis": "Original Response true with no failureDetails and Flutter All tests passed after tearDownAll; pinned source sequentially awaits all original P3 assertions, including the final document assertion. There are no separate per-card telemetry records.",
+    "source_file": "packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart",
+    "source_sha256": "7f0059c7164890bb33ff7aaf7eeb55244a1ea5380fac31f3f900871085f04fd3",
+    "source_url": "https://github.com/pawaovo/shadcn_flutter/blob/f149ec298a701d806661ab8ed4eb6085a037b70f/packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart",
+    "call_site_line": 149,
+    "tail_assertions": [
+      {
+        "line": 431,
+        "expected": "Calculated 1 supplier records"
+      },
+      {
+        "line": 433,
+        "expected": "Saved supplier property: summary"
+      },
+      {
+        "line": 445,
+        "expected": "Cone King: 7 days lead time; ready for review."
+      },
+      {
+        "line": 470,
+        "expected": "Selected workspace: seasonal · destination: inventory"
+      },
+      {
+        "line": 487,
+        "expected": "Accepted stock threshold: 60 tubs"
+      },
+      {
+        "line": 518,
+        "expected": "Opened insight follow-up: allocation"
+      },
+      {
+        "line": 526,
+        "expected": "Accepted document edit: improve"
+      },
+      {
+        "line": 533,
+        "expected_prefix": "Review pistachio stock and confirm the required quantity."
+      }
+    ]
+  },
+  "native_trace": {
+    "actual_app_pid": 2392,
+    "commitText_dispatch_lines": [
+      " l_ai_ui_catalog-2392    (   2392) [000] .....   282.161122: tracing_mark_write: B|2392|InputConnection#commitText",
+      " l_ai_ui_catalog-2392    (   2392) [001] .....   295.773318: tracing_mark_write: B|2392|InputConnection#commitText",
+      " l_ai_ui_catalog-2392    (   2392) [000] .....   305.956362: tracing_mark_write: B|2392|InputConnection#commitText"
+    ],
+    "boundary": "Trace dispatch is supplementary. Actual native candidate identity, API return and matched live Dart before/after snapshots jointly establish the scoped commit. No universal delivery deadline or cross-clock latency claim."
+  },
+  "build": {
+    "helper_apk_sha256": "3fb7b27dd7c4fc6b4f9d04d010e775a7231d2063e691f635aed392485a86d2f6",
+    "catalog_apk": {
+      "path": "/home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/app/outputs/flutter-apk/app-debug.apk",
+      "sha256": "ec42bcdc1921fd7c695d3d893f443333c2ca4d452c0107e81b8d418d068b78ef",
+      "bytes": 77119297
+    },
+    "flutter_sdk": {
+      "frameworkVersion": "3.47.0",
+      "channel": "stable",
+      "repositoryUrl": "https://github.com/flutter/flutter.git",
+      "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+      "frameworkCommitDate": "2026-08-11 11:53:49 -0700",
+      "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+      "engineCommitDate": "2026-08-11 16:38:36.000Z",
+      "engineContentHash": "59d54a2b2896a6bbf356c94b7fac7b9e235bdacd",
+      "engineBuildDate": "2026-08-11 10:18:15.653",
+      "dartSdkVersion": "3.13.0",
+      "devToolsVersion": "2.60.0",
+      "flutterVersion": "3.47.0",
+      "flutterRoot": "/opt/hostedtoolcache/flutter/stable-3.47.0-x64/flutter"
+    },
+    "device_fingerprint": "Android/sdk_phone64_x86_64/emu64x:15/AE3A.240806.019/12368160:userdebug/test-keys",
+    "actual_jvm_protocol_checks": 46,
+    "actual_jvm_stage_spec_checks": 27,
+    "headless_regressions": 50,
+    "driver_fixture_checks": 35,
+    "real_dart_python_wire_cases": 3,
+    "host_regressions": 19
+  },
+  "cleanup": {
+    "supervisor": "verified",
+    "errors": [],
+    "cleanup_errors": [],
+    "driver_cleanup_errors": [],
+    "all_stage_retirements_verified": true
+  },
+  "source_inputs_unchanged": true,
+  "source_input_count": 325,
+  "core_records": {
+    "run-final.json": {
+      "bytes": 3198,
+      "sha256": "8d790f2f73b01754e40b4bff975e06d461187940185315388ade7c870afcd1b2"
+    },
+    "artifacts-metadata.json": {
+      "bytes": 743,
+      "sha256": "6e8bac6374eb81312499bcbf73f9029ade9d63deb0096a1a8475e8cc9eeb1e7b"
+    },
+    "job-101012200460.log": {
+      "bytes": 105456,
+      "sha256": "68fcbc90042bba61a1aab94ca25ec6b489a575751a2f39549bcd351793dd12e8"
+    },
+    "artifacts/android-native-candidate-33869603924-1/helper-build/build-report.json": {
+      "bytes": 3332,
+      "sha256": "5f9b597a9b7ea210caa26a73d4afc6490faff5f54f33c3a2455a7dcdb3c423cf"
+    },
+    "artifacts/android-native-candidate-33869603924-1/helper-build/build.log": {
+      "bytes": 18975,
+      "sha256": "f2cab03629b27fff6c71cf1af3d1f4458e0ff7a3e8aee00de63d32e1dcaba8f1"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/summary.json": {
+      "bytes": 2327301,
+      "sha256": "d5000f3fad992a16b798843bd4681218db0af7f0b873ebe776a2fa2e733a9af5"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/driver/driver-summary.json": {
+      "bytes": 2031241,
+      "sha256": "402e7d3487370d75351d7c112548846f23438dce7be81dd70897192af974673b"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/driver/request-data.json": {
+      "bytes": 63902,
+      "sha256": "ebea586dca450786b5281304188906f947ae625de98506e82dfdd4b4d04f9ab4"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/source-inputs-before.json": {
+      "bytes": 45239,
+      "sha256": "65eca71e96e27bcbdb6371f76290465a9202f925e4743c6475921e59593366ce"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/source-inputs-after.json": {
+      "bytes": 45239,
+      "sha256": "65eca71e96e27bcbdb6371f76290465a9202f925e4743c6475921e59593366ce"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/flutter-drive.log": {
+      "bytes": 21164,
+      "sha256": "ea87ab561d8dc310ed43567aca79a9faeb00125769ec0ccb2868a87ef7b8a850"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/input-connection.atrace": {
+      "bytes": 92383,
+      "sha256": "fdc4adc3e34424d64c36842a5cb1d9bed5490308ec7255e71d3a0e8f999f13be"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/input-connection-app-slices.txt": {
+      "bytes": 10511,
+      "sha256": "81b292486b6d9ba9c30124651490ab7cecdc53fe7de8d004cd2b302e14a617bb"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/artifact-manifest.json": {
+      "bytes": 35091,
+      "sha256": "800c3ae11c0d8ba877b17866416e742b8e9933fca2966193c5ea8a306c0a6f85"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/native-inspection.json": {
+      "bytes": 23228,
+      "sha256": "7b3bee8edae8ddae95df194556ecac1aabefd130e97d50ace1b3848e1c07c4d3"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/native-tap.json": {
+      "bytes": 23473,
+      "sha256": "60603f7d97553dfd8a70b76bd6e947cae4a6072314433730ec25d0d229ee1e7d"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/native-helper-events.jsonl": {
+      "bytes": 47070,
+      "sha256": "50b5192747ce45e0e4437177f6c8e888b8a825636c25b3afe5bf71467c5844ea"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/native-instrumentation.log": {
+      "bytes": 1504,
+      "sha256": "f6e6c2aa83b215125f99226261eb5abb7bec448fddbff76b0b1dafc39e5a3e54"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/vm-before-native-inspect.json": {
+      "bytes": 1715,
+      "sha256": "364ad613a816d3480703d387929d5d8daeaf3e586cb3134f754d694df26b4f00"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/chat_send/vm-immediately-before-native-tap.json": {
+      "bytes": 1774,
+      "sha256": "a70160856ed4d9bc285830bc6787f2312a91a591b44567f7cc3ec6a39dd02ddf"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/native-inspection.json": {
+      "bytes": 23189,
+      "sha256": "8856bd56c68c88f902126ebd902f470441a694424e6dc96b1425469373e7ac46"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/native-tap.json": {
+      "bytes": 23434,
+      "sha256": "605069adeeb0301f039b4d1bb49de642382b0407de02e909b443d772fb8650f3"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/native-helper-events.jsonl": {
+      "bytes": 46921,
+      "sha256": "0fd06c8feb9a13a3bfb2b1b9c8bee7c242176462ee434c5b5cb15e26af3f2aeb"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/native-instrumentation.log": {
+      "bytes": 1480,
+      "sha256": "f216aaf43223020fd831002b1aaaf6a68ec0029750fc47d8fb9ca4996c9bd427"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/vm-before-native-inspect.json": {
+      "bytes": 3701,
+      "sha256": "e08845952fcad118af612cb827b6a668112134f4b2cf35906e03f8fd2a6c5f5b"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_command/vm-immediately-before-native-tap.json": {
+      "bytes": 3760,
+      "sha256": "b250a40faff7ca94b8393d06064c70c476af8b92769373d270d8594813cae2a0"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/native-inspection.json": {
+      "bytes": 23235,
+      "sha256": "cab732322c402565bc5f5711513bbefd59c64a56295f3a60f0f0b15be1023893"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/native-tap.json": {
+      "bytes": 23480,
+      "sha256": "1d0742915ee300293c4e4646e099fe83fb6a49774527932d72047b492aae7ae4"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/native-helper-events.jsonl": {
+      "bytes": 47106,
+      "sha256": "6526204343c8973f29179555d877686e43cc109362994580051aadb271877511"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/native-instrumentation.log": {
+      "bytes": 1525,
+      "sha256": "26a91955243c34cb651997c7b28b611ffd4dba644c06434b14db49620e3f7c0d"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/vm-before-native-inspect.json": {
+      "bytes": 5536,
+      "sha256": "64ada27662f0909ea942385489128410877d217fa2d82e5b61cf6264ff9285cc"
+    },
+    "artifacts/android-native-candidate-33869603924-1/run/native-stages/prompt_send/vm-immediately-before-native-tap.json": {
+      "bytes": 5595,
+      "sha256": "c80aaa8f325f7bbc1caeeb1661965dd73186bc6792b7e30dbb5313556aeb2667"
+    }
+  },
+  "raw_directory": "/tmp/beautiful-android-candidate-f149ec29-33869603924",
+  "preservation": "One natural workflow execution; one artifact download; no UI/action retries. Old source-specific failures remain unchanged. One metadata GET was repeated after a transport EOF, without restarting or downloading the artifact again.",
+  "limits": [
+    "Original draft insertion, Enter and application button taps retain their Flutter-injected framework scope; only the three enumerated IME candidate touches are native UiAutomation input.",
+    "This representative API35 LatinIME emulator machine result is not human IME acceptance, other IME/language/device coverage, performance acceptance or a new main 12/12 result.",
+    "ZIP digest is GitHub-reported; independently verified hashes cover the extracted run files, not a retained ZIP."
+  ]
+}
