@@ -458,7 +458,26 @@ function Prepare-OwnedNarratorHome {
             $narrator.Refresh()
             if ($narrator.HasExited) { throw 'The owned Narrator process exited during startup preparation' }
             $ownedElements = [Windows.Automation.AutomationElement]::RootElement.FindAll([Windows.Automation.TreeScope]::Children, $condition)
-            $windows = @($ownedElements | Where-Object { $_.Current.ControlType -eq [Windows.Automation.ControlType]::Window })
+            $windows = @()
+            $discovery = @()
+            foreach ($element in $ownedElements) {
+                $elementPid = $element.Current.ProcessId
+                $elementHandle = [IntPtr]$element.Current.NativeWindowHandle
+                [uint32]$nativeOwner = 0
+                $null = [AtCapability]::GetWindowThreadProcessId($elementHandle, [ref]$nativeOwner)
+                $ownedWindow = $elementHandle -ne [IntPtr]::Zero -and $elementPid -eq $narrator.Id -and $nativeOwner -eq $narrator.Id
+                $discovery += @{
+                    uia_pid = $elementPid; native_owner_pid = $nativeOwner
+                    native_window_handle = $elementHandle.ToInt64()
+                    owned_native_window = $ownedWindow
+                    control_type = $element.Current.ControlType.ProgrammaticName
+                }
+                # UIA providers can classify a native HWND as Pane. Actual
+                # ownership and WindowPattern support decide whether it can be
+                # minimized; a ControlType label is not proof of either.
+                if ($ownedWindow) { $windows += $element }
+            }
+            $preparation.discovery = @{ utc = [DateTime]::UtcNow.ToString('o'); uia_element_count = $ownedElements.Count; elements = $discovery }
             if ($windows.Count -gt 1) { throw 'Multiple owned Narrator windows were found; no window will be chosen implicitly' }
             if ($windows.Count -eq 1) { $candidate = $windows[0]; break }
             Start-Sleep -Milliseconds 120

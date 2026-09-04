@@ -1,0 +1,96 @@
+name: Beautiful AI UI Edge full journey pair (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-character commit containing the paired diagnostic
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  condition:
+    name: Full Edge journey - ${{ matrix.condition }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        condition: [baseline, preread]
+    steps:
+      - name: Require an exact source commit
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$DIAGNOSTIC_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - name: Verify source and diagnostic boundaries
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIAGNOSTIC_SOURCE_SHA"
+          python3 -B -m unittest discover -s .github/scripts -p 'test_edge_full_journey.py' -v
+          python3 -B -m unittest discover -s .github/scripts -p 'test_edge_resource_observation.py' -v
+          python3 -B -m unittest discover -s .github/scripts -p 'test_flutter_edge_webdriver.py' -v
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.0'
+          channel: stable
+          cache: true
+      - name: Resolve dependencies
+        working-directory: packages/beautiful_ai_ui_catalog
+        run: flutter pub get --enforce-lockfile
+      - name: Run exactly one full journey on this fresh runner
+        timeout-minutes: 20
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+          DIAGNOSTIC_CONDITION: ${{ matrix.condition }}
+        run: |
+          options=()
+          if [[ "$DIAGNOSTIC_CONDITION" == preread ]]; then
+            options+=(--preread-browser-executable /opt/microsoft/msedge/msedge)
+          fi
+          python3 -B .github/scripts/probe_edge_full_journey.py run \
+            --source-sha "$DIAGNOSTIC_SOURCE_SHA" --condition "$DIAGNOSTIC_CONDITION" \
+            --output "artifacts/edge-full-$DIAGNOSTIC_CONDITION" "${options[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edge-full-${{ matrix.condition }}
+          path: artifacts/edge-full-${{ matrix.condition }}/
+          if-no-files-found: error
+          retention-days: 14
+
+  compare:
+    name: Check actual pair provenance and retain both outcomes
+    needs: condition
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: edge-full-*
+          path: artifacts
+      - name: Compare only after checking actual image, versions and post-run hashes
+        run: |
+          python3 -B .github/scripts/probe_edge_full_journey.py compare \
+            --baseline artifacts/edge-full-baseline/report.json \
+            --preread artifacts/edge-full-preread/report.json \
+            --output artifacts/pair.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edge-full-pair-comparison
+          path: artifacts/pair.json
+          if-no-files-found: error
+          retention-days: 14

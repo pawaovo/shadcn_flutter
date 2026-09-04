@@ -91,7 +91,9 @@ def run(args):
     output = args.artifacts.resolve()
     output.mkdir(parents=True, exist_ok=True)
     suites = ["framework", "browser"] if args.platform in BROWSERS else ["framework"]
-    if args.include_journey:
+    if getattr(args, "journey_only", False):
+        suites = ["journey"]
+    elif args.include_journey:
         suites.insert(0, "journey")
     if (output / "input-acceptance-summary.json").exists() or any((output / suite).exists() for suite in suites):
         raise FileExistsError(f"Refusing to reuse existing suite evidence; choose a fresh artifact directory: {output}")
@@ -258,8 +260,11 @@ def main():
     parser.add_argument("--platform", required=True,
                         choices=(*BROWSERS, "macos", "windows", "linux", "android", "ios"))
     parser.add_argument("--device", help="Explicit connected device/simulator ID for native runs")
-    parser.add_argument("--include-journey", action="store_true",
+    journey = parser.add_mutually_exclusive_group()
+    journey.add_argument("--include-journey", action="store_true",
                         help="Run the original complete Catalog journey before the added input suites")
+    journey.add_argument("--journey-only", action="store_true",
+                         help="Run only the original complete Catalog journey with the same owned cleanup")
     parser.add_argument("--artifacts", type=Path, required=True)
     args = parser.parse_args()
     if args.platform in ("android", "ios") and not args.device:

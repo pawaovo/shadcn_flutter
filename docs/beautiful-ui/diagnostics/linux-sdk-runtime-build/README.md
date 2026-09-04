@@ -3,7 +3,14 @@
 This directory builds the actual official GTK embedding with the reviewed
 [SDK accessibility patch](../linux-sdk-accessibility-patch/README.md).
 It does not replace the existing source-unit proof or claim that a compiled
-library has already passed Catalog/Orca acceptance.
+library alone has passed Catalog/Orca acceptance.
+
+The [79fbcdd1 runtime evidence](evidence/catalog-79fbcdd1-orca.md) records a
+subsequent **3/3 original Catalog/Orca machine-task pass** with the full engine,
+the separate native geometry repair and the corrected Thinking semantics.
+It includes actual mapped-library hashes and retains the earlier failed attempts.
+Its scope is the explicitly rebuilt Linux debug runtime, with human review and
+ordinary stock release acceptance kept separate.
 
 The plan pins Flutter `4cf24164269a5ebf0c16a028a00727d0e77bbb05` and its original
 DEPS. Bootstrap depot_tools uses that DEPS file's exact revision

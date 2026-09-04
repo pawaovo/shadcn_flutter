@@ -1,0 +1,422 @@
+{
+  "tested_source_sha": "b179fbf2679074ecddfd6d9fa00b318e20d641d7",
+  "workflow_definition_head_sha": "049892683ffc3da92ffc76c0ee9e4d4b57473bda",
+  "run_id": 33842863109,
+  "job_id": 100928531587,
+  "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33842863109",
+  "source_matches": [
+    {
+      "path": ".github/scripts/probe_real_at_windows.ps1",
+      "exists": true,
+      "sha256": "38e68f667119c25f69d8b10423d101fbfce796ed520760f539a97a91783e2996",
+      "matched_checkout_forms": [
+        "windows_crlf"
+      ]
+    },
+    {
+      "path": ".github/scripts/test_probe_real_at_windows.ps1",
+      "exists": true,
+      "sha256": "52a78c6cb2850115eee7d421b3022979a0657ef3e226ae4f979db1c673afe2e4",
+      "matched_checkout_forms": [
+        "windows_crlf"
+      ]
+    },
+    {
+      "path": ".github/scripts/windows_owned_process.py",
+      "exists": true,
+      "sha256": "96a5e1b2e7a9243dc868aefb793ef86e77913419c15aa82a4fb2d6b712d8f723",
+      "matched_checkout_forms": [
+        "windows_crlf"
+      ]
+    },
+    {
+      "path": ".github/workflows/beautiful_ai_ui_narrator_diagnostic.yml",
+      "exists": true,
+      "sha256": "a76717687173fc8ab74605069954a2b945291af1efd7296489f76676c00084a3",
+      "matched_checkout_forms": [
+        "windows_crlf"
+      ]
+    }
+  ],
+  "powershell": {
+    "edition": "Desktop",
+    "version": "5.1.26100.33296",
+    "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+  },
+  "pure_checks": {
+    "count": 30,
+    "exit_code": 0,
+    "elapsed_seconds": 1.9839999999999236
+  },
+  "probe": {
+    "schema_version": 1,
+    "platform": "windows",
+    "scope": "native_fixture_capability",
+    "status": "not_accepted",
+    "application_acceptance": "not_accepted",
+    "explanation": "A native WinForms fixture cannot accept the Flutter catalog or replace human review.",
+    "runtime": {
+      "os": "Microsoft Windows NT 10.0.26100.0",
+      "powershell": "5.1.26100.33296",
+      "image": "20260824.214.3",
+      "session_id": 2,
+      "user_interactive": true,
+      "narrator_path": "C:\\Windows\\System32\\Narrator.exe",
+      "narrator_version": "10.0.26100.33296 (WinBuild.160101.0800)"
+    },
+    "layers": {
+      "native_accessibility": {
+        "status": "observed",
+        "controls": [
+          {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane"
+          },
+          {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane"
+          }
+        ],
+        "source": "UI Automation"
+      },
+      "at_navigation": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "utterance_output": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "synthesized_audio": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "human_review": {
+        "status": "not_accepted",
+        "reason": "No human listened or completed a Flutter task"
+      }
+    },
+    "evidence": {
+      "input_desktop_available": true,
+      "audio_services": [
+        {
+          "Name": "AudioEndpointBuilder",
+          "Status": 4
+        },
+        {
+          "Name": "Audiosrv",
+          "Status": 4
+        }
+      ],
+      "audio_inventory": {
+        "flow": "eRender",
+        "state_mask": "DEVICE_STATEMASK_ALL (0xF)",
+        "error": null,
+        "endpoint_count": 0,
+        "endpoints": [],
+        "defaults": [
+          {
+            "role": "eConsole",
+            "id": null,
+            "error": "inventory.default[eConsole].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          },
+          {
+            "role": "eMultimedia",
+            "id": null,
+            "error": "inventory.default[eMultimedia].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          },
+          {
+            "role": "eCommunications",
+            "id": null,
+            "error": "inventory.default[eCommunications].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          }
+        ]
+      },
+      "audio_capture_policy": "Original eRender/eConsole shared loopback only; inventory does not choose, activate or create an endpoint.",
+      "command_trace": [
+        {
+          "phase": "ordinary Tab:before",
+          "utc_started": "2026-09-04T06:04:53.7084979Z",
+          "elapsed_ms_started": 4711,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 2,
+          "fixture_last_event": "2026-09-04T06:04:52.1985858Z elapsed_ms=139 ready",
+          "utc_finished": "2026-09-04T06:04:53.7348475Z",
+          "elapsed_ms_finished": 4733
+        },
+        {
+          "phase": "ordinary Tab:after_send",
+          "utc_started": "2026-09-04T06:04:53.7659121Z",
+          "elapsed_ms_started": 4763,
+          "keyboard_events_inserted": 2,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": false
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T06:04:53.8096621Z elapsed_ms=1751 focus=beta",
+          "utc_finished": "2026-09-04T06:04:53.9065313Z",
+          "elapsed_ms_finished": 4904
+        },
+        {
+          "phase": "ordinary Tab:response_observed",
+          "utc_started": "2026-09-04T06:04:53.9103329Z",
+          "elapsed_ms_started": 4907,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T06:04:53.8096621Z elapsed_ms=1751 focus=beta",
+          "utc_finished": "2026-09-04T06:04:53.9103329Z",
+          "elapsed_ms_finished": 4908
+        },
+        {
+          "phase": "ordinary Space:before",
+          "utc_started": "2026-09-04T06:04:53.9103329Z",
+          "elapsed_ms_started": 4908,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T06:04:53.8096621Z elapsed_ms=1751 focus=beta",
+          "utc_finished": "2026-09-04T06:04:53.9103329Z",
+          "elapsed_ms_finished": 4909
+        },
+        {
+          "phase": "ordinary Space:after_send",
+          "utc_started": "2026-09-04T06:04:53.9143791Z",
+          "elapsed_ms_started": 4911,
+          "keyboard_events_inserted": 2,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T06:04:53.9302236Z elapsed_ms=1870 checked=true",
+          "utc_finished": "2026-09-04T06:04:53.9342545Z",
+          "elapsed_ms_finished": 4931
+        },
+        {
+          "phase": "ordinary Space:response_observed",
+          "utc_started": "2026-09-04T06:04:53.9342545Z",
+          "elapsed_ms_started": 4932,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T06:04:53.9302236Z elapsed_ms=1870 checked=true",
+          "utc_finished": "2026-09-04T06:04:53.9342545Z",
+          "elapsed_ms_finished": 4933
+        }
+      ],
+      "input_attempts": [
+        {
+          "command": "ordinary Tab",
+          "expected_control": "Narrator capability alpha",
+          "status": "sent",
+          "attempt": {
+            "send_started": true,
+            "focus": {
+              "process_id": 5920,
+              "fixture_alive": true,
+              "fixture_foreground": true,
+              "has_keyboard_focus": true,
+              "control_name": "Narrator capability alpha"
+            }
+          },
+          "keyboard_events_inserted": 2
+        },
+        {
+          "command": "ordinary Space",
+          "expected_control": "Narrator capability beta",
+          "status": "sent",
+          "attempt": {
+            "send_started": true,
+            "focus": {
+              "process_id": 5920,
+              "fixture_alive": true,
+              "fixture_foreground": true,
+              "has_keyboard_focus": true,
+              "control_name": "Narrator capability beta"
+            }
+          },
+          "keyboard_events_inserted": 2
+        }
+      ],
+      "fixture_compilation": {
+        "executable_exists": true,
+        "exit_code": 0,
+        "executable_bytes": 22016,
+        "compiler": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe"
+      },
+      "fixture_session_id": 2,
+      "keyboard_events_inserted": 2,
+      "interactive_keyboard_response": "Tab focused beta and Space toggled the native checkbox",
+      "narrator_pid": 3900,
+      "narrator_session_id": 2,
+      "narrator_preparation": {
+        "status": "failed",
+        "expected_owner_pid": 3900,
+        "utc_started": "2026-09-04T06:04:54.1701978Z",
+        "deadline_elapsed_seconds": 13,
+        "minimize_requests": 0,
+        "observations": [],
+        "error": "No top-level window belonging to the owned Narrator PID was observed before the startup deadline",
+        "result": {
+          "minimize_started": false,
+          "before": null,
+          "after": null
+        },
+        "utc_finished": "2026-09-04T06:05:02.1505329Z"
+      },
+      "audio_com_calls": [
+        {
+          "stage": "inventory.CoCreateInstance(MMDeviceEnumerator)",
+          "utc": "2026-09-04T06:04:50.1832879Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.EnumAudioEndpoints(eRender,0xF)",
+          "utc": "2026-09-04T06:04:50.1853020Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.IMMDeviceCollection.GetCount",
+          "utc": "2026-09-04T06:04:50.1853020Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.default[eConsole].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T06:04:50.1853020Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        },
+        {
+          "stage": "inventory.default[eMultimedia].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T06:04:50.1870575Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        },
+        {
+          "stage": "inventory.default[eCommunications].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T06:04:50.1870575Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        }
+      ]
+    },
+    "errors": [
+      "No top-level window belonging to the owned Narrator PID was observed before the startup deadline"
+    ],
+    "elapsed_seconds": 13.307
+  },
+  "raw_directory": "/tmp/beautiful-narrator-b179fbf2-33842863109",
+  "limits": [
+    "The workflow definition preceded the tested checkout; exact checkout and all four source hashes independently match the requested b179fbf2 source.",
+    "No owned candidate matching the then-used ControlType.Window filter was observed; this does not prove that the process has no UIA panes/native HWNDs.",
+    "No minimize or Narrator command was sent after preparation failed. Ordinary guarded Tab/Space did execute.",
+    "All-state render endpoint count remains zero; no audio or app acceptance is granted."
+  ],
+  "artifacts": [
+    {
+      "file": "narrator-diagnostic-33842863109-1/powershell-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/powershell-version.stdout.log",
+      "bytes": 155,
+      "sha256": "b7e559fe85f86d5907329e739f3893fc1e69e377eac1becea12afe3a6b4c188c"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/command.json",
+      "bytes": 364,
+      "sha256": "b449c00b2b177f145fd040413504d2f879cec243658a821fc1df960a25306f87"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/compile-error.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/fixture-events.log",
+      "bytes": 224,
+      "sha256": "6b06614c3563fa97b667f58a74acc6f0c1b15fe3878180fa5e89a9b553fe1808"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/process-exit.json",
+      "bytes": 58,
+      "sha256": "f084c077de3dd290553b6d4c9bd7250e0b33d73e4393d94a3879531bac9cd6a9"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/process.log",
+      "bytes": 22740,
+      "sha256": "ff3e8a51852abe2c94dc45b6c10951e26196223029a22847adf7a15c7a2ee358"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/probe/report.json",
+      "bytes": 22738,
+      "sha256": "5c462966e07dedcf73637d7e4419565dd46e0d55e19123c4c51bb238c90ebdaa"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/provenance.json",
+      "bytes": 2253,
+      "sha256": "7dfc26c647059ad1384f351f48a545f59b32679064c61bca284080c394adfb09"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/tests/result.json",
+      "bytes": 351,
+      "sha256": "ae2c0196210bff8408383ddd2096f31ca01350c0f4adc6bad3477db4fa997b79"
+    },
+    {
+      "file": "narrator-diagnostic-33842863109-1/tests/stdout.log",
+      "bytes": 107,
+      "sha256": "a313a9c6a1adbaced6aecf90c1de9365c0e4e6bdaafcdbdc58f8c4d2fd7f528e"
+    }
+  ]
+}

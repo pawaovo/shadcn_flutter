@@ -26,7 +26,7 @@ class InputAcceptanceRunnerTests(unittest.TestCase):
         self.output = self.directory / "evidence"
         self.flutter = self.directory / "flutter"
 
-    def run_fixture(self, script, platform="linux"):
+    def run_fixture(self, script, platform="linux", journey_only=False):
         # A sleeping Python process stands in for the owned WebDriver. The
         # ready response only tests runner orchestration, never browser input.
         preamble = ("import sys,time\n"
@@ -34,7 +34,7 @@ class InputAcceptanceRunnerTests(unittest.TestCase):
         self.flutter.write_text(f"#!{sys.executable}\n" + preamble + script, encoding="utf-8")
         self.flutter.chmod(0o755)
         args = argparse.Namespace(platform=platform, device="fixture", include_journey=False,
-                                  artifacts=self.output)
+                                  journey_only=journey_only, artifacts=self.output)
         with patch.object(acceptance, "executable", return_value=str(self.flutter)), \
                 patch.object(acceptance.urllib.request, "urlopen",
                              side_effect=lambda *_a, **_k: io.BytesIO(b'{"value":{"ready":true}}')), \
@@ -51,6 +51,17 @@ class InputAcceptanceRunnerTests(unittest.TestCase):
             "(output/'browser-input.json').write_text('{\"status\":\"passed\"}')\n"
             f"raise SystemExit({browser_exit})\n"
         )
+
+    def test_journey_only_uses_original_full_target_once_with_owned_cleanup(self):
+        self.run_fixture("raise SystemExit(0)\n", platform="chrome", journey_only=True)
+        summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+        self.assertEqual([(s["suite"], s["status"], s["cleanup_status"]) for s in summary["suites"]],
+                         [("journey", "passed", "verified")])
+        command = summary["suites"][0]["command"]
+        self.assertIn("--target=integration_test/catalog_journey_test.dart", command)
+        self.assertIn("--driver=integration_test/driver/catalog_trusted_journey_driver.dart", command)
+        self.assertFalse((self.output / "framework").exists())
+        self.assertFalse((self.output / "browser").exists())
 
     def test_failed_framework_still_runs_independent_browser_and_fails_overall(self):
         with self.assertRaisesRegex(RuntimeError, "framework input suite failed with 4"):

@@ -32,7 +32,8 @@ def proc_row(pid, details=False):
     stat = (directory / "stat").read_text()
     fields = stat[stat.rindex(")") + 2:].split()
     row = {"pid": pid, "state": fields[0], "ppid": int(fields[1]),
-           "pgrp": int(fields[2]), "utime_ticks": int(fields[11]),
+           "pgrp": int(fields[2]), "minflt": int(fields[7]), "majflt": int(fields[9]),
+           "utime_ticks": int(fields[11]),
            "stime_ticks": int(fields[12]), "start_ticks": int(fields[19]),
            "rss_pages": int(fields[21])}
     if not details:
@@ -48,6 +49,11 @@ def proc_row(pid, details=False):
             row[name] = (directory / name).read_text()[:4096].strip()
         except OSError as error:
             row[name] = {"unavailable": str(error)}
+    try:
+        row["io"] = {name: int(value) for name, value in (
+            line.split(":", 1) for line in (directory / "io").read_text().splitlines())}
+    except (OSError, ValueError) as error:
+        row["io"] = {"unavailable": str(error)}
     return row
 
 

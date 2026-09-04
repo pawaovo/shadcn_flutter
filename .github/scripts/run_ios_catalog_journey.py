@@ -69,6 +69,12 @@ def unified_service_uri(line, pid, executable, launched_at):
 
 def live_group_members(group_id):
     try:
+        os.killpg(group_id, 0)
+    except ProcessLookupError:
+        return []
+    except PermissionError:
+        pass  # The group may still contain live members; inspect it below.
+    try:
         snapshot = subprocess.check_output(
             ["/bin/ps", "-axo", "pid=,pgid=,stat="], text=True, timeout=1,
         )

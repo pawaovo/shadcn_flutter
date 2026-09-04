@@ -1,0 +1,1050 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-09-04T07:05:37.903098+00:00",
+  "source_sha": "79fbcdd14fb7e1022def265df30c880cab9b4c21",
+  "scope": "Original three-task Catalog/Orca machine evidence in an explicit owned Linux arm64 debug SDK plus patched native dependency runtime",
+  "run_instrumentation": {
+    "inspector_trace": false,
+    "debugger": false,
+    "snapshot_timeout_seconds": 8,
+    "probe_deadline_seconds": 240,
+    "outer_timeout_seconds": 270
+  },
+  "process_exit_code": 0,
+  "status": "three_task_machine_evidence_observed",
+  "application_acceptance": "not_accepted",
+  "human_review": {
+    "status": "not_accepted",
+    "reason": "No human listened to or accepted these tasks"
+  },
+  "all_components_accepted": false,
+  "all_platform_release_accepted": false,
+  "runtime": {
+    "platform": "Linux-7.0.14-orbstack-00380-ga7e0a2dc9535-aarch64-with-glibc2.39",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "runner_image": null,
+    "display": ":99",
+    "orca": "46.1",
+    "speech-dispatcher": "speech-dispatcher 0.12.0-rc2\nCopyright (C) 2002-2012 Brailcom, o.p.s.\nThis is free software; you can redistribute it and/or modify it\nunder the terms of the GNU General Public License as published by\nthe Free Software Foundation; either version 2, or (at your option)\nany later version. Please see COPYING for more details.",
+    "pulseaudio": "pulseaudio 16.1",
+    "espeak-ng": "eSpeak NG text-to-speech: 1.51  Data at: /usr/lib/aarch64-linux-gnu/espeak-ng-data"
+  },
+  "loaded_engine": {
+    "pid": 36122,
+    "path": "/work/catalog-79fbcdd1/packages/beautiful_ai_ui_catalog/build/linux/arm64/debug/bundle/lib/libflutter_linux_gtk.so",
+    "sha256": "763654ee12d84c51fb4c6a9937d18aa95b691f576df861ee6c1af51eaa14acab",
+    "source": "actual /proc/PID/maps and mapped-file hash"
+  },
+  "native_dependency": {
+    "source_pin": "46c8de80022d28eef2da58f1054b5bff745ed7e0",
+    "patch_sha256": "2315f3fbb206a85af9baefedca8030751e26f01c629e9d20d003bfcf3941da7d",
+    "bridge_sha256": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74",
+    "preflight_actual_mapped_libraries": {
+      "pid": 36097,
+      "libraries": {
+        "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "49005ef8e9db9a45691ff875e6ca18dd8723c7ec5c1a863a276a1186dbf22774",
+        "/usr/lib/aarch64-linux-gnu/libX11.so.6.4.0": "8e4b164809fe69ddfa317340c23cddc7b66963413ba2b224bec5da79496c0c12",
+        "/usr/lib/aarch64-linux-gnu/libXau.so.6.0.0": "6fff1a9d4b5bc4d91df752b12600f8aedcd8ac33ea01a48295326675243d68c0",
+        "/usr/lib/aarch64-linux-gnu/libXdmcp.so.6.0.0": "84b6623297efd8eb43f98af678acbb68ca31de7617dab042a1dcc7c6feb8a2ea",
+        "/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0": "9201e1e51d6dccd7934d4e74883e9c5fa8628c332ae79fbe163e40d73825bb6e",
+        "/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0": "be081f920c99e38c2cfa0075c322219892fdce2a1c2f185777136a78662427f5",
+        "/usr/lib/aarch64-linux-gnu/libatk-1.0.so.0.25209.1": "d33bd498c2051470bc563a911471438868d3a5c4b0bbb65e9645b3a1647e71a3",
+        "/usr/lib/aarch64-linux-gnu/libatspi.so.0.0.1": "132198bf622a466ce55bd091145e5175a6542a803fd7635e5c7784bd084d54df",
+        "/usr/lib/aarch64-linux-gnu/libbsd.so.0.12.1": "6c5348ee0e1777f13e148b7492fa311b6f65adb0dc21a001a67ebc18948e6b3e",
+        "/usr/lib/aarch64-linux-gnu/libc.so.6": "6e3cc56b98887cb3cc2a9fe78b6dd4610184aa27bd05d592cb287db93e82d494",
+        "/usr/lib/aarch64-linux-gnu/libcap.so.2.66": "1b6d3932cf8b60b2f27f80cdd26d9a296b8a9608fc02b4eccb8fb2fdab73fea2",
+        "/usr/lib/aarch64-linux-gnu/libdbus-1.so.3.32.4": "9b8d0d8b10bdffc68f6699b03e7be99d4dc40552aca189be43b55c5f84753241",
+        "/usr/lib/aarch64-linux-gnu/libffi.so.8.1.4": "9dd873a938c4d7df76912d01f6a28aa4aa73d583bd20485a0dbfe5aa9673a191",
+        "/usr/lib/aarch64-linux-gnu/libgcrypt.so.20.4.3": "fab6cc79218fb1af1327af5bb25d41d165b7a2185cc3852c8682805816182ed4",
+        "/usr/lib/aarch64-linux-gnu/libglib-2.0.so.0.8000.0": "83bd509782a469b00174d557f9145c4e74edbff91b7ce47dcb0be4f100f10877",
+        "/usr/lib/aarch64-linux-gnu/libgobject-2.0.so.0.8000.0": "c7d244109cd606d974bb4b2cd0a4dc5814ac4c37e4ac2f8a97b69783d10df7d2",
+        "/usr/lib/aarch64-linux-gnu/libgpg-error.so.0.34.0": "ff2dccba4993ef97775b70c1ed1144f70dfe8581ee48c1eb25c76878c6cdfdf7",
+        "/usr/lib/aarch64-linux-gnu/liblz4.so.1.9.4": "d1482a2f74152881d8b83708fedae7bca039f5608024f1178dc21a17df9887a7",
+        "/usr/lib/aarch64-linux-gnu/liblzma.so.5.4.5": "47ea0f43683ef829cda43bfe1862c1b06f085fbd813bb58d2d142477f5380139",
+        "/usr/lib/aarch64-linux-gnu/libm.so.6": "24be585ff27080ba6301d8b3e1c92a54a3832829a9efde744cad4b876a73681a",
+        "/usr/lib/aarch64-linux-gnu/libmd.so.0.1.0": "30d117046ce9405745e0d0d4722cff121f532913180bbb9425b38d076319ac08",
+        "/usr/lib/aarch64-linux-gnu/libpcre2-8.so.0.11.2": "aa4e91ff910dbb8e40472ed4fcaaeebfef19ad13fe925d9ed8e22e87d45ce13b",
+        "/usr/lib/aarch64-linux-gnu/libsystemd.so.0.38.0": "f0574d5aa73fb8ef26d159d909751c1cf4555ce8679ac5c1ebac76bbdddaec7f",
+        "/usr/lib/aarch64-linux-gnu/libxcb.so.1.1.0": "cc570b1aff9e2ffe32c1add5aa23cb65b041a3615810566bb32efcc0c3f83f28",
+        "/usr/lib/aarch64-linux-gnu/libzstd.so.1.5.5": "fe726238b170b83aa83bf1f8a79109b8b61b9eb45234304511d093bbe5f5fb20",
+        "/work/atspi-geometry/runtime-patched-canonical/libatk-bridge-2.0.so.0.0.0": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74"
+      },
+      "source": "actual /proc/PID/maps and hashes of all selected bridge dependencies"
+    },
+    "catalog_actual_mapped_libraries": {
+      "pid": 36122,
+      "libraries": {
+        "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "49005ef8e9db9a45691ff875e6ca18dd8723c7ec5c1a863a276a1186dbf22774",
+        "/usr/lib/aarch64-linux-gnu/libX11.so.6.4.0": "8e4b164809fe69ddfa317340c23cddc7b66963413ba2b224bec5da79496c0c12",
+        "/usr/lib/aarch64-linux-gnu/libXau.so.6.0.0": "6fff1a9d4b5bc4d91df752b12600f8aedcd8ac33ea01a48295326675243d68c0",
+        "/usr/lib/aarch64-linux-gnu/libXdmcp.so.6.0.0": "84b6623297efd8eb43f98af678acbb68ca31de7617dab042a1dcc7c6feb8a2ea",
+        "/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0": "9201e1e51d6dccd7934d4e74883e9c5fa8628c332ae79fbe163e40d73825bb6e",
+        "/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0": "be081f920c99e38c2cfa0075c322219892fdce2a1c2f185777136a78662427f5",
+        "/usr/lib/aarch64-linux-gnu/libatk-1.0.so.0.25209.1": "d33bd498c2051470bc563a911471438868d3a5c4b0bbb65e9645b3a1647e71a3",
+        "/usr/lib/aarch64-linux-gnu/libatspi.so.0.0.1": "132198bf622a466ce55bd091145e5175a6542a803fd7635e5c7784bd084d54df",
+        "/usr/lib/aarch64-linux-gnu/libbsd.so.0.12.1": "6c5348ee0e1777f13e148b7492fa311b6f65adb0dc21a001a67ebc18948e6b3e",
+        "/usr/lib/aarch64-linux-gnu/libc.so.6": "6e3cc56b98887cb3cc2a9fe78b6dd4610184aa27bd05d592cb287db93e82d494",
+        "/usr/lib/aarch64-linux-gnu/libcap.so.2.66": "1b6d3932cf8b60b2f27f80cdd26d9a296b8a9608fc02b4eccb8fb2fdab73fea2",
+        "/usr/lib/aarch64-linux-gnu/libdbus-1.so.3.32.4": "9b8d0d8b10bdffc68f6699b03e7be99d4dc40552aca189be43b55c5f84753241",
+        "/usr/lib/aarch64-linux-gnu/libffi.so.8.1.4": "9dd873a938c4d7df76912d01f6a28aa4aa73d583bd20485a0dbfe5aa9673a191",
+        "/usr/lib/aarch64-linux-gnu/libgcrypt.so.20.4.3": "fab6cc79218fb1af1327af5bb25d41d165b7a2185cc3852c8682805816182ed4",
+        "/usr/lib/aarch64-linux-gnu/libglib-2.0.so.0.8000.0": "83bd509782a469b00174d557f9145c4e74edbff91b7ce47dcb0be4f100f10877",
+        "/usr/lib/aarch64-linux-gnu/libgobject-2.0.so.0.8000.0": "c7d244109cd606d974bb4b2cd0a4dc5814ac4c37e4ac2f8a97b69783d10df7d2",
+        "/usr/lib/aarch64-linux-gnu/libgpg-error.so.0.34.0": "ff2dccba4993ef97775b70c1ed1144f70dfe8581ee48c1eb25c76878c6cdfdf7",
+        "/usr/lib/aarch64-linux-gnu/liblz4.so.1.9.4": "d1482a2f74152881d8b83708fedae7bca039f5608024f1178dc21a17df9887a7",
+        "/usr/lib/aarch64-linux-gnu/liblzma.so.5.4.5": "47ea0f43683ef829cda43bfe1862c1b06f085fbd813bb58d2d142477f5380139",
+        "/usr/lib/aarch64-linux-gnu/libm.so.6": "24be585ff27080ba6301d8b3e1c92a54a3832829a9efde744cad4b876a73681a",
+        "/usr/lib/aarch64-linux-gnu/libmd.so.0.1.0": "30d117046ce9405745e0d0d4722cff121f532913180bbb9425b38d076319ac08",
+        "/usr/lib/aarch64-linux-gnu/libpcre2-8.so.0.11.2": "aa4e91ff910dbb8e40472ed4fcaaeebfef19ad13fe925d9ed8e22e87d45ce13b",
+        "/usr/lib/aarch64-linux-gnu/libsystemd.so.0.38.0": "f0574d5aa73fb8ef26d159d909751c1cf4555ce8679ac5c1ebac76bbdddaec7f",
+        "/usr/lib/aarch64-linux-gnu/libxcb.so.1.1.0": "cc570b1aff9e2ffe32c1add5aa23cb65b041a3615810566bb32efcc0c3f83f28",
+        "/usr/lib/aarch64-linux-gnu/libzstd.so.1.5.5": "fe726238b170b83aa83bf1f8a79109b8b61b9eb45234304511d093bbe5f5fb20",
+        "/work/atspi-geometry/runtime-patched-canonical/libatk-bridge-2.0.so.0.0.0": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74"
+      },
+      "source": "actual /proc/PID/maps and hashes of all selected bridge dependencies"
+    }
+  },
+  "tasks": [
+    {
+      "id": "theme_keyboard_toggle",
+      "status": "machine_evidence_observed",
+      "layers": {
+        "native_accessibility": "observed",
+        "keyboard_action": "observed",
+        "orca_command": "observed",
+        "utterance_output": "observed",
+        "synthesized_audio": "observed",
+        "application_result": "observed"
+      },
+      "commands": [
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505310376112631,
+          "end_epoch_ns": 1788505310391326035,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Theme: system",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "space",
+          "start_epoch_ns": 1788505312377564172,
+          "end_epoch_ns": 1788505312392128025
+        },
+        {
+          "kind": "key",
+          "key": "KP_Enter",
+          "start_epoch_ns": 1788505315216581553,
+          "end_epoch_ns": 1788505315233834942
+        }
+      ],
+      "errors": [],
+      "reader_checkpoints": [
+        {
+          "label": "theme-light",
+          "expected_text": "Theme: light",
+          "utterances": [
+            "07:01:55.265443 - SPEECH OUTPUT: 'Theme: light push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+          ],
+          "orca_handler_observed": true,
+          "expected_utterance_observed": true,
+          "audio": {
+            "frames": 39948,
+            "rms": 4116.559551668135,
+            "sample_rate": 16000,
+            "channels": 1,
+            "sample_format": "s16le"
+          },
+          "audio_quiet_before": {
+            "pcm_byte_offset": 64252,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 2.0096175619983114
+          },
+          "audio_quiet_after": {
+            "pcm_byte_offset": 143836,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 2.310356091998983
+          },
+          "audio_client_names": [
+            "speech-dispatcher-espeak-ng"
+          ],
+          "application_state_unchanged_by_reader_command": true
+        }
+      ]
+    },
+    {
+      "id": "thinking_disclosure",
+      "status": "machine_evidence_observed",
+      "layers": {
+        "native_accessibility": "observed",
+        "keyboard_action": "observed",
+        "orca_command": "observed",
+        "utterance_output": "observed",
+        "synthesized_audio": "observed",
+        "application_result": "observed"
+      },
+      "commands": [
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505319074485064,
+          "end_epoch_ns": 1788505319092987176,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Motion: system",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505320486718203,
+          "end_epoch_ns": 1788505320503949091,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Hide steps thinking details",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "space",
+          "start_epoch_ns": 1788505322385399174,
+          "end_epoch_ns": 1788505322403583615
+        },
+        {
+          "kind": "key",
+          "key": "KP_Enter",
+          "start_epoch_ns": 1788505327122251182,
+          "end_epoch_ns": 1788505327170333008
+        },
+        {
+          "kind": "key",
+          "key": "space",
+          "start_epoch_ns": 1788505332360790134,
+          "end_epoch_ns": 1788505332378635946
+        },
+        {
+          "kind": "key",
+          "key": "KP_Enter",
+          "start_epoch_ns": 1788505337358680370,
+          "end_epoch_ns": 1788505337378031660
+        }
+      ],
+      "errors": [],
+      "reader_checkpoints": [
+        {
+          "label": "disclosure-collapsed",
+          "expected_text": "Show steps thinking details",
+          "utterances": [
+            "07:02:07.294259 - SPEECH OUTPUT: 'Show steps thinking details collapsed push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+          ],
+          "orca_handler_observed": true,
+          "expected_utterance_observed": true,
+          "audio": {
+            "frames": 68118,
+            "rms": 4260.395998901566,
+            "sample_rate": 16000,
+            "channels": 1,
+            "sample_format": "s16le"
+          },
+          "audio_quiet_before": {
+            "pcm_byte_offset": 112486,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 3.5178998929914087
+          },
+          "audio_quiet_after": {
+            "pcm_byte_offset": 248644,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 4.010883642011322
+          },
+          "audio_client_names": [
+            "speech-dispatcher-espeak-ng"
+          ],
+          "application_state_unchanged_by_reader_command": true
+        },
+        {
+          "label": "disclosure-restored",
+          "expected_text": "Hide steps thinking details",
+          "utterances": [
+            "07:02:17.423439 - SPEECH OUTPUT: 'Hide steps thinking details expanded push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+          ],
+          "orca_handler_observed": true,
+          "expected_utterance_observed": true,
+          "audio": {
+            "frames": 67016,
+            "rms": 4585.591695344864,
+            "sample_rate": 16000,
+            "channels": 1,
+            "sample_format": "s16le"
+          },
+          "audio_quiet_before": {
+            "pcm_byte_offset": 124370,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 3.888532112003304
+          },
+          "audio_quiet_after": {
+            "pcm_byte_offset": 258402,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 3.989190821972443
+          },
+          "audio_client_names": [
+            "speech-dispatcher-espeak-ng"
+          ],
+          "application_state_unchanged_by_reader_command": true
+        }
+      ]
+    },
+    {
+      "id": "search_query_and_selection",
+      "status": "machine_evidence_observed",
+      "layers": {
+        "native_accessibility": "observed",
+        "keyboard_action": "observed",
+        "orca_command": "observed",
+        "utterance_output": "observed",
+        "synthesized_audio": "observed",
+        "application_result": "observed"
+      },
+      "commands": [
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505343571355709,
+          "end_epoch_ns": 1788505343593951583,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Hide reasoning thinking details",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505346019005981,
+          "end_epoch_ns": 1788505346038618649,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Hide search thinking details",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505347693349112,
+          "end_epoch_ns": 1788505347711999809,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Hide coding thinking details",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505349614078865,
+          "end_epoch_ns": 1788505349657995054,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Reading flavor briefs",
+              "role": "link",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505351362908078,
+          "end_epoch_ns": 1788505351381005060,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Reading flavor briefs",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505352592932835,
+          "end_epoch_ns": 1788505352658510594,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Scanning supplier lists",
+              "role": "link",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505353976138851,
+          "end_epoch_ns": 1788505353993010151,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Scanning supplier lists",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505355984785776,
+          "end_epoch_ns": 1788505356002711256,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Comparing tasting notes, 6 flavors",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505358181389948,
+          "end_epoch_ns": 1788505358198001537,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505360468189529,
+          "end_epoch_ns": 1788505360485072662,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Comparing tasting notes, 6 flavors",
+              "role": "link",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505362708297552,
+          "end_epoch_ns": 1788505362750924724,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505364364914330,
+          "end_epoch_ns": 1788505364381312249,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Alternatives",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505366602021480,
+          "end_epoch_ns": 1788505366619987586,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Accept",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505369786217879,
+          "end_epoch_ns": 1788505369800988152,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Search flavors",
+              "role": "text",
+              "text": ""
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "ctrl+a",
+          "start_epoch_ns": 1788505372207417353,
+          "end_epoch_ns": 1788505372266210441
+        },
+        {
+          "kind": "typed_text",
+          "text": "cone",
+          "start_epoch_ns": 1788505372267128786,
+          "end_epoch_ns": 1788505372493426943
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505375873801112,
+          "end_epoch_ns": 1788505375893511781,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Clear search",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505379658975730,
+          "end_epoch_ns": 1788505379677210755,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "Tab",
+          "start_epoch_ns": 1788505384101240204,
+          "end_epoch_ns": 1788505384121714050,
+          "focused_before_next_tab": [
+            {
+              "name": "",
+              "role": "panel",
+              "text": null
+            },
+            {
+              "name": "Find waffle cone suppliers",
+              "role": "push button",
+              "text": null
+            }
+          ]
+        },
+        {
+          "kind": "key",
+          "key": "KP_Enter",
+          "start_epoch_ns": 1788505388259862077,
+          "end_epoch_ns": 1788505388280168713
+        },
+        {
+          "kind": "key",
+          "key": "Return",
+          "start_epoch_ns": 1788505393509689674,
+          "end_epoch_ns": 1788505393525438710
+        },
+        {
+          "kind": "key",
+          "key": "KP_Enter",
+          "start_epoch_ns": 1788505402886784116,
+          "end_epoch_ns": 1788505402946343423
+        }
+      ],
+      "errors": [],
+      "reader_checkpoints": [
+        {
+          "label": "search-result",
+          "expected_text": "Find waffle cone suppliers",
+          "utterances": [
+            "07:03:08.496414 - SPEECH OUTPUT: 'Find waffle cone suppliers push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+          ],
+          "orca_handler_observed": true,
+          "expected_utterance_observed": true,
+          "audio": {
+            "frames": 65532,
+            "rms": 4506.937692095887,
+            "sample_rate": 16000,
+            "channels": 1,
+            "sample_format": "s16le"
+          },
+          "audio_quiet_before": {
+            "pcm_byte_offset": 19394,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 0.6335898880206514
+          },
+          "audio_quiet_after": {
+            "pcm_byte_offset": 148976,
+            "tail": {
+              "frames": 8039,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 3.7404091260104906
+          },
+          "audio_client_names": [
+            "speech-dispatcher-espeak-ng"
+          ],
+          "application_state_unchanged_by_reader_command": true
+        },
+        {
+          "label": "search-committed",
+          "expected_text": "Find waffle cone suppliers",
+          "utterances": [
+            "07:03:23.161389 - SPEECH OUTPUT: 'Search flavors text.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}",
+            "07:03:23.162396 - SPEECH OUTPUT: 'Find waffle cone suppliers selected.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+          ],
+          "orca_handler_observed": true,
+          "expected_utterance_observed": true,
+          "audio": {
+            "frames": 95551,
+            "rms": 4231.719877343283,
+            "sample_rate": 16000,
+            "channels": 1,
+            "sample_format": "s16le"
+          },
+          "audio_quiet_before": {
+            "pcm_byte_offset": 250466,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 7.827573372982442
+          },
+          "audio_quiet_after": {
+            "pcm_byte_offset": 440164,
+            "tail": {
+              "frames": 8000,
+              "rms": 0.0,
+              "sample_rate": 16000,
+              "channels": 1,
+              "sample_format": "s16le"
+            },
+            "speech_text_quiet_seconds": 5.55624586599879
+          },
+          "audio_client_names": [
+            "speech-dispatcher-espeak-ng"
+          ],
+          "application_state_unchanged_by_reader_command": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "elapsed_seconds": 112.819,
+  "cleanup": "verified",
+  "orca_debug_transport": {
+    "kind": "owned_raw_pty",
+    "producer_debug_file": "/dev/stdout",
+    "captured_log": "capability-preflight/orca-debug.log",
+    "content_policy": "Original diagnostic bytes; no injected utterances or handler records",
+    "bytes_captured": 1257157,
+    "eof_verified": true,
+    "reader_stopped": true,
+    "capture_error": null
+  },
+  "source_unchanged_since_build": true,
+  "bundle_unchanged_during_tasks": true,
+  "runtime_binding_unchanged": true,
+  "post_run_process_check": "docker top confirmed only the original owned sleep infinity remains",
+  "raw_artifact_directory": "/tmp/beautiful-linux-runtime-build-20260904/work/validation/catalog-79fbcdd1-orca",
+  "artifact_manifest_verified_file_count": 56,
+  "core_records": {
+    "report": {
+      "path": "/tmp/beautiful-linux-runtime-build-20260904/work/validation/catalog-79fbcdd1-orca/catalog-report.json",
+      "sha256": "36f2c6a134243e422b4fdf2d2cee7ae05fb6924aa9659c68c4024cb8d3aca50e",
+      "bytes": 40021
+    },
+    "artifact_manifest": {
+      "path": "/tmp/beautiful-linux-runtime-build-20260904/work/validation/catalog-79fbcdd1-orca/artifact-manifest.json",
+      "sha256": "5ae057ef434d53b9e70de31f567503822b23871104230828fbfe1af0c7b3203e",
+      "bytes": 8634
+    },
+    "build_provenance": {
+      "path": "/tmp/beautiful-linux-runtime-build-20260904/work/validation/catalog-79fbcdd1-build/build-provenance.json",
+      "sha256": "357a670e52bc8ec31bca1eadb1b58bda89bff74277d50b7c9940fd72079044b8",
+      "bytes": 117291
+    },
+    "runtime_manifest": {
+      "path": "/tmp/beautiful-linux-runtime-build-20260904/work/validation/sdk-runtime-79fbcdd1.json",
+      "sha256": "bd6d15529209113ab276e074239a6e9e472c8c90e4f444e51091bd129bbd5183",
+      "bytes": 42337
+    }
+  },
+  "artifacts": {
+    "build-provenance.json": {
+      "sha256": "357a670e52bc8ec31bca1eadb1b58bda89bff74277d50b7c9940fd72079044b8",
+      "bytes": 117291
+    },
+    "capability-preflight/audio-capture.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "capability-preflight/fixture-events.log": {
+      "sha256": "74475f3243aecb7baaf4db08d8b74ba3e6c643ae955b8f16eacf12ce7882bffb",
+      "bytes": 42
+    },
+    "capability-preflight/fixture.log": {
+      "sha256": "d9e2d42e8f1fc8298c1d5b069b243940696f4bfcc669cfc0c7a004fefef6de85",
+      "bytes": 228
+    },
+    "capability-preflight/orca-debug.log": {
+      "sha256": "e7937f250e0193b83c20e8186911b55e13a2288046a41bbd14d87ef1dff9cd76",
+      "bytes": 1257157
+    },
+    "capability-preflight/orca-task.pcm": {
+      "sha256": "27f2f08e5fb2a8b8a1a0bf5aeb48f7771a6129922a3648e36c8f01b481a9b491",
+      "bytes": 100294
+    },
+    "capability-preflight/orca-task.wav": {
+      "sha256": "df2d98a4f90b2f6b52f78bab111061ef1164ae1b36c38330cac75232d8e10db7",
+      "bytes": 100338
+    },
+    "capability-preflight/orca.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "capability-preflight/preflight-report.json": {
+      "sha256": "510d7e9678dff91739f9c8374e15485309f5d1bfa9cd9734254654216e47bb88",
+      "bytes": 1210484
+    },
+    "capability-preflight/pulseaudio.log": {
+      "sha256": "2f0104a73d9a4e48bdc117efb1cd59cc27a325bab0613f0d5fd8de284d156f69",
+      "bytes": 19398
+    },
+    "capability-preflight/speech-dispatcher.log": {
+      "sha256": "c84c3cdf36d8e3d893ce19a79768640659615c79c914c3f6cd00964d53d18ede",
+      "bytes": 1232808
+    },
+    "capability-preflight/speechd-logs/espeak-ng.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "capability-preflight/speechd-logs/speech-dispatcher.log": {
+      "sha256": "cd975d5dc6e06b722c53d881e36945ad8315f81ab0f5eae67337235fa4a30bf2",
+      "bytes": 1411366
+    },
+    "capability-preflight/task-utterances.log": {
+      "sha256": "7e0b2628e7857d15320f68148afb433620e91e7e242e4a229cc955c50ad36417",
+      "bytes": 665
+    },
+    "catalog-initial-native-tree.json": {
+      "sha256": "c3f737763a027a781c086cfef16a54936c93fbd1a1a8577bfc0842721186082f",
+      "bytes": 207837
+    },
+    "catalog-report.json": {
+      "sha256": "36f2c6a134243e422b4fdf2d2cee7ae05fb6924aa9659c68c4024cb8d3aca50e",
+      "bytes": 40021
+    },
+    "catalog.log": {
+      "sha256": "76e9e8330eaa1f36a3c2d4316ce0ca09aebeb6ce447f62edb23fbb48a036a392",
+      "bytes": 488
+    },
+    "disclosure-before-native-tree.json": {
+      "sha256": "c2b878dcdbee797250f82240c857ecd61acbe36551fdd37fb351a13d92391981",
+      "bytes": 207833
+    },
+    "disclosure-collapsed-after-reader-command-native-tree.json": {
+      "sha256": "3ebe3f3f27187c20ba4a0bfafc60b6455f6d61eb18acf62dc3c44cdfbd2e00e9",
+      "bytes": 206643
+    },
+    "disclosure-collapsed-audio.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "disclosure-collapsed-native-tree.json": {
+      "sha256": "3ebe3f3f27187c20ba4a0bfafc60b6455f6d61eb18acf62dc3c44cdfbd2e00e9",
+      "bytes": 206643
+    },
+    "disclosure-collapsed-orca-command.log": {
+      "sha256": "c6a03e849495db9d9322014f0befb146ad20f324f7f0bd9a2cad67b9a9d31368",
+      "bytes": 8570
+    },
+    "disclosure-collapsed-utterances.log": {
+      "sha256": "162bbc595d2f081cce442f3c07aaf230c01bc04f8fc5e1bd71f52cdc3e51bce4",
+      "bytes": 199
+    },
+    "disclosure-collapsed.pcm": {
+      "sha256": "21779f1d144109611c19562ccd6677712a6392b1b2d168edde51cb25f273e561",
+      "bytes": 248722
+    },
+    "disclosure-collapsed.wav": {
+      "sha256": "8416abdcd133f537c7790cdef1bf1de6932d1a099b42d10e4fea8808bf3e6833",
+      "bytes": 136280
+    },
+    "disclosure-restored-after-reader-command-native-tree.json": {
+      "sha256": "6a63097c368a76e9ad7b2e14f5e28643a948c0131db87e4e34a8464d189b5619",
+      "bytes": 207833
+    },
+    "disclosure-restored-audio.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "disclosure-restored-native-tree.json": {
+      "sha256": "6a63097c368a76e9ad7b2e14f5e28643a948c0131db87e4e34a8464d189b5619",
+      "bytes": 207833
+    },
+    "disclosure-restored-orca-command.log": {
+      "sha256": "dc0448909651398acd188fe8713a76faed94b05dc33f837e873078225784180b",
+      "bytes": 8564
+    },
+    "disclosure-restored-utterances.log": {
+      "sha256": "244c7f90c915ed3d0d6a2222d7180f619ebd2796029b97c77cf986a60874b212",
+      "bytes": 198
+    },
+    "disclosure-restored.pcm": {
+      "sha256": "e815eaa19e7754c63313204775db95c0274a6eb2a0fe67fb095dc89f3ee897b9",
+      "bytes": 258402
+    },
+    "disclosure-restored.wav": {
+      "sha256": "598d986dee755c5268a96425397e0f188579ecfb10d8da655c7d0a85ac9e9a2c",
+      "bytes": 134076
+    },
+    "last-native-tree.json": {
+      "sha256": "51d7ca0288b5284a0cc8d094f9c04e0a1a25d2c98adc412cf915a15ba77c532a",
+      "bytes": 206531
+    },
+    "search-before-native-tree.json": {
+      "sha256": "24d626ccee1590c6dfa3a5a5141931797f63db4c1a87faa73449fb92a607a27c",
+      "bytes": 207833
+    },
+    "search-committed-after-reader-command-native-tree.json": {
+      "sha256": "51d7ca0288b5284a0cc8d094f9c04e0a1a25d2c98adc412cf915a15ba77c532a",
+      "bytes": 206531
+    },
+    "search-committed-audio.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "search-committed-native-tree.json": {
+      "sha256": "51d7ca0288b5284a0cc8d094f9c04e0a1a25d2c98adc412cf915a15ba77c532a",
+      "bytes": 206531
+    },
+    "search-committed-orca-command.log": {
+      "sha256": "2951437443efd0baab8780e9597a48cc9af93f369c412199d7de9be46339107f",
+      "bytes": 10090
+    },
+    "search-committed-utterances.log": {
+      "sha256": "2cd01a78a1ce62def6035bdc43ce5ad3083411dde06508edebf59f968e1f967c",
+      "bytes": 354
+    },
+    "search-committed.pcm": {
+      "sha256": "ac3d2edd1e98b6040fad85b34b5961a1ff217a230ab711e2e176c03a530b7458",
+      "bytes": 441568
+    },
+    "search-committed.wav": {
+      "sha256": "ce1e8e898e25a56cd895b2b740f034ab4bdc09b21317a6b6f4119a5d2e1dc44b",
+      "bytes": 191146
+    },
+    "search-filtered-native-tree.json": {
+      "sha256": "d6476230ddbde1f1763ed7a2976f45c31a896ff54c7cc6409bf85fa6bc6b412b",
+      "bytes": 206510
+    },
+    "search-result-after-reader-command-native-tree.json": {
+      "sha256": "dbbbaaeb26133f09d169302f331c887d77b10932edb2d45ca6dedc904a3d6b10",
+      "bytes": 206509
+    },
+    "search-result-audio.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "search-result-orca-command.log": {
+      "sha256": "a90f677bbb5901cd92bbbb330761a6a4234ea9345e76ca19285f0e4bb6441407",
+      "bytes": 8297
+    },
+    "search-result-utterances.log": {
+      "sha256": "f12cc0d2e080a9242cde5f142032557b14c00c718a948c599d6681cd1e86be8f",
+      "bytes": 188
+    },
+    "search-result.pcm": {
+      "sha256": "e5e4f1577a64e23eaf8ae5644827f4de9565d153b2be1f37d92ff9614dd37cc4",
+      "bytes": 150458
+    },
+    "search-result.wav": {
+      "sha256": "f749a4603bb1090403c4596aa55640f4f6d956088d0da78b39ed2cae7f6f9b35",
+      "bytes": 131108
+    },
+    "theme-after-native-tree.json": {
+      "sha256": "ee2036e2bd557d0ad90572a090f547591bd8251254c919f9733ca50483d3cf2a",
+      "bytes": 207833
+    },
+    "theme-before-native-tree.json": {
+      "sha256": "d58b6ece2e9a10d76e3e41702db1aa03882d79e3a15eeed5c842cef62e6a6bd6",
+      "bytes": 207836
+    },
+    "theme-light-after-reader-command-native-tree.json": {
+      "sha256": "ee2036e2bd557d0ad90572a090f547591bd8251254c919f9733ca50483d3cf2a",
+      "bytes": 207833
+    },
+    "theme-light-audio.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "theme-light-orca-command.log": {
+      "sha256": "394bcd532d74cddcdb39bdea6aebfb2755f8abaf84066e2e652fce3ed9032a49",
+      "bytes": 8075
+    },
+    "theme-light-utterances.log": {
+      "sha256": "52fa3c4efe2720a41103dfd3ff93813b0e335a0b8cbe41054a9ffccf2e6e5fe9",
+      "bytes": 174
+    },
+    "theme-light.pcm": {
+      "sha256": "bf66d5d6101cc2b6eb1c055ea1d63a96e108300531c151cb1d0a83ac04462af7",
+      "bytes": 144148
+    },
+    "theme-light.wav": {
+      "sha256": "e1a2cf80cb0e51bf4e97b7e4b9f54648779301cc66f00ddf4fc41eda10354b6a",
+      "bytes": 79940
+    }
+  },
+  "retained_history": "The original 049 attempt remains 0/3; both separately scoped trace/debugger diagnoses remain 1/3. This new source and dependency attempt does not overwrite them."
+}

@@ -76,7 +76,9 @@ Names of focused controls outside the owned fixture are not read or recorded.
 After launching its owned Narrator process, the probe allows up to eight seconds
 within the existing overall budget to find one top-level window belonging to
 that exact PID. UIA process identity and the native HWND owner must agree, and
-the process handle must remain alive. A nonmodal window with a supported,
+the process handle must remain alive. Selection uses the actual HWND, not the
+provider's `ControlType.Window` label; some providers expose native windows as
+panes. A nonmodal window with a supported,
 interactive WindowPattern can receive one minimize request. The probe then
 reads the actual state again, requiring the same owner and a minimized or hidden
 window. Missing/ambiguous ownership, unsupported windows, API errors or an

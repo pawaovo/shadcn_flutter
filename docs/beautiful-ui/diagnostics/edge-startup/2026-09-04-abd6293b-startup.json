@@ -1,0 +1,991 @@
+{
+  "source_sha": "abd6293b066f2df56108cebfe3689fcc5b9a0a13",
+  "artifact_root": "/tmp/beautiful-ci-abd6293b/input/input-edge",
+  "analysis": "Read-only calculations over retained artifacts; no new browser run",
+  "window_rule": "In-window samples satisfy command_start <= sample.epoch <= response_epoch. PSI deltas use first and last selected samples, not exact command boundaries. Bracket uses last sample before command and first after response.",
+  "attribution_limits": [
+    "State and wchan are main-thread point observations; sample count is not duration.",
+    "schedstat runtime and runqueue delay describe the sampled task main thread; utime/stime are process CPU ticks. Clock ticks per second was not archived in these sidecars, so ticks remain ticks.",
+    "/proc/pressure metrics are host-wide; they cannot be assigned to a PID. Root cgroup counters are not a dedicated browser cgroup.",
+    "These snapshots lack minflt/majflt and per-PID io counters. No fault count, bytes read, or faulted file can be recovered.",
+    "folio_wait_bit_common does not identify Edge executable versus shared library, snapshot or other file.",
+    "The later passing suite shares the same job and versions but starts after the failure; it is not a fresh-runner control.",
+    "No executable hashes or runner ImageVersion are present in these per-suite artifacts. Post-run executable hashes and runner identity must be collected for the next pair."
+  ],
+  "suites": {
+    "framework": {
+      "browser_pid": 2760,
+      "identity": {
+        "sessionId": "6da03e061666a5257326b8872b313caf",
+        "capabilities": {
+          "acceptInsecureCerts": true,
+          "browserName": "MicrosoftEdge",
+          "browserVersion": "152.0.4191.53",
+          "fedcm:accounts": true,
+          "goog:processID": 2760,
+          "ms:edgeOptions": {
+            "debuggerAddress": "localhost:44725"
+          },
+          "msedge": {
+            "msedgedriverVersion": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+            "userDataDir": "/tmp/com.microsoft.Edge.scoped_dir.Gpx6RQ"
+          },
+          "networkConnectionEnabled": false,
+          "pageLoadStrategy": "normal",
+          "platformName": "linux",
+          "proxy": {},
+          "setWindowRect": true,
+          "strictFileInteractability": false,
+          "timeouts": {
+            "implicit": 0,
+            "pageLoad": 300000,
+            "script": 30000
+          },
+          "unhandledPromptBehavior": "dismiss and notify",
+          "webauthn:extension:credBlob": true,
+          "webauthn:extension:largeBlob": true,
+          "webauthn:extension:minPinLength": true,
+          "webauthn:extension:prf": true,
+          "webauthn:virtualAuthenticators": true
+        }
+      },
+      "log_anchors": {
+        "init_start": {
+          "line": 7,
+          "epoch": 1788502801.059
+        },
+        "init_end": {
+          "line": 279,
+          "epoch": 1788502846.059
+        },
+        "first_position_start": {
+          "line": 317,
+          "epoch": 1788502846.072
+        },
+        "first_position_end": {
+          "line": 6354,
+          "epoch": 1788503146.205
+        }
+      },
+      "init_session_seconds": 45.0,
+      "first_position_seconds": 300.1329998970032,
+      "sources": {
+        "msedgedriver.log": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/framework/msedgedriver.log",
+          "sha256": "cd2dc3f6f2f71060bf7cd5d6d1370fbfb744a58a521ffaf90ede9cb8b3d9936a"
+        },
+        "webdriver.log": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/framework/webdriver.log",
+          "sha256": "e0ba7de75e2c31c0fd7ab9608d43cb48f659a92f9418e62cf8f1902ccd4c256c"
+        },
+        "browser-identity.json": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/framework/browser-identity.json",
+          "sha256": "a8ccce65966ab597d2132760e2cc62deaf8cd9c1eee6104c1a347cd692e26750"
+        },
+        "resources/resources.jsonl": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/framework/resources/resources.jsonl",
+          "sha256": "3a518565190286f6e3b0b6e294905df28e8e791053851b5134fd825f017338fd"
+        }
+      },
+      "windows": {
+        "init_session": {
+          "browser": {
+            "samples": 44,
+            "jsonl_lines": [
+              42,
+              85
+            ],
+            "sample_epoch_bounds": [
+              1788502801.6926928,
+              1788502845.148211
+            ],
+            "seconds_from_init_start": [
+              0.633692741394043,
+              44.089210987091064
+            ],
+            "states": {
+              "D": 39,
+              "S": 5
+            },
+            "wait_channels": {
+              "folio_wait_bit_common": 38,
+              "__skb_wait_for_more_packets": 2,
+              "0": 1,
+              "poll_schedule_timeout.constprop.0": 3
+            },
+            "utime_stime_delta_ticks": 95,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 479503092,
+              "runqueue_delay_ns": 3432469,
+              "timeslices": 2867
+            }
+          },
+          "sample_count": 44,
+          "host_psi_delta_microseconds": {
+            "cpu": {
+              "some": 97004,
+              "full": 0
+            },
+            "io": {
+              "some": 35845359,
+              "full": 35343994
+            },
+            "memory": {
+              "some": 0,
+              "full": 0
+            }
+          }
+        },
+        "first_position": {
+          "browser": {
+            "samples": 297,
+            "jsonl_lines": [
+              86,
+              382
+            ],
+            "sample_epoch_bounds": [
+              1788502846.159136,
+              1788503145.2655883
+            ],
+            "seconds_from_init_start": [
+              45.100136041641235,
+              344.20658826828003
+            ],
+            "states": {
+              "S": 293,
+              "R": 4
+            },
+            "wait_channels": {
+              "poll_schedule_timeout.constprop.0": 290,
+              "0": 7
+            },
+            "utime_stime_delta_ticks": 1101,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 7829019479,
+              "runqueue_delay_ns": 26647405,
+              "timeslices": 67043
+            }
+          },
+          "sample_count": 297,
+          "host_psi_delta_microseconds": {
+            "cpu": {
+              "some": 8088588,
+              "full": 0
+            },
+            "io": {
+              "some": 310573,
+              "full": 284793
+            },
+            "memory": {
+              "some": 1,
+              "full": 1
+            }
+          }
+        },
+        "all_after_init_start": {
+          "browser": {
+            "samples": 344,
+            "jsonl_lines": [
+              42,
+              385
+            ],
+            "sample_epoch_bounds": [
+              1788502801.6926928,
+              1788503148.2963405
+            ],
+            "seconds_from_init_start": [
+              0.633692741394043,
+              347.23734045028687
+            ],
+            "states": {
+              "D": 39,
+              "S": 301,
+              "R": 4
+            },
+            "wait_channels": {
+              "folio_wait_bit_common": 38,
+              "__skb_wait_for_more_packets": 2,
+              "0": 8,
+              "poll_schedule_timeout.constprop.0": 296
+            },
+            "utime_stime_delta_ticks": 1212,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 8383104756,
+              "runqueue_delay_ns": 30529820,
+              "timeslices": 70620
+            }
+          },
+          "sample_count": 344,
+          "host_psi_delta_microseconds": {
+            "cpu": {
+              "some": 8196347,
+              "full": 0
+            },
+            "io": {
+              "some": 37078516,
+              "full": 36502602
+            },
+            "memory": {
+              "some": 1,
+              "full": 1
+            }
+          }
+        }
+      },
+      "startup_bracket": {
+        "jsonl_lines": [
+          41,
+          86
+        ],
+        "epoch_bounds": [
+          1788502800.6836188,
+          1788502846.159136
+        ],
+        "host_psi_delta_microseconds": {
+          "cpu": {
+            "some": 108849,
+            "full": 0
+          },
+          "io": {
+            "some": 36935742,
+            "full": 36381750
+          },
+          "memory": {
+            "some": 0,
+            "full": 0
+          }
+        }
+      },
+      "children": {
+        "2805": {
+          "start_ticks": 24511,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --ignore-certificate-errors --use-angle=swiftshader-webgl --ignore-certificate-errors --crashpad-handler-pid=2768 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Gpx6RQ --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,4325495868136530933,10009243690537519822,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12573109332130194629,13649367234015489876,4 --trace-process-track-uuid=3190708989122997041 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 22,
+            "jsonl_lines": [
+              59,
+              80
+            ],
+            "sample_epoch_bounds": [
+              1788502818.8632143,
+              1788502840.090701
+            ],
+            "seconds_from_init_start": [
+              17.804214239120483,
+              39.03170108795166
+            ],
+            "states": {
+              "S": 15,
+              "Z": 7
+            },
+            "wait_channels": {
+              "futex_do_wait": 15,
+              "0": 7
+            },
+            "utime_stime_delta_ticks": 0,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 608656,
+              "runqueue_delay_ns": 0,
+              "timeslices": 3
+            }
+          },
+          "startup": {
+            "samples": 22,
+            "jsonl_lines": [
+              59,
+              80
+            ],
+            "sample_epoch_bounds": [
+              1788502818.8632143,
+              1788502840.090701
+            ],
+            "seconds_from_init_start": [
+              17.804214239120483,
+              39.03170108795166
+            ],
+            "states": {
+              "S": 15,
+              "Z": 7
+            },
+            "wait_channels": {
+              "futex_do_wait": 15,
+              "0": 7
+            },
+            "utime_stime_delta_ticks": 0,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 608656,
+              "runqueue_delay_ns": 0,
+              "timeslices": 3
+            }
+          },
+          "first_position": {
+            "samples": 0
+          },
+          "D_or_Z_observations": [
+            {
+              "line": 74,
+              "epoch": 1788502834.0239942,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 75,
+              "epoch": 1788502835.0343368,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 76,
+              "epoch": 1788502836.0446362,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 77,
+              "epoch": 1788502837.0548868,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 78,
+              "epoch": 1788502838.0652597,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 79,
+              "epoch": 1788502839.080347,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 80,
+              "epoch": 1788502840.090701,
+              "state": "Z",
+              "wchan": "0"
+            }
+          ]
+        },
+        "3010": {
+          "start_ticks": 26788,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --ignore-certificate-errors --use-angle=swiftshader-webgl --ignore-certificate-errors --crashpad-handler-pid=2768 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Gpx6RQ --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,4325495868136530933,10009243690537519822,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12573109332130194629,13649367234015489876,4 --trace-process-track-uuid=3190708992871164437 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 305,
+            "jsonl_lines": [
+              81,
+              385
+            ],
+            "sample_epoch_bounds": [
+              1788502841.1039963,
+              1788503148.2963405
+            ],
+            "seconds_from_init_start": [
+              40.04499626159668,
+              347.23734045028687
+            ],
+            "states": {
+              "S": 305
+            },
+            "wait_channels": {
+              "futex_do_wait": 305
+            },
+            "utime_stime_delta_ticks": 26,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 4408579,
+              "runqueue_delay_ns": 639333,
+              "timeslices": 39
+            }
+          },
+          "startup": {
+            "samples": 5,
+            "jsonl_lines": [
+              81,
+              85
+            ],
+            "sample_epoch_bounds": [
+              1788502841.1039963,
+              1788502845.148211
+            ],
+            "seconds_from_init_start": [
+              40.04499626159668,
+              44.089210987091064
+            ],
+            "states": {
+              "S": 5
+            },
+            "wait_channels": {
+              "futex_do_wait": 5
+            },
+            "utime_stime_delta_ticks": 6,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 725646,
+              "runqueue_delay_ns": 0,
+              "timeslices": 11
+            }
+          },
+          "first_position": {
+            "samples": 297,
+            "jsonl_lines": [
+              86,
+              382
+            ],
+            "sample_epoch_bounds": [
+              1788502846.159136,
+              1788503145.2655883
+            ],
+            "seconds_from_init_start": [
+              45.100136041641235,
+              344.20658826828003
+            ],
+            "states": {
+              "S": 297
+            },
+            "wait_channels": {
+              "futex_do_wait": 297
+            },
+            "utime_stime_delta_ticks": 16,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 3682933,
+              "runqueue_delay_ns": 639333,
+              "timeslices": 28
+            }
+          },
+          "D_or_Z_observations": []
+        },
+        "2846": {
+          "start_ticks": 26560,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=renderer --crashpad-handler-pid=2768 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Gpx6RQ --change-stack-guard-on-fork=enable --no-sandbox --disable-background-timer-throttling --enable-automation --force-device-scale-factor=1 --remote-debugging-port=0 --test-type=webdriver --allow-pre-commit-input --ozone-platform=headless --disable-gpu-compositing --lang=en-US --js-flags --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=265600548 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,4325495868136530933,10009243690537519822,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12573109332130194629,13649367234015489876,4 --trace-process-track-uuid=3190708991934122588 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 307,
+            "jsonl_lines": [
+              79,
+              385
+            ],
+            "sample_epoch_bounds": [
+              1788502839.080347,
+              1788503148.2963405
+            ],
+            "seconds_from_init_start": [
+              38.02134704589844,
+              347.23734045028687
+            ],
+            "states": {
+              "D": 8,
+              "S": 299
+            },
+            "wait_channels": {
+              "do_mprotect_pkey": 1,
+              "folio_wait_bit_common": 7,
+              "futex_do_wait": 299
+            },
+            "utime_stime_delta_ticks": 24,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 163305564,
+              "runqueue_delay_ns": 1225641,
+              "timeslices": 1194
+            }
+          },
+          "startup": {
+            "samples": 7,
+            "jsonl_lines": [
+              79,
+              85
+            ],
+            "sample_epoch_bounds": [
+              1788502839.080347,
+              1788502845.148211
+            ],
+            "seconds_from_init_start": [
+              38.02134704589844,
+              44.089210987091064
+            ],
+            "states": {
+              "D": 7
+            },
+            "wait_channels": {
+              "do_mprotect_pkey": 1,
+              "folio_wait_bit_common": 6
+            },
+            "utime_stime_delta_ticks": 7,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 56083116,
+              "runqueue_delay_ns": 993835,
+              "timeslices": 459
+            }
+          },
+          "first_position": {
+            "samples": 297,
+            "jsonl_lines": [
+              86,
+              382
+            ],
+            "sample_epoch_bounds": [
+              1788502846.159136,
+              1788503145.2655883
+            ],
+            "seconds_from_init_start": [
+              45.100136041641235,
+              344.20658826828003
+            ],
+            "states": {
+              "S": 297
+            },
+            "wait_channels": {
+              "futex_do_wait": 297
+            },
+            "utime_stime_delta_ticks": 15,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 93005909,
+              "runqueue_delay_ns": 112529,
+              "timeslices": 618
+            }
+          },
+          "D_or_Z_observations": [
+            {
+              "line": 79,
+              "epoch": 1788502839.080347,
+              "state": "D",
+              "wchan": "do_mprotect_pkey"
+            },
+            {
+              "line": 80,
+              "epoch": 1788502840.090701,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 81,
+              "epoch": 1788502841.1039963,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 82,
+              "epoch": 1788502842.1156604,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 83,
+              "epoch": 1788502843.1266077,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 84,
+              "epoch": 1788502844.137325,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 85,
+              "epoch": 1788502845.148211,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 383,
+              "epoch": 1788503146.2760246,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            }
+          ]
+        }
+      },
+      "child_log_events": [
+        {
+          "line": 103,
+          "text": "[2805:2805:0904/062033.357817:INFO:content/child/child_thread_impl.cc:1153] Terminating current process after 15 seconds with no connection."
+        },
+        {
+          "line": 137,
+          "text": "[2760:2760:0904/062041.046404:ERROR:content/browser/network_service_instance_impl.cc:670] Network service crashed or was terminated, restarting service."
+        }
+      ]
+    },
+    "browser": {
+      "browser_pid": 3450,
+      "identity": {
+        "sessionId": "36624020991a17b24138274889698d9d",
+        "capabilities": {
+          "acceptInsecureCerts": true,
+          "browserName": "MicrosoftEdge",
+          "browserVersion": "152.0.4191.53",
+          "fedcm:accounts": true,
+          "goog:processID": 3450,
+          "ms:edgeOptions": {
+            "debuggerAddress": "localhost:45765"
+          },
+          "msedge": {
+            "msedgedriverVersion": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+            "userDataDir": "/tmp/com.microsoft.Edge.scoped_dir.Sm5mNW"
+          },
+          "networkConnectionEnabled": false,
+          "pageLoadStrategy": "normal",
+          "platformName": "linux",
+          "proxy": {},
+          "setWindowRect": true,
+          "strictFileInteractability": false,
+          "timeouts": {
+            "implicit": 0,
+            "pageLoad": 300000,
+            "script": 30000
+          },
+          "unhandledPromptBehavior": "dismiss and notify",
+          "webauthn:extension:credBlob": true,
+          "webauthn:extension:largeBlob": true,
+          "webauthn:extension:minPinLength": true,
+          "webauthn:extension:prf": true,
+          "webauthn:virtualAuthenticators": true
+        }
+      },
+      "log_anchors": {
+        "init_start": {
+          "line": 7,
+          "epoch": 1788503187.169
+        },
+        "init_end": {
+          "line": 281,
+          "epoch": 1788503188.063
+        },
+        "first_position_start": {
+          "line": 319,
+          "epoch": 1788503188.079
+        },
+        "first_position_end": {
+          "line": 394,
+          "epoch": 1788503188.092
+        }
+      },
+      "init_session_seconds": 0.8940000534057617,
+      "first_position_seconds": 0.013000011444091797,
+      "sources": {
+        "msedgedriver.log": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/browser/msedgedriver.log",
+          "sha256": "1e6e4bd22718bc722ded84ae994ed6adaa1f11b9a8beafda63d350a029cb66ae"
+        },
+        "webdriver.log": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/browser/webdriver.log",
+          "sha256": "421dd0156bf8f866cc7ba96d34f657f3e63491bf63487905041439eb8b56d547"
+        },
+        "browser-identity.json": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/browser/browser-identity.json",
+          "sha256": "b8feba5b7ae68ccd4fa0eb9230d4738e631cbb396c5c79072247aaedf0149dcf"
+        },
+        "resources/resources.jsonl": {
+          "path": "/tmp/beautiful-ci-abd6293b/input/input-edge/browser/resources/resources.jsonl",
+          "sha256": "1c1ed0a0516545dcc1e226d525014fc1e1776e7cd044b2e5e757f1bdaf9a3e7f"
+        }
+      },
+      "windows": {
+        "init_session": {
+          "browser": {
+            "samples": 1,
+            "jsonl_lines": [
+              39,
+              39
+            ],
+            "sample_epoch_bounds": [
+              1788503187.1968722,
+              1788503187.1968722
+            ],
+            "seconds_from_init_start": [
+              0.027872323989868164,
+              0.027872323989868164
+            ],
+            "states": {
+              "R": 1
+            },
+            "wait_channels": {
+              "0": 1
+            },
+            "utime_stime_delta_ticks": 0,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 0,
+              "runqueue_delay_ns": 0,
+              "timeslices": 0
+            }
+          },
+          "sample_count": 1,
+          "host_psi_delta_microseconds": {
+            "cpu": {
+              "some": 0,
+              "full": 0
+            },
+            "io": {
+              "some": 0,
+              "full": 0
+            },
+            "memory": {
+              "some": 0,
+              "full": 0
+            }
+          }
+        },
+        "first_position": {
+          "browser": {
+            "samples": 0
+          },
+          "sample_count": 0
+        },
+        "all_after_init_start": {
+          "browser": {
+            "samples": 58,
+            "jsonl_lines": [
+              39,
+              96
+            ],
+            "sample_epoch_bounds": [
+              1788503187.1968722,
+              1788503245.0458803
+            ],
+            "seconds_from_init_start": [
+              0.027872323989868164,
+              57.876880407333374
+            ],
+            "states": {
+              "R": 1,
+              "S": 56,
+              "D": 1
+            },
+            "wait_channels": {
+              "0": 2,
+              "poll_schedule_timeout.constprop.0": 55,
+              "folio_wait_bit_common": 1
+            },
+            "utime_stime_delta_ticks": 215,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 1003614259,
+              "runqueue_delay_ns": 399865066,
+              "timeslices": 8308
+            }
+          },
+          "sample_count": 59,
+          "host_psi_delta_microseconds": {
+            "cpu": {
+              "some": 3544999,
+              "full": 0
+            },
+            "io": {
+              "some": 8943367,
+              "full": 7498369
+            },
+            "memory": {
+              "some": 0,
+              "full": 0
+            }
+          }
+        }
+      },
+      "startup_bracket": {
+        "jsonl_lines": [
+          38,
+          40
+        ],
+        "epoch_bounds": [
+          1788503186.1809494,
+          1788503188.2099059
+        ],
+        "host_psi_delta_microseconds": {
+          "cpu": {
+            "some": 174148,
+            "full": 0
+          },
+          "io": {
+            "some": 323884,
+            "full": 224228
+          },
+          "memory": {
+            "some": 0,
+            "full": 0
+          }
+        }
+      },
+      "children": {
+        "3488": {
+          "start_ticks": 61414,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --ignore-certificate-errors --use-angle=swiftshader-webgl --ignore-certificate-errors --crashpad-handler-pid=3457 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Sm5mNW --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,11202591347464003830,981763215013555155,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12570747436788509800,4012693426502501348,4 --trace-process-track-uuid=3190708989122997041 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 57,
+            "jsonl_lines": [
+              40,
+              96
+            ],
+            "sample_epoch_bounds": [
+              1788503188.2099059,
+              1788503245.0458803
+            ],
+            "seconds_from_init_start": [
+              1.0409059524536133,
+              57.876880407333374
+            ],
+            "states": {
+              "S": 57
+            },
+            "wait_channels": {
+              "futex_do_wait": 57
+            },
+            "utime_stime_delta_ticks": 313,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 16259399,
+              "runqueue_delay_ns": 669964,
+              "timeslices": 15
+            }
+          },
+          "startup": {
+            "samples": 0
+          },
+          "first_position": {
+            "samples": 0
+          },
+          "D_or_Z_observations": []
+        },
+        "3530": {
+          "start_ticks": 61427,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=renderer --crashpad-handler-pid=3457 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Sm5mNW --change-stack-guard-on-fork=enable --no-sandbox --disable-background-timer-throttling --enable-automation --force-device-scale-factor=1 --remote-debugging-port=0 --test-type=webdriver --allow-pre-commit-input --ozone-platform=headless --disable-gpu-compositing --lang=en-US --js-flags --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=6 --launch-time-ticks=614276261 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,11202591347464003830,981763215013555155,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12570747436788509800,4012693426502501348,4 --trace-process-track-uuid=3190708991934122588 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 4,
+            "jsonl_lines": [
+              40,
+              43
+            ],
+            "sample_epoch_bounds": [
+              1788503188.2099059,
+              1788503191.242397
+            ],
+            "seconds_from_init_start": [
+              1.0409059524536133,
+              4.073397159576416
+            ],
+            "states": {
+              "S": 2,
+              "Z": 2
+            },
+            "wait_channels": {
+              "futex_do_wait": 2,
+              "0": 2
+            },
+            "utime_stime_delta_ticks": 1,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 3376245,
+              "runqueue_delay_ns": 283274,
+              "timeslices": 32
+            }
+          },
+          "startup": {
+            "samples": 0
+          },
+          "first_position": {
+            "samples": 0
+          },
+          "D_or_Z_observations": [
+            {
+              "line": 42,
+              "epoch": 1788503190.231398,
+              "state": "Z",
+              "wchan": "0"
+            },
+            {
+              "line": 43,
+              "epoch": 1788503191.242397,
+              "state": "Z",
+              "wchan": "0"
+            }
+          ]
+        },
+        "3541": {
+          "start_ticks": 61433,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "argv": [
+            "/opt/microsoft/msedge/msedge --type=renderer --crashpad-handler-pid=3457 --enable-crash-reporter=, --noerrdialogs --user-data-dir=/tmp/com.microsoft.Edge.scoped_dir.Sm5mNW --change-stack-guard-on-fork=enable --no-sandbox --disable-background-timer-throttling --enable-automation --force-device-scale-factor=1 --remote-debugging-port=0 --test-type=webdriver --allow-pre-commit-input --ozone-platform=headless --disable-gpu-compositing --lang=en-US --js-flags --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=7 --launch-time-ticks=614333714 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,11202591347464003830,981763215013555155,262144 --enable-features=msMetricsLogFastStartup,msSendMetricsLogOnClose --disable-features=IgnoreDuplicateNavs,PaintHolding,Prewarm --variations-seed-version --pseudonymization-salt-handle=7,i,12570747436788509800,4012693426502501348,4 --trace-process-track-uuid=3190708992871164437 --enable-logging=stderr --log-level=0"
+          ],
+          "all_samples": {
+            "samples": 57,
+            "jsonl_lines": [
+              40,
+              96
+            ],
+            "sample_epoch_bounds": [
+              1788503188.2099059,
+              1788503245.0458803
+            ],
+            "seconds_from_init_start": [
+              1.0409059524536133,
+              57.876880407333374
+            ],
+            "states": {
+              "S": 17,
+              "D": 5,
+              "R": 35
+            },
+            "wait_channels": {
+              "futex_do_wait": 15,
+              "folio_wait_bit_common": 5,
+              "0": 37
+            },
+            "utime_stime_delta_ticks": 5870,
+            "main_thread_schedstat_delta": {
+              "runtime_ns": 36784746823,
+              "runqueue_delay_ns": 625236239,
+              "timeslices": 10071
+            }
+          },
+          "startup": {
+            "samples": 0
+          },
+          "first_position": {
+            "samples": 0
+          },
+          "D_or_Z_observations": [
+            {
+              "line": 42,
+              "epoch": 1788503190.231398,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 43,
+              "epoch": 1788503191.242397,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 45,
+              "epoch": 1788503193.2643907,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 46,
+              "epoch": 1788503194.2748384,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            },
+            {
+              "line": 58,
+              "epoch": 1788503206.4720874,
+              "state": "D",
+              "wchan": "folio_wait_bit_common"
+            }
+          ]
+        }
+      },
+      "child_log_events": []
+    }
+  }
+}

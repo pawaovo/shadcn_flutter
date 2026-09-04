@@ -177,10 +177,70 @@ startup-health hypothesis; a responsive document with a stuck navigation tracker
 supports investigating driver event tracking. Neither is automatically labelled
 the cause by the script. Exact timing and complete logs remain reviewable.
 
+## Manual pair using the full Catalog journey
+
+The retained failure at source `abd6293b066f2df56108cebfe3689fcc5b9a0a13` now
+includes process evidence. Its 45-second `InitSession` contains all 39 browser
+D-state samples; the following original 300-second position failure contains
+none. The network-service child terminates during startup and is replaced
+before session creation returns. The [archived analysis and calculation JSON](../docs/beautiful-ui/diagnostics/edge-startup/2026-09-04-abd6293b-startup.md)
+keep these windows separate and document attribution limits.
+
+The manual-only
+[`beautiful_ai_ui_edge_full_journey_pair.yml`](workflows/beautiful_ai_ui_edge_full_journey_pair.yml)
+prepares one baseline and one explicit preread condition on **separate fresh
+Ubuntu runners**, each checking out the same exact source SHA. `fail-fast: false`
+preserves the second condition even if the first fails. There is one full
+Catalog journey per condition, with no retry. The workflow is ready for owner
+review and commit; it has not been dispatched as part of this change.
+
+Both conditions use `probe_edge_full_journey.py`, which calls the existing input
+runner's `--journey-only` mode. That mode retains its owned process launch and
+cleanup, unchanged Edge adapter, real resource observer, original Flutter
+startup/navigation order and complete trusted Catalog journey. The ordinary
+input runner defaults and standalone three-session experiment remain unchanged.
+No browser version is installed or pinned, and no extra navigation or
+`Page.stopLoading` is injected.
+
+Only the preread job reads `/opt/microsoft/msedge/msedge` once before the full
+run, using the existing ELF validation and single-pass timing/hash function.
+The baseline does not prehash executables, pre-read their contents or flush
+caches. Both reports record total elapsed time including preread and cleanup;
+`preread.json` records the separate read cost and bytes. After owned cleanup is
+verified, sampled session `goog:processID` and driver PID/start time bind the
+actual executable paths to their post-run SHA-256 hashes. The preread path and
+hash must match the actual session browser and its post-run hash.
+
+The comparison checks actual source, `ImageOS`, `ImageVersion`, runner OS/arch,
+browser/driver versions, and post-run browser/driver hashes. Missing or differing
+provenance blocks interpretation instead of prompting an automatic browser pin
+or rerun. Both original runner results and failures remain in their artifacts;
+diagnostic evidence errors have separate fields. Matching provenance permits
+inspection of one pair, not a causal conclusion or repair claim. The selected
+preread happens before the full runner, so its cache residency may also change
+during normal Flutter setup; all timings remain explicit.
+
+The shared observer now also records actual `/proc/PID/stat` `minflt`/`majflt`
+counters and reads `/proc/PID/io` only for owned detailed process samples.
+Unavailable I/O files remain explicit errors, never invented zero counters.
+PID/start-time ownership and the 1 Hz sampling bounds are unchanged. These
+additional counters improve the next capture but do not identify the file behind
+a fault; file causality still requires a controlled intervention and matching
+provenance.
+
+After review and commit, the owner can dispatch the pair with an exact SHA:
+
+```sh
+gh workflow run beautiful_ai_ui_edge_full_journey_pair.yml -R pawaovo/shadcn_flutter --ref product/main \
+  -f source_sha="$DIAGNOSTIC_SOURCE_SHA"
+```
+
 ## Local regression boundary
 
 ```sh
 python3 -B -m unittest discover -s .github/scripts -p 'test_probe_edge_cold_start.py' -v
+python3 -B -m unittest discover -s .github/scripts -p 'test_edge_full_journey.py' -v
+python3 -B -m unittest discover -s .github/scripts -p 'test_edge_resource_observation.py' -v
 ```
 
 These tests use the real adapter and HTTP client with a clearly synthetic upstream.

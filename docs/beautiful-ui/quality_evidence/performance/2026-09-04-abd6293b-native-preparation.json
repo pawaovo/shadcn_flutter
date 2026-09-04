@@ -1,0 +1,137 @@
+{
+  "source_sha": "abd6293b066f2df56108cebfe3689fcc5b9a0a13",
+  "status": "preparation_failed_no_measurements",
+  "native_workloads_started": false,
+  "scenario_count": 0,
+  "performance_budget_accepted": false,
+  "operator_observation": "Computer Use reported that the Mac was locked and automatic unlock was unavailable. No Start action was sent, and no other unlock method was attempted.",
+  "native_result": "Original 120-second preparation deadline failed; the workload precondition also failed. Real VM connection and failed response persistence completed.",
+  "source_integrity": {
+    "schema_version": 1,
+    "status": "verified_unchanged",
+    "revision_unchanged": true,
+    "before_revision": "abd6293b066f2df56108cebfe3689fcc5b9a0a13",
+    "after_revision": "abd6293b066f2df56108cebfe3689fcc5b9a0a13",
+    "before_manifest_sha256": "0e566d42249a6ae8a7341e228aa6383b61b6865244ae5baa496347475fb2eaa0",
+    "after_manifest_sha256": "0e566d42249a6ae8a7341e228aa6383b61b6865244ae5baa496347475fb2eaa0",
+    "before_file_count": 310,
+    "after_file_count": 310,
+    "changed_paths": [],
+    "source_worktree_status_unchanged": true,
+    "scope_note": "Acceptance checks the listed build/runtime inputs and git revision. Changes to out-of-scope documentation/tests are reported by worktree status and do not alter this manifest."
+  },
+  "runner": {
+    "status": "failed",
+    "phase": "finalized",
+    "exit_code": 1
+  },
+  "transport": {
+    "status": "failed",
+    "response_file": "integration_response.raw.json",
+    "checkpoint_file": null,
+    "checkpoint_sequence": null,
+    "checkpoint_terminal": null,
+    "timeline_stop_attempts": [
+      {
+        "boundary": "final_close",
+        "status": "acknowledged",
+        "start_epoch_us": 1788502896513263,
+        "end_epoch_us": 1788502896525407
+      }
+    ],
+    "primary_failure": {
+      "phase": "response_validation",
+      "error": "Bad state: Failure in method: Release native profile frame and memory workloads\nInstance of 'FlutterErrorDetails'\nend of failure 1\n\n\n",
+      "stack": "#0      main.<anonymous closure> (file:///private/tmp/beautiful-final-native-abd6293b/packages/beautiful_ai_ui_catalog/test_driver/p3_performance_driver.dart:29:9)\n#1      captureNativeProfile (file:///private/tmp/beautiful-final-native-abd6293b/packages/beautiful_ai_ui_catalog/test_driver/profile_driver_adapter.dart:275:28)\n<asynchronous suspension>\n#2      main (file:///private/tmp/beautiful-final-native-abd6293b/packages/beautiful_ai_ui_catalog/test_driver/p3_performance_driver.dart:22:19)\n<asynchronous suspension>\n"
+    },
+    "secondary_failures": []
+  },
+  "raw_directory": "/tmp/beautiful-final-native-abd6293b/packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-abd6293b-all",
+  "artifacts": [
+    {
+      "file": "driver_exit_code.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "file": "driver_transport.json",
+      "bytes": 1150,
+      "sha256": "f086edba3269eefc0b3b526329c421110c04496b8025bd3dd667fe39a74bef9f"
+    },
+    {
+      "file": "exit_code.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "file": "flutter_version.json",
+      "bytes": 696,
+      "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+    },
+    {
+      "file": "integration_response.raw.json",
+      "bytes": 2634,
+      "sha256": "4a34801aa150d4e8f2e31e123a5e909410b7c39c6b51091c08564eb7da74c064"
+    },
+    {
+      "file": "launch.log",
+      "bytes": 5618,
+      "sha256": "9aaa224c53c5d2a8deb94b8b2127fdaa2323b9243307c088ee6abce4176049c5"
+    },
+    {
+      "file": "launch_command.txt",
+      "bytes": 255,
+      "sha256": "ac5ef521f1f39fd977193cc841d746fd0034cec1961f8f8af3750c7ea3bd22d1"
+    },
+    {
+      "file": "launcher_metadata.json",
+      "bytes": 1388,
+      "sha256": "7fe6bc43a293aba017623217fe205cae0b89e65024486b11fc55f763cfbb148f"
+    },
+    {
+      "file": "p3_frame_samples.json",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "file": "p3_memory_samples.json",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "file": "p3_performance.json",
+      "bytes": 4048,
+      "sha256": "9afe2462555d22c0d9d1c9587ecc75052a6464160ffebb3ffa8b61948fd8c66c"
+    },
+    {
+      "file": "p3_response_data.raw.json",
+      "bytes": 2930,
+      "sha256": "523fda6d3ca20e46f3fcdf25ea39287f7fcd910bee1e1fff72fcda30b5cab99b"
+    },
+    {
+      "file": "pub_get.log",
+      "bytes": 937,
+      "sha256": "c762a8beb33d2cfecb0669d2e77a8f2947db891533c8f14b9d8b2abd4cb0dd7c"
+    },
+    {
+      "file": "runner_status.json",
+      "bytes": 54,
+      "sha256": "b7343d892b15ef9022c7e81859062d4b04d91ed1bd6c4a8af7dd437821be3c97"
+    },
+    {
+      "file": "source_after.json",
+      "bytes": 63389,
+      "sha256": "bac9c2b9395df9658c2d533fdc655f69763bf4db41285adc884ac9c904826576"
+    },
+    {
+      "file": "source_before.json",
+      "bytes": 63389,
+      "sha256": "a1906b3400d5e18dfd10203e775bd30585e50dff34e7c54d3c059e21ae23bfd7"
+    },
+    {
+      "file": "source_integrity.json",
+      "bytes": 727,
+      "sha256": "8918927e9417c7bb4d20605498228dc0fee662ac11523c357afef28d0b19a014"
+    }
+  ]
+}

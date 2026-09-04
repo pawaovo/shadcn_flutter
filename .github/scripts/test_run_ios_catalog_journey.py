@@ -15,8 +15,8 @@ from unittest.mock import patch
 
 from run_ios_catalog_journey import (
     Journey, LoggedProcess, capture_query_snapshot, discover_service, launch_pid,
-    query_unified_service, redact,
-    service_uri, unified_service_uri,
+    live_group_members, query_unified_service, redact,
+    service_uri, stop_process_group, unified_service_uri,
 )
 
 
@@ -89,6 +89,18 @@ class IOSLaunchTests(unittest.TestCase):
         self.assertTrue(status["host_group_clean"])
         self.assertNotIn("private-token", path.read_text())
 
+    def test_reaped_group_does_not_require_available_ps(self):
+        with subprocess.Popen([sys.executable, "-c", "pass"], start_new_session=True) as process:
+            self.assertEqual(process.wait(timeout=2), 0)
+            with self.assertRaises(ProcessLookupError):
+                os.killpg(process.pid, 0)
+            unavailable = subprocess.TimeoutExpired(
+                ["/bin/ps", "-axo", "pid=,pgid=,stat="], timeout=1,
+            )
+            with patch("run_ios_catalog_journey.subprocess.check_output", side_effect=unavailable) as ps:
+                self.assertEqual(live_group_members(process.pid), [])
+                ps.assert_not_called()
+
     def test_snapshot_cannot_pass_when_its_host_group_still_has_a_live_child(self):
         command, marker = self.descriptor_holder_fixture("live-group", separate_group=False)
         path = self.path / "live-group.log"
@@ -105,17 +117,32 @@ class IOSLaunchTests(unittest.TestCase):
     def assert_snapshot_ps_cause(self, cause, expected_details):
         path = self.path / "ps-cause.log"
         real_check_output = subprocess.check_output
+        real_killpg = os.killpg
+        cleanup_complete = False
+
+        def finish_cleanup(process, *args, **kwargs):
+            nonlocal cleanup_complete
+            stop_process_group(process, *args, **kwargs)
+            cleanup_complete = True
+
+        def signal_group(group_id, sig):
+            if cleanup_complete and sig == 0:
+                raise PermissionError(errno.EPERM, "membership unknown")
+            return real_killpg(group_id, sig)
 
         def inspect(command, *args, **kwargs):
-            if command[0] == "/bin/ps":
+            if cleanup_complete and command[0] == "/bin/ps":
                 self.assertEqual(command, ["/bin/ps", "-axo", "pid=,pgid=,stat="])
                 self.assertEqual(kwargs["timeout"], 1)
                 raise cause
             return real_check_output(command, *args, **kwargs)
 
-        # The query and its timeout/termination remain real. Only the subsequent
-        # ps inspection fails, matching the observed CI cleanup boundary.
-        with patch("run_ios_catalog_journey.subprocess.check_output", side_effect=inspect):
+        # The query, timeout and termination remain real. The final kernel probe
+        # explicitly cannot verify absence, so failed ps inspection must still
+        # reject cleanup and retain its original cause.
+        with patch("run_ios_catalog_journey.stop_process_group", side_effect=finish_cleanup), \
+                patch("run_ios_catalog_journey.os.killpg", side_effect=signal_group), \
+                patch("run_ios_catalog_journey.subprocess.check_output", side_effect=inspect):
             with self.assertRaisesRegex(RuntimeError, "Cannot verify process group membership") as raised:
                 capture_query_snapshot([
                     sys.executable, "-u", "-c",
