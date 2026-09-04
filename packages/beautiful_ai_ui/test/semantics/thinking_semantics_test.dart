@@ -58,6 +58,7 @@ void main() {
 
     var header = tester.getSemantics(_headerWidget).getSemanticsData();
     expect(header.flagsCollection.isButton, isTrue);
+    expect(header.flagsCollection.isEnabled, Tristate.isTrue);
     expect(header.flagsCollection.isExpanded, Tristate.isFalse);
     expect(header.hasAction(SemanticsAction.tap), isTrue);
     expect(header.hasAction(SemanticsAction.expand), isTrue);
@@ -73,6 +74,7 @@ void main() {
     await tester.pump();
 
     header = tester.getSemantics(_headerWidget).getSemanticsData();
+    expect(header.flagsCollection.isEnabled, Tristate.isTrue);
     expect(header.flagsCollection.isExpanded, Tristate.isTrue);
     expect(header.hasAction(SemanticsAction.collapse), isTrue);
     expect(header.label, 'Hide thinking details');
@@ -158,6 +160,7 @@ void main() {
         .getSemanticsData();
     expect(row.flagsCollection.isLink, isTrue);
     expect(row.flagsCollection.isButton, isFalse);
+    expect(row.flagsCollection.isEnabled, Tristate.isTrue);
     expect(row.hasAction(SemanticsAction.tap), isTrue);
 
     await tester.pumpWidget(
@@ -173,6 +176,7 @@ void main() {
         .getSemantics(find.bySemanticsLabel('Read, flavors.dart'))
         .getSemanticsData();
     expect(row.flagsCollection.isLink, isFalse);
+    expect(row.flagsCollection.isEnabled, Tristate.none);
     expect(row.hasAction(SemanticsAction.tap), isFalse);
     semantics.dispose();
   });
@@ -194,6 +198,7 @@ void main() {
     final rowFinder = find.bySemanticsLabel('Read, flavors.dart');
     var row = tester.getSemantics(rowFinder).getSemanticsData();
     expect(row.flagsCollection.isButton, isTrue);
+    expect(row.flagsCollection.isEnabled, Tristate.isTrue);
     expect(row.flagsCollection.isSelected, Tristate.isFalse);
 
     tester.semantics.tap(find.semantics.byLabel('Read, flavors.dart'));
@@ -201,6 +206,7 @@ void main() {
     row = tester
         .getSemantics(find.bySemanticsLabel('Read, flavors.dart'))
         .getSemanticsData();
+    expect(row.flagsCollection.isEnabled, Tristate.isTrue);
     expect(row.flagsCollection.isSelected, Tristate.isTrue);
     semantics.dispose();
   });

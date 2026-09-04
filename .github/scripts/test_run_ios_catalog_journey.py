@@ -102,6 +102,49 @@ class IOSLaunchTests(unittest.TestCase):
         finally:
             self.stop_holder(marker)
 
+    def assert_snapshot_ps_cause(self, cause, expected_details):
+        path = self.path / "ps-cause.log"
+        real_check_output = subprocess.check_output
+
+        def inspect(command, *args, **kwargs):
+            if command[0] == "/bin/ps":
+                self.assertEqual(command, ["/bin/ps", "-axo", "pid=,pgid=,stat="])
+                self.assertEqual(kwargs["timeout"], 1)
+                raise cause
+            return real_check_output(command, *args, **kwargs)
+
+        # The query and its timeout/termination remain real. Only the subsequent
+        # ps inspection fails, matching the observed CI cleanup boundary.
+        with patch("run_ios_catalog_journey.subprocess.check_output", side_effect=inspect):
+            with self.assertRaisesRegex(RuntimeError, "Cannot verify process group membership") as raised:
+                capture_query_snapshot([
+                    sys.executable, "-u", "-c",
+                    "import time; print('query started', flush=True); time.sleep(30)",
+                ], path, 0.1)
+        self.assertIs(raised.exception.__cause__, cause)
+        status = json.loads(path.with_suffix(".json").read_text())
+        self.assertEqual(status["exit_code"], 124)
+        self.assertTrue(status["timed_out"])
+        self.assertFalse(status["host_group_clean"])
+        self.assertEqual(status["error"], "Cannot verify process group membership")
+        self.assertEqual(status["cause"]["type"], type(cause).__name__)
+        self.assertEqual(status["cause"]["message"], redact(str(cause)))
+        for key, value in expected_details.items():
+            self.assertEqual(status["cause"][key], value)
+        self.assertNotIn("private-ps-token", path.with_suffix(".json").read_text())
+
+    def test_snapshot_preserves_ps_timeout_cause_without_accepting_cleanup(self):
+        cause = subprocess.TimeoutExpired(
+            ["/bin/ps", "http://127.0.0.1:12345/private-ps-token/"], timeout=1,
+        )
+        self.assert_snapshot_ps_cause(cause, {"timeout": 1})
+
+    def test_snapshot_preserves_ps_exit_cause_without_accepting_cleanup(self):
+        cause = subprocess.CalledProcessError(
+            7, ["/bin/ps", "http://127.0.0.1:12345/private-ps-token/"],
+        )
+        self.assert_snapshot_ps_cause(cause, {"returncode": 7})
+
     def test_snapshot_drain_cannot_convert_a_late_exit_zero_into_success(self):
         path = self.path / "slow-drain.log"
         release = self.path / "release-output"

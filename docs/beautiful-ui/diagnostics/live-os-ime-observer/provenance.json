@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-09-04T03:03:04.460884+00:00",
+  "archived_files": {
+    "docs/beautiful-ui/diagnostics/live-os-ime-observer/live_os_ime_probe.dart": {
+      "sha256": "3e00285fdde66ebf08f82ddd742f25eca474237ea1e8346dd4c996dabae0ae9b",
+      "bytes": 16322
+    },
+    "docs/beautiful-ui/diagnostics/live-os-ime-observer/live-os-ime-build.txt": {
+      "sha256": "1729794c457a16c4b692b59d1b094ae96b54e6474ef024c17fef4f1e895755b6",
+      "bytes": 2004
+    },
+    "docs/beautiful-ui/diagnostics/live-os-ime-observer/build-manifest.json": {
+      "sha256": "a4f3a737a5ea4641bee01c7bc4e0af0576d5b4de41906470488b33a8f3144b5b",
+      "bytes": 2301
+    }
+  },
+  "observation_record": "docs/beautiful-ui/quality_evidence/2026-09-04-live-os-ime-observation.json",
+  "observation_sha256": "f21c45359c41459d9262ef5b4507fbe8dfd29a3fe28af04cc9a7b49386ebd3d2",
+  "existing_build_sha256": {
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live_os_ime_probe.dart": "3e00285fdde66ebf08f82ddd742f25eca474237ea1e8346dd4c996dabae0ae9b",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime/main.dart.js": "748b9a297e1ecce96d699022583f4e15ba1013708f099056a01efee8fab5f425",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime/flutter_bootstrap.js": "a2cefd59a6e5eae8cee8728b388bae3b00696aec8594c38ac6b15fa600682da4",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime-build.log": "1729794c457a16c4b692b59d1b094ae96b54e6474ef024c17fef4f1e895755b6",
+    "pubspec.lock": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae",
+    "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart": "6978df31b67e7aeabb08678d0920c9f1449465a5706aabf7ee15f9007d6d88dd"
+  },
+  "local_build_directory": "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime",
+  "compiled_assets_archived": false,
+  "note": "The source/log/build manifest are exact byte copies. Compiled main JS/bootstrap and dependency hashes were rechecked against the existing pre-observation manifest. Raw build-log whitespace is preserved."
+}

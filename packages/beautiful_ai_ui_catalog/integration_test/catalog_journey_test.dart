@@ -139,7 +139,6 @@ void main() {
           'journey-code-copy',
           completed: _inside('catalog-code-block', find.text('Copied')),
         );
-        await tester.pump();
         expect(find.text('Copied'), findsOneWidget);
         await _runP2Journey(tester);
         await _runP3Journey(tester);
@@ -170,7 +169,6 @@ Future<void> _runP2Journey(WidgetTester tester) async {
     'journey-stream-copy',
     completed: find.text('Response copied'),
   );
-  await tester.pump(const Duration(milliseconds: 180));
   expect(find.text('Response copied'), findsOneWidget);
   await tap('catalog-streaming-complete', find.text('Sources (2)'));
   await tap(

@@ -95,6 +95,9 @@ acceptance remain separate; this is validation, not a package publication.
 
 ### Fixed
 
+- Expose enabled semantics on interactive Thinking disclosures, search links
+  and code rows while retaining static semantics when an action is absent.
+
 - Use Flutter's official selection actions for plain and Shift horizontal
   arrows in the Web read-only document, preserving grapheme boundaries and
   leaving native and modified host shortcuts unchanged.

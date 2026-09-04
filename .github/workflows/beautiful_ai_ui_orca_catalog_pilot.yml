@@ -82,7 +82,8 @@ jobs:
           timeout 60s dbus-run-session -- xvfb-run -a \
             packages/beautiful_ai_ui_catalog/build/linux/x64/release/native_bridge_probe/catalog_accessibility_bridge_probe \
             --bundle "$PWD/packages/beautiful_ai_ui_catalog/build/linux/x64/release/bundle" \
-            > artifacts/catalog-orca-native-bridge/report.json \
+            --report "$PWD/artifacts/catalog-orca-native-bridge/report.json" \
+            > artifacts/catalog-orca-native-bridge/stdout.log \
             2> artifacts/catalog-orca-native-bridge/stderr.log
       - name: Observe three real Catalog tasks in a private Orca session
         timeout-minutes: 5

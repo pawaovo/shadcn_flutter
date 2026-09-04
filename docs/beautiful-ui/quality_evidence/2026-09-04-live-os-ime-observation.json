@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-09-04T03:03:04.460884+00:00",
+  "status": "prepared_not_accepted_for_os_ime",
+  "collection": "Compact transcription of root task native Chrome observations; complete original run trace was not exported.",
+  "browser": {
+    "application": "Google Chrome",
+    "version": "not recorded",
+    "surface": "native Chrome tab controlled by native CUA",
+    "owned_claimed_tab_id": 1891840655,
+    "handoff_url": "http://127.0.0.1:63118/",
+    "marked_handoff": true,
+    "initial_background_tab_closed": 1891840652
+  },
+  "probe": {
+    "semantics_enabled": true,
+    "stock_and_prompt_writable": true,
+    "no_synthetic_input_or_automatic_focus": true,
+    "build_mode": "release",
+    "build_manifest": "docs/beautiful-ui/diagnostics/live-os-ime-observer/build-manifest.json",
+    "source_sha256": "3e00285fdde66ebf08f82ddd742f25eca474237ea1e8346dd4c996dabae0ae9b",
+    "prompt_on_send_callback_configured": true
+  },
+  "input_source_observation": {
+    "api": "TISCopyCurrentKeyboardInputSource",
+    "access": "read-only",
+    "input_source_id": "com.tencent.inputmethod.wetype.pinyin",
+    "localized_name": "微信输入法",
+    "bundle_id": "com.tencent.inputmethod.wetype",
+    "chinese_mode_confirmed": false,
+    "ime_participation_in_observed_key_confirmed": false
+  },
+  "focus_observations": {
+    "lsappinfo_front_application": "IINA",
+    "native_ax_chrome_stock_field_focused": true,
+    "interpretation": "Both observations are retained. AX field focus is not treated as proof of global foreground application."
+  },
+  "native_input": {
+    "action": "one native key n",
+    "reported_events": [
+      {
+        "phase": "beforeinput capture",
+        "elapsed_ms": 26347,
+        "type": "beforeinput",
+        "isTrusted": true,
+        "inputType": "insertText",
+        "data": "n",
+        "isComposing": false
+      },
+      {
+        "phase": "input capture",
+        "elapsed_ms": 26347,
+        "type": "input",
+        "isTrusted": true,
+        "inputType": "insertText",
+        "data": "n",
+        "isComposing": false
+      },
+      {
+        "phase": "keyup",
+        "elapsed_ms": 26387,
+        "type": "keyup",
+        "key": "n",
+        "code": "KeyN",
+        "keyCode": 78,
+        "isTrusted": true,
+        "modifiers": {
+          "shift": false,
+          "control": false,
+          "meta": false,
+          "alt": false
+        }
+      }
+    ],
+    "compositionstart_update_end_events_observed": 0,
+    "stock": {
+      "text": "n",
+      "selection": [
+        1,
+        1
+      ],
+      "composing": [
+        -1,
+        -1
+      ],
+      "state_id": 413824414,
+      "controller_id": 19479854
+    },
+    "active_dom": {
+      "text": "n",
+      "selection": [
+        1,
+        1
+      ]
+    },
+    "product": {
+      "text": "",
+      "focused": false,
+      "state_id": 381000331,
+      "controller_id": 961119028
+    },
+    "submissions": []
+  },
+  "subsequent_clear_attempt": {
+    "status": "blocked_before_execution",
+    "reason": "Native CUA detected a user application switch and blocked the operation before sending further keys.",
+    "clearing_succeeded": false,
+    "further_keys_sent_after_block": false
+  },
+  "conclusions": {
+    "ordinary_trusted_native_text_input_observed": true,
+    "actual_ime_preedit_observed": false,
+    "os_ime_accepted": false,
+    "os_ime_functionality_diagnosis": "not determined",
+    "framework_or_w3c_gates_changed": false
+  },
+  "limits": [
+    "Selected input-source identity alone does not prove Chinese mode or IME involvement.",
+    "No compositionstart/update/end was observed, so ordinary trusted n insertion is not actual IME pre-edit verification.",
+    "No IME success or malfunction is concluded, and the blocked clear operation is not reported as successful.",
+    "Full original run trace was not exported; only the supplied compact observations are preserved.",
+    "The native Chrome probe is a local release build, distinct from debug CI execution."
+  ],
+  "service": {
+    "url": "http://127.0.0.1:63118/",
+    "session": 69030,
+    "intent": "Leave running for manual native input; no stop operation was performed by this archival task."
+  }
+}

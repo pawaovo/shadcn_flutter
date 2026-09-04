@@ -1,0 +1,45 @@
+{
+  "recorded_at_utc": "2026-09-04T02:58:06.059748+00:00",
+  "url": "http://127.0.0.1:63118/",
+  "server_session": 69030,
+  "source": "packages/beautiful_ai_ui_catalog/build/diagnostics/live_os_ime_probe.dart",
+  "output": "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime",
+  "build_mode": "release",
+  "compile_seconds": 29.6,
+  "git_head": "bff08825bf9bc48a074a261ec9f912a1058058a2",
+  "command": [
+    "flutter",
+    "build",
+    "web",
+    "--no-pub",
+    "--target=build/diagnostics/live_os_ime_probe.dart",
+    "--output=build/diagnostics/live-os-ime"
+  ],
+  "developer_dir": "/Applications/Xcode.app/Contents/Developer",
+  "sha256": {
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live_os_ime_probe.dart": "3e00285fdde66ebf08f82ddd742f25eca474237ea1e8346dd4c996dabae0ae9b",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime/main.dart.js": "748b9a297e1ecce96d699022583f4e15ba1013708f099056a01efee8fab5f425",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime/flutter_bootstrap.js": "a2cefd59a6e5eae8cee8728b388bae3b00696aec8594c38ac6b15fa600682da4",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/live-os-ime-build.log": "1729794c457a16c4b692b59d1b094ae96b54e6474ef024c17fef4f1e895755b6",
+    "pubspec.lock": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae",
+    "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart": "6978df31b67e7aeabb08678d0920c9f1449465a5706aabf7ee15f9007d6d88dd"
+  },
+  "observer_boundary": [
+    "Native input is driven separately by the root task through the existing macOS input method.",
+    "No automatic focus/text/selection/event injection or system settings changes.",
+    "Stock and actual BeautifulPromptBar start writable and empty under enabled semantics.",
+    "Passive capture listeners preserve event deep target at capture and sample same event after dispatch via timer/frame.",
+    "Actual Prompt onSend is enabled and recorded; product normal submission can clear its own draft.",
+    "This manifest does not assert that an OS IME session or composing range was observed."
+  ],
+  "observed_events": [
+    "keydown",
+    "keyup",
+    "compositionstart",
+    "compositionupdate",
+    "compositionend",
+    "beforeinput",
+    "input",
+    "selectionchange"
+  ]
+}

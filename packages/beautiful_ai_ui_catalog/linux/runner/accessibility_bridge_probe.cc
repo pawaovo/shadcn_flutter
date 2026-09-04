@@ -2,7 +2,6 @@
 #include "accessibility_bridge.h"
 
 #include <atk/atk.h>
-#include <cstdio>
 #include <cstring>
 
 namespace {
@@ -185,7 +184,7 @@ FlValue* verify_replaced_parent(FlDartProject* project, gboolean* passed) {
   return report;
 }
 
-int print_report(FlValue* report, gboolean passed) {
+int write_report(FlValue* report, gboolean passed, const char* report_path) {
   string(report, "status", passed ? "native_bridge_initialization_verified" : "not_verified");
   string(report, "application_acceptance", "not_accepted");
   string(report, "human_review", "not_accepted");
@@ -198,7 +197,10 @@ int print_report(FlValue* report, gboolean passed) {
   }
   gsize length = 0;
   const void* data = g_bytes_get_data(json, &length);
-  if (std::fwrite(data, 1, length, stdout) != length || std::fputc('\n', stdout) == EOF) {
+  if (!g_file_set_contents(report_path, static_cast<const gchar*>(data),
+                           static_cast<gssize>(length), &error)) {
+    g_printerr("Could not write native evidence to %s: %s\n", report_path,
+               error == nullptr ? "unknown error" : error->message);
     return 2;
   }
   return passed ? 0 : 2;
@@ -207,8 +209,9 @@ int print_report(FlValue* report, gboolean passed) {
 }  // namespace
 
 int main(int argc, char** argv) {
-  if (argc != 3 || std::strcmp(argv[1], "--bundle") != 0) {
-    g_printerr("Usage: catalog_accessibility_bridge_probe --bundle /absolute/release/bundle\n");
+  if (argc != 5 || std::strcmp(argv[1], "--bundle") != 0 ||
+      std::strcmp(argv[3], "--report") != 0 || argv[4][0] == '\0') {
+    g_printerr("Usage: catalog_accessibility_bridge_probe --bundle /absolute/release/bundle --report /path/report.json\n");
     return 2;
   }
   g_autofree gchar* bundle = g_canonicalize_filename(argv[2], nullptr);
@@ -274,6 +277,6 @@ int main(int argc, char** argv) {
       verify_preexisting_parent(project, &preexisting_verified));
   fl_value_set_string_take(report, "constructed_replaced_parent_case",
       verify_replaced_parent(project, &replaced_verified));
-  return print_report(report, actual_socket && embedded_plug && correct_parent && inverse && !repeat_changed &&
-      preserved_original && did_not_realize && lifetime && preexisting_verified && replaced_verified);
+  return write_report(report, actual_socket && embedded_plug && correct_parent && inverse && !repeat_changed &&
+      preserved_original && did_not_realize && lifetime && preexisting_verified && replaced_verified, argv[4]);
 }

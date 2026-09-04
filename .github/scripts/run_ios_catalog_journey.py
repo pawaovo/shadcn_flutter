@@ -207,6 +207,13 @@ def capture_query_snapshot(command, path, timeout):
                 status["discarded_tail_bytes"] = len(pending)
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
         status["error"] = redact(str(error))
+        if error.__cause__ is not None:
+            cause = error.__cause__
+            status["cause"] = {"type": type(cause).__name__, "message": redact(str(cause))}
+            if isinstance(cause, subprocess.TimeoutExpired):
+                status["cause"]["timeout"] = cause.timeout
+            elif isinstance(cause, subprocess.CalledProcessError):
+                status["cause"]["returncode"] = cause.returncode
         raise
     finally:
         status["host_returncode"] = process.returncode if process is not None else None

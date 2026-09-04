@@ -5,11 +5,11 @@ Multi-platform visual, interaction, accessibility, and integration harness for
 
 Current release evidence and open gates are summarized in
 [September 4 release readiness](../../docs/beautiful-ui/quality_evidence/2026-09-04-release-readiness.md).
-Candidate `f39faedf` passed **12/12** main jobs,
-all three native framework input jobs and the full Firefox W3C suite. All four
-W3C browsers passed Prompt and clipboard flows. Readonly focus/copy and actual
-Linux Theme keyboard activation now work in their scoped runs; the remaining
-readonly ArrowRight and native ATK parent repairs require their new run.
+Candidate `bff08825` passed all four complete W3C browser input suites, all three
+native framework input jobs and the real Linux parent/lifetime contract. Main
+CI passed **10/12**; Android copy-feedback observation and iOS VM discovery
+remain open. Full Linux reader tasks expose pinned SDK name/state limitations;
+actual OS IME and full device/AT acceptance remain separate.
 P1/P2 budgets passed **8/8** at the
 earlier `87299572` runtime snapshot; P3 and full device/AT gates remain open. The `c2bde85` results below are dated historical observations,
 not acceptance of later source. All 27 registry entries remain `in_progress` and all six

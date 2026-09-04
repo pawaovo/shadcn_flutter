@@ -836,6 +836,7 @@ final class _ThinkingControlState extends State<_ThinkingControl> {
       identifier: widget.identifier,
       button: !widget.link,
       link: widget.link,
+      enabled: true,
       selected: widget.selected,
       expanded: widget.expanded,
       excludeSemantics: !widget.preserveChildSemantics,

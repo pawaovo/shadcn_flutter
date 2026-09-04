@@ -69,15 +69,23 @@ observer independently records its own index getter and reverse lookup.
 From the repository root on the disposable Linux runner:
 
 ```sh
+mkdir -p artifacts/catalog-orca-native-bridge
 cmake --build packages/beautiful_ai_ui_catalog/build/linux/x64/release \
   --target catalog_accessibility_bridge_probe
 GTK_MODULES=gail:atk-bridge NO_AT_BRIDGE=0 GDK_BACKEND=x11 \
 dbus-run-session -- xvfb-run -a \
   packages/beautiful_ai_ui_catalog/build/linux/x64/release/native_bridge_probe/catalog_accessibility_bridge_probe \
-  --bundle "$PWD/packages/beautiful_ai_ui_catalog/build/linux/x64/release/bundle"
+  --bundle "$PWD/packages/beautiful_ai_ui_catalog/build/linux/x64/release/bundle" \
+  --report "$PWD/artifacts/catalog-orca-native-bridge/report.json" \
+  > artifacts/catalog-orca-native-bridge/stdout.log \
+  2> artifacts/catalog-orca-native-bridge/stderr.log
 ```
 
-Capture stdout as JSON and stderr separately in the independent native-bridge
-artifact directory. The macOS preparation host has no GTK development tooling;
+The explicit `--report` path receives the complete JSON encoded by Flutter's JSON codec;
+encoding or file-write failure returns exit 2. Preserve stdout and stderr as
+separate original logs: GTK, the accessibility registry and the unstarted engine
+can emit initialization or teardown diagnostics on stdout. Those diagnostics
+are not JSON and must not be silently filtered from the original log. The
+macOS preparation host has no GTK development tooling;
 actual C++ compilation, real GTK getters, finalization and full Orca outcomes
 must be reported from the Linux CI execution, not inferred from source review.

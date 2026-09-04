@@ -1,16 +1,16 @@
 # Multi-platform support matrix
 
-Status: main CI and P1/P2 engineering budgets pass; remaining input, P3 and device/AT gates keep all six platforms Partial
+Status: four-browser W3C input and P1/P2 engineering budgets pass; remaining journey, SDK, P3 and device/AT gates keep all six platforms Partial
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `f39faedf` checkpoint has main CI **12/12**
-and input/AT **4/9**, including all three native input bridges; Firefox also
-completed its independent W3C suite. At the earlier `87299572` runtime snapshot,
-P1/P2 budgets passed **8/8** and P3 **1/7**. Readonly focus/copy and actual Linux
-Tab/Space now work in the scoped runs; three browsers still fail the required
-ArrowRight caret collapse, and full Orca tasks fail at the native parent chain.
-Their new repairs require their own runtime evidence. The
+The completed `bff08825` checkpoint has main CI **10/12** and input/AT **4/9**,
+including all three native input bridges. All four independent W3C suites pass
+in full. The two main failures are Android's copy-feedback observation and
+iOS VM-service discovery/cleanup before driver start. At the earlier `87299572`
+runtime snapshot, P1/P2 budgets passed **8/8** and P3 **1/7**. Linux's native
+parent/lifetime contract passes; full Orca tasks still expose SDK dynamic-name
+notification and expanded-state limitations. The
 `c2bde85` twelve-job pass retained below is historical, not current-candidate
 acceptance. All 27 registry entries remain `in_progress`.
 
@@ -43,10 +43,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed; earlier startup failure retained separately |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and entire independent W3C input suite passed at f39faedf; framework composition check failed |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed; OS/device/AT acceptance remains open |
+| Chrome stable | Release-blocking shared Web journey | Partial | Main journey and complete independent W3C input pass at bff08825; retained framework composition check fails |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at bff08825; separate framework driver navigation times out before a report |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at bff08825; retained framework composition check fails |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Main journey and complete independent W3C input pass at bff08825; retained synthetic resize composition check fails; OS/device/AT acceptance remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 

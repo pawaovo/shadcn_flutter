@@ -1,16 +1,15 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. The latest completed
-`f39faedf` checkpoint passed 12/12 main jobs, including the actual iOS driver.
-All three native framework input jobs passed; all four real-browser suites
-passed the Prompt/resize/clipboard flows, with Firefox completing its entire
-W3C suite. The readonly focus repair now passes copy and Cut rejection in all
-four browsers; Chrome/Edge/Safari still fail the required ArrowRight caret
-collapse. Real Linux Tab/Space now focuses and activates Theme, while the full
-Orca task fails at a missing native parent link. P1/P2 engineering budgets
-passed at the earlier `87299572`
-runtime snapshot; P3 frames, OS IME and full device/AT acceptance remain open.
+Status: **not ready for stable-release sign-off**. At the latest completed
+`bff08825` checkpoint, all four browsers pass the complete trusted W3C input
+journey, and all three native framework input jobs pass. Main CI is **10/12**:
+Android fails a transient copy-feedback observation and iOS fails VM-service
+discovery/host-query cleanup before its driver starts. Linux's native parent
+repair passes all three actual FlView cases; full Orca tasks now expose SDK
+name-notification and expanded-state limitations. P1/P2 engineering budgets
+passed at the earlier `87299572` runtime snapshot; P3 frames, OS IME and full
+device/AT acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
 implementations. **All 27 registry entries remain `in_progress`; all six Flutter
@@ -31,7 +30,55 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Latest completed checkpoint at f39faedf
+## Latest completed checkpoint at bff08825
+
+The new source is `bff08825bf9bc48a074a261ec9f912a1058058a2`.
+[Main CI 33830801341](https://github.com/pawaovo/shadcn_flutter/actions/runs/33830801341)
+finished naturally with **10/12** jobs passing.
+[Input/AT 33830801244](https://github.com/pawaovo/shadcn_flutter/actions/runs/33830801244)
+has **4/9** combined jobs passing, while **Chrome, Edge, Firefox and Safari all
+pass their entire independent W3C suites**, including the original readonly
+caret, rejected paste, actual paste and completion assertions. The Web readonly
+selection repair therefore has the required four-browser runtime result.
+
+The remaining framework results are distinct: Chrome/Firefox fail the retained
+composition assertion; Safari gets through the earlier checks then fails
+synthetic resize composition preservation. Edge's framework run times out in
+WebDriver navigation before producing its framework report; it must not be
+classified as a composing assertion failure. Its independent W3C suite passes.
+Three native framework input targets and ordinary GTK Orca capability pass.
+Narrator still lacks a default WASAPI render endpoint.
+
+Android's emulator boots, builds and installs the app. The copy completion
+helper observes `Copied`, but the caller's later assertion finds zero copies.
+The [minimal fixture repair](./2026-09-04-android-copy-feedback-fixture.md)
+removes only the redundant frames between completion and the original exact
+feedback assertions; real execution at the next source remains required.
+iOS builds, installs and launches, but its first unified-log query times out
+after 15 seconds with zero bytes. The cleanup process-group check fails; the
+driver never starts. The original report does not distinguish the underlying
+`ps` timeout from nonzero exit. The next diagnostic retains that cause while
+preserving every timeout and cleanup requirement.
+
+[Catalog Orca pilot 33830848233](https://github.com/pawaovo/shadcn_flutter/actions/runs/33830848233)
+verifies all three actual native parent/lifetime cases. Theme's reverse chain
+now reaches the same-process frame with all inverse relations verified, and
+Orca keeps its locus on Theme. Fresh native getters show the updated label,
+but a new Where Am I handler still speaks the old name; expanded-state mapping
+is also missing in this pinned SDK. The [SDK boundary report](./2026-09-04-linux-sdk-accessibility-boundaries.md)
+separates these findings from Thinking's own missing enabled flag. That flag
+now has a minimal repair with **15/15** targeted checks, without claiming it
+fixes the SDK mappings. Native initialization noise in the probe's old stdout
+report is retained; the next version writes JSON to an explicit file and keeps
+stdout/stderr separately.
+
+At bff08825, clean publication dry-run passes with zero warnings and a 3 MB
+archive, and a fresh Web release build passes. The [live input-method observer](./2026-09-04-live-os-ime-observation.md)
+is available for real human input. Native automation observed only a trusted
+ordinary character insertion, with no composition session; actual OS IME
+acceptance remains unestablished. No package was published.
+
+## Earlier completed checkpoint at f39faedf
 
 [The exact-source CI record](../../../.github/evidence/f39faedf-ci.md) and its
 [JSON manifest](../../../.github/evidence/f39faedf-ci.json) bind all three runs,
@@ -418,10 +465,12 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Verify the remaining readonly ArrowRight and native ATK parent repairs on
-  their new source, preserving all original input and reader assertions.
-  Readonly focus/readiness and Catalog content FocusScope now have actual
-  results at `f39faedf`; the earlier Edge startup failure remains historical.
+- Verify the Thinking enabled flag, copy-feedback fixture correction and
+  native report-file packaging on their new source. The readonly ArrowRight
+  repair now passes all four W3C suites and the native parent repair passes
+  its real FlView contract at `bff08825`. Full Linux reader tasks still need
+  the verified SDK corrections described above; iOS host discovery and actual
+  IME remain separate open boundaries.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain

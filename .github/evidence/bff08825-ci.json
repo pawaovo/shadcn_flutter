@@ -1,0 +1,464 @@
+{
+  "source_sha": "bff08825bf9bc48a074a261ec9f912a1058058a2",
+  "scope": "Historical exact-candidate evidence. Subsequent Thinking enabled, Android feedback fixture, and explicit native --report changes need their own validation.",
+  "runs": {
+    "main": {
+      "id": 33830801341,
+      "head_sha": "bff08825bf9bc48a074a261ec9f912a1058058a2",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33830801341",
+      "success_jobs": 10,
+      "total_jobs": 12,
+      "jobs": [
+        {
+          "id": 100893215405,
+          "name": "Detect generated targets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236644,
+          "name": "Format, analyze, and test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236653,
+          "name": "Build Web catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236668,
+          "name": "Build Windows catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236674,
+          "name": "Build Apple catalogs",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893236690,
+          "name": "Run Firefox journey",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236694,
+          "name": "Run Chrome and Linux journeys",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236699,
+          "name": "Build Android catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236704,
+          "name": "Run Android journey",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893236705,
+          "name": "Build Linux catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893236733,
+          "name": "Run Edge journey",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893888273,
+          "name": "Validate pub.dev package",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "input": {
+      "id": 33830801244,
+      "head_sha": "bff08825bf9bc48a074a261ec9f912a1058058a2",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33830801244",
+      "success_jobs": 4,
+      "total_jobs": 9,
+      "jobs": [
+        {
+          "id": 100893206118,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893206241,
+          "name": "Real edge input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893206278,
+          "name": "Real Safari full journey and input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893206283,
+          "name": "Native linux input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893206286,
+          "name": "Native windows input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893206293,
+          "name": "Native macos input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893206345,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100893206351,
+          "name": "Real chrome input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100893206359,
+          "name": "Real firefox input",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    "orca-pilot": {
+      "id": 33830848233,
+      "head_sha": "bff08825bf9bc48a074a261ec9f912a1058058a2",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33830848233",
+      "success_jobs": 0,
+      "total_jobs": 1,
+      "jobs": [
+        {
+          "id": 100893349180,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  },
+  "web": {
+    "chrome": {
+      "trusted_w3c_status": "passed",
+      "browser_report": {
+        "file": "input/input-chrome/browser/browser-input.json",
+        "sha256": "55b13e14bf13097b41d4ace0503456cf5526cbc8421609d2a4ba402b7d593361"
+      },
+      "last_stage": "complete",
+      "runner_summary": {
+        "file": "input/input-chrome/input-acceptance-summary.json",
+        "sha256": "36c6e7a528961aec8c790f7049e65bf547525220fc61248a70c050b2d8f74c66"
+      },
+      "framework_evidence": {
+        "file": "input/input-chrome/framework/framework-input.json",
+        "sha256": "216509502001e1be4247795efcbed801ff8a988660c40ad1450b20f894ee7c81"
+      },
+      "framework_boundary": "Retained injected composing range mismatch"
+    },
+    "edge": {
+      "trusted_w3c_status": "passed",
+      "browser_report": {
+        "file": "input/input-edge/browser/browser-input.json",
+        "sha256": "b59ae4da10d2f909be470fa37e5202022ad009cb1110004877ef69d4bbb7bbb9"
+      },
+      "last_stage": "complete",
+      "runner_summary": {
+        "file": "input/input-edge/input-acceptance-summary.json",
+        "sha256": "c327cc52637fc1072283958c08158e5229630e04223703fb8e22eef7cdf6dbb4"
+      },
+      "framework_evidence": {
+        "file": "input/input-edge/framework/run.log",
+        "sha256": "bdfc865925f71e21c9bb1a530279ae86b619e57b4e0e2ca473f9938c7303fff0"
+      },
+      "framework_boundary": "WebDriver SetLocation renderer timeout 300s before framework fixture report; no composing result observed"
+    },
+    "firefox": {
+      "trusted_w3c_status": "passed",
+      "browser_report": {
+        "file": "input/input-firefox/browser/browser-input.json",
+        "sha256": "420e0048397d3ede1b8500ad1750938fa4acf2095b397847490b672318760a61"
+      },
+      "last_stage": "complete",
+      "runner_summary": {
+        "file": "input/input-firefox/input-acceptance-summary.json",
+        "sha256": "b2fb720599cf2bd2ffd86d42b2e4f80e470f11f2db4723b08b5d65e015bc35a3"
+      },
+      "framework_evidence": {
+        "file": "input/input-firefox/framework/framework-input.json",
+        "sha256": "9374952a6bdeace7d2a2d5b8af84ae3e629f5311f44837c9757936f035d14816"
+      },
+      "framework_boundary": "Retained injected composing range mismatch"
+    },
+    "safari": {
+      "trusted_w3c_status": "passed",
+      "browser_report": {
+        "file": "input/input-safari/browser/browser-input.json",
+        "sha256": "362c54fb0acc49427c03354cf0beb88ebe421305a4fddc0c04fd046475f6c4e9"
+      },
+      "last_stage": "complete",
+      "runner_summary": {
+        "file": "input/input-safari/input-acceptance-summary.json",
+        "sha256": "f46860591fb1258b964f04a5634b95907b8c4ee12ca36ebfc34cd8cc6bccd08f"
+      },
+      "framework_evidence": {
+        "file": "input/input-safari/framework/framework-input.json",
+        "sha256": "99b9b06aefc4e5c34af2da9c56c5f1a9dfeab821c4869fdeb342b25382657869"
+      },
+      "framework_boundary": "Prompt composition and numeric scenarios passed; synthetic resize retained composing assertion failed"
+    }
+  },
+  "native_bridge": {
+    "status": "native_bridge_initialization_verified",
+    "original_raw_stdout": {
+      "file": "orca-pilot/catalog-orca-pilot-33830848233-1/catalog-orca-native-bridge/report.json",
+      "sha256": "d3b685fa59dac72d4de0c9eb0eb785caee37de1f129176673659e8257641b067"
+    },
+    "extraction": {
+      "file": "derived/native-bridge-report-extracted.json",
+      "sha256": "74e2f1cbaf40571a555ef40cedaa99c233e5589e3100f867a5690073cb22dee9"
+    },
+    "file_format_boundary": "Original report.json contains complete runtime stdout followed by one JSON document; it is not a pure JSON file. Derived extraction preserves original file and its hash.",
+    "three_real_flview_cases": "verified; actual occupied socket, natural missing parent repair, preexisting parent no-op, replacement preserved through destroy, all weak refs finalized"
+  },
+  "catalog_orca": {
+    "report": {
+      "file": "orca-pilot/catalog-orca-pilot-33830848233-1/catalog-orca-three-tasks/catalog-report.json",
+      "sha256": "2e1db9bdea6e4a0b718b0af37a2fc6c47b545dba750d1d5e180e5c7056a4db8a"
+    },
+    "runner": {
+      "file": "orca-pilot/catalog-orca-pilot-33830848233-1/catalog-orca-run/runner.json",
+      "sha256": "6b42eaff2b701a3814294d538db2d3124ebad94eb1b57586a1deec0106e0c932"
+    },
+    "build": {
+      "file": "orca-pilot/catalog-orca-pilot-33830848233-1/catalog-orca-build/build-provenance.json",
+      "sha256": "5b835a740aad84497c8609878733885dd80e91c2567f8ad8cc686431de0ec3e2"
+    },
+    "accepted_tasks": 0,
+    "total_tasks": 3,
+    "manifest_files_sha256_verified": 29,
+    "theme": "Actual native Theme system -> light with Space; 6 parent edges all reciprocal to same PID frame; real fresh WhereAmI generated old Theme system name. Measured pre-key 8000 frames all zero, new handler precedes utterance. Not stale speech queue.",
+    "thinking": "Focus reached disclosure descendant; native expanded/expandable/enabled false before any Space; no full task acceptance.",
+    "search": "One Tab issued; inspector exceeded existing 8 second timeout; query and selection not issued.",
+    "cleanup": "verified"
+  },
+  "android_journey": {
+    "job_id": 100893236704,
+    "log": {
+      "file": "android-job.log",
+      "sha256": "831de1be6d2dcda0e2494378c4eece51ae4215380f5f9f6e2567d0c71fa0e140"
+    },
+    "failure": "Emulator booted, debug APK built and installed; original journey failed catalog_journey_test.dart:143:9 because Copied text found 0 instead of 1."
+  },
+  "narrator": {
+    "report": {
+      "file": "input/real-at-windows-capability/report.json",
+      "sha256": "1ca5f97ce55ad7318acbf5f79d74f089f21511007a1bbcdb3b29cb26c0e37562"
+    },
+    "failure": "No usable WASAPI endpoint 0x80070490; native UIA and ordinary keyboard response observed, no AT acceptance."
+  },
+  "sdk_boundary_document": "docs/beautiful-ui/quality_evidence/2026-09-04-linux-sdk-accessibility-boundaries.md",
+  "input_artifacts": [
+    {
+      "id": 9921793303,
+      "name": "input-safari",
+      "size_in_bytes": 14069,
+      "digest": "sha256:47550a013ed8cbf0174a2a0d312fb558c417895480763691232cd029f32b4a40"
+    },
+    {
+      "id": 9921774113,
+      "name": "input-edge",
+      "size_in_bytes": 68529,
+      "digest": "sha256:5512ab57396814bed6d88a3f4a583f4e29675100b4eb600a73e243be230e1245"
+    },
+    {
+      "id": 9921670188,
+      "name": "input-firefox",
+      "size_in_bytes": 35907,
+      "digest": "sha256:d4efb3c22ada5ffc6d6002b730809f92e69fe64a0ff471e35225e80b6f4fcb5b"
+    },
+    {
+      "id": 9921666510,
+      "name": "input-windows",
+      "size_in_bytes": 15784,
+      "digest": "sha256:6c6ea6370fcca306b368b67eca3cd03b4318c2a5bd7926eec10b1a92b794454f"
+    },
+    {
+      "id": 9921665501,
+      "name": "input-chrome",
+      "size_in_bytes": 799948,
+      "digest": "sha256:31ed9673b1dbc00ed17e2c445596f78bc7fe0f314f518f775d39d4589d75b9d8"
+    },
+    {
+      "id": 9921663292,
+      "name": "input-macos",
+      "size_in_bytes": 16262,
+      "digest": "sha256:5b59bdebf006ba73218a18b5ed44cbf396a37deb58a34a47ef9b725d4c82eaf0"
+    },
+    {
+      "id": 9921634280,
+      "name": "input-linux",
+      "size_in_bytes": 15771,
+      "digest": "sha256:e28bdafbc7268625cb91b048d576716c45fe5ac9c517341cbd7d6b7994df6e96"
+    },
+    {
+      "id": 9921617104,
+      "name": "real-at-linux-capability",
+      "size_in_bytes": 485350,
+      "digest": "sha256:337e079b1e8f08fad34adedc369105fbfee8a257ae0602f25b2346aeb6bc7942"
+    },
+    {
+      "id": 9921605337,
+      "name": "real-at-windows-capability",
+      "size_in_bytes": 2971,
+      "digest": "sha256:c56f4d30e61e2c191637a39606b4ce8722634871ca5fad07d7eb575a967625fc"
+    }
+  ],
+  "native_input": {
+    "linux": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-linux/framework/framework-input.json",
+        "sha256": "4689eabc3a9cc067f641c54b1647876084e065a1d8e2d69f88a2d97a7d56eb03"
+      }
+    },
+    "macos": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-macos/framework/framework-input.json",
+        "sha256": "31a5edc0821f9da9c85dfec6e3ee23b380b1dbad281a12b96f2390aeda6f6a9d"
+      }
+    },
+    "windows": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-windows/framework/framework-input.json",
+        "sha256": "25d1cda6797d96fcbfc0aa5d26ee1f73d25eb91d5c229056e07d912257ddb2ce"
+      }
+    }
+  },
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "ios_journey": {
+    "passed": false,
+    "report": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+      "sha256": "b3c319cceb83a776270efdc106015bc38977ac759e00eeba0939fc868eca2a96"
+    },
+    "vm_query_capture": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.json",
+      "sha256": "a8173fec4fd7acb0f9a043e3ac6356853bfa545452f8137702148f57d8959fc9"
+    },
+    "job_log": {
+      "file": "apple-job.log",
+      "sha256": "395fc404b484daaf39f9ac46ecf9ed433977e5600773acb7ce63fc26fc676035"
+    },
+    "boundary": "Build/install/launch passed. First VM log-history query returned zero bytes before its 15-second limit, then owned process-group verification failed. Dart integration driver never started; this is not an observed application assertion failure.",
+    "capture": {
+      "exit_code": 124,
+      "timed_out": true,
+      "stdout_eof": false,
+      "bytes_read": 0,
+      "host_group_clean": false,
+      "error": "Cannot verify process group membership",
+      "host_returncode": -15,
+      "elapsed_seconds": 18.93
+    },
+    "underlying_ps_failure": "Cause not serialized; timeout versus nonzero ps result is not established."
+  },
+  "main_artifacts": [
+    {
+      "id": 9921956974,
+      "name": "apple-native-journeys",
+      "size_in_bytes": 188777,
+      "digest": "sha256:f77ec4a92047aadfcb00703509e14e01bbac25140905428e00340eb7f66c06f9"
+    },
+    {
+      "id": 9921732081,
+      "name": "windows-native-journey",
+      "size_in_bytes": 813,
+      "digest": "sha256:9739c240cf2459bdb394d222c156e9e2309f82a73cda94349856f7848244e553"
+    },
+    {
+      "id": 9921699426,
+      "name": "chrome-trusted-journey",
+      "size_in_bytes": 1130,
+      "digest": "sha256:f847bf9389f7813395afc0528ef98f1d5208d0e1a70cc27c7c1aaab69236f000"
+    },
+    {
+      "id": 9921696867,
+      "name": "isolated-hosted-consumer",
+      "size_in_bytes": 10370,
+      "digest": "sha256:052650519e62547acb6f7307827105f061b11658d93df5f2ea4f3bd968f81f32"
+    },
+    {
+      "id": 9921691400,
+      "name": "firefox-journey",
+      "size_in_bytes": 19541,
+      "digest": "sha256:764361f61c1ef0ff767a1e1f3124c860b862fab9bc9fd12d8609ba567a194235"
+    },
+    {
+      "id": 9921678693,
+      "name": "edge-journey",
+      "size_in_bytes": 43201,
+      "digest": "sha256:43525c7ff141eb5a5dd603b4a3b862112ef3c672fac4999d58325b1a97e14269"
+    },
+    {
+      "id": 9921672427,
+      "name": "source-asset-audits",
+      "size_in_bytes": 882,
+      "digest": "sha256:413bdaefee8c56a8ef5fb39d54353a6957c918a89946fd0c34f96a5ad8ce3a9f"
+    },
+    {
+      "id": 9921646613,
+      "name": "web-asset-audits",
+      "size_in_bytes": 6364,
+      "digest": "sha256:5b0b9e5e370dd6b8e25887cc74df6f484e0f3c8e9688552af4e56b2267f8bfa9"
+    }
+  ],
+  "pilot_artifact": {
+    "id": 9921659576,
+    "name": "catalog-orca-pilot-33830848233-1",
+    "size_in_bytes": 775223,
+    "digest": "sha256:28444ec3a65e4c4277ef78dc584272402188a30336d8f944ba5c978330d7ff53",
+    "metadata_source": {
+      "file": "orca-pilot-job.log",
+      "sha256": "71c79d8208631d81ae9bb7644f7617eff371cc4912f9711a0fd4253fff83ee35"
+    },
+    "digest_boundary": "GitHub upload digest; 29 extracted task-manifest file digests independently verified."
+  },
+  "artifact_digest_boundary": "Artifact digest fields are GitHub-reported ZIP digests. Downloaded ZIP digests independently verified for apple-native-journeys and input-linux/input-macos/input-windows; each core report reference hash is independently computed from preserved files.",
+  "safari_original_journey": "passed independently before framework and W3C suites",
+  "core_file_hashes_verified": 26,
+  "total_artifact_metadata_records": 18
+}
