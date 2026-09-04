@@ -1,0 +1,11 @@
+Compiling build/diagnostics/composition_web_probe.dart for the Web...     
+Wasm dry run succeeded. Consider building and testing your application with the `--wasm` flag. See docs for more info: https://docs.flutter.dev/platform-integration/web/wasm
+Use --no-wasm-dry-run to disable these warnings.
+package:skeletonizer has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+package:country_flags has `uses-material-design: true` set but the primary pubspec contains `uses-material-design: false`. If the application needs material icons, then `uses-material-design`  must be set to true.
+Expected to find fonts for (packages/cupertino_icons/CupertinoIcons, MaterialIcons, packages/shadcn_flutter/LucideIcons, packages/shadcn_flutter/RadixIcons, packages/shadcn_flutter/BootstrapIcons), but found (packages/shadcn_flutter/RadixIcons, packages/shadcn_flutter/BootstrapIcons, packages/shadcn_flutter/LucideIcons). This usually means you are referring to font families in an IconData class but not including them in the assets section of your pubspec.yaml, are missing the package that would include them, or are missing "uses-material-design: true".
+Font asset "RadixIcons.otf" was tree-shaken, reducing it from 87120 to 67188 bytes (22.9% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "LucideIcons.ttf" was tree-shaken, reducing it from 685840 to 639376 bytes (6.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "BootstrapIcons.otf" was tree-shaken, reducing it from 478036 to 412068 bytes (13.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Compiling build/diagnostics/composition_web_probe.dart for the Web...        30.7s
+✓ Built build/diagnostics/composition-web

@@ -11,6 +11,7 @@ import '../../packages/beautiful_ai_ui_catalog/integration_test/driver/catalog_b
 /// This exercises the real HTTP boundary without launching a browser or GUI.
 Future<void> main() async {
   final requests = <Map<String, Object?>>[];
+  final pendingSnapshots = <Map<String, Object?>>[];
   final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
   var failNext = false;
   server.listen((request) async {
@@ -36,6 +37,10 @@ Future<void> main() async {
       request.response.statusCode = 500;
       request.response.write(
         '{"value":{"error":"timeout","message":"real upstream failure"}}',
+      );
+    } else if (pendingSnapshots.isNotEmpty) {
+      request.response.write(
+        jsonEncode(<String, Object?>{'value': pendingSnapshots.removeAt(0)}),
       );
     } else {
       request.response.write('{"value":null}');
@@ -139,11 +144,119 @@ Future<void> main() async {
     print(
       'Browser input protocol checks passed: UTF-8 byte framing, complete POST url, native events, balanced keys, existing session, original failure, no retry.',
     );
+    await _exerciseReadOnlyMonitor(driver, requests, pendingSnapshots);
   } finally {
     driver.close();
     await server.close(force: true);
   }
   await _exerciseDriverMain();
+}
+
+Future<void> _exerciseReadOnlyMonitor(
+  BrowserInputDriver driver,
+  List<Map<String, Object?>> requests,
+  List<Map<String, Object?>> pendingSnapshots,
+) async {
+  const documentText = 'Read-only document 中文';
+  const promptText = 'Unrelated Prompt draft';
+  const stageName = 'readonly-copy';
+  final report = <String, Object?>{'stages': <Object?>[]};
+  final monitor = BrowserAcceptanceMonitor(driver, report);
+
+  Map<String, Object?> snapshot({
+    bool documentFocused = true,
+    bool documentReadOnly = true,
+    bool documentSelected = false,
+    bool domReadOnly = true,
+    bool domInFlutterView = true,
+    bool domDisabled = false,
+    String domTag = 'textarea',
+    bool domSelected = false,
+    String domText = documentText,
+  }) => <String, Object?>{
+    'stage': <String, Object?>{
+      'stage': stageName,
+      // Deliberately ready and fully selected: these fields describe Prompt,
+      // not the document the read-only actions are meant to exercise.
+      'focused': true,
+      'draft': promptText,
+      'selectionStart': 0,
+      'selectionEnd': promptText.length,
+      'document': <String, Object?>{
+        'text': documentText,
+        'focused': documentFocused,
+        'readOnly': documentReadOnly,
+        'selectionStart': 0,
+        'selectionEnd': documentSelected ? documentText.length : 0,
+        'state_id': 41,
+        'controller_id': 42,
+      },
+    },
+    'result': null,
+    'acknowledgement': null,
+    'activeEditor': <String, Object?>{
+      // The general writable-editor flag is false for a valid read-only field.
+      'ready': !domReadOnly && domInFlutterView && !domDisabled,
+      'tagName': domTag,
+      'inFlutterView': domInFlutterView,
+      'readOnly': domReadOnly,
+      'disabled': domDisabled,
+      'value': domText,
+      'selectionStart': 0,
+      'selectionEnd': domSelected ? documentText.length : 0,
+    },
+  };
+
+  Future<void> consume(
+    String description,
+    List<Map<String, Object?>> snapshots,
+    Future<void> Function() wait,
+  ) async {
+    final before = requests.length;
+    pendingSnapshots.addAll(snapshots);
+    await wait().timeout(const Duration(seconds: 3));
+    if (pendingSnapshots.isNotEmpty) {
+      throw StateError(
+        '$description accepted an invalid earlier snapshot; '
+        '${pendingSnapshots.length} required snapshots were not consumed',
+      );
+    }
+    final observed = requests.skip(before).toList();
+    if (observed.length != snapshots.length ||
+        observed.any(
+          (request) =>
+              request['method'] != 'POST' ||
+              request['path'] != '/session/actual/execute/sync' ||
+              (request['body'] as Map)['script'] !=
+                  browserAcceptanceSnapshotScript,
+        )) {
+      throw StateError('$description must only poll the read-only snapshot');
+    }
+  }
+
+  await consume('Read-only document readiness', <Map<String, Object?>>[
+    snapshot(documentFocused: false),
+    snapshot(documentReadOnly: false),
+    snapshot(domReadOnly: false),
+    snapshot(domInFlutterView: false),
+    snapshot(domDisabled: true),
+    snapshot(domTag: 'div'),
+    snapshot(),
+  ], () => monitor.waitForReadOnlyEditorReady(stageName));
+  await consume('Exact read-only document selection', <Map<String, Object?>>[
+    snapshot(domSelected: true),
+    snapshot(documentSelected: true),
+    snapshot(documentSelected: true, domSelected: true, domText: promptText),
+    snapshot(documentSelected: true, domSelected: true),
+  ], () => monitor.waitForDocumentSelection(stageName));
+  final document = (report['last_non_null_state'] as Map)['document'] as Map;
+  if (document['state_id'] != 41 || document['controller_id'] != 42) {
+    throw StateError('Read-only observations must retain document identities');
+  }
+  print(
+    'Read-only monitor checks passed: document focus, native read-only field, '
+    'matching Flutter/DOM text and full selection; Prompt state cannot satisfy either wait.',
+  );
 }
 
 /// Run the actual entry point against an HTTP fixture, including its reporting

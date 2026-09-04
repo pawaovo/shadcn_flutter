@@ -558,6 +558,7 @@ final class _BeautifulSelectionActionsState
               textField: true,
               readOnly: true,
               enabled: true,
+              onFocus: _documentFocus.requestFocus,
               child: BeautifulTextSelectionGestureDetector(
                 editableTextKey: _documentKey,
                 identity: (widget.documentId, widget.text),

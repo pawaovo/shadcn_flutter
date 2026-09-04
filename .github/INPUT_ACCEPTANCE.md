@@ -43,6 +43,13 @@ element or inserting text through JavaScript. Prompt paste targets use the same
 readiness boundary. Select-all before keyboard copy waits for the exact full
 selection, with no repeated key action.
 
+Read-only document stages publish their own text, focus, selection, read-only
+flag, and editor/controller identities separately from Prompt. After one document
+click, the driver waits for that document's Flutter focus and the matching active
+read-only DOM editor. Its single select-all must be reflected in both document
+and DOM selection before copy and Backspace proceed. The original unchanged-text
+and selected-text assertions remain the acceptance conditions.
+
 Every stage/readiness wait also reads the original `$flutterDriverResult`.
 An early target assertion is saved and propagated immediately, together with the
 last non-null application state and acknowledgement. Post-Escape and post-copy

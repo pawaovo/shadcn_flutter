@@ -4,9 +4,11 @@ Status: main CI and P1/P2 engineering budgets pass; remaining input, P3 and devi
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `87299572` checkpoint has main CI **12/12**, input/AT **4/9**
-(including all three native input bridges), P1/P2 budgets **8/8 pass**, and P3
-budgets **1/7 pass**. Subsequent input/reader-observation repairs await CI. The
+The completed `3612efd0` checkpoint has main CI **11/12** (Edge startup timeout)
+and input/AT **4/9**, including all three native input bridges; Firefox also
+completed its independent W3C suite. At the earlier `87299572` runtime snapshot,
+P1/P2 budgets passed **8/8** and P3 **1/7**. Readonly-focus and cold-start repairs
+await their new CI evidence. The
 `c2bde85` twelve-job pass retained below is historical, not current-candidate
 acceptance. All 27 registry entries remain `in_progress`.
 

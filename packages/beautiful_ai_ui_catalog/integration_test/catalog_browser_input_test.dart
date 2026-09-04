@@ -53,6 +53,23 @@ void main() {
         matching: find.byType(EditableText),
       );
       EditableText editor() => tester.widget<EditableText>(prompt);
+      Finder? readOnlyDocument;
+
+      Map<String, Object?>? documentSnapshot() {
+        final target = readOnlyDocument;
+        if (target == null || target.evaluate().length != 1) return null;
+        final state = tester.state<EditableTextState>(target);
+        final controller = state.widget.controller;
+        return <String, Object?>{
+          'state_id': identityHashCode(state),
+          'controller_id': identityHashCode(controller),
+          'text': controller.text,
+          'focused': state.widget.focusNode.hasPrimaryFocus,
+          'readOnly': state.widget.readOnly,
+          'selectionStart': controller.selection.start,
+          'selectionEnd': controller.selection.end,
+        };
+      }
 
       Future<void> reveal(Finder target) async {
         await tester.ensureVisible(target);
@@ -82,6 +99,7 @@ void main() {
               'selectionStart': editor().controller.selection.start,
               'selectionEnd': editor().controller.selection.end,
             },
+            'document': ?documentSnapshot(),
             ...extra,
           });
           await tester.pump(const Duration(milliseconds: 30));
@@ -217,7 +235,9 @@ void main() {
             matching: find.byType(EditableText),
           )
           .first;
+      readOnlyDocument = document;
       await reveal(document);
+      expect(tester.widget<EditableText>(document).readOnly, isTrue);
       final original = tester.widget<EditableText>(document).controller.text;
       await stage(
         'readonly-copy',

@@ -68,9 +68,18 @@ void main() {
     await tester.pump();
     expect(find.text('Motion: reduced'), findsOneWidget);
 
+    // Mount a fresh app so the keyboard assertion requires a real transition.
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
     await tester.pumpWidget(const CatalogApp());
     await tester.pump();
+    expect(find.text('Theme: system'), findsOneWidget);
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    expect(
+      Focus.of(tester.element(find.text('Theme: system'))).hasFocus,
+      isTrue,
+    );
     await tester.sendKeyEvent(LogicalKeyboardKey.enter);
     await tester.pump();
     expect(find.text('Theme: light'), findsOneWidget);

@@ -132,9 +132,13 @@ Future<void> main() async {
       await driver.keys('\uE003');
     }
     await clickStage('readonly-copy');
+    await monitor.waitForReadOnlyEditorReady('readonly-copy');
     await driver.chord(modifier, 'a');
+    await monitor.waitForDocumentSelection('readonly-copy');
     await driver.chord(modifier, 'c');
+    await monitor.observe('after readonly copy key acknowledgement');
     await driver.keys('\uE003');
+    await monitor.observe('after readonly Backspace key acknowledgement');
     await acknowledge('readonly-copy');
     for (final operation in <String>['cut', 'paste']) {
       if (operation == 'paste') {
@@ -296,6 +300,48 @@ final class BrowserAcceptanceMonitor {
           state['selectionEnd'] == (state['draft'] as String).length;
     }, '$name exact selection after its single select-all action');
     _recordObservation('full selection for $name');
+  }
+
+  Future<void> waitForReadOnlyEditorReady(String name) async {
+    await driver.waitFor(() async {
+      final snapshot = await _snapshot('$name read-only document readiness');
+      return _readOnlyDocumentReady(snapshot, name);
+    }, '$name document focus after its single pointer click');
+    _recordObservation('read-only document ready for $name');
+  }
+
+  bool _readOnlyDocumentReady(Map<String, dynamic> snapshot, String name) {
+    final state = snapshot['stage'];
+    final document = state is Map ? state['document'] : null;
+    final active = snapshot['activeEditor'];
+    return state is Map &&
+        state['stage'] == name &&
+        document is Map &&
+        document['focused'] == true &&
+        document['readOnly'] == true &&
+        document['text'] is String &&
+        active is Map &&
+        active['inFlutterView'] == true &&
+        active['readOnly'] == true &&
+        active['disabled'] == false &&
+        (active['tagName'] == 'input' || active['tagName'] == 'textarea') &&
+        active['value'] == document['text'];
+  }
+
+  Future<void> waitForDocumentSelection(String name) async {
+    await driver.waitFor(() async {
+      final snapshot = await _snapshot('$name document select-all');
+      if (!_readOnlyDocumentReady(snapshot, name)) return false;
+      final document = (snapshot['stage'] as Map)['document'] as Map;
+      final active = snapshot['activeEditor'] as Map;
+      final length = (document['text'] as String).length;
+      return length > 0 &&
+          document['selectionStart'] == 0 &&
+          document['selectionEnd'] == length &&
+          active['selectionStart'] == 0 &&
+          active['selectionEnd'] == length;
+    }, '$name exact document selection after its single select-all action');
+    _recordObservation('full document selection for $name');
   }
 
   Future<void> observe(String boundary) async {

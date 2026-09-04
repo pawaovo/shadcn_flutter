@@ -1,0 +1,339 @@
+{
+  "recorded_at_utc": "2026-09-04T01:40:01.678630+00:00",
+  "browser": "Codex In-app Browser selected by CUA (browser id 2)",
+  "url": "http://127.0.0.1:52709/",
+  "collection": "Transcribed from the complete visible DOM snapshots returned by CUA; no hidden application state or fabricated OS input.",
+  "semantics_enabled": true,
+  "stock_control_enabled_verified_in_dom": true,
+  "os_ime_accepted": false,
+  "framework_gates_changed": false,
+  "direct_dart_injection": {
+    "delivery": "one public EditableTextState.userUpdateTextEditingValue call per control",
+    "source_boundary": "Earlier Dart-only build was replaced by the extended DOM-event probe; exact earlier bundle hash was not captured. Observations are retained as tool-visible evidence, not a new source-bound release acceptance.",
+    "runs": [
+      {
+        "control": "stock EditableText",
+        "samples": [
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "immediate",
+            "elapsed_ms": 0,
+            "composing": [
+              0,
+              2
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "next frame",
+            "elapsed_ms": 25,
+            "composing": [
+              0,
+              2
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "100ms",
+            "elapsed_ms": 102,
+            "composing": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "500ms",
+            "elapsed_ms": 503,
+            "composing": [
+              -1,
+              -1
+            ]
+          }
+        ]
+      },
+      {
+        "control": "BeautifulPromptBar",
+        "samples": [
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "immediate",
+            "elapsed_ms": 1,
+            "composing": [
+              0,
+              2
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "next frame",
+            "elapsed_ms": 17,
+            "composing": [
+              0,
+              2
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "100ms",
+            "elapsed_ms": 101,
+            "composing": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "500ms",
+            "elapsed_ms": 501,
+            "composing": [
+              -1,
+              -1
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "synthetic_dom_composition": {
+    "events": [
+      {
+        "type": "compositionstart",
+        "isTrusted": false,
+        "data": ""
+      },
+      {
+        "type": "compositionupdate",
+        "isTrusted": false,
+        "data": "中文"
+      },
+      {
+        "type": "input",
+        "isTrusted": false,
+        "data": "中文",
+        "inputType": "insertCompositionText",
+        "isComposing": true
+      },
+      {
+        "type": "compositionend",
+        "isTrusted": false,
+        "data": "中文"
+      },
+      {
+        "type": "input",
+        "isTrusted": false,
+        "data": "中文",
+        "inputType": "insertText",
+        "isComposing": false
+      }
+    ],
+    "runs": [
+      {
+        "control": "stock EditableText",
+        "status": "failed_expected_composition_lifecycle",
+        "samples": [
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "immediate after composition input",
+            "elapsed_ms": 1,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "next frame",
+            "elapsed_ms": 15,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "100ms",
+            "elapsed_ms": 100,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "500ms",
+            "elapsed_ms": 500,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "after compositionend",
+            "elapsed_ms": 510,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          }
+        ]
+      },
+      {
+        "control": "BeautifulPromptBar",
+        "status": "failed_expected_composition_lifecycle",
+        "samples": [
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "immediate after composition input",
+            "elapsed_ms": 1,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "next frame",
+            "elapsed_ms": 18,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "100ms",
+            "elapsed_ms": 101,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "500ms",
+            "elapsed_ms": 501,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          },
+          {
+            "text": "中文",
+            "selection": [
+              2,
+              2
+            ],
+            "primary_focus": true,
+            "phase": "after compositionend",
+            "elapsed_ms": 512,
+            "composing": [
+              -1,
+              -1
+            ],
+            "dom_text": "中文"
+          }
+        ]
+      }
+    ]
+  },
+  "interpretation": "Both stock EditableText and BeautifulPromptBar behave alike in this browser and semantics host. Direct Dart injection is normalized to empty composing; the synthetic DOM sequence does not establish a nonempty Flutter composing range. Text, caret and focus remain correct. These observations do not accept OS IME or justify weakening the original integration assertions.",
+  "current_probe_source_sha256": "9f5dce10e558a8b84ca5027867bee7f0b6ef44b367a17ca324da0bc016c532f9",
+  "dependency_lock_sha256": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae",
+  "git_head_when_recorded": "3612efd0b034a2eff2407553a36cf14e156d0b48"
+}

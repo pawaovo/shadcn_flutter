@@ -169,11 +169,14 @@ final class _CatalogAppState extends State<CatalogApp> {
           themeMode: _themeMode,
           motion: _motion,
           child: Overlay.wrap(
-            child: _CatalogHome(
-              themeMode: _themeMode,
-              motion: _motion,
-              onThemePressed: _cycleTheme,
-              onMotionPressed: _cycleMotion,
+            child: FocusScope(
+              autofocus: true,
+              child: _CatalogHome(
+                themeMode: _themeMode,
+                motion: _motion,
+                onThemePressed: _cycleTheme,
+                onMotionPressed: _cycleMotion,
+              ),
             ),
           ),
         );

@@ -1,0 +1,12 @@
+diff --git a/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart b/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart
+index b8df40e5..947fa289 100644
+--- a/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart
++++ b/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart
+@@ -558,6 +558,7 @@ final class _BeautifulSelectionActionsState
+               textField: true,
+               readOnly: true,
+               enabled: true,
++              onFocus: _documentFocus.requestFocus,
+               child: BeautifulTextSelectionGestureDetector(
+                 editableTextKey: _documentKey,
+                 identity: (widget.documentId, widget.text),

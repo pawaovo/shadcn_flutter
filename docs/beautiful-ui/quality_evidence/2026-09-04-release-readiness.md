@@ -1,11 +1,13 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. The main workflow at
-`351d7c4f54b66d93749028c8053cc01840bd5328` passed all 12 jobs, all three native
-framework input jobs passed, and the eight P1/P2 native workloads at the
-preceding `87299572` runtime snapshot passed the fixed engineering budget. Independent Web input, P3 frame budgets, full real
-assistive-technology review and physical-device acceptance remain open.
+Status: **not ready for stable-release sign-off**. The latest completed
+`3612efd0` checkpoint passed 11/12 main jobs (Edge failed before app startup).
+All three native framework input jobs passed; all four real-browser suites
+passed the Prompt/resize/clipboard flows, with Firefox completing its entire
+W3C suite. The new readonly-focus and Catalog cold-start repairs await their
+own cloud result. P1/P2 engineering budgets passed at the earlier `87299572`
+runtime snapshot; P3 frames, OS IME and full device/AT acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
 implementations. **All 27 registry entries remain `in_progress`; all six Flutter
@@ -26,7 +28,42 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Subsequent checkpoint at 351d7c4f and the next repair
+## Latest completed checkpoint at 3612efd0
+
+[The compact CI record](../../../.github/evidence/3612efd0-ci.md) and its
+[JSON](../../../.github/evidence/3612efd0-ci.json) preserve the exact run/job
+identity and report hashes. Main CI was **11/12**, with actual iOS driver
+success and an Edge startup timeout before application navigation. Input/AT
+jobs were **4/9**, while Firefox's independent W3C suite completed fully.
+All four real-browser W3C runs passed Prompt typing, menu Escape, keyboard
+copy/paste, five actual window widths, submission, and Code/Streaming clipboard
+operations. The original Prompt semantics repair is therefore verified for
+those browser flows.
+
+Chrome's remaining readonly failure was an empty selected substring, after
+its document-text-unchanged assertion had passed. Edge/Safari did not satisfy
+the collapsed-caret condition after ArrowRight; Paste was not issued. The next
+repair connects the readonly document's Semantics focus action to its real
+FocusNode and uses document-specific Flutter/DOM readiness and selection
+observations before the unchanged real-key operations. Its regression moves
+focus from Prompt to the actual document and preserves text, selection,
+controller identity and the readonly contract.
+
+The Catalog content FocusScope and readonly-focus changes pass **641/641
+library tests and 66/66 Catalog tests**, strict analysis, and formatting of
+**146 package Dart sources plus the protocol test**. Real-browser and
+X11/Orca outcomes still need the new source's CI run.
+
+The remaining framework composition assertion is deliberately retained.
+[Actual-browser stock controls](./2026-09-04-web-composition-control.md)
+showed the same normalization in stock EditableText and Prompt: direct Dart
+range injection was cleared, and synthetic DOM composition events did not
+establish the expected active range under the enabled semantics strategy.
+Text, selection and focus stayed correct. This establishes the tested channel's
+limit, without accepting or rejecting real OS IME. No assertion is removed and
+no synthetic event is relabelled as real input-method evidence.
+
+## Earlier checkpoint at 351d7c4f and its following repair
 
 [The compact 351d7c4f report](../../../.github/evidence/351d7c4f-ci.md) and
 [its JSON](../../../.github/evidence/351d7c4f-ci.json) bind the following results
@@ -67,6 +104,19 @@ draft-clearing symptom is gone. The new error recorder forwards the original
 Flutter handler while preserving each error before aggregation; it does not
 consume or suppress failures. The component and Catalog changes require their
 new CI result; the older evidence remains scoped to its recorded source.
+
+The subsequent Catalog cold-start regression also identified a missing content
+focus scope in its builder-only app shell. A standard autofocus `FocusScope`
+now wraps the actual Overlay content, without choosing any specific control.
+Three initial-view-event orderings must reach Theme with the first Tab and
+activate a real system-to-light transition with Space; an existing editor must
+retain focus, value and selection during view recovery and theme changes.
+The old pointer/keyboard fixture now mounts a fresh app before its keyboard
+phase, so an already-light theme can no longer hide a missing key action.
+The complete Catalog suite passes **65/65** with this repair; the library
+remains **641/641**, strict analysis is clean and all **145 Git-source Dart
+files** pass formatting. Real X11/Orca cold-start behavior remains pending the
+new candidate run.
 
 ## Runtime checkpoint at 87299572
 
@@ -294,10 +344,10 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Run the Prompt semantic-identity, Catalog enabled-state and explicit GI
-  Text repairs on real CI; preserve original assertions and capture any
-  remaining target error. Main CI at `351d7c4f` and the earlier clean packaging
-  check are already complete.
+- Run the readonly document focus/readiness and Catalog content FocusScope
+  repairs on real CI; preserve original assertions and capture remaining
+  target errors. Prompt menu/value preservation already has real-browser
+  evidence at `3612efd0`. Retain the separate Edge startup failure.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain
@@ -307,8 +357,8 @@ default Catalog samples do not accept those capabilities.
   host integrations. Narrator needs a host with an available audio endpoint;
   a capability probe or prepared script is insufficient.
 - Reconcile future runtime changes with the bounded visual/localization,
-  performance, asset, notice and publication evidence. The pending Prompt repair changes component semantic identity, while the
-  header and observer repairs have their separate Catalog/diagnostic scope.
+  performance, asset, notice and publication evidence. The latest readonly focus bridge and Catalog content scope have corresponding
+  new local regressions; their new real-platform observations must remain explicit.
 
 The [support matrix](../support_matrix.md) and [parity manifest](../parity_manifest.yaml)
 therefore retain six `Partial` platforms and 27 `in_progress` entries. No later

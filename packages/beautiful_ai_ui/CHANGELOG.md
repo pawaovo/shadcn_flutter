@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
-Local acceptance on 2026-09-04 passes 629 library tests and strict analysis.
+Local acceptance on 2026-09-04 passes 641 library tests and strict analysis.
 The supplemental visual review covers 78 P1/P2 images and 127 P3 images;
 1,008 P3 layout/interaction combinations passed. Real device, screen-reader,
 current cloud input and performance-budget acceptance are recorded separately.
@@ -95,6 +95,15 @@ acceptance remain separate; this is validation, not a package publication.
 
 ### Fixed
 
+- Preserve the Prompt editor's semantic identity while command/model menus
+  change, preventing the browser's native editing element from being reset.
+- Connect read-only document accessibility focus to its actual Flutter focus
+  node while preserving text, selection, and the read-only editing contract.
+- Isolate Code Block copy feedback from large source rendering; retain current
+  Tool output across disclosure while excluding closed content from focus,
+  semantics and host selection.
+- Reuse unchanged Chat transcripts and Filter rows without losing host updates,
+  theme changes, full content selection or hidden-row selection exclusion.
 - Preserve desktop Prompt focus when model, source and attachment controls are
   used by keeping its editor and adjacent controls in the same tap region.
 - Add held-pointer feedback and cancellation/disable cleanup to shared actions,

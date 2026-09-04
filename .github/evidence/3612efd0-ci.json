@@ -1,0 +1,555 @@
+{
+  "source_sha": "3612efd0b034a2eff2407553a36cf14e156d0b48",
+  "run_ids": {
+    "main": 33824250813,
+    "input": 33824250815,
+    "orca_pilot": 33824259170
+  },
+  "scope": "Completed source-specific CI. Stage labels are requests, not proof their ensuing action completed.",
+  "workflows": {
+    "main": {
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "3612efd0b034a2eff2407553a36cf14e156d0b48",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33824250813",
+      "metadata_sha256": "eac675cb0a07939464f9e35f26b7de1f346c1d82991623fd48bb6a961222d27a",
+      "jobs": [
+        {
+          "id": 100873395659,
+          "name": "Detect generated targets",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423439,
+          "name": "Run Edge journey",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873423442,
+          "name": "Run Chrome and Linux journeys",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423443,
+          "name": "Format, analyze, and test",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423459,
+          "name": "Build Web catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423472,
+          "name": "Run Firefox journey",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423509,
+          "name": "Build Linux catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423532,
+          "name": "Run Android journey",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423533,
+          "name": "Build Windows catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423548,
+          "name": "Build Android catalog",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873423573,
+          "name": "Build Apple catalogs",
+          "conclusion": "success"
+        },
+        {
+          "id": 100874332337,
+          "name": "Validate pub.dev package",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "input": {
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "3612efd0b034a2eff2407553a36cf14e156d0b48",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33824250815",
+      "metadata_sha256": "9e0d72e9becdeb21fe13635b3f0f3f2b8b541ae2ddf03ccdb3534bb48e63e512",
+      "jobs": [
+        {
+          "id": 100873395286,
+          "name": "Native macos input bridge",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873395438,
+          "name": "Real Safari full journey and input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873395478,
+          "name": "Real firefox input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873395483,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873395519,
+          "name": "Real edge input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873395547,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873395575,
+          "name": "Real chrome input",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100873395576,
+          "name": "Native linux input bridge",
+          "conclusion": "success"
+        },
+        {
+          "id": 100873395577,
+          "name": "Native windows input bridge",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "orca_pilot": {
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "3612efd0b034a2eff2407553a36cf14e156d0b48",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33824259170",
+      "metadata_sha256": "dd48f8d3e76f55357624ff0d22620c6a90c24f958d04c25044fe725baf8dcd3f",
+      "jobs": [
+        {
+          "id": 100873423235,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  },
+  "input": {
+    "chrome": {
+      "suites": [
+        [
+          "framework",
+          "failed",
+          1
+        ],
+        [
+          "browser",
+          "failed",
+          1
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "4d9535361ce5cc0d78920687e4f13438642252418892196d36cc1323b46b471c",
+        "status": "failed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "failed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null,
+        "error_summary": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>"
+      },
+      "browser-input.json": {
+        "sha256": "4988fb53004269e9ea4365705b4804b2ac09ec50046862494285fa339643c119",
+        "status": "failed",
+        "scenarios": [],
+        "stages": [
+          "prompt-type",
+          "shift-enter",
+          "model-open",
+          "model-escape",
+          "keyboard-copy",
+          "keyboard-clear",
+          "keyboard-paste",
+          "select-before-resize",
+          "resize-599",
+          "resize-600",
+          "resize-1023",
+          "resize-1024",
+          "resize-1440",
+          "send",
+          "code-copy",
+          "code-paste",
+          "code-clear",
+          "stream-copy",
+          "stream-paste",
+          "stream-clear",
+          "readonly-copy"
+        ],
+        "terminal_boundary": "readonly-cut-rejected",
+        "error_summary": "Bad state: Failure in method: real browser keyboard clipboard focus and window acceptance"
+      },
+      "readonly_failure_interpretation": {
+        "failed_assertion": "selection.textInside(original) equals full original text",
+        "source_line": 228,
+        "actual_selection_text": "",
+        "preceding_document_text_unchanged_assertion_passed": true,
+        "interpretation": "Selection was absent or lost; the body text was not deleted by this observed operation. Cut had not been issued."
+      }
+    },
+    "edge": {
+      "suites": [
+        [
+          "framework",
+          "failed",
+          1
+        ],
+        [
+          "browser",
+          "failed",
+          1
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "86f79e7e9344a091924e20e47aed44089630c05133f14437c10479538c9eafe5",
+        "status": "failed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "failed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null,
+        "error_summary": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>"
+      },
+      "browser-input.json": {
+        "sha256": "52b29dcf82ce4e39ae2329016665ee4588cc6c4aa99210836515a319186da606",
+        "status": "failed",
+        "scenarios": [],
+        "stages": [
+          "prompt-type",
+          "shift-enter",
+          "model-open",
+          "model-escape",
+          "keyboard-copy",
+          "keyboard-clear",
+          "keyboard-paste",
+          "select-before-resize",
+          "resize-599",
+          "resize-600",
+          "resize-1023",
+          "resize-1024",
+          "resize-1440",
+          "send",
+          "code-copy",
+          "code-paste",
+          "code-clear",
+          "stream-copy",
+          "stream-paste",
+          "stream-clear",
+          "readonly-copy",
+          "readonly-cut-rejected",
+          "readonly-caret"
+        ],
+        "terminal_boundary": "readonly-paste-rejected",
+        "error_summary": "Bad state: Failure in method: real browser keyboard clipboard focus and window acceptance"
+      }
+    },
+    "firefox": {
+      "suites": [
+        [
+          "framework",
+          "failed",
+          1
+        ],
+        [
+          "browser",
+          "passed",
+          0
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "0bb86db4adc671c21b850362e805540d217bc0d2a32b329a75e34b32c5995ca8",
+        "status": "failed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "failed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null,
+        "error_summary": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>"
+      },
+      "browser-input.json": {
+        "sha256": "a8d2b0bd94e5212fb4efe81c4b607b68649e9246af04382dcac6ec9245f4bea8",
+        "status": "passed",
+        "scenarios": [],
+        "stages": [
+          "prompt-type",
+          "shift-enter",
+          "model-open",
+          "model-escape",
+          "keyboard-copy",
+          "keyboard-clear",
+          "keyboard-paste",
+          "select-before-resize",
+          "resize-599",
+          "resize-600",
+          "resize-1023",
+          "resize-1024",
+          "resize-1440",
+          "send",
+          "code-copy",
+          "code-paste",
+          "code-clear",
+          "stream-copy",
+          "stream-paste",
+          "stream-clear",
+          "readonly-copy",
+          "readonly-cut-rejected",
+          "readonly-caret",
+          "readonly-paste-rejected",
+          "readonly-paste",
+          "complete"
+        ],
+        "terminal_boundary": "original integration_test completion"
+      }
+    },
+    "linux": {
+      "suites": [
+        [
+          "framework",
+          "passed",
+          0
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "f3dd52e65d40502afc41c32e5a0bc7042a9c33d9f7fb775f3764174b2c9fe033",
+        "status": "passed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "passed"
+          ],
+          [
+            "numeric_draft_cancel_adjust_and_bounds",
+            "passed"
+          ],
+          [
+            "synthetic_resize_preserves_prompt_draft",
+            "passed"
+          ],
+          [
+            "pointer_selection_replaces_exact_repeated_range",
+            "passed"
+          ],
+          [
+            "native_clipboard_copy_and_paste",
+            "passed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null
+      }
+    },
+    "macos": {
+      "suites": [
+        [
+          "framework",
+          "passed",
+          0
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "961efa901218046b23bb6fb1b1a74b870da3407828e257b362052689609c05b4",
+        "status": "passed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "passed"
+          ],
+          [
+            "numeric_draft_cancel_adjust_and_bounds",
+            "passed"
+          ],
+          [
+            "synthetic_resize_preserves_prompt_draft",
+            "passed"
+          ],
+          [
+            "pointer_selection_replaces_exact_repeated_range",
+            "passed"
+          ],
+          [
+            "native_clipboard_copy_and_paste",
+            "passed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null
+      }
+    },
+    "safari": {
+      "suites": [
+        [
+          "journey",
+          "passed",
+          0
+        ],
+        [
+          "framework",
+          "failed",
+          1
+        ],
+        [
+          "browser",
+          "failed",
+          1
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "d2f8bfb80f2c061ea5bb45984cdd257dfb66411102fd856ab5803adc218f7aa7",
+        "status": "failed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "passed"
+          ],
+          [
+            "numeric_draft_cancel_adjust_and_bounds",
+            "passed"
+          ],
+          [
+            "synthetic_resize_preserves_prompt_draft",
+            "failed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null,
+        "error_summary": "Expected: TextEditingValue:<TextEditingValue(text: ┤中文 inventory draft├, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>"
+      },
+      "browser-input.json": {
+        "sha256": "e94fffcd5726e789ffc52a72b8f4da81a212c5daa1736fe6a82697b3145ad19e",
+        "status": "failed",
+        "scenarios": [],
+        "stages": [
+          "prompt-type",
+          "shift-enter",
+          "model-open",
+          "model-escape",
+          "keyboard-copy",
+          "keyboard-clear",
+          "keyboard-paste",
+          "select-before-resize",
+          "resize-599",
+          "resize-600",
+          "resize-1023",
+          "resize-1024",
+          "resize-1440",
+          "send",
+          "code-copy",
+          "code-paste",
+          "code-clear",
+          "stream-copy",
+          "stream-paste",
+          "stream-clear",
+          "readonly-copy",
+          "readonly-cut-rejected",
+          "readonly-caret"
+        ],
+        "terminal_boundary": "readonly-paste-rejected",
+        "error_summary": "Bad state: Failure in method: real browser keyboard clipboard focus and window acceptance"
+      }
+    },
+    "windows": {
+      "suites": [
+        [
+          "framework",
+          "passed",
+          0
+        ]
+      ],
+      "framework-input.json": {
+        "sha256": "0bffdc3ec315c950b3b6d5140a5f669187f3d82d3141e3a94200248f6b105c35",
+        "status": "passed",
+        "scenarios": [
+          [
+            "prompt_keyboard_menus_and_focus",
+            "passed"
+          ],
+          [
+            "prompt_composing_and_submission",
+            "passed"
+          ],
+          [
+            "numeric_draft_cancel_adjust_and_bounds",
+            "passed"
+          ],
+          [
+            "synthetic_resize_preserves_prompt_draft",
+            "passed"
+          ],
+          [
+            "pointer_selection_replaces_exact_repeated_range",
+            "passed"
+          ],
+          [
+            "native_clipboard_copy_and_paste",
+            "passed"
+          ]
+        ],
+        "stages": [],
+        "terminal_boundary": null
+      }
+    }
+  },
+  "artifact_index_sha256": "0e7fee1991f89a3f56e234d374a66740ca8acb02b1e4130a6ef5fe2f47128a9d",
+  "confirmed_interpretation": {
+    "main": "11/12 jobs passed; Edge failed before the app at its initial 300-second window-setting wait; actual iOS driver passed.",
+    "input_jobs": "4/9 passed: all three native framework inputs and Orca capability.",
+    "browser_scope": "All four W3C runs passed Prompt, five real window widths, Code and Streaming clipboard operations; Firefox completed the entire W3C suite.",
+    "chrome_readonly": "Document text remained unchanged. The selected substring was empty at line 228; Cut had not been sent.",
+    "edge_safari_readonly": "ArrowRight was sent but the readonly-caret condition did not complete; Paste had not been sent.",
+    "composition": "The failure is the synthetic composing-value round-trip before the relevant Enter/resize action. It does not establish an actual OS IME failure.",
+    "orca_pilot": "Actual Catalog launched and enabled/text-reading fixes were present. No new content FocusScope existed at this SHA; complete tasks remained unaccepted."
+  }
+}
