@@ -3,7 +3,8 @@
 
 This does not change a release gate or grant human/application acceptance.
 --describe and importing this module are safe without a desktop. All live modes
-require Linux and GITHUB_ACTIONS=true; there is deliberately no local override.
+require Linux GitHub Actions, or an explicit manifest-bound SDK diagnostic in
+an owned disposable container. The latter never claims ordinary release acceptance.
 """
 
 from __future__ import annotations
@@ -25,6 +26,7 @@ import wave
 from probe_real_at_linux import Probe
 from owned_pty_capture import OwnedPtyCapture
 from run_catalog_input_acceptance import start_owned_process, stop_owned_process
+from isolated_sdk_runtime import build_command, validate_manifest, verify_loaded_engine
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -60,6 +62,15 @@ def require_ci() -> None:
         raise RuntimeError("Live execution requires a disposable Linux GitHub Actions runner")
 
 
+def require_execution(runtime_manifest: Path | None, *, inspect_only=False):
+    if runtime_manifest is None:
+        require_ci()
+        return None
+    return validate_manifest(runtime_manifest, ROOT,
+                             current_sources=None if inspect_only else source_inventory(),
+                             verify_files=not inspect_only)
+
+
 def source_inventory() -> dict[str, str]:
     paths = set()
     for folder in (ROOT / "packages/shadcn_flutter/lib", ROOT / "packages/shadcn_flutter/assets",
@@ -74,6 +85,7 @@ def source_inventory() -> dict[str, str]:
         ".github/scripts/probe_catalog_orca_linux.py", ".github/scripts/probe_real_at_linux.py",
         ".github/scripts/owned_pty_capture.py",
         ".github/scripts/run_catalog_input_acceptance.py", ".github/scripts/run_ios_catalog_journey.py",
+        ".github/scripts/isolated_sdk_runtime.py",
     ))
     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(paths)}
 
@@ -82,13 +94,23 @@ def bundle_inventory(bundle: Path) -> dict[str, str]:
     return {str(p.relative_to(bundle)): sha(p) for p in sorted(bundle.rglob("*")) if p.is_file()}
 
 
-def build_catalog(output: Path, flutter: str) -> int:
-    require_ci()
+def build_catalog(output: Path, flutter: str, runtime_manifest: Path | None = None) -> int:
+    runtime = require_execution(runtime_manifest)
     output.mkdir(parents=True, exist_ok=False)
     before = source_inventory()
     command = [flutter, "build", "linux", "--release", "--no-pub", "--target=lib/main.dart"]
+    mode = "release"
+    if runtime is not None:
+        command = build_command(runtime)
+        mode = "debug"
+        if flutter != "flutter" and Path(shutil.which(flutter) or flutter).resolve() != Path(command[0]):
+            raise RuntimeError("Isolated SDK builds must use the manifest's Flutter checkout")
     report = {"schema_version": 1, "status": "not_bound", "command": command,
-              "cwd": str(CATALOG), "source_sha256_before": before}
+              "cwd": str(CATALOG), "source_sha256_before": before,
+              "execution_scope": "ci_release" if runtime is None else "isolated_sdk_runtime_diagnostic",
+              "build_mode": mode}
+    if runtime is not None:
+        report["sdk_runtime_manifest_sha256"] = sha(runtime_manifest)
     try:
         with (output / "build.log").open("wb") as log:
             child = start_owned_process(command, cwd=CATALOG, stdin=subprocess.DEVNULL,
@@ -100,14 +122,20 @@ def build_catalog(output: Path, flutter: str) -> int:
         report["source_sha256_after"] = source_inventory()
         if report["exit_code"] or report["source_sha256_after"] != before:
             raise RuntimeError("Build failed or source/configuration changed during compilation")
-        candidates = list((CATALOG / "build/linux").glob("*/release/bundle/beautiful_ai_ui_catalog"))
+        candidates = list((CATALOG / "build/linux").glob(f"*/{mode}/bundle/beautiful_ai_ui_catalog"))
         if len(candidates) != 1:
-            raise RuntimeError(f"Expected exactly one release Catalog executable, found {candidates}")
+            raise RuntimeError(f"Expected exactly one {mode} Catalog executable, found {candidates}")
         executable = candidates[0].resolve()
+        if runtime is not None:
+            bundled_engine = executable.parent / "lib/libflutter_linux_gtk.so"
+            if sha(bundled_engine) != runtime["engine_library"]["sha256"]:
+                raise RuntimeError("Catalog bundle does not contain the generated patched engine")
+            report["bundled_engine_sha256"] = sha(bundled_engine)
+            require_execution(runtime_manifest)
         report.update(status="compiled_snapshot_bound", executable=str(executable),
                       bundle_sha256=bundle_inventory(executable.parent),
                       git_head=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                      flutter=json.loads(subprocess.check_output([flutter, "--version", "--machine"], text=True)))
+                      flutter=json.loads(subprocess.check_output([command[0], "--version", "--machine"], text=True)))
     except Exception as error:
         report["error"] = f"{type(error).__name__}: {error}"
     write_json(output / "build-provenance.json", report)
@@ -260,10 +288,12 @@ def audio_statistics(raw: bytes) -> dict:
 
 
 class CatalogProbe(Probe):
-    def __init__(self, output: Path, seconds: int, provenance: Path):
+    def __init__(self, output: Path, seconds: int, provenance: Path, runtime_manifest: Path | None = None):
+        self.runtime_manifest = runtime_manifest.resolve() if runtime_manifest is not None else None
+        self.runtime_context = require_execution(self.runtime_manifest) if self.runtime_manifest is not None else None
         self.root = output.resolve()
         self.root.mkdir(parents=True, exist_ok=False)
-        super().__init__(self.root / "capability-preflight", seconds)
+        super().__init__(self.root / "capability-preflight", seconds, allow_local=self.runtime_context is not None)
         self.named_children = {}
         self.orca_capture = None
         self.current_task = None
@@ -278,6 +308,10 @@ class CatalogProbe(Probe):
             "errors": [], "input_method": "OS X11 keyboard via xdotool, not Flutter test events or AT-SPI actions",
             "observation_method": "PID-scoped read-only AT-SPI, real Orca handler/debug output, isolated real speech PCM",
         }
+        if self.runtime_context is not None:
+            self.app["execution_scope"] = "isolated_sdk_runtime_diagnostic"
+            self.app["build_mode"] = "debug-unoptimized"
+            self.app["sdk_runtime_manifest_sha256"] = sha(self.runtime_manifest)
 
     def spawn(self, argv, name, *, stdout=None):
         if name == "orca":
@@ -321,7 +355,10 @@ class CatalogProbe(Probe):
 
     def snapshot(self, label: str | None = None) -> dict:
         self.alive()
-        result = self.run([sys.executable, str(Path(__file__).resolve()), "--inspect-pid", str(self.catalog.pid)], timeout=8)
+        command = [sys.executable, str(Path(__file__).resolve()), "--inspect-pid", str(self.catalog.pid)]
+        if self.runtime_manifest is not None:
+            command.extend(["--sdk-runtime-manifest", str(self.runtime_manifest)])
+        result = self.run(command, timeout=8)
         data = json.loads(result.stdout)
         write_json(self.root / "last-native-tree.json", data)
         if label:
@@ -542,10 +579,19 @@ class CatalogProbe(Probe):
         self.current_task["result_boundary"] = "Search committed its selected title; Catalog's demo onSelected callback performs no navigation"
 
     def execute_catalog(self) -> None:
-        require_ci()
+        runtime = require_execution(self.runtime_manifest)
         provenance = json.loads(self.provenance.read_text())
         if provenance.get("status") != "compiled_snapshot_bound":
             raise RuntimeError("A successful --build-only provenance record is required")
+        if runtime is None:
+            if provenance.get("execution_scope", "ci_release") != "ci_release":
+                raise RuntimeError("A diagnostic SDK build cannot enter ordinary CI release mode")
+        elif (provenance.get("execution_scope") != "isolated_sdk_runtime_diagnostic"
+              or provenance.get("build_mode") != "debug"
+              or provenance.get("command") != build_command(runtime)
+              or provenance.get("sdk_runtime_manifest_sha256") != sha(self.runtime_manifest)
+              or provenance.get("bundled_engine_sha256") != runtime["engine_library"]["sha256"]):
+            raise RuntimeError("Catalog build does not match the isolated SDK manifest")
         executable = Path(provenance["executable"])
         if not executable.is_file() or not os.access(executable, os.X_OK):
             raise RuntimeError("Compiled Catalog executable is absent or not executable")
@@ -584,6 +630,8 @@ class CatalogProbe(Probe):
         self.run(["xdotool", "windowfocus", "--sync", window])
         self.app["window_id"] = window
         self.app["native_window_geometry"] = self.run(["xdotool", "getwindowgeometry", "--shell", window]).stdout
+        if runtime is not None:
+            self.app["loaded_engine"] = verify_loaded_engine(self.catalog.pid, runtime["engine_library"]["sha256"])
         self.wait_snapshot(lambda tree: self.target(tree, "Theme: system") is not None,
                            "catalog-initial", seconds=20)
         for task, action in zip(self.app["tasks"], (self.theme, self.disclosure, self.search)):
@@ -604,6 +652,11 @@ class CatalogProbe(Probe):
         self.current_task = None
         self.app["source_unchanged_since_build"] = provenance["source_sha256_after"] == source_inventory()
         self.app["bundle_unchanged_during_tasks"] = provenance["bundle_sha256"] == bundle_inventory(executable.parent)
+        if runtime is not None:
+            if sha(self.runtime_manifest) != self.app["sdk_runtime_manifest_sha256"]:
+                raise RuntimeError("Runtime manifest changed during the task")
+            require_execution(self.runtime_manifest)
+            self.app["runtime_binding_unchanged"] = True
         if (all(task["status"] == "machine_evidence_observed" for task in self.app["tasks"])
                 and self.app["source_unchanged_since_build"] and self.app["bundle_unchanged_during_tasks"]):
             self.app["status"] = "three_task_machine_evidence_observed"
@@ -650,25 +703,27 @@ def main() -> int:
     parser.add_argument("--build-only", action="store_true", help="Build the ordinary release entry and record matching source/bundle hashes")
     parser.add_argument("--flutter", default="flutter")
     parser.add_argument("--build-provenance", type=Path)
+    parser.add_argument("--sdk-runtime-manifest", type=Path,
+                        help="Explicit owned-container/debug-engine diagnostic; never ordinary release acceptance")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--seconds", type=int, default=240, choices=range(90, 301), metavar="90..300")
     parser.add_argument("--inspect-pid", type=int, help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.describe:
         print(json.dumps({"status": "prepared_not_executed", "tasks": TASKS, "human_review": "not_accepted",
-                          "application_acceptance": "not_accepted", "live_execution": "Linux GitHub Actions only"}, indent=2))
+                          "application_acceptance": "not_accepted", "live_execution": "Linux GitHub Actions or explicit manifest-bound owned SDK container"}, indent=2))
         return 0
-    require_ci()
+    require_execution(args.sdk_runtime_manifest, inspect_only=args.inspect_pid is not None)
     if args.inspect_pid is not None:
         inspect_catalog(args.inspect_pid)
         return 0
     if args.output is None:
         parser.error("--output must name a fresh directory")
     if args.build_only:
-        return build_catalog(args.output.resolve(), args.flutter)
+        return build_catalog(args.output.resolve(), args.flutter, args.sdk_runtime_manifest)
     if args.build_provenance is None:
         parser.error("--build-provenance from --build-only is required")
-    probe = CatalogProbe(args.output, args.seconds, args.build_provenance)
+    probe = CatalogProbe(args.output, args.seconds, args.build_provenance, args.sdk_runtime_manifest)
     try:
         probe.execute_catalog()
     except Exception as error:
