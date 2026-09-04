@@ -22,6 +22,8 @@ import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from edge_resource_observation import ResourceSampler
+
 
 class _DeadlineReader(io.RawIOBase):
     """Every buffered HTTP read shares the same absolute network deadline."""
@@ -289,6 +291,8 @@ def main():
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument("--diagnostics", type=Path,
                         help="Directory for bounded URL/screenshot evidence after upstream server errors")
+    parser.add_argument("--resources", type=Path,
+                        help="Optional Linux PID-scoped, 1 Hz read-only startup/resource evidence")
     args = parser.parse_args()
     if not (0 < args.port < 65536 and 0 < args.upstream_port < 65536) or args.port == args.upstream_port:
         parser.error("Use two distinct local ports from 1 to 65535")
@@ -298,6 +302,9 @@ def main():
 
     signal.signal(signal.SIGTERM, stop)
     driver = None
+    observer = None
+    resource_report = {"scope": "driver_pid_start_time_and_descendants", "interval_seconds": 1,
+                       "browser_commands_changed": False, "process_cleanup_claimed": False}
     try:
         args.evidence.unlink(missing_ok=True)
         version = installed_versions(args.binary, args.driver)
@@ -311,6 +318,16 @@ def main():
                  "--verbose", "--enable-chrome-logs"],
                 stdout=log, stderr=subprocess.STDOUT,
             )
+            if args.resources is not None:
+                try:
+                    args.resources.mkdir(parents=True, exist_ok=True)
+                    if sys.platform != "linux":
+                        raise RuntimeError("Resource evidence requires actual Linux /proc")
+                    observer = ResourceSampler(None, args.resources / "resources.jsonl", root_pid=driver.pid)
+                    resource_report.update(status="observing", root_pid=observer.root_identity[0],
+                                           root_start_ticks=observer.root_identity[1])
+                except (OSError, ValueError, RuntimeError) as error:
+                    resource_report.update(status="unavailable", error=str(error))
             wait_for_driver(driver, args.upstream_port)
             with EdgeAdapter(args.port, args.upstream_port, args.binary, version,
                              args.evidence, args.diagnostics) as server:
@@ -322,6 +339,17 @@ def main():
         print(f"Edge WebDriver startup failed: {error}", file=sys.stderr, flush=True)
         return 1
     finally:
+        if observer is not None:
+            try:
+                observer.stop_observing()
+                resource_report.update(status="recorded", observed_process_identities=sorted(observer.observed_processes))
+            except RuntimeError as error:
+                resource_report.update(status="failed", error=str(error))
+        if args.resources is not None:
+            try:
+                (args.resources / "observation.json").write_text(json.dumps(resource_report, indent=2) + "\n")
+            except OSError as error:
+                print(f"Edge resource evidence unavailable: {error}", file=sys.stderr, flush=True)
         if driver is not None and driver.poll() is None:
             driver.terminate()
             try:

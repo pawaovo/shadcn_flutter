@@ -106,6 +106,26 @@ can remain alive, but this does not mean the initial compile overlaps startup.
 
 ## Preserved protocol and evidence
 
+The ordinary Edge shared journey and input suites also enable the adapter's
+optional `--resources` observer. This captures the actual full Flutter-drive
+startup, rather than substituting the standalone replay. It reads Linux `/proc`,
+pressure, memory and shared-memory metadata at 1 Hz; it does not issue browser
+commands, pre-read executables, change options/deadlines or retry an action.
+
+The observer binds the real driver PID **and its start time**, then follows its
+descendants. The adapter can share its shell's process group, so group membership
+alone would wrongly include Flutter or sibling processes. Only the bound tree's
+command lines are read. The original standalone experiment retains its existing
+dedicated-group scope and cleanup verification. Stopping the adapter observer
+only stops observation; process ownership and cleanup remain with the original
+supervisor. Each flushed `resources.jsonl` sample survives an interrupted run;
+`observation.json` records collection status when shutdown permits. An unavailable
+observer is recorded separately and cannot overwrite a browser's result.
+
+This additional evidence is prepared for the next full journey execution. The
+PID-reuse/sibling boundary and a real Linux child were verified in two focused
+tests; that is neither an Edge reproduction nor a repair of the 300-second error.
+
 The harness sends `GET /status`, the captured legacy `POST /session`,
 `GET /session/{id}/window`, `POST /window/rect {x:0,y:0}`, then
 `POST /window/rect {width:1440,height:900}` in that order. The unchanged adapter

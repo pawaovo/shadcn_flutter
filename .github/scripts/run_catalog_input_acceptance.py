@@ -132,7 +132,8 @@ def run(args):
                                           "--binary", executable("microsoft-edge"),
                                           "--log", str(directory / "msedgedriver.log"),
                                           "--evidence", str(directory / "browser-identity.json"),
-                                          "--diagnostics", str(directory / "diagnostics")]
+                                          "--diagnostics", str(directory / "diagnostics"),
+                                          "--resources", str(directory / "resources")]
                     elif args.platform == "chrome":
                         driver_command = [executable("chromedriver", "CHROMEWEBDRIVER"), "--port=4444", "--verbose"]
                     elif args.platform == "firefox":
