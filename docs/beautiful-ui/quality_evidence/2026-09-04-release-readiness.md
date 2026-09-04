@@ -1,17 +1,23 @@
 # Release readiness — 2026-09-04
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
-Status: **not ready for stable-release sign-off**. At the completed `5edbcab7`
-checkpoint, all four browsers pass the complete trusted W3C input journey, and
-all three native framework input jobs pass. Main CI is **11/12**: iOS and the
-original full Edge journey now pass; Android again receives an active composing
-range before Send and fails its original host assertion. Input/AT is **4/9**,
-retaining four framework composition failures and the hosted Narrator limitation. Linux's original three
+Status: **not ready for stable-release sign-off**. The completed `75594991`
+main CI is **11/12**. Android now verifies one actual LatinIME `inventory`
+candidate commit, unchanged draft, one original Chat Send and its new host
+message. Its complete integration response then fails the P3 slash-command
+assertion: `/rest` remains unchanged instead of becoming `/restock `.
+That failure's live composition/menu state was not captured and its cause is
+not inferred from the text alone. All other main jobs, including iOS and the
+complete Edge journey, pass. The separate input/AT checkpoint remains the
+completed `5edbcab7` **4/9**, with four complete W3C suites and three native
+framework input jobs passing, while retaining four framework composition
+failures and the hosted Narrator limitation. It was not rerun at `75594991`.
+Linux's original three
 Catalog/Orca machine tasks now pass **3/3** at `79fbcdd1` with the explicitly
 rebuilt SDK and patched native bridge. After desktop interaction became
 available, a new complete native capture at `5edbcab7` passes **15/15 unchanged
 engineering budgets and 120/120 gates**, with the new durable checkpoint success
-path verified. Actual OS IME and full device/AT acceptance remain open. The older
+path verified. Chinese OS IME pre-edit and full device/AT acceptance remain open. The older
 locked `abd6293b` attempt remains a failed preparation with no measurements.
 
 All 20 Gallery components and seven foundation/building-block items have
@@ -23,7 +29,8 @@ changing those decisions or rewriting earlier records.
 
 | Source snapshot | Evidence and meaning |
 | --- | --- |
-| Current `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails again. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. |
+| Current main `7559499112dcc5c5d9b0370ba1d6b0eb34743f45` | Main CI **11/12**; library 658, Catalog 147 and core 571 tests pass. Android's actual candidate commit and original Chat Send pass, then the complete response fails the P3 `/rest` command assertion. All other main jobs pass. Input/AT was not rerun. |
+| Runtime/performance `5edbcab7edc5c058cf9354c6109df917846fb4e8` | Main CI **11/12**, input/AT **4/9**; original Edge journey passes with explicit once-only executable preread; iOS passes; Android's composing-protected Send fails. All 15 native performance workloads and 120 original budget gates pass, with source/checkpoint integrity verified. Production runtime inputs are unchanged through `75594991`. |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
 | Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
 | Earlier runtime `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See its recorded runtime checkpoint below. |
@@ -34,7 +41,39 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Current completed checkpoint at 5edbcab7
+## Current completed main checkpoint at 75594991
+
+[The exact-source main CI record](../../../.github/evidence/75594991-ci.md)
+preserves run `33863483982`, attempt 1, with **11 successful jobs and one Android
+failure**. Library **658/658**, Catalog **147/147**, core **571/571**, strict
+analysis and all 170 checked Dart sources pass. The actual iOS driver exits 0
+after **42.662 seconds**; its original discovery history and cleanup details are
+preserved rather than reduced to a build-only success.
+
+[The Android record](../../../.github/evidence/android-candidate-75594991.md)
+contains the full failed integration response and the successful native Chat
+portion. Actual candidate inspection and one DOWN/UP retain the full draft,
+clear composition, preserve focus and enable Send. The original single Send
+creates its expected host message, and the corrected final observer records
+the normal Send-to-Stop transition without an observation error. Both driver
+and supervisor cleanup succeed. P3 then fails at its original slash-command
+expectation; no retry, alternate text or composition clear is used.
+
+The earlier diagnostic records preserve the separate
+[helper compiler failure](../../../.github/evidence/android-candidate-920f1dd8.md),
+[HTTP body-framing failure](../../../.github/evidence/android-candidate-2e83a2e3.md),
+[cross-zone observer failure](../../../.github/evidence/android-candidate-080697f2.md)
+and [successful candidate/Send with a post-Send observer failure](../../../.github/evidence/android-candidate-5a90dff9.md).
+The last of those did not receive the final integration response; the current
+`75594991` run did receive it, with the concrete P3 assertion failure.
+
+An empty source diff verifies unchanged public library/core runtime, Catalog
+production Dart and assets, package manifests/lockfile and generated platform
+runners between `5edbcab7` and `75594991`. The earlier release artifacts and
+native performance capture retain that runtime boundary. The new workflow and
+integration fixtures are separately bound to their own tested source.
+
+## Earlier completed runtime checkpoint at 5edbcab7
 
 [The exact-source CI record](../../../.github/evidence/5edbcab7-ci.md) preserves
 the new main **11/12** and input/AT **4/9** results, both original attempt 1.
@@ -699,14 +738,14 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Resolve the native input-commit boundary in the original full Android journey.
-  Both `153412b3` and `5edbcab7` record a new composing range after the committed
-  framework injection but before the single Send tap. The host message
-  assertion fails. Active composition must remain protected; clearing it,
-  hiding the keyboard, retrying Send or substituting a mocked input peer would
-  not accept those executions. A native candidate/commit observation is needed
-  before choosing another fixture or product change.
-- Complete real OS IME candidate, pre-edit and commit observation. Four-browser
+- Resolve the P3 Android slash-command failure in the original full journey.
+  The native Chat candidate/commit boundary and original single Send now have
+  actual passing evidence at `75594991`; its complete response then fails the
+  unchanged `/restock ` assertion. Observe the live Prompt composition, menu,
+  focus and key/submission state before choosing the next repair. Keep the
+  component's active-composition protection and original input/actions intact.
+- Extend the actual Android English candidate evidence to Chinese OS IME
+  pre-edit and cross-platform candidate/commit observation. Four-browser
   W3C input passes, but those Unicode key events are not an IME workflow. The
   retained synthetic composing checks still fail in web framework suites, and
   the stock Flutter control reproduces that channel limitation. The user's

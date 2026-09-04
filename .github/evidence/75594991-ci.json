@@ -1,0 +1,911 @@
+{
+  "schema_version": 1,
+  "source_revision": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45",
+  "recorded_at_utc": "2026-09-04T10:50:01.467439+00:00",
+  "repository": "pawaovo/shadcn_flutter",
+  "raw_directory": "/tmp/beautiful-75594991-main-33863483982",
+  "main": {
+    "run_id": 33863483982,
+    "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982",
+    "event": "workflow_dispatch",
+    "attempt": 1,
+    "created_at": "2026-09-04T10:29:35Z",
+    "completed_at": "2026-09-04T10:48:09Z",
+    "status": "completed",
+    "conclusion": "failure",
+    "job_counts": {
+      "total": 12,
+      "success": 11,
+      "failure": 1
+    },
+    "jobs": [
+      {
+        "databaseId": 100992984456,
+        "name": "Detect generated targets",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:39Z",
+        "completedAt": "2026-09-04T10:29:47Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100992984456"
+      },
+      {
+        "databaseId": 100993027922,
+        "name": "Build Android catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:34:01Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027922"
+      },
+      {
+        "databaseId": 100993027930,
+        "name": "Format, analyze, and test",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:35:14Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027930"
+      },
+      {
+        "databaseId": 100993027934,
+        "name": "Run Firefox journey",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:34:05Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027934"
+      },
+      {
+        "databaseId": 100993027960,
+        "name": "Run Edge journey",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:55Z",
+        "completedAt": "2026-09-04T10:33:31Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027960"
+      },
+      {
+        "databaseId": 100993027966,
+        "name": "Run Chrome and Linux journeys",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:35:26Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027966"
+      },
+      {
+        "databaseId": 100993027981,
+        "name": "Build Web catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:31:50Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993027981"
+      },
+      {
+        "databaseId": 100993028054,
+        "name": "Build Linux catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:49Z",
+        "completedAt": "2026-09-04T10:31:05Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993028054"
+      },
+      {
+        "databaseId": 100993028063,
+        "name": "Run Android journey",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-09-04T10:29:50Z",
+        "completedAt": "2026-09-04T10:37:20Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993028063"
+      },
+      {
+        "databaseId": 100993028081,
+        "name": "Build Windows catalog",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:50Z",
+        "completedAt": "2026-09-04T10:35:05Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993028081"
+      },
+      {
+        "databaseId": 100993028181,
+        "name": "Build Apple catalogs",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:29:51Z",
+        "completedAt": "2026-09-04T10:48:09Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100993028181"
+      },
+      {
+        "databaseId": 100994377698,
+        "name": "Validate pub.dev package",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-09-04T10:35:17Z",
+        "completedAt": "2026-09-04T10:36:26Z",
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33863483982/job/100994377698"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 9933561460,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzNTYxNDYw",
+        "name": "apple-native-journeys",
+        "size_in_bytes": 150854,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933561460",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933561460/zip",
+        "expired": false,
+        "digest": "sha256:5074f7a8009d670584a354e5c9ffe64543b10e4df3982f31a6545cd4fbe5f163",
+        "created_at": "2026-09-04T10:48:01Z",
+        "updated_at": "2026-09-04T10:48:01Z",
+        "expires_at": "2026-09-11T10:48:00Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933246104,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMjQ2MTA0",
+        "name": "android-native-candidate-33863483982-1",
+        "size_in_bytes": 676612,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933246104",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933246104/zip",
+        "expired": false,
+        "digest": "sha256:04f4d334ea0ba999db5b1015947c4eab33e93c9e813c111d9e2f137a1cdc05ba",
+        "created_at": "2026-09-04T10:37:18Z",
+        "updated_at": "2026-09-04T10:37:18Z",
+        "expires_at": "2026-09-18T10:37:17Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933219038,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMjE5MDM4",
+        "name": "isolated-hosted-consumer",
+        "size_in_bytes": 10379,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933219038",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933219038/zip",
+        "expired": false,
+        "digest": "sha256:32d03cb7fb153ea669e748161dd098926bf931d9224d34a28a69f099bfdd12e8",
+        "created_at": "2026-09-04T10:36:24Z",
+        "updated_at": "2026-09-04T10:36:24Z",
+        "expires_at": "2026-09-11T10:36:23Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933187446,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMTg3NDQ2",
+        "name": "chrome-trusted-journey",
+        "size_in_bytes": 1121,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933187446",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933187446/zip",
+        "expired": false,
+        "digest": "sha256:8b2f06f1012434873b28d08d9ec6b4903269ebacf7d93b67eafc6aee1e428692",
+        "created_at": "2026-09-04T10:35:23Z",
+        "updated_at": "2026-09-04T10:35:23Z",
+        "expires_at": "2026-12-03T10:29:36Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933181305,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMTgxMzA1",
+        "name": "source-asset-audits",
+        "size_in_bytes": 882,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933181305",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933181305/zip",
+        "expired": false,
+        "digest": "sha256:0ff3e64237e765dde53180e73bee8c2b6846c2b0477d90cb3f4bc5a05fc1ba10",
+        "created_at": "2026-09-04T10:35:11Z",
+        "updated_at": "2026-09-04T10:35:11Z",
+        "expires_at": "2026-09-11T10:35:10Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933175121,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMTc1MTIx",
+        "name": "windows-native-journey",
+        "size_in_bytes": 1586,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933175121",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933175121/zip",
+        "expired": false,
+        "digest": "sha256:1df90fc5b3a77893d9278664c0c0941269316faacde5678a4006bec119593024",
+        "created_at": "2026-09-04T10:34:59Z",
+        "updated_at": "2026-09-04T10:34:59Z",
+        "expires_at": "2026-09-11T10:34:58Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933146668,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMTQ2NjY4",
+        "name": "firefox-journey",
+        "size_in_bytes": 18395,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933146668",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933146668/zip",
+        "expired": false,
+        "digest": "sha256:ca7f5bf0863d3ea9520d0aad158982a4020f3f76f540e3cbea550e70f95956ca",
+        "created_at": "2026-09-04T10:34:02Z",
+        "updated_at": "2026-09-04T10:34:02Z",
+        "expires_at": "2026-09-11T10:34:01Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933130498,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMTMwNDk4",
+        "name": "edge-journey",
+        "size_in_bytes": 124633,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933130498",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933130498/zip",
+        "expired": false,
+        "digest": "sha256:f28f1217e34ffceff4e3d74003befecf4558e70069e03f6b3a09717fae7da403",
+        "created_at": "2026-09-04T10:33:28Z",
+        "updated_at": "2026-09-04T10:33:28Z",
+        "expires_at": "2026-09-11T10:33:27Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      },
+      {
+        "id": 9933081839,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTMzMDgxODM5",
+        "name": "web-asset-audits",
+        "size_in_bytes": 6364,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933081839",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9933081839/zip",
+        "expired": false,
+        "digest": "sha256:fcd838c17ddf8c5ce0f6ae91ed96617a28002824bea40628d2b91b9b36270075",
+        "created_at": "2026-09-04T10:31:49Z",
+        "updated_at": "2026-09-04T10:31:49Z",
+        "expires_at": "2026-09-11T10:31:48Z",
+        "workflow_run": {
+          "id": 33863483982,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45"
+        }
+      }
+    ]
+  },
+  "main_quality": {
+    "formatted_dart_files": 170,
+    "format_changes": 0,
+    "strict_analysis_packages": 3,
+    "strict_analysis": "passed",
+    "library_tests": {
+      "behavior": 537,
+      "semantics": 109,
+      "strict_linux_golden": 12,
+      "total": 658
+    },
+    "catalog_tests": 147,
+    "core_tests": 571
+  },
+  "android": {
+    "job_id": 100993028063,
+    "conclusion": "failure",
+    "actual_native_candidate_and_original_single_chat_send_observed": true,
+    "complete_response_received": true,
+    "all_tests_passed": false,
+    "original_failure": "P3 catalog_journey_test.dart:304 expected '/restock ', actual '/rest' after the original Enter; contemporaneous Prompt focus/composition/menu state absent, so root cause remains undetermined.",
+    "driver_and_supervisor_cleanup": "verified; both error arrays empty; native call drained",
+    "evidence": "android-candidate-75594991.json",
+    "verified_original_manifest_files": 102
+  },
+  "browser_journeys": {
+    "Chrome": {
+      "status": "passed",
+      "capabilities": {
+        "acceptInsecureCerts": true,
+        "browserName": "chrome",
+        "browserVersion": "152.0.7977.64",
+        "chrome": {
+          "chromedriverVersion": "152.0.7977.64 (506c834ecceaa943c5f41e6cfe7f68acb5c45346-refs/branch-heads/7977@{#1891})",
+          "userDataDir": "/tmp/org.chromium.Chromium.scoped_dir.H2dUhx"
+        },
+        "fedcm:accounts": true,
+        "goog:chromeOptions": {
+          "debuggerAddress": "localhost:38237"
+        },
+        "goog:processID": 4225,
+        "networkConnectionEnabled": false,
+        "pageLoadStrategy": "normal",
+        "platformName": "linux",
+        "proxy": {},
+        "setWindowRect": true,
+        "strictFileInteractability": false,
+        "timeouts": {
+          "implicit": 0,
+          "pageLoad": 300000,
+          "script": 30000
+        },
+        "unhandledPromptBehavior": "dismiss and notify",
+        "webauthn:extension:credBlob": true,
+        "webauthn:extension:largeBlob": true,
+        "webauthn:extension:minPinLength": true,
+        "webauthn:extension:prf": true,
+        "webauthn:virtualAuthenticators": true
+      },
+      "trusted_clipboard_clicks": [
+        "journey-code-copy",
+        "journey-stream-copy"
+      ],
+      "other_inputs": "Original Flutter-injected full Catalog journey",
+      "integration_data": null
+    },
+    "Firefox": {
+      "status": "passed",
+      "capabilities": {
+        "acceptInsecureCerts": true,
+        "browserName": "firefox",
+        "browserVersion": "154.0",
+        "moz:accessibilityChecks": false,
+        "moz:buildID": "20260812182057",
+        "moz:geckodriverVersion": "0.37.1",
+        "moz:headless": true,
+        "moz:platformVersion": "6.17.0-1022-azure",
+        "moz:processID": 2610,
+        "moz:profile": "/tmp/rust_mozprofilepUVoLX",
+        "moz:shutdownTimeout": 60000,
+        "moz:webdriverClick": true,
+        "moz:windowless": false,
+        "pageLoadStrategy": "normal",
+        "platformName": "linux",
+        "proxy": {},
+        "setWindowRect": true,
+        "strictFileInteractability": false,
+        "timeouts": {
+          "implicit": 0,
+          "pageLoad": 300000,
+          "script": 30000
+        },
+        "unhandledPromptBehavior": "dismiss and notify",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0"
+      },
+      "trusted_clipboard_clicks": [
+        "journey-code-copy",
+        "journey-stream-copy"
+      ],
+      "other_inputs": "Original Flutter-injected full Catalog journey",
+      "integration_data": null
+    },
+    "Edge": {
+      "status": "passed",
+      "capabilities": {
+        "acceptInsecureCerts": true,
+        "browserName": "MicrosoftEdge",
+        "browserVersion": "151.0.4129.101",
+        "fedcm:accounts": true,
+        "goog:processID": 2677,
+        "ms:edgeOptions": {
+          "debuggerAddress": "localhost:39421"
+        },
+        "msedge": {
+          "msedgedriverVersion": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+          "userDataDir": "/tmp/com.microsoft.Edge.scoped_dir.mAVXW1"
+        },
+        "networkConnectionEnabled": false,
+        "pageLoadStrategy": "normal",
+        "platformName": "linux",
+        "proxy": {},
+        "setWindowRect": true,
+        "strictFileInteractability": false,
+        "timeouts": {
+          "implicit": 0,
+          "pageLoad": 300000,
+          "script": 30000
+        },
+        "unhandledPromptBehavior": "dismiss and notify",
+        "webauthn:extension:credBlob": true,
+        "webauthn:extension:largeBlob": true,
+        "webauthn:extension:minPinLength": true,
+        "webauthn:extension:prf": true,
+        "webauthn:virtualAuthenticators": true
+      },
+      "trusted_clipboard_clicks": [
+        "journey-code-copy",
+        "journey-stream-copy"
+      ],
+      "other_inputs": "Original Flutter-injected full Catalog journey",
+      "integration_data": null
+    }
+  },
+  "edge_preparation": {
+    "setup": {
+      "status": "ready",
+      "upstream_status": "not_started",
+      "condition": "once_only_edge_elf_preread",
+      "timeout_seconds": 60.0,
+      "source_sha": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45",
+      "started_epoch": 1788517823.2802906,
+      "runner": {
+        "ImageOS": "ubuntu24",
+        "ImageVersion": "20260823.283.1",
+        "RUNNER_OS": "Linux",
+        "RUNNER_ARCH": "X64"
+      },
+      "preread": {
+        "status": "read_complete",
+        "path": "/opt/microsoft/msedge/msedge",
+        "started_epoch": 1788517823.280448,
+        "bytes_read": 398196048,
+        "condition": "preread_actual_browser_executable_once",
+        "resolved": "/opt/microsoft/msedge/msedge",
+        "sha256": "c50c266b5dbae21b5ae7b1ff3a0b6c352441520b114ff9e98d49910e3b450162",
+        "bytes": 398196048,
+        "elapsed_seconds": 5.831558,
+        "completed_epoch": 1788517829.1120043
+      },
+      "completed_epoch": 1788517829.1122265
+    },
+    "verification": {
+      "status": "verified",
+      "run_step_outcome": "success",
+      "upstream_status": "passed",
+      "cleanup_scope": "observed_identity_no_live_processes",
+      "unobserved_descendant_absence_claimed": false,
+      "suites": [
+        {
+          "suite": "packages/beautiful_ai_ui_catalog/artifacts/edge",
+          "session": {
+            "sessionId": "c0565903facbe22e5d2fa44de4cc585b",
+            "capabilities": {
+              "acceptInsecureCerts": true,
+              "browserName": "MicrosoftEdge",
+              "browserVersion": "151.0.4129.101",
+              "fedcm:accounts": true,
+              "goog:processID": 2677,
+              "ms:edgeOptions": {
+                "debuggerAddress": "localhost:39421"
+              },
+              "msedge": {
+                "msedgedriverVersion": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+                "userDataDir": "/tmp/com.microsoft.Edge.scoped_dir.mAVXW1"
+              },
+              "networkConnectionEnabled": false,
+              "pageLoadStrategy": "normal",
+              "platformName": "linux",
+              "proxy": {},
+              "setWindowRect": true,
+              "strictFileInteractability": false,
+              "timeouts": {
+                "implicit": 0,
+                "pageLoad": 300000,
+                "script": 30000
+              },
+              "unhandledPromptBehavior": "dismiss and notify",
+              "webauthn:extension:credBlob": true,
+              "webauthn:extension:largeBlob": true,
+              "webauthn:extension:minPinLength": true,
+              "webauthn:extension:prf": true,
+              "webauthn:virtualAuthenticators": true
+            }
+          },
+          "no_live_observed_identities": [
+            {
+              "pid": 2607,
+              "start_ticks": 6499,
+              "state": "absent"
+            },
+            {
+              "pid": 2677,
+              "start_ticks": 10374,
+              "state": "absent"
+            },
+            {
+              "pid": 2681,
+              "start_ticks": 10374,
+              "state": "absent"
+            },
+            {
+              "pid": 2682,
+              "start_ticks": 10374,
+              "state": "absent"
+            },
+            {
+              "pid": 2691,
+              "start_ticks": 10414,
+              "state": "absent"
+            },
+            {
+              "pid": 2692,
+              "start_ticks": 10415,
+              "state": "absent"
+            },
+            {
+              "pid": 2712,
+              "start_ticks": 10457,
+              "state": "absent"
+            },
+            {
+              "pid": 2715,
+              "start_ticks": 10463,
+              "state": "absent"
+            },
+            {
+              "pid": 2724,
+              "start_ticks": 10469,
+              "state": "absent"
+            },
+            {
+              "pid": 2757,
+              "start_ticks": 10499,
+              "state": "absent"
+            },
+            {
+              "pid": 2767,
+              "start_ticks": 10507,
+              "state": "absent"
+            },
+            {
+              "pid": 2949,
+              "start_ticks": 10582,
+              "state": "absent"
+            },
+            {
+              "pid": 3059,
+              "start_ticks": 13609,
+              "state": "absent"
+            },
+            {
+              "pid": 3329,
+              "start_ticks": 17551,
+              "state": "absent"
+            }
+          ],
+          "browser": {
+            "pid": 2677,
+            "start_ticks": 10374,
+            "path": "/opt/microsoft/msedge/msedge",
+            "post_run_executable": {
+              "path": "/opt/microsoft/msedge/msedge",
+              "resolved": "/opt/microsoft/msedge/msedge",
+              "bytes": 398196048,
+              "sha256": "c50c266b5dbae21b5ae7b1ff3a0b6c352441520b114ff9e98d49910e3b450162"
+            }
+          },
+          "driver": {
+            "pid": 2607,
+            "start_ticks": 6499,
+            "path": "/usr/local/share/edge_driver/msedgedriver",
+            "post_run_executable": {
+              "path": "/usr/local/share/edge_driver/msedgedriver",
+              "resolved": "/usr/local/share/edge_driver/msedgedriver",
+              "bytes": 23598936,
+              "sha256": "c8bf9cd5531e0efd7710cc3d6001f4737fdd2b44ced897604ed8c4c11aca271c"
+            }
+          }
+        }
+      ],
+      "started_epoch": 1788518007.0871172,
+      "completed_epoch": 1788518007.744601
+    },
+    "boundary": "One original main journey passed under the existing once-only ELF preread condition. No startup command/capability/timeout or failure was replaced; this is not a general reproducibility-rate claim."
+  },
+  "ios": {
+    "report": {
+      "passed": true,
+      "device_id": "FC5FEF2A-E933-4515-AAEF-C9FC16651D0B",
+      "stages": [
+        {
+          "name": "selected-xcode",
+          "command": [
+            "xcodebuild",
+            "-version"
+          ],
+          "required": true,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 1.103
+        },
+        {
+          "name": "simulator-sdk",
+          "command": [
+            "xcrun",
+            "--sdk",
+            "iphonesimulator",
+            "--show-sdk-version"
+          ],
+          "required": true,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 0.05
+        },
+        {
+          "name": "install",
+          "command": [
+            "xcrun",
+            "simctl",
+            "install",
+            "FC5FEF2A-E933-4515-AAEF-C9FC16651D0B",
+            "/Users/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/ios/iphonesimulator/Runner.app"
+          ],
+          "required": true,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 22.43
+        },
+        {
+          "name": "launch",
+          "command": [
+            "xcrun",
+            "simctl",
+            "launch",
+            "--terminate-running-process",
+            "FC5FEF2A-E933-4515-AAEF-C9FC16651D0B",
+            "dev.beautifulai.beautifulAiUiCatalog",
+            "--enable-dart-profiling",
+            "--enable-checked-mode",
+            "--verify-entry-points"
+          ],
+          "required": true,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 7.723
+        },
+        {
+          "name": "vm-service-discovery",
+          "required": true,
+          "passed": true,
+          "launched_at": "2026-09-04T10:46:34.761416+00:00",
+          "discovery": {
+            "application_pid": 36118,
+            "history_queries": [
+              {
+                "exit_code": 124,
+                "log": "vm-service-history-1.log",
+                "capture_status": "vm-service-history-1.json",
+                "timeout_seconds": 15
+              },
+              {
+                "exit_code": 0,
+                "log": "vm-service-history-2.log",
+                "capture_status": "vm-service-history-2.json",
+                "timeout_seconds": 15
+              }
+            ],
+            "source": "unified-log-history"
+          },
+          "elapsed_seconds": 35.903,
+          "vm_service": "http://127.0.0.1:52435/<REDACTED>"
+        },
+        {
+          "name": "native-flutter-driver",
+          "command": [
+            "/Users/runner/hostedtoolcache/flutter/stable-3.47.0-arm64/flutter/bin/flutter",
+            "drive",
+            "--verbose",
+            "--device-id=FC5FEF2A-E933-4515-AAEF-C9FC16651D0B",
+            "--driver=test_driver/integration_test.dart",
+            "--target=integration_test/catalog_journey_test.dart",
+            "--use-existing-app=http://127.0.0.1:52435/<REDACTED>",
+            "--timeout=600",
+            "--no-pub"
+          ],
+          "required": true,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 42.662
+        },
+        {
+          "name": "terminate",
+          "command": [
+            "xcrun",
+            "simctl",
+            "terminate",
+            "FC5FEF2A-E933-4515-AAEF-C9FC16651D0B",
+            "dev.beautifulai.beautifulAiUiCatalog"
+          ],
+          "required": false,
+          "passed": true,
+          "exit_code": 0,
+          "elapsed_seconds": 0.765
+        }
+      ],
+      "bundle_id": "dev.beautifulai.beautifulAiUiCatalog",
+      "bundle": "/Users/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/ios/iphonesimulator/Runner.app",
+      "executable": "Runner"
+    },
+    "history_query_captures": [
+      {
+        "file": "vm-service-history-1.json",
+        "exit_code": 124,
+        "timed_out": true,
+        "stdout_eof": true,
+        "bytes_read": 0,
+        "host_group_clean": true,
+        "final_drain_complete": true,
+        "host_returncode": -15,
+        "elapsed_seconds": 15.899
+      },
+      {
+        "file": "vm-service-history-2.json",
+        "exit_code": 0,
+        "timed_out": false,
+        "stdout_eof": true,
+        "bytes_read": 227,
+        "host_group_clean": true,
+        "final_drain_complete": true,
+        "host_returncode": 0,
+        "elapsed_seconds": 10.195
+      }
+    ],
+    "boundary": "The first bounded discovery query timed out and cleaned its host process group; the original polling loop obtained the VM service on its second query. Actual native driver then passed. This is not a workflow retry."
+  },
+  "publication_validation": {
+    "passed": true,
+    "repository_head": "7559499112dcc5c5d9b0370ba1d6b0eb34743f45",
+    "compressed_archive": "3 MB",
+    "warnings": 0,
+    "public_core_version": "0.0.54",
+    "public_core_archive_sha256": "403a9e790447dc4b6bae73a810d7ffa52baece4d7b29b32de56d0dd769be080e",
+    "unmodified_hosted_runtime_files": 209,
+    "theme_observations": 12,
+    "required_license_labels": 13,
+    "boundary": "temporary publication-surface path dependency (not yet a hosted publication); no publication performed"
+  },
+  "input_and_at": {
+    "new_run_at_this_source": false,
+    "retained_source": "5edbcab7edc5c058cf9354c6109df917846fb4e8",
+    "retained_run_id": 33850098744,
+    "retained_counts": {
+      "success": 4,
+      "total": 9
+    },
+    "evidence": "5edbcab7-ci.json",
+    "boundary": "Historical input/AT results remain separately attributed to 5edbcab7; no new input/AT workflow was dispatched or inferred for 75594991."
+  },
+  "preservation": {
+    "artifact_downloads": {
+      "apple-native-journeys": 1,
+      "android-native-candidate-33863483982-1": 1,
+      "isolated-hosted-consumer": 1,
+      "chrome-trusted-journey": 1,
+      "source-asset-audits": 1,
+      "windows-native-journey": 1,
+      "firefox-journey": 1,
+      "edge-journey": 1,
+      "web-asset-audits": 1
+    },
+    "downloaded_files_hashed": 174,
+    "raw_artifacts_modified": false,
+    "workflow_retries": 0,
+    "artifact_digest_boundary": "ZIP digests are GitHub-reported. Independently computed hashes cover every extracted original file; no retained ZIP was hashed.",
+    "original_failures": "5a90 and previous Android/main/input failures remain unchanged."
+  },
+  "core_file_sha256": {
+    "run-final.json": {
+      "bytes": 26119,
+      "sha256": "bf2ff4fcb6ddd8a5d77ecbb867e587f8cf56881a43ba291ba3d1a841683f6bbe"
+    },
+    "run-api.json": {
+      "bytes": 12351,
+      "sha256": "8f10ade2cdc3db23abed02c84fd8a434b3e9b161f62cbf1a4e94323cd24c07ae"
+    },
+    "artifacts-final.json": {
+      "bytes": 6275,
+      "sha256": "9ac7062f92ff728453c8a613982b46d02b51bfe368c0aa82785d73ecf317a1c1"
+    },
+    "job-100993027930-checks.log": {
+      "bytes": 332803,
+      "sha256": "666da1ed3ef97004739a15663e39fe467d4ebc3f58e4655333a5b63ef7e8b0ac"
+    },
+    "job-100993028063-android.log": {
+      "bytes": 88040,
+      "sha256": "f6add1694e6f866265154b5e76487256d34762a02d18a204c136d5820ed0093c"
+    },
+    "job-100993028181-apple.log": {
+      "bytes": 76538,
+      "sha256": "160823023eb2dd335b6dc894c6db26626639f08f6a77d72c7d3006f6070a62ec"
+    },
+    "job-100994377698-publish.log": {
+      "bytes": 42719,
+      "sha256": "594850ba7b502d95bf977e9a9d35ca5be785c13e3f2890b0b9f04faab6838ba6"
+    },
+    "downloaded-file-hashes.json": {
+      "bytes": 32887,
+      "sha256": "4e3eed7571e445f5cdd2090d470cefa1a659b03b1b8d2b67fc711cbf70e85a3c"
+    },
+    "artifacts/isolated-hosted-consumer/result.json": {
+      "bytes": 13033,
+      "sha256": "757079616f33e9b3d1a06cc3c24bb2f70b8e21edcf4f9fc48412d5337f9fa9d4"
+    },
+    "artifacts/chrome-trusted-journey/trusted-journey.json": {
+      "bytes": 1219,
+      "sha256": "1b2ec7825b89a97dd1bad4ce33fb6f8c109c317f6885edfc8cd6972f217a603d"
+    },
+    "artifacts/firefox-journey/trusted-journey.json": {
+      "bytes": 1071,
+      "sha256": "5cce3a113bbf389fb8bd1c47c62cae4408be5e8331f92a4c467454ac9cd02e32"
+    },
+    "artifacts/edge-journey/trusted-journey.json": {
+      "bytes": 1190,
+      "sha256": "e4e2596111e833b4f7b4e19bd97868c4f540989cf170370946ae211353dc56b0"
+    },
+    "artifacts/edge-journey/startup-condition/setup.json": {
+      "bytes": 859,
+      "sha256": "0214bcffaf3558a3fb5da869885e555190383b8644ca4e54c5f7b1c33f69d53c"
+    },
+    "artifacts/edge-journey/startup-condition/verification.json": {
+      "bytes": 3946,
+      "sha256": "e893c180dedbba56ea65cc00849a8b787205fd4fb770b5319cb108e4853476a5"
+    },
+    "artifacts/edge-journey/resources/observation.json": {
+      "bytes": 781,
+      "sha256": "299c56ead8e9999f6aba059596692311fc440b0653cb1299d5a83f3bdf956b0c"
+    },
+    "artifacts/windows-native-journey/catalog-journey.json": {
+      "bytes": 7118,
+      "sha256": "ccba83d13e7fb9c92ea15abf32ba252921d99bcec6a5a3ed1f8dc862677cdc68"
+    },
+    "artifacts/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json": {
+      "bytes": 3315,
+      "sha256": "61ea5acfe9d2e0ed42deb2772720a65cc58a99b55907349ad538c88352144b71"
+    },
+    "artifacts/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/native-flutter-driver.log": {
+      "bytes": 471096,
+      "sha256": "2d81bc803d4510d1432fe35398aa16435ce4d1aa857f686bd296670ba86a2b30"
+    },
+    "artifacts/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/macos-journey.json": {
+      "bytes": 7176,
+      "sha256": "7540fcc0f77ee178ed595780f45bbdc6656a55417d83f3667a29c5d8398a6a79"
+    },
+    "artifacts/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.json": {
+      "bytes": 200,
+      "sha256": "192cb7fc46074d8ff292cd3d29e0901d5258664505f2885bc4c9fd0c9b6bb414"
+    },
+    "artifacts/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-2.json": {
+      "bytes": 199,
+      "sha256": "014ed645aa8f142ce65cb6d76392830ae51cbb91d8b41c8ad019df676ced9fa7"
+    }
+  },
+  "limits": [
+    "Native candidate and Chat Send evidence does not accept the failed complete Android journey.",
+    "Main browser journeys use two trusted Copy actions plus the original Flutter-injected remainder; they are separate from the historical 26-stage trusted browser-input suites.",
+    "No all-platform, human IME, human assistive-technology or performance acceptance is inferred from this main CI."
+  ]
+}

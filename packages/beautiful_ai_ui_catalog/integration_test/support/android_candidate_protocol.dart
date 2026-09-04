@@ -340,7 +340,9 @@ final class AndroidCandidateProtocol {
     if (_stage == 'passed' || _stage == 'failed') return;
     if (_remaining(_deadline) == 0) {
       fail('Candidate target exceeded its overall deadline.');
-    } else if ((_stage == 'action_claimed' || _stage == 'awaiting_commit') &&
+    } else if ((_stage == 'action_claimed' ||
+            _stage == 'awaiting_commit' ||
+            (_stage == 'sending' && !_activationChecked)) &&
         leaseRemainingMilliseconds == 0) {
       fail('Native candidate action lease expired.');
     }

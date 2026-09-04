@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+  "run_id": 33862137234,
+  "job_id": 100988759570,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33862137234",
+  "job_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33862137234/job/100988759570",
+  "conclusion": "failure",
+  "created_at": "2026-09-04T10:12:49Z",
+  "completed_at": "2026-09-04T10:19:14Z",
+  "scope": "Original full Android journey; one actual native candidate commit and one original Send observed; final full-journey Response not received",
+  "artifact": {
+    "id": 9932708612,
+    "node_id": "MDg6QXJ0aWZhY3Q5OTMyNzA4NjEy",
+    "name": "android-native-candidate-33862137234-1",
+    "size_in_bytes": 677417,
+    "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9932708612",
+    "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9932708612/zip",
+    "expired": false,
+    "digest": "sha256:b05aee06e7dfde13456b614a9fb72c5d951c3b6ff42dd14959316bc1b3ccb898",
+    "created_at": "2026-09-04T10:19:13Z",
+    "updated_at": "2026-09-04T10:19:13Z",
+    "expires_at": "2026-09-18T10:19:12Z",
+    "workflow_run": {
+      "id": 33862137234,
+      "repository_id": 1354580211,
+      "head_repository_id": 1354580211,
+      "head_branch": "product/main",
+      "head_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a"
+    }
+  },
+  "artifact_download_count": 1,
+  "archive_digest_boundary": "GitHub-reported ZIP digest only; extracted files independently verified against the runner manifest. ZIP was not retained for independent digest verification.",
+  "verified_run_files": 101,
+  "build": {
+    "helper": {
+      "android_jar": "/usr/local/lib/android/sdk/platforms/android-35/android.jar",
+      "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "apk": "/home/runner/work/shadcn_flutter/shadcn_flutter/artifacts/android-candidate/helper-build/android-candidate-probe.apk",
+      "apk_sha256": "c7aa6c0bc96477b011af50dc432a3c0498146d67672e54a23140ea3f4fb1e250",
+      "build_tools_version": "37.0.0",
+      "component": "dev.beautifulai.androidcandidateprobe/.ProbeInstrumentation",
+      "min_sdk": 34,
+      "package": "dev.beautifulai.androidcandidateprobe",
+      "source_file_sha256": {
+        "AndroidManifest.xml": "3030608fec81e2e5fb6af0dfceb8d10039eddee14705c3f6b32eb70d1ee853a4",
+        "build.py": "750c893e88df76ce4899423087f462afa19190e15597e86e167ea3a491ae227b",
+        "generated/dev/beautifulai/androidcandidateprobe/BuildIdentity.java": "50fb1cd16d5bca183b1356990e285573642389c6ec978155d48572815a1d64ce",
+        "repo/.github/scripts/run_catalog_input_acceptance.py": "8bf405be74889aa962c0f6b6c3aa746546a6e1f0619a7fc84e962cf7e5b6f328",
+        "repo/.github/scripts/run_ios_catalog_journey.py": "8c85b9d0735433baff1b5ee428316a4992bc2ee22f292a1aa4a14256794db469",
+        "repo/.github/scripts/windows_owned_process.py": "f54850f3a3c942c2840c38a4f55b4a0838d25568360497309c1f97f52b754e12",
+        "src/dev/beautifulai/androidcandidateprobe/ProbeInstrumentation.java": "1344b8a5f328f396bab719780ea4569d99015e006270ede2751733934699c611",
+        "src/dev/beautifulai/androidcandidateprobe/Protocol.java": "ad2078948b214b1173ddf58536f6bdafe5c511c869ce4d06ac7ad1ffccabade8",
+        "tests/ProtocolTest.java": "7f286b61871782fb855cba24e15247fa429a17e0960a51c2ea9773dd794bf2e1",
+        "tests/test_build.py": "0d18f0be300eee0c0cbe1226ee006bda085d1154f94d0eab56680b288e55c74e"
+      },
+      "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+      "target_sdk": 35,
+      "tool_paths": {
+        "aapt2": "/usr/local/lib/android/sdk/build-tools/37.0.0/aapt2",
+        "apksigner": "/usr/local/lib/android/sdk/build-tools/37.0.0/apksigner",
+        "d8": "/usr/local/lib/android/sdk/build-tools/37.0.0/d8",
+        "java": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "javac": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+        "keytool": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/keytool",
+        "zipalign": "/usr/local/lib/android/sdk/build-tools/37.0.0/zipalign"
+      },
+      "tool_versions": {
+        "aapt2": "Android Asset Packaging Tool (aapt) 2.20-15087165",
+        "apksigner": "0.9",
+        "d8": "D8 9.2.4-dev (build 084a89126ae0596c599143df57a654646af28313 from go/r8bot (luci-r8-custom-ci-archive-0-4u1w))",
+        "java": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)",
+        "javac": "javac 17.0.20.1",
+        "keytool": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)",
+        "zipalign": "Android SDK Build-Tools 37.0.0"
+      }
+    },
+    "catalog_test_apk": {
+      "path": "/home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/app/outputs/flutter-apk/app-debug.apk",
+      "sha256": "46aae4526951905be0e00e48cc842b9784a9c9f925f59ed1238c91ea78d8febc",
+      "bytes": 77096433
+    },
+    "flutter_sdk": {
+      "frameworkVersion": "3.47.0",
+      "channel": "stable",
+      "repositoryUrl": "https://github.com/flutter/flutter.git",
+      "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+      "frameworkCommitDate": "2026-08-11 11:53:49 -0700",
+      "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+      "engineCommitDate": "2026-08-11 16:38:36.000Z",
+      "engineContentHash": "59d54a2b2896a6bbf356c94b7fac7b9e235bdacd",
+      "engineBuildDate": "2026-08-11 10:18:15.653",
+      "dartSdkVersion": "3.13.0",
+      "devToolsVersion": "2.60.0",
+      "flutterVersion": "3.47.0",
+      "flutterRoot": "/opt/hostedtoolcache/flutter/stable-3.47.0-x64/flutter"
+    },
+    "device_fingerprint": "Android/sdk_phone64_x86_64/emu64x:15/AE3A.240806.019/12368160:userdebug/test-keys"
+  },
+  "processes": {
+    "app": {
+      "package": "dev.beautifulai.beautiful_ai_ui_catalog",
+      "pid": 2386,
+      "start_ticks": 23246
+    },
+    "helper": {
+      "package": "dev.beautifulai.androidcandidateprobe",
+      "pid": 2316,
+      "start_ticks": 4893
+    }
+  },
+  "native_candidate": {
+    "ok": true,
+    "operation": "inspect",
+    "protocol_version": 1,
+    "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+    "device_elapsed_ms": 266093,
+    "ime_component": "com.android.inputmethod.latin/.LatinIME",
+    "ime_package": "com.android.inputmethod.latin",
+    "ime_window_id": 0,
+    "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+    "bounds": {
+      "left": 380,
+      "top": 1503,
+      "right": 698,
+      "bottom": 1604
+    },
+    "candidate_id": "e6047d143abc8c5e9495733e66ed1cd8",
+    "inspect_started_device_ms": 265967,
+    "expires_at_device_ms": 267967
+  },
+  "unique_candidate_node": {
+    "index": 48,
+    "depth": 9,
+    "package": "com.android.inputmethod.latin",
+    "view_id": null,
+    "class": "android.widget.TextView",
+    "text": "inventory",
+    "description": "inventory",
+    "visible": true,
+    "enabled": true,
+    "clickable": true,
+    "bounds": {
+      "left": 380,
+      "top": 1503,
+      "right": 698,
+      "bottom": 1604
+    }
+  },
+  "native_tap": {
+    "ok": true,
+    "operation": "tap",
+    "protocol_version": 1,
+    "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+    "device_elapsed_ms": 267245,
+    "ime_component": "com.android.inputmethod.latin/.LatinIME",
+    "ime_package": "com.android.inputmethod.latin",
+    "ime_window_id": 0,
+    "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+    "bounds": {
+      "left": 380,
+      "top": 1503,
+      "right": 698,
+      "bottom": 1604
+    },
+    "used_candidate_id": "e6047d143abc8c5e9495733e66ed1cd8",
+    "expires_at_device_ms": 267967,
+    "injected_down": true,
+    "injected_up": true,
+    "cancelled": false,
+    "down_device_elapsed_ms": 266965,
+    "down_dispatch_attempted": true,
+    "down_injection_returned_device_elapsed_ms": 267049,
+    "up_device_elapsed_ms": 267050,
+    "up_injection_returned_device_elapsed_ms": 267245
+  },
+  "native_tap_attempts": 1,
+  "driver_native_click_count": 1,
+  "claim_and_result_observations": [
+    {
+      "driver_elapsed_ms": 29418,
+      "action": "claim",
+      "response": {
+        "protocol_version": 1,
+        "nonce": "e9a78b48fbec48bab41f224a2e048ffa",
+        "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+        "stage": "action_claimed",
+        "elapsed_ms": 29100,
+        "remaining_ms": 118302,
+        "expected_text": "Check cone inventory",
+        "candidate_text": "inventory",
+        "snapshot": {
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": 11,
+            "composingExtent": 20
+          },
+          "editor_primary_focus": true,
+          "send_count": 1,
+          "send_enabled_semantics": "isFalse",
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "role": "user",
+              "text": "What should we restock this week?"
+            },
+            {
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand."
+            }
+          ],
+          "observation_error": null
+        },
+        "candidate_id": "e6047d143abc8c5e9495733e66ed1cd8",
+        "lease_id": "7812fb8a556c73ceaf75ead5ebb31eb2",
+        "claimed_elapsed_ms": 29087,
+        "lease_remaining_ms": 4987,
+        "can_click": true,
+        "native_click_acknowledged": false,
+        "native_drained": false,
+        "native_call_pending": true,
+        "send_activation_checked": false,
+        "failure": null
+      }
+    },
+    {
+      "driver_elapsed_ms": 30758,
+      "action": "result",
+      "response": {
+        "protocol_version": 1,
+        "nonce": "e9a78b48fbec48bab41f224a2e048ffa",
+        "source_sha": "5a90dff9515deb7e421cfa2c9cc9bf9ebc67466a",
+        "stage": "awaiting_commit",
+        "elapsed_ms": 30304,
+        "remaining_ms": 117098,
+        "expected_text": "Check cone inventory",
+        "candidate_text": "inventory",
+        "snapshot": {
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "role": "user",
+              "text": "What should we restock this week?"
+            },
+            {
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand."
+            }
+          ],
+          "observation_error": null
+        },
+        "candidate_id": "e6047d143abc8c5e9495733e66ed1cd8",
+        "lease_id": "7812fb8a556c73ceaf75ead5ebb31eb2",
+        "claimed_elapsed_ms": 29087,
+        "lease_remaining_ms": 3783,
+        "can_click": false,
+        "native_click_acknowledged": true,
+        "native_drained": true,
+        "native_call_pending": false,
+        "send_activation_checked": false,
+        "failure": null
+      }
+    }
+  ],
+  "send_activation_checked": true,
+  "original_send_observations": [
+    {
+      "complete_json": true,
+      "record": {
+        "expected_text": "Check cone inventory",
+        "scope": "framework_touch_one_send_tap",
+        "pointer_snapshots": "rendered widget and semantics state; no frame is forced",
+        "sample": {
+          "phase": "before_tap",
+          "utc_epoch_us": 1788517137251421,
+          "elapsed_us": 2045,
+          "input": {
+            "text": "Check cone inventory",
+            "selectionBase": 20,
+            "selectionExtent": 20,
+            "selectionAffinity": "TextAffinity.downstream",
+            "selectionIsDirectional": false,
+            "composingBase": -1,
+            "composingExtent": -1
+          },
+          "editor_primary_focus": true,
+          "primary_focus": "BeautifulChat composer",
+          "send_count": 1,
+          "send_enabled_semantics": "isTrue",
+          "observation_error": null,
+          "send_rect": [
+            72.0,
+            523.0238095238092,
+            267.42857142857144,
+            19.0
+          ],
+          "view_insets_bottom_physical": 901.0,
+          "device_pixel_ratio": 2.625,
+          "host_status": "idle",
+          "host_messages": [
+            {
+              "id": "initial-user",
+              "role": "user",
+              "text": "What should we restock this week?",
+              "resolving": false
+            },
+            {
+              "id": "initial-assistant",
+              "role": "assistant",
+              "text": "Start with pistachio and waffle cones. Both have rising demand.",
+              "resolving": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "complete_json": false,
+      "raw_prefix": "{\"expected_text\":\"Check cone inventory\",\"scope\":\"framework_touch_one_send_tap\",\"pointer_snapshots\":\"rendered widget and semantics state; no frame is forced\",\"sample\":{\"phase\":\"pointer_down\",\"utc_epoch_us\":1788517137824227,\"elapsed_us\":574739,\"input\":{\"text\":\"Check cone inventory\",\"selectionBase\":20,\"selectionExtent\":20,\"selectionAffinity\":\"TextAffinity.downstream\",\"selectionIsDirectional\":false,\"composingBase\":-1,\"composingExtent\":-1},\"editor_primary_focus\":true,\"primary_focus\":\"BeautifulChat composer\",\"send_count\":1,\"send_enabled_semantics\":\"isTrue\",\"observation_error\":null,\"send_rect\":[72.0,523.0238095238092,267.42857142857144,19.0],\"view_insets_bottom_physical\":901.0,\"device_pixel_ratio\":2.625,\"host_status\":\"idle\",\"host_messages\":[{\"id\":\"initial-user\",\"role\":\"user\",\"text\":\"What should we restock this week?\",\"resolving\":false},{\"id\":\"initial-assistant\",\"role\":\"assistant\",\"text\":\"Start with pistachio and waffle cones. Both have rising demand.\",\"resolving\":false}],\"pointer\":23,\"",
+      "note": "Original Android log line is truncated; no missing suffix reconstructed."
+    },
+    {
+      "complete_json": false,
+      "raw_prefix": "{\"expected_text\":\"Check cone inventory\",\"scope\":\"framework_touch_one_send_tap\",\"pointer_snapshots\":\"rendered widget and semantics state; no frame is forced\",\"sample\":{\"phase\":\"pointer_up\",\"utc_epoch_us\":1788517137847896,\"elapsed_us\":598408,\"input\":{\"text\":\"Check cone inventory\",\"selectionBase\":20,\"selectionExtent\":20,\"selectionAffinity\":\"TextAffinity.downstream\",\"selectionIsDirectional\":false,\"composingBase\":-1,\"composingExtent\":-1},\"editor_primary_focus\":true,\"primary_focus\":\"BeautifulChat composer\",\"send_count\":1,\"send_enabled_semantics\":\"isTrue\",\"observation_error\":null,\"send_rect\":[72.0,523.0238095238092,267.42857142857144,19.0],\"view_insets_bottom_physical\":901.0,\"device_pixel_ratio\":2.625,\"host_status\":\"idle\",\"host_messages\":[{\"id\":\"initial-user\",\"role\":\"user\",\"text\":\"What should we restock this week?\",\"resolving\":false},{\"id\":\"initial-assistant\",\"role\":\"assistant\",\"text\":\"Start with pistachio and waffle cones. Both have rising demand.\",\"resolving\":false}],\"pointer\":23,\"ki",
+      "note": "Original Android log line is truncated; no missing suffix reconstructed."
+    },
+    {
+      "complete_json": false,
+      "raw_prefix": "{\"expected_text\":\"Check cone inventory\",\"scope\":\"framework_touch_one_send_tap\",\"pointer_snapshots\":\"rendered widget and semantics state; no frame is forced\",\"sample\":{\"phase\":\"after_tap\",\"utc_epoch_us\":1788517138171762,\"elapsed_us\":922275,\"input\":{\"text\":\"\",\"selectionBase\":0,\"selectionExtent\":0,\"selectionAffinity\":\"TextAffinity.downstream\",\"selectionIsDirectional\":false,\"composingBase\":-1,\"composingExtent\":-1},\"editor_primary_focus\":true,\"primary_focus\":\"BeautifulChat composer\",\"send_count\":0,\"send_enabled_semantics\":null,\"observation_error\":null,\"send_rect\":null,\"view_insets_bottom_physical\":901.0,\"device_pixel_ratio\":2.625,\"host_status\":\"responding\",\"host_messages\":[{\"id\":\"initial-user\",\"role\":\"user\",\"text\":\"What should we restock this week?\",\"resolving\":false},{\"id\":\"initial-assistant\",\"role\":\"assistant\",\"text\":\"Start with pistachio and waffle cones. Both have rising demand.\",\"resolving\":false},{\"id\":\"prompt-1\",\"role\":\"user\",\"text\":\"Check cone inventory\",\"resolving\":false},{\"",
+      "note": "Original Android log line is truncated; no missing suffix reconstructed."
+    }
+  ],
+  "after_send_visible_prefix_fields": {
+    "source": "flutter-drive.log original truncated after_tap line",
+    "utc_epoch_us": 1788517138171762,
+    "elapsed_us": 922275,
+    "input_text": "",
+    "composition": [
+      -1,
+      -1
+    ],
+    "selection": [
+      0,
+      0
+    ],
+    "editor_primary_focus": true,
+    "send_count": 0,
+    "send_enabled_semantics": null,
+    "host_status": "responding",
+    "observed_new_user_message": {
+      "id": "prompt-1",
+      "role": "user",
+      "text": "Check cone inventory"
+    },
+    "boundary": "Only fields fully visible before the original log truncation are extracted; no missing JSON suffix invented."
+  },
+  "input_trace": {
+    "actual_app_pid": 2386,
+    "trace_clock": "local global counter uptime perf mono mono_raw [boot] tai x86-tsc",
+    "recorded_app_dispatch_lines": 50,
+    "key_dispatch_lines": [
+      " l_ai_ui_catalog-2386    (   2386) [000] .....   245.284309: tracing_mark_write: B|2386|InputConnection#setComposingRegion",
+      " l_ai_ui_catalog-2386    (   2386) [001] .....   264.724464: tracing_mark_write: B|2386|InputConnection#setComposingRegion",
+      " l_ai_ui_catalog-2386    (   2386) [000] .....   267.285969: tracing_mark_write: B|2386|InputConnection#commitText",
+      " l_ai_ui_catalog-2386    (   2386) [001] .....   276.826941: tracing_mark_write: B|2386|InputConnection#setComposingRegion"
+    ],
+    "boundary": "Stock atrace dispatch slices do not alone establish text/commit acceptance. The separate fresh VM result verifies unchanged text and empty composition. Native invocation/return times do not guarantee OS delivery deadlines; no cross-clock latency claim is made."
+  },
+  "failure": {
+    "error": "Bad state: Final candidate observer failed: Bad state: Finder returned no matching elements.",
+    "stack": "#0      main (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/driver/catalog_android_candidate_driver.dart:164:39)\n<asynchronous suspension>\n",
+    "all_tests_passed_present": false,
+    "all_tests_passed": null,
+    "response_received": false,
+    "request_data_error": "DriverError: Failed to fulfill RequestData due to remote error\nOriginal error: ext.flutter.driver: (-32000) Service connection disposed\nOriginal stack trace:\n#0      new _OutstandingRequest (package:vm_service/src/vm_service.dart:278:34)\n#1      VmService._call.<anonymous closure> (package:vm_service/src/vm_service.dart:1960:25)\n#2      VmService._call (package:vm_service/src/vm_service.dart:1972:8)\n#3      VmService.callServiceExtension (package:vm_service/src/vm_service.dart:1911:14)\n#4      VMServiceFlutterDriver.sendCommand (package:flutter_driver/src/driver/vmservice_driver.dart:327:12)\n#5      FlutterDriver.requestData (package:flutter_driver/src/driver/driver.dart:585:13)\n#6      main (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/driver/catalog_android_candidate_driver.dart:120:10)\n<asynchronous suspension>\n\n",
+    "driver_cleanup_errors": [
+      "original failure response: TimeoutException after 0:00:10.000000: Future not completed"
+    ],
+    "classification": "Final diagnostic observer unconditionally queried Send semantics after the normal Send-to-Stop transition. Full original Response was not collected; this is not a received allTestsPassed=false response. Overall failure is retained."
+  },
+  "cleanup": {
+    "supervisor": "verified",
+    "supervisor_cleanup_errors": [],
+    "native_call_drained": true,
+    "driver_native_drain_confirmed": true,
+    "native_abort": {
+      "ok": true,
+      "native_authorization_revoked": true,
+      "native_drained": true,
+      "native_helper_stopped": true
+    },
+    "driver_cleanup_errors": [
+      "original failure response: TimeoutException after 0:00:10.000000: Future not completed"
+    ]
+  },
+  "core_records": {
+    "run_metadata": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/run-final.json",
+      "bytes": 4389,
+      "sha256": "bf21aa03b7c9a72de9290143fcfd6211deccc1e61a54f636b783aaec590264fa"
+    },
+    "artifact_metadata": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts-metadata.json",
+      "bytes": 919,
+      "sha256": "6b4ae01e21e9087d75cb267a5db69b90955b056a4de811d890da0d1e6897f5d6"
+    },
+    "job_log": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/job-100988759570.log",
+      "bytes": 94887,
+      "sha256": "77c0ef36bdefd694c049be77cf3022943e52140e5478a49ff611a371e3dbfa1c"
+    },
+    "build_report": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/helper-build/build-report.json",
+      "bytes": 3075,
+      "sha256": "b783978b0e1410672d21521f8ef172c9ec4222ed0a312a0376a3f27df6288c93"
+    },
+    "build_log": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/helper-build/build.log",
+      "bytes": 17253,
+      "sha256": "12f8d140b444da9ed992b6768c35d54090e113ab0af8bfb4b0f525372e857014"
+    },
+    "supervisor_summary": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/summary.json",
+      "bytes": 75670,
+      "sha256": "48f0292cd046156cf877e67a20daea83f30af692ac010d112b931f4738071e74"
+    },
+    "driver_summary": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/driver/driver-summary.json",
+      "bytes": 190276,
+      "sha256": "b1f69c40e7c3d4f284dc141c0e7b57ecd4b2d720dcb775df0666c83a91aee2e8"
+    },
+    "inspection": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/native-inspection.json",
+      "bytes": 22898,
+      "sha256": "70ee8cf89d80a0cc1f38f310b1481665c48f6945edc8ae28abcc29d6db5e1d76"
+    },
+    "native_tap": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/native-tap.json",
+      "bytes": 23143,
+      "sha256": "d0509aaa747c6d012ab4694cc56686a47e12ded9dfdf2f237a87b14df12b68d8"
+    },
+    "native_events": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/native-helper-events.jsonl",
+      "bytes": 45544,
+      "sha256": "1ac0e1b9d8e8862a730e3ece53dc538de4904aba1a4f04565adac40ec300656f"
+    },
+    "input_trace": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/input-connection.atrace",
+      "bytes": 50137,
+      "sha256": "4d9d201b7349cd3955209a1cbd1ee3626c4dfedb55b14b887de601823f6e2a03"
+    },
+    "app_pid_trace": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/input-connection-app-slices.txt",
+      "bytes": 6125,
+      "sha256": "d05b569f3052fdd398766b2420e3faa661b1ed1bd5b16ce406c93601395fcd45"
+    },
+    "trace_clock": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/018-trace-clock.stdout",
+      "bytes": 66,
+      "sha256": "bb5cd92b7b2fe258aa1d4828ba21deafe0ac36118f50e5945b26f960596aa0f3"
+    },
+    "flutter_log": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/flutter-drive.log",
+      "bytes": 12816,
+      "sha256": "8f789171949afc51d59eaf62b321f5eacb85aefae6ae6609786945c1820533b9"
+    },
+    "run_file_manifest": {
+      "path": "/tmp/beautiful-android-candidate-5a90dff9-33862137234/artifacts/android-native-candidate-33862137234-1/run/artifact-manifest.json",
+      "bytes": 15054,
+      "sha256": "4d44f1cb9c4df2641cb0e477fc935816f9f2d51ff983a1db54c7d151a6be6c9f"
+    }
+  },
+  "raw_directory": "/tmp/beautiful-android-candidate-5a90dff9-33862137234",
+  "history": "920f1dd8, 2e83a2e3 and 080697f2 failures remain unchanged. No run was retried."
+}

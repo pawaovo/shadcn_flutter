@@ -93,6 +93,18 @@ void main() {
     expect(protocol.stage, 'preparing');
   });
 
+  test('the short action lease ends after the checked Send activation', () {
+    protocol.offerCandidate();
+    claim();
+    acknowledge();
+    snapshot = committed();
+    protocol.beginSend();
+    protocol.guardSendActivation(snapshot);
+    now = 6000;
+    protocol.pass();
+    expect(protocol.stage, 'passed');
+  });
+
   test('wrong nonce or source never obtains authority', () {
     protocol.offerCandidate();
     for (final key in <String>['nonce', 'source_sha']) {
@@ -531,7 +543,12 @@ void main() {
     },
   );
 
-  for (final failure in <String>['guard_throw', 'abort', 'composition']) {
+  for (final failure in <String>[
+    'guard_throw',
+    'abort',
+    'composition',
+    'lease',
+  ]) {
     testWidgets('final activation $failure sends no pointer or host message', (
       tester,
     ) async {
@@ -633,6 +650,8 @@ void main() {
                 } else if (failure == 'composition') {
                   beginComposition();
                   await tester.pump();
+                } else if (failure == 'lease') {
+                  now = AndroidCandidateProtocol.actionLeaseMilliseconds;
                 }
               }
             },

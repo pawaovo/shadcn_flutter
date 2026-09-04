@@ -32,6 +32,14 @@ reads inside the test's guarded execution scope. Before Chat, requests read only
 the preparation record; after the final tap or a terminal failure, they read a
 frozen record that cannot authorize another candidate claim.
 
+The same flag enables a passive observer around the original P3 slash Enter and
+Prompt Send. It records editing values, composition, focus, rendered menus and
+Send state, framework key delivery and visible host receipts in the full
+integration response. Listener callbacks read held controller/focus objects;
+only explicit test-owned checkpoints query widgets and semantics. It consumes
+no key and adds no input, focus change, pump, delay or retry. Observation failures
+remain in the report without replacing the original action/assertion failure.
+
 At the candidate stage the actual editor must contain exactly
 `Check cone inventory`, with selection `[20,20]`, composing `[11,20]`, primary
 focus, a visible keyboard and a disabled Send. The independent native helper
@@ -64,7 +72,11 @@ full text, empty composition, retained focus and enabled Send. It then reaches
 the original send helper. A fixture-only synchronous activation guard checks
 the live widget/controller/semantics again immediately before the existing
 single tap, so reveal-time abort or re-composition cannot become Send. The
-default helper has no extra wait or action. A final successful driver response
+five-second action lease also remains mandatory until that activation check;
+after the checked tap, the remaining journey uses its original overall deadline.
+The real-widget expiration regression verifies zero pointer events and zero host
+messages when the lease expires during reveal. The default helper has no extra
+wait or action. A final successful driver response
 requires all original P1/P2/P3 assertions, one native tap and verified drain.
 
 The supervisor captures stock Android `atrace` category `input`, preserving the

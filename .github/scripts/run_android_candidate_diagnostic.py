@@ -133,10 +133,12 @@ class Runner:
         self.active = True
         self.native_stopped = False
         self.owned_packages = set()
-        self.report = {"schema_version": 1, "scope": "manual_original_journey_with_one_native_IME_candidate_tap",
+        self.report = {"schema_version": 1, "scope": "original_full_journey_with_one_native_IME_candidate_tap",
                        "source_sha": args.source_sha, "nonce": self.nonce, "status": "started",
                        "application_acceptance": "not_accepted", "human_IME_acceptance": "not_accepted",
-                       "original_android_gate_changed": False, "errors": [], "cleanup_errors": []}
+                       "workflow": os.environ.get("GITHUB_WORKFLOW"),
+                       "workflow_ref": os.environ.get("GITHUB_WORKFLOW_REF"),
+                       "job": os.environ.get("GITHUB_JOB"), "errors": [], "cleanup_errors": []}
         write_json(self.output / "owner.json", {"pid": os.getpid(), "nonce": self.nonce,
                                                "source_sha": args.source_sha, "device": args.device})
 

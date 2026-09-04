@@ -11,6 +11,7 @@ import 'support/interactions.dart';
 import 'support/chat_send_diagnostics.dart';
 import 'support/catalog_semantics_fixture.dart';
 import 'support/trusted_clipboard_action.dart';
+import 'support/prompt_input_diagnostics.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -295,13 +296,34 @@ Future<void> _runP3Journey(WidgetTester tester) async {
   }
 
   final prompt = _inside('catalog-prompt-bar', find.byType(EditableText));
-  await tester.ensureVisible(prompt);
-  await tester.pump();
-  await enterCatalogText(tester, prompt, '/rest');
-  await tester.pump();
-  await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-  await tester.pump();
-  expect(tester.widget<EditableText>(prompt).controller.text, '/restock ');
+  CatalogPromptInputObserver? observePrompt(String action) =>
+      const bool.fromEnvironment('CATALOG_ANDROID_CANDIDATE')
+      ? CatalogPromptInputObserver(
+          tester,
+          find.byKey(const Key('catalog-prompt-bar')),
+          action: action,
+          reportData:
+              IntegrationTestWidgetsFlutterBinding.instance.reportData ??=
+                  <String, dynamic>{},
+        )
+      : null;
+  final slashObservation = observePrompt('slash_enter');
+  try {
+    await tester.ensureVisible(prompt);
+    await tester.pump();
+    slashObservation?.sample('before_edit');
+    await enterCatalogText(tester, prompt, '/rest');
+    slashObservation?.sample('after_edit');
+    await tester.pump();
+    slashObservation?.sample('before_enter');
+    final handled = await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    slashObservation?.sample('after_enter', keyDownHandled: handled);
+    await tester.pump();
+    slashObservation?.sample('after_enter_pump');
+    expect(tester.widget<EditableText>(prompt).controller.text, '/restock ');
+  } finally {
+    slashObservation?.finish();
+  }
   await tap(
     'catalog-prompt-bar',
     find.byKey(const Key('beautiful-prompt-model')),
@@ -319,19 +341,28 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     _inside('catalog-prompt-bar', find.text('Remove inventory-1.csv')),
     findsOneWidget,
   );
-  await tester.ensureVisible(prompt);
-  await enterCatalogText(tester, prompt, 'Prepare the seasonal restock');
-  await tap(
-    'catalog-prompt-bar',
-    find.byKey(const Key('beautiful-prompt-send')),
-  );
-  expect(
-    find.text(
-      'Prompt received: Prepare the seasonal restock · 1 files · precise',
-    ),
-    findsOneWidget,
-  );
-  expect(tester.widget<EditableText>(prompt).controller.text, isEmpty);
+  final sendObservation = observePrompt('prompt_send');
+  try {
+    await tester.ensureVisible(prompt);
+    sendObservation?.sample('before_edit');
+    await enterCatalogText(tester, prompt, 'Prepare the seasonal restock');
+    sendObservation?.sample('after_edit');
+    sendObservation?.sample('before_send');
+    await tap(
+      'catalog-prompt-bar',
+      find.byKey(const Key('beautiful-prompt-send')),
+    );
+    sendObservation?.sample('after_send');
+    expect(
+      find.text(
+        'Prompt received: Prepare the seasonal restock · 1 files · precise',
+      ),
+      findsOneWidget,
+    );
+    expect(tester.widget<EditableText>(prompt).controller.text, isEmpty);
+  } finally {
+    sendObservation?.finish();
+  }
 
   await tap(
     'catalog-diff-table',
