@@ -2,11 +2,12 @@
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
 Status: **not ready for stable-release sign-off**. At the latest completed
-`e3526d3f` checkpoint, all four browsers pass the complete trusted W3C input
+`f5484b9f` checkpoint, all four browsers pass the complete trusted W3C input
 journey, and all three native framework input jobs pass. Main CI is **11/12**:
-Android's complete journey passes; iOS connects its actual driver and then
-fails the FineTune width assertion (`360` expected, `324` observed). The next
-fixture repair synchronizes framework edits with the real input peer. Linux's native parent
+Android and iOS complete their actual journeys, including the corrected input
+synchronization and both numeric submission assertions. The only main failure
+is Edge's initial browser navigation/window request before application code.
+Linux's native parent
 repair passes all three actual FlView cases; full Orca tasks now expose SDK
 name-notification and expanded-state limitations. P1/P2 engineering budgets
 passed at the earlier `87299572` runtime snapshot; P3 frames, OS IME and full
@@ -23,7 +24,7 @@ changing those decisions or rewriting earlier records.
 | --- | --- |
 | Historical `c2bde85dd5da7c33b0f7881234ae312f3be1826c` | The [September 3 CI record](./2026-09-03-final-ci-33748054504.json) preserves run `33748054504`, attempt 1, with 12/12 jobs passing. Its iOS driver, hosted consumer, build, visual and profile observations remain historical evidence for that source. They do not accept a later candidate. |
 | Prior `36142500c9ad91dc307b6c8005e78add357f080b` | The earlier completed cloud checkpoint summarized below has main CI 10/12 and input/AT 1/9. Two complete native captures at this SHA have engineering-budget failures. Those results remain unchanged. |
-| Candidate `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See the current checkpoint below. |
+| Earlier runtime `8729957220c011329022bafc7a0f7402434ce15e` | Main CI **12/12**, input/AT **4/9**, and clean publication dry-run **exit 0 / zero warnings**. The native P1/P2 budget is **8/8 pass**; P3 has **1 pass / 6 fail**. See its recorded runtime checkpoint below. |
 | Local changes after `3614250`, now committed in `87299572` | P1 performance repairs, input/CI repairs and lossless timeline transport have completed local verification: 640 library tests, 59 Catalog tests, strict analysis and 141-file formatting. The exact committed source, clean dry-run and subsequent cloud/native observations are recorded in the current checkpoint. They do not accept future changes automatically. |
 
 The [September 3 readiness document](./2026-09-03-release-readiness.md) and
@@ -31,7 +32,44 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Latest completed checkpoint at e3526d3f
+## Latest completed checkpoint at f5484b9f
+
+[The exact-source CI record](../../../.github/evidence/f5484b9f-ci.md) and its
+[JSON manifest](../../../.github/evidence/f5484b9f-ci.json) bind the two new
+runs and 21 job identities to `f5484b9ff80ebae9c728204c48387e3ef148bda8`.
+Main CI is **11/12**, including successful actual Android and iOS journeys.
+The iOS report has `passed=true`, required driver exit 0 in 57.405 seconds,
+and `All tests passed.`. Both unconditional numeric checks execute: controller
+text is `360` and the actual host Width setting is `360`. VM discovery, process
+cleanup, stdout EOF and the final drain also succeed. The input protocol
+correction therefore has an actual iOS result, not merely its local model.
+
+Chrome, Edge, Firefox and Safari again pass all four independent trusted W3C
+journeys; Safari's separate original journey passes as well. All three native
+framework input/clipboard jobs pass. Combined input/AT remains **4/9** because
+the retained framework composition checks and the Narrator environment do not
+all pass. Edge's framework failure is startup rather than a composing assertion;
+Chrome/Firefox fail the injected range check and Safari fails its synthetic
+resize range check. Actual OS IME remains unaccepted.
+
+The single main failure is Edge's startup before Catalog navigation.
+[The startup comparison](./2026-09-04-edge-startup-boundary.md) finds identical
+actual capabilities and versions within the input job, with the successful
+suite executing the same SDK window-position request. Failed requests wait for
+initial navigation after earlier child-process/network-service startup errors;
+the actual bounds-setting command has not executed. The specific startup cause
+is unresolved. Neither another suite's pass nor a configuration change accepts
+the unexecuted Edge shared journey. Original failures were not retried or erased.
+
+An independently verified empty diff covers the entire public package,
+Catalog production Dart, web and all platform runners between `e3526d3f` and
+this candidate. The e3526d3f Web/macOS release builds and zero-warning publication
+dry-run retain that unchanged runtime/package boundary. The earlier native
+FlView/Orca evidence is also retained with its original source and **0/3 full AT
+tasks accepted**; it is not counted as a new run. All newer changes here are
+test-harness and documentation changes. No package was published.
+
+## Earlier completed checkpoint at e3526d3f
 
 [The exact-source CI record](../../../.github/evidence/e3526d3f-ci.md) binds the
 results to `e3526d3fb6f9ce97706a3e28297d5e682ebce9e8`. Main CI is **11/12**;
@@ -513,12 +551,11 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Verify the corrected framework text-input path and the retained numeric
-  submission assertions in the next actual iOS journey. Copy feedback,
-  Thinking's enabled state, native report-file packaging and four-browser
-  W3C input now have actual results at `e3526d3f`. Full Linux reader tasks still
-  need the verified SDK corrections described above; actual OS IME remains a
-  separate open boundary.
+- Resolve and verify the remaining Edge startup boundary before accepting its
+  unexecuted shared journey. Android/iOS complete journeys and all four W3C
+  suites now have actual results at `f5484b9f`. Full Linux reader tasks still
+  need the verified SDK corrections and remaining task observation described
+  above; actual OS IME remains a separate open boundary.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain

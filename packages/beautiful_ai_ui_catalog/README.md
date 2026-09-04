@@ -5,11 +5,12 @@ Multi-platform visual, interaction, accessibility, and integration harness for
 
 Current release evidence and open gates are summarized in
 [September 4 release readiness](../../docs/beautiful-ui/quality_evidence/2026-09-04-release-readiness.md).
-Candidate `e3526d3f` passed all four complete W3C browser input suites, all three
+Candidate `f5484b9f` passed all four complete W3C browser input suites, all three
 native framework input jobs and the real Linux parent/lifetime contract. Main
-CI passed **11/12**; Android's full journey now passes, while iOS connects its
-driver and fails a numeric Width assertion. The next fixture synchronizes its
-framework edits with the real input peer. Full Linux reader tasks expose pinned SDK name/state limitations;
+CI passed **11/12**; Android and iOS complete their actual journeys, including
+the numeric controller and host-setting assertions. Edge's shared journey is
+still blocked before app navigation by browser startup. The native parent
+evidence retains its e3526d3f source, with runtime identity verified. Full Linux reader tasks expose pinned SDK name/state limitations;
 actual OS IME and full device/AT acceptance remain separate.
 P1/P2 budgets passed **8/8** at the
 earlier `87299572` runtime snapshot; P3 and full device/AT gates remain open. The `c2bde85` results below are dated historical observations,
