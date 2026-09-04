@@ -1,0 +1,44 @@
+name: Beautiful AI UI Edge cold startup diagnostic (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-character commit containing the diagnostic
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  edge-cold-start:
+    name: Three independent real Edge startups (not Catalog acceptance)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - name: Require an exact source commit
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$DIAGNOSTIC_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - name: Verify source and protocol failure propagation
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIAGNOSTIC_SOURCE_SHA"
+          python3 -B -m unittest discover -s .github/scripts -p 'test_probe_edge_cold_start.py' -v
+          python3 -B -m unittest discover -s .github/scripts -p 'test_flutter_edge_webdriver.py' -v
+      - name: Run exactly three independent sessions with installed Edge and driver
+        timeout-minutes: 50
+        run: python3 -B .github/scripts/probe_edge_cold_start.py --output artifacts/edge-cold-start
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edge-cold-start-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/edge-cold-start/
+          if-no-files-found: error
+          retention-days: 14
