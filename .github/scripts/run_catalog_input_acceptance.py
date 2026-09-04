@@ -110,6 +110,16 @@ def run(args):
             driver_log = None
             entry = {"suite": suite, "status": "started"}
             summary["suites"].append(entry)
+
+            def start_suite_process(argv, **kwargs):
+                try:
+                    return start_owned_process(argv, **kwargs)
+                except Exception as error:
+                    # No returned ownership handle means this caller cannot
+                    # prove startup cleanup, including Windows Job failures.
+                    entry["cleanup_error"] = f"Subprocess startup cleanup was not verified: {error}"
+                    raise
+
             try:
                 target = ("catalog_browser_input_test.dart" if suite == "browser"
                           else "catalog_platform_input_test.dart")
@@ -130,7 +140,7 @@ def run(args):
                     else:
                         driver_command = [executable("safaridriver"), "--port", "4444"]
                     driver_log = (directory / "webdriver.log").open("w")
-                    process = start_owned_process(driver_command, cwd=CATALOG, stdout=driver_log,
+                    process = start_suite_process(driver_command, cwd=CATALOG, stdout=driver_log,
                                                   stderr=subprocess.STDOUT)
                     deadline = time.monotonic() + 30
                     while True:
@@ -168,12 +178,21 @@ def run(args):
                 (directory / "command.json").write_text(json.dumps(command, indent=2) + "\n")
                 try:
                     with (directory / "run.log").open("w", encoding="utf-8") as log:
-                        flutter_process = start_owned_process(command, cwd=CATALOG, env=environment,
+                        flutter_process = start_suite_process(command, cwd=CATALOG, env=environment,
                                                               stdout=log, stderr=subprocess.STDOUT)
                         try:
                             entry["exit_code"] = flutter_process.wait(timeout=900)
+                        except Exception as error:
+                            entry["error"] = str(error)
+                            if isinstance(error, subprocess.TimeoutExpired):
+                                entry["timed_out"] = True
+                            raise
                         finally:
-                            stop_owned_process(flutter_process)
+                            try:
+                                stop_owned_process(flutter_process)
+                            except Exception as error:
+                                entry["cleanup_error"] = str(error)
+                                raise
                 finally:
                     # Keep partial scenario evidence even when Flutter fails or times out.
                     for line in (directory / "run.log").read_text(encoding="utf-8", errors="replace").splitlines():
@@ -197,8 +216,11 @@ def run(args):
                         raise RuntimeError(f"Input report did not accept this run: {required_report}")
                 entry["status"] = "completed_pending_cleanup"
             except Exception as error:
-                entry.update(status="failed", error=str(error))
-                raise
+                entry["status"] = "failed"
+                entry.setdefault("error", str(error))
+                if "cleanup_error" in entry:
+                    # An unverified process tree can contaminate another suite.
+                    raise
             finally:
                 try:
                     if process is not None:
@@ -208,9 +230,20 @@ def run(args):
                     raise
                 finally:
                     if driver_log is not None:
-                        driver_log.close()
+                        try:
+                            driver_log.close()
+                        except Exception as error:
+                            entry.update(status="failed", cleanup_error=str(error))
+                            raise
+            entry["cleanup_status"] = "verified"
+            if entry["status"] == "failed":
+                print(f"{args.platform} {suite}: failed; cleanup verified", flush=True)
+                continue
             entry["status"] = "passed"
             print(f"{args.platform} {suite}: passed", flush=True)
+        failures = [entry for entry in summary["suites"] if entry["status"] == "failed"]
+        if failures:
+            raise RuntimeError("Input acceptance failed: " + "; ".join(entry["error"] for entry in failures))
         summary["status"] = "passed"
     except Exception as error:
         summary.update(status="failed", error=str(error))

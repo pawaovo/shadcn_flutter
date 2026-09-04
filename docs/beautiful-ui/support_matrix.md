@@ -1,7 +1,13 @@
 # Multi-platform support matrix
 
-Status: twelve-job automated validation passed; platform/manual release gates remain open
+Status: current CI/input and native performance failures remain open; all six platforms are Partial
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
+
+Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
+The completed `3614250` checkpoint has main CI 10/12 and input/AT CI 1/9;
+subsequent local repairs await final candidate/runtime validation. The
+`c2bde85` twelve-job pass retained below is historical, not current-candidate
+acceptance. All 27 registry entries remain `in_progress`.
 
 ## Status vocabulary
 
@@ -32,10 +38,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Shared journey passed in final run 33748054504 on c2bde85… |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Targeted reduced-motion Flowchart light/dark/light visual regression passed; full browser/input/AT matrix remains open |
+| Chrome stable | Release-blocking shared Web journey | Partial | Shared journeys passed at historical c2bde85 and 3614250; the added 3614250 framework input target failed |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Historical c2bde85 journey passed; 3614250 failed during SDK window startup before the journey |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Shared journeys passed at historical c2bde85 and 3614250; the added 3614250 framework input target failed |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Historical targeted Flowchart visuals and the original 3614250 journey passed; the later framework input target failed; full input/AT acceptance remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 
@@ -100,9 +106,9 @@ The parity manifest records the approved presentation per component before imple
 
 Evidence is dated and release-specific. A platform returns to Partial when a toolchain, renderer, or major interaction dependency changes until proportionate regression evidence is restored.
 
-## Current evidence snapshot
+## Historical evidence snapshot — September 3, c2bde85
 
-**Validated code: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`.**
+**Historically validated code: `c2bde85dd5da7c33b0f7881234ae312f3be1826c`.**
 [Fifth CI `33748054504`, attempt 1](https://github.com/pawaovo/shadcn_flutter/actions/runs/33748054504)
 completed with **12 successful jobs, zero failures and zero skips**. The
 [compact final evidence](./quality_evidence/2026-09-03-final-ci-33748054504.json)
@@ -144,7 +150,7 @@ standalone documentation/evidence commit does not replace this tested code SHA.
   not independently accepted. Earlier white/no-window capture symptoms ceased
   without a code change; their cause remains unproven.
 
-The [readiness record](./quality_evidence/2026-09-03-release-readiness.md) and
+The [historical readiness record](./quality_evidence/2026-09-03-release-readiness.md) and
 `toolchain.json` retain the first four failed attempts and the fourth run's
 successful same-SHA targeted Edge retry. The fourth runner's `+3` counts
 setup, one journey and teardown, not three independent journey tests. Those

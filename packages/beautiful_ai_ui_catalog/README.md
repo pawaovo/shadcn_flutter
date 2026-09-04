@@ -3,6 +3,12 @@
 Multi-platform visual, interaction, accessibility, and integration harness for
 `beautiful_ai_ui`.
 
+Current release evidence and open gates are summarized in
+[September 4 release readiness](../../docs/beautiful-ui/quality_evidence/2026-09-04-release-readiness.md).
+The `c2bde85` results below are dated historical observations, not acceptance
+of later source. All 27 registry entries remain `in_progress` and all six
+platforms remain `Partial`.
+
 Run on the Web:
 
 ```bash
@@ -88,7 +94,7 @@ Web integration uses `flutter drive`, a matching ChromeDriver, and the
 `test_driver/integration_test.dart` adapter because Flutter 3.47 does not run
 `integration_test` through `flutter test -d chrome`.
 
-**Fifth CI `33748054504`, attempt 1, passed all 12 jobs** for validated code
+**Historical fifth CI `33748054504`, attempt 1, passed all 12 jobs** for code
 **`c2bde85dd5da7c33b0f7881234ae312f3be1826c`**. Quality passed 528 library,
 26 Catalog and 571 core tests, strict analysis and Linux golden comparison.
 All native/browser journeys passed, including the actual iOS Flutter driver:
@@ -96,10 +102,13 @@ exit 0 in 50.234s with one whole Catalog journey plus suite setup/teardown,
 followed by successful termination. The original runner's `+3` includes
 those suite hooks and does not mean three independent journey tests.
 
-The [compact final evidence](../../docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json)
+The [historical compact evidence](../../docs/beautiful-ui/quality_evidence/2026-09-03-final-ci-33748054504.json)
 records exact artifact hashes and the hosted-consumer result at the same
 code SHA. Earlier attempts and the fourth run's targeted Edge retry remain
-historical evidence; their failures are distinct from the final full pass.
+historical evidence; their failures are distinct from that source's full pass.
+The later `3614250` checkpoint finished with main CI 10/12 and input/AT CI 1/9;
+its actual failure boundaries and subsequent local repairs are retained in the
+current readiness record, rather than replaced by the older pass.
 
 The Catalog now uses independently drawn launcher/Web artwork. The exact
 source and generated files are recorded in
@@ -110,14 +119,24 @@ The real Flutter `LicenseRegistry` probe verified 13 complete labels.
 
 For native workload measurement, the opt-in
 [`tool/run_p3_profile.sh`](tool/run_p3_profile.sh) creates a separate profile
-fixture and saves raw artifacts under `build/p3-profile/`. The accepted
-[final-source capture](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/README.md)
+fixture and saves raw artifacts under `build/p3-profile/`. It supports the
+seven-workload P3 suite, eight representative P1/P2 workloads, or both, with an
+explicit native Start preparation gate and before/after source verification.
+The [engineering defaults and assessor](../../docs/beautiful-ui/quality_evidence/performance/engineering_acceptance.md)
+now define fixed frame and whole-process RSS gates. These defaults are not
+product-approved budgets. The [3614250 baseline](../../docs/beautiful-ui/quality_evidence/performance/2026-09-04-3614250-native-baseline.md)
+contains two complete captures with actual budget failures; a subsequent locked
+preparation attempt measured no workloads and is not an isolated comparison.
+
+The historical
+[c2bde85 source-matched capture](../../docs/beautiful-ui/quality_evidence/performance/2026-09-03-macos-profile-final/README.md)
 completed all seven workloads and strict finalization with 4,495 frame samples
 and 478 process RSS samples at 1,728×1,080dp, DPR 2, 120 Hz. All 50 runtime/
 build inputs match validated code `c2bde85…`; documentation/evidence changes
 in the worktree are recorded separately. The platform semantics flag is false
-but framework test semantics remains enabled. Budgets, repeatability and
-other-platform or physical-input measurements remain separate acceptance work.
+but framework test semantics remains enabled. This historical capture does not
+replace current budget failures or establish repeatability, other-platform
+performance, or physical-input acceptance.
 
 The [targeted Safari review](../../docs/beautiful-ui/quality_evidence/2026-09-03-safari-flowchart-theme-reduced.md)
 accepted three paired screenshot/AX captures of light/dark/light with reduced
@@ -128,8 +147,10 @@ Earlier white/no-window capture issues ceased without code changes and have
 no established cause. GUI testing is finished; Safari was restored to an
 ordinary window in light theme with reduced motion.
 
-The [49-image review](../../docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md)
-and [release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
-track specific visual/input corrections and remaining gates. All twenty
+The [historical 49-image review](../../docs/beautiful-ui/quality_evidence/2026-09-03-accessibility-visual-review.md)
+and [September 3 readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
+retain their original scope. The current September 4 record links the later
+P1/P2 complementary review, P3 finite matrix, targeted byte-identical addenda,
+input failures and measured budget results. All twenty
 modules are implemented, all 27 registry entries remain `in_progress`, and
 all six platform support states are `Partial`.

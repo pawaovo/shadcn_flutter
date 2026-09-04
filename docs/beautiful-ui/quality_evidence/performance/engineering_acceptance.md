@@ -42,8 +42,22 @@ retain visible outlier risk even when p95 looks good; no warmup or mount frame
 is relabeled after looking at the results.
 
 RSS includes fixtures, Flutter, the engine and capture overhead. Trace results
-are retained by `integration_test` across scenarios; later scenarios can inherit
-this evidence cost. RSS sampled during interactions is kept separate from
+are retained across scenarios; later scenarios can inherit this evidence cost.
+The original captures retained `integration_test`'s complete parsed timeline
+object graphs. The current recorder losslessly compresses each returned timeline
+after its sampling window, two-second trailing flush and raw frame/RSS evidence
+assembly. The driver verifies the decoded JSON byte length, SHA-256 and retained
+event count before restoring the ordinary `.timeline.json` artifact. It preserves
+all fields and event order, including partial VM timelines; compression cannot
+recover events already evicted from the VM's ring buffer. The scenario records
+compression epochs, wall time and transport byte counts separately. This allows
+the original object graphs to become reclaimable without forcing GC, but does
+not guarantee when process RSS falls or establish a measured budget improvement.
+Decoder failure saves the original transport payload, other valid timelines and
+independent frame/RSS evidence, then fails the driver. Historical raw timeline
+payloads remain supported.
+
+RSS sampled during interactions is kept separate from
 post-trace lifecycle snapshots and the process-lifetime `maxRss` counter. The
 tool always leaves component-memory and leak assessment `unassessed`. Retaining
 paths and heap snapshots would be needed to distinguish a leak from expected
@@ -187,6 +201,12 @@ python3 packages/beautiful_ai_ui_catalog/tool/assess_profile_budget.py \
 
 python3 -B -W error::ResourceWarning -m unittest discover \
   -s packages/beautiful_ai_ui_catalog/tool -p 'test_profile_*.py'
+
+# Read-only transport replay against files written by the native driver.
+# Verifies complete JSON content and exact restored driver-output bytes.
+cd packages/beautiful_ai_ui_catalog
+mise exec -- dart run tool/verify_profile_timeline_codec.dart \
+  /absolute/path/to/p3_trace_code_block_long_source.timeline.json
 ```
 
 Exit `0` means the observed-run engineering gates passed, `1` means a budget

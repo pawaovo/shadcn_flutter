@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart'
+    show ClearSelectionEvent, Selectable, SelectionRegistrar;
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -550,9 +552,18 @@ final class _ToolDisclosure extends StatefulWidget {
 
 final class _ToolDisclosureState extends State<_ToolDisclosure> {
   final _headerFocus = FocusNode(skipTraversal: true);
+  final _selection = _ToolSelectionRegistrar();
+  late bool _hasOpened = widget.expanded;
+
+  @override
+  void didUpdateWidget(_ToolDisclosure oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _hasOpened = _hasOpened || widget.expanded;
+  }
 
   @override
   void dispose() {
+    _selection.parent = null;
     _headerFocus.dispose();
     super.dispose();
   }
@@ -578,6 +589,31 @@ final class _ToolDisclosureState extends State<_ToolDisclosure> {
         environment.motionPolicy != BeautifulMotionPolicy.none &&
         environment.motionPolicy != BeautifulMotionPolicy.reduced;
     final enabled = widget.onChanged != null;
+    final registrar = SelectionContainer.maybeOf(context);
+    _selection.parent = widget.expanded ? registrar : null;
+    // Mount on first disclosure, then retain only this latest body. A stable
+    // registrar keeps its native Text selectables intact while closed output
+    // is removed from the host's selection without rebuilding every paragraph.
+    final body = _hasOpened
+        ? Offstage(
+            offstage: !widget.expanded,
+            child: TickerMode(
+              enabled: widget.expanded,
+              child: ExcludeFocus(
+                excluding: !widget.expanded,
+                child: ExcludeSemantics(
+                  excluding: !widget.expanded,
+                  child: registrar == null
+                      ? widget.child
+                      : SelectionRegistrarScope(
+                          registrar: _selection,
+                          child: widget.child,
+                        ),
+                ),
+              ),
+            ),
+          )
+        : const SizedBox.shrink();
     return Focus(
       skipTraversal: true,
       includeSemantics: false,
@@ -639,26 +675,93 @@ final class _ToolDisclosureState extends State<_ToolDisclosure> {
               duration: theme.motion.standard,
               curve: theme.motion.outCurve,
               alignment: AlignmentDirectional.topStart,
-              child: widget.expanded ? widget.child : const SizedBox.shrink(),
+              child: body,
             )
-          else if (widget.expanded)
-            widget.child,
+          else
+            body,
         ],
       ),
     );
   }
 }
 
-final class _ToolLines extends StatelessWidget {
+// Forward the original selectables rather than replacing their native
+// selection handlers. Nested disclosures naturally unregister from each other.
+final class _ToolSelectionRegistrar implements SelectionRegistrar {
+  final _selectables = <Selectable>{};
+  SelectionRegistrar? _parent;
+
+  set parent(SelectionRegistrar? value) {
+    if (identical(value, _parent)) return;
+    final previous = _parent;
+    _parent = value;
+    for (final selectable in _selectables.toList(growable: false)) {
+      previous?.remove(selectable);
+      if (value == null) {
+        selectable.dispatchSelectionEvent(const ClearSelectionEvent());
+      } else {
+        value.add(selectable);
+      }
+    }
+  }
+
+  @override
+  void add(Selectable selectable) {
+    if (_selectables.add(selectable)) _parent?.add(selectable);
+  }
+
+  @override
+  void remove(Selectable selectable) {
+    if (_selectables.remove(selectable)) _parent?.remove(selectable);
+  }
+}
+
+final class _ToolLines extends StatefulWidget {
   const _ToolLines({required this.lines, required this.mono});
 
   final List<BeautifulToolDetailLine> lines;
   final bool mono;
 
   @override
+  State<_ToolLines> createState() => _ToolLinesState();
+}
+
+final class _ToolLinesState extends State<_ToolLines> {
+  Widget? _body;
+
+  @override
+  void didUpdateWidget(_ToolLines oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.mono != oldWidget.mono ||
+        !_sameLines(widget.lines, oldWidget.lines)) {
+      _body = null;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _body = null;
+  }
+
+  bool _sameLines(
+    List<BeautifulToolDetailLine> a,
+    List<BeautifulToolDetailLine> b,
+  ) {
+    if (identical(a, b)) return true;
+    if (a.length != b.length) return false;
+    for (var index = 0; index < a.length; index++) {
+      if (a[index].text != b[index].text || a[index].tone != b[index].tone) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
-    return Container(
+    return _body ??= Container(
       width: double.infinity,
       margin: EdgeInsetsDirectional.only(
         start: theme.spacing.md,
@@ -674,7 +777,7 @@ final class _ToolLines extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          for (final line in lines)
+          for (final line in widget.lines)
             Container(
               color: switch (line.tone) {
                 BeautifulToolLineTone.context => null,
@@ -691,12 +794,15 @@ final class _ToolLines extends StatelessWidget {
                   BeautifulToolLineTone.addition => '+ ${line.text}',
                   BeautifulToolLineTone.deletion => '− ${line.text}',
                 },
-                style: (mono ? theme.typography.mono : theme.typography.body)
-                    .copyWith(
-                      color: theme.colors.ink,
-                      fontSize: 12,
-                      height: 1.6,
-                    ),
+                style:
+                    (widget.mono
+                            ? theme.typography.mono
+                            : theme.typography.body)
+                        .copyWith(
+                          color: theme.colors.ink,
+                          fontSize: 12,
+                          height: 1.6,
+                        ),
               ),
             ),
         ],

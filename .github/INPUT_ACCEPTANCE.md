@@ -5,6 +5,14 @@ input workflow runs separate targets and retains a failing operation as failure;
 it does not retry inputs, grant browser clipboard permissions, or replace a
 browser with a different engine.
 
+Each suite starts a fresh Flutter process and, for web targets, a fresh owned
+WebDriver. A failing framework or journey suite does not suppress the independent
+browser suite after all owned processes have been verified clean. Reports retain
+every suite's original failure and the invocation still exits nonzero if any
+suite fails. A cleanup failure stops later suites to prevent shared process or
+browser state from contaminating their evidence. This is independent execution,
+not a retry of any failed operation.
+
 The original Web journey now uses `catalog_trusted_journey_driver.dart` and
 `CATALOG_TRUSTED_BROWSER_COPY=true` for exactly two clipboard activations. Its
 CodeBlock and StreamingText copy controls are clicked with actual W3C pointer

@@ -1,0 +1,170 @@
+{
+  "recorded_at_utc": "2026-09-04T00:03:18.586575+00:00",
+  "base_head": "36142500c9ad91dc307b6c8005e78add357f080b",
+  "source_state": "working_tree_with_uncommitted_candidate3_changes",
+  "runtime_source_files": {
+    "packages/beautiful_ai_ui/lib/beautiful_ai_ui.dart": "01cecc1be1c59895cbd1d4820153b4e12ca295ca879277b46ffce0244cdab6c7",
+    "packages/beautiful_ai_ui/lib/src/components/approval_card.dart": "76908d3502e7b09ef5b485400469d3ddf95a3151464bd712b88fb2e807b08bb3",
+    "packages/beautiful_ai_ui/lib/src/components/chat.dart": "7d422c14b324a27993143faafb05cc57e5a2138ed36405c399d694ec4f3819f1",
+    "packages/beautiful_ai_ui/lib/src/components/code_block.dart": "d406b6095ad1505c57cceb9df10d661d429e6d30a010825d766b30e24161fdce",
+    "packages/beautiful_ai_ui/lib/src/components/context_cards.dart": "264b47d0e361e3bbe9ba0457ac537dd2a2ea4335cef426573f456873d0565dec",
+    "packages/beautiful_ai_ui/lib/src/components/diff_table.dart": "1e8a0bfb5e429516435f905fa915d55228f30d288f5dc316cf0e3c41d32a8d19",
+    "packages/beautiful_ai_ui/lib/src/components/filter_table.dart": "94cb34c944ecccf2d149e06d0b0ca876c82714dcc7a4cd11ad71cb7afb7beeab",
+    "packages/beautiful_ai_ui/lib/src/components/fine_tune_card.dart": "730472c96a9d4b4707ced8d61ac424f2bf00bb27bc765afda1ac093e404d7436",
+    "packages/beautiful_ai_ui/lib/src/components/flowchart.dart": "76d7a79e7f0921a6b100cbdf037bdcc4353a45f743215eeaefc1d8257e790ad6",
+    "packages/beautiful_ai_ui/lib/src/components/insight_cards.dart": "e2fba92f6622b70d834e608a8095e77011ced80f9351cfc6c002a4ec923d220b",
+    "packages/beautiful_ai_ui/lib/src/components/loading_state.dart": "e5247a5a4073f6242efe393870b036ac76912ac2216e9f1e63d14e00eab14925",
+    "packages/beautiful_ai_ui/lib/src/components/prompt_bar.dart": "a541f8178320adbe7e887ef2e89543de10d4088a846ebf14557d88d5fc15a1e8",
+    "packages/beautiful_ai_ui/lib/src/components/recommendation_card.dart": "4afa8212be5f64e7353e0b5330f91a58d7ab43a66a4a22660eec1895de3ea788",
+    "packages/beautiful_ai_ui/lib/src/components/records_table.dart": "603cf1558bab2e34a08e85423e1e19d66bc0582e74adc20b66b3d9a0c330dafb",
+    "packages/beautiful_ai_ui/lib/src/components/search.dart": "b8bdaddec0ce41c1792a5664232933306e8104506075c3db274df45e608bd1e3",
+    "packages/beautiful_ai_ui/lib/src/components/selection_actions.dart": "6ba9f43f1499e4a5082ee40d6dbb40503c370d0c659a036fb26e97b6272bf137",
+    "packages/beautiful_ai_ui/lib/src/components/sidebar_nav.dart": "15b8b5c452186f00d546747538ebcd7a183fa645f97e760d8081ab854a3ed3b0",
+    "packages/beautiful_ai_ui/lib/src/components/streaming_text.dart": "ed604ba0c2cc991a8e42e841617bccdac644630596fe7f3a753b740474a55aae",
+    "packages/beautiful_ai_ui/lib/src/components/task_rows.dart": "2c3712edf8ea9c769e213469558d0443750d7b4e9d5186a1bf09d449a7f9683d",
+    "packages/beautiful_ai_ui/lib/src/components/thinking.dart": "56c15d8daa36310017fb179da1dbf83eb634521292657cb5282c9c42e27774c0",
+    "packages/beautiful_ai_ui/lib/src/components/tool_chips.dart": "f06ba10a52dbffa0a0da80b61c97758c7e5d7b0f8c4fdad8a0b0c53db125ec1c",
+    "packages/beautiful_ai_ui/lib/src/foundation/environment.dart": "bd544b79b3432766803fef5e30c6a66e908177a44d5850d94131861265cc11f6",
+    "packages/beautiful_ai_ui/lib/src/foundation/failure.dart": "089bd61f23dc08a866e157cd6ba50fde294c835ae6ad6dcab235edc22666b7dd",
+    "packages/beautiful_ai_ui/lib/src/foundation/layout.dart": "8d2deb6adf203e3af26cb41321c0259f1bd2a6e88deb4f350853d18ea5614d10",
+    "packages/beautiful_ai_ui/lib/src/foundation/motion.dart": "6ccfb6f699a953407bd587efd0917f8ce7d5747f7edc367fcb3a23488bd12164",
+    "packages/beautiful_ai_ui/lib/src/foundation/scope.dart": "a000a5436d23ba5f88c7e4902cc6fc5054f3da593ad5cb53adadbc4c377fb5b2",
+    "packages/beautiful_ai_ui/lib/src/foundation/theme.dart": "0ae3b4e3775e42de611a2a3b5d3921008c46e4a6e33ff6b3d03da408282bda5f",
+    "packages/beautiful_ai_ui/lib/src/implementation/controls/action_control.dart": "5fcb127fac60f8c977a137d7ae40bdf0189d13f84345873e8ebbb9758f14780d",
+    "packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938",
+    "packages/beautiful_ai_ui/lib/src/implementation/shadcn/theme_adapter.dart": "593a0a1e5bc1fc0227fe4dc5bfbb937e6deef8d1b0c167cc3f0cc74b56ddc02b",
+    "packages/beautiful_ai_ui/lib/src/implementation/streaming/stream_content.dart": "0c42124075e7d252f9cce43df071a16017e17068f268c2335965142cfcfd9d0c",
+    "packages/beautiful_ai_ui_catalog/lib/host_file_attachments.dart": "4c45634eb8acee0f656fd1e62ae4982eca033d0145643642f1d64bcb0b949662",
+    "packages/beautiful_ai_ui_catalog/lib/main.dart": "1d2fa0f3af6cda66a682dc9d1d1ce0f7a3981b0eac5f40e2450768851887fa51",
+    "packages/beautiful_ai_ui_catalog/lib/p2_examples.dart": "4c2353cca70991b774571d10cb12d7728ae82458d31adb06d9c2a3778b61d707",
+    "packages/beautiful_ai_ui_catalog/lib/p3_examples.dart": "3418cbc8351325d61f2f472410b9b2d202909e4218c186a054bb6ebb0f3ad169",
+    "pubspec.yaml": "db506dfd40265b05a58e7e1192ab55d20e86f40e9ff33a0b61f0d63532e82f8e",
+    "pubspec.lock": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae",
+    "packages/beautiful_ai_ui/pubspec.yaml": "1018b0e82b4ac984afe06d4041b53a7a5ec787d00d9b94cb42773a3a1d14205d",
+    "packages/beautiful_ai_ui_catalog/pubspec.yaml": "61d7f9eec14b5bee19f261ecc88d41ba5790efdc52364ad9d3ea6ee36095c1a7"
+  },
+  "checks": {
+    "library_tests": {
+      "passed": 640,
+      "exit_code": 0
+    },
+    "catalog_tests": {
+      "passed": 59,
+      "exit_code": 0
+    },
+    "strict_analysis": {
+      "library": "passed",
+      "catalog": "passed"
+    },
+    "dart_format": {
+      "files": 141,
+      "changed": 0
+    },
+    "source_dependency_assets": "passed",
+    "source_media": "passed",
+    "web-assets": {
+      "status": "passed",
+      "result_sha256": "4be852e34e15fc88f1beb76b3c2bb7073a0479dd89284f70972263fa80b7f19e"
+    },
+    "web-media": {
+      "status": "passed",
+      "result_sha256": "846a9bbf877eb0fd5c5ca49cddcbe2c56c50ebf212b37cd5ea4d41265c9c67e1"
+    },
+    "web_release": {
+      "exit_code": 0,
+      "compile_seconds": 37.4,
+      "log_sha256": "2cc9fcf5f40a8aa1fa98bdbae5f1c6b2fbf1c1fae7ca6f8a74bf44b02802ea00",
+      "preview_url": "http://127.0.0.1:8096/",
+      "http_compared_to_build": [
+        "index.html",
+        "main.dart.js",
+        "flutter_bootstrap.js"
+      ],
+      "new_gui_review": false
+    }
+  },
+  "log_sha256": {
+    "library-tests": {
+      "file_name": "beautiful-candidate3-library-tests.log",
+      "sha256": "e5ebfe4053697197227424a3ce812586a4bf011d5689003798a0648578d086b3"
+    },
+    "library-analysis": {
+      "file_name": "beautiful-candidate3-library-analysis.log",
+      "sha256": "1728902d138c0fd32bbe9eb915e9984ec884d0aa6e3e7f7d0a9a1d42e1ebebf2"
+    },
+    "catalog-tests": {
+      "file_name": "beautiful-candidate3-catalog-tests.log",
+      "sha256": "93bb3290d213857a44fdba3e5a4f3b4f6e0d7f207e88b962b22274c476910e74"
+    },
+    "catalog-analysis": {
+      "file_name": "beautiful-candidate3-catalog-analysis.log",
+      "sha256": "6dee624662983a0bf694a1e423c12bb0053a2f371da07f15d1cb188c592cbdfb"
+    },
+    "format": {
+      "file_name": "beautiful-candidate3-format.log",
+      "sha256": "6425e146d6a56a5be3c5dbe1c398a296a564c2441a682a06f0e4f0d42b6aca8f"
+    },
+    "source-assets": {
+      "file_name": "beautiful-candidate3-source-assets.json",
+      "sha256": "d4930538382e8c5067851d75831ae3cf83b9af45f0b1e1fe4c7db782886186a2"
+    },
+    "source-media": {
+      "file_name": "beautiful-candidate3-source-media.json",
+      "sha256": "556b22a63cfdbff53801ed44111877dbc4ac101fe33302b8cf4f38d964d84b9d"
+    }
+  },
+  "ci_script_validation": {
+    "checked_at_utc": "2026-09-03T23:57:10.747249+00:00",
+    "base_head": "36142500c9ad91dc307b6c8005e78add357f080b",
+    "working_tree_validation": true,
+    "python_regressions": {
+      "ran": 43,
+      "passed": 41,
+      "skipped_real_windows_only": 2,
+      "seconds": 14.791,
+      "log": "/tmp/beautiful-ci-current-python-regressions.log"
+    },
+    "node_browser_bridge_regressions": {
+      "passed": 4
+    },
+    "dart_browser_http_protocol": "passed",
+    "actionlint_workflows": 3,
+    "python_ast_files": 11,
+    "orca_describe": "prepared_not_executed",
+    "native_browser_at_or_build_launched": false,
+    "sha256": {
+      ".github/INPUT_ACCEPTANCE.md": "1279e58aa5eb43a6d758ed0b10c3af93c32cf6103e9d5f6fe073d82eba01f810",
+      ".github/REAL_AT_ACCEPTANCE.md": "14fd17f4e35bbb15e94a2eb07e794d977825a93311db9306937c15576cfeeaf5",
+      ".github/REAL_AT_CATALOG_PILOT.md": "ace3f58c0dc6445307c4e935f56fc85fecc986deab492737233a7790a6936560",
+      ".github/scripts/flutter_edge_webdriver.py": "92ff0e53e3582a7335f197e74dcb12152497c36a270e4abb6a70937fe8d54ad0",
+      ".github/scripts/probe_catalog_orca_linux.py": "1f54eb80b67e09671f0ffe6f23ebe622e4d5e9a1f5f152d56708b9b05686c82c",
+      ".github/scripts/probe_real_at_linux.py": "fb659fdda9d5ea975890fd7d73570a829f3e4f6fa4cb300dcbd9c20738b49f60",
+      ".github/scripts/probe_real_at_windows.ps1": "78ebe25392006e39e9a3b1875982d724be706db13adf73ef4fb41318ae8d0c72",
+      ".github/scripts/run_catalog_input_acceptance.py": "9ffe08cd59b3fd0464acb1d3205f3d823361b0a6d8f7ea2976a78c685675e796",
+      ".github/scripts/run_ios_catalog_journey.py": "1de7e9a179cb0bddc7f91e179173faa6ba20080052d7150c2037b631d49d627d",
+      ".github/scripts/test_catalog_browser_bridge.mjs": "7245c012143db6aae21a60c66e7342dd3dad6e00f72a9a87b54e954d8639ea7a",
+      ".github/scripts/test_catalog_browser_input_protocol.dart": "4242b8ad5884ac9ff4536547bc79e1f49053f8786e5ef5ab0039cceff821a353",
+      ".github/scripts/test_flutter_edge_webdriver.py": "e1945d46f1b21298e46754bb1d30d5192e8d4fb62c9d7448b67a78e3ef5b1956",
+      ".github/scripts/test_probe_real_at_linux.py": "5f7d6e432d0b146c9bbea134b73bdd0a6b4b889ec18db4de1c0b2348184138cc",
+      ".github/scripts/test_run_catalog_input_acceptance.py": "88ca928475de9162764d7b251cca890529e52f04c166288d28c444e198ba9295",
+      ".github/scripts/test_run_ios_catalog_journey.py": "1d58d9dbb69e706c8046da26748e07264c12752935ec373dc6e70171210f1f57",
+      ".github/scripts/test_windows_owned_process.py": "17378b5459e37b49e9683d7f56b24903ffe332f526d850a628cd2a26f15b5a02",
+      ".github/scripts/windows_owned_process.py": "f54850f3a3c942c2840c38a4f55b4a0838d25568360497309c1f97f52b754e12",
+      ".github/workflows/beautiful_ai_ui.yml": "b3d319abc340daf00c96d35d51c8b96a0077926f96d4d3c04ff893879a9681b4",
+      ".github/workflows/beautiful_ai_ui_input_acceptance.yml": "db02ef0f12b4583a4f4b5623598d9f8041af949f136b213fee7e6bd6c9a02271",
+      ".github/workflows/beautiful_ai_ui_orca_catalog_pilot.yml": "63d08cc00338f38b290af670fde7537a57c8bb30756f977c2fbb1cd1f0925925"
+    }
+  },
+  "publish_dry_run": {
+    "status": "requires_repeat_after_commit",
+    "exit_code": 65,
+    "reason": "only warning: six tracked package files modified"
+  },
+  "not_claimed": [
+    "native_performance_budget_pass",
+    "real_platform_input_pass",
+    "real_screen_reader_task_pass",
+    "physical_device_pass",
+    "published_package"
+  ]
+}

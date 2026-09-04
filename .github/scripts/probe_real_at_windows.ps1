@@ -271,10 +271,10 @@ try {
         if ($null -ne $element) { $controls += @{ name = $element.Current.Name; type = $element.Current.ControlType.ProgrammaticName } }
     }
     if ($controls.Count -eq 2) { Observe 'native_accessibility' @{ controls = $controls; source = 'UI Automation' } }
-    $count = [AtCapability]::Chord([ushort[]]@(0x09))
+    $count = [AtCapability]::Chord([System.UInt16[]]@(0x09))
     $report.evidence.keyboard_events_inserted = $count
     Wait-Probe { [IO.File]::ReadAllText($events).Contains('focus=beta') }
-    [AtCapability]::Chord([ushort[]]@(0x20)) | Out-Null
+    [AtCapability]::Chord([System.UInt16[]]@(0x20)) | Out-Null
     Wait-Probe { [IO.File]::ReadAllText($events).Contains('checked=true') }
     $report.evidence.interactive_keyboard_response = 'Tab focused beta and Space toggled the native checkbox'
 
@@ -299,13 +299,13 @@ try {
     # Narrator+Tab reads the current item. Then Narrator+Ctrl+X copies its own
     # most recent utterance; unsupported builds leave our sentinel unchanged.
     [Windows.Forms.Clipboard]::SetText('probe-no-narrator-output')
-    [AtCapability]::Chord([ushort[]]@(0x2D, 0x09)) | Out-Null
+    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x09)) | Out-Null
     $until = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 4)
     do {
         if ($null -ne $recording) { $recording.Drain() }
         Start-Sleep -Milliseconds 100
     } while ($started.Elapsed.TotalSeconds -lt $until)
-    [AtCapability]::Chord([ushort[]]@(0x2D, 0x11, 0x58)) | Out-Null
+    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x11, 0x58)) | Out-Null
     Start-Sleep -Milliseconds 350
     $utterance = [Windows.Forms.Clipboard]::GetText()
     [IO.File]::WriteAllText((Join-Path $output 'narrator-utterance.txt'), $utterance)
@@ -316,7 +316,7 @@ try {
         $report.layers.utterance_output.reason = 'Narrator copy-last-phrase did not return the fixture control; the installed build may not support this command'
     }
     $beforeInvoke = [IO.File]::ReadAllText($events)
-    [AtCapability]::Chord([ushort[]]@(0x2D, 0x0D)) | Out-Null # Narrator invoke, not UIA InvokePattern.
+    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x0D)) | Out-Null # Narrator invoke, not UIA InvokePattern.
     $until = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 3)
     do {
         if ($null -ne $recording) { $recording.Drain() }

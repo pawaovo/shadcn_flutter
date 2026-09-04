@@ -12,6 +12,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'interactions.dart';
 import 'native_performance_environment.dart';
+import 'profile_timeline_codec.dart';
 
 const p3PerformanceSurfaceKey = Key('p3-performance-surface');
 const p3PerformanceOuterScrollKey = Key('p3-performance-outer-scroll');
@@ -410,6 +411,10 @@ final class P3PerformanceRecorder {
             ? 'failed_no_engine_frame_samples'
             : 'complete',
       });
+      result['timeline_transport'] = compressProfileTimelineReport(
+        binding.reportData!,
+        'p3_trace_${workload.id}',
+      );
       if (interactionError != null) {
         Error.throwWithStackTrace(interactionError!, interactionStack!);
       }

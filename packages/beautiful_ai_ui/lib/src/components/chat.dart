@@ -263,6 +263,7 @@ final class _BeautifulChatState extends State<BeautifulChat> {
   String _selectedTranscript = '';
   late List<BeautifulChatMessage> _messages;
   late List<BeautifulChatTab> _tabs;
+  Widget? _transcriptContent;
   late String _lastDraft;
   var _draftRevision = 0;
   var _conversationGeneration = 0;
@@ -300,6 +301,7 @@ final class _BeautifulChatState extends State<BeautifulChat> {
   }
 
   void _snapshot() {
+    _transcriptContent = null;
     _messages = List<BeautifulChatMessage>.unmodifiable(widget.messages);
     _tabs = List<BeautifulChatTab>.unmodifiable(widget.tabs);
     assert(
@@ -315,6 +317,12 @@ final class _BeautifulChatState extends State<BeautifulChat> {
           _tabs.any((tab) => tab.id == widget.selectedTabId),
       'BeautifulChat selectedTabId must identify an existing tab.',
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _transcriptContent = null;
   }
 
   @override
@@ -591,7 +599,9 @@ final class _BeautifulChatState extends State<BeautifulChat> {
   }
 
   Widget _transcript(BeautifulUiThemeData theme) {
-    final messages = Column(
+    // Draft, focus and follow-latest changes do not change the host snapshot.
+    // Reuse its complete subtree, including offscreen selectable messages.
+    final messages = _transcriptContent ??= Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         if (_messages.isEmpty)
@@ -657,7 +667,7 @@ final class _BeautifulChatState extends State<BeautifulChat> {
                 key: const ValueKey<String>('beautiful-chat-transcript'),
                 controller: _scroll,
                 padding: EdgeInsets.all(theme.spacing.md),
-                child: selectable,
+                child: RepaintBoundary(child: selectable),
               ),
             ),
           ),

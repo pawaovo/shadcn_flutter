@@ -1,6 +1,7 @@
 """Process/evidence regressions; no Flutter app, browser, or AT is launched."""
 
 import argparse
+import io
 import json
 import os
 import signal
@@ -25,14 +26,130 @@ class InputAcceptanceRunnerTests(unittest.TestCase):
         self.output = self.directory / "evidence"
         self.flutter = self.directory / "flutter"
 
-    def run_fixture(self, script):
-        self.flutter.write_text(f"#!{sys.executable}\n" + script, encoding="utf-8")
+    def run_fixture(self, script, platform="linux"):
+        # A sleeping Python process stands in for the owned WebDriver. The
+        # ready response only tests runner orchestration, never browser input.
+        preamble = ("import sys,time\n"
+                    "if '--port=4444' in sys.argv:\n time.sleep(60)\n raise SystemExit(0)\n")
+        self.flutter.write_text(f"#!{sys.executable}\n" + preamble + script, encoding="utf-8")
         self.flutter.chmod(0o755)
-        args = argparse.Namespace(platform="linux", device="fixture", include_journey=False,
+        args = argparse.Namespace(platform=platform, device="fixture", include_journey=False,
                                   artifacts=self.output)
         with patch.object(acceptance, "executable", return_value=str(self.flutter)), \
+                patch.object(acceptance.urllib.request, "urlopen",
+                             side_effect=lambda *_a, **_k: io.BytesIO(b'{"value":{"ready":true}}')), \
                 patch.dict(os.environ, {"DISPLAY": ":fixture"}):
             acceptance.run(args)
+
+    def browser_fixture(self, browser_exit=0):
+        return (
+            "import json,os\nfrom pathlib import Path\n"
+            "output=Path(os.environ['BEAUTIFUL_INPUT_EVIDENCE'])\n"
+            "if any('catalog_platform_input_test.dart' in arg for arg in sys.argv):\n"
+            " print('CATALOG_INPUT_REPORT: {\"status\":\"failed\"}')\n"
+            " raise SystemExit(4)\n"
+            "(output/'browser-input.json').write_text('{\"status\":\"passed\"}')\n"
+            f"raise SystemExit({browser_exit})\n"
+        )
+
+    def test_failed_framework_still_runs_independent_browser_and_fails_overall(self):
+        with self.assertRaisesRegex(RuntimeError, "framework input suite failed with 4"):
+            self.run_fixture(self.browser_fixture(), platform="chrome")
+        summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+        self.assertEqual(summary["status"], "failed")
+        self.assertEqual([(suite["suite"], suite["status"], suite["exit_code"])
+                          for suite in summary["suites"]],
+                         [("framework", "failed", 4), ("browser", "passed", 0)])
+        self.assertTrue(all(suite["cleanup_status"] == "verified" for suite in summary["suites"]))
+        self.assertEqual(json.loads((self.output / "framework/framework-input.json").read_text()),
+                         {"status": "failed"})
+        self.assertEqual(json.loads((self.output / "browser/browser-input.json").read_text()),
+                         {"status": "passed"})
+
+    def test_each_suite_failure_keeps_its_original_exit_status(self):
+        with self.assertRaisesRegex(RuntimeError, "framework input suite failed with 4.*browser input suite failed with 5"):
+            self.run_fixture(self.browser_fixture(browser_exit=5), platform="chrome")
+        summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+        self.assertEqual([suite["exit_code"] for suite in summary["suites"]], [4, 5])
+        self.assertEqual([suite["status"] for suite in summary["suites"]], ["failed", "failed"])
+
+    def test_unverified_flutter_or_driver_cleanup_stops_remaining_suites(self):
+        stop = acceptance.stop_owned_process
+        for owner in ("flutter", "driver"):
+            with self.subTest(owner=owner):
+                self.output = self.directory / f"evidence-{owner}"
+
+                def fail_verification(process, **kwargs):
+                    # Clean the actual fixture first so this injected failure
+                    # never leaks a process from the regression itself.
+                    stop(process, **kwargs)
+                    is_driver = "--port=4444" in process.args
+                    if is_driver == (owner == "driver"):
+                        raise RuntimeError("fixture cleanup verification failed")
+
+                with patch.object(acceptance, "stop_owned_process", side_effect=fail_verification):
+                    with self.assertRaisesRegex(RuntimeError, "fixture cleanup verification failed"):
+                        self.run_fixture(self.browser_fixture(), platform="chrome")
+                summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+                self.assertEqual(summary["status"], "failed")
+                self.assertEqual(len(summary["suites"]), 1)
+                self.assertEqual(summary["suites"][0]["status"], "failed")
+                self.assertIn("cleanup_error", summary["suites"][0])
+                self.assertFalse((self.output / "browser").exists())
+
+    def test_startup_without_verified_cleanup_stops_remaining_suites(self):
+        start = acceptance.start_owned_process
+        for owner in ("flutter", "driver"):
+            with self.subTest(owner=owner):
+                self.output = self.directory / f"evidence-{owner}"
+
+                def fail_startup(argv, **kwargs):
+                    is_driver = "--port=4444" in argv
+                    if is_driver == (owner == "driver"):
+                        raise RuntimeError("startup cleanup failed")
+                    return start(argv, **kwargs)
+
+                with patch.object(acceptance, "start_owned_process", side_effect=fail_startup):
+                    with self.assertRaisesRegex(RuntimeError, "startup cleanup failed"):
+                        self.run_fixture(self.browser_fixture(), platform="chrome")
+                summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+                self.assertEqual(len(summary["suites"]), 1)
+                self.assertIn("cleanup_error", summary["suites"][0])
+                self.assertNotIn("cleanup_status", summary["suites"][0])
+                self.assertFalse((self.output / "browser").exists())
+
+    def test_timeout_and_cleanup_failure_both_remain_in_evidence(self):
+        start = acceptance.start_owned_process
+        stop = acceptance.stop_owned_process
+
+        def timeout_process(argv, **kwargs):
+            process = start(argv, **kwargs)
+            wait = process.wait
+            first_wait = True
+
+            def timeout_once(timeout=None):
+                nonlocal first_wait
+                if first_wait:
+                    first_wait = False
+                    raise subprocess.TimeoutExpired(argv, timeout)
+                return wait(timeout=timeout)
+
+            process.wait = timeout_once
+            return process
+
+        def failed_cleanup(process, **kwargs):
+            stop(process, **kwargs)
+            raise RuntimeError("cleanup failed after timeout")
+
+        with patch.object(acceptance, "start_owned_process", side_effect=timeout_process), \
+                patch.object(acceptance, "stop_owned_process", side_effect=failed_cleanup):
+            with self.assertRaisesRegex(RuntimeError, "cleanup failed after timeout"):
+                self.run_fixture('print(\'CATALOG_INPUT_REPORT: {"status":"passed"}\')\n')
+        summary = json.loads((self.output / "input-acceptance-summary.json").read_text())
+        entry = summary["suites"][0]
+        self.assertTrue(entry["timed_out"])
+        self.assertIn("timed out", entry["error"])
+        self.assertEqual(entry["cleanup_error"], "cleanup failed after timeout")
 
     def test_failed_native_run_keeps_exact_structured_report(self):
         with self.assertRaisesRegex(RuntimeError, "failed with 4"):

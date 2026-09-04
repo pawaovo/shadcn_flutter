@@ -165,6 +165,7 @@ final class BeautifulFilterTable extends StatefulWidget {
 
 final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
   late List<BeautifulFilterTableRow> _rows;
+  List<Widget>? _tableRows;
   BeautifulFilterTableStatus? _status;
 
   @override
@@ -180,7 +181,14 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
     _takeSnapshot();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _tableRows = null;
+  }
+
   void _takeSnapshot() {
+    _tableRows = null;
     _rows = List<BeautifulFilterTableRow>.unmodifiable(widget.rows);
     assert(() {
       final ids = <String>{};
@@ -205,6 +213,7 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
+    final hasSelectionScope = SelectionContainer.maybeOf(context) != null;
     final visibleRows = _rows
         .where((row) => _status == null || row.status == _status)
         .toList(growable: false);
@@ -272,7 +281,7 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
                   ),
                 )
               else if (expanded)
-                _table(theme, visibleRows)
+                _table(theme, hasSelectionScope: hasSelectionScope)
               else
                 _cards(theme, visibleRows),
             ],
@@ -394,46 +403,60 @@ final class _BeautifulFilterTableState extends State<BeautifulFilterTable> {
     ),
   );
 
-  Widget _table(
-    BeautifulUiThemeData theme,
-    List<BeautifulFilterTableRow> rows,
-  ) => Semantics(
-    key: const ValueKey<String>('filter-table-expanded'),
-    container: true,
-    explicitChildNodes: true,
-    role: SemanticsRole.table,
-    label: widget.labels.table,
-    child: _surface(
-      theme,
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          _tableRow(
-            theme,
-            header: true,
-            children: <Widget>[
-              Text(widget.labels.taskColumn),
-              Text(widget.labels.dateColumn),
-              Text(widget.labels.statusColumn),
-              Text(widget.labels.ownerColumn),
-            ],
-          ),
-          for (final row in rows)
+  Widget _table(BeautifulUiThemeData theme, {required bool hasSelectionScope}) {
+    final rowWidgets = _tableRows ??= <Widget>[
+      for (final row in _rows)
+        _tableRow(
+          theme,
+          key: ValueKey<String>('filter-table-row-${row.id}'),
+          children: <Widget>[
+            Text(row.task),
+            Text(row.date),
+            _statusPill(theme, row.status),
+            Text(row.owner),
+          ],
+        ),
+    ];
+    return Semantics(
+      key: const ValueKey<String>('filter-table-expanded'),
+      container: true,
+      explicitChildNodes: true,
+      role: SemanticsRole.table,
+      label: widget.labels.table,
+      child: _surface(
+        theme,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
             _tableRow(
               theme,
-              key: ValueKey<String>('filter-table-row-${row.id}'),
+              header: true,
               children: <Widget>[
-                Text(row.task),
-                Text(row.date),
-                _statusPill(theme, row.status),
-                Text(row.owner),
+                Text(widget.labels.taskColumn),
+                Text(widget.labels.dateColumn),
+                Text(widget.labels.statusColumn),
+                Text(widget.labels.ownerColumn),
               ],
             ),
-        ],
+            // Keep laid-out rows for local filter changes. Offstage removes
+            // their paint, hit testing and Semantics without imposing row heights.
+            // A host selection scope must instead unregister hidden paragraphs:
+            // Offstage alone would leave them eligible for Select All and Copy.
+            for (var index = 0; index < _rows.length; index++)
+              if (!hasSelectionScope ||
+                  _status == null ||
+                  _rows[index].status == _status)
+                Offstage(
+                  key: ValueKey<String>('filter-table-slot-${_rows[index].id}'),
+                  offstage: _status != null && _rows[index].status != _status,
+                  child: rowWidgets[index],
+                ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   Widget _tableRow(
     BeautifulUiThemeData theme, {

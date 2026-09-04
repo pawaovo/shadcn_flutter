@@ -591,16 +591,20 @@ final class _CatalogButton extends StatefulWidget {
 final class _CatalogButtonState extends State<_CatalogButton> {
   var _hovered = false;
   var _focused = false;
+  var _hasFocus = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
     return Semantics(
       button: true,
+      focusable: true,
+      focused: _hasFocus,
       excludeSemantics: true,
       label: widget.label,
       onTap: widget.onPressed,
       child: FocusableActionDetector(
+        onFocusChange: (value) => setState(() => _hasFocus = value),
         onShowHoverHighlight: (value) => setState(() => _hovered = value),
         onShowFocusHighlight: (value) => setState(() => _focused = value),
         shortcuts: const <ShortcutActivator, Intent>{

@@ -31,6 +31,7 @@ void main() {
     'target_platform': defaultTargetPlatform.name,
     'native_clipboard_applicable': !kIsWeb,
     'evidence_boundaries': <String>[
+      'Editor focus and its text-input connection are requested through EditableTextState.requestKeyboard before editing-value injection.',
       'TextEditingValue updates use EditableTextState.userUpdateTextEditingValue, including an injected composing range.',
       'Keyboard events use Flutter KeyEventSimulator with explicit physical key mappings; they are not OS or WebDriver keyboard events.',
       'Selection uses a Flutter-injected mouse drag through the actual document selection widget.',
@@ -399,6 +400,16 @@ void main() {
               expect(copied?.text, expectedText);
 
               await actions.enter(prompt, '');
+              // Copying from another component does not refresh this editor's
+              // cached clipboard status. Query the real platform bridge before
+              // requesting the paste action that depends on that status.
+              final editor = tester.state<EditableTextState>(prompt);
+              await editor.clipboardStatus.update();
+              expect(
+                editor.pasteEnabled,
+                isTrue,
+                reason: 'The native clipboard should expose the copied text.',
+              );
               await tester.pump(const Duration(milliseconds: 180));
               tester.semantics.paste(find.semantics.byLabel('Prompt'));
               await actions.until(
@@ -495,14 +506,21 @@ final class _CatalogInputActions {
   }) {
     final editor = _lastEditor;
     final value = editor?.mounted ?? false ? editor!.textEditingValue : null;
+    final primary = FocusManager.instance.primaryFocus;
     inputTrace.add(<String, Object?>{
       'operation': operation,
-      'primary_focus': FocusManager.instance.primaryFocus?.debugLabel,
+      'primary_focus_present': primary != null,
+      'primary_focus': primary?.toString(),
       'lifecycle': tester.binding.lifecycleState?.name,
       'handled': ?handled,
       'key_events': ?keyEvents,
       if (value != null) ...<String, Object?>{
         'editor_has_primary_focus': editor!.widget.focusNode.hasPrimaryFocus,
+        'editor_has_focus': editor.widget.focusNode.hasFocus,
+        'editor_can_request_focus': editor.widget.focusNode.canRequestFocus,
+        'editor_focus_ancestors': <String>[
+          for (final node in editor.widget.focusNode.ancestors) node.toString(),
+        ],
         'draft': value.text,
         'selection': <int>[value.selection.start, value.selection.end],
         'composing': <int>[value.composing.start, value.composing.end],
@@ -528,6 +546,7 @@ final class _CatalogInputActions {
       if (completed()) return;
       await tester.pump(const Duration(milliseconds: 20));
     }
+    _record('timeout: $failure');
     expect(completed(), isTrue, reason: failure);
   }
 
@@ -543,8 +562,12 @@ final class _CatalogInputActions {
     await reveal(target);
     final state = tester.state<EditableTextState>(target);
     _lastEditor = state;
-    state.widget.focusNode.requestFocus();
+    // Match the public editor setup used by tester.showKeyboard/enterText in
+    // the complete journey. Calling requestKeyboard directly also reopens a
+    // previously focused editor after another control closed its connection.
+    state.requestKeyboard();
     await tester.pump();
+    _record('request keyboard');
     await until(
       () => state.widget.focusNode.hasPrimaryFocus,
       'The editing target must receive keyboard focus before text injection.',

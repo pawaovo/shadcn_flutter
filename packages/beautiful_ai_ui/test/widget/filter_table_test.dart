@@ -1,4 +1,5 @@
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
+import 'package:flutter/material.dart' show materialTextSelectionControls;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -60,6 +61,202 @@ Widget _app({
 );
 
 void main() {
+  testWidgets(
+    'expanded filters restore all 200 row layouts and refresh mutable snapshots',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1440, 1400);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetPhysicalSize);
+      final semantics = tester.ensureSemantics();
+      final rows = List.generate(
+        200,
+        (index) => BeautifulFilterTableRow(
+          id: 'row-$index',
+          task: index == 0
+              ? List.filled(60, 'Long task').join(' ')
+              : 'Task $index',
+          date: 'Sep 3',
+          status: BeautifulFilterTableStatus.values[index % 3],
+          owner: 'Owner $index',
+        ),
+      );
+      await tester.pumpWidget(_app(rows: rows, width: 1024));
+      final first = find.byKey(
+        const ValueKey<String>('filter-table-row-row-0'),
+      );
+      final originalLayout = tester.renderObject(first);
+      final originalHeight = tester.getSize(first).height;
+      for (var round = 0; round < 3; round++) {
+        await tester.tap(_filter('completed'));
+        await tester.pump();
+        expect(first, findsNothing);
+        expect(
+          tester
+              .getSemantics(
+                find.byKey(const ValueKey<String>('filter-table-expanded')),
+              )
+              .toStringDeep(),
+          isNot(contains(rows.first.task)),
+        );
+        expect(find.text('Matching tasks: 66 / 200'), findsOneWidget);
+        await tester.tap(_filter('all'));
+        await tester.pump();
+        expect(find.text('Matching tasks: 200 / 200'), findsOneWidget);
+        expect(find.text('Task 199'), findsOneWidget);
+        expect(tester.renderObject(first), same(originalLayout));
+        expect(tester.getSize(first).height, originalHeight);
+      }
+
+      rows[0] = const BeautifulFilterTableRow(
+        id: 'row-0',
+        task: 'Updated short task',
+        date: 'Sep 4',
+        status: BeautifulFilterTableStatus.completed,
+        owner: 'Updated owner',
+      );
+      rows.removeLast();
+      await tester.pumpWidget(_app(rows: rows, width: 1024));
+      expect(find.text('Updated short task'), findsOneWidget);
+      expect(find.text('Updated owner'), findsOneWidget);
+      expect(find.text('Task 199'), findsNothing);
+      expect(find.text('Matching tasks: 199 / 199'), findsOneWidget);
+      expect(tester.getSize(first).height, lessThan(originalHeight));
+      expect(tester.takeException(), isNull);
+      semantics.dispose();
+    },
+  );
+
+  testWidgets('expanded hidden rows leave host Select All and Copy', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1440, 1400);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    final semantics = tester.ensureSemantics();
+    final focus = FocusNode();
+    addTearDown(focus.dispose);
+    final selectionKey = GlobalKey<SelectableRegionState>();
+    String? copied;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      (call) async {
+        if (call.method == 'Clipboard.setData') {
+          copied = (call.arguments as Map)['text'] as String;
+        }
+        return null;
+      },
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        null,
+      ),
+    );
+    await tester.pumpWidget(
+      WidgetsApp(
+        color: const Color(0xffffffff),
+        builder: (context, child) => Overlay.wrap(
+          child: beautifulTestApp(
+            size: const Size(1024, 1200),
+            disableAnimations: true,
+            child: SelectableRegion(
+              key: selectionKey,
+              focusNode: focus,
+              selectionControls: materialTextSelectionControls,
+              child: const SingleChildScrollView(
+                child: SizedBox(
+                  width: 1024,
+                  child: BeautifulFilterTable(rows: _rows),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    void copySelection() => selectionKey.currentState!.contextMenuButtonItems
+        .singleWhere((item) => item.type == ContextMenuButtonType.copy)
+        .onPressed!();
+    selectionKey.currentState!.selectAll();
+    await tester.pump();
+    copySelection();
+    await tester.pump();
+    expect(copied, contains('Review inventory'));
+    expect(copied, contains('Prepare report'));
+
+    await tester.tap(_filter('completed'));
+    await tester.pump();
+    expect(find.bySemanticsLabel('Review inventory'), findsNothing);
+    expect(find.bySemanticsLabel('Prepare report'), findsNothing);
+    expect(find.text('Review inventory', skipOffstage: false), findsNothing);
+    selectionKey.currentState!.selectAll();
+    await tester.pump();
+    copySelection();
+    await tester.pump();
+    expect(copied, contains('Audit sources'));
+    expect(copied, isNot(contains('Review inventory')));
+    expect(copied, isNot(contains('Prepare report')));
+
+    await tester.tap(_filter('all'));
+    await tester.pump();
+    selectionKey.currentState!.selectAll();
+    await tester.pump();
+    copySelection();
+    await tester.pump();
+    expect(copied, contains('Review inventory'));
+    expect(copied, contains('Prepare report'));
+    expect(copied, contains('Audit sources'));
+    expect(tester.takeException(), isNull);
+    semantics.dispose();
+  });
+
+  testWidgets('expanded retained row content follows inherited theme updates', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1440, 1400);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    late StateSetter updateTheme;
+    var dark = false;
+    const table = BeautifulFilterTable(rows: _rows);
+    await tester.pumpWidget(
+      beautifulTestApp(
+        size: const Size(1024, 1200),
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            updateTheme = setState;
+            return BeautifulUiTheme(
+              data: dark
+                  ? const BeautifulUiThemeData.dark()
+                  : const BeautifulUiThemeData.light(),
+              child: const SingleChildScrollView(child: table),
+            );
+          },
+        ),
+      ),
+    );
+    final paragraph = find.descendant(
+      of: find.text('Review inventory'),
+      matching: find.byType(RichText),
+    );
+    final lightColor = tester.widget<RichText>(paragraph).text.style!.color;
+    updateTheme(() => dark = true);
+    await tester.pump();
+    expect(
+      tester.widget<RichText>(paragraph).text.style!.color,
+      const BeautifulUiThemeData.dark().colors.ink,
+    );
+    expect(
+      tester.widget<RichText>(paragraph).text.style!.color,
+      isNot(lightColor),
+    );
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('derives all filter counts and displays caller-owned rows', (
     tester,
   ) async {

@@ -1,0 +1,418 @@
+{
+  "schema": 1,
+  "date": "2026-09-04",
+  "verified_at_utc": "2026-09-03T23:58:28.093305+00:00",
+  "status": "passed_for_byte_identical_existing_static_fixtures",
+  "scope": "Full existing P1/P2 78-image replay; this addendum details the 24 Chat, Filter, Code and Tool captures affected by the current performance changes.",
+  "baseline_evidence": "docs/beautiful-ui/quality_evidence/2026-09-03-p1-p2-complementary-review.json",
+  "baseline_evidence_sha256": "5eab0d225de5ee42a49aef019b227b69e2822b74efd4d2d0a3cdaf50b67194c9",
+  "baseline_artifact_directory": "packages/beautiful_ai_ui/build/release_review/2026-09-03-p1-p2-matrix",
+  "baseline_capture_manifest_sha256": "29bfaf17cfc71c2f45e0376abc8aaf16ece598b4cd8fb434856a890b4bc73353",
+  "baseline_source_sha256": "e2bcc12029aca5247f4acdaf6c3ea3f620d7dd4856f07c33c409772da5a55106",
+  "artifact_directory": "packages/beautiful_ai_ui/build/release_review/2026-09-04-performance-regression",
+  "capture_manifest_sha256": "a7c1159b0c9101858e1f2a8dfdea6ec7797ba5ad73663d74d305f966f9693f7f",
+  "source_sha256": "c5db3b710b4f9fd6abfb262606ffc20f312f9bccb07a3ff3d26a7c5059fd9c6d",
+  "source_file_count": 198,
+  "source_unchanged_during_capture": true,
+  "source_files_rehashed_after_capture": true,
+  "repository_head_at_capture_start": "36142500c9ad91dc307b6c8005e78add357f080b",
+  "source_identity_note": "The capture includes uncommitted performance edits. The aggregate source SHA and 198-file manifest identify the rendered input; the repository HEAD alone does not.",
+  "changed_source_files_since_baseline": [
+    {
+      "file": "packages/beautiful_ai_ui/lib/src/components/chat.dart",
+      "baseline_sha256": "d4fd295d03a55441f91006f104a7063b1288195bc112d0d616a075a35c9c5be8",
+      "current_sha256": "7d422c14b324a27993143faafb05cc57e5a2138ed36405c399d694ec4f3819f1"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/lib/src/components/code_block.dart",
+      "baseline_sha256": "c6b28d1f0a577a2c7f4552fc9a064d675b58bf5fbffaa780866ac1aef2137d21",
+      "current_sha256": "d406b6095ad1505c57cceb9df10d661d429e6d30a010825d766b30e24161fdce"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/lib/src/components/filter_table.dart",
+      "baseline_sha256": "a9168eeccde24a4f797d39905a5a75da99022003c42648ca1282dbdd87c812e4",
+      "current_sha256": "94cb34c944ecccf2d149e06d0b0ca876c82714dcc7a4cd11ad71cb7afb7beeab"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/lib/src/components/search.dart",
+      "baseline_sha256": "7871625f876a1f77eaffdc019534a4c97034219ef1c6aba07d26ddce71e07f12",
+      "current_sha256": "b8bdaddec0ce41c1792a5664232933306e8104506075c3db274df45e608bd1e3"
+    },
+    {
+      "file": "packages/beautiful_ai_ui/lib/src/components/tool_chips.dart",
+      "baseline_sha256": "0774455141c8201a35d1cd9edb39efd7c49382704866aa293c4b734a627695ed",
+      "current_sha256": "f06ba10a52dbffa0a0da80b61c97758c7e5d7b0f8c4fdad8a0b0c53db125ec1c"
+    }
+  ],
+  "counts": {
+    "captures": 78,
+    "byte_identical_to_reviewed_baseline": 78,
+    "related_captures": 24,
+    "related_byte_identical": 24,
+    "changed_images": 0,
+    "newly_viewed_images": 0,
+    "rendering_errors": 0
+  },
+  "review_method": "Recomputed each of 78 fresh PNG SHA-256 values and compared with both the accepted Sep3 index and the retained original PNG. All match. The prior individual visual reviews are inherited; no new image viewing is claimed. The raw exporter manifest remains unreviewed.",
+  "all_capture_comparison": {
+    "path": "packages/beautiful_ai_ui/build/release_review/2026-09-04-performance-regression/all-capture-sha-comparison.json",
+    "sha256": "083f8efa7c9838782a741047346f4fff71f8e69c6cbfda7c531b6ea2c340494f"
+  },
+  "capture": {
+    "exporter_command": [
+      "python3",
+      "tool/release_review/export_p1_p2_matrix.py",
+      "--flutter",
+      "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+      "--output",
+      "build/release_review/2026-09-04-performance-regression"
+    ],
+    "flutter_command": [
+      "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/flutter",
+      "test",
+      "--no-pub",
+      "tool/release_review/p1_p2_matrix_test.dart",
+      "--dart-define=P1P2_MATRIX_OUTPUT=/Users/zzz/build/design/shadcn_flutter/packages/beautiful_ai_ui/build/release_review/2026-09-04-performance-regression"
+    ],
+    "environment": {
+      "DEVELOPER_DIR": "/Applications/Xcode.app/Contents/Developer"
+    },
+    "started_at_utc": "2026-09-03T23:55:48.896430+00:00",
+    "finished_at_utc": "2026-09-03T23:55:59.264813+00:00",
+    "exit_code": 0,
+    "log": "capture.log",
+    "log_sha256": "6b471c6090264e923ad4febb8738b912249a6af1791d009d177d67f86feb301a",
+    "flutter_version": "3.47.0",
+    "framework_revision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+    "engine_revision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+    "platform": "macos",
+    "host_os": "Version 15.7.9 (Build 24G830)",
+    "dpr": 1
+  },
+  "profiles": [
+    {
+      "id": "compact-dark-long-en-2x",
+      "viewport_width": 390.0,
+      "component_width": 358.0,
+      "brightness": "dark",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "en",
+      "direction": "ltr",
+      "motion": "none",
+      "disable_animations": false
+    },
+    {
+      "id": "compact-light-hc-ar-rtl-2x",
+      "viewport_width": 390.0,
+      "component_width": 358.0,
+      "brightness": "light",
+      "high_contrast": true,
+      "text_scale": 2.0,
+      "language": "ar",
+      "direction": "rtl",
+      "motion": "system",
+      "disable_animations": true
+    },
+    {
+      "id": "medium-light-zh-2x",
+      "viewport_width": 768.0,
+      "component_width": 736.0,
+      "brightness": "light",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "zh",
+      "direction": "ltr",
+      "motion": "reduced",
+      "disable_animations": false
+    },
+    {
+      "id": "medium-dark-hc-long-en-1x",
+      "viewport_width": 768.0,
+      "component_width": 736.0,
+      "brightness": "dark",
+      "high_contrast": true,
+      "text_scale": 1.0,
+      "language": "en",
+      "direction": "ltr",
+      "motion": "none",
+      "disable_animations": false
+    },
+    {
+      "id": "expanded-light-ar-rtl-1x",
+      "viewport_width": 1280.0,
+      "component_width": 1248.0,
+      "brightness": "light",
+      "high_contrast": false,
+      "text_scale": 1.0,
+      "language": "ar",
+      "direction": "rtl",
+      "motion": "reduced",
+      "disable_animations": false
+    },
+    {
+      "id": "expanded-dark-zh-2x",
+      "viewport_width": 1280.0,
+      "component_width": 1248.0,
+      "brightness": "dark",
+      "high_contrast": false,
+      "text_scale": 2.0,
+      "language": "zh",
+      "direction": "ltr",
+      "motion": "system",
+      "disable_animations": true
+    }
+  ],
+  "fonts": {
+    "same_pinned_font_and_license_provenance_as_baseline": true,
+    "purpose": "Existing review-only Geist/Noto setup; no distributed font changes."
+  },
+  "captures": [
+    {
+      "module": "code-block",
+      "profile": "compact-dark-long-en-2x",
+      "file": "compact-dark-long-en-2x/code-block.png",
+      "baseline_sha256": "2e97d6e1f58f571ae33a77e05f4f588d6aa4275e5307475cd7fc86a794879334",
+      "current_sha256": "2e97d6e1f58f571ae33a77e05f4f588d6aa4275e5307475cd7fc86a794879334",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "compact-dark-long-en-2x",
+      "file": "compact-dark-long-en-2x/tool-chips.png",
+      "baseline_sha256": "51d41763ae420b44e589fcc1c3764378bf9515be369bdee4060ee6cf1cd8e3dd",
+      "current_sha256": "51d41763ae420b44e589fcc1c3764378bf9515be369bdee4060ee6cf1cd8e3dd",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "chat",
+      "profile": "compact-dark-long-en-2x",
+      "file": "compact-dark-long-en-2x/chat.png",
+      "baseline_sha256": "1770f47b3818bd7f10b1045b152cbdaca3fb59cadd381d9ac79a1b4bdccc9ebf",
+      "current_sha256": "1770f47b3818bd7f10b1045b152cbdaca3fb59cadd381d9ac79a1b4bdccc9ebf",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "filter-table",
+      "profile": "compact-dark-long-en-2x",
+      "file": "compact-dark-long-en-2x/filter-table.png",
+      "baseline_sha256": "c50fc2e0859c35ef5573533da2e8d301e645f44fcd479279bb36448cf946b043",
+      "current_sha256": "c50fc2e0859c35ef5573533da2e8d301e645f44fcd479279bb36448cf946b043",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "code-block",
+      "profile": "compact-light-hc-ar-rtl-2x",
+      "file": "compact-light-hc-ar-rtl-2x/code-block.png",
+      "baseline_sha256": "15613f9ae41fbe375c1370759edd1053566171a90e676eeaea39d25de4949ae4",
+      "current_sha256": "15613f9ae41fbe375c1370759edd1053566171a90e676eeaea39d25de4949ae4",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "compact-light-hc-ar-rtl-2x",
+      "file": "compact-light-hc-ar-rtl-2x/tool-chips.png",
+      "baseline_sha256": "d9d42ffc3aa1e0722a9c01f0a81f1f191089c430cf30aa6480ed255adc4a34b2",
+      "current_sha256": "d9d42ffc3aa1e0722a9c01f0a81f1f191089c430cf30aa6480ed255adc4a34b2",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "chat",
+      "profile": "compact-light-hc-ar-rtl-2x",
+      "file": "compact-light-hc-ar-rtl-2x/chat.png",
+      "baseline_sha256": "32d6fdb08e1df5d68d03f9376a1485b36459f8c7c66f5dc70dc1c2c417f47611",
+      "current_sha256": "32d6fdb08e1df5d68d03f9376a1485b36459f8c7c66f5dc70dc1c2c417f47611",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "filter-table",
+      "profile": "compact-light-hc-ar-rtl-2x",
+      "file": "compact-light-hc-ar-rtl-2x/filter-table.png",
+      "baseline_sha256": "8a204a4d51ed4fc7e646b402fbb15ce90a47caafae0aa55d649b0e2f17fe06c7",
+      "current_sha256": "8a204a4d51ed4fc7e646b402fbb15ce90a47caafae0aa55d649b0e2f17fe06c7",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "code-block",
+      "profile": "medium-light-zh-2x",
+      "file": "medium-light-zh-2x/code-block.png",
+      "baseline_sha256": "e3a1997000c6827d5793cfc12cb6a390b465c4a48f1b25a59c5b6e1e973006ed",
+      "current_sha256": "e3a1997000c6827d5793cfc12cb6a390b465c4a48f1b25a59c5b6e1e973006ed",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "medium-light-zh-2x",
+      "file": "medium-light-zh-2x/tool-chips.png",
+      "baseline_sha256": "a3301072e329793d7d509952d5dbbaf25eb82bf8c45db817a10b9b5b93bb627b",
+      "current_sha256": "a3301072e329793d7d509952d5dbbaf25eb82bf8c45db817a10b9b5b93bb627b",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "chat",
+      "profile": "medium-light-zh-2x",
+      "file": "medium-light-zh-2x/chat.png",
+      "baseline_sha256": "70a2aeadb41e6fd0366f83efdb59e5219877887711d725d49c959d90044c421d",
+      "current_sha256": "70a2aeadb41e6fd0366f83efdb59e5219877887711d725d49c959d90044c421d",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "filter-table",
+      "profile": "medium-light-zh-2x",
+      "file": "medium-light-zh-2x/filter-table.png",
+      "baseline_sha256": "73c41ae45bfa9bc846e99c5b7e71a957ac9b865c4ef5761085d9e7ba81ab1f51",
+      "current_sha256": "73c41ae45bfa9bc846e99c5b7e71a957ac9b865c4ef5761085d9e7ba81ab1f51",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "code-block",
+      "profile": "medium-dark-hc-long-en-1x",
+      "file": "medium-dark-hc-long-en-1x/code-block.png",
+      "baseline_sha256": "1f9e013752222fc61ed484df7b8a312c1df564ef65dbfbc9612f9280729b2f69",
+      "current_sha256": "1f9e013752222fc61ed484df7b8a312c1df564ef65dbfbc9612f9280729b2f69",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "medium-dark-hc-long-en-1x",
+      "file": "medium-dark-hc-long-en-1x/tool-chips.png",
+      "baseline_sha256": "7edc76526a893af49714228471b8f51a262cab36572c914aa946c1c80b620d15",
+      "current_sha256": "7edc76526a893af49714228471b8f51a262cab36572c914aa946c1c80b620d15",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "chat",
+      "profile": "medium-dark-hc-long-en-1x",
+      "file": "medium-dark-hc-long-en-1x/chat.png",
+      "baseline_sha256": "2823ff41a9639cc88b8b7838e049ebefd0afb9ecfd52df76917e2bab3362c044",
+      "current_sha256": "2823ff41a9639cc88b8b7838e049ebefd0afb9ecfd52df76917e2bab3362c044",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "filter-table",
+      "profile": "medium-dark-hc-long-en-1x",
+      "file": "medium-dark-hc-long-en-1x/filter-table.png",
+      "baseline_sha256": "37d6cee7dceac21939a0d56a6f80494a7707a34182c6d7c8cf0048d2af9fa34a",
+      "current_sha256": "37d6cee7dceac21939a0d56a6f80494a7707a34182c6d7c8cf0048d2af9fa34a",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/release_device_handoff"
+    },
+    {
+      "module": "code-block",
+      "profile": "expanded-light-ar-rtl-1x",
+      "file": "expanded-light-ar-rtl-1x/code-block.png",
+      "baseline_sha256": "d7b3cb35dc0293e451751c8cf2eac1ec96e540ca8487b4fd0fa9e4afc2de0459",
+      "current_sha256": "d7b3cb35dc0293e451751c8cf2eac1ec96e540ca8487b4fd0fa9e4afc2de0459",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "expanded-light-ar-rtl-1x",
+      "file": "expanded-light-ar-rtl-1x/tool-chips.png",
+      "baseline_sha256": "c700fb833f879a9105aba14acd31b06e0b0aee91e8ba70cb2c5c61a5c1623a79",
+      "current_sha256": "c700fb833f879a9105aba14acd31b06e0b0aee91e8ba70cb2c5c61a5c1623a79",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "chat",
+      "profile": "expanded-light-ar-rtl-1x",
+      "file": "expanded-light-ar-rtl-1x/chat.png",
+      "baseline_sha256": "f2b73851b642656121b56da16ef430b6151e8c166b156b1d0bbb14568526088d",
+      "current_sha256": "f2b73851b642656121b56da16ef430b6151e8c166b156b1d0bbb14568526088d",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "filter-table",
+      "profile": "expanded-light-ar-rtl-1x",
+      "file": "expanded-light-ar-rtl-1x/filter-table.png",
+      "baseline_sha256": "49ebecc47586e3f89383994690a428ec509aea2cb1951271b3912883a2b1534f",
+      "current_sha256": "49ebecc47586e3f89383994690a428ec509aea2cb1951271b3912883a2b1534f",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "code-block",
+      "profile": "expanded-dark-zh-2x",
+      "file": "expanded-dark-zh-2x/code-block.png",
+      "baseline_sha256": "b6e5e2a39fa0165f9a3a775c39c8a889a208c0deb0cebdff0e359a4ac8a3b29c",
+      "current_sha256": "b6e5e2a39fa0165f9a3a775c39c8a889a208c0deb0cebdff0e359a4ac8a3b29c",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "tool-chips",
+      "profile": "expanded-dark-zh-2x",
+      "file": "expanded-dark-zh-2x/tool-chips.png",
+      "baseline_sha256": "c64936a98174361bb59c1050daf8b2ff5093cd437758e078e1e410792d7cb542",
+      "current_sha256": "c64936a98174361bb59c1050daf8b2ff5093cd437758e078e1e410792d7cb542",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "chat",
+      "profile": "expanded-dark-zh-2x",
+      "file": "expanded-dark-zh-2x/chat.png",
+      "baseline_sha256": "8ff574cc8a619538f2ac74b53c9b0d50915f744e8dd392aa86b0c93b6ed05b75",
+      "current_sha256": "8ff574cc8a619538f2ac74b53c9b0d50915f744e8dd392aa86b0c93b6ed05b75",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    },
+    {
+      "module": "filter-table",
+      "profile": "expanded-dark-zh-2x",
+      "file": "expanded-dark-zh-2x/filter-table.png",
+      "baseline_sha256": "a1d6d253f22517a451841a83df027901a7769a7b84f56a06b629bd1cf6de3189",
+      "current_sha256": "a1d6d253f22517a451841a83df027901a7769a7b84f56a06b629bd1cf6de3189",
+      "byte_identical": true,
+      "baseline_visual_review": "pass",
+      "baseline_reviewer": "/root/p3_catalog"
+    }
+  ],
+  "limits": [
+    "These six complementary static profiles are not the complete Cartesian product of locales, widths, themes, states or motion settings.",
+    "The fixtures retain their original representative data. This visual replay does not measure the native 200-row Filter or 500-message Chat workloads.",
+    "Native performance, physical input, assistive technology, selection behavior and temporal animation remain separate evidence. No acceptance status for those areas is changed here.",
+    "The already accepted Search change is also present in the source manifest; its six images and all other unrelated fixtures remain byte-identical in this full replay."
+  ]
+}

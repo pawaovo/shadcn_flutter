@@ -201,41 +201,20 @@ enum _BeautifulCodeBlockMode { code, diff }
 enum _CopyFeedback { idle, copying, copied, failed }
 
 final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
-  static const _feedbackDuration = Duration(milliseconds: 1500);
-
   late final ScrollController _horizontalController;
   late final FocusNode _selectionFocusNode;
-  late final FocusNode _copyFocusNode;
-  Timer? _feedbackTimer;
-  _CopyFeedback _copyFeedback = _CopyFeedback.idle;
-  var _copyGeneration = 0;
-  var _copyHovered = false;
-  var _copyFocused = false;
 
   @override
   void initState() {
     super.initState();
     _horizontalController = ScrollController();
     _selectionFocusNode = FocusNode(debugLabel: 'BeautifulCodeBlock selection');
-    _copyFocusNode = FocusNode(debugLabel: 'BeautifulCodeBlock copy');
-  }
-
-  @override
-  void didUpdateWidget(BeautifulCodeBlock oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget._mode != widget._mode || oldWidget._code != widget._code) {
-      _feedbackTimer?.cancel();
-      _copyGeneration += 1;
-      _copyFeedback = _CopyFeedback.idle;
-    }
   }
 
   @override
   void dispose() {
-    _feedbackTimer?.cancel();
     _horizontalController.dispose();
     _selectionFocusNode.dispose();
-    _copyFocusNode.dispose();
     super.dispose();
   }
 
@@ -277,7 +256,14 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
   Widget _buildHeader(BeautifulUiThemeData theme) {
     final trailing = widget._mode == _BeautifulCodeBlockMode.diff
         ? _buildDiffStatistics(theme)
-        : _buildCopyControl(theme);
+        : _CodeCopyControl(
+            code: widget._code!,
+            copyLabel: widget.copyLabel,
+            copyingLabel: widget.copyingLabel,
+            copiedLabel: widget.copiedLabel,
+            copyFailedLabel: widget.copyFailedLabel,
+            onCopy: widget.onCopy,
+          );
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -365,122 +351,6 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
                 style: style.copyWith(color: theme.colors.destructive),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCopyControl(BeautifulUiThemeData theme) {
-    final enabled = _copyFeedback != _CopyFeedback.copying;
-    final isLive =
-        _copyFeedback == _CopyFeedback.copied ||
-        _copyFeedback == _CopyFeedback.failed;
-    final label = switch (_copyFeedback) {
-      _CopyFeedback.idle => widget.copyLabel,
-      _CopyFeedback.copying => widget.copyingLabel,
-      _CopyFeedback.copied => widget.copiedLabel,
-      _CopyFeedback.failed => widget.copyFailedLabel,
-    };
-    final foreground = switch (_copyFeedback) {
-      _CopyFeedback.idle =>
-        _copyHovered ? theme.colors.ink : theme.colors.inkSubtle,
-      _CopyFeedback.copying => theme.colors.accentInk,
-      _CopyFeedback.copied => theme.colors.success,
-      _CopyFeedback.failed => theme.colors.destructive,
-    };
-    final environment = BeautifulUiEnvironment.of(context);
-    final mediaDisablesMotion =
-        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
-    final duration =
-        mediaDisablesMotion ||
-            environment.motionPolicy == BeautifulMotionPolicy.none
-        ? Duration.zero
-        : theme.motion.quick;
-
-    return Semantics(
-      container: true,
-      button: true,
-      enabled: enabled,
-      liveRegion: isLive,
-      excludeSemantics: true,
-      label: label,
-      onTap: enabled ? _copy : null,
-      child: FocusableActionDetector(
-        focusNode: _copyFocusNode,
-        mouseCursor: enabled
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic,
-        onShowHoverHighlight: (value) {
-          if (_copyHovered != value) {
-            setState(() => _copyHovered = value);
-          }
-        },
-        onShowFocusHighlight: (value) {
-          if (_copyFocused != value) {
-            setState(() => _copyFocused = value);
-          }
-        },
-        shortcuts: const <ShortcutActivator, Intent>{
-          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-        },
-        actions: <Type, Action<Intent>>{
-          ActivateIntent: CallbackAction<ActivateIntent>(
-            onInvoke: (_) {
-              if (enabled) {
-                _copy();
-              }
-              return null;
-            },
-          ),
-        },
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: enabled ? _copy : null,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              minWidth: 48,
-              minHeight: 48,
-              maxWidth: 160,
-            ),
-            child: Center(
-              child: AnimatedContainer(
-                duration: duration,
-                curve: theme.motion.outCurve,
-                constraints: const BoxConstraints(minHeight: 24),
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                decoration: BoxDecoration(
-                  color: _copyHovered && enabled
-                      ? theme.colors.hover
-                      : const Color(0x00000000),
-                  border: _copyFocused
-                      ? Border.all(color: theme.colors.accent, width: 2)
-                      : null,
-                  borderRadius: BorderRadius.circular(theme.radii.chip),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    _CopyGlyph(feedback: _copyFeedback, color: foreground),
-                    SizedBox(width: theme.spacing.xs),
-                    Flexible(
-                      child: Text(
-                        label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.typography.label.copyWith(
-                          color: foreground,
-                          fontSize: 12,
-                          height: 1.25,
-                          letterSpacing: -0.12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ),
         ),
       ),
@@ -598,16 +468,185 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
         ),
     ];
   }
+}
+
+// Copy feedback is independent of the source listing: a timer, pointer hover,
+// or focus change must not rebuild/re-tokenize every unchanged source line.
+final class _CodeCopyControl extends StatefulWidget {
+  const _CodeCopyControl({
+    required this.code,
+    required this.copyLabel,
+    required this.copyingLabel,
+    required this.copiedLabel,
+    required this.copyFailedLabel,
+    required this.onCopy,
+  });
+
+  final String code;
+  final String copyLabel;
+  final String copyingLabel;
+  final String copiedLabel;
+  final String copyFailedLabel;
+  final FutureOr<void> Function(String code)? onCopy;
+
+  @override
+  State<_CodeCopyControl> createState() => _CodeCopyControlState();
+}
+
+final class _CodeCopyControlState extends State<_CodeCopyControl> {
+  static const _feedbackDuration = Duration(milliseconds: 1500);
+  final FocusNode _copyFocusNode = FocusNode(
+    debugLabel: 'BeautifulCodeBlock copy',
+  );
+  Timer? _feedbackTimer;
+  _CopyFeedback _copyFeedback = _CopyFeedback.idle;
+  var _copyGeneration = 0;
+  var _copyHovered = false;
+  var _copyFocused = false;
+
+  @override
+  void didUpdateWidget(_CodeCopyControl oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.code != widget.code) {
+      _feedbackTimer?.cancel();
+      _copyGeneration += 1;
+      _copyFeedback = _CopyFeedback.idle;
+    }
+  }
+
+  @override
+  void dispose() {
+    _feedbackTimer?.cancel();
+    _copyFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = BeautifulUiTheme.of(context);
+    final enabled = _copyFeedback != _CopyFeedback.copying;
+    final isLive =
+        _copyFeedback == _CopyFeedback.copied ||
+        _copyFeedback == _CopyFeedback.failed;
+    final label = switch (_copyFeedback) {
+      _CopyFeedback.idle => widget.copyLabel,
+      _CopyFeedback.copying => widget.copyingLabel,
+      _CopyFeedback.copied => widget.copiedLabel,
+      _CopyFeedback.failed => widget.copyFailedLabel,
+    };
+    final foreground = switch (_copyFeedback) {
+      _CopyFeedback.idle =>
+        _copyHovered ? theme.colors.ink : theme.colors.inkSubtle,
+      _CopyFeedback.copying => theme.colors.accentInk,
+      _CopyFeedback.copied => theme.colors.success,
+      _CopyFeedback.failed => theme.colors.destructive,
+    };
+    final environment = BeautifulUiEnvironment.of(context);
+    final mediaDisablesMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    final duration =
+        mediaDisablesMotion ||
+            environment.motionPolicy == BeautifulMotionPolicy.none
+        ? Duration.zero
+        : theme.motion.quick;
+
+    return Semantics(
+      container: true,
+      button: true,
+      enabled: enabled,
+      liveRegion: isLive,
+      excludeSemantics: true,
+      label: label,
+      onTap: enabled ? _copy : null,
+      child: FocusableActionDetector(
+        focusNode: _copyFocusNode,
+        mouseCursor: enabled
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        onShowHoverHighlight: (value) {
+          if (_copyHovered != value) {
+            setState(() => _copyHovered = value);
+          }
+        },
+        onShowFocusHighlight: (value) {
+          if (_copyFocused != value) {
+            setState(() => _copyFocused = value);
+          }
+        },
+        shortcuts: const <ShortcutActivator, Intent>{
+          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+        },
+        actions: <Type, Action<Intent>>{
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              if (enabled) {
+                _copy();
+              }
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: enabled ? _copy : null,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minWidth: 48,
+              minHeight: 48,
+              maxWidth: 160,
+            ),
+            child: Center(
+              child: AnimatedContainer(
+                duration: duration,
+                curve: theme.motion.outCurve,
+                constraints: const BoxConstraints(minHeight: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                decoration: BoxDecoration(
+                  color: _copyHovered && enabled
+                      ? theme.colors.hover
+                      : const Color(0x00000000),
+                  border: _copyFocused
+                      ? Border.all(color: theme.colors.accent, width: 2)
+                      : null,
+                  borderRadius: BorderRadius.circular(theme.radii.chip),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _CopyGlyph(feedback: _copyFeedback, color: foreground),
+                    SizedBox(width: theme.spacing.xs),
+                    Flexible(
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.typography.label.copyWith(
+                          color: foreground,
+                          fontSize: 12,
+                          height: 1.25,
+                          letterSpacing: -0.12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> _copy() async {
-    if (widget._mode != _BeautifulCodeBlockMode.code ||
-        _copyFeedback == _CopyFeedback.copying) {
+    if (_copyFeedback == _CopyFeedback.copying) {
       return;
     }
 
     _feedbackTimer?.cancel();
     final generation = ++_copyGeneration;
-    final source = widget._code!;
+    final source = widget.code;
     final environment = BeautifulUiEnvironment.of(context);
     setState(() => _copyFeedback = _CopyFeedback.copying);
 

@@ -1,0 +1,84 @@
+name: Beautiful AI UI Catalog Orca pilot (manual evidence only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-character commit containing the pilot scripts
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.47.0"
+
+jobs:
+  catalog-orca-pilot:
+    name: Three Catalog tasks with real Orca (not app acceptance)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Require an exact source commit
+        env:
+          PILOT_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$PILOT_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - name: Verify checkout and record runner provenance
+        env:
+          PILOT_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$PILOT_SOURCE_SHA"
+          mkdir -p artifacts/catalog-orca-run
+          python3 - <<'PY'
+          import json, os, platform, subprocess
+          from pathlib import Path
+          report = {
+              'source_sha': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'runner_image': os.environ.get('ImageOS'),
+              'runner_image_version': os.environ.get('ImageVersion'),
+              'platform': platform.platform(),
+              'workflow_ref': os.environ.get('GITHUB_WORKFLOW_REF'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'scope': 'three_representative_flutter_catalog_tasks',
+              'application_acceptance': 'not_accepted',
+              'human_review': 'not_accepted',
+          }
+          Path('artifacts/catalog-orca-run/runner.json').write_text(json.dumps(report, indent=2))
+          PY
+      - name: Install real AT, speech and native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev orca speech-dispatcher speech-dispatcher-espeak-ng espeak-ng pulseaudio pulseaudio-utils python3-gi python3-pyatspi python3-speechd gir1.2-gtk-3.0 at-spi2-core dbus-x11 xvfb xauth xdotool
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Resolve exact locked dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Build ordinary release Catalog and bind source and bundle evidence
+        timeout-minutes: 12
+        run: /usr/bin/python3 -B .github/scripts/probe_catalog_orca_linux.py --build-only --flutter "$(command -v flutter)" --output artifacts/catalog-orca-build
+      - name: Observe three real Catalog tasks in a private Orca session
+        timeout-minutes: 5
+        run: |
+          timeout 270s dbus-run-session -- xvfb-run -a -s '-screen 0 1440x1200x24' \
+            /usr/bin/python3 -B .github/scripts/probe_catalog_orca_linux.py \
+            --build-provenance artifacts/catalog-orca-build/build-provenance.json \
+            --output artifacts/catalog-orca-three-tasks --seconds 240
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-orca-pilot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            artifacts/catalog-orca-run/
+            artifacts/catalog-orca-build/
+            artifacts/catalog-orca-three-tasks/
+          if-no-files-found: error
+          retention-days: 14

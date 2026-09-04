@@ -630,6 +630,127 @@ void main() {
   );
 
   testWidgets(
+    'local draft and scroll keep all 500 messages until the host updates its snapshot',
+    (tester) async {
+      final messages = _longMessages(500);
+      final initialText = messages.map((message) => message.text).toList();
+      late StateSetter updateHost;
+      await tester.pumpWidget(
+        beautifulTestApp(
+          disableAnimations: true,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              updateHost = setState;
+              return BeautifulChat(
+                conversationId: 'mutable-long-snapshot',
+                messages: messages,
+                onSend: (_) {},
+              );
+            },
+          ),
+        ),
+      );
+      await tester.pump();
+      final transcript = find.byKey(
+        const ValueKey<String>('beautiful-chat-transcript'),
+      );
+      List<String?> transcriptText() => tester
+          .widgetList<Text>(
+            find.descendant(of: transcript, matching: find.byType(Text)),
+          )
+          .map((text) => text.data)
+          .toList();
+      expect(transcriptText(), initialText);
+
+      messages[250] = const BeautifulChatMessage(
+        id: 'message-250',
+        role: BeautifulChatRole.assistant,
+        text: 'Updated message under the same identity.',
+      );
+      messages.removeAt(0);
+      messages.add(
+        const BeautifulChatMessage(
+          id: 'message-500',
+          role: BeautifulChatRole.assistant,
+          text: 'The replacement last message.',
+        ),
+      );
+      await tester.enterText(find.byType(EditableText), 'Keep this draft');
+      await tester.pump();
+      expect(transcriptText(), initialText);
+
+      await tester.drag(transcript, const Offset(0, 350));
+      await tester.pumpAndSettle();
+      expect(find.text('Scroll to latest'), findsOneWidget);
+      expect(transcriptText(), initialText);
+
+      updateHost(() {});
+      await tester.pump();
+      await tester.pump();
+      expect(messages, hasLength(500));
+      expect(
+        transcriptText(),
+        messages.map((message) => message.text).toList(),
+      );
+      expect(_draft(tester).text, 'Keep this draft');
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'theme changes refresh message styles without replacing the chat child',
+    (tester) async {
+      const chat = BeautifulChat(
+        conversationId: 'themed-snapshot',
+        messages: _messages,
+      );
+      var theme = const BeautifulUiThemeData.light();
+      late StateSetter updateTheme;
+      await tester.pumpWidget(
+        beautifulTestApp(
+          disableAnimations: true,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              updateTheme = setState;
+              return BeautifulUiTheme(data: theme, child: chat);
+            },
+          ),
+        ),
+      );
+      await tester.pump();
+      Color? subtitleColor() =>
+          tester.widget<Text>(find.text('Flavor data')).style?.color;
+      Color? userBubbleColor() =>
+          (tester
+                      .widget<DecoratedBox>(
+                        find.descendant(
+                          of: find.byKey(
+                            const ValueKey<String>(
+                              'beautiful-chat-message-user-1',
+                            ),
+                          ),
+                          matching: find.byType(DecoratedBox),
+                        ),
+                      )
+                      .decoration
+                  as BoxDecoration)
+              .color;
+      expect(subtitleColor(), theme.colors.inkMuted);
+      expect(userBubbleColor(), theme.colors.field);
+
+      updateTheme(() => theme = const BeautifulUiThemeData.dark());
+      await tester.pump();
+      expect(
+        tester.widget<BeautifulChat>(find.byType(BeautifulChat)),
+        same(chat),
+      );
+      expect(subtitleColor(), theme.colors.inkMuted);
+      expect(userBubbleColor(), theme.colors.field);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
     'reader scroll remains stable on append and latest reveals new messages',
     (tester) async {
       late StateSetter updateHost;

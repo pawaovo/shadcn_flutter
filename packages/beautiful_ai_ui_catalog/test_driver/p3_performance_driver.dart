@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:integration_test/integration_test_driver.dart';
 
 import '../integration_test/support/performance_suite.dart';
+import '../integration_test/support/profile_timeline_codec.dart';
 
 /// Writes compact evidence separately from raw engine frames and VM timelines.
 Future<void> main(List<String> arguments) async {
@@ -18,67 +19,94 @@ Future<void> main(List<String> arguments) async {
       final output =
           Platform.environment['P3_PERF_OUTPUT_DIR'] ??
           'build/p3-profile/${DateTime.now().toUtc().toIso8601String().replaceAll(':', '-')}';
-      final directory = Directory(output);
-      await directory.create(recursive: true);
-      if (data == null || data['p3_performance'] is! Map) {
-        await _write(directory, 'p3_performance.json', <String, Object?>{
-          'status': 'failed_missing_report_data',
-          'received_data': data,
-        });
-        throw StateError(
-          'Missing p3_performance report data; the run is invalid.',
-        );
-      }
-      final report = Map<String, dynamic>.from(data['p3_performance'] as Map);
-      await _write(
-        directory,
-        'launcher_metadata.json',
-        await _launcherMetadata(directory),
-      );
-      final traces = <String, String>{};
-      for (final entry in data.entries) {
-        if (entry.key.startsWith('p3_trace_')) {
-          final filename = '${entry.key}.timeline.json';
-          await _write(directory, filename, entry.value);
-          traces[entry.key] = filename;
-        }
-      }
-      final rawFrames = <String, Object?>{};
-      final rawMemory = <String, Object?>{};
-      final scenarios = <Map<String, dynamic>>[];
-      for (final value in (report['scenarios'] as List? ?? <Object>[])) {
-        final scenario = Map<String, dynamic>.from(value as Map);
-        final id = scenario['id'] as String;
-        rawFrames[id] = scenario.remove('raw_frame_timings');
-        rawMemory[id] = scenario.remove('rss_samples');
-        scenario['raw_frame_file'] = 'p3_frame_samples.json';
-        scenario['raw_memory_file'] = 'p3_memory_samples.json';
-        scenario['timeline_file'] = traces[scenario['trace_report_key']];
-        scenarios.add(scenario);
-      }
-      report['scenarios'] = scenarios;
-      report['driver'] = <String, Object?>{
-        'written_at_utc': DateTime.now().toUtc().toIso8601String(),
-        'host_os': Platform.operatingSystem,
-        'host_os_version': Platform.operatingSystemVersion,
-        'source_revision': await _command('git', <String>['rev-parse', 'HEAD']),
-        'source_worktree_status': await _command('git', <String>[
-          'status',
-          '--porcelain',
-        ]),
-        'device_id_requested': Platform.environment['P3_PERF_DEVICE_ID'],
-        'performance_suite': Platform.environment['P3_PERF_SUITE'] ?? 'p3',
-        'launcher_metadata_file': 'launcher_metadata.json',
-        'launch_log': 'launch.log',
-        'launcher_notes': 'Files named here are created by tool/run_p3_profile.sh; direct flutter drive users should save the exact command, Flutter version and engine launch log themselves.',
-      };
-      await _write(directory, 'p3_frame_samples.json', rawFrames);
-      await _write(directory, 'p3_memory_samples.json', rawMemory);
-      await _write(directory, 'p3_performance.json', report);
+      await writeProfilePerformanceEvidence(data, Directory(output));
       // ignore: avoid_print
-      print('P3 profile evidence written to ${directory.absolute.path}');
+      print(
+        'P3 profile evidence written to ${Directory(output).absolute.path}',
+      );
     },
   );
+}
+
+/// Saves independent evidence even when one timeline cannot be decoded.
+Future<void> writeProfilePerformanceEvidence(
+  Map<String, dynamic>? data,
+  Directory directory,
+) async {
+  await directory.create(recursive: true);
+  if (data == null || data['p3_performance'] is! Map) {
+    await _write(directory, 'p3_performance.json', <String, Object?>{
+      'status': 'failed_missing_report_data',
+      'received_data': data,
+    });
+    throw StateError('Missing p3_performance report data; the run is invalid.');
+  }
+  final report = Map<String, dynamic>.from(data['p3_performance'] as Map);
+  await _write(
+    directory,
+    'launcher_metadata.json',
+    await _launcherMetadata(directory),
+  );
+  final traces = <String, String>{};
+  final traceFailures = <String, Object?>{};
+  for (final entry in data.entries) {
+    if (!entry.key.startsWith('p3_trace_')) continue;
+    try {
+      final timeline = decodeProfileTimeline(entry.value);
+      final filename = '${entry.key}.timeline.json';
+      await _write(directory, filename, timeline);
+      traces[entry.key] = filename;
+    } catch (error) {
+      final filename = '${entry.key}.transport_failure.json';
+      await _write(directory, filename, entry.value);
+      traceFailures[entry.key] = <String, Object?>{
+        'error': error.toString(),
+        'original_payload_file': filename,
+      };
+    }
+  }
+  final rawFrames = <String, Object?>{};
+  final rawMemory = <String, Object?>{};
+  final scenarios = <Map<String, dynamic>>[];
+  for (final value in (report['scenarios'] as List? ?? <Object>[])) {
+    final scenario = Map<String, dynamic>.from(value as Map);
+    final id = scenario['id'] as String;
+    rawFrames[id] = scenario.remove('raw_frame_timings');
+    rawMemory[id] = scenario.remove('rss_samples');
+    scenario['raw_frame_file'] = 'p3_frame_samples.json';
+    scenario['raw_memory_file'] = 'p3_memory_samples.json';
+    scenario['timeline_file'] = traces[scenario['trace_report_key']];
+    scenarios.add(scenario);
+  }
+  report['scenarios'] = scenarios;
+  report['driver'] = <String, Object?>{
+    'written_at_utc': DateTime.now().toUtc().toIso8601String(),
+    'host_os': Platform.operatingSystem,
+    'host_os_version': Platform.operatingSystemVersion,
+    'source_revision': await _command('git', <String>['rev-parse', 'HEAD']),
+    'source_worktree_status': await _command('git', <String>[
+      'status',
+      '--porcelain',
+    ]),
+    'device_id_requested': Platform.environment['P3_PERF_DEVICE_ID'],
+    'performance_suite': Platform.environment['P3_PERF_SUITE'] ?? 'p3',
+    'launcher_metadata_file': 'launcher_metadata.json',
+    'launch_log': 'launch.log',
+    'timeline_decode_failures': traceFailures,
+    'launcher_notes': 'Files named here are created by tool/run_p3_profile.sh; direct flutter drive users should save the exact command, Flutter version and engine launch log themselves.',
+  };
+  if (traceFailures.isNotEmpty) {
+    report['workload_status_before_timeline_decode_failure'] = report['status'];
+    report['status'] = 'failed_timeline_decode';
+  }
+  await _write(directory, 'p3_frame_samples.json', rawFrames);
+  await _write(directory, 'p3_memory_samples.json', rawMemory);
+  await _write(directory, 'p3_performance.json', report);
+  if (traceFailures.isNotEmpty) {
+    throw StateError(
+      'Timeline decoding failed for ${traceFailures.keys.join(', ')}. Independent frame/RSS samples, other traces and failed payloads were saved.',
+    );
+  }
 }
 
 Future<String?> _command(String executable, List<String> arguments) async {
