@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "scope": "Independent manual Android native candidate diagnostic; failed host HTTP attachment before candidate stage",
+  "source_sha": "2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49",
+  "run_id": 33858867632,
+  "job_id": 100978414294,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858867632",
+  "job_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858867632/job/100978414294",
+  "conclusion": "failure",
+  "run": {
+    "conclusion": "failure",
+    "createdAt": "2026-09-04T09:32:41Z",
+    "headSha": "2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49",
+    "jobs": [
+      {
+        "completedAt": "2026-09-04T09:38:36Z",
+        "conclusion": "failure",
+        "databaseId": 100978414294,
+        "name": "Original journey with one observed native IME candidate tap",
+        "startedAt": "2026-09-04T09:32:45Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-04T09:32:47Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-04T09:32:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:32:47Z",
+            "conclusion": "success",
+            "name": "Require an exact source commit",
+            "number": 2,
+            "startedAt": "2026-09-04T09:32:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:32:49Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 3,
+            "startedAt": "2026-09-04T09:32:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:32:55Z",
+            "conclusion": "success",
+            "name": "Verify source and host protocol rejection paths",
+            "number": 4,
+            "startedAt": "2026-09-04T09:32:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:32:55Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-java@v5",
+            "number": 5,
+            "startedAt": "2026-09-04T09:32:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:33:10Z",
+            "conclusion": "success",
+            "name": "Run subosito/flutter-action@v2",
+            "number": 6,
+            "startedAt": "2026-09-04T09:32:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:33:42Z",
+            "conclusion": "success",
+            "name": "Resolve the unchanged package lock and validate Dart protocol",
+            "number": 7,
+            "startedAt": "2026-09-04T09:33:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:33:42Z",
+            "conclusion": "success",
+            "name": "Enable KVM for this fresh disposable runner",
+            "number": 8,
+            "startedAt": "2026-09-04T09:33:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:33Z",
+            "conclusion": "failure",
+            "name": "Build fresh helper and run exactly one candidate diagnostic",
+            "number": 9,
+            "startedAt": "2026-09-04T09:33:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:34Z",
+            "conclusion": "success",
+            "name": "Upload all original build, protocol, native and journey evidence",
+            "number": 10,
+            "startedAt": "2026-09-04T09:38:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:34Z",
+            "conclusion": "success",
+            "name": "Post Run subosito/flutter-action@v2",
+            "number": 18,
+            "startedAt": "2026-09-04T09:38:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:34Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-java@v5",
+            "number": 19,
+            "startedAt": "2026-09-04T09:38:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:34Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 20,
+            "startedAt": "2026-09-04T09:38:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T09:38:34Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-09-04T09:38:34Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858867632/job/100978414294"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-09-04T09:38:37Z",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33858867632"
+  },
+  "artifact": {
+    "id": 9931470061,
+    "node_id": "MDg6QXJ0aWZhY3Q5OTMxNDcwMDYx",
+    "name": "android-native-candidate-33858867632-1",
+    "size_in_bytes": 664544,
+    "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9931470061",
+    "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9931470061/zip",
+    "expired": false,
+    "digest": "sha256:e62f4c1a9614bd855fb1bb3ee3da64a745b0c4b5c71eabfee5777fe113969ad4",
+    "created_at": "2026-09-04T09:38:34Z",
+    "updated_at": "2026-09-04T09:38:34Z",
+    "expires_at": "2026-09-18T09:38:33Z",
+    "workflow_run": {
+      "id": 33858867632,
+      "repository_id": 1354580211,
+      "head_repository_id": 1354580211,
+      "head_branch": "product/main",
+      "head_sha": "2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49"
+    }
+  },
+  "artifact_download_count": 1,
+  "archive_digest_scope": "GitHub-provided ZIP digest; 84 extracted run files independently checked against the run manifest",
+  "validation": {
+    "host_protocol_tests_passed": 10,
+    "build_cleanup_tests_passed": 3,
+    "dart_tests_passed": 36,
+    "dart_analysis": "passed",
+    "actual_jvm_protocol_checks_passed": 36,
+    "android35_apk_compilation": "passed",
+    "helper_apk_signature_and_alignment": "passed",
+    "helper_apk_sha256": "9055846a9592c2a4f9a5709be98d17ad7b489181493743912d0e6e404a755ac3",
+    "catalog_test_apk": {
+      "path": "/home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/app/outputs/flutter-apk/app-debug.apk",
+      "sha256": "025f2c480a4d67929748ae53af4ba4c59041dad54cc6f4a45f76cbbde5d5b95c",
+      "bytes": 77093449
+    }
+  },
+  "configured_ime_component": "com.android.inputmethod.latin/.LatinIME",
+  "native_helper_process": {
+    "package": "dev.beautifulai.androidcandidateprobe",
+    "pid": 2314,
+    "start_ticks": 4941
+  },
+  "vm_state_before_failure": {
+    "protocol_version": 1,
+    "nonce": "dcf479fffdbb461da7d5538c4a7d5f19",
+    "source_sha": "2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49",
+    "stage": "preparing",
+    "elapsed_ms": 257,
+    "remaining_ms": 599743,
+    "expected_text": "Check cone inventory",
+    "candidate_text": "inventory",
+    "snapshot": {
+      "observation_error": "The original journey has not reached Chat yet."
+    },
+    "candidate_id": null,
+    "lease_id": null,
+    "claimed_elapsed_ms": null,
+    "lease_remaining_ms": 0,
+    "can_click": false,
+    "native_click_acknowledged": false,
+    "native_drained": true,
+    "native_call_pending": false,
+    "send_activation_checked": false,
+    "failure": null
+  },
+  "driver_failure": {
+    "error": "Bad state: Native supervisor /attach failed (400): {ok: false, error: Invalid protocol Content-Length}",
+    "cleanup_errors": [
+      "original failure response: TimeoutException after 0:00:10.000000: Future not completed"
+    ],
+    "native_click_count": 0,
+    "all_tests_passed": null
+  },
+  "failure_boundary": {
+    "operation": "Dart host client POST /attach",
+    "http_status": 400,
+    "server_error": "Invalid protocol Content-Length",
+    "source": "catalog_android_candidate_driver.dart:391-392",
+    "client_behavior": "HttpClientRequest.write(jsonEncode(body)) without explicit UTF-8 Content-Length; strict host requires a positive Content-Length",
+    "native_candidate": "not inspected; no native touch",
+    "native_draft_commit": "not observed",
+    "original_full_journey": "started and incomplete; public VM extension was preparing before abort; no final integration response"
+  },
+  "input_trace": {
+    "file": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/run/input-connection.atrace",
+      "bytes": 21533,
+      "sha256": "e075b0b237dd89cb639315fe380485cfbb42159a3c398767980698eec5e2b696"
+    },
+    "app_pid": 2385,
+    "pid_evidence": "process-tagged Flutter launch log; supervisor /attach validation never executed",
+    "app_dispatch_slices": [
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   246.695006: tracing_mark_write: B|2385|InputConnection#finishComposingText",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   246.695418: tracing_mark_write: B|2385|InputConnection#getTextBeforeCursor",
+      " l_ai_ui_catalog-2385    (   2385) [000] .....   246.760611: tracing_mark_write: B|2385|InputConnection#getSelectedText",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   246.995920: tracing_mark_write: B|2385|InputConnection#requestCursorUpdates",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   247.241064: tracing_mark_write: B|2385|InputConnection#getTextBeforeCursor",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   247.260579: tracing_mark_write: B|2385|InputConnection#getSelectedText",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   249.384393: tracing_mark_write: B|2385|InputConnection#getTextBeforeCursor",
+      " l_ai_ui_catalog-2385    (   2385) [001] .....   249.640700: tracing_mark_write: B|2385|InputConnection#getTextAfterCursor",
+      " l_ai_ui_catalog-2385    (   2385) [000] .....   249.891002: tracing_mark_write: B|2385|InputConnection#getTextBeforeCursor",
+      " l_ai_ui_catalog-2385    (   2385) [000] .....   249.908265: tracing_mark_write: B|2385|InputConnection#getTextAfterCursor",
+      " l_ai_ui_catalog-2385    (   2385) [000] .....   249.916680: tracing_mark_write: B|2385|InputConnection#setComposingRegion"
+    ],
+    "scope": "11 app dispatch slices including finishComposingText/setComposingRegion; these are not evidence of the never-executed inventory candidate action"
+  },
+  "cleanup": {
+    "supervisor": "verified",
+    "errors": [],
+    "native_events": "{\"ok\":true,\"operation\":\"stop\",\"protocol_version\":1,\"source_sha\":\"2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49\",\"device_elapsed_ms\":253832}\n{\"ok\":true,\"operation\":\"finish\",\"protocol_version\":1,\"source_sha\":\"2e83a2e3bda5d0ebdfaf8f72caf682d949f4cd49\",\"device_elapsed_ms\":253836,\"reason\":\"stopped\",\"message\":\"Probe stopped\",\"diagnostics\":{}}\n",
+    "emulator_finalizer": "emu kill acknowledged OK; action finalizer completed"
+  },
+  "run_manifest_verified_files": 84,
+  "core_records": {
+    "job_log": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/job-100978414294.log",
+      "bytes": 92467,
+      "sha256": "7a78325e6aed486062fdd9d7bb1b8dab3364af90ddbb3d00e343a0eff4406e0d"
+    },
+    "build_log": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/helper-build/build.log",
+      "bytes": 17253,
+      "sha256": "f7d7e402a3ad43a46953a3acd49cd6a748a2363b08ebce6aa807888becacd537"
+    },
+    "build_report": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/helper-build/build-report.json",
+      "bytes": 3075,
+      "sha256": "74a8331067117e6fc3e437b3f643d4de68bd08718a381b2282272923829a4bd0"
+    },
+    "summary": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/run/summary.json",
+      "bytes": 49796,
+      "sha256": "3811ab8f966e0d1a7fae5e626469878ab63e37e8a47610f64819bf0e23fe5c27"
+    },
+    "driver_summary": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/run/driver/driver-summary.json",
+      "bytes": 5446,
+      "sha256": "f0bebffb14fe4c58b86c104eb0dbbf49dfd9b7030dc7a522f3b9d0cfe401600f"
+    },
+    "run_manifest": {
+      "path": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632/artifacts/android-native-candidate-33858867632-1/run/artifact-manifest.json",
+      "bytes": 12526,
+      "sha256": "5d9be03a189aec9234ff8cbc481991b4d112d35501c7ba614a104bcd00c74d42"
+    }
+  },
+  "run_files": {
+    "001-source-head.json": {
+      "sha256": "b8b1a59be1bd0d1b9cdbcc33540e1ee79875a7d5c575f167f69f97dbaa0813b7",
+      "bytes": 185
+    },
+    "001-source-head.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "001-source-head.stdout": {
+      "sha256": "3dbb9f116d0e02960ee8f60c578666bdfb35bb407e59783b58038a3451a40862",
+      "bytes": 41
+    },
+    "002-workspace-status-before.json": {
+      "sha256": "d15c23f0ef714f62b020ad3c628ca50d50ed6f3f3d7fe45ca2e2dc45611c08d6",
+      "bytes": 224
+    },
+    "002-workspace-status-before.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "002-workspace-status-before.stdout": {
+      "sha256": "814e8cda70abc8a2c407e8c6353cb8d6496019429ac16cfc69b63107a6da93d4",
+      "bytes": 14
+    },
+    "003-relevant-source-clean-before.json": {
+      "sha256": "11ff2477707c51ec9b7626202c5748978d7ac0cfe91db3da2c89544fa243edd5",
+      "bytes": 998
+    },
+    "003-relevant-source-clean-before.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "003-relevant-source-clean-before.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "004-relevant-source-files-before.json": {
+      "sha256": "01e845aad50c1f7a20b764e3da688b837521e4638bc2801373e76f390c997eb2",
+      "bytes": 981
+    },
+    "004-relevant-source-files-before.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "004-relevant-source-files-before.stdout": {
+      "sha256": "893e949b26bb904d2d42621eac7fc456f98295eb72d878a2e717cdd4edeb8c38",
+      "bytes": 20659
+    },
+    "005-flutter-sdk.json": {
+      "sha256": "d3d3af1cccab886607bce7ed2da2e94094175c6d77bee60da6d815ad23885781",
+      "bytes": 195
+    },
+    "005-flutter-sdk.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "005-flutter-sdk.stdout": {
+      "sha256": "fb2e10be88a558719fd4446d409dc28376d0c06c8257431b3328cf273f45d80a",
+      "bytes": 635
+    },
+    "006-require-fresh-beautiful_ai_ui_catalog.json": {
+      "sha256": "98b812e1285da582143a2c3bdbd42a3f12eda6d37fbcca136967943d7c60f3a8",
+      "bytes": 269
+    },
+    "006-require-fresh-beautiful_ai_ui_catalog.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "006-require-fresh-beautiful_ai_ui_catalog.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "007-require-fresh-androidcandidateprobe.json": {
+      "sha256": "3238cdccc2d6bab60df22625bed8d97b1a476a6b43f367a9a3f023401d4c30b3",
+      "bytes": 267
+    },
+    "007-require-fresh-androidcandidateprobe.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "007-require-fresh-androidcandidateprobe.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "008-fingerprint.json": {
+      "sha256": "e52b5684a0fa505b8c73122565db2ef45f0c0dd8a9fa603aceec520b06ea8050",
+      "bytes": 243
+    },
+    "008-fingerprint.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "008-fingerprint.stdout": {
+      "sha256": "e07fd7d414c3b262449a1a48ec96db76edc31b2273ac896fc04f4f44870e7426",
+      "bytes": 82
+    },
+    "009-ime-component.json": {
+      "sha256": "9eb25dd2863eeed3b53fa3445a129006acc698c7e7802ee910063f3969515d14",
+      "bytes": 269
+    },
+    "009-ime-component.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "009-ime-component.stdout": {
+      "sha256": "d1b8b078a616add26d565d7afb896dbbf8f6ee5f746d8cb7227888f81b060391",
+      "bytes": 40
+    },
+    "010-ime-list.json": {
+      "sha256": "1b1fd8b01659b7c02bb15b6d5415431e079c1da2de5cbb49bd67856a3616ed06",
+      "bytes": 233
+    },
+    "010-ime-list.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "010-ime-list.stdout": {
+      "sha256": "d1b8b078a616add26d565d7afb896dbbf8f6ee5f746d8cb7227888f81b060391",
+      "bytes": 40
+    },
+    "011-input-method-before.json": {
+      "sha256": "6680e344b536a7627f13eca462e9e6743f52ef34ad928ee4d327648aec425bce",
+      "bytes": 236
+    },
+    "011-input-method-before.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "011-input-method-before.stdout": {
+      "sha256": "1b9b0bc482c51bf5e95c90d54c37c4e8f291b86598d546644cd371a113b12157",
+      "bytes": 38749
+    },
+    "012-atrace-categories.json": {
+      "sha256": "ffa947afd03853b9d4debd5b02e8e732ef542e59627351dd54d53a24aebbda3e",
+      "bytes": 239
+    },
+    "012-atrace-categories.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "012-atrace-categories.stdout": {
+      "sha256": "f97a630c58b9b3ef6c2d367f0c466a4181bae07c44b97d7a7005e6252a6eae22",
+      "bytes": 1224
+    },
+    "013-install-fresh-helper.json": {
+      "sha256": "5943a7fed5ecca4b128172c64505e1f5ce9c0b83f124590569c620dc33c3a847",
+      "bytes": 337
+    },
+    "013-install-fresh-helper.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "013-install-fresh-helper.stdout": {
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7",
+      "bytes": 36
+    },
+    "014-pid-androidcandidateprobe.json": {
+      "sha256": "943165538473e72a99e190a9fc65bc4ddf03f88115651c4cc5cf0f755e9126eb",
+      "bytes": 258
+    },
+    "014-pid-androidcandidateprobe.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "014-pid-androidcandidateprobe.stdout": {
+      "sha256": "e43842b618b9da5312147a3bf86e7dbebf40ba40a9147e33647bd1dfcd0056b7",
+      "bytes": 5
+    },
+    "015-start-ticks.json": {
+      "sha256": "35dd513aaebecbcd430346241b24cd8161c16dea433414c7ced1ab353281aa21",
+      "bytes": 293
+    },
+    "015-start-ticks.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "015-start-ticks.stdout": {
+      "sha256": "0f118203ca27ecf37d67d7770bdf5dbea1997f6da51a57b98f64b18274fa457f",
+      "bytes": 329
+    },
+    "016-forward-owned-helper.json": {
+      "sha256": "8f2b9b41f044a30d936fc88a3952b74684197ef9073d665bd7197f36b7cb0a8b",
+      "bytes": 232
+    },
+    "016-forward-owned-helper.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "016-forward-owned-helper.stdout": {
+      "sha256": "0955c663d7e3b5c48c6c37aa2329d8965ae84c62bc571b467d7cd32178fa41f3",
+      "bytes": 6
+    },
+    "017-atrace-start.json": {
+      "sha256": "b63db1cb99a200e9b3ffcbba947614533f237f78acebcb7d9cda7cfe967f8540",
+      "bytes": 272
+    },
+    "017-atrace-start.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "017-atrace-start.stdout": {
+      "sha256": "1b7bb8e629a69f3ce32e8355cf8dc5a8a500c74daee56ff391e56b68045d568f",
+      "bytes": 18
+    },
+    "018-trace-clock.json": {
+      "sha256": "f88fb520a6133432e70adfb3c4c9d5c9c1e137c68296cee7725dce2d1194c3b1",
+      "bytes": 250
+    },
+    "018-trace-clock.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "018-trace-clock.stdout": {
+      "sha256": "bb5cd92b7b2fe258aa1d4828ba21deafe0ac36118f50e5945b26f960596aa0f3",
+      "bytes": 66
+    },
+    "019-atrace-stop.json": {
+      "sha256": "ad535a5a8d1828f376a76acbd32ce71fa428b93da997536247402443baa01d56",
+      "bytes": 238
+    },
+    "019-atrace-stop.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "019-atrace-stop.stdout": {
+      "sha256": "e075b0b237dd89cb639315fe380485cfbb42159a3c398767980698eec5e2b696",
+      "bytes": 21533
+    },
+    "020-stop-owned-androidcandidateprobe.json": {
+      "sha256": "42bd5e3d88529426867c534341d14365f5abe57320aec2a58f13f5034a2a4c63",
+      "bytes": 273
+    },
+    "020-stop-owned-androidcandidateprobe.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "020-stop-owned-androidcandidateprobe.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "021-verify-stopped.json": {
+      "sha256": "57829961779cc5ab8eaa48cb778cba294a1d2479dd881fa0fe6339725fdc5bbb",
+      "bytes": 258
+    },
+    "021-verify-stopped.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "021-verify-stopped.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "022-stop-owned-beautiful_ai_ui_catalog.json": {
+      "sha256": "71d7af97cc427d14f715a57a97b6aef8fa7f72d9fae65c51add5789eeb2a3837",
+      "bytes": 275
+    },
+    "022-stop-owned-beautiful_ai_ui_catalog.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "022-stop-owned-beautiful_ai_ui_catalog.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "023-verify-stopped.json": {
+      "sha256": "c8ef21ce6d2dc43b403509e105aa77539f1623cc1e29c21562d0e6760ec54c7e",
+      "bytes": 260
+    },
+    "023-verify-stopped.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "023-verify-stopped.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "024-native-private-event-log.json": {
+      "sha256": "65fa2824baf6e4eb99abcd47680d7246788badbbe6d5a0c8e3d160f10a71c4c9",
+      "bytes": 305
+    },
+    "024-native-private-event-log.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "024-native-private-event-log.stdout": {
+      "sha256": "8af01dc9d954c3147494a02ac2674f318c8b75d3dd59d0d814dfc7747164d4ac",
+      "bytes": 334
+    },
+    "025-remove-owned-forward.json": {
+      "sha256": "985976d21d67bc6910c1dbe6dfe5fcc48c8374b52014936b8faf8e1ec1613660",
+      "bytes": 235
+    },
+    "025-remove-owned-forward.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "025-remove-owned-forward.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "android-logcat.log": {
+      "sha256": "0cd312fad49f4d2e096b1dd4590ad99776cf55ee8a677d96b48cb94dedb857ee",
+      "bytes": 3467984
+    },
+    "driver/driver-summary.json": {
+      "sha256": "f0bebffb14fe4c58b86c104eb0dbbf49dfd9b7030dc7a522f3b9d0cfe401600f",
+      "bytes": 5446
+    },
+    "flutter-drive.log": {
+      "sha256": "c24a75c73b25ff6c2156b10be8f661bb908c21422fd92e6e80ca4384b866ca63",
+      "bytes": 3693
+    },
+    "input-connection.atrace": {
+      "sha256": "e075b0b237dd89cb639315fe380485cfbb42159a3c398767980698eec5e2b696",
+      "bytes": 21533
+    },
+    "native-helper-events.jsonl": {
+      "sha256": "8af01dc9d954c3147494a02ac2674f318c8b75d3dd59d0d814dfc7747164d4ac",
+      "bytes": 334
+    },
+    "native-instrumentation.log": {
+      "sha256": "1d106fd1e56aad9693275c7046be8318739b6cb89848144b7d989b7b063bdb4e",
+      "bytes": 707
+    },
+    "owner.json": {
+      "sha256": "b0737a4c231bb0ba142011501157be1630d16a932f477a6291b4c6b8e649bdbf",
+      "bytes": 154
+    },
+    "source-inputs-before.json": {
+      "sha256": "483bcdc7216d935705142055ae38cbee79b3ffef2e5da0214ab6fbda29b95739",
+      "bytes": 43615
+    },
+    "summary.json": {
+      "sha256": "3811ab8f966e0d1a7fae5e626469878ab63e37e8a47610f64819bf0e23fe5c27",
+      "bytes": 49796
+    }
+  },
+  "raw_directory": "/tmp/beautiful-android-candidate-2e83a2e3-33858867632",
+  "retained_previous_failure": "920f1dd8 LambdaMetafactory compilation failure is retained separately; this is a new source/run, not a retry.",
+  "next_fix_local_wire_regression": {
+    "scope": "Actual extracted Dart host HTTP client against real strict loopback HttpServer; no VM or native/IME acceptance",
+    "old_client_exit_code": 255,
+    "old_request": {
+      "method": "POST",
+      "path": "/attach",
+      "content_length": -1,
+      "transfer_encoding": "chunked",
+      "received_utf8_bytes": 87,
+      "http_status": 400
+    },
+    "fixed_client_exit_code": 0,
+    "fixed_result": {
+      "scope": "actual Dart host client against a strict loopback HTTP server",
+      "status": "passed",
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/attach",
+          "authorization": "Bearer fixture-token",
+          "content_length": 87,
+          "received_bytes": 87,
+          "transfer_encoding": null,
+          "expected_bytes": 87,
+          "decoded_body": "{\"vm_service_url\":\"http://127.0.0.1:12345/token/\",\"nonce\":\"fixture-nonce\",\"note\":\"你\"}"
+        },
+        {
+          "method": "GET",
+          "path": "/native/inspect",
+          "authorization": "Bearer fixture-token",
+          "content_length": -1,
+          "received_bytes": 0,
+          "transfer_encoding": null,
+          "expected_bytes": 0,
+          "decoded_body": ""
+        },
+        {
+          "method": "POST",
+          "path": "/native/click",
+          "authorization": "Bearer fixture-token",
+          "content_length": 100,
+          "received_bytes": 100,
+          "transfer_encoding": null,
+          "expected_bytes": 100,
+          "decoded_body": "{\"candidate\":{\"candidate_id\":\"exact-candidate\"},\"claim\":{\"lease_id\":\"exact-lease\"},\"note\":\"你🙂\"}"
+        },
+        {
+          "method": "POST",
+          "path": "/abort",
+          "authorization": "Bearer fixture-token",
+          "content_length": 48,
+          "received_bytes": 48,
+          "transfer_encoding": null,
+          "expected_bytes": 48,
+          "decoded_body": "{\"error\":\"ASCII: preserve the original failure\"}"
+        }
+      ]
+    },
+    "red_log": {
+      "path": "/tmp/beautiful-android-http-2e83-red.log",
+      "bytes": 1121,
+      "sha256": "9b71c2b89ff38765b0c1edbb385b2291fb5c2aeee9171ce73de6ce2e2bf011be"
+    },
+    "green_log": {
+      "path": "/tmp/beautiful-android-http-2e83-green.log",
+      "bytes": 1093,
+      "sha256": "fee2666a688278065534aea21f4dbdccf248ec05645e3f4611e0c099f4d77499"
+    },
+    "client": "packages/beautiful_ai_ui_catalog/integration_test/driver/android_candidate_host.dart",
+    "fixture": "packages/beautiful_ai_ui_catalog/test_driver/android_candidate_http_fixture.dart",
+    "command": "dart packages/beautiful_ai_ui_catalog/test_driver/android_candidate_http_fixture.dart",
+    "pending": "A new exact-source Android workflow run is still required; the failed 2e83 run is unchanged."
+  }
+}

@@ -48,6 +48,7 @@ jobs:
         run: |
           flutter pub get --enforce-lockfile
           flutter test test/android_candidate_protocol_test.dart test/catalog_chat_send_diagnostics_test.dart --no-pub
+          dart test_driver/android_candidate_http_fixture.dart
           flutter analyze --fatal-infos --fatal-warnings --no-pub integration_test/catalog_android_candidate_test.dart integration_test/support/android_candidate_protocol.dart integration_test/driver/catalog_android_candidate_driver.dart
       - name: Enable KVM for this fresh disposable runner
         run: |

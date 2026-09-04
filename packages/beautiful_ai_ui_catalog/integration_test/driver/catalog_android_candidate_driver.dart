@@ -7,6 +7,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:integration_test/common.dart';
 
 import '../support/android_candidate_protocol.dart';
+import 'android_candidate_host.dart';
 
 /// Coordinates public VM observations and one independently checked native
 /// action. requestData remains the authority for the original full journey.
@@ -25,7 +26,7 @@ Future<void> main() async {
     'native_click_count': 0,
   };
   FlutterDriver? driver;
-  _NativeHost? host;
+  AndroidCandidateHost? host;
   Future<void>? responseTask;
   Response? response;
   Object? responseError;
@@ -90,7 +91,7 @@ Future<void> main() async {
       throw StateError('A fresh nonce and exact source SHA are required.');
     }
     report.addAll(<String, Object?>{'nonce': nonce, 'source_sha': sourceSha});
-    host = _NativeHost.fromEnvironment();
+    host = AndroidCandidateHost.fromEnvironment();
     final connection = FlutterDriver.connect();
     // FlutterDriver.connect's own slow-operation timeout only warns. This
     // outer deadline rejects the run and closes any connection arriving late.
@@ -343,77 +344,4 @@ Future<void> main() async {
     await File('${output.path}/driver-summary.json')
         .writeAsString(const JsonEncoder.withIndent('  ').convert(report));
   }
-}
-
-final class _NativeHost {
-  _NativeHost(this.base, this.token) {
-    client.findProxy = (_) => 'DIRECT';
-    client.connectionTimeout = const Duration(seconds: 2);
-  }
-
-  factory _NativeHost.fromEnvironment() {
-    final base = Uri.parse(
-      Platform.environment['ANDROID_CANDIDATE_HOST_URL'] ?? '',
-    );
-    final token = Platform.environment['ANDROID_CANDIDATE_HOST_TOKEN'] ?? '';
-    if (base.scheme != 'http' ||
-        base.host != '127.0.0.1' ||
-        !base.hasPort ||
-        base.userInfo.isNotEmpty ||
-        (base.path.isNotEmpty && base.path != '/') ||
-        base.hasQuery ||
-        base.hasFragment ||
-        token.isEmpty) {
-      throw StateError(
-        'The native supervisor must be an authenticated loopback HTTP endpoint.',
-      );
-    }
-    return _NativeHost(base, token);
-  }
-
-  final Uri base;
-  final String token;
-  final HttpClient client = HttpClient();
-
-  Future<Map<String, Object?>> request(
-    String method,
-    String path,
-    Map<String, Object?>? body, {
-    required Duration timeout,
-  }) async {
-    HttpClientRequest? outgoing;
-    try {
-      return await (() async {
-        outgoing = await client.openUrl(method, base.resolve(path));
-        outgoing!.followRedirects = false;
-        outgoing!.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
-        if (body != null) {
-          outgoing!.headers.contentType = ContentType.json;
-          outgoing!.write(jsonEncode(body));
-        }
-        final response = await outgoing!.close();
-        final bytes = <int>[];
-        await for (final chunk in response) {
-          bytes.addAll(chunk);
-          if (bytes.length > 1024 * 1024) {
-            throw StateError('Native response is too large.');
-          }
-        }
-        final result = Map<String, Object?>.from(
-          jsonDecode(utf8.decode(bytes)) as Map,
-        );
-        if (response.statusCode != 200) {
-          throw StateError(
-            'Native supervisor $path failed (${response.statusCode}): $result',
-          );
-        }
-        return result;
-      })().timeout(timeout);
-    } catch (_) {
-      outgoing?.abort();
-      rethrow;
-    }
-  }
-
-  void close() => client.close(force: true);
 }
