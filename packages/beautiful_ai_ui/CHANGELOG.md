@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
-Local acceptance on 2026-09-04 passes 641 library tests and strict analysis.
+Local acceptance on 2026-09-04 passes 648 library tests and strict analysis.
 The supplemental visual review covers 78 P1/P2 images and 127 P3 images;
 1,008 P3 layout/interaction combinations passed. Real device, screen-reader,
 current cloud input and performance-budget acceptance are recorded separately.
@@ -94,6 +94,10 @@ acceptance remain separate; this is validation, not a package publication.
   input/AT and temporal/performance limitations (product/main, @pawaovo).
 
 ### Fixed
+
+- Use Flutter's official selection actions for plain and Shift horizontal
+  arrows in the Web read-only document, preserving grapheme boundaries and
+  leaving native and modified host shortcuts unchanged.
 
 - Preserve the Prompt editor's semantic identity while command/model menus
   change, preventing the browser's native editing element from being reset.

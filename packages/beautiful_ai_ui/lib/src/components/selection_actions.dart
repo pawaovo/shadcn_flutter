@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui' show BoxWidthStyle;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,6 +9,7 @@ import '../foundation/environment.dart';
 import '../foundation/failure.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/action_control.dart';
+import '../implementation/controls/readonly_selection_shortcuts.dart';
 import '../implementation/controls/text_selection.dart';
 
 /// Whether a selected-text action proposes an edit or only explains content.
@@ -530,6 +532,9 @@ final class _BeautifulSelectionActionsState
     super.dispose();
   }
 
+  Widget _webDocumentSelection(Widget child) =>
+      kIsWeb ? BeautifulReadonlySelectionShortcuts(child: child) : child;
+
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
@@ -552,73 +557,75 @@ final class _BeautifulSelectionActionsState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          MergeSemantics(
-            child: Semantics(
-              label: labels.document,
-              textField: true,
-              readOnly: true,
-              enabled: true,
-              onFocus: _documentFocus.requestFocus,
-              child: BeautifulTextSelectionGestureDetector(
-                editableTextKey: _documentKey,
-                identity: (widget.documentId, widget.text),
-                child: Container(
-                  constraints: const BoxConstraints(minHeight: 48),
-                  padding: EdgeInsets.all(theme.spacing.md),
-                  decoration: BoxDecoration(
-                    color: theme.colors.surface,
-                    border: Border.all(color: theme.colors.line),
-                    borderRadius: BorderRadius.circular(theme.radii.card),
-                  ),
-                  child: EditableText(
-                    key: _documentKey,
-                    controller: _document,
-                    focusNode: _documentFocus,
-                    readOnly: true,
-                    showCursor: false,
-                    rendererIgnoresPointer: true,
-                    scrollController: _scroll,
-                    minLines: 1,
-                    maxLines: widget.documentMaxLines,
-                    style: theme.typography.body.copyWith(
-                      color: theme.colors.ink,
-                      height: 1.7,
+          _webDocumentSelection(
+            MergeSemantics(
+              child: Semantics(
+                label: labels.document,
+                textField: true,
+                readOnly: true,
+                enabled: true,
+                onFocus: _documentFocus.requestFocus,
+                child: BeautifulTextSelectionGestureDetector(
+                  editableTextKey: _documentKey,
+                  identity: (widget.documentId, widget.text),
+                  child: Container(
+                    constraints: const BoxConstraints(minHeight: 48),
+                    padding: EdgeInsets.all(theme.spacing.md),
+                    decoration: BoxDecoration(
+                      color: theme.colors.surface,
+                      border: Border.all(color: theme.colors.line),
+                      borderRadius: BorderRadius.circular(theme.radii.card),
                     ),
-                    cursorColor: theme.colors.accent,
-                    backgroundCursorColor: theme.colors.inkMuted,
-                    selectionColor: theme.colors.accentTint,
-                    // Native max-width boxes can cover unselected RTL text.
-                    // Editing actions must show the exact source range.
-                    selectionWidthStyle: BoxWidthStyle.tight,
-                    selectionControls: hasOverlay
-                        ? BeautifulTextSelectionControls(theme.colors.accent)
-                        : null,
-                    showSelectionHandles: hasOverlay,
-                    onSelectionChanged: _selectionChanged,
-                    contextMenuBuilder: !hasOverlay
-                        ? null
-                        : (_, editor) {
-                            final generation = _generation;
-                            return beautifulEditableTextContextMenu(
-                              context,
-                              editor,
-                              isCurrent: () =>
-                                  mounted && generation == _generation,
-                              additionalButtons: [
-                                if (widget.enabled && !_busy && _active)
-                                  for (final action in widget.actions.where(
-                                    (a) => !a.secondary,
-                                  ))
-                                    ContextMenuButtonItem(
-                                      label: action.label,
-                                      onPressed: () {
-                                        editor.hideToolbar();
-                                        unawaited(_run(action));
-                                      },
-                                    ),
-                              ],
-                            );
-                          },
+                    child: EditableText(
+                      key: _documentKey,
+                      controller: _document,
+                      focusNode: _documentFocus,
+                      readOnly: true,
+                      showCursor: false,
+                      rendererIgnoresPointer: true,
+                      scrollController: _scroll,
+                      minLines: 1,
+                      maxLines: widget.documentMaxLines,
+                      style: theme.typography.body.copyWith(
+                        color: theme.colors.ink,
+                        height: 1.7,
+                      ),
+                      cursorColor: theme.colors.accent,
+                      backgroundCursorColor: theme.colors.inkMuted,
+                      selectionColor: theme.colors.accentTint,
+                      // Native max-width boxes can cover unselected RTL text.
+                      // Editing actions must show the exact source range.
+                      selectionWidthStyle: BoxWidthStyle.tight,
+                      selectionControls: hasOverlay
+                          ? BeautifulTextSelectionControls(theme.colors.accent)
+                          : null,
+                      showSelectionHandles: hasOverlay,
+                      onSelectionChanged: _selectionChanged,
+                      contextMenuBuilder: !hasOverlay
+                          ? null
+                          : (_, editor) {
+                              final generation = _generation;
+                              return beautifulEditableTextContextMenu(
+                                context,
+                                editor,
+                                isCurrent: () =>
+                                    mounted && generation == _generation,
+                                additionalButtons: [
+                                  if (widget.enabled && !_busy && _active)
+                                    for (final action in widget.actions.where(
+                                      (a) => !a.secondary,
+                                    ))
+                                      ContextMenuButtonItem(
+                                        label: action.label,
+                                        onPressed: () {
+                                          editor.hideToolbar();
+                                          unawaited(_run(action));
+                                        },
+                                      ),
+                                ],
+                              );
+                            },
+                    ),
                   ),
                 ),
               ),

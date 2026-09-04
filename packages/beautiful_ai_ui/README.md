@@ -14,12 +14,12 @@ are available. Release-level platform, assistive-technology, and performance
 validation remains in progress; implementation coverage is not a stable
 support or full-parity claim.
 
-The current engineering pass has verified dependency font/media notices,
-reviewed representative static states, completed a source-matched native
-macOS profile for all seven P3 workloads, and accepted the targeted Safari
-Flowchart reduced-motion theme regression. The dated
-[release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-03-release-readiness.md)
-distinguishes these completed checks from remaining release gates.
+The engineering evidence includes verified dependency font/media notices,
+reviewed representative static states, native macOS profiles, and scoped
+browser and desktop input journeys. The current
+[release-readiness record](../../docs/beautiful-ui/quality_evidence/2026-09-04-release-readiness.md)
+binds results to their source versions and distinguishes completed checks from
+remaining performance, device, input-method and screen-reader gates.
 
 ## Quick start
 

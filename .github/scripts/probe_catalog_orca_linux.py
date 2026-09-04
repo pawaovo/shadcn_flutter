@@ -121,6 +121,71 @@ def read_interface_text(atspi, interface) -> str:
     return atspi.Text.get_text(interface, 0, min(count, 1024))
 
 
+def parent_chain_evidence(subject, known_nodes, frames, maximum=32) -> dict:
+    """Observe actual upward edges and reciprocal getters; never alter the tree."""
+    def identity(node):
+        known = known_nodes.get(node)
+        if known is not None:
+            return {key: known[key] for key in ("path", "name", "role", "pid")}
+        return {"path": None, "name": node.get_name() or "", "role": node.get_role_name(),
+                "pid": node.get_process_id()}
+
+    result = {"chain": [], "links": [], "frame_reached": False,
+              "parent_ended_before_frame": False, "cycle": False,
+              "truncated": False, "errors": []}
+    seen = set()
+    current = subject
+    try:
+        for _ in range(maximum):
+            if current in seen:
+                result["cycle"] = True
+                break
+            seen.add(current)
+            child_identity = identity(current)
+            result["chain"].append(child_identity)
+            if current in frames:
+                result["frame_reached"] = True
+                break
+            parent = current.get_parent()
+            if parent is None:
+                result["parent_ended_before_frame"] = True
+                break
+            parent_identity = identity(parent)
+            index = current.get_index_in_parent()
+            count = parent.get_child_count()
+            if count < 0:
+                raise RuntimeError(f"Native parent returned invalid child count: {count}")
+            valid_index = 0 <= index < count
+            index_matches = parent.get_child_at_index(index) == current if valid_index else None
+            found_index = index if index_matches else None
+            if found_index is None:
+                # AtkSocket may leave its optional index vfunc unsupported.
+                # Preserve that reported value and prove the inverse using the
+                # parent's real getters rather than inventing an index.
+                for candidate in range(min(count, 512)):
+                    if valid_index and candidate == index:
+                        continue
+                    if parent.get_child_at_index(candidate) == current:
+                        found_index = candidate
+                        break
+            path, parent_path = child_identity["path"], parent_identity["path"]
+            result["links"].append({
+                "child": child_identity, "parent": parent_identity,
+                "index_reported_by_child": index, "parent_child_count": count,
+                "reported_index_child_matches": index_matches,
+                "index_observed_in_parent": found_index,
+                "parent_child_getter_matches": found_index is not None,
+                "parent_child_scan_truncated": found_index is None and count > 512,
+                "bfs_parent_matches": path[:-1] == parent_path if path and parent_path is not None else None,
+            })
+            current = parent
+        else:
+            result["truncated"] = True
+    except Exception as error:
+        result["errors"].append(f"{type(error).__name__}: {error}")
+    return result
+
+
 def inspect_catalog(pid: int) -> None:
     """Read only. No AT-SPI focus, action, selection or text mutation APIs."""
     import gi
@@ -142,6 +207,7 @@ def inspect_catalog(pid: int) -> None:
             selected.append((app, (index,)))
     pending = selected[:]
     nodes = []
+    known_nodes = {}
     while pending and len(nodes) < 4096:
         node, path = pending.pop(0)
         try:
@@ -163,15 +229,25 @@ def inspect_catalog(pid: int) -> None:
                 except Exception as error:
                     record["text_read_error"] = str(error)
             nodes.append(record)
+            known_nodes[node] = record
             count = node.get_child_count()
             if count > 512:
                 errors.append(f"Child limit at {path}: {count}")
             pending.extend((node.get_child_at_index(i), path + (i,)) for i in range(min(count, 512)))
         except Exception as error:
             errors.append(f"{path}: {type(error).__name__}: {error}")
+    frames = {node for node, record in known_nodes.items()
+              if record["pid"] == pid and record["role"] in ("frame", "window", "dialog")}
+    subjects = [node for node, record in known_nodes.items()
+                if record["focused"] or record["name"].startswith("Theme:")
+                or record["name"] in ("Hide steps thinking details", "Show steps thinking details",
+                                      "Search flavors", RESULT)]
+    parents = [parent_chain_evidence(node, known_nodes, frames) for node in subjects[:12]]
     print(json.dumps({"target_pid": pid, "applications": applications, "nodes": nodes,
                       "truncated": bool(pending) or any("limit" in error.lower() for error in errors),
-                      "errors": errors[:32]}))
+                      "errors": errors[:32], "parent_chain_evidence": parents,
+                      "parent_chain_subjects_omitted": max(0, len(subjects) - 12),
+                      "parent_chain_scope": "Supplemental read-only diagnostics; original task acceptance predicates are unchanged"}))
 
 
 def audio_statistics(raw: bytes) -> dict:

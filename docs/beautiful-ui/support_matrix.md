@@ -4,11 +4,13 @@ Status: main CI and P1/P2 engineering budgets pass; remaining input, P3 and devi
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `3612efd0` checkpoint has main CI **11/12** (Edge startup timeout)
+The completed `f39faedf` checkpoint has main CI **12/12**
 and input/AT **4/9**, including all three native input bridges; Firefox also
 completed its independent W3C suite. At the earlier `87299572` runtime snapshot,
-P1/P2 budgets passed **8/8** and P3 **1/7**. Readonly-focus and cold-start repairs
-await their new CI evidence. The
+P1/P2 budgets passed **8/8** and P3 **1/7**. Readonly focus/copy and actual Linux
+Tab/Space now work in the scoped runs; three browsers still fail the required
+ArrowRight caret collapse, and full Orca tasks fail at the native parent chain.
+Their new repairs require their own runtime evidence. The
 `c2bde85` twelve-job pass retained below is historical, not current-candidate
 acceptance. All 27 registry entries remain `in_progress`.
 
@@ -41,10 +43,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Shared journeys passed at historical c2bde85 and 3614250; the added 3614250 framework input target failed |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Historical c2bde85 journey passed; 3614250 failed during SDK window startup before the journey |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Shared journeys passed at historical c2bde85 and 3614250; the added 3614250 framework input target failed |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Historical targeted Flowchart visuals and the original 3614250 journey passed; the later framework input target failed; full input/AT acceptance remains open |
+| Chrome stable | Release-blocking shared Web journey | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed; earlier startup failure retained separately |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and entire independent W3C input suite passed at f39faedf; framework composition check failed |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Main journey passed at f39faedf; trusted input passed through readonly Cut rejection, then failed ArrowRight collapse; framework composition check failed; OS/device/AT acceptance remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 

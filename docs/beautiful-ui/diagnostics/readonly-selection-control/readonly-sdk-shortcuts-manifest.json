@@ -1,0 +1,17 @@
+{
+  "recorded_at_utc": "2026-09-04T02:27:35.692307+00:00",
+  "url": "http://127.0.0.1:60451/",
+  "source": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_sdk_shortcuts_probe.dart",
+  "source_sha256": "f5302972b700146ad42bd37736fc4942ac37f71bf9ef8e08dc646606a692e2ca",
+  "main_js_sha256": "e8f4b019ef86f276933e70348fed037dff45271c60f303dfccf2f4e1d00951fe",
+  "build_log_sha256": "3861243dcb6df4f3f79d8365338a373eab7154e813c1186413249b7addfcb6bd",
+  "build_mode": "release",
+  "compile_seconds": 33.2,
+  "server_session": 96319,
+  "control_text": "109-character single-line variant shared by prior HTML/Flutter controls; no exact CI multiline equivalence asserted.",
+  "change": "Stock-only Shortcuts: plain/Shift Left/Right mapped to official ExtendSelectionByCharacterIntent; existing EditableText Actions reused; no character arithmetic or custom DOM selection writes.",
+  "previous_controls_unchanged": [
+    "http://127.0.0.1:58375/",
+    "http://127.0.0.1:59015/"
+  ]
+}

@@ -69,6 +69,21 @@ jobs:
       - name: Build ordinary release Catalog and bind source and bundle evidence
         timeout-minutes: 12
         run: /usr/bin/python3 -B .github/scripts/probe_catalog_orca_linux.py --build-only --flutter "$(command -v flutter)" --output artifacts/catalog-orca-build
+      - name: Verify the native FlView accessibility parent contract
+        timeout-minutes: 3
+        env:
+          GTK_MODULES: gail:atk-bridge
+          NO_AT_BRIDGE: "0"
+          GDK_BACKEND: x11
+        run: |
+          mkdir -p artifacts/catalog-orca-native-bridge
+          cmake --build packages/beautiful_ai_ui_catalog/build/linux/x64/release --target catalog_accessibility_bridge_probe \
+            > artifacts/catalog-orca-native-bridge/build.log 2>&1
+          timeout 60s dbus-run-session -- xvfb-run -a \
+            packages/beautiful_ai_ui_catalog/build/linux/x64/release/native_bridge_probe/catalog_accessibility_bridge_probe \
+            --bundle "$PWD/packages/beautiful_ai_ui_catalog/build/linux/x64/release/bundle" \
+            > artifacts/catalog-orca-native-bridge/report.json \
+            2> artifacts/catalog-orca-native-bridge/stderr.log
       - name: Observe three real Catalog tasks in a private Orca session
         timeout-minutes: 5
         run: |
@@ -83,6 +98,7 @@ jobs:
           path: |
             artifacts/catalog-orca-run/
             artifacts/catalog-orca-build/
+            artifacts/catalog-orca-native-bridge/
             artifacts/catalog-orca-three-tasks/
           if-no-files-found: error
           retention-days: 14

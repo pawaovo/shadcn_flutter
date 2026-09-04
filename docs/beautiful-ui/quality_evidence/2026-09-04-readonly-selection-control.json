@@ -1,0 +1,468 @@
+{
+  "schema": 1,
+  "date": "2026-09-04",
+  "recorded_at_utc": "2026-09-04T02:36:47.565568+00:00",
+  "status": "diagnostic_observations_transcribed_raw_traces_pending",
+  "scope": "Local in-app-browser readonly selection controls; no release, CI, clipboard, or platform-matrix acceptance is changed.",
+  "provenance": {
+    "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/provenance.json",
+    "bytes": 28203,
+    "sha256": "74704ae6ccbd38128463a86015a7ea745124184ba085db272123251419ef207f"
+  },
+  "environment": {
+    "surface": "Codex in-app browser (IAB)",
+    "browser_version": null,
+    "browser_engine_version": null,
+    "version_boundary": "Not captured in supplied observation messages; do not infer Chromium/Safari version from the local surface.",
+    "flutter_controls_build_mode": "release",
+    "ci_comparison_build_mode": "debug",
+    "sdk_version_at_inventory": "3.47.0",
+    "input_method": "Trusted browser key input operated by root task through the in-app-browser surface; no synthetic DOM key dispatch recorded for these observations."
+  },
+  "document_equivalence": {
+    "text": "We should maybe order some more pistachio tubs soon. Confirm the supplier lead time before sending the order.",
+    "utf16_code_units": 109,
+    "newline_count": 0,
+    "ci_commit": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+    "ci_source": "packages/beautiful_ai_ui_catalog/lib/p3_examples.dart",
+    "ci_source_lines": [
+      729,
+      730
+    ],
+    "correction": "An earlier statement that CI used different multiline text was incorrect. Adjacent Dart literals preserve the trailing space and concatenate to this same single-line text.",
+    "boundary": "Exact text equality does not establish equivalent build mode, browser host/version, layout, timing, or complete input sequence.",
+    "original_three_archived_source_texts_match_exactly": true,
+    "followup_multiline_boundary": "The appended product probe adds an explicit one-newline variant; it is not the original CI fixture."
+  },
+  "baseline_observations": [
+    {
+      "control": "native_html_readonly_textarea",
+      "source_group": "readonly-html",
+      "evidence_basis": "compact_root_message_transcription",
+      "full_trace_available": false,
+      "input": {
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "modifiers": 0,
+        "defaultPrevented": false
+      },
+      "selection_before": [
+        0,
+        109
+      ],
+      "selection_after": [
+        0,
+        109
+      ],
+      "text_length_after": 109,
+      "text_unchanged": true,
+      "focused_after": true,
+      "readOnly_after": true,
+      "identity_unchanged": true,
+      "identity_values": null,
+      "elapsed_ms": null,
+      "observation": "Root reported that selection remained fully selected after the trusted ArrowRight in each baseline control.",
+      "unassigned_elapsed_ms": [
+        49272,
+        49274,
+        49277,
+        49278,
+        49280,
+        49283
+      ],
+      "timing_boundary": "Root supplied these elapsed timestamps without a per-event phase mapping; no keydown/keyup/capture/timer assignment is inferred."
+    },
+    {
+      "control": "stock_flutter_readonly_editable_text",
+      "source_group": "readonly-flutter",
+      "evidence_basis": "compact_root_message_transcription",
+      "full_trace_available": false,
+      "input": {
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "modifiers": 0,
+        "defaultPrevented": false
+      },
+      "selection_before": [
+        0,
+        109
+      ],
+      "selection_after": [
+        0,
+        109
+      ],
+      "text_length_after": 109,
+      "text_unchanged": true,
+      "focused_after": true,
+      "readOnly_after": true,
+      "identity_unchanged": true,
+      "identity_values": null,
+      "elapsed_ms": null,
+      "observation": "Root reported that selection remained fully selected after the trusted ArrowRight in each baseline control.",
+      "unassigned_elapsed_ms": [
+        360429,
+        360447,
+        360449,
+        360470
+      ],
+      "timing_boundary": "Root supplied these elapsed timestamps without a per-event phase mapping; no keydown/keyup/capture/timer assignment is inferred."
+    },
+    {
+      "control": "beautiful_selection_actions_readonly_document",
+      "source_group": "readonly-flutter",
+      "evidence_basis": "compact_root_message_transcription",
+      "full_trace_available": false,
+      "input": {
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "modifiers": 0,
+        "defaultPrevented": false
+      },
+      "selection_before": [
+        0,
+        109
+      ],
+      "selection_after": [
+        0,
+        109
+      ],
+      "text_length_after": 109,
+      "text_unchanged": true,
+      "focused_after": true,
+      "readOnly_after": true,
+      "identity_unchanged": true,
+      "identity_values": null,
+      "elapsed_ms": null,
+      "observation": "Root reported that selection remained fully selected after the trusted ArrowRight in each baseline control.",
+      "unassigned_elapsed_ms": [
+        387786,
+        387806,
+        387808,
+        387834
+      ],
+      "timing_boundary": "Root supplied these elapsed timestamps without a per-event phase mapping; no keydown/keyup/capture/timer assignment is inferred."
+    }
+  ],
+  "sdk_shortcuts_variant": {
+    "source_group": "readonly-sdk-shortcuts",
+    "control": "stock_readonly_editable_text_with_official_sdk_selection_intents",
+    "experimental_change": "A local Shortcuts map routes plain and Shift Left/Right to ExtendSelectionByCharacterIntent. Existing EditableText Actions perform selection changes; no custom character arithmetic, DOM selection writes, or product implementation change.",
+    "evidence_basis": "compact_root_message_transcription",
+    "full_trace_available": false,
+    "pre_action_observation": {
+      "phase": "after Meta+A / before ArrowRight",
+      "selection": [
+        0,
+        109
+      ],
+      "source_sequence_as_clarified": "click -> Meta+A gives DOM and Dart [0,109]; one ArrowRight gives [109,109]",
+      "dom_selection": [
+        0,
+        109
+      ],
+      "flutter_selection": [
+        0,
+        109
+      ]
+    },
+    "selection_after_arrow_right": [
+      109,
+      109
+    ],
+    "text_length_after": 109,
+    "text_unchanged": true,
+    "focused_after": true,
+    "readOnly_after": true,
+    "state_id": 243876494,
+    "controller_id": 858759108,
+    "identity_unchanged": true,
+    "events": [
+      {
+        "phase": "keydown capture",
+        "elapsed_ms": 18639,
+        "event_type": "keydown",
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "defaultPrevented": true
+      },
+      {
+        "phase": "keydown post-dispatch animation frame",
+        "elapsed_ms": 18657,
+        "event_type": "keydown",
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "defaultPrevented": true
+      },
+      {
+        "phase": "keydown post-dispatch timeout",
+        "elapsed_ms": 18659,
+        "event_type": "keydown",
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "defaultPrevented": true
+      },
+      {
+        "phase": "keyup capture",
+        "elapsed_ms": 18676,
+        "event_type": "keyup",
+        "key": "ArrowRight",
+        "isTrusted": true,
+        "defaultPrevented": false
+      }
+    ],
+    "timing_basis": "Per-probe elapsed milliseconds transcribed from root messages, not wall-clock timestamps. Baseline timestamps are retained without phase assignment.",
+    "not_exercised_by_supplied_observation": [
+      "Shift+ArrowLeft",
+      "Shift+ArrowRight",
+      "ArrowLeft",
+      "full W3C readonly copy/cut/paste sequence"
+    ]
+  },
+  "interpretation": {
+    "supported": "The supplied local observations show the same full-selection retention in native HTML, stock Flutter and product baseline controls, while the SDK-intent stock variant collapsed to the end. This makes keyboard routing a concrete variable for further investigation. A subsequent probe of the actual product adapter also collapsed both the exact-CI and explicit-newline controls to [109,109] in one reported plain-ArrowRight trial each.",
+    "not_established": [
+      "A product-only cause for the default-route behavior.",
+      "The cause of the browser native default behavior.",
+      "A passed CI browser, clipboard, RTL, grapheme, accessibility, or OS IME matrix.",
+      "A replayable full event trace for any local control until raw exports are attached."
+    ],
+    "acceptance_changed": false
+  },
+  "ci_trace_context": {
+    "artifact_commit": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+    "scope": "Previously audited existing W3C logs, not rerun during this archive task.",
+    "chrome": {
+      "post_arrow_sample_count": 104,
+      "all_sampled_dom_and_document_selection": [
+        0,
+        109
+      ],
+      "raw_log": "/tmp/beautiful-ci-f39faedf/input/input-chrome/browser/webdriver.log",
+      "first_post_arrow_response_line": 262429,
+      "last_post_arrow_response_line": 290516
+    },
+    "edge": {
+      "post_arrow_sample_count": 94,
+      "all_sampled_dom_and_document_selection": [
+        0,
+        109
+      ],
+      "raw_log": "/tmp/beautiful-ci-f39faedf/input/input-edge/browser/msedgedriver.log",
+      "first_post_arrow_response_line": 16697,
+      "last_post_arrow_response_line": 29099
+    },
+    "safari": {
+      "webdriver_log_empty": true,
+      "post_arrow_dom_final_state": null,
+      "last_recorded_flutter_document_selection": [
+        0,
+        109
+      ],
+      "boundary": "Only pre-Arrow DOM observation and retained Flutter state are available; no post-Arrow DOM trajectory is inferred."
+    },
+    "firefox": {
+      "reported_original_w3c_result": "passed"
+    },
+    "sampling_boundary": "No sampled collapse was observed in Chrome/Edge. Snapshot polling cannot exclude an unrecorded transient collapse and rewrite between samples."
+  },
+  "pending_evidence": [
+    "Attach original complete root-operated IAB event/snapshot exports for the baseline controls, SDK-intent variant, and actual-product follow-up.",
+    "Attach raw data assigning the baseline timestamps to event phases; currently these remain unassigned.",
+    "Capture IAB/browser engine version if available; current value remains unknown."
+  ],
+  "product_actual_followup": {
+    "source": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly_product_web_probe.dart",
+    "manifest": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-product-web-manifest.json",
+    "host": "Same root-operated IAB surface; browser/engine version remains unknown.",
+    "build_mode": "release",
+    "compile_seconds_reported": 38.5,
+    "probe_behavior": "The probe contains no Shortcuts map, custom selection Actions, synthetic key dispatch, or DOM selection writes. Both controls are actual product components.",
+    "observations": [
+      {
+        "fixture": "exact_ci",
+        "control": "Actual BeautifulSelectionActions using the product Web adapter",
+        "trials_reported": 1,
+        "evidence_basis": "compact_root_message_transcription",
+        "full_trace_available": false,
+        "sequence": "click -> Meta+A -> one ArrowRight",
+        "before_arrow": {
+          "phase": "after Meta+A / before ArrowRight",
+          "dom_selection": [
+            0,
+            109
+          ],
+          "flutter_selection": [
+            0,
+            109
+          ]
+        },
+        "after_arrow": {
+          "dom_selection": [
+            109,
+            109
+          ],
+          "flutter_selection": [
+            109,
+            109
+          ],
+          "text": "We should maybe order some more pistachio tubs soon. Confirm the supplier lead time before sending the order.",
+          "text_length": 109,
+          "newline_count": 0,
+          "readOnly": true,
+          "primary_focus": true,
+          "state_id": 706662049,
+          "controller_id": 1013550805,
+          "identities_unchanged": true
+        },
+        "events": [
+          {
+            "phase": "keydown capture",
+            "elapsed_ms": 22959,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keydown post-dispatch animation frame",
+            "elapsed_ms": 22986,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keydown post-dispatch timeout",
+            "elapsed_ms": 22989,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keyup capture",
+            "elapsed_ms": 23014,
+            "event_type": "keyup",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": false
+          }
+        ],
+        "local_observed_result": "single_arrow_right_collapsed_selection_to_end",
+        "coverage_boundary": "Only one plain ArrowRight after select-all was observed here. Shift-arrow coverage is headless-test coverage, not a claimed real-browser trial."
+      },
+      {
+        "fixture": "explicit_multiline",
+        "control": "Actual BeautifulSelectionActions using the product Web adapter",
+        "trials_reported": 1,
+        "evidence_basis": "compact_root_message_transcription",
+        "full_trace_available": false,
+        "sequence": "click -> Meta+A -> one ArrowRight",
+        "before_arrow": {
+          "phase": "after Meta+A / before ArrowRight",
+          "dom_selection": [
+            0,
+            109
+          ],
+          "flutter_selection": [
+            0,
+            109
+          ]
+        },
+        "after_arrow": {
+          "dom_selection": [
+            109,
+            109
+          ],
+          "flutter_selection": [
+            109,
+            109
+          ],
+          "text": "We should maybe order some more pistachio tubs soon.\nConfirm the supplier lead time before sending the order.",
+          "text_length": 109,
+          "newline_count": 1,
+          "readOnly": true,
+          "primary_focus": true,
+          "state_id": 87930328,
+          "controller_id": 972951705,
+          "identities_unchanged": true
+        },
+        "events": [
+          {
+            "phase": "keydown capture",
+            "elapsed_ms": 43178,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keydown post-dispatch animation frame",
+            "elapsed_ms": 43206,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keydown post-dispatch timeout",
+            "elapsed_ms": 43210,
+            "event_type": "keydown",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": true,
+            "modifiers": {
+              "shift": false,
+              "control": false,
+              "meta": false,
+              "alt": false
+            }
+          },
+          {
+            "phase": "keyup",
+            "elapsed_ms": 43233,
+            "event_type": "keyup",
+            "key": "ArrowRight",
+            "isTrusted": true,
+            "defaultPrevented": false,
+            "phase_detail": "Capture/post-dispatch subtype was not explicit in the supplied compact message."
+          }
+        ],
+        "local_observed_result": "single_arrow_right_collapsed_selection_to_end",
+        "coverage_boundary": "Only one plain ArrowRight after select-all was observed here. Shift-arrow coverage is headless-test coverage, not a claimed real-browser trial."
+      }
+    ],
+    "acceptance_changed": false,
+    "full_w3c_sequence_rerun_as_part_of_archive": false
+  }
+}

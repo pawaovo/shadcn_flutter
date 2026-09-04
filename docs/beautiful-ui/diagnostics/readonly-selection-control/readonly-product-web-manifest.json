@@ -1,0 +1,20 @@
+{
+  "recorded_at_utc": "2026-09-04T02:41:04.553489+00:00",
+  "url": "http://127.0.0.1:61667/",
+  "server_session": 89976,
+  "build_mode": "release",
+  "compile_seconds": 38.5,
+  "entrypoint": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_product_web_probe.dart",
+  "scope": "Actual product component Web adapter; probe contains no shortcut maps or custom selection actions. Passive observers only.",
+  "fixtures": {
+    "exact_ci": "Single-line 109 UTF-16 code units from p3_examples.dart, initialSelection 0:52",
+    "explicit_multiline": "Same text with one separator space replaced by newline; 109 code units, initialSelection 0:52. Additional variant, not original CI text."
+  },
+  "sha256": {
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_product_web_probe.dart": "3356fa0dc2a05485d5bf118ca3fd40b93d408ecc19ef7fde5edc82873edeb171",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/main.dart.js": "ac06c6fd3bd915aa1d4dfe7eb1c8f2bc5d6f78d715654099050fcf6435682a3c",
+    "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web-build.log": "1023d32b5b7f34ab52d2bff6319243d8a8f651e844f4af6078ff1d1d8d994b33",
+    "packages/beautiful_ai_ui/lib/src/components/selection_actions.dart": "5ca75ab8abda36432bd81136fcd73576cde77a337b8ab377dfd1c7744d7fb86e",
+    "packages/beautiful_ai_ui/lib/src/implementation/controls/readonly_selection_shortcuts.dart": "606a83dd5bd9ec3520e1c6e40cdf2bc452234ddf6d39fc5be1ad1d807894a770"
+  }
+}

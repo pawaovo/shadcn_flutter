@@ -1,0 +1,442 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-09-04T02:36:47.565568+00:00",
+  "scope": "Post-observation inventory of retained readonly control sources and local outputs; not a contemporaneous source freeze or a browser acceptance result.",
+  "repository_head_at_inventory": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+  "sources": [
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-html/index.html",
+        "bytes": 3700,
+        "sha256": "5fd6d6481b0880e06f9c1ac013e819b3102ba27c4a9e65350a5c6b4b6d9ffa9d"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/native-html/index.html",
+        "bytes": 3700,
+        "sha256": "5fd6d6481b0880e06f9c1ac013e819b3102ba27c4a9e65350a5c6b4b6d9ffa9d"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_web_probe.dart",
+        "bytes": 13758,
+        "sha256": "9c1046cdd2358f3013392c5b5962248b5bff5f2e23bd9183946200a0c3a6cccb"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly_web_probe.dart",
+        "bytes": 13758,
+        "sha256": "9c1046cdd2358f3013392c5b5962248b5bff5f2e23bd9183946200a0c3a6cccb"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_sdk_shortcuts_probe.dart",
+        "bytes": 14516,
+        "sha256": "f5302972b700146ad42bd37736fc4942ac37f71bf9ef8e08dc646606a692e2ca"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly_sdk_shortcuts_probe.dart",
+        "bytes": 14516,
+        "sha256": "f5302972b700146ad42bd37736fc4942ac37f71bf9ef8e08dc646606a692e2ca"
+      },
+      "byte_identical": true
+    }
+  ],
+  "build_logs_and_historical_metadata": [
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-web-build.log",
+        "bytes": 2011,
+        "sha256": "c843f13060537cca491e9e6075cb6e305ddd3d294f9cb139d9f1c29ca8994bca"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-web-build.txt",
+        "bytes": 2011,
+        "sha256": "c843f13060537cca491e9e6075cb6e305ddd3d294f9cb139d9f1c29ca8994bca"
+      }
+    },
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts-build.log",
+        "bytes": 2037,
+        "sha256": "3861243dcb6df4f3f79d8365338a373eab7154e813c1186413249b7addfcb6bd"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-sdk-shortcuts-build.txt",
+        "bytes": 2037,
+        "sha256": "3861243dcb6df4f3f79d8365338a373eab7154e813c1186413249b7addfcb6bd"
+      }
+    },
+    {
+      "original": {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts-manifest.json",
+        "bytes": 988,
+        "sha256": "1c8d1cd1f6f337f00d7897ef4e655d2f72789924ad092a5b722e58e22a0cd315"
+      },
+      "archived": {
+        "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-sdk-shortcuts-manifest.json",
+        "bytes": 988,
+        "sha256": "1c8d1cd1f6f337f00d7897ef4e655d2f72789924ad092a5b722e58e22a0cd315"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "directory": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-html",
+      "file_count": 1,
+      "total_bytes": 3700,
+      "inventory_sha256": "4c5911eafc154bcdc8c3265124655e46eaa8e19b5aebfe1c0734744485ebf5e2",
+      "inventory_sha256_format": "UTF-8 sorted relative path + NUL + decimal bytes + NUL + SHA256 + LF per file",
+      "selected_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-html/index.html",
+          "bytes": 3700,
+          "sha256": "5fd6d6481b0880e06f9c1ac013e819b3102ba27c4a9e65350a5c6b4b6d9ffa9d"
+        }
+      ],
+      "package_version_metadata": null,
+      "build_mode": "not_applicable",
+      "compile_seconds_reported": null,
+      "exact_build_command_argv": null,
+      "command_boundary": "Static source; no compile step.",
+      "compiled_assets_archived": false
+    },
+    {
+      "directory": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter",
+      "file_count": 341,
+      "total_bytes": 49601663,
+      "inventory_sha256": "708b3df5a0b7f1744ca46068c6252ad93cef041047ecd66009ccf1db6de430a5",
+      "inventory_sha256_format": "UTF-8 sorted relative path + NUL + decimal bytes + NUL + SHA256 + LF per file",
+      "selected_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/.last_build_id",
+          "bytes": 32,
+          "sha256": "f403b4fd09e788fdf7419bd718b53f891627259e02340af6d3a3152e60f37b5c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/index.html",
+          "bytes": 1534,
+          "sha256": "44ee56c555d2c687d2c9c31de0bd6cd6ec4cbbd036961f670960abcd3a6e0fe4"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/main.dart.js",
+          "bytes": 2016185,
+          "sha256": "badf934ef37fd30b7d9c5b692906ad7ee4dbfff07e3360e96bc779b25ee8570b"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/flutter_bootstrap.js",
+          "bytes": 13094,
+          "sha256": "819b2e094832685786bf1420fc590e5f2e5d8eced66e91cf169055e33939f7a7"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/flutter.js",
+          "bytes": 12136,
+          "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/flutter_service_worker.js",
+          "bytes": 784,
+          "sha256": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/version.json",
+          "bytes": 116,
+          "sha256": "1cd5b9dfc087746bc02a156295808cc53b15e13a4810eef601f19c76addc7ee2"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-flutter/manifest.json",
+          "bytes": 929,
+          "sha256": "48168531131a9563155553afea475cb40c9207a6c877155169f6d330f8e76550"
+        }
+      ],
+      "package_version_metadata": {
+        "app_name": "beautiful_ai_ui_catalog",
+        "version": "0.1.0",
+        "build_number": "1",
+        "package_name": "beautiful_ai_ui_catalog"
+      },
+      "build_mode": "release",
+      "compile_seconds_reported": 35.3,
+      "exact_build_command_argv": null,
+      "command_boundary": "Existing build log identifies entrypoint and output; full original argv was not retained.",
+      "compiled_assets_archived": false
+    },
+    {
+      "directory": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts",
+      "file_count": 341,
+      "total_bytes": 49305609,
+      "inventory_sha256": "235aa64be08096487465a7dc6ada8329efaef9efc8e193bea7f59df7a647b6f4",
+      "inventory_sha256_format": "UTF-8 sorted relative path + NUL + decimal bytes + NUL + SHA256 + LF per file",
+      "selected_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/.last_build_id",
+          "bytes": 32,
+          "sha256": "bbee0baae072de2153268f613be1b67ebee2af4920fb95940ec864bb56fef083"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/index.html",
+          "bytes": 1534,
+          "sha256": "44ee56c555d2c687d2c9c31de0bd6cd6ec4cbbd036961f670960abcd3a6e0fe4"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/main.dart.js",
+          "bytes": 1720131,
+          "sha256": "e8f4b019ef86f276933e70348fed037dff45271c60f303dfccf2f4e1d00951fe"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/flutter_bootstrap.js",
+          "bytes": 13094,
+          "sha256": "df3c874c48793940cde91ff124e99d7f1910987955e55c1918fa090914c044c3"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/flutter.js",
+          "bytes": 12136,
+          "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/flutter_service_worker.js",
+          "bytes": 784,
+          "sha256": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/version.json",
+          "bytes": 116,
+          "sha256": "1cd5b9dfc087746bc02a156295808cc53b15e13a4810eef601f19c76addc7ee2"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-sdk-shortcuts/manifest.json",
+          "bytes": 929,
+          "sha256": "48168531131a9563155553afea475cb40c9207a6c877155169f6d330f8e76550"
+        }
+      ],
+      "package_version_metadata": {
+        "app_name": "beautiful_ai_ui_catalog",
+        "version": "0.1.0",
+        "build_number": "1",
+        "package_name": "beautiful_ai_ui_catalog"
+      },
+      "build_mode": "release",
+      "compile_seconds_reported": 33.2,
+      "exact_build_command_argv": null,
+      "command_boundary": "Existing build log identifies entrypoint and output; full original argv was not retained.",
+      "compiled_assets_archived": false
+    }
+  ],
+  "sdk_inventory": {
+    "version_file": {
+      "path": "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/cache/flutter.version.json",
+      "bytes": 559,
+      "sha256": "c15f0ab0a619860ddb4211b76443ccef0c4dee2d7e1413e9f255e54b21a9fa52"
+    },
+    "version": {
+      "frameworkVersion": "3.47.0",
+      "channel": "stable",
+      "repositoryUrl": "https://github.com/flutter/flutter.git",
+      "frameworkRevision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+      "frameworkCommitDate": "2026-08-11 11:53:49 -0700",
+      "engineRevision": "5f77625673248ee5846fbcaf5d3e1a3878386fd7",
+      "engineCommitDate": "2026-08-11 16:38:36.000Z",
+      "engineContentHash": "59d54a2b2896a6bbf356c94b7fac7b9e235bdacd",
+      "engineBuildDate": "2026-08-11 10:18:15.653",
+      "dartSdkVersion": "3.13.0",
+      "devToolsVersion": "2.60.0",
+      "flutterVersion": "3.47.0"
+    }
+  },
+  "relevant_source_inventory": [
+    {
+      "path": "pubspec.lock",
+      "bytes": 40701,
+      "sha256": "d774c7cf82f9ac3ddbb87bf72a51ad3e51c2d11ab74114f3b54854eea4e757ae"
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/components/selection_actions.dart",
+      "bytes": 29563,
+      "sha256": "5ca75ab8abda36432bd81136fcd73576cde77a337b8ab377dfd1c7744d7fb86e"
+    },
+    {
+      "path": "packages/beautiful_ai_ui/lib/src/implementation/controls/text_selection.dart",
+      "bytes": 14395,
+      "sha256": "5e418a868096736c6f5a44ad9a1a2c229698d3eafadca66759c9aa78b9765938"
+    },
+    {
+      "path": "packages/beautiful_ai_ui_catalog/lib/p3_examples.dart",
+      "bytes": 27389,
+      "sha256": "3418cbc8351325d61f2f472410b9b2d202909e4218c186a054bb6ebb0f3ad169"
+    },
+    {
+      "path": "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/packages/flutter/lib/src/widgets/editable_text.dart",
+      "bytes": 277075,
+      "sha256": "d579841ac35e72085bffb720142432342baaf7c9c895adfc7bcbb8bd3b7ca9fd"
+    },
+    {
+      "path": "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/packages/flutter/lib/src/widgets/default_text_editing_shortcuts.dart",
+      "bytes": 50994,
+      "sha256": "c5a9f1e7adca39df166988ed671c9779a3ab480083d4928f6d56c5625c312dd4"
+    },
+    {
+      "path": "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/cache/flutter_web_sdk/lib/_engine/engine/semantics/text_field.dart",
+      "bytes": 13283,
+      "sha256": "560248596a0ea39f197bd327dce65940f705abe166f5301634f8f15d6f46699b"
+    },
+    {
+      "path": "/Users/zzz/.local/share/mise/installs/flutter/3.47.0/bin/cache/flutter_web_sdk/lib/_engine/engine/text_editing/text_editing.dart",
+      "bytes": 100276,
+      "sha256": "f96df384c6cb21ff3f64811bfe7cff72c9fda4acc0f014b029df99cfdc98457a"
+    }
+  ],
+  "relevant_source_working_tree_diff": "diff --git a/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart b/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart\nindex 947fa289..3110d4cd 100644\n--- a/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart\n+++ b/packages/beautiful_ai_ui/lib/src/components/selection_actions.dart\n@@ -1,6 +1,7 @@\n import 'dart:async';\n import 'dart:ui' show BoxWidthStyle;\n \n+import 'package:flutter/foundation.dart' show kIsWeb;\n import 'package:flutter/services.dart';\n import 'package:flutter/widgets.dart';\n \n@@ -8,6 +9,7 @@ import '../foundation/environment.dart';\n import '../foundation/failure.dart';\n import '../foundation/theme.dart';\n import '../implementation/controls/action_control.dart';\n+import '../implementation/controls/readonly_selection_shortcuts.dart';\n import '../implementation/controls/text_selection.dart';\n \n /// Whether a selected-text action proposes an edit or only explains content.\n@@ -530,6 +532,9 @@ final class _BeautifulSelectionActionsState\n     super.dispose();\n   }\n \n+  Widget _webDocumentSelection(Widget child) =>\n+      kIsWeb ? BeautifulReadonlySelectionShortcuts(child: child) : child;\n+\n   @override\n   Widget build(BuildContext context) {\n     final theme = BeautifulUiTheme.of(context);\n@@ -552,73 +557,75 @@ final class _BeautifulSelectionActionsState\n         mainAxisSize: MainAxisSize.min,\n         crossAxisAlignment: CrossAxisAlignment.stretch,\n         children: [\n-          MergeSemantics(\n-            child: Semantics(\n-              label: labels.document,\n-              textField: true,\n-              readOnly: true,\n-              enabled: true,\n-              onFocus: _documentFocus.requestFocus,\n-              child: BeautifulTextSelectionGestureDetector(\n-                editableTextKey: _documentKey,\n-                identity: (widget.documentId, widget.text),\n-                child: Container(\n-                  constraints: const BoxConstraints(minHeight: 48),\n-                  padding: EdgeInsets.all(theme.spacing.md),\n-                  decoration: BoxDecoration(\n-                    color: theme.colors.surface,\n-                    border: Border.all(color: theme.colors.line),\n-                    borderRadius: BorderRadius.circular(theme.radii.card),\n-                  ),\n-                  child: EditableText(\n-                    key: _documentKey,\n-                    controller: _document,\n-                    focusNode: _documentFocus,\n-                    readOnly: true,\n-                    showCursor: false,\n-                    rendererIgnoresPointer: true,\n-                    scrollController: _scroll,\n-                    minLines: 1,\n-                    maxLines: widget.documentMaxLines,\n-                    style: theme.typography.body.copyWith(\n-                      color: theme.colors.ink,\n-                      height: 1.7,\n+          _webDocumentSelection(\n+            MergeSemantics(\n+              child: Semantics(\n+                label: labels.document,\n+                textField: true,\n+                readOnly: true,\n+                enabled: true,\n+                onFocus: _documentFocus.requestFocus,\n+                child: BeautifulTextSelectionGestureDetector(\n+                  editableTextKey: _documentKey,\n+                  identity: (widget.documentId, widget.text),\n+                  child: Container(\n+                    constraints: const BoxConstraints(minHeight: 48),\n+                    padding: EdgeInsets.all(theme.spacing.md),\n+                    decoration: BoxDecoration(\n+                      color: theme.colors.surface,\n+                      border: Border.all(color: theme.colors.line),\n+                      borderRadius: BorderRadius.circular(theme.radii.card),\n+                    ),\n+                    child: EditableText(\n+                      key: _documentKey,\n+                      controller: _document,\n+                      focusNode: _documentFocus,\n+                      readOnly: true,\n+                      showCursor: false,\n+                      rendererIgnoresPointer: true,\n+                      scrollController: _scroll,\n+                      minLines: 1,\n+                      maxLines: widget.documentMaxLines,\n+                      style: theme.typography.body.copyWith(\n+                        color: theme.colors.ink,\n+                        height: 1.7,\n+                      ),\n+                      cursorColor: theme.colors.accent,\n+                      backgroundCursorColor: theme.colors.inkMuted,\n+                      selectionColor: theme.colors.accentTint,\n+                      // Native max-width boxes can cover unselected RTL text.\n+                      // Editing actions must show the exact source range.\n+                      selectionWidthStyle: BoxWidthStyle.tight,\n+                      selectionControls: hasOverlay\n+                          ? BeautifulTextSelectionControls(theme.colors.accent)\n+                          : null,\n+                      showSelectionHandles: hasOverlay,\n+                      onSelectionChanged: _selectionChanged,\n+                      contextMenuBuilder: !hasOverlay\n+                          ? null\n+                          : (_, editor) {\n+                              final generation = _generation;\n+                              return beautifulEditableTextContextMenu(\n+                                context,\n+                                editor,\n+                                isCurrent: () =>\n+                                    mounted && generation == _generation,\n+                                additionalButtons: [\n+                                  if (widget.enabled && !_busy && _active)\n+                                    for (final action in widget.actions.where(\n+                                      (a) => !a.secondary,\n+                                    ))\n+                                      ContextMenuButtonItem(\n+                                        label: action.label,\n+                                        onPressed: () {\n+                                          editor.hideToolbar();\n+                                          unawaited(_run(action));\n+                                        },\n+                                      ),\n+                                ],\n+                              );\n+                            },\n                     ),\n-                    cursorColor: theme.colors.accent,\n-                    backgroundCursorColor: theme.colors.inkMuted,\n-                    selectionColor: theme.colors.accentTint,\n-                    // Native max-width boxes can cover unselected RTL text.\n-                    // Editing actions must show the exact source range.\n-                    selectionWidthStyle: BoxWidthStyle.tight,\n-                    selectionControls: hasOverlay\n-                        ? BeautifulTextSelectionControls(theme.colors.accent)\n-                        : null,\n-                    showSelectionHandles: hasOverlay,\n-                    onSelectionChanged: _selectionChanged,\n-                    contextMenuBuilder: !hasOverlay\n-                        ? null\n-                        : (_, editor) {\n-                            final generation = _generation;\n-                            return beautifulEditableTextContextMenu(\n-                              context,\n-                              editor,\n-                              isCurrent: () =>\n-                                  mounted && generation == _generation,\n-                              additionalButtons: [\n-                                if (widget.enabled && !_busy && _active)\n-                                  for (final action in widget.actions.where(\n-                                    (a) => !a.secondary,\n-                                  ))\n-                                    ContextMenuButtonItem(\n-                                      label: action.label,\n-                                      onPressed: () {\n-                                        editor.hideToolbar();\n-                                        unawaited(_run(action));\n-                                      },\n-                                    ),\n-                              ],\n-                            );\n-                          },\n                   ),\n                 ),\n               ),\n",
+  "sdk_shortcuts_manifest_checks": {
+    "source_matches": true,
+    "main_js_matches": true,
+    "build_log_matches": true,
+    "recorded_url": "http://127.0.0.1:60451/",
+    "url_liveness_checked": false,
+    "recorded_server_session": 96319,
+    "historical_text_claim_superseded": "109-character single-line variant shared by prior HTML/Flutter controls; no exact CI multiline equivalence asserted.",
+    "correction": "At f39faedf the CI fixture is the same single-line 109-character text. Source line breaks between adjacent literals do not insert a newline."
+  },
+  "runtime_trace_archival": {
+    "full_raw_trace_files": [],
+    "status": "not_supplied_or_found_at_inventory",
+    "observation_record": "docs/beautiful-ui/quality_evidence/2026-09-04-readonly-selection-control.json",
+    "available_observation_basis": "Compact transcription of root task messages from its actual in-app-browser run."
+  },
+  "product_actual_followup": {
+    "recorded_at_utc": "2026-09-04T02:45:26.780625+00:00",
+    "scope": "Actual product adapter follow-up, appended without replacing the initial three source copies or historical SDK manifest.",
+    "copies": [
+      {
+        "original": {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_product_web_probe.dart",
+          "bytes": 14030,
+          "sha256": "3356fa0dc2a05485d5bf118ca3fd40b93d408ecc19ef7fde5edc82873edeb171"
+        },
+        "archived": {
+          "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly_product_web_probe.dart",
+          "bytes": 14030,
+          "sha256": "3356fa0dc2a05485d5bf118ca3fd40b93d408ecc19ef7fde5edc82873edeb171"
+        },
+        "byte_identical": true
+      },
+      {
+        "original": {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web-build.log",
+          "bytes": 2031,
+          "sha256": "1023d32b5b7f34ab52d2bff6319243d8a8f651e844f4af6078ff1d1d8d994b33"
+        },
+        "archived": {
+          "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-product-web-build.txt",
+          "bytes": 2031,
+          "sha256": "1023d32b5b7f34ab52d2bff6319243d8a8f651e844f4af6078ff1d1d8d994b33"
+        },
+        "byte_identical": true
+      },
+      {
+        "original": {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web-manifest.json",
+          "bytes": 1501,
+          "sha256": "4f106fc700a9f401bf7d43c15a289fa0b63eacb1ac9c74a7be3366364a9656fa"
+        },
+        "archived": {
+          "path": "docs/beautiful-ui/diagnostics/readonly-selection-control/readonly-product-web-manifest.json",
+          "bytes": 1501,
+          "sha256": "4f106fc700a9f401bf7d43c15a289fa0b63eacb1ac9c74a7be3366364a9656fa"
+        },
+        "byte_identical": true
+      }
+    ],
+    "build_manifest_hash_checks": [
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly_product_web_probe.dart",
+        "bytes": 14030,
+        "sha256": "3356fa0dc2a05485d5bf118ca3fd40b93d408ecc19ef7fde5edc82873edeb171"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/main.dart.js",
+        "bytes": 2016836,
+        "sha256": "ac06c6fd3bd915aa1d4dfe7eb1c8f2bc5d6f78d715654099050fcf6435682a3c"
+      },
+      {
+        "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web-build.log",
+        "bytes": 2031,
+        "sha256": "1023d32b5b7f34ab52d2bff6319243d8a8f651e844f4af6078ff1d1d8d994b33"
+      },
+      {
+        "path": "packages/beautiful_ai_ui/lib/src/components/selection_actions.dart",
+        "bytes": 29563,
+        "sha256": "5ca75ab8abda36432bd81136fcd73576cde77a337b8ab377dfd1c7744d7fb86e"
+      },
+      {
+        "path": "packages/beautiful_ai_ui/lib/src/implementation/controls/readonly_selection_shortcuts.dart",
+        "bytes": 1586,
+        "sha256": "606a83dd5bd9ec3520e1c6e40cdf2bc452234ddf6d39fc5be1ad1d807894a770"
+      }
+    ],
+    "all_five_manifest_hashes_match": true,
+    "output": {
+      "directory": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web",
+      "file_count": 341,
+      "total_bytes": 49602314,
+      "inventory_sha256": "4e586051227264c2a3ff2fc9e8efa6bb112b8959ebcae0c67e74a9f4c90b8e8b",
+      "inventory_sha256_format": "UTF-8 sorted relative path + NUL + decimal bytes + NUL + SHA256 + LF per file",
+      "selected_artifacts": [
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/.last_build_id",
+          "bytes": 32,
+          "sha256": "a71fa6d56a1d4814511c0d93715b190cf1fb5560cbe29a5610163ad8b369d0de"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/index.html",
+          "bytes": 1534,
+          "sha256": "44ee56c555d2c687d2c9c31de0bd6cd6ec4cbbd036961f670960abcd3a6e0fe4"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/main.dart.js",
+          "bytes": 2016836,
+          "sha256": "ac06c6fd3bd915aa1d4dfe7eb1c8f2bc5d6f78d715654099050fcf6435682a3c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/flutter_bootstrap.js",
+          "bytes": 13094,
+          "sha256": "ac34f35b790698de4d7e3b3dee9d92871b27b9631161f8dc3dca496920292a96"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/flutter.js",
+          "bytes": 12136,
+          "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/flutter_service_worker.js",
+          "bytes": 784,
+          "sha256": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/version.json",
+          "bytes": 116,
+          "sha256": "1cd5b9dfc087746bc02a156295808cc53b15e13a4810eef601f19c76addc7ee2"
+        },
+        {
+          "path": "packages/beautiful_ai_ui_catalog/build/diagnostics/readonly-product-web/manifest.json",
+          "bytes": 929,
+          "sha256": "48168531131a9563155553afea475cb40c9207a6c877155169f6d330f8e76550"
+        }
+      ],
+      "package_version_metadata": {
+        "app_name": "beautiful_ai_ui_catalog",
+        "version": "0.1.0",
+        "build_number": "1",
+        "package_name": "beautiful_ai_ui_catalog"
+      },
+      "compiled_assets_archived": false
+    },
+    "recorded_build_mode": "release",
+    "recorded_compile_seconds": 38.5,
+    "recorded_url": "http://127.0.0.1:61667/",
+    "recorded_server_session": 89976,
+    "url_liveness_checked": false,
+    "runtime_evidence_basis": "Compact root-operated IAB observations supplied in task messages; full raw trace still not archived."
+  }
+}

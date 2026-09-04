@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "source_sha": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+  "scope": "Historical exact-candidate evidence. Later native parent repairs or diagnostics are unverified by these runs.",
+  "runs": {
+    "main": {
+      "run_id": 33827337805,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33827337805",
+      "conclusion": "success",
+      "success_jobs": 12,
+      "total_jobs": 12,
+      "jobs": [
+        {
+          "job_id": 100882697955,
+          "name": "Detect generated targets",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721190,
+          "name": "Run Chrome and Linux journeys",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721209,
+          "name": "Format, analyze, and test",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721223,
+          "name": "Run Firefox journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721225,
+          "name": "Run Android journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721231,
+          "name": "Build Web catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721245,
+          "name": "Build Linux catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721256,
+          "name": "Build Apple catalogs",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721268,
+          "name": "Build Windows catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721289,
+          "name": "Run Edge journey",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882721314,
+          "name": "Build Android catalog",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100883613763,
+          "name": "Validate pub.dev package",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "input": {
+      "run_id": 33827337737,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33827337737",
+      "conclusion": "failure",
+      "success_jobs": 4,
+      "total_jobs": 9,
+      "jobs": [
+        {
+          "job_id": 100882697228,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882697352,
+          "name": "Real firefox input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100882697370,
+          "name": "Real Safari full journey and input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100882697396,
+          "name": "Real edge input",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100882697398,
+          "name": "Native macos input bridge",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882697403,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "conclusion": "failure"
+        },
+        {
+          "job_id": 100882697412,
+          "name": "Native linux input bridge",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882697413,
+          "name": "Native windows input bridge",
+          "conclusion": "success"
+        },
+        {
+          "job_id": 100882697565,
+          "name": "Real chrome input",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    "orca-pilot": {
+      "run_id": 33827344230,
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33827344230",
+      "conclusion": "failure",
+      "success_jobs": 0,
+      "total_jobs": 1,
+      "jobs": [
+        {
+          "job_id": 100882718707,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  },
+  "web": {
+    "chrome": {
+      "framework_status": "failed",
+      "framework_report": {
+        "file": "input/input-chrome/framework/framework-input.json",
+        "sha256": "d9b07f97f8539dbaf7bc756b5dd7a63bb9d2e3022aa487bc720934cd1a1d3d83"
+      },
+      "framework_boundary": "Retained injected composition assertions; stock and Prompt comparisons show the same phenomenon, not a Prompt-specific OS IME defect.",
+      "trusted_w3c_status": "failed",
+      "trusted_w3c_report": {
+        "file": "input/input-chrome/browser/browser-input.json",
+        "sha256": "5535783a63015035ae3d4da421fe9db9248a771e6946e5c6b0b576cf683cfb19"
+      },
+      "stages": [
+        "prompt-type",
+        "shift-enter",
+        "model-open",
+        "model-escape",
+        "keyboard-copy",
+        "keyboard-clear",
+        "keyboard-paste",
+        "select-before-resize",
+        "resize-599",
+        "resize-600",
+        "resize-1023",
+        "resize-1024",
+        "resize-1440",
+        "send",
+        "code-copy",
+        "code-paste",
+        "code-clear",
+        "stream-copy",
+        "stream-paste",
+        "stream-clear",
+        "readonly-copy",
+        "readonly-cut-rejected",
+        "readonly-caret"
+      ],
+      "terminal_boundary": "readonly-paste-rejected",
+      "interpretation": "Readonly copy and cut rejection passed. ArrowRight did not produce the required collapsed caret; Paste was not issued."
+    },
+    "edge": {
+      "framework_status": "failed",
+      "framework_report": {
+        "file": "input/input-edge/framework/framework-input.json",
+        "sha256": "6ad17f6735f0fac224b79fcc33ff63e908c2c9b0b2afd765e9a2a6de2612234f"
+      },
+      "framework_boundary": "Retained injected composition assertions; stock and Prompt comparisons show the same phenomenon, not a Prompt-specific OS IME defect.",
+      "trusted_w3c_status": "failed",
+      "trusted_w3c_report": {
+        "file": "input/input-edge/browser/browser-input.json",
+        "sha256": "bab780c6950660f9f12eb822b452057e8fca16c1a276a4a373a34b8c48b8bce4"
+      },
+      "stages": [
+        "prompt-type",
+        "shift-enter",
+        "model-open",
+        "model-escape",
+        "keyboard-copy",
+        "keyboard-clear",
+        "keyboard-paste",
+        "select-before-resize",
+        "resize-599",
+        "resize-600",
+        "resize-1023",
+        "resize-1024",
+        "resize-1440",
+        "send",
+        "code-copy",
+        "code-paste",
+        "code-clear",
+        "stream-copy",
+        "stream-paste",
+        "stream-clear",
+        "readonly-copy",
+        "readonly-cut-rejected",
+        "readonly-caret"
+      ],
+      "terminal_boundary": "readonly-paste-rejected",
+      "interpretation": "Readonly copy and cut rejection passed. ArrowRight did not produce the required collapsed caret; Paste was not issued."
+    },
+    "firefox": {
+      "framework_status": "failed",
+      "framework_report": {
+        "file": "input/input-firefox/framework/framework-input.json",
+        "sha256": "fb9fa6a5978f0f56224e1cb4667f59d9de9cd879c186d2f2e72180f43224716b"
+      },
+      "framework_boundary": "Retained injected composition assertions; stock and Prompt comparisons show the same phenomenon, not a Prompt-specific OS IME defect.",
+      "trusted_w3c_status": "passed",
+      "trusted_w3c_report": {
+        "file": "input/input-firefox/browser/browser-input.json",
+        "sha256": "e86fa1f6dff7a02f4f4e863c7d513df54808a1b0efa592dc4bd471e0eec87768"
+      },
+      "stages": [
+        "prompt-type",
+        "shift-enter",
+        "model-open",
+        "model-escape",
+        "keyboard-copy",
+        "keyboard-clear",
+        "keyboard-paste",
+        "select-before-resize",
+        "resize-599",
+        "resize-600",
+        "resize-1023",
+        "resize-1024",
+        "resize-1440",
+        "send",
+        "code-copy",
+        "code-paste",
+        "code-clear",
+        "stream-copy",
+        "stream-paste",
+        "stream-clear",
+        "readonly-copy",
+        "readonly-cut-rejected",
+        "readonly-caret",
+        "readonly-paste-rejected",
+        "readonly-paste",
+        "complete"
+      ],
+      "terminal_boundary": "original integration_test completion",
+      "interpretation": "Complete trusted W3C suite passed."
+    },
+    "safari": {
+      "framework_status": "failed",
+      "framework_report": {
+        "file": "input/input-safari/framework/framework-input.json",
+        "sha256": "84a3187db3b93f0e2a8dbd15a29a952bd7ca4a4c80ebd6c95b93c3f3fc90656d"
+      },
+      "framework_boundary": "Retained injected composition assertions; stock and Prompt comparisons show the same phenomenon, not a Prompt-specific OS IME defect.",
+      "trusted_w3c_status": "failed",
+      "trusted_w3c_report": {
+        "file": "input/input-safari/browser/browser-input.json",
+        "sha256": "ca2a2d9a2f3820e3ffb1440d580a347ee6dc036f2c5aaee49a6c32c738ef8fd1"
+      },
+      "stages": [
+        "prompt-type",
+        "shift-enter",
+        "model-open",
+        "model-escape",
+        "keyboard-copy",
+        "keyboard-clear",
+        "keyboard-paste",
+        "select-before-resize",
+        "resize-599",
+        "resize-600",
+        "resize-1023",
+        "resize-1024",
+        "resize-1440",
+        "send",
+        "code-copy",
+        "code-paste",
+        "code-clear",
+        "stream-copy",
+        "stream-paste",
+        "stream-clear",
+        "readonly-copy",
+        "readonly-cut-rejected",
+        "readonly-caret"
+      ],
+      "terminal_boundary": "readonly-paste-rejected",
+      "interpretation": "Readonly copy and cut rejection passed. ArrowRight did not produce the required collapsed caret; Paste was not issued."
+    }
+  },
+  "catalog_orca": {
+    "status": "not_observed",
+    "report": {
+      "file": "orca-pilot/catalog-orca-pilot-33827344230-1/catalog-orca-three-tasks/catalog-report.json",
+      "sha256": "e6326a02fa2210dffb5861ae8b98e172676cacb6cdf9617920e42845f1b7637c"
+    },
+    "cleanup": "verified",
+    "transport": {
+      "kind": "owned_raw_pty",
+      "producer_debug_file": "/dev/stdout",
+      "captured_log": "capability-preflight/orca-debug.log",
+      "content_policy": "Original diagnostic bytes; no injected utterances or handler records",
+      "bytes_captured": 668434,
+      "eof_verified": true,
+      "reader_stopped": true,
+      "capture_error": null
+    },
+    "tasks": [
+      {
+        "id": "theme_keyboard_toggle",
+        "status": "not_observed",
+        "commands": 3,
+        "errors": [
+          "TimeoutError: Timed out waiting for a capability response"
+        ]
+      },
+      {
+        "id": "thinking_disclosure",
+        "status": "not_observed",
+        "commands": 2,
+        "errors": [
+          "TimeoutExpired: Command '['/usr/bin/python3', '/home/runner/work/shadcn_flutter/shadcn_flutter/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '6079']' timed out after 8 seconds",
+          "Failure snapshot: Command '['/usr/bin/python3', '/home/runner/work/shadcn_flutter/shadcn_flutter/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '6079']' timed out after 8 seconds"
+        ]
+      },
+      {
+        "id": "search_query_and_selection",
+        "status": "not_observed",
+        "commands": 0,
+        "errors": [
+          "TimeoutExpired: Command '['/usr/bin/python3', '/home/runner/work/shadcn_flutter/shadcn_flutter/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '6079']' timed out after 8 seconds"
+        ]
+      }
+    ],
+    "theme_partial_observation": "First Tab focused Theme; Space changed system to light with native focused/enabled true. Real WhereAmI said panel, so the exact utterance and complete task were not accepted.",
+    "reader_focus_boundary": "Orca received Theme focused, then on Space found Theme outside the active frame because an intermediate filler had no parent, and reset locus to frame/panel.",
+    "application_acceptance": "not_accepted",
+    "human_review": "not_accepted",
+    "runner_source_report": {
+      "selected_source_sha": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+      "file": "orca-pilot/catalog-orca-pilot-33827344230-1/catalog-orca-run/runner.json",
+      "sha256": "2111c779179b839ec9c54efd21cedd7d66f6026e57d8af21051949f60e9fe17b"
+    },
+    "build_provenance_report": {
+      "selected_source_sha": "f39faedfcb0e09f57e29fd8edbfab98b808164b9",
+      "file": "orca-pilot/catalog-orca-pilot-33827344230-1/catalog-orca-three-tasks/build-provenance.json",
+      "sha256": "95b3f6789de681be6b1afe1eeea22f5f0859bcd311c1724ab89b5a98275112f7"
+    }
+  },
+  "narrator": {
+    "status": "not_accepted",
+    "errors": [
+      "No usable loopback audio endpoint: Exception calling \".ctor\" with \"1\" argument(s): \"Element not found. (Exception from HRESULT: 0x80070490)\""
+    ],
+    "report": {
+      "file": "input/real-at-windows-capability/report.json",
+      "sha256": "76fb2a4739c52c2354792b93a944c1d1e9443dfcbba13daf2aaf43ec4f5ea11c"
+    }
+  },
+  "ios_driver": {
+    "passed": true,
+    "exit_code": 0,
+    "report": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+      "sha256": "de7239295d50c40b12e8031833107c3d839a2d8a9046cbc212103c4d439d4b31"
+    }
+  }
+}

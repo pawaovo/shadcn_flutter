@@ -2,11 +2,14 @@
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
 Status: **not ready for stable-release sign-off**. The latest completed
-`3612efd0` checkpoint passed 11/12 main jobs (Edge failed before app startup).
+`f39faedf` checkpoint passed 12/12 main jobs, including the actual iOS driver.
 All three native framework input jobs passed; all four real-browser suites
 passed the Prompt/resize/clipboard flows, with Firefox completing its entire
-W3C suite. The new readonly-focus and Catalog cold-start repairs await their
-own cloud result. P1/P2 engineering budgets passed at the earlier `87299572`
+W3C suite. The readonly focus repair now passes copy and Cut rejection in all
+four browsers; Chrome/Edge/Safari still fail the required ArrowRight caret
+collapse. Real Linux Tab/Space now focuses and activates Theme, while the full
+Orca task fails at a missing native parent link. P1/P2 engineering budgets
+passed at the earlier `87299572`
 runtime snapshot; P3 frames, OS IME and full device/AT acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
@@ -28,7 +31,78 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Latest completed checkpoint at 3612efd0
+## Latest completed checkpoint at f39faedf
+
+[The exact-source CI record](../../../.github/evidence/f39faedf-ci.md) and its
+[JSON manifest](../../../.github/evidence/f39faedf-ci.json) bind all three runs,
+22 job identities and 13 core report hashes to
+`f39faedfcb0e09f57e29fd8edbfab98b808164b9`. Main CI passed **12/12**. Input/AT
+passed **4/9** jobs: the three native framework targets and GTK Orca capability.
+Firefox again passed its complete independent W3C suite, although its combined
+job failed the retained framework composition check.
+
+Chrome, Edge and Safari passed the actual readonly document's focus, full
+selection, copy, Backspace protection and Cut rejection. Their next real
+ArrowRight did not satisfy the required collapsed caret, and Paste was not
+issued. Chrome/Edge observations show both DOM and Flutter still at `0:109`,
+with text, readonly state, focus and controller identity preserved. Safari
+provides the final Flutter selection but not the equivalent continuous DOM
+trace. This is not evidence of document deletion or observed DOM/Dart divergence.
+
+The real Linux Catalog pilot now reaches Theme with the first Tab and changes
+system to light with Space. Native enabled/focused state and Orca's initial
+Theme focus speech are observed. On the subsequent ancestor walk, an
+intermediate filler reports no parent; Orca resets its locus to the frame/panel
+and its real Where Am I handler says `panel.` instead of the required Theme
+utterance. No complete task is accepted. The proposed bounded native ATK parent
+repair has its own real FlView initialization/lifetime probe and requires a new
+Linux execution; neither source review nor unrelated audio accepts that repair.
+
+Local validation at this source remains **641/641 library tests, 66/66 Catalog
+tests**, strict analysis and Git-source formatting. The clean publication
+dry-run exited 0 with zero warnings, and fresh Web and macOS release builds
+passed. No package was published. Narrator still lacks a default WASAPI render
+endpoint; actual OS IME, physical devices and human speech review remain open.
+
+A later [direct macOS observation](./2026-09-04-macos-direct-input.md) confirmed
+native Tab traversal, Motion activation, and typing/filtering `waffle` in
+Search after verifying the real foreground app. The subsequent system paste
+operation timed out and produced inconsistent AX/rendered values, so clipboard
+completion remains unaccepted. These bounded native observations do not accept
+the complete input matrix or the later source changes.
+
+## Repairs following f39faedf
+
+The Web readonly document now routes plain and Shift Left/Right through
+Flutter's own `ExtendSelectionByCharacterIntent` actions. This scope applies
+only to that document on Web. Native widgets and Control/Alt/Meta shortcuts
+retain their host policy; the component does not calculate character offsets
+or manipulate DOM selection directly. Three red regressions became green,
+covering full-selection collapse, grapheme movement and the SDK's RTL logical
+selection contract; modifier/native-host protections also pass. All **648
+library tests**, strict library/Catalog analysis, and **149 Git-source Dart
+format checks** pass.
+
+[The actual-browser controls](./2026-09-04-readonly-selection-control.md) compare
+the earlier default paths with both a stock SDK-action variant and the actual
+repaired product. On the product page, one real Meta+A followed by one
+ArrowRight moves both DOM and Flutter from `0:109` to `109:109`, preserving
+readonly state, focus, text and editor/controller identities. Both the exact
+CI text and a separately labeled newline variant pass this bounded operation.
+The observed host is Codex's in-app browser, release mode, with browser version
+unknown. The four-browser CI and its complete clipboard journey remain their
+own required verification; none of their assertions was relaxed.
+
+The Linux Catalog runner repairs only a missing parent on its real direct
+AtkSocket child. Its weak-reference destroy hook removes only the relation
+it installed and still owns. The separate native probe covers actual SDK
+initialization and explicitly constructed existing/replaced-parent conditions,
+including real getter inverses and finalization. Independent source review,
+55 Python checks (53 passed, two Windows-only skips), and workflow lint pass.
+Actual native compilation, GTK lifetime results and full Orca tasks await the
+new Linux execution. See the [native bridge contract](../../../packages/beautiful_ai_ui_catalog/linux/runner/ACCESSIBILITY_BRIDGE.md).
+
+## Earlier checkpoint at 3612efd0
 
 [The compact CI record](../../../.github/evidence/3612efd0-ci.md) and its
 [JSON](../../../.github/evidence/3612efd0-ci.json) preserve the exact run/job
@@ -344,14 +418,16 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Run the readonly document focus/readiness and Catalog content FocusScope
-  repairs on real CI; preserve original assertions and capture remaining
-  target errors. Prompt menu/value preservation already has real-browser
-  evidence at `3612efd0`. Retain the separate Edge startup failure.
+- Verify the remaining readonly ArrowRight and native ATK parent repairs on
+  their new source, preserving all original input and reader assertions.
+  Readonly focus/readiness and Catalog content FocusScope now have actual
+  results at `f39faedf`; the earlier Edge startup failure remains historical.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain
-  separate from the engineering defaults used here.
+  separate from the engineering defaults used here. A [read-only trace diagnosis](./performance/2026-09-04-p3-trace-diagnosis.md)
+  identifies expensive phases but does not provide sufficient attribution for
+  an additional product patch.
 - Complete actual physical-device, OS IME, direct keyboard/clipboard and full
   screen-reader task-flow review for the advertised platforms and applicable
   host integrations. Narrator needs a host with an available audio endpoint;

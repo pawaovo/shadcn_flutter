@@ -6,6 +6,7 @@
 #endif
 
 #include "flutter/generated_plugin_registrant.h"
+#include "accessibility_bridge.h"
 
 struct _MyApplication {
   GtkApplication parent_instance;
@@ -66,6 +67,7 @@ static void my_application_activate(GApplication* application) {
   fl_view_set_background_color(view, &background_color);
   gtk_widget_show(GTK_WIDGET(view));
   gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
+  catalog_repair_accessible_socket_parent(view);
 
   // Show the window when Flutter renders.
   // Requires the view to be realized so we can start rendering.

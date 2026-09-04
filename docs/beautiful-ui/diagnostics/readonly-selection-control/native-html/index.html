@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Native HTML readonly selection control</title>
+<style>
+  body { margin: 28px; max-width: 1000px; color: #18212b; background: #f4f6f8; font: 16px/1.5 system-ui, sans-serif; }
+  textarea { box-sizing: border-box; width: 100%; min-height: 150px; padding: 16px; font: 18px/1.6 system-ui, sans-serif; color: #18212b; background: white; border: 1px solid #667085; }
+  pre { padding: 16px; background: white; border: 1px solid #cbd5e1; white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.45 ui-monospace, monospace; }
+</style>
+<h1>Native HTML readonly textarea</h1>
+<p>No Flutter. Observers only: no programmatic focus, selection, key dispatch or preventDefault.</p>
+<p>First sequence: click the textarea, press Ctrl+A (Windows/Linux) or Command+A (macOS), then press ArrowRight once. Read the current state and event trace. Reload before a fresh control run.</p>
+<textarea id="native-readonly" aria-label="Native HTML readonly document" readonly rows="4">We should maybe order some more pistachio tubs soon. Confirm the supplier lead time before sending the order.</textarea>
+<h2>Current state</h2>
+<pre id="state" aria-label="Native textarea current state"></pre>
+<h2>Passive event observations</h2>
+<pre id="events" aria-label="Native textarea event observations"></pre>
+<script>
+  const field = document.getElementById('native-readonly');
+  const current = document.getElementById('state');
+  const output = document.getElementById('events');
+  const observations = [];
+  const started = performance.now();
+  function state() {
+    return {
+      text: field.value,
+      length: field.value.length,
+      readOnly: field.readOnly,
+      disabled: field.disabled,
+      focused: document.activeElement === field,
+      documentFocused: document.hasFocus(),
+      selectionStart: field.selectionStart,
+      selectionEnd: field.selectionEnd,
+      selectionDirection: field.selectionDirection,
+      activeTag: document.activeElement?.tagName || null,
+      activeId: document.activeElement?.id || null
+    };
+  }
+  function record(phase, event) {
+    const entry = {
+      phase,
+      elapsedMs: Math.round(performance.now() - started),
+      eventType: event?.type || null,
+      key: event?.key || null,
+      code: event?.code || null,
+      isTrusted: event?.isTrusted ?? null,
+      defaultPrevented: event?.defaultPrevented ?? null,
+      targetTag: event?.target?.tagName || null,
+      targetId: event?.target?.id || null,
+      ctrl: event?.ctrlKey ?? false,
+      meta: event?.metaKey ?? false,
+      shift: event?.shiftKey ?? false,
+      alt: event?.altKey ?? false,
+      ...state()
+    };
+    observations.push(entry);
+    current.textContent = JSON.stringify(state(), null, 2);
+    output.textContent = JSON.stringify(observations.slice(-60), null, 2);
+  }
+  for (const type of ['keydown', 'keyup']) {
+    document.addEventListener(type, event => {
+      record('capture', event);
+      // Observe after the complete event-dispatch task, without consuming it.
+      setTimeout(() => record('after dispatch', event), 0);
+      requestAnimationFrame(() => record('next animation frame', event));
+    }, {capture: true, passive: true});
+  }
+  document.addEventListener('selectionchange', event => record('selectionchange', event), {passive: true});
+  field.addEventListener('select', event => record('select', event), {passive: true});
+  field.addEventListener('focus', event => record('focus', event), {passive: true});
+  field.addEventListener('blur', event => record('blur', event), {passive: true});
+  record('initial', null);
+</script>
+</html>

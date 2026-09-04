@@ -9,6 +9,7 @@ project(runner LANGUAGES CXX)
 add_executable(${BINARY_NAME}
   "main.cc"
   "my_application.cc"
+  "accessibility_bridge.cc"
   "${FLUTTER_MANAGED_DIR}/generated_plugin_registrant.cc"
 )
 
@@ -24,3 +25,22 @@ target_link_libraries(${BINARY_NAME} PRIVATE flutter)
 target_link_libraries(${BINARY_NAME} PRIVATE PkgConfig::GTK)
 
 target_include_directories(${BINARY_NAME} PRIVATE "${CMAKE_SOURCE_DIR}")
+
+# Explicit CI-only probe. It links the runtime from the prior ordinary Flutter
+# build without another flutter_assemble invocation or a bundle installation.
+add_library(catalog_probe_flutter_runtime SHARED IMPORTED)
+set_target_properties(catalog_probe_flutter_runtime PROPERTIES
+  IMPORTED_LOCATION "${FLUTTER_LIBRARY}"
+  INTERFACE_INCLUDE_DIRECTORIES "${FLUTTER_MANAGED_DIR}/ephemeral"
+)
+add_executable(catalog_accessibility_bridge_probe EXCLUDE_FROM_ALL
+  "accessibility_bridge_probe.cc"
+  "accessibility_bridge.cc"
+)
+apply_standard_settings(catalog_accessibility_bridge_probe)
+target_link_libraries(catalog_accessibility_bridge_probe PRIVATE
+  catalog_probe_flutter_runtime PkgConfig::GTK
+)
+set_target_properties(catalog_accessibility_bridge_probe PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/native_bridge_probe"
+)
