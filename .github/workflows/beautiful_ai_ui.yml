@@ -627,6 +627,7 @@ jobs:
           printf '%s\n' "$CANDIDATE_SOURCE_SHA" > artifacts/android-candidate/source-sha.txt
           python3 -B -m unittest discover -s .github/scripts -p 'test_android_candidate_diagnostic.py' -v
           python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p 'test_build.py' -v
+          python3 -B -m unittest discover -s .github/scripts -p 'test_android_candidate_wire.py' -v
           cd packages/beautiful_ai_ui_catalog
           dart test_driver/android_candidate_http_fixture.dart
           dart test_driver/android_candidate_stage_driver_fixture.dart

@@ -425,15 +425,15 @@ class Runner:
             raise RuntimeError("Native candidate tap is never retried")
         if self.inspection is None or time.monotonic() - self.inspected_at > 1.4:
             raise RuntimeError("Native candidate inspection is missing or stale")
-        candidate = body.get("candidate", {})
-        claim = body.get("claim", {})
-        if candidate.get("candidate_id") != self.inspection["candidate_id"]:
+        candidate_id = body.get("candidate_id")
+        lease_id = body.get("lease_id")
+        if candidate_id != self.inspection["candidate_id"]:
             raise RuntimeError("Driver changed the native candidate identity")
         fresh = self.state()
         write_json(self.stage_file("vm-immediately-before-native-tap.json"), fresh)
         validate_stage(fresh, self.nonce, self.args.source_sha, claimed=True,
                        stage_id=record["stage_id"], stage_nonce=record["stage_nonce"],
-                       candidate_id=self.inspection["candidate_id"], lease_id=claim.get("lease_id"))
+                       candidate_id=self.inspection["candidate_id"], lease_id=lease_id)
         self.completed_prefix(fresh, STAGES.index(record["stage_id"]))
         if time.monotonic() - self.inspected_at > 1.4:
             raise RuntimeError("Candidate expired while revalidating the VM lease")

@@ -180,11 +180,7 @@ Future<void> main() async {
         final finished = await host.request(
           'POST',
           '/native/finish',
-          <String, Object?>{
-            'nonce': nonce,
-            'source_sha': sourceSha,
-            ...stage.identity,
-          },
+          stage.requestBody(nonce, sourceSha),
           timeout: bounded(const Duration(seconds: 40)),
         );
         stage.acceptFinish(finished);
@@ -211,11 +207,7 @@ Future<void> main() async {
         final prepared = await host.request(
           'POST',
           '/native/prepare',
-          <String, Object?>{
-            'nonce': nonce,
-            'source_sha': sourceSha,
-            ...stage.identity,
-          },
+          stage.requestBody(nonce, sourceSha),
           timeout: bounded(const Duration(seconds: 30)),
         );
         stage.verify(prepared);
@@ -228,11 +220,7 @@ Future<void> main() async {
         final candidate = await host.request(
           'POST',
           '/native/inspect',
-          <String, Object?>{
-            'nonce': nonce,
-            'source_sha': sourceSha,
-            ...stage.identity,
-          },
+          stage.requestBody(nonce, sourceSha),
           timeout: bounded(const Duration(seconds: 5)),
         );
         stage.verify(candidate);
@@ -272,13 +260,12 @@ Future<void> main() async {
         final click = await host.request(
           'POST',
           '/native/click',
-          <String, Object?>{
-            'nonce': nonce,
-            'source_sha': sourceSha,
-            ...stage.identity,
-            'candidate_id': candidateId,
-            'lease_id': stage.leaseId,
-          },
+          stage.clickBody(
+            nonce,
+            sourceSha,
+            candidateId: candidateId,
+            leaseId: stage.leaseId!,
+          ),
           timeout: bounded(const Duration(seconds: 3)),
         );
         stage.verify(click);
@@ -485,7 +472,8 @@ final class AndroidCandidateDriverStages {
       known.verify(state);
       return known;
     }
-    if (index != _stages.length || nonce == runNonce ||
+    if (index != _stages.length ||
+        nonce == runNonce ||
         _stages.values.any((stage) => stage.nonce == nonce)) {
       throw StateError(
         'Candidate stages were reordered or reused a stage nonce.',
@@ -602,6 +590,24 @@ final class AndroidCandidateDriverStage {
   Map<String, String> get identity => <String, String>{
     'stage_id': id,
     'stage_nonce': nonce,
+  };
+
+  Map<String, Object?> requestBody(String runNonce, String sourceSha) =>
+      <String, Object?>{
+        'nonce': runNonce,
+        'source_sha': sourceSha,
+        ...identity,
+      };
+
+  Map<String, Object?> clickBody(
+    String runNonce,
+    String sourceSha, {
+    required String candidateId,
+    required String leaseId,
+  }) => <String, Object?>{
+    ...requestBody(runNonce, sourceSha),
+    'candidate_id': candidateId,
+    'lease_id': leaseId,
   };
 
   void verify(Map<String, Object?> response) {

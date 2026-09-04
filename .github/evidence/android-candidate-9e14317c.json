@@ -1,0 +1,530 @@
+{
+  "schema_version": 1,
+  "source_sha": "9e14317c18167b9beb49ed7219fb3a418c52189e",
+  "run_id": 33868182731,
+  "job_id": 101007719510,
+  "run_url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33868182731",
+  "conclusion": "failure",
+  "scope": "First fixed-three-stage Android diagnostic; host click wire mismatch before native touch",
+  "artifact": {
+    "id": 9935009448,
+    "node_id": "MDg6QXJ0aWZhY3Q5OTM1MDA5NDQ4",
+    "name": "android-native-candidate-33868182731-1",
+    "size_in_bytes": 731247,
+    "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9935009448",
+    "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9935009448/zip",
+    "expired": false,
+    "digest": "sha256:7a8cc571eb2e33ad50271e02a544ef305048a47519fb4e28fad4c03c9ec5ba94",
+    "created_at": "2026-09-04T11:36:52Z",
+    "updated_at": "2026-09-04T11:36:52Z",
+    "expires_at": "2026-09-18T11:36:51Z",
+    "workflow_run": {
+      "id": 33868182731,
+      "repository_id": 1354580211,
+      "head_repository_id": 1354580211,
+      "head_branch": "product/main",
+      "head_sha": "9e14317c18167b9beb49ed7219fb3a418c52189e"
+    }
+  },
+  "artifact_download_count": 1,
+  "verified_run_manifest_files": 123,
+  "build": {
+    "protocol_version": 2,
+    "actual_jvm_protocol_checks": 46,
+    "actual_jvm_stage_spec_checks": 27,
+    "helper": {
+      "android_jar": "/usr/local/lib/android/sdk/platforms/android-35/android.jar",
+      "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "apk": "/home/runner/work/shadcn_flutter/shadcn_flutter/artifacts/android-candidate/helper-build/android-candidate-probe.apk",
+      "apk_sha256": "4ef0f266410e1d7d1839fcaa94b756d92812e0b3481bfe88dbed07e998e5320d",
+      "build_tools_version": "37.0.0",
+      "component": "dev.beautifulai.androidcandidateprobe/.ProbeInstrumentation",
+      "min_sdk": 34,
+      "package": "dev.beautifulai.androidcandidateprobe",
+      "protocol_version": 2,
+      "source_file_sha256": {
+        "AndroidManifest.xml": "3030608fec81e2e5fb6af0dfceb8d10039eddee14705c3f6b32eb70d1ee853a4",
+        "build.py": "d62eacffd26cab7035c63a0b7db13138ea37afa4e2d4c3965ea7ba42e981e8e5",
+        "generated/dev/beautifulai/androidcandidateprobe/BuildIdentity.java": "d37354fbdf9a5d6944f218c868a17561fbc6756490fbc914403676f0c3a1b899",
+        "repo/.github/scripts/run_catalog_input_acceptance.py": "8bf405be74889aa962c0f6b6c3aa746546a6e1f0619a7fc84e962cf7e5b6f328",
+        "repo/.github/scripts/run_ios_catalog_journey.py": "8c85b9d0735433baff1b5ee428316a4992bc2ee22f292a1aa4a14256794db469",
+        "repo/.github/scripts/windows_owned_process.py": "f54850f3a3c942c2840c38a4f55b4a0838d25568360497309c1f97f52b754e12",
+        "src/dev/beautifulai/androidcandidateprobe/ProbeInstrumentation.java": "cb53a23519efa0f2164f6f61bc5fa5708239d2f28dd45209df77ab7c0b41db33",
+        "src/dev/beautifulai/androidcandidateprobe/Protocol.java": "1dd5fca26681cb5adb15804a50ab24d30aeb361ab5de6de599435076889c6686",
+        "src/dev/beautifulai/androidcandidateprobe/StageSpec.java": "d6705e92f8f6c4dca5a36fc4b0ec562af1c41fc7e14433116f0482bbe7d7029d",
+        "tests/ProtocolTest.java": "f4387f963bbe5104d62e8d76d2894ad9bc89980115c9575f684de1c6a92b30ac",
+        "tests/StageSpecTest.java": "01ac331bd330f09d2f0e4feebf7362e31ae0a93679cdc3604a881d032ada37a9",
+        "tests/test_build.py": "0d18f0be300eee0c0cbe1226ee006bda085d1154f94d0eab56680b288e55c74e"
+      },
+      "source_sha": "9e14317c18167b9beb49ed7219fb3a418c52189e",
+      "target_sdk": 35,
+      "tool_paths": {
+        "aapt2": "/usr/local/lib/android/sdk/build-tools/37.0.0/aapt2",
+        "apksigner": "/usr/local/lib/android/sdk/build-tools/37.0.0/apksigner",
+        "d8": "/usr/local/lib/android/sdk/build-tools/37.0.0/d8",
+        "java": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java",
+        "javac": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/javac",
+        "keytool": "/usr/lib/jvm/temurin-17-jdk-amd64/bin/keytool",
+        "zipalign": "/usr/local/lib/android/sdk/build-tools/37.0.0/zipalign"
+      },
+      "tool_versions": {
+        "aapt2": "Android Asset Packaging Tool (aapt) 2.20-15087165",
+        "apksigner": "0.9",
+        "d8": "D8 9.2.4-dev (build 084a89126ae0596c599143df57a654646af28313 from go/r8bot (luci-r8-custom-ci-archive-0-4u1w))",
+        "java": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)",
+        "javac": "javac 17.0.20.1",
+        "keytool": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)",
+        "zipalign": "Android SDK Build-Tools 37.0.0"
+      }
+    },
+    "catalog_test_apk": {
+      "path": "/home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/build/app/outputs/flutter-apk/app-debug.apk",
+      "sha256": "9e985c4ea3aabfc080f40ffb8dded4d2c5f98d9d760454d34dca6c082d2f5f41",
+      "bytes": 77119297
+    }
+  },
+  "app_process": {
+    "package": "dev.beautifulai.beautiful_ai_ui_catalog",
+    "pid": 2390,
+    "start_ticks": 26166
+  },
+  "stage_records": [
+    {
+      "stage_id": "chat_send",
+      "stage_nonce": "2912fd2431074351ada4e66ff672c362",
+      "event_log": "files/probe-events-chat_send-2912fd2431074351ada4e66ff672c362.jsonl",
+      "helper_process": {
+        "package": "dev.beautifulai.androidcandidateprobe",
+        "pid": 2328,
+        "start_ticks": 6368
+      },
+      "prepared_by_driver": true,
+      "inspection_attempted": true,
+      "native_call_drained": true,
+      "cleanup_verified": true,
+      "retired_epoch_ns": 1788521809247634955
+    }
+  ],
+  "candidate_inspection": {
+    "ok": true,
+    "operation": "inspect",
+    "protocol_version": 2,
+    "device_elapsed_ms": 296320,
+    "source_sha": "9e14317c18167b9beb49ed7219fb3a418c52189e",
+    "nonce": "09e78da4882443358ca558f63363a594",
+    "run_nonce": "09e78da4882443358ca558f63363a594",
+    "stage_nonce": "2912fd2431074351ada4e66ff672c362",
+    "stage_id": "chat_send",
+    "expected_text": "Check cone inventory",
+    "candidate_text": "inventory",
+    "composing_base": 11,
+    "composing_extent": 20,
+    "selection_offset": 20,
+    "ime_component": "com.android.inputmethod.latin/.LatinIME",
+    "ime_package": "com.android.inputmethod.latin",
+    "ime_window_id": 5,
+    "focused_app_package": "dev.beautifulai.beautiful_ai_ui_catalog",
+    "bounds": {
+      "left": 380,
+      "top": 1503,
+      "right": 698,
+      "bottom": 1604
+    },
+    "candidate_id": "bfaa0b16f7a16134fc9d45e833117ef2",
+    "inspect_started_device_ms": 296187,
+    "expires_at_device_ms": 298187
+  },
+  "exact_candidate_nodes": [
+    {
+      "index": 48,
+      "depth": 9,
+      "package": "com.android.inputmethod.latin",
+      "view_id": null,
+      "class": "android.widget.TextView",
+      "text": "inventory",
+      "description": "inventory",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "bounds": {
+        "left": 380,
+        "top": 1503,
+        "right": 698,
+        "bottom": 1604
+      }
+    }
+  ],
+  "native_click_count": 0,
+  "native_event_operations": [
+    "inspect",
+    "stop",
+    "finish"
+  ],
+  "complete_response_received": true,
+  "all_tests_passed": false,
+  "original_response": {
+    "result": "false",
+    "failureDetails": [
+      "{\"methodName\":\"catalog launches and completes its critical interaction journey\",\"details\":\"══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞═════════════════\\nThe following StateError was thrown running a test:\\nBad state: Native driver aborted: Bad state: Native supervisor\\n/native/click failed (409): {ok: false, error: RuntimeError:\\nDriver changed the native candidate identity}.\\n\\nWhen the exception was thrown, this was the stack:\\n#0      main.<anonymous closure>.until (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_android_candidate_test.dart:247:15)\\n<asynchronous suspension>\\n#1      main.<anonymous closure> (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_android_candidate_test.dart:272:11)\\n<asynchronous suspension>\\n#2      sendCatalogChatOnce (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/support/chat_send_diagnostics.dart:21:5)\\n<asynchronous suspension>\\n#3      _runP2Journey (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart:238:3)\\n<asynchronous suspension>\\n#4      main.<anonymous closure> (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart:148:9)\\n<asynchronous suspension>\\n#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)\\n<asynchronous suspension>\\n#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)\\n<asynchronous suspension>\\n#7      TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1707:12)\\n<asynchronous suspension>\\n\\nThe test description was:\\n  catalog launches and completes its critical interaction journey\\n═════════════════════════════════════════════════════════════════\\n\"}"
+    ],
+    "data": {
+      "android_candidate": {
+        "suite": "catalog_android_candidate",
+        "scope": "original full Catalog journey with three fixed native IME candidates",
+        "status": "failed",
+        "stages": [
+          {
+            "stage_id": "chat_send",
+            "stage_nonce": "2912fd2431074351ada4e66ff672c362",
+            "events": [
+              {
+                "stage": "awaiting_candidate",
+                "elapsed_ms": 28175,
+                "snapshot": {
+                  "input": {
+                    "text": "Check cone inventory",
+                    "selectionBase": 20,
+                    "selectionExtent": 20,
+                    "selectionAffinity": "TextAffinity.downstream",
+                    "selectionIsDirectional": false,
+                    "composingBase": 11,
+                    "composingExtent": 20
+                  },
+                  "editor_primary_focus": true,
+                  "send_count": 1,
+                  "send_enabled_semantics": "isFalse",
+                  "view_insets_bottom_physical": 901.0,
+                  "platform_semantics_enabled": true,
+                  "device_pixel_ratio": 2.625,
+                  "host_status": "idle",
+                  "host_messages": [
+                    {
+                      "role": "user",
+                      "text": "What should we restock this week?"
+                    },
+                    {
+                      "role": "assistant",
+                      "text": "Start with pistachio and waffle cones. Both have rising demand."
+                    }
+                  ],
+                  "observation_error": null
+                },
+                "native_drained": true
+              },
+              {
+                "stage": "action_claimed",
+                "elapsed_ms": 30289,
+                "snapshot": {
+                  "input": {
+                    "text": "Check cone inventory",
+                    "selectionBase": 20,
+                    "selectionExtent": 20,
+                    "selectionAffinity": "TextAffinity.downstream",
+                    "selectionIsDirectional": false,
+                    "composingBase": 11,
+                    "composingExtent": 20
+                  },
+                  "editor_primary_focus": true,
+                  "send_count": 1,
+                  "send_enabled_semantics": "isFalse",
+                  "view_insets_bottom_physical": 901.0,
+                  "platform_semantics_enabled": true,
+                  "device_pixel_ratio": 2.625,
+                  "host_status": "idle",
+                  "host_messages": [
+                    {
+                      "role": "user",
+                      "text": "What should we restock this week?"
+                    },
+                    {
+                      "role": "assistant",
+                      "text": "Start with pistachio and waffle cones. Both have rising demand."
+                    }
+                  ],
+                  "observation_error": null
+                },
+                "native_drained": false,
+                "lease_id": "a69cf54a666371e0d52b05d05886e8cc"
+              },
+              {
+                "stage": "failed",
+                "elapsed_ms": 30562,
+                "snapshot": {
+                  "input": {
+                    "text": "Check cone inventory",
+                    "selectionBase": 20,
+                    "selectionExtent": 20,
+                    "selectionAffinity": "TextAffinity.downstream",
+                    "selectionIsDirectional": false,
+                    "composingBase": 11,
+                    "composingExtent": 20
+                  },
+                  "editor_primary_focus": true,
+                  "send_count": 1,
+                  "send_enabled_semantics": "isFalse",
+                  "view_insets_bottom_physical": 901.0,
+                  "platform_semantics_enabled": true,
+                  "device_pixel_ratio": 2.625,
+                  "host_status": "idle",
+                  "host_messages": [
+                    {
+                      "role": "user",
+                      "text": "What should we restock this week?"
+                    },
+                    {
+                      "role": "assistant",
+                      "text": "Start with pistachio and waffle cones. Both have rising demand."
+                    }
+                  ],
+                  "observation_error": null
+                },
+                "native_drained": false,
+                "failure": "Native driver aborted: Bad state: Native supervisor /native/click failed (409): {ok: false, error: RuntimeError: Driver changed the native candidate identity}.",
+                "lease_id": "a69cf54a666371e0d52b05d05886e8cc"
+              },
+              {
+                "stage": "failed",
+                "elapsed_ms": 31026,
+                "snapshot": {
+                  "input": {
+                    "text": "Check cone inventory",
+                    "selectionBase": 20,
+                    "selectionExtent": 20,
+                    "selectionAffinity": "TextAffinity.downstream",
+                    "selectionIsDirectional": false,
+                    "composingBase": 11,
+                    "composingExtent": 20
+                  },
+                  "editor_primary_focus": true,
+                  "send_count": 1,
+                  "send_enabled_semantics": "isFalse",
+                  "view_insets_bottom_physical": 901.0,
+                  "platform_semantics_enabled": true,
+                  "device_pixel_ratio": 2.625,
+                  "host_status": "idle",
+                  "host_messages": [
+                    {
+                      "role": "user",
+                      "text": "What should we restock this week?"
+                    },
+                    {
+                      "role": "assistant",
+                      "text": "Start with pistachio and waffle cones. Both have rising demand."
+                    }
+                  ],
+                  "observation_error": null
+                },
+                "native_drained": true,
+                "failure": "Native driver aborted: Bad state: Native supervisor /native/click failed (409): {ok: false, error: RuntimeError: Driver changed the native candidate identity}.",
+                "lease_id": "a69cf54a666371e0d52b05d05886e8cc"
+              }
+            ],
+            "input_trace": [
+              {
+                "elapsed_ms": 27767,
+                "input": {
+                  "text": "Check cone inventory",
+                  "selectionBase": 20,
+                  "selectionExtent": 20,
+                  "selectionAffinity": "TextAffinity.downstream",
+                  "selectionIsDirectional": false,
+                  "composingBase": -1,
+                  "composingExtent": -1
+                }
+              },
+              {
+                "elapsed_ms": 27805,
+                "input": {
+                  "text": "Check cone inventory",
+                  "selectionBase": 20,
+                  "selectionExtent": 20,
+                  "selectionAffinity": "TextAffinity.downstream",
+                  "selectionIsDirectional": false,
+                  "composingBase": 11,
+                  "composingExtent": 20
+                }
+              }
+            ],
+            "error": "Bad state: Native driver aborted: Bad state: Native supervisor /native/click failed (409): {ok: false, error: RuntimeError: Driver changed the native candidate identity}.",
+            "stack": "#0      main.<anonymous closure>.until (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_android_candidate_test.dart:247:15)\n<asynchronous suspension>\n#1      main.<anonymous closure> (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_android_candidate_test.dart:272:11)\n<asynchronous suspension>\n#2      sendCatalogChatOnce (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/support/chat_send_diagnostics.dart:21:5)\n<asynchronous suspension>\n#3      _runP2Journey (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart:238:3)\n<asynchronous suspension>\n#4      main.<anonymous closure> (file:///home/runner/work/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/integration_test/catalog_journey_test.dart:148:9)\n<asynchronous suspension>\n#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)\n<asynchronous suspension>\n#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)\n<asynchronous suspension>\n#7      TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1707:12)\n<asynchronous suspension>\n",
+            "after_action_or_terminal_snapshot": {
+              "input": {
+                "text": "Check cone inventory",
+                "selectionBase": 20,
+                "selectionExtent": 20,
+                "selectionAffinity": "TextAffinity.downstream",
+                "selectionIsDirectional": false,
+                "composingBase": 11,
+                "composingExtent": 20
+              },
+              "editor_primary_focus": true,
+              "send_count": 1,
+              "send_enabled_semantics": "isFalse",
+              "view_insets_bottom_physical": 901.0,
+              "platform_semantics_enabled": false,
+              "device_pixel_ratio": 2.625,
+              "host_status": "idle",
+              "host_messages": [
+                {
+                  "role": "user",
+                  "text": "What should we restock this week?"
+                },
+                {
+                  "role": "assistant",
+                  "text": "Start with pistachio and waffle cones. Both have rising demand."
+                }
+              ],
+              "observation_error": null
+            }
+          }
+        ],
+        "final_state": {
+          "protocol_version": 2,
+          "nonce": "09e78da4882443358ca558f63363a594",
+          "run_nonce": "09e78da4882443358ca558f63363a594",
+          "source_sha": "9e14317c18167b9beb49ed7219fb3a418c52189e",
+          "stage_id": "chat_send",
+          "stage_nonce": "2912fd2431074351ada4e66ff672c362",
+          "stage": "failed",
+          "elapsed_ms": 31315,
+          "remaining_ms": 116444,
+          "expected_text": "Check cone inventory",
+          "candidate_text": "inventory",
+          "composing_base": 11,
+          "composing_extent": 20,
+          "selection_offset": 20,
+          "snapshot": {
+            "input": {
+              "text": "Check cone inventory",
+              "selectionBase": 20,
+              "selectionExtent": 20,
+              "selectionAffinity": "TextAffinity.downstream",
+              "selectionIsDirectional": false,
+              "composingBase": 11,
+              "composingExtent": 20
+            },
+            "editor_primary_focus": true,
+            "send_count": 1,
+            "send_enabled_semantics": "isFalse",
+            "view_insets_bottom_physical": 901.0,
+            "platform_semantics_enabled": true,
+            "device_pixel_ratio": 2.625,
+            "host_status": "idle",
+            "host_messages": [
+              {
+                "role": "user",
+                "text": "What should we restock this week?"
+              },
+              {
+                "role": "assistant",
+                "text": "Start with pistachio and waffle cones. Both have rising demand."
+              }
+            ],
+            "observation_error": null
+          },
+          "candidate_id": "bfaa0b16f7a16134fc9d45e833117ef2",
+          "lease_id": "a69cf54a666371e0d52b05d05886e8cc",
+          "claimed_elapsed_ms": 30289,
+          "lease_remaining_ms": 3974,
+          "can_click": false,
+          "native_click_acknowledged": false,
+          "native_drained": true,
+          "native_call_pending": false,
+          "send_activation_checked": false,
+          "failure": "Native driver aborted: Bad state: Native supervisor /native/click failed (409): {ok: false, error: RuntimeError: Driver changed the native candidate identity}.",
+          "stage_index": 0,
+          "original_action_passed": false,
+          "completed_stage_ids": [],
+          "stage_results": [],
+          "journey_status": "failed"
+        }
+      }
+    }
+  },
+  "failure": {
+    "original_driver_error": "Bad state: Native supervisor /native/click failed (409): {ok: false, error: RuntimeError: Driver changed the native candidate identity}",
+    "host_protocol_errors": [
+      {
+        "path": "/native/click",
+        "error": "RuntimeError: Driver changed the native candidate identity"
+      }
+    ],
+    "cause": "Dart production driver sends flat candidate_id and lease_id. Python click_native still reads body.candidate.candidate_id and body.claim.lease_id. The resulting mismatch rejects the first stage before calling native /tap. This is a host-driver wire integration defect, not a candidate or product failure.",
+    "later_stages": "prompt_command and prompt_send were not reached; no candidate existence/commit inferred."
+  },
+  "cleanup": {
+    "supervisor": "verified",
+    "supervisor_errors": [],
+    "driver_errors": [],
+    "native_abort": {
+      "ok": true,
+      "stage_id": "chat_send",
+      "stage_nonce": "2912fd2431074351ada4e66ff672c362",
+      "native_authorization_revoked": true,
+      "native_drained": true,
+      "native_helper_stopped": true
+    },
+    "first_stage_retirement_verified": true
+  },
+  "core_records": {
+    "run-final.json": {
+      "bytes": 3017,
+      "sha256": "d9ab3eed4c555673c97e8ecec7f2d2a841cf5f0f9092e6fb91e0c45cf146e03a"
+    },
+    "artifacts-metadata.json": {
+      "bytes": 743,
+      "sha256": "0c1d54c93ab9b66853531c292d0179628c2e685c99ec7dbbc133ea8387ca59e4"
+    },
+    "job-101007719510.log": {
+      "bytes": 103167,
+      "sha256": "e50f9f398be690b13cfdc6b310a6585fb497df6cbba872f121883be5a3ea6f28"
+    },
+    "artifacts/android-native-candidate-33868182731-1/helper-build/build-report.json": {
+      "bytes": 3332,
+      "sha256": "321eb214e803fdfd654e2606d279bbd0d70f315b5f83a68ed81a26028490c37c"
+    },
+    "artifacts/android-native-candidate-33868182731-1/helper-build/build.log": {
+      "bytes": 18975,
+      "sha256": "a7e405cc92c103960717062bec43f168bb1cb9bd9313e42f90f6bf70fc17d3bb"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/summary.json": {
+      "bytes": 52995,
+      "sha256": "7356cf092b6635805ceb6d1a09afc9445ea3a83a4e95fae8f1567d58cff246e1"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/driver/driver-summary.json": {
+      "bytes": 257147,
+      "sha256": "ec95cdfcefe0952f2d47e4b5289d4f7f1d1992cced2ca2aa494fafbad853ca35"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/driver/request-data.json": {
+      "bytes": 10038,
+      "sha256": "931215f385b8c759e30a9dbf3b43ef6dda51cf2b1f82c6584c170ab35e9355e1"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/host-protocol-errors.json": {
+      "bytes": 115,
+      "sha256": "4bd015f6126fcd1552236e728d635cbfd2e3e70e5e6bc13450fdd92976dec469"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/native-stages/chat_send/native-inspection.json": {
+      "bytes": 23228,
+      "sha256": "cb4a9017bc2a872256aa38e3f171bb1525a6473e2a46ed13010bfdf79985a160"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/native-stages/chat_send/native-helper-events.jsonl": {
+      "bytes": 30905,
+      "sha256": "b51ecc8aab2cdffa10fa7dd2b20b12c5f1a841b8d108ad7f391f5916a466aa91"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/native-stages/chat_send/native-instrumentation.log": {
+      "bytes": 1504,
+      "sha256": "4df91d2572b7932f27afa5ba12ad63b36f84297bc0753ca2963e39b7672c33bd"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/flutter-drive.log": {
+      "bytes": 10614,
+      "sha256": "987f34f3fa1545551ffdc112d91bdb1c09f8b140d703e0f61009ecb098fafb83"
+    },
+    "artifacts/android-native-candidate-33868182731-1/run/artifact-manifest.json": {
+      "bytes": 18426,
+      "sha256": "3008e7e5ed0d41165723433433882defcac9c111f359ce1625a746f17eff3dd5"
+    }
+  },
+  "raw_directory": "/tmp/beautiful-android-candidate-9e14317c-33868182731",
+  "preservation": "One natural workflow attempt and one artifact download. Earlier sources and failures remain unchanged. Initial watch had a read-only GitHub API EOF; only monitoring was resumed, not CI.",
+  "artifact_digest_boundary": "GitHub-reported ZIP digest is distinct from independently verified extracted-file hashes; ZIP not retained."
+}

@@ -102,7 +102,7 @@ class HostProtocolTests(unittest.TestCase):
         runner.inspected_at = time.monotonic()
         return {"nonce": runner.nonce, "source_sha": SHA,
                 "stage_id": "chat_send", "stage_nonce": STAGE_NONCE,
-                "candidate": {"candidate_id": "candidate"}, "claim": {"lease_id": "lease"}}
+                "candidate_id": "candidate", "lease_id": "lease"}
 
     def test_exact_live_vm_state_is_rechecked_before_one_native_request(self):
         body = self.prepare_click()

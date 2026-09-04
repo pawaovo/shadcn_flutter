@@ -104,6 +104,12 @@ file hashes.
 
 Local checks exercise implementation and rejection paths, not native delivery:
 
+The cross-language wire check calls the production Dart body builders and HTTP
+client against the actual Python host routes. Its VM/native peers are explicitly
+fixtures. It verifies the flat candidate/lease fields and complete
+prepare/inspect/click/finish exchange, and rejects the old nested body and a
+wrong stage before any fixture touch. Both workflows run it before the emulator.
+
 ```sh
 python3 -B -m unittest discover -s .github/scripts -p test_android_candidate_diagnostic.py -v
 python3 -B -m unittest discover -s tool/android_candidate_probe/tests -p test_build.py -v
@@ -111,6 +117,7 @@ cd packages/beautiful_ai_ui_catalog
 flutter test test/android_candidate_protocol_test.dart test/android_candidate_sequence_test.dart test/catalog_chat_send_diagnostics_test.dart test/prompt_input_diagnostics_test.dart --no-pub
 dart test_driver/android_candidate_http_fixture.dart
 dart test_driver/android_candidate_stage_driver_fixture.dart
+python3 -B -m unittest discover -s ../../.github/scripts -p test_android_candidate_wire.py -v
 ```
 
 The [native helper contract](../tool/android_candidate_probe/README.md) documents

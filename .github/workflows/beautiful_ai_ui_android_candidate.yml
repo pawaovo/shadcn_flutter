@@ -51,6 +51,8 @@ jobs:
           dart test_driver/android_candidate_http_fixture.dart
           dart test_driver/android_candidate_stage_driver_fixture.dart
           flutter analyze --fatal-infos --fatal-warnings --no-pub integration_test/catalog_android_candidate_test.dart integration_test/support/android_candidate_protocol.dart integration_test/support/prompt_input_diagnostics.dart integration_test/driver/catalog_android_candidate_driver.dart
+      - name: Verify the real Dart to Python stage wire
+        run: python3 -B -m unittest discover -s .github/scripts -p 'test_android_candidate_wire.py' -v
       - name: Enable KVM for this fresh disposable runner
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
