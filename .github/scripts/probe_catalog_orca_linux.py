@@ -26,7 +26,8 @@ import wave
 from probe_real_at_linux import Probe
 from owned_pty_capture import OwnedPtyCapture
 from run_catalog_input_acceptance import start_owned_process, stop_owned_process
-from isolated_sdk_runtime import build_command, validate_manifest, verify_loaded_engine
+from isolated_sdk_runtime import (build_command, native_dependency_environment, validate_manifest,
+                                  verify_loaded_engine, verify_loaded_native_dependencies)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -294,6 +295,7 @@ class CatalogProbe(Probe):
         self.root = output.resolve()
         self.root.mkdir(parents=True, exist_ok=False)
         super().__init__(self.root / "capability-preflight", seconds, allow_local=self.runtime_context is not None)
+        self.env.update(native_dependency_environment(self.runtime_context))
         self.named_children = {}
         self.orca_capture = None
         self.current_task = None
@@ -608,6 +610,9 @@ class CatalogProbe(Probe):
             write_json(self.output / "preflight-report.json", self.report)
         if self.report["status"] != "capability_observed":
             raise RuntimeError("Existing real-Orca capability preflight did not succeed")
+        if runtime is not None and runtime.get("native_atk_bridge") is not None:
+            self.app["preflight_native_dependencies"] = verify_loaded_native_dependencies(
+                self.named_children["fixture"].pid, runtime)
         self.stop(self.named_children["fixture"])
         self.debug = self.output / "orca-debug.log"
         self.app["runtime"] = self.report["runtime"]
@@ -632,6 +637,8 @@ class CatalogProbe(Probe):
         self.app["native_window_geometry"] = self.run(["xdotool", "getwindowgeometry", "--shell", window]).stdout
         if runtime is not None:
             self.app["loaded_engine"] = verify_loaded_engine(self.catalog.pid, runtime["engine_library"]["sha256"])
+            if runtime.get("native_atk_bridge") is not None:
+                self.app["loaded_native_dependencies"] = verify_loaded_native_dependencies(self.catalog.pid, runtime)
         self.wait_snapshot(lambda tree: self.target(tree, "Theme: system") is not None,
                            "catalog-initial", seconds=20)
         for task, action in zip(self.app["tasks"], (self.theme, self.disclosure, self.search)):

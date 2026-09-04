@@ -19,6 +19,8 @@ SDK_REVISION = "4cf24164269a5ebf0c16a028a00727d0e77bbb05"
 PATCH_SHA256 = "edff45421907b259cd3b31330816e5f5c35d3ec83e31847d41aaacab773d4394"
 NODE_SHA256 = "dbb1e3bf353dd6ec2b8f85866854cc09c6befe2e3990f213a97ca79c48426ded"
 ENGINE_NAME = "host_debug_unopt_arm64"
+ATK_SOURCE_REVISION = "46c8de80022d28eef2da58f1054b5bff745ed7e0"
+ATK_PATCH_SHA256 = "2315f3fbb206a85af9baefedca8030751e26f01c629e9d20d003bfcf3941da7d"
 
 
 def digest(path):
@@ -46,6 +48,88 @@ def build_command(context):
     return [str(sdk / "bin/flutter"), f"--local-engine-src-path={sdk / 'engine/src'}",
             f"--local-engine={ENGINE_NAME}", f"--local-engine-host={ENGINE_NAME}",
             "build", "linux", "--debug", "--no-pub", "--target=lib/main.dart"]
+
+
+def linked_library_inventory(library):
+    """Record the actual loader dependency closure for one private bridge ELF."""
+    library = Path(library).resolve()
+    output = subprocess.check_output(["ldd", str(library)], text=True,
+                                    env={**os.environ, "LC_ALL": "C",
+                                         "LD_LIBRARY_PATH": str(library.parent)})
+    if "not found" in output:
+        raise RuntimeError("Private native dependency has an unresolved linked library")
+    paths = {library}
+    for line in output.splitlines():
+        match = re.search(r"(?:=>\s+)?(/\S+)\s+\(", line)
+        if match:
+            paths.add(Path(match.group(1)).resolve())
+    if len(paths) < 2:
+        raise RuntimeError("Native dependency closure was not observed")
+    return {str(path): digest(path) for path in sorted(paths)}
+
+
+def validate_native_dependency(value, *, verify_files=True):
+    library = Path(value["library"]["path"]).resolve()
+    if (library.parent.parent != WORK / "atspi-geometry"
+            or not library.parent.name.startswith("runtime-patched")
+            or library.name != "libatk-bridge-2.0.so.0.0.0"):
+        raise RuntimeError("Unexpected private ATK bridge library location")
+    if not isinstance(value.get("linked_libraries"), dict) or not value["linked_libraries"]:
+        raise RuntimeError("Native dependency closure binding is missing")
+    if not verify_files:
+        return
+    checked_record(value["library"])
+    if checked_record(value["patch"]).name != "at-spi2-core-2.52-same-process-geometry.patch" or value["patch"]["sha256"] != ATK_PATCH_SHA256:
+        raise RuntimeError("Native dependency patch differs from the reviewed source")
+    artifact = json.loads(checked_record(value["build_artifact"]).read_text())
+    source = WORK / "atspi-geometry/patched"
+    if (artifact.get("source_pin") != ATK_SOURCE_REVISION or artifact.get("variant") != "patched"
+            or artifact.get("source") != str(source) or artifact.get("patch_sha256") != ATK_PATCH_SHA256
+            or artifact.get("source_diff_sha256") != ATK_PATCH_SHA256
+            or artifact.get("library") != str(library)
+            or artifact.get("sha256") != value["library"]["sha256"]):
+        raise RuntimeError("Private ATK bridge does not match its source/build artifact")
+    if subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=source, text=True).strip() != ATK_SOURCE_REVISION:
+        raise RuntimeError("Native dependency source revision changed")
+    diff = subprocess.check_output(["git", "diff", "--binary", "HEAD"], cwd=source)
+    if hashlib.sha256(diff).hexdigest() != ATK_PATCH_SHA256:
+        raise RuntimeError("Native dependency source patch changed")
+    selected = library.parent
+    if set(path.name for path in selected.iterdir()) != {
+            library.name, "libatk-bridge-2.0.so.0", "libatk-bridge-2.0.so"}:
+        raise RuntimeError("Private loader directory contains an unbound dependency")
+    if any(path.resolve() != library for path in selected.iterdir()):
+        raise RuntimeError("Private loader alias does not select the bound bridge")
+    if linked_library_inventory(library) != value["linked_libraries"]:
+        raise RuntimeError("Native linked dependency closure changed")
+
+
+def native_dependency_environment(context):
+    dependency = context.get("native_atk_bridge") if context else None
+    return ({"LD_LIBRARY_PATH": str(Path(dependency["library"]["path"]).resolve().parent)}
+            if dependency else {})
+
+
+def verify_loaded_native_dependencies(pid, context):
+    dependency = context.get("native_atk_bridge")
+    if dependency is None:
+        return None
+    mapped = set()
+    for line in Path(f"/proc/{pid}/maps").read_text().splitlines():
+        fields = line.split(maxsplit=5)
+        if len(fields) == 6 and fields[5].startswith("/"):
+            mapped.add(Path(fields[5]).resolve())
+    expected = dependency["linked_libraries"]
+    bridge = Path(dependency["library"]["path"]).resolve()
+    bridges = {path for path in mapped if path.name.startswith("libatk-bridge-2.0.so")}
+    if bridges != {bridge}:
+        raise RuntimeError(f"Process loaded a different ATK bridge: {bridges}")
+    for path, expected_hash in expected.items():
+        actual = Path(path).resolve()
+        if actual not in mapped or digest(actual) != expected_hash:
+            raise RuntimeError(f"Process native dependency mapping differs: {actual}")
+    return {"pid": pid, "libraries": expected,
+            "source": "actual /proc/PID/maps and hashes of all selected bridge dependencies"}
 
 
 def validate_manifest(path, catalog_root, *, current_sources=None, verify_files=True):
@@ -91,6 +175,8 @@ def validate_manifest(path, catalog_root, *, current_sources=None, verify_files=
         raise RuntimeError("The manifest does not request the explicit local debug engine")
     if not isinstance(data.get("fixture_source_sha256"), dict) or not data["fixture_source_sha256"]:
         raise RuntimeError("Fixture source binding is missing")
+    if data.get("native_atk_bridge") is not None:
+        validate_native_dependency(data["native_atk_bridge"], verify_files=verify_files)
     if verify_files:
         if current_sources != data["fixture_source_sha256"]:
             raise RuntimeError("Fixture sources differ from the runtime manifest")

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "scope": "isolated native dependency diagnostic",
+  "variant": "patched",
+  "source_pin": "46c8de80022d28eef2da58f1054b5bff745ed7e0",
+  "source": "/work/atspi-geometry/patched",
+  "source_diff_sha256": "67147fa08da76034b94166956e07ff91b3dd561c72f8b2d6680365e4a11d3253",
+  "patch_sha256": "67147fa08da76034b94166956e07ff91b3dd561c72f8b2d6680365e4a11d3253",
+  "library": "/work/atspi-geometry/runtime-patched/libatk-bridge-2.0.so.0.0.0",
+  "sha256": "1b372fc7db998fe551cb26bd3831b835b597f0d0ab64e631e4ada5716bc77f55",
+  "bytes": 866248,
+  "runtime_library_directory": "/work/atspi-geometry/runtime-patched",
+  "logs": "/work/atspi-geometry/logs/patched-20260904T064037.400464Z",
+  "system_libraries_replaced": false,
+  "application_acceptance": "not_accepted"
+}

@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "scope": "isolated Linux arm64 official full engine debug diagnosis",
+  "source_unit_proof": "../../linux-sdk-accessibility-patch/README.md",
+  "application_acceptance": "not_accepted",
+  "human_acceptance": "not_accepted",
+  "performance_acceptance": "not_applicable",
+  "attempts": [
+    {
+      "attempt": "catalog-orca-1",
+      "scope": "three_representative_flutter_catalog_tasks",
+      "status": "not_observed",
+      "source_sha": "049892683ffc3da92ffc76c0ee9e4d4b57473bda",
+      "loaded_engine": {
+        "pid": 31280,
+        "path": "/work/catalog/packages/beautiful_ai_ui_catalog/build/linux/arm64/debug/bundle/lib/libflutter_linux_gtk.so",
+        "sha256": "763654ee12d84c51fb4c6a9937d18aa95b691f576df861ee6c1af51eaa14acab",
+        "source": "actual /proc/PID/maps and mapped-file hash"
+      },
+      "cleanup": "verified",
+      "tasks": [
+        {
+          "id": "theme_keyboard_toggle",
+          "status": "not_observed",
+          "commands": [
+            "Tab",
+            "Tab",
+            "Tab",
+            "Tab"
+          ],
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/work/catalog/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '31280', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json']' timed out after 8 seconds",
+            "Failure snapshot: Command '['/usr/bin/python3', '/work/catalog/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '31280', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json']' timed out after 8 seconds"
+          ],
+          "reader_checkpoints": []
+        },
+        {
+          "id": "thinking_disclosure",
+          "status": "not_observed",
+          "commands": [],
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/work/catalog/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '31280', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json']' timed out after 8 seconds"
+          ],
+          "reader_checkpoints": []
+        },
+        {
+          "id": "search_query_and_selection",
+          "status": "not_observed",
+          "commands": [
+            "Tab"
+          ],
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/work/catalog/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '31280', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json']' timed out after 8 seconds",
+            "Failure snapshot: Command '['/usr/bin/python3', '/work/catalog/.github/scripts/probe_catalog_orca_linux.py', '--inspect-pid', '31280', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json']' timed out after 8 seconds"
+          ],
+          "reader_checkpoints": []
+        }
+      ],
+      "files": {
+        "catalog-report.json": {
+          "sha256": "2eb4a4c49aef2571120b0eada089eab532f743b3481824db1e3e702185e9d8f9",
+          "bytes": 8745
+        },
+        "catalog-initial-native-tree.json": {
+          "sha256": "eb0010d5b564aa4f4c09dafc7b60da21370c974f1a53e0293f72f09f9f7d87db",
+          "bytes": 207837
+        },
+        "artifact-manifest.json": {
+          "sha256": "a0fc6c4264d7cbb84ccf47f9df29b1a3ba017fbffab3d23d92cc419416daa795",
+          "bytes": 3002
+        },
+        "capability-preflight/preflight-report.json": {
+          "sha256": "a8d8e21aa6d5da5cc8aa484bb262c1b80fdac987e7a3dfe8fbb245b95fb71afd",
+          "bytes": 1210486
+        }
+      }
+    },
+    {
+      "attempt": "catalog-orca-trace-1",
+      "scope": "unchanged_fixture_inspector_call_trace_diagnostic",
+      "status": "not_observed",
+      "source_sha": "049892683ffc3da92ffc76c0ee9e4d4b57473bda",
+      "loaded_engine": {
+        "pid": 31563,
+        "path": "/work/catalog/packages/beautiful_ai_ui_catalog/build/linux/arm64/debug/bundle/lib/libflutter_linux_gtk.so",
+        "sha256": "763654ee12d84c51fb4c6a9937d18aa95b691f576df861ee6c1af51eaa14acab",
+        "source": "actual /proc/PID/maps and mapped-file hash"
+      },
+      "cleanup": "verified",
+      "tasks": [
+        {
+          "id": "theme_keyboard_toggle",
+          "status": "machine_evidence_observed",
+          "commands": [
+            "Tab",
+            "space",
+            "KP_Enter"
+          ],
+          "errors": [],
+          "reader_checkpoints": [
+            {
+              "label": "theme-light",
+              "expected_utterance_observed": true,
+              "utterances": [
+                "06:23:49.861074 - SPEECH OUTPUT: 'Theme: light push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+              ],
+              "audio": {
+                "frames": 42610,
+                "rms": 3975.446428561201,
+                "sample_rate": 16000,
+                "channels": 1,
+                "sample_format": "s16le"
+              }
+            }
+          ]
+        },
+        {
+          "id": "thinking_disclosure",
+          "status": "not_observed",
+          "commands": [
+            "Tab",
+            "Tab",
+            "space",
+            "KP_Enter"
+          ],
+          "errors": [
+            "TimeoutError: Timed out waiting for a capability response"
+          ],
+          "reader_checkpoints": [
+            {
+              "label": "disclosure-collapsed",
+              "expected_utterance_observed": false,
+              "utterances": [
+                "06:24:07.128081 - SPEECH OUTPUT: 'panel grayed.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+              ],
+              "audio": {
+                "frames": 130735,
+                "rms": 1729.4387369263557,
+                "sample_rate": 16000,
+                "channels": 1,
+                "sample_format": "s16le"
+              }
+            }
+          ]
+        },
+        {
+          "id": "search_query_and_selection",
+          "status": "not_observed",
+          "commands": [
+            "Tab"
+          ],
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/plan/trace_catalog_inspector.py', '--catalog-root', '/work/catalog', '--inspect-pid', '31563', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json', '--trace-file', '/work/validation/catalog-orca-trace-1/inspector-0016.jsonl', '--expected-probe-sha256', 'c2bae4c1f380a77c306e649eac0769b2bef6a62bb7fc44254d30e6425c42434f']' timed out after 8 seconds",
+            "Failure snapshot: Command '['/usr/bin/python3', '/plan/trace_catalog_inspector.py', '--catalog-root', '/work/catalog', '--inspect-pid', '31563', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json', '--trace-file', '/work/validation/catalog-orca-trace-1/inspector-0017.jsonl', '--expected-probe-sha256', 'c2bae4c1f380a77c306e649eac0769b2bef6a62bb7fc44254d30e6425c42434f']' timed out after 8 seconds"
+          ],
+          "reader_checkpoints": []
+        }
+      ],
+      "files": {
+        "catalog-report.json": {
+          "sha256": "29240d4e92d89e292c66f220dfc13e043ed8181510557d0d8270db756924d90f",
+          "bytes": 15503
+        },
+        "catalog-initial-native-tree.json": {
+          "sha256": "28cc42a1f9d1e506d7062d453a88e09d8eec17b6ebdc64602641e9e451cb7e9a",
+          "bytes": 207837
+        },
+        "artifact-manifest.json": {
+          "sha256": "e967a66bd309851a9f35fc2019e1d0a01622ecb5941ee4989482662a296584f3",
+          "bytes": 8027
+        },
+        "capability-preflight/preflight-report.json": {
+          "sha256": "02a570da178857793d8d8f6714cfcea4a4ac6481177dcc7b3fce206ffffd5b4c",
+          "bytes": 1210484
+        }
+      }
+    },
+    {
+      "attempt": "catalog-orca-stack-1",
+      "scope": "unchanged_fixture_inspector_call_trace_diagnostic",
+      "status": "not_observed",
+      "source_sha": "049892683ffc3da92ffc76c0ee9e4d4b57473bda",
+      "loaded_engine": {
+        "pid": 31969,
+        "path": "/work/catalog/packages/beautiful_ai_ui_catalog/build/linux/arm64/debug/bundle/lib/libflutter_linux_gtk.so",
+        "sha256": "763654ee12d84c51fb4c6a9937d18aa95b691f576df861ee6c1af51eaa14acab",
+        "source": "actual /proc/PID/maps and mapped-file hash"
+      },
+      "cleanup": "verified",
+      "tasks": [
+        {
+          "id": "theme_keyboard_toggle",
+          "status": "machine_evidence_observed",
+          "commands": [
+            "Tab",
+            "space",
+            "KP_Enter"
+          ],
+          "errors": [],
+          "reader_checkpoints": [
+            {
+              "label": "theme-light",
+              "expected_utterance_observed": true,
+              "utterances": [
+                "06:28:42.867939 - SPEECH OUTPUT: 'Theme: light push button.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+              ],
+              "audio": {
+                "frames": 39849,
+                "rms": 4160.094713817275,
+                "sample_rate": 16000,
+                "channels": 1,
+                "sample_format": "s16le"
+              }
+            }
+          ]
+        },
+        {
+          "id": "thinking_disclosure",
+          "status": "not_observed",
+          "commands": [
+            "Tab",
+            "Tab",
+            "space",
+            "KP_Enter"
+          ],
+          "errors": [
+            "TimeoutError: Timed out waiting for a capability response"
+          ],
+          "reader_checkpoints": [
+            {
+              "label": "disclosure-collapsed",
+              "expected_utterance_observed": false,
+              "utterances": [
+                "06:29:00.412578 - SPEECH OUTPUT: 'panel grayed.' {'established': False, 'family': {'name': None, 'gender': None, 'lang': None, 'dialect': None, 'variant': None}}"
+              ],
+              "audio": {
+                "frames": 129718,
+                "rms": 1756.559676891104,
+                "sample_rate": 16000,
+                "channels": 1,
+                "sample_format": "s16le"
+              }
+            }
+          ]
+        },
+        {
+          "id": "search_query_and_selection",
+          "status": "not_observed",
+          "commands": [
+            "Tab"
+          ],
+          "errors": [
+            "TimeoutExpired: Command '['/usr/bin/python3', '/plan/trace_catalog_inspector.py', '--catalog-root', '/work/catalog', '--inspect-pid', '31969', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json', '--trace-file', '/work/validation/catalog-orca-stack-1/inspector-0016.jsonl', '--expected-probe-sha256', 'c2bae4c1f380a77c306e649eac0769b2bef6a62bb7fc44254d30e6425c42434f']' timed out after 8 seconds",
+            "Failure snapshot: Command '['/usr/bin/python3', '/plan/trace_catalog_inspector.py', '--catalog-root', '/work/catalog', '--inspect-pid', '31969', '--sdk-runtime-manifest', '/work/validation/sdk-runtime-manifest.json', '--trace-file', '/work/validation/catalog-orca-stack-1/inspector-0017.jsonl', '--expected-probe-sha256', 'c2bae4c1f380a77c306e649eac0769b2bef6a62bb7fc44254d30e6425c42434f']' timed out after 8 seconds"
+          ],
+          "reader_checkpoints": []
+        }
+      ],
+      "files": {
+        "catalog-report.json": {
+          "sha256": "e7443e5fc57f29122bd4feafb32ef808a0a418ee0b7ec066b2840f0752394940",
+          "bytes": 16459
+        },
+        "catalog-initial-native-tree.json": {
+          "sha256": "165a32ebbe7c37536b96efb09ec098a6b341011eede8438fcc4bf2d6dc5e4b39",
+          "bytes": 207837
+        },
+        "artifact-manifest.json": {
+          "sha256": "edb9811bd6785c952d93f385f8afbfd49f33ec502a317ea9376a4cd20096fda9",
+          "bytes": 8501
+        },
+        "capability-preflight/preflight-report.json": {
+          "sha256": "5d0baf486d682aa1783a28ea057d59c38f817cdd3f2ea24ba7da0fbc87fdab5f",
+          "bytes": 1210486
+        },
+        "first-timeout-stacks/report.json": {
+          "sha256": "45cf248be28266685ddc1e375e4fd85a7b60fcc0cbf4cada8689ed0722cfadbc",
+          "bytes": 813
+        },
+        "first-timeout-stacks/gdb.log": {
+          "sha256": "4707e0dd42c23ac084b1faa4fcbcce48f78ad07de2f4898df386c99d89ebf199",
+          "bytes": 44696
+        },
+        "first-timeout-stacks/threads-before-debugger.json": {
+          "sha256": "40bc3518cb08803393e7b98f8ca488bc4dce1b312563a17c7da6ee392ddbfe03",
+          "bytes": 25668
+        }
+      }
+    }
+  ],
+  "findings": [
+    "First uninstrumented attempt remains 0/3.",
+    "Both diagnostic attempts observed the complete original Theme task with real WhereAmI light utterance and post-key PCM. Tracing/debugger runs do not replace the original attempt.",
+    "Thinking actual native expansion changes true to false, but focused empty child panel makes WhereAmI say panel grayed; disclosure task fails.",
+    "Search inspector original8second deadline expires in application get_name before BFS. Captured GTK main-thread stack is blocked in synchronous atk-bridge geometry DBus call reached through nested atk_component_get_extents, not in text getters or rendering."
+  ],
+  "raw_artifact_root": "/tmp/beautiful-linux-runtime-build-20260904/work/validation"
+}

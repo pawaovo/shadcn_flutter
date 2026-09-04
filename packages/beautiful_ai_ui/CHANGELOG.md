@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 
 ## [Unreleased]
 
-Local acceptance on 2026-09-04 passes 655 library tests and strict analysis.
+Local acceptance on 2026-09-04 passes 658 library tests and strict analysis.
 The supplemental visual review covers 78 P1/P2 images and 127 P3 images;
 1,008 P3 layout/interaction combinations passed. Real device, screen-reader,
 current cloud input and performance-budget acceptance are recorded separately.
@@ -94,6 +94,10 @@ acceptance remain separate; this is validation, not a package publication.
   input/AT and temporal/performance limitations (product/main, @pawaovo).
 
 ### Fixed
+
+- Keep Thinking keyboard and accessibility focus on the named control while
+  preserving its separate live status, expansion actions and focus highlight.
+  Remove duplicate empty focus and gesture semantics from its header.
 
 - Reuse Diff Table change totals across page navigation while refreshing totals
   after inclusion or proposal changes; keep empty-table semantics valid.

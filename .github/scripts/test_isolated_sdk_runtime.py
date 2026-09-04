@@ -69,7 +69,15 @@ class IsolatedSDKManifestTests(unittest.TestCase):
     def write(self, path, data):
         path.write_text(json.dumps(data))
 
-    def git_revision(self, command, *, cwd, text):
+    def git_revision(self, command, *, cwd=None, text=False, env=None):
+        if command[0] == "ldd":
+            self.assertEqual(env["LD_LIBRARY_PATH"], str(self.native_library.parent))
+            return f"\tlibc.so => {self.system_library} (0x1234)\n"
+        if cwd == self.work / "atspi-geometry/patched":
+            if command == ["git", "diff", "--binary", "HEAD"]:
+                return self.native_patch.read_bytes()
+            self.assertEqual(command, ["git", "rev-parse", "HEAD"])
+            return runtime.ATK_SOURCE_REVISION + "\n"
         self.assertEqual(command, ["git", "rev-parse", "HEAD"])
         self.assertTrue(text)
         self.assertIn(Path(cwd), (self.sdk, self.root))
@@ -124,6 +132,67 @@ class IsolatedSDKManifestTests(unittest.TestCase):
         with patch.object(runtime.socket, "gethostname", return_value="another-container"):
             with self.assertRaisesRegex(RuntimeError, "owned container"):
                 runtime.validate_manifest(self.manifest, self.root, verify_files=False)
+
+    def add_native_dependency(self):
+        base = self.work / "atspi-geometry"
+        self.native_patch = base / "at-spi2-core-2.52-same-process-geometry.patch"
+        self.native_library = base / "runtime-patched/libatk-bridge-2.0.so.0.0.0"
+        self.system_library = self.work / "system/libc.so"
+        for path, content in ((self.native_patch, b"native source patch fixture"),
+                              (self.native_library, b"native library fixture, never executed"),
+                              (self.system_library, b"system dependency fixture, never executed")):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+        for name in ("libatk-bridge-2.0.so.0", "libatk-bridge-2.0.so"):
+            (self.native_library.parent / name).symlink_to(self.native_library.name)
+        context = patch.object(runtime, "ATK_PATCH_SHA256", runtime.digest(self.native_patch))
+        context.start()
+        self.addCleanup(context.stop)
+        artifact = base / "patched-artifact.json"
+        self.write(artifact, {"source_pin": runtime.ATK_SOURCE_REVISION, "variant": "patched",
+            "source": str(base / "patched"), "patch_sha256": runtime.ATK_PATCH_SHA256,
+            "source_diff_sha256": runtime.ATK_PATCH_SHA256,
+            "library": str(self.native_library), "sha256": runtime.digest(self.native_library)})
+        self.data["native_atk_bridge"] = {"build_artifact": runtime.record(artifact),
+            "patch": runtime.record(self.native_patch), "library": runtime.record(self.native_library),
+            "linked_libraries": {str(p): runtime.digest(p)
+                                 for p in (self.native_library, self.system_library)}}
+        self.write(self.manifest, self.data)
+
+    def test_private_native_dependency_binds_actual_files_and_loader_environment(self):
+        self.add_native_dependency()
+        self.assertEqual(runtime.native_dependency_environment(self.validate()),
+                         {"LD_LIBRARY_PATH": str(self.native_library.parent)})
+        self.assertEqual(runtime.native_dependency_environment(None), {})
+        self.assertEqual(runtime.native_dependency_environment({}), {})
+
+    def test_changed_linked_system_library_is_rejected(self):
+        self.add_native_dependency()
+        self.system_library.write_bytes(b"changed system dependency")
+        with self.assertRaisesRegex(RuntimeError, "dependency closure changed"):
+            self.validate()
+
+    def test_unbound_file_in_private_loader_directory_is_rejected(self):
+        self.add_native_dependency()
+        (self.native_library.parent / "another.so").write_bytes(b"unbound")
+        with self.assertRaisesRegex(RuntimeError, "unbound dependency"):
+            self.validate()
+
+    def test_loaded_native_dependency_requires_the_bound_actual_path(self):
+        self.add_native_dependency()
+        self.validate()
+        original_read = Path.read_text
+        maps = "".join(f"100-200 r-xp 0 00:00 1 {p}\n"
+                       for p in (self.native_library, self.system_library))
+        with patch.object(Path, "read_text", lambda p, *a, **k:
+                          maps if str(p) == "/proc/42/maps" else original_read(p, *a, **k)):
+            result = runtime.verify_loaded_native_dependencies(42, self.data)
+            self.assertEqual(len(result["libraries"]), 2)
+        with patch.object(Path, "read_text", lambda p, *a, **k:
+                          maps.replace(str(self.native_library), "/usr/lib/libatk-bridge-2.0.so.0.0.0")
+                          if str(p) == "/proc/42/maps" else original_read(p, *a, **k)):
+            with self.assertRaisesRegex(RuntimeError, "different ATK bridge"):
+                runtime.verify_loaded_native_dependencies(42, self.data)
 
 
 if __name__ == "__main__":

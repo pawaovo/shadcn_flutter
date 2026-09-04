@@ -56,3 +56,48 @@ environment. The current CI-only pilot guard must not be bypassed by pretending
 that a local container is GitHub Actions. The unit proof's engine link stubs,
 private-symbol access, vtable replacement and manufactured AT events are never
 part of this runtime build.
+
+For a separately cloned and pinned Catalog fixture, populate the isolated SDK's
+official universal package cache before its locked `pub get`. The SDK's official
+`3.47.0` tag must peel to the pinned framework commit; `build_engine.py` fetches
+and verifies that tag. A tagless clone reports `0.0.0-unknown`, while the generated
+engine `sky_engine` package alone does not populate the Flutter tool's SDK cache.
+Neither condition should be worked around by changing a package constraint or
+lockfile.
+
+```sh
+docker exec "$SDK_BUILD_CONTAINER" /work/flutter/bin/flutter --suppress-analytics \
+  precache --universal --no-linux --no-web --no-windows --no-macos --no-ios --no-fuchsia
+docker exec "$SDK_BUILD_CONTAINER" sh /plan/install_runtime_dependencies.sh
+```
+
+The explicit runtime manifest binds the container identity, fixed app source,
+reviewed SDK patch, build records, actual generated library and canonical local
+engine build command. `probe_catalog_orca_linux.py --build-only
+--sdk-runtime-manifest ...` records the real debug Catalog bundle; the live mode
+also hashes the library actually mapped in the Catalog process. This remains an
+isolated debug diagnosis, separate from ordinary release CI and human acceptance.
+
+`trace_catalog_inspector.py` is a separate diagnostic for a native inspector
+timeout. It imports the fixed fixture, preserves its build/source checks and
+three tasks, and inserts before/after JSONL records around the existing read-only
+AT-SPI calls. Every record is flushed immediately. No native object is stringified
+for tracing. The original eight-second snapshot deadline, tree traversal and
+acceptance predicates are unchanged; tracing adds overhead, which must be
+considered when interpreting timing differences. A traced result never replaces
+the original attempt.
+
+```sh
+docker exec "$SDK_BUILD_CONTAINER" timeout 270s dbus-run-session -- \
+  xvfb-run -a -s '-screen 0 1440x1200x24' \
+  python3 /plan/trace_catalog_inspector.py \
+  --catalog-root /work/catalog \
+  --sdk-runtime-manifest /work/validation/sdk-runtime-manifest.json \
+  --build-provenance /work/validation/catalog-build/build-provenance.json \
+  --output /work/validation/fresh-inspector-diagnostic --seconds 240
+```
+
+Each diagnostic output contains its exact script, the original probe and runtime
+binding hashes, individual inspector traces, the unchanged task reports and
+owned-process cleanup evidence. The source unit tests remain a separate proof;
+their link stubs are never linked into this Catalog bundle.

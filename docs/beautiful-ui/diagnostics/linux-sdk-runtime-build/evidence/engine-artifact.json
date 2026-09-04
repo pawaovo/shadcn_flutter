@@ -1,0 +1,11 @@
+{
+  "status": "built_not_runtime_accepted",
+  "sdk_revision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+  "library": "/work/flutter/engine/src/out/host_debug_unopt_arm64/libflutter_linux_gtk.so",
+  "library_bytes": 78770456,
+  "library_sha256": "763654ee12d84c51fb4c6a9937d18aa95b691f576df861ee6c1af51eaa14acab",
+  "mode": "debug-unoptimized",
+  "source_build_binding_sha256": "ab721b44efb78f900f3bd7adee023f64e4ed8852e1480f3e7226f510d6f4518c",
+  "application_acceptance": "not_accepted",
+  "screen_reader_acceptance": "not_accepted"
+}

@@ -1,0 +1,2 @@
+# Unified-diff context lines contain a significant single space when empty.
+at-spi2-core-2.52-same-process-geometry.patch whitespace=-blank-at-eol

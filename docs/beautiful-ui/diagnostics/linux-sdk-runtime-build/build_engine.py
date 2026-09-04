@@ -96,6 +96,13 @@ def bootstrap():
     checkout(DEPOT, "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
              DEPOT_REVISION, "depot")
     checkout(SDK, "https://github.com/flutter/flutter.git", SDK_REVISION, "sdk")
+    # Flutter's package solver derives the framework version from Git tags.
+    # Fetch the official tag and verify it points to the already pinned commit;
+    # do not invent a local version tag or alter the source revision.
+    run("sdk-release-tag", ["git", "fetch", "--depth=1", "origin",
+                           "refs/tags/3.47.0:refs/tags/3.47.0"], SDK)
+    if output(["git", "rev-parse", "refs/tags/3.47.0^{}"], SDK) != SDK_REVISION:
+        raise RuntimeError("Official release tag does not match the pinned source")
     pinned_deps = subprocess.check_output(["git", "show", f"{SDK_REVISION}:DEPS"], cwd=SDK)
     if (SDK / "DEPS").read_bytes() != pinned_deps:
         raise RuntimeError("DEPS differs from the pinned official commit")

@@ -1,7 +1,9 @@
 import 'dart:ui' show Tristate;
 
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -22,6 +24,15 @@ SemanticsFinder get _headerSemantics => find.semantics.byPredicate(
   (node) => node.identifier == 'beautiful-thinking-header',
   describeMatch: (_) => 'Thinking disclosure button',
 );
+
+List<SemanticsNode> _semanticSubtree(SemanticsNode root) {
+  final nodes = <SemanticsNode>[root];
+  root.visitChildren((child) {
+    nodes.addAll(_semanticSubtree(child));
+    return true;
+  });
+  return nodes;
+}
 
 BeautifulThinking _thinking({
   Key? key,
@@ -48,6 +59,208 @@ BeautifulThinking _thinking({
 }
 
 void main() {
+  testWidgets('Tab and Space keep focus on the named disclosure button', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    final previousHighlight = FocusManager.instance.highlightStrategy;
+    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
+    FocusManager.instance.highlightStrategy =
+        FocusHighlightStrategy.alwaysTouch;
+    try {
+      await tester.pumpWidget(
+        WidgetsApp(
+          color: const Color(0xffffffff),
+          onGenerateRoute: (settings) => PageRouteBuilder<void>(
+            settings: settings,
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                beautifulTestApp(
+                  disableAnimations: true,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Focus(
+                        autofocus: true,
+                        child: Text('Before thinking'),
+                      ),
+                      _thinking(initiallyExpanded: true),
+                    ],
+                  ),
+                ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .getSemantics(find.text('Before thinking'))
+            .getSemanticsData()
+            .flagsCollection
+            .isFocused,
+        Tristate.isTrue,
+      );
+      final headerId = tester.getSemantics(_headerWidget).id;
+
+      void expectDisclosure({required bool expanded}) {
+        final header = tester.getSemantics(_headerWidget);
+        final data = header.getSemanticsData();
+        expect(header.id, headerId);
+        expect(data.flagsCollection.isButton, isTrue);
+        expect(data.flagsCollection.isEnabled, Tristate.isTrue);
+        final nodes = _semanticSubtree(header);
+        expect(
+          nodes.where(
+            (node) =>
+                node.getSemanticsData().flagsCollection.isFocused ==
+                Tristate.isTrue,
+          ),
+          hasLength(1),
+          reason: 'Tab must establish actual focus inside the disclosure.',
+        );
+        expect(data.flagsCollection.isFocused, Tristate.isTrue);
+        expect(
+          data.flagsCollection.isExpanded,
+          expanded ? Tristate.isTrue : Tristate.isFalse,
+        );
+        expect(
+          data.label,
+          expanded ? 'Hide thinking details' : 'Show thinking details',
+        );
+
+        expect(
+          nodes.where(
+            (node) =>
+                node.getSemanticsData().flagsCollection.isFocused !=
+                Tristate.none,
+          ),
+          <SemanticsNode>[header],
+          reason: 'Only the named button may publish input focus semantics.',
+        );
+        expect(
+          nodes.where((node) {
+            final data = node.getSemanticsData();
+            return data.label.isEmpty &&
+                (data.flagsCollection.isFocused != Tristate.none ||
+                    data.actions != 0);
+          }),
+          isEmpty,
+          reason: 'No unnamed focusable or actionable child may shadow it.',
+        );
+        final status = tester.getSemantics(_statusWidget);
+        expect(nodes, contains(status));
+        expect(status.id, isNot(headerId));
+        expect(status.getSemanticsData().role, SemanticsRole.status);
+        expect(status.getSemanticsData().label, 'Thinking');
+        expect(
+          status.getSemanticsData().flagsCollection.isFocused,
+          Tristate.none,
+        );
+        expect(status.getSemanticsData().actions, 0);
+      }
+
+      await tester.sendKeyEvent(
+        LogicalKeyboardKey.tab,
+        physicalKey: PhysicalKeyboardKey.tab,
+      );
+      await tester.pump();
+      expectDisclosure(expanded: true);
+
+      await tester.sendKeyEvent(
+        LogicalKeyboardKey.space,
+        physicalKey: PhysicalKeyboardKey.space,
+      );
+      await tester.pump();
+      expectDisclosure(expanded: false);
+      expect(find.semantics.byLabel('Read, flavors.dart'), findsNothing);
+
+      await tester.sendKeyEvent(
+        LogicalKeyboardKey.space,
+        physicalKey: PhysicalKeyboardKey.space,
+      );
+      await tester.pump();
+      expectDisclosure(expanded: true);
+      expect(find.semantics.byLabel('Read, flavors.dart'), findsOne);
+    } finally {
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump();
+      semantics.dispose();
+      FocusManager.instance.highlightStrategy = previousHighlight;
+      debugDefaultTargetPlatformOverride = null;
+    }
+  });
+
+  for (final platform in <TargetPlatform>[
+    TargetPlatform.linux,
+    TargetPlatform.iOS,
+  ]) {
+    testWidgets(
+      'semantic focus action preserves disclosure on ${platform.name}',
+      (tester) async {
+        final semantics = tester.ensureSemantics();
+        debugDefaultTargetPlatformOverride = platform;
+        try {
+          await tester.pumpWidget(
+            beautifulTestApp(disableAnimations: true, child: _thinking()),
+          );
+          final header = tester.getSemantics(_headerWidget);
+          expect(
+            header.getSemanticsData().hasAction(SemanticsAction.focus),
+            platform != TargetPlatform.iOS,
+          );
+          expect(
+            header.getSemanticsData().flagsCollection.isFocused,
+            Tristate.isFalse,
+          );
+          if (platform == TargetPlatform.iOS) return;
+
+          header.owner!.performAction(header.id, SemanticsAction.focus);
+          await tester.pumpAndSettle();
+          expect(
+            tester
+                .getSemantics(_headerWidget)
+                .getSemanticsData()
+                .flagsCollection
+                .isFocused,
+            Tristate.isTrue,
+          );
+          expect(
+            tester
+                .getSemantics(_headerWidget)
+                .getSemanticsData()
+                .flagsCollection
+                .isExpanded,
+            Tristate.isFalse,
+          );
+
+          await tester.sendKeyEvent(
+            LogicalKeyboardKey.space,
+            physicalKey: PhysicalKeyboardKey.space,
+          );
+          await tester.pump();
+          final activated = tester.getSemantics(_headerWidget);
+          expect(activated.id, header.id);
+          expect(
+            activated.getSemanticsData().flagsCollection.isFocused,
+            Tristate.isTrue,
+          );
+          expect(
+            activated.getSemanticsData().flagsCollection.isExpanded,
+            Tristate.isTrue,
+          );
+          expect(
+            tester.getSemantics(_statusWidget).getSemanticsData().role,
+            SemanticsRole.status,
+          );
+        } finally {
+          await tester.pumpWidget(const SizedBox.shrink());
+          await tester.pump();
+          semantics.dispose();
+          debugDefaultTargetPlatformOverride = null;
+        }
+      },
+    );
+  }
+
   testWidgets('header exposes unique status and disclosure semantics', (
     tester,
   ) async {

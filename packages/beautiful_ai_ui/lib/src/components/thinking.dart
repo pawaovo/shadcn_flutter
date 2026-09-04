@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -810,6 +811,7 @@ final class _ThinkingControlState extends State<_ThinkingControl> {
   late final FocusNode _focusNode;
   var _hovered = false;
   var _focused = false;
+  var _hasFocus = false;
 
   @override
   void initState() {
@@ -837,6 +839,8 @@ final class _ThinkingControlState extends State<_ThinkingControl> {
       button: !widget.link,
       link: widget.link,
       enabled: true,
+      focusable: true,
+      focused: _hasFocus,
       selected: widget.selected,
       expanded: widget.expanded,
       excludeSemantics: !widget.preserveChildSemantics,
@@ -844,10 +848,16 @@ final class _ThinkingControlState extends State<_ThinkingControl> {
       onTap: widget.onPressed,
       onExpand: widget.expanded == false ? widget.onPressed : null,
       onCollapse: widget.expanded == true ? widget.onPressed : null,
+      onFocus: defaultTargetPlatform != TargetPlatform.iOS
+          ? _focusNode.requestFocus
+          : null,
       child: SizedBox(
         width: widget.fullWidth ? double.infinity : null,
         child: FocusableActionDetector(
           focusNode: _focusNode,
+          // The named control owns focus semantics while status stays separate.
+          includeFocusSemantics: false,
+          onFocusChange: (value) => setState(() => _hasFocus = value),
           mouseCursor: SystemMouseCursors.click,
           onShowHoverHighlight: (value) => setState(() => _hovered = value),
           onShowFocusHighlight: (value) => setState(() => _focused = value),
@@ -865,6 +875,7 @@ final class _ThinkingControlState extends State<_ThinkingControl> {
           },
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
+            excludeFromSemantics: true,
             onTap: () {
               _focusNode.requestFocus();
               widget.onPressed();

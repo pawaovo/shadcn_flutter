@@ -1,0 +1,42 @@
+{
+  "build_artifact": {
+    "path": "/work/atspi-geometry/patched-canonical-artifact.json",
+    "sha256": "e1e54476633390eb65d62f7a73c98972dba78ffc0d17a4646f3f4821aef1881a"
+  },
+  "library": {
+    "path": "/work/atspi-geometry/runtime-patched-canonical/libatk-bridge-2.0.so.0.0.0",
+    "sha256": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74"
+  },
+  "patch": {
+    "path": "/plan/atspi-geometry/at-spi2-core-2.52-same-process-geometry.patch",
+    "sha256": "2315f3fbb206a85af9baefedca8030751e26f01c629e9d20d003bfcf3941da7d"
+  },
+  "linked_libraries": {
+    "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "49005ef8e9db9a45691ff875e6ca18dd8723c7ec5c1a863a276a1186dbf22774",
+    "/usr/lib/aarch64-linux-gnu/libX11.so.6.4.0": "8e4b164809fe69ddfa317340c23cddc7b66963413ba2b224bec5da79496c0c12",
+    "/usr/lib/aarch64-linux-gnu/libXau.so.6.0.0": "6fff1a9d4b5bc4d91df752b12600f8aedcd8ac33ea01a48295326675243d68c0",
+    "/usr/lib/aarch64-linux-gnu/libXdmcp.so.6.0.0": "84b6623297efd8eb43f98af678acbb68ca31de7617dab042a1dcc7c6feb8a2ea",
+    "/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0": "9201e1e51d6dccd7934d4e74883e9c5fa8628c332ae79fbe163e40d73825bb6e",
+    "/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0": "be081f920c99e38c2cfa0075c322219892fdce2a1c2f185777136a78662427f5",
+    "/usr/lib/aarch64-linux-gnu/libatk-1.0.so.0.25209.1": "d33bd498c2051470bc563a911471438868d3a5c4b0bbb65e9645b3a1647e71a3",
+    "/usr/lib/aarch64-linux-gnu/libatspi.so.0.0.1": "132198bf622a466ce55bd091145e5175a6542a803fd7635e5c7784bd084d54df",
+    "/usr/lib/aarch64-linux-gnu/libbsd.so.0.12.1": "6c5348ee0e1777f13e148b7492fa311b6f65adb0dc21a001a67ebc18948e6b3e",
+    "/usr/lib/aarch64-linux-gnu/libc.so.6": "6e3cc56b98887cb3cc2a9fe78b6dd4610184aa27bd05d592cb287db93e82d494",
+    "/usr/lib/aarch64-linux-gnu/libcap.so.2.66": "1b6d3932cf8b60b2f27f80cdd26d9a296b8a9608fc02b4eccb8fb2fdab73fea2",
+    "/usr/lib/aarch64-linux-gnu/libdbus-1.so.3.32.4": "9b8d0d8b10bdffc68f6699b03e7be99d4dc40552aca189be43b55c5f84753241",
+    "/usr/lib/aarch64-linux-gnu/libffi.so.8.1.4": "9dd873a938c4d7df76912d01f6a28aa4aa73d583bd20485a0dbfe5aa9673a191",
+    "/usr/lib/aarch64-linux-gnu/libgcrypt.so.20.4.3": "fab6cc79218fb1af1327af5bb25d41d165b7a2185cc3852c8682805816182ed4",
+    "/usr/lib/aarch64-linux-gnu/libglib-2.0.so.0.8000.0": "83bd509782a469b00174d557f9145c4e74edbff91b7ce47dcb0be4f100f10877",
+    "/usr/lib/aarch64-linux-gnu/libgobject-2.0.so.0.8000.0": "c7d244109cd606d974bb4b2cd0a4dc5814ac4c37e4ac2f8a97b69783d10df7d2",
+    "/usr/lib/aarch64-linux-gnu/libgpg-error.so.0.34.0": "ff2dccba4993ef97775b70c1ed1144f70dfe8581ee48c1eb25c76878c6cdfdf7",
+    "/usr/lib/aarch64-linux-gnu/liblz4.so.1.9.4": "d1482a2f74152881d8b83708fedae7bca039f5608024f1178dc21a17df9887a7",
+    "/usr/lib/aarch64-linux-gnu/liblzma.so.5.4.5": "47ea0f43683ef829cda43bfe1862c1b06f085fbd813bb58d2d142477f5380139",
+    "/usr/lib/aarch64-linux-gnu/libm.so.6": "24be585ff27080ba6301d8b3e1c92a54a3832829a9efde744cad4b876a73681a",
+    "/usr/lib/aarch64-linux-gnu/libmd.so.0.1.0": "30d117046ce9405745e0d0d4722cff121f532913180bbb9425b38d076319ac08",
+    "/usr/lib/aarch64-linux-gnu/libpcre2-8.so.0.11.2": "aa4e91ff910dbb8e40472ed4fcaaeebfef19ad13fe925d9ed8e22e87d45ce13b",
+    "/usr/lib/aarch64-linux-gnu/libsystemd.so.0.38.0": "f0574d5aa73fb8ef26d159d909751c1cf4555ce8679ac5c1ebac76bbdddaec7f",
+    "/usr/lib/aarch64-linux-gnu/libxcb.so.1.1.0": "cc570b1aff9e2ffe32c1add5aa23cb65b041a3615810566bb32efcc0c3f83f28",
+    "/usr/lib/aarch64-linux-gnu/libzstd.so.1.5.5": "fe726238b170b83aa83bf1f8a79109b8b61b9eb45234304511d093bbe5f5fb20",
+    "/work/atspi-geometry/runtime-patched-canonical/libatk-bridge-2.0.so.0.0.0": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74"
+  }
+}

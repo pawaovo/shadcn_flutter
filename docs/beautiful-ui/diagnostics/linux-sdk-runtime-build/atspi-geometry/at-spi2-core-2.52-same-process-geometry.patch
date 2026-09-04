@@ -1,0 +1,141 @@
+diff --git a/atk-adaptor/adaptors/socket-adaptor.c b/atk-adaptor/adaptors/socket-adaptor.c
+index 91a5f10..7d9f560 100644
+--- a/atk-adaptor/adaptors/socket-adaptor.c
++++ b/atk-adaptor/adaptors/socket-adaptor.c
+@@ -24,13 +24,88 @@
+ 
+ #include <atk/atk.h>
+ #include <droute/droute.h>
++#include <errno.h>
++#include <string.h>
+ 
++#include "accessible-register.h"
+ #include "accessible-stateset.h"
+ #include "bridge.h"
+ #include "introspection.h"
+ #include "object.h"
+ #include "spi-dbus.h"
+ 
++typedef enum
++{
++  SOCKET_PARENT_REMOTE,
++  SOCKET_PARENT_LOCAL,
++  SOCKET_PARENT_UNAVAILABLE
++} SocketParentKind;
++
++/* AtkSocket supports plugs in the same process. Sending a blocking D-Bus
++ * request to our own connection while handling an AT request prevents the
++ * main thread from dispatching that request. Resolve only our own registered
++ * socket locally; other connections retain the existing IPC implementation.
++ * The returned local object has a temporary strong reference. */
++static SocketParentKind
++ref_local_socket_parent (AtkComponent *component, AtkObject **socket)
++{
++  const char object_path_prefix[] = "/org/a11y/atspi/accessible/";
++  const char *id = g_object_get_data (G_OBJECT (component), "dbus-plug-parent");
++  g_autofree char *bus_name = NULL;
++  char *path;
++  const char *number;
++  char *end;
++  guint64 index;
++  GObject *registered;
++  g_autoptr (AtkObject) local = NULL;
++  g_autoptr (GHashTable) ancestors = NULL;
++  AtkObject *ancestor;
++
++  *socket = NULL;
++  if (!id || id[0] != ':')
++    return SOCKET_PARENT_UNAVAILABLE;
++  bus_name = g_strdup (id);
++  path = strchr (bus_name + 1, ':');
++  if (!path)
++    return SOCKET_PARENT_UNAVAILABLE;
++  *path++ = '\0';
++  if (!dbus_validate_bus_name (bus_name, NULL) || !dbus_validate_path (path, NULL))
++    return SOCKET_PARENT_UNAVAILABLE;
++  if (g_strcmp0 (bus_name, dbus_bus_get_unique_name (spi_global_app_data->bus)) != 0)
++    return SOCKET_PARENT_REMOTE;
++
++  /* The register's general lookup accepts atoi prefixes. Only canonical
++   * numeric object paths can identify a socket here; never alias an invalid
++   * local path to a different object, or fall back to synchronous self IPC. */
++  if (!g_str_has_prefix (path, object_path_prefix))
++    return SOCKET_PARENT_UNAVAILABLE;
++  number = path + sizeof (object_path_prefix) - 1;
++  if (!g_ascii_isdigit (*number))
++    return SOCKET_PARENT_UNAVAILABLE;
++  if (number[0] == '0' && number[1] != '\0')
++    return SOCKET_PARENT_UNAVAILABLE;
++  errno = 0;
++  index = g_ascii_strtoull (number, &end, 10);
++  if (*end != '\0' || errno == ERANGE || index > G_MAXINT)
++    return SOCKET_PARENT_UNAVAILABLE;
++  registered = spi_global_register_path_to_object (path);
++  if (!registered || !ATK_IS_SOCKET (registered) || !ATK_IS_COMPONENT (registered))
++    return SOCKET_PARENT_UNAVAILABLE;
++  local = g_object_ref (ATK_OBJECT (registered));
++
++  /* An invalid parent graph must not turn the direct call into recursion.
++   * These are actual ATK parent getters, not a replacement parent relation. */
++  ancestors = g_hash_table_new (g_direct_hash, g_direct_equal);
++  for (ancestor = local; ancestor; ancestor = atk_object_get_parent (ancestor))
++    {
++      if (ancestor == ATK_OBJECT (component) || g_hash_table_contains (ancestors, ancestor))
++        return SOCKET_PARENT_UNAVAILABLE;
++      g_hash_table_add (ancestors, ancestor);
++    }
++  *socket = g_steal_pointer (&local);
++  return SOCKET_PARENT_LOCAL;
++}
++
+ static DBusMessage *
+ new_socket_call_message (AtkComponent *component, const char *member)
+ {
+@@ -60,6 +135,15 @@ new_socket_call_message (AtkComponent *component, const char *member)
+ static void
+ atspi_plug_component_get_extents (AtkComponent *component, gint *x, gint *y, gint *width, gint *height, AtkCoordType coord_type)
+ {
++  g_autoptr (AtkObject) socket = NULL;
++  SocketParentKind parent_kind = ref_local_socket_parent (component, &socket);
++  if (parent_kind != SOCKET_PARENT_REMOTE)
++    {
++      *x = *y = *width = *height = -1;
++      if (parent_kind == SOCKET_PARENT_LOCAL)
++        atk_component_get_extents (ATK_COMPONENT (socket), x, y, width, height, coord_type);
++      return;
++    }
+   DBusMessage *message = new_socket_call_message (component, "GetExtents");
+   DBusMessage *reply;
+   dbus_uint32_t coord_type_dbus = coord_type;
+@@ -111,6 +195,15 @@ atspi_plug_component_get_extents (AtkComponent *component, gint *x, gint *y, gin
+ static void
+ atspi_plug_component_get_position (AtkComponent *component, gint *x, gint *y, AtkCoordType coord_type)
+ {
++  g_autoptr (AtkObject) socket = NULL;
++  SocketParentKind parent_kind = ref_local_socket_parent (component, &socket);
++  if (parent_kind != SOCKET_PARENT_REMOTE)
++    {
++      *x = *y = -1;
++      if (parent_kind == SOCKET_PARENT_LOCAL)
++        atk_component_get_position (ATK_COMPONENT (socket), x, y, coord_type);
++      return;
++    }
+   DBusMessage *message = new_socket_call_message (component, "GetPosition");
+   DBusMessage *reply;
+   dbus_uint32_t coord_type_dbus = coord_type;
+@@ -149,6 +242,15 @@ atspi_plug_component_get_size (AtkComponent *component,
+                                gint *width,
+                                gint *height)
+ {
++  g_autoptr (AtkObject) socket = NULL;
++  SocketParentKind parent_kind = ref_local_socket_parent (component, &socket);
++  if (parent_kind != SOCKET_PARENT_REMOTE)
++    {
++      *width = *height = -1;
++      if (parent_kind == SOCKET_PARENT_LOCAL)
++        atk_component_get_size (ATK_COMPONENT (socket), width, height);
++      return;
++    }
+   DBusMessage *message = new_socket_call_message (component, "GetSize");
+   DBusMessage *reply;
+   DBusError error;

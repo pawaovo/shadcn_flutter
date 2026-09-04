@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-09-04T06:51:44.014150+00:00",
+  "scope": "Native GTK/ATK bridge integration only; no Flutter, Catalog, Orca, or full Linux accessibility acceptance claim.",
+  "container": "beautiful-flutter-gtk-build-4cf-arm64-20260904",
+  "source": {
+    "path": "docs/beautiful-ui/diagnostics/linux-sdk-runtime-build/atspi-geometry/fixtures/atspi_geometry_fixture.c",
+    "sha256": "42de759722dc2d7cd4c0196e15b1858779a1d0a1abe66fd8f5324c66775b294c"
+  },
+  "binary": {
+    "path": "/work/atspi-geometry/fixtures/atspi-geometry-fixture",
+    "sha256": "8f1e0f33c8b64120142e4e83cf26f5e3cc3f9433a9cfd63fae92666339b95312"
+  },
+  "compile": "cc -std=c11 -O0 -g -Wall -Wextra -Werror /plan/atspi-geometry/fixtures/atspi_geometry_fixture.c -o /work/atspi-geometry/fixtures/atspi-geometry-fixture $(pkg-config --cflags --libs gtk+-3.0 atk-bridge-2.0 atspi-2)",
+  "gtk_version": "3.24.41",
+  "atk_version": "2.52.0",
+  "query_watchdog_ms": 1500,
+  "bridge_runtimes": {
+    "stock": {
+      "mapped_path": "/work/atspi-geometry/runtime-stock/libatk-bridge-2.0.so.0.0.0",
+      "sha256": "8059965cf36268be4723fa0ac2f55ac5cb7dc21fbe7054b5f2221cbf4e5d0dc7"
+    },
+    "precanonical": {
+      "mapped_path": "/work/atspi-geometry/runtime-patched/libatk-bridge-2.0.so.0.0.0",
+      "sha256": "1b372fc7db998fe551cb26bd3831b835b597f0d0ab64e631e4ada5716bc77f55"
+    },
+    "canonical": {
+      "mapped_path": "/work/atspi-geometry/runtime-patched-canonical/libatk-bridge-2.0.so.0.0.0",
+      "sha256": "dcb5f71fdad78b45021ee162836218eb7069c0d75a220b6a0c466b605e457f74"
+    }
+  },
+  "unchanged_system_maps": [
+    "/usr/lib/aarch64-linux-gnu/libatk-1.0.so.0.25209.1",
+    "/usr/lib/aarch64-linux-gnu/libgtk-3.so.0.2409.32"
+  ],
+  "canonical_summary": {
+    "checks": 155,
+    "failures": 0,
+    "process_reports": 7
+  },
+  "healthy_gtk_oracle": {
+    "host_screen": [
+      151,
+      104,
+      287,
+      149
+    ],
+    "host_window": [
+      41,
+      29,
+      287,
+      149
+    ],
+    "descendant_screen": [
+      174,
+      121,
+      83,
+      47
+    ],
+    "descendant_window": [
+      64,
+      46,
+      83,
+      47
+    ]
+  },
+  "raw_evidence_host_directory": "/tmp/beautiful-linux-runtime-build-20260904/work/atspi-geometry/fixtures",
+  "cases": [
+    {
+      "name": "final-stock-plug",
+      "runtime": "stock",
+      "expected_outcome": "watchdog-red",
+      "exit_code": 124,
+      "checks": null,
+      "failures": null,
+      "max_query_duration_us": null,
+      "report": "/work/atspi-geometry/fixtures/final-stock-plug.ndjson",
+      "report_sha256": "fa2c7ab2b57f5c893b8d149f3bc77cc813c0dc95de5990b6dcbc63cf3f9ae0f1",
+      "exit_sha256": "ca2ebdf97d7469496b1f4b78958f9dc8447efdcb623953fee7b6996b762f6fff",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true,
+      "blocked_query": {
+        "object": "plug",
+        "operation": "GetExtents",
+        "coord": "screen"
+      }
+    },
+    {
+      "name": "final-stock-descendant",
+      "runtime": "stock",
+      "expected_outcome": "watchdog-red",
+      "exit_code": 124,
+      "checks": null,
+      "failures": null,
+      "max_query_duration_us": null,
+      "report": "/work/atspi-geometry/fixtures/final-stock-descendant.ndjson",
+      "report_sha256": "55fa73bc6521a4b0b436a0fb0e36f8d9e661b57b502a631ef12b4be27ee1f81b",
+      "exit_sha256": "ca2ebdf97d7469496b1f4b78958f9dc8447efdcb623953fee7b6996b762f6fff",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true,
+      "blocked_query": {
+        "object": "descendant",
+        "operation": "GetExtents",
+        "coord": "screen"
+      }
+    },
+    {
+      "name": "precanonical-invalid-parent-path",
+      "runtime": "precanonical",
+      "expected_outcome": "numeric-alias-red",
+      "exit_code": 1,
+      "checks": 35,
+      "failures": 20,
+      "max_query_duration_us": 70,
+      "report": "/work/atspi-geometry/fixtures/precanonical-invalid-parent-path.ndjson",
+      "report_sha256": "46d8a8181616578fa4e231996827728f31c04e62d37ae12f0f77e85b28b6a035",
+      "exit_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "canonical-same-process",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 15,
+      "failures": 0,
+      "max_query_duration_us": 74,
+      "report": "/work/atspi-geometry/fixtures/canonical-same-process.ndjson",
+      "report_sha256": "278847ce46254c7d3b9aa895a249e6110b41bafdaebe6c63759b3e6a6a0d2b49",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "canonical-destroy-widget",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 26,
+      "failures": 0,
+      "max_query_duration_us": 41,
+      "report": "/work/atspi-geometry/fixtures/canonical-destroy-widget.ndjson",
+      "report_sha256": "108ea7507c496bbecb57522d628ec71e75e6a8f1c5b419d558ab8c742e5c863c",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "canonical-destroy-parent",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 36,
+      "failures": 0,
+      "max_query_duration_us": 39,
+      "report": "/work/atspi-geometry/fixtures/canonical-destroy-parent.ndjson",
+      "report_sha256": "75fcb66ad46fc27c103a55513b31c204839a047b9f48188f66e384b66ef67326",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "canonical-cyclic-parent",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 26,
+      "failures": 0,
+      "max_query_duration_us": 42,
+      "report": "/work/atspi-geometry/fixtures/canonical-cyclic-parent.ndjson",
+      "report_sha256": "9512051b9da96dc0256f0e7e195df6d89505eb96daddca12e8305bf248641c46",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "canonical-invalid-parent-path",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 35,
+      "failures": 0,
+      "max_query_duration_us": 67,
+      "report": "/work/atspi-geometry/fixtures/canonical-invalid-parent-path.ndjson",
+      "report_sha256": "2519999bfafeab00a3223a8d21be741a0b7a0999d8c1105178e8b53accadefa0",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": true
+    },
+    {
+      "name": "final-stock-remote-host",
+      "runtime": "stock",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 1,
+      "failures": 0,
+      "max_query_duration_us": null,
+      "report": "/work/atspi-geometry/fixtures/final-stock-remote-host.ndjson",
+      "report_sha256": "66fd081c49695fee0f01155833fe2795f390ccbff9ac561fce885d9d4d56723e",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-stock-remote-plug",
+      "runtime": "stock",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 16,
+      "failures": 0,
+      "max_query_duration_us": 87,
+      "report": "/work/atspi-geometry/fixtures/final-stock-remote-plug.ndjson",
+      "report_sha256": "624ea0c2fea6114d60f5ec9169c195d7f5b3187455e99fd5579cb2c9c63895d3",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": false
+    },
+    {
+      "name": "canonical-remote-host",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 1,
+      "failures": 0,
+      "max_query_duration_us": null,
+      "report": "/work/atspi-geometry/fixtures/canonical-remote-host.ndjson",
+      "report_sha256": "9bf876c23487a70e3af5696f7820416bb4a78cc524aeebbc631d16e58b4451c1",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "canonical-remote-plug",
+      "runtime": "canonical",
+      "expected_outcome": "pass",
+      "exit_code": 0,
+      "checks": 16,
+      "failures": 0,
+      "max_query_duration_us": 109,
+      "report": "/work/atspi-geometry/fixtures/canonical-remote-plug.ndjson",
+      "report_sha256": "fe3ae9c456466705d6e45465e534e45401d0cbb98f98c0ead09b4080d903937f",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observed_same_bus": false
+    }
+  ]
+}

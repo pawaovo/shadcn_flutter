@@ -1,0 +1,18 @@
+{
+  "id": "3d46acd2e606034d0cabe565182e5aaab8d65ae59c8befccf4668d77fe786a0c",
+  "name": "beautiful-flutter-gtk-build-4cf-arm64-20260904",
+  "labels": {
+    "beautiful.owner": "linux-sdk-runtime-build",
+    "org.opencontainers.image.version": "24.04"
+  },
+  "platform": "linux",
+  "architecture": "arm64",
+  "cpus": 4.0,
+  "memory_bytes": 8589934592,
+  "mounts": {
+    "/work": true,
+    "/plan": false,
+    "/proof": false
+  },
+  "source": "Host Docker inspect; never supplied by a CI environment variable"
+}

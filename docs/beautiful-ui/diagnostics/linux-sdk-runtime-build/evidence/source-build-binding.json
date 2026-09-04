@@ -1,0 +1,15 @@
+{
+  "sdk_revision": "4cf24164269a5ebf0c16a028a00727d0e77bbb05",
+  "patch_sha256": "edff45421907b259cd3b31330816e5f5c35d3ec83e31847d41aaacab773d4394",
+  "patched_node_sha256": "dbb1e3bf353dd6ec2b8f85866854cc09c6befe2e3990f213a97ca79c48426ded",
+  "gn_args_sha256": "9b4d28b301c6218a825119f038322b1257050a5c948926092bdfc3b7696f2a15",
+  "targets": [
+    "flutter/shell/platform/linux:flutter_gtk",
+    "flutter/build/archives:flutter_patched_sdk",
+    "flutter/build/archives:dart_sdk_archive",
+    "flutter/sky"
+  ],
+  "mode": "debug-unoptimized",
+  "performance_acceptance": "not_applicable",
+  "application_acceptance": "not_accepted"
+}

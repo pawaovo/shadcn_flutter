@@ -12,10 +12,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--atk-bridge-artifact", type=Path,
+                        help="Optional independently built native geometry dependency artifact")
     args = parser.parse_args()
     root = args.catalog_root.resolve()
     sys.path.insert(0, str(root / ".github/scripts"))
-    from isolated_sdk_runtime import SDK_REVISION, build_command, record, validate_manifest
+    from isolated_sdk_runtime import SDK_REVISION, build_command, linked_library_inventory, record, validate_manifest
     from probe_catalog_orca_linux import source_inventory
 
     if args.output.exists():
@@ -41,6 +43,14 @@ def main():
         "application_acceptance": "not_accepted", "performance_acceptance": "not_applicable",
     }
     data["expected_build_command"] = build_command(data)
+    if args.atk_bridge_artifact is not None:
+        bridge = json.loads(args.atk_bridge_artifact.read_text())
+        library = Path(bridge["library"])
+        data["native_atk_bridge"] = {
+            "build_artifact": record(args.atk_bridge_artifact), "library": record(library),
+            "patch": record(Path(__file__).parent / "atspi-geometry/at-spi2-core-2.52-same-process-geometry.patch"),
+            "linked_libraries": linked_library_inventory(library),
+        }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(data, indent=2) + "\n")
     validate_manifest(args.output, root, current_sources=source_inventory())
