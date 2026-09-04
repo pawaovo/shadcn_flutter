@@ -58,6 +58,28 @@ An absent endpoint, unsupported copy command, missing voice/output, or failed
 invocation remains unaccepted. Endpoint-wide audio is not independently
 attributed to Narrator; a human must check the recording.
 
+The Windows report also inventories real render endpoints in all four states
+(active, disabled, not present, unplugged) and the console, multimedia and
+communications default roles. This reads endpoint IDs and state only: it neither
+activates nor selects one for capture. The original capture still requests the
+console render endpoint. `audio_com_calls` retains each initialization stage and
+HRESULT, including failures followed by cleanup; routine successful packet polls
+are omitted. Missing inventory roles never count as capability success.
+
+`command_trace` brackets each actual key chord with UTC and probe elapsed times,
+the owned fixture's foreground/focus state and the count/last event already read
+from its log. Fixture events carry their own UTC and elapsed time. An immediate
+`after_send` snapshot reports SendInput delivery, not completed application or
+Narrator processing; later response/window snapshots retain that distinction.
+Names of focused controls outside the owned fixture are not read or recorded.
+
+Before running a changed Windows probe, validate its complete embedded C# and
+PowerShell diagnostic serialization without launching a reader or device:
+
+```powershell
+powershell -NoProfile -STA -File .github/scripts/test_probe_real_at_windows.ps1
+```
+
 Use a job timeout as a final guard around platform APIs. Normal script work is
 bounded to 50 seconds with short process cleanup. Upload the output directory
 with `if: always()` so missing capability is reviewable when the job fails.
@@ -90,6 +112,8 @@ process, or transcript alone cannot establish that result.
   installed Server build; Windows 11 documentation does not promise Server parity.
 - [WASAPI loopback](https://learn.microsoft.com/en-us/windows/win32/coreaudio/loopback-recording)
   requires a rendering endpoint and captures its shared audio stream.
+- [Microsoft's Windows SDK MMDevice declarations](https://github.com/microsoft/win32metadata/blob/main/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h)
+  define the read-only collection ABI, endpoint state flags and default roles.
 - [Orca 46 speech implementation](https://github.com/GNOME/orca/blob/gnome-46/src/orca/speech.py#L143)
   emits `SPEECH OUTPUT` even when there is no speech server. This is why a debug
   transcript is checked separately from actual PCM.

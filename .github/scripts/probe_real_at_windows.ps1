@@ -54,6 +54,7 @@ $source = @'
 using System;
 using System.IO;
 using System.Threading;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Drawing;
@@ -92,7 +93,11 @@ public static class AtCapability {
 
     [STAThread] public static void Main(string[] args) {
         string log=args[0];
-        Action<string> emit = delegate(string s) { File.AppendAllText(log,s+Environment.NewLine); };
+        System.Diagnostics.Stopwatch clock=System.Diagnostics.Stopwatch.StartNew();
+        Action<string> emit = delegate(string s) {
+            File.AppendAllText(log,DateTime.UtcNow.ToString("o")+" elapsed_ms="+
+                clock.ElapsedMilliseconds+" "+s+Environment.NewLine);
+        };
         Application.EnableVisualStyles();
         Form form=new Form(); form.Text="Real Narrator capability fixture"; form.Size=new Size(500,240);
         Button alpha=new Button(); alpha.Text="Narrator capability alpha";
@@ -114,8 +119,14 @@ public static class AtCapability {
 [ComImport, Guid("BCDE0395-E52F-467C-8E3D-C4579291692E")] class DeviceEnumerator {}
 [ComImport, Guid("A95664D2-9614-4F35-A746-DE8DB63617E6"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 interface IMMDeviceEnumerator {
-    [PreserveSig] int EnumAudioEndpoints(int flow, uint mask, out IntPtr devices);
+    [PreserveSig] int EnumAudioEndpoints(int flow, uint mask, out IMMDeviceCollection devices);
     [PreserveSig] int GetDefaultAudioEndpoint(int flow, int role, out IMMDevice device);
+}
+// Windows SDK mmdeviceapi.h: GetCount then Item, following IUnknown.
+[ComImport, Guid("0BD7A1BE-7A1A-44DB-8397-CC5392387B5E"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+interface IMMDeviceCollection {
+    [PreserveSig] int GetCount(out uint count);
+    [PreserveSig] int Item(uint index, out IMMDevice device);
 }
 [ComImport, Guid("D666063F-1587-4E43-81F1-B948E807363F"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 interface IMMDevice {
@@ -146,22 +157,116 @@ interface IAudioCaptureClient {
     [PreserveSig] int GetNextPacketSize(out uint frames);
 }
 
+public sealed class AtAudioCall {
+    public string stage, utc, hresult_hex, exception_type;
+    public int hresult;
+}
+public sealed class AtAudioEndpoint {
+    public string role, id, error;
+    public uint? state;
+}
+public sealed class AtAudioInventory {
+    public string flow="eRender", state_mask="DEVICE_STATEMASK_ALL (0xF)", error;
+    public uint? endpoint_count;
+    public List<AtAudioEndpoint> endpoints=new List<AtAudioEndpoint>();
+    public List<AtAudioEndpoint> defaults=new List<AtAudioEndpoint>();
+}
+public static class AtAudioDiagnostics {
+    public static readonly List<AtAudioCall> Calls=new List<AtAudioCall>();
+    static void Record(string stage, int code, Exception error) {
+        Calls.Add(new AtAudioCall { stage=stage, utc=DateTime.UtcNow.ToString("o"),
+            hresult=code, hresult_hex="0x"+unchecked((uint)code).ToString("X8"),
+            exception_type=error==null ? null : error.GetType().FullName });
+    }
+    public static void Call(string stage, Func<int> operation, bool recordSuccess=true) {
+        int code;
+        try { code=operation(); }
+        catch(Exception error) { Record(stage,Marshal.GetHRForException(error),error); throw; }
+        if(recordSuccess || code<0) Record(stage,code,null);
+        if(code<0) throw new COMException(stage+" failed (0x"+
+            unchecked((uint)code).ToString("X8")+")",code);
+    }
+    internal static IMMDeviceEnumerator CreateEnumerator(string scope) {
+        IMMDeviceEnumerator result=null;
+        Call(scope+".CoCreateInstance(MMDeviceEnumerator)",delegate {
+            result=(IMMDeviceEnumerator)new DeviceEnumerator(); return 0;
+        });
+        return result;
+    }
+    static void ReadEndpoint(IMMDevice device, string scope, AtAudioEndpoint item) {
+        string id=null; uint state=0;
+        Call(scope+".IMMDevice.GetId",delegate { return device.GetId(out id); });
+        item.id=id;
+        Call(scope+".IMMDevice.GetState",delegate { return device.GetState(out state); });
+        item.state=state;
+    }
+    // Read-only render metadata. Never opens a property store, changes a default,
+    // activates an audio client, or captures microphone/audio samples.
+    public static AtAudioInventory Inventory() {
+        AtAudioInventory report=new AtAudioInventory();
+        IMMDeviceEnumerator enumerator=null; IMMDeviceCollection devices=null;
+        try {
+            enumerator=CreateEnumerator("inventory");
+            try {
+                Call("inventory.EnumAudioEndpoints(eRender,0xF)",delegate {
+                    return enumerator.EnumAudioEndpoints(0,0xF,out devices);
+                });
+                uint count=0;
+                Call("inventory.IMMDeviceCollection.GetCount",delegate { return devices.GetCount(out count); });
+                report.endpoint_count=count;
+                for(uint index=0;index<count;index++) {
+                    IMMDevice device=null; AtAudioEndpoint item=new AtAudioEndpoint();
+                    report.endpoints.Add(item);
+                    string scope="inventory.endpoint["+index+"]";
+                    try {
+                        Call(scope+".IMMDeviceCollection.Item",delegate { return devices.Item(index,out device); });
+                        ReadEndpoint(device,scope,item);
+                    } catch(Exception error) { item.error=error.Message; }
+                    finally { if(device!=null) Marshal.ReleaseComObject(device); }
+                }
+            } catch(Exception error) { report.error=error.Message; }
+            string[] roles={"eConsole","eMultimedia","eCommunications"};
+            for(int role=0;role<roles.Length;role++) {
+                IMMDevice device=null; AtAudioEndpoint item=new AtAudioEndpoint { role=roles[role] };
+                report.defaults.Add(item);
+                string scope="inventory.default["+item.role+"]";
+                try {
+                    Call(scope+".GetDefaultAudioEndpoint(eRender)",delegate {
+                        return enumerator.GetDefaultAudioEndpoint(0,role,out device);
+                    });
+                    ReadEndpoint(device,scope,item);
+                } catch(Exception error) { item.error=error.Message; }
+                finally { if(device!=null) Marshal.ReleaseComObject(device); }
+            }
+        } catch(Exception error) { report.error=error.Message; }
+        finally {
+            if(devices!=null) Marshal.ReleaseComObject(devices);
+            if(enumerator!=null) Marshal.ReleaseComObject(enumerator);
+        }
+        return report;
+    }
+}
+
 public sealed class AtLoopback : IDisposable {
     IAudioClient client; IAudioCaptureClient capture; IMMDevice endpoint; IMMDeviceEnumerator enumerator;
     FileStream file; BinaryWriter writer; int blockAlign; int formatTag; int bits; int channels;
     uint rate; long bytes; double sumSquares; long samples; public string EndpointId;
     public long Frames { get { return blockAlign==0 ? 0 : bytes/blockAlign; } }
     public double Rms { get { return samples==0 ? 0 : Math.Sqrt(sumSquares/samples); } }
-    static void Check(int code) { if(code<0) Marshal.ThrowExceptionForHR(code); }
     public AtLoopback(string path) {
         IntPtr format=IntPtr.Zero;
         try {
-            enumerator=(IMMDeviceEnumerator)new DeviceEnumerator();
-            Check(enumerator.GetDefaultAudioEndpoint(0,0,out endpoint));
-            Check(endpoint.GetId(out EndpointId));
+            enumerator=AtAudioDiagnostics.CreateEnumerator("capture");
+            AtAudioDiagnostics.Call("capture.GetDefaultAudioEndpoint(eRender,eConsole)",delegate {
+                return enumerator.GetDefaultAudioEndpoint(0,0,out endpoint);
+            });
+            AtAudioDiagnostics.Call("capture.IMMDevice.GetId",delegate { return endpoint.GetId(out EndpointId); });
             Guid id=typeof(IAudioClient).GUID; object value;
-            Check(endpoint.Activate(ref id,23,IntPtr.Zero,out value)); client=(IAudioClient)value;
-            Check(client.GetMixFormat(out format));
+            value=null;
+            AtAudioDiagnostics.Call("capture.IMMDevice.Activate(IAudioClient)",delegate {
+                return endpoint.Activate(ref id,23,IntPtr.Zero,out value);
+            }); client=(IAudioClient)value;
+            AtAudioDiagnostics.Call("capture.IAudioClient.GetMixFormat",delegate { return client.GetMixFormat(out format); });
             formatTag=(ushort)Marshal.ReadInt16(format,0); channels=(ushort)Marshal.ReadInt16(format,2);
             rate=(uint)Marshal.ReadInt32(format,4); blockAlign=(ushort)Marshal.ReadInt16(format,12);
             bits=(ushort)Marshal.ReadInt16(format,14);
@@ -170,24 +275,32 @@ public sealed class AtLoopback : IDisposable {
             if(formatTag==0xfffe && extra>=22) formatTag=Marshal.ReadInt32(format,24);
             if(!((formatTag==3 && bits==32) || (formatTag==1 && bits==16)))
                 throw new NotSupportedException("Probe supports PCM16 or float32 endpoint mix formats only");
-            Check(client.Initialize(0,0x20000,1000000,0,format,IntPtr.Zero)); // shared WASAPI loopback
-            id=typeof(IAudioCaptureClient).GUID; Check(client.GetService(ref id,out value));
+            AtAudioDiagnostics.Call("capture.IAudioClient.Initialize(shared,loopback)",delegate {
+                return client.Initialize(0,0x20000,1000000,0,format,IntPtr.Zero);
+            }); // same original shared WASAPI loopback endpoint and configuration
+            id=typeof(IAudioCaptureClient).GUID;
+            AtAudioDiagnostics.Call("capture.IAudioClient.GetService(IAudioCaptureClient)",delegate {
+                return client.GetService(ref id,out value);
+            });
             capture=(IAudioCaptureClient)value;
             file=new FileStream(path,FileMode.Create,FileAccess.Write,FileShare.Read);
             writer=new BinaryWriter(file);
             writer.Write(System.Text.Encoding.ASCII.GetBytes("RIFF")); writer.Write(0);
             writer.Write(System.Text.Encoding.ASCII.GetBytes("WAVEfmt ")); writer.Write(formatLength);
             writer.Write(formatBytes); writer.Write(System.Text.Encoding.ASCII.GetBytes("data")); writer.Write(0);
-            Check(client.Start());
+            AtAudioDiagnostics.Call("capture.IAudioClient.Start",delegate { return client.Start(); });
         } catch { Dispose(); throw; }
         finally { if(format!=IntPtr.Zero) Marshal.FreeCoTaskMem(format); }
     }
     public void Drain() {
-        uint count; Check(capture.GetNextPacketSize(out count));
+        uint count=0;
+        AtAudioDiagnostics.Call("capture.IAudioCaptureClient.GetNextPacketSize",delegate { return capture.GetNextPacketSize(out count); },false);
         // Cap a single drain so malformed/device-busy behavior cannot spin forever.
         for(int packet=0; count>0 && packet<100; packet++) {
-            IntPtr data; uint frames, flags; ulong device,counter;
-            Check(capture.GetBuffer(out data,out frames,out flags,out device,out counter));
+            IntPtr data=IntPtr.Zero; uint frames=0,flags=0; ulong device=0,counter=0;
+            AtAudioDiagnostics.Call("capture.IAudioCaptureClient.GetBuffer",delegate {
+                return capture.GetBuffer(out data,out frames,out flags,out device,out counter);
+            },false);
             try {
                 byte[] buffer=new byte[checked((int)frames*blockAlign)];
                 if((flags&2)==0) Marshal.Copy(data,buffer,0,buffer.Length);
@@ -196,12 +309,14 @@ public sealed class AtLoopback : IDisposable {
                     double value = formatTag==3 ? BitConverter.ToSingle(buffer,i) : BitConverter.ToInt16(buffer,i)/32768.0;
                     if(!Double.IsNaN(value) && !Double.IsInfinity(value)) { sumSquares+=value*value; samples++; }
                 }
-            } finally { Check(capture.ReleaseBuffer(frames)); }
-            Check(capture.GetNextPacketSize(out count));
+            } finally {
+                AtAudioDiagnostics.Call("capture.IAudioCaptureClient.ReleaseBuffer",delegate { return capture.ReleaseBuffer(frames); },false);
+            }
+            AtAudioDiagnostics.Call("capture.IAudioCaptureClient.GetNextPacketSize",delegate { return capture.GetNextPacketSize(out count); },false);
         }
     }
     public void Dispose() {
-        if(client!=null) { try { client.Stop(); } catch {} }
+        if(client!=null) { try { AtAudioDiagnostics.Call("capture.IAudioClient.Stop",delegate { return client.Stop(); }); } catch {} }
         if(writer!=null) {
             long length=file.Length; writer.Seek(4,SeekOrigin.Begin); writer.Write((uint)(length-8));
             writer.Seek((int)(length-bytes-4),SeekOrigin.Begin); writer.Write((uint)bytes);
@@ -214,6 +329,41 @@ public sealed class AtLoopback : IDisposable {
     }
 }
 '@
+
+function Record-CommandBoundary([string]$Phase, $Inserted = $null) {
+    # Only name/type/value information belonging to the owned fixture is read.
+    # For any other focused application retain only the fact that focus differs.
+    $snapshot = [ordered]@{
+        phase = $Phase; utc_started = [DateTime]::UtcNow.ToString('o')
+        elapsed_ms_started = $started.ElapsedMilliseconds
+        keyboard_events_inserted = $Inserted
+    }
+    try {
+        $snapshot.fixture_foreground = [AtCapability]::GetForegroundWindow() -eq $window
+        $focused = [Windows.Automation.AutomationElement]::FocusedElement
+        $snapshot.focused_element_is_fixture = $null -ne $focused -and $focused.Current.ProcessId -eq $fixture.Id
+        if ($snapshot.focused_element_is_fixture) {
+            $snapshot.focused_control = @{
+                name = $focused.Current.Name; type = $focused.Current.ControlType.ProgrammaticName
+                has_keyboard_focus = $focused.Current.HasKeyboardFocus
+            }
+        }
+        $lines = [IO.File]::ReadAllLines($events)
+        $snapshot.fixture_event_count = $lines.Length
+        $snapshot.fixture_last_event = if ($lines.Length -gt 0) { $lines[-1] } else { $null }
+    } catch {
+        $snapshot.observation_error = $_.Exception.GetType().FullName
+    }
+    $snapshot.utc_finished = [DateTime]::UtcNow.ToString('o')
+    $snapshot.elapsed_ms_finished = $started.ElapsedMilliseconds
+    $report.evidence.command_trace += $snapshot
+}
+function Invoke-ProbeChord([string]$Name, [System.UInt16[]]$Keys) {
+    Record-CommandBoundary ($Name + ':before')
+    $inserted = [AtCapability]::Chord($Keys)
+    Record-CommandBoundary ($Name + ':after_send') $inserted
+    return $inserted
+}
 
 $recording = $null
 try {
@@ -230,6 +380,9 @@ try {
     $report.runtime.narrator_path = $narratorPath
     $report.runtime.narrator_version = (Get-Item $narratorPath).VersionInfo.FileVersion
     $report.evidence.audio_services = @(Get-Service Audiosrv, AudioEndpointBuilder -ErrorAction SilentlyContinue | Select-Object Name, Status)
+    $report.evidence.audio_inventory = [AtAudioDiagnostics]::Inventory()
+    $report.evidence.audio_capture_policy = 'Original eRender/eConsole shared loopback only; inventory does not choose, activate or create an endpoint.'
+    $report.evidence.command_trace = @()
 
     $sourcePath = Join-Path $temporary 'fixture.cs'
     $fixturePath = Join-Path $temporary 'fixture.exe'
@@ -271,11 +424,13 @@ try {
         if ($null -ne $element) { $controls += @{ name = $element.Current.Name; type = $element.Current.ControlType.ProgrammaticName } }
     }
     if ($controls.Count -eq 2) { Observe 'native_accessibility' @{ controls = $controls; source = 'UI Automation' } }
-    $count = [AtCapability]::Chord([System.UInt16[]]@(0x09))
+    $count = Invoke-ProbeChord 'ordinary Tab' ([System.UInt16[]]@(0x09))
     $report.evidence.keyboard_events_inserted = $count
     Wait-Probe { [IO.File]::ReadAllText($events).Contains('focus=beta') }
-    [AtCapability]::Chord([System.UInt16[]]@(0x20)) | Out-Null
+    Record-CommandBoundary 'ordinary Tab:response_observed'
+    Invoke-ProbeChord 'ordinary Space' ([System.UInt16[]]@(0x20)) | Out-Null
     Wait-Probe { [IO.File]::ReadAllText($events).Contains('checked=true') }
+    Record-CommandBoundary 'ordinary Space:response_observed'
     $report.evidence.interactive_keyboard_response = 'Tab focused beta and Space toggled the native checkbox'
 
     Assert-Time
@@ -299,15 +454,17 @@ try {
     # Narrator+Tab reads the current item. Then Narrator+Ctrl+X copies its own
     # most recent utterance; unsupported builds leave our sentinel unchanged.
     [Windows.Forms.Clipboard]::SetText('probe-no-narrator-output')
-    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x09)) | Out-Null
+    Invoke-ProbeChord 'Narrator+Tab' ([System.UInt16[]]@(0x2D, 0x09)) | Out-Null
     $until = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 4)
     do {
         if ($null -ne $recording) { $recording.Drain() }
         Start-Sleep -Milliseconds 100
     } while ($started.Elapsed.TotalSeconds -lt $until)
-    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x11, 0x58)) | Out-Null
+    Record-CommandBoundary 'Narrator+Tab:observation_window_finished'
+    Invoke-ProbeChord 'Narrator+Ctrl+X' ([System.UInt16[]]@(0x2D, 0x11, 0x58)) | Out-Null
     Start-Sleep -Milliseconds 350
     $utterance = [Windows.Forms.Clipboard]::GetText()
+    Record-CommandBoundary 'Narrator+Ctrl+X:clipboard_observed'
     [IO.File]::WriteAllText((Join-Path $output 'narrator-utterance.txt'), $utterance)
     $spoken = $utterance -match 'Narrator capability beta'
     if ($spoken) {
@@ -316,13 +473,14 @@ try {
         $report.layers.utterance_output.reason = 'Narrator copy-last-phrase did not return the fixture control; the installed build may not support this command'
     }
     $beforeInvoke = [IO.File]::ReadAllText($events)
-    [AtCapability]::Chord([System.UInt16[]]@(0x2D, 0x0D)) | Out-Null # Narrator invoke, not UIA InvokePattern.
+    Invoke-ProbeChord 'Narrator+Enter' ([System.UInt16[]]@(0x2D, 0x0D)) | Out-Null # Narrator invoke, not UIA InvokePattern.
     $until = [Math]::Min($Seconds, $started.Elapsed.TotalSeconds + 3)
     do {
         if ($null -ne $recording) { $recording.Drain() }
         Start-Sleep -Milliseconds 100
     } while ($started.Elapsed.TotalSeconds -lt $until)
     $afterInvoke = [IO.File]::ReadAllText($events)
+    Record-CommandBoundary 'Narrator+Enter:observation_window_finished'
     if ($spoken -and $afterInvoke.Substring($beforeInvoke.Length).Contains('checked=false')) {
         Observe 'at_navigation' @{ commands = @('Narrator+Tab', 'Narrator+Enter'); response = 'Narrator read beta and invoked its checkbox action'; limitation = 'Native fixture only; no Flutter task acceptance' }
     }
@@ -348,6 +506,9 @@ try {
             $report.errors += ('Audio cleanup: ' + $_.Exception.Message)
             $report.status = 'not_accepted'
         }
+    }
+    if ('AtAudioDiagnostics' -as [type]) {
+        $report.evidence.audio_com_calls = [AtAudioDiagnostics]::Calls.ToArray()
     }
     for ($i = $owned.Count - 1; $i -ge 0; $i--) {
         try {

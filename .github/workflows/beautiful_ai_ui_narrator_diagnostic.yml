@@ -1,0 +1,174 @@
+name: Beautiful AI UI Narrator diagnostic (manual only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-character commit containing the diagnostic and regression
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  narrator-diagnostic:
+    name: Actual Narrator capability diagnostics (not app acceptance)
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - name: Require an exact source commit
+        shell: bash
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          requested = os.environ['DIAGNOSTIC_SOURCE_SHA']
+          valid = re.fullmatch(r'[0-9a-fA-F]{40}', requested) is not None
+          output = Path('artifacts/real-at-windows-diagnostic')
+          output.mkdir(parents=True, exist_ok=True)
+          (output / 'source-request.json').write_text(json.dumps({
+              'requested_source_sha': requested, 'valid_40_hex': valid,
+              'scope': 'manual_native_fixture_diagnostic',
+              'application_acceptance': 'not_accepted'}, indent=2))
+          if not valid:
+              raise SystemExit('source_sha must contain exactly 40 hexadecimal characters')
+          PY
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - name: Verify exact checkout and record actual runtime provenance
+        shell: bash
+        env:
+          DIAGNOSTIC_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, platform, subprocess, sys
+          from datetime import datetime, timezone
+          from pathlib import Path
+          output = Path('artifacts/real-at-windows-diagnostic')
+          output.mkdir(parents=True, exist_ok=True)
+          source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          requested = os.environ['DIAGNOSTIC_SOURCE_SHA'].lower()
+          paths = [
+              '.github/scripts/probe_real_at_windows.ps1',
+              '.github/scripts/test_probe_real_at_windows.ps1',
+              '.github/scripts/windows_owned_process.py',
+              '.github/workflows/beautiful_ai_ui_narrator_diagnostic.yml',
+          ]
+          report = {
+              'schema_version': 1, 'scope': 'manual_native_fixture_diagnostic',
+              'application_acceptance': 'not_accepted',
+              'recorded_at_utc': datetime.now(timezone.utc).isoformat(),
+              'requested_source_sha': requested, 'actual_head_sha': source,
+              'exact_source_match': source == requested,
+              'runner': {key: os.environ.get(key) for key in (
+                  'ImageOS', 'ImageVersion', 'RUNNER_OS', 'RUNNER_ARCH',
+                  'RUNNER_ENVIRONMENT', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT',
+                  'GITHUB_EVENT_NAME', 'GITHUB_WORKFLOW_REF', 'GITHUB_WORKFLOW_SHA')},
+              'windows': {'platform': platform.platform(),
+                          'version': list(sys.getwindowsversion())},
+              'python': sys.version,
+              'files': [{'path': path, 'exists': Path(path).is_file(),
+                         'sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                         if Path(path).is_file() else None} for path in paths],
+              'capture_contract': {
+                  'endpoint': 'original eRender/eConsole', 'probe_seconds': 50,
+                  'supervisor_wait_seconds': 65, 'retry_count': 0},
+          }
+          try:
+              if source != requested:
+                  raise RuntimeError('Checkout HEAD does not equal requested source_sha')
+              command = ['powershell', '-NoProfile', '-Command',
+                         "[ordered]@{edition=$PSVersionTable.PSEdition; "
+                         "version=$PSVersionTable.PSVersion.ToString(); "
+                         "executable=(Get-Process -Id $PID).Path} | ConvertTo-Json"]
+              completed = subprocess.run(command, capture_output=True, text=True,
+                                         timeout=20, check=False)
+              (output / 'powershell-version.stdout.log').write_text(completed.stdout)
+              (output / 'powershell-version.stderr.log').write_text(completed.stderr)
+              report['powershell_version_exit_code'] = completed.returncode
+              completed.check_returncode()
+              report['powershell'] = json.loads(completed.stdout)
+              if report['powershell']['edition'] != 'Desktop' or not report['powershell']['version'].startswith('5.1.'):
+                  raise RuntimeError('The diagnostic requires actual Windows PowerShell 5.1')
+          except Exception as error:
+              report['provenance_error'] = str(error)
+              raise
+          finally:
+              (output / 'provenance.json').write_text(json.dumps(report, indent=2))
+          PY
+      - name: Compile production C# and verify diagnostic failure propagation without native activity
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, sys, time
+          from pathlib import Path
+          sys.path.insert(0, '.github/scripts')
+          from windows_owned_process import start_owned_process, stop_owned_process
+          output = Path('artifacts/real-at-windows-diagnostic/tests')
+          output.mkdir(parents=True, exist_ok=True)
+          command = ['powershell', '-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
+                     '-File', '.github/scripts/test_probe_real_at_windows.ps1']
+          report = {'command': command, 'scope': 'pure_diagnostic_regression',
+                    'native_capability_exercised': False, 'status': 'started'}
+          started = time.monotonic()
+          try:
+              with (output / 'stdout.log').open('w') as log:
+                  process = start_owned_process(command, stdout=log, stderr=subprocess.STDOUT)
+                  try:
+                      result = process.wait(timeout=65)
+                      report['exit_code'] = result
+                  finally:
+                      stop_owned_process(process)
+              report['status'] = 'passed' if result == 0 else 'failed'
+          except Exception as error:
+              report.update(status='failed', reason=str(error))
+              raise
+          finally:
+              report['elapsed_seconds'] = time.monotonic() - started
+              (output / 'result.json').write_text(json.dumps(report, indent=2))
+          raise SystemExit(result)
+          PY
+      - name: Observe the original actual Narrator probe once
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, sys
+          from pathlib import Path
+          sys.path.insert(0, '.github/scripts')
+          from windows_owned_process import start_owned_process, stop_owned_process
+          output = Path('artifacts/real-at-windows-diagnostic/probe')
+          output.mkdir(parents=True, exist_ok=True)
+          command = ['powershell', '-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
+                     '-File', '.github/scripts/probe_real_at_windows.ps1',
+                     '-OutputDirectory', str(output), '-Seconds', '50']
+          (output / 'command.json').write_text(json.dumps({
+              'command': command, 'supervisor_wait_seconds': 65,
+              'application_acceptance': 'not_accepted'}, indent=2))
+          try:
+              with (output / 'process.log').open('w') as log:
+                  process = start_owned_process(command, stdout=log, stderr=subprocess.STDOUT)
+                  try:
+                      result = process.wait(timeout=65)
+                  finally:
+                      stop_owned_process(process)
+          except Exception as error:
+              (output / 'supervisor.json').write_text(json.dumps({
+                  'status': 'not_accepted', 'reason': str(error),
+                  'application_acceptance': 'not_accepted'}))
+              raise
+          (output / 'process-exit.json').write_text(json.dumps({
+              'exit_code': result, 'application_acceptance': 'not_accepted'}))
+          raise SystemExit(result)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: narrator-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/real-at-windows-diagnostic/
+          if-no-files-found: error
+          retention-days: 14
