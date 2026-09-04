@@ -1,0 +1,756 @@
+{
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+  "scope": "One manual exact-source Windows native-fixture capability diagnostic, completed without retry. Pure diagnostic compilation and checks are not AT application acceptance.",
+  "run": {
+    "conclusion": "failure",
+    "createdAt": "2026-09-04T05:39:43Z",
+    "databaseId": 33841314675,
+    "headSha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+    "jobs": [
+      {
+        "completedAt": "2026-09-04T05:40:42Z",
+        "conclusion": "failure",
+        "databaseId": 100924033015,
+        "name": "Actual Narrator capability diagnostics (not app acceptance)",
+        "startedAt": "2026-09-04T05:40:03Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-04T05:40:05Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-04T05:40:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:06Z",
+            "conclusion": "success",
+            "name": "Require an exact source commit",
+            "number": 2,
+            "startedAt": "2026-09-04T05:40:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:15Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 3,
+            "startedAt": "2026-09-04T05:40:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:20Z",
+            "conclusion": "success",
+            "name": "Verify exact checkout and record actual runtime provenance",
+            "number": 4,
+            "startedAt": "2026-09-04T05:40:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:23Z",
+            "conclusion": "success",
+            "name": "Compile production C# and verify diagnostic failure propagation without native activity",
+            "number": 5,
+            "startedAt": "2026-09-04T05:40:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:38Z",
+            "conclusion": "failure",
+            "name": "Observe the original actual Narrator probe once",
+            "number": 6,
+            "startedAt": "2026-09-04T05:40:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:38Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 7,
+            "startedAt": "2026-09-04T05:40:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:41Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 14,
+            "startedAt": "2026-09-04T05:40:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-04T05:40:41Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "startedAt": "2026-09-04T05:40:41Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33841314675/job/100924033015"
+      }
+    ],
+    "status": "completed",
+    "updatedAt": "2026-09-04T05:40:43Z",
+    "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33841314675"
+  },
+  "artifact_metadata": {
+    "total_count": 1,
+    "artifacts": [
+      {
+        "id": 9925017084,
+        "node_id": "MDg6QXJ0aWZhY3Q5OTI1MDE3MDg0",
+        "name": "narrator-diagnostic-33841314675-1",
+        "size_in_bytes": 8642,
+        "url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9925017084",
+        "archive_download_url": "https://api.github.com/repos/pawaovo/shadcn_flutter/actions/artifacts/9925017084/zip",
+        "expired": false,
+        "digest": "sha256:e6c7f4c4b1afcc76f47d7908d08428dec2fbfb81bb58b7f1e3521bd9dd9b2d13",
+        "created_at": "2026-09-04T05:40:38Z",
+        "updated_at": "2026-09-04T05:40:38Z",
+        "expires_at": "2026-09-18T05:40:38Z",
+        "workflow_run": {
+          "id": 33841314675,
+          "repository_id": 1354580211,
+          "head_repository_id": 1354580211,
+          "head_branch": "product/main",
+          "head_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b"
+        }
+      }
+    ]
+  },
+  "artifact_digest_boundary": "The archive digest is GitHub API metadata. Thirteen downloaded individual files were independently hashed; no claim of independent ZIP digest verification is made.",
+  "runtime_and_source_provenance": {
+    "schema_version": 1,
+    "scope": "manual_native_fixture_diagnostic",
+    "application_acceptance": "not_accepted",
+    "recorded_at_utc": "2026-09-04T05:40:15.639293+00:00",
+    "requested_source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+    "actual_head_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+    "exact_source_match": true,
+    "runner": {
+      "ImageOS": "win25-vs2026",
+      "ImageVersion": "20260824.214.3",
+      "RUNNER_OS": "Windows",
+      "RUNNER_ARCH": "X64",
+      "RUNNER_ENVIRONMENT": "github-hosted",
+      "GITHUB_RUN_ID": "33841314675",
+      "GITHUB_RUN_ATTEMPT": "1",
+      "GITHUB_EVENT_NAME": "workflow_dispatch",
+      "GITHUB_WORKFLOW_REF": "pawaovo/shadcn_flutter/.github/workflows/beautiful_ai_ui_narrator_diagnostic.yml@refs/heads/product/main",
+      "GITHUB_WORKFLOW_SHA": "70e3d14970d2cb383f63c7c480a26ca295a23c2b"
+    },
+    "windows": {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "version": [
+        10,
+        0,
+        26100,
+        2,
+        ""
+      ]
+    },
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "files": [
+      {
+        "path": ".github/scripts/probe_real_at_windows.ps1",
+        "exists": true,
+        "sha256": "99849b8e8055191a0a3058773a19b8a692c4706d9e9c4012d94b6d93f7ffc96f"
+      },
+      {
+        "path": ".github/scripts/test_probe_real_at_windows.ps1",
+        "exists": true,
+        "sha256": "80d98ac5b22413678ba879ad8b52d376533d707314d4b52f8b5594ca453d371f"
+      },
+      {
+        "path": ".github/scripts/windows_owned_process.py",
+        "exists": true,
+        "sha256": "96a5e1b2e7a9243dc868aefb793ef86e77913419c15aa82a4fb2d6b712d8f723"
+      },
+      {
+        "path": ".github/workflows/beautiful_ai_ui_narrator_diagnostic.yml",
+        "exists": true,
+        "sha256": "a76717687173fc8ab74605069954a2b945291af1efd7296489f76676c00084a3"
+      }
+    ],
+    "capture_contract": {
+      "endpoint": "original eRender/eConsole",
+      "probe_seconds": 50,
+      "supervisor_wait_seconds": 65,
+      "retry_count": 0
+    },
+    "powershell_version_exit_code": 0,
+    "powershell": {
+      "edition": "Desktop",
+      "version": "5.1.26100.33296",
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  },
+  "source_verification": {
+    "files": [
+      {
+        "path": ".github/scripts/probe_real_at_windows.ps1",
+        "exists": true,
+        "sha256": "99849b8e8055191a0a3058773a19b8a692c4706d9e9c4012d94b6d93f7ffc96f",
+        "verified_against_source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+        "matching_representation": "windows_crlf_checkout"
+      },
+      {
+        "path": ".github/scripts/test_probe_real_at_windows.ps1",
+        "exists": true,
+        "sha256": "80d98ac5b22413678ba879ad8b52d376533d707314d4b52f8b5594ca453d371f",
+        "verified_against_source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+        "matching_representation": "windows_crlf_checkout"
+      },
+      {
+        "path": ".github/scripts/windows_owned_process.py",
+        "exists": true,
+        "sha256": "96a5e1b2e7a9243dc868aefb793ef86e77913419c15aa82a4fb2d6b712d8f723",
+        "verified_against_source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+        "matching_representation": "windows_crlf_checkout"
+      },
+      {
+        "path": ".github/workflows/beautiful_ai_ui_narrator_diagnostic.yml",
+        "exists": true,
+        "sha256": "a76717687173fc8ab74605069954a2b945291af1efd7296489f76676c00084a3",
+        "verified_against_source_sha": "70e3d14970d2cb383f63c7c480a26ca295a23c2b",
+        "matching_representation": "windows_crlf_checkout"
+      }
+    ],
+    "method": "Each Windows runtime file SHA-256 was recomputed from the exact source commit Git blob with LF-to-CRLF checkout conversion; all four match.",
+    "all_four_match": true
+  },
+  "pure_regression": {
+    "command": [
+      "powershell",
+      "-NoProfile",
+      "-STA",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      ".github/scripts/test_probe_real_at_windows.ps1"
+    ],
+    "scope": "pure_diagnostic_regression",
+    "native_capability_exercised": false,
+    "status": "passed",
+    "exit_code": 0,
+    "elapsed_seconds": 2.5320000000000107,
+    "csharp_diagnostic_checks_passed": 7,
+    "powershell_parse": "passed",
+    "json_round_trip": "passed",
+    "actual_stdout": "Passed 7 C# diagnostic checks, PowerShell parse and JSON round-trip; no native capability was exercised.\n",
+    "not_at_acceptance": true
+  },
+  "native_process_exit": {
+    "exit_code": 2,
+    "application_acceptance": "not_accepted"
+  },
+  "native_probe_report": {
+    "schema_version": 1,
+    "platform": "windows",
+    "scope": "native_fixture_capability",
+    "status": "not_accepted",
+    "application_acceptance": "not_accepted",
+    "explanation": "A native WinForms fixture cannot accept the Flutter catalog or replace human review.",
+    "runtime": {
+      "os": "Microsoft Windows NT 10.0.26100.0",
+      "powershell": "5.1.26100.33296",
+      "image": "20260824.214.3",
+      "session_id": 2,
+      "user_interactive": true,
+      "narrator_path": "C:\\Windows\\System32\\Narrator.exe",
+      "narrator_version": "10.0.26100.33296 (WinBuild.160101.0800)"
+    },
+    "layers": {
+      "native_accessibility": {
+        "status": "observed",
+        "controls": [
+          {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane"
+          },
+          {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane"
+          }
+        ],
+        "source": "UI Automation"
+      },
+      "at_navigation": {
+        "status": "not_accepted",
+        "reason": "Not observed"
+      },
+      "utterance_output": {
+        "status": "not_accepted",
+        "reason": "Narrator copy-last-phrase did not return the fixture control; the installed build may not support this command"
+      },
+      "synthesized_audio": {
+        "status": "not_accepted",
+        "reason": "No usable loopback audio endpoint: Exception calling \".ctor\" with \"1\" argument(s): \"capture.GetDefaultAudioEndpoint(eRender,eConsole) failed (0x80070490)\""
+      },
+      "human_review": {
+        "status": "not_accepted",
+        "reason": "No human listened or completed a Flutter task"
+      }
+    },
+    "evidence": {
+      "input_desktop_available": true,
+      "audio_services": [
+        {
+          "Name": "AudioEndpointBuilder",
+          "Status": 4
+        },
+        {
+          "Name": "Audiosrv",
+          "Status": 4
+        }
+      ],
+      "audio_inventory": {
+        "flow": "eRender",
+        "state_mask": "DEVICE_STATEMASK_ALL (0xF)",
+        "error": null,
+        "endpoint_count": 0,
+        "endpoints": [],
+        "defaults": [
+          {
+            "role": "eConsole",
+            "id": null,
+            "error": "inventory.default[eConsole].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          },
+          {
+            "role": "eMultimedia",
+            "id": null,
+            "error": "inventory.default[eMultimedia].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          },
+          {
+            "role": "eCommunications",
+            "id": null,
+            "error": "inventory.default[eCommunications].GetDefaultAudioEndpoint(eRender) failed (0x80070490)",
+            "state": null
+          }
+        ]
+      },
+      "audio_capture_policy": "Original eRender/eConsole shared loopback only; inventory does not choose, activate or create an endpoint.",
+      "command_trace": [
+        {
+          "phase": "ordinary Tab:before",
+          "utc_started": "2026-09-04T05:40:27.1349900Z",
+          "elapsed_ms_started": 3453,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 2,
+          "fixture_last_event": "2026-09-04T05:40:26.2500986Z elapsed_ms=92 ready",
+          "utc_finished": "2026-09-04T05:40:27.1548344Z",
+          "elapsed_ms_finished": 3468
+        },
+        {
+          "phase": "ordinary Tab:after_send",
+          "utc_started": "2026-09-04T05:40:27.1608646Z",
+          "elapsed_ms_started": 3474,
+          "keyboard_events_inserted": 2,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability alpha",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": false
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T05:40:27.1865054Z elapsed_ms=1029 focus=beta",
+          "utc_finished": "2026-09-04T05:40:27.1963167Z",
+          "elapsed_ms_finished": 3510
+        },
+        {
+          "phase": "ordinary Tab:response_observed",
+          "utc_started": "2026-09-04T05:40:27.1983445Z",
+          "elapsed_ms_started": 3512,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T05:40:27.1865054Z elapsed_ms=1029 focus=beta",
+          "utc_finished": "2026-09-04T05:40:27.2299964Z",
+          "elapsed_ms_finished": 3543
+        },
+        {
+          "phase": "ordinary Space:before",
+          "utc_started": "2026-09-04T05:40:27.2299964Z",
+          "elapsed_ms_started": 3543,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 3,
+          "fixture_last_event": "2026-09-04T05:40:27.1865054Z elapsed_ms=1029 focus=beta",
+          "utc_finished": "2026-09-04T05:40:27.2299964Z",
+          "elapsed_ms_finished": 3544
+        },
+        {
+          "phase": "ordinary Space:after_send",
+          "utc_started": "2026-09-04T05:40:27.2320090Z",
+          "elapsed_ms_started": 3544,
+          "keyboard_events_inserted": 2,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:27.2400602Z",
+          "elapsed_ms_finished": 3552
+        },
+        {
+          "phase": "ordinary Space:response_observed",
+          "utc_started": "2026-09-04T05:40:27.2400602Z",
+          "elapsed_ms_started": 3553,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:27.2400602Z",
+          "elapsed_ms_finished": 3554
+        },
+        {
+          "phase": "Narrator+Tab:before",
+          "utc_started": "2026-09-04T05:40:30.1910239Z",
+          "elapsed_ms_started": 6504,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:30.2068611Z",
+          "elapsed_ms_finished": 6520
+        },
+        {
+          "phase": "Narrator+Tab:after_send",
+          "utc_started": "2026-09-04T05:40:30.2068611Z",
+          "elapsed_ms_started": 6521,
+          "keyboard_events_inserted": 4,
+          "fixture_foreground": true,
+          "focused_element_is_fixture": true,
+          "focused_control": {
+            "name": "Narrator capability beta",
+            "type": "ControlType.Pane",
+            "has_keyboard_focus": true
+          },
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:30.2189415Z",
+          "elapsed_ms_finished": 6532
+        },
+        {
+          "phase": "Narrator+Tab:observation_window_finished",
+          "utc_started": "2026-09-04T05:40:34.7409722Z",
+          "elapsed_ms_started": 11053,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:34.7531052Z",
+          "elapsed_ms_finished": 11067
+        },
+        {
+          "phase": "Narrator+Ctrl+X:before",
+          "utc_started": "2026-09-04T05:40:34.7551234Z",
+          "elapsed_ms_started": 11068,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:34.7568909Z",
+          "elapsed_ms_finished": 11071
+        },
+        {
+          "phase": "Narrator+Ctrl+X:after_send",
+          "utc_started": "2026-09-04T05:40:34.7609361Z",
+          "elapsed_ms_started": 11074,
+          "keyboard_events_inserted": 6,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:34.7669922Z",
+          "elapsed_ms_finished": 11079
+        },
+        {
+          "phase": "Narrator+Ctrl+X:clipboard_observed",
+          "utc_started": "2026-09-04T05:40:35.1526093Z",
+          "elapsed_ms_started": 11467,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:35.1566331Z",
+          "elapsed_ms_finished": 11469
+        },
+        {
+          "phase": "Narrator+Enter:before",
+          "utc_started": "2026-09-04T05:40:35.1586520Z",
+          "elapsed_ms_started": 11473,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:35.1626900Z",
+          "elapsed_ms_finished": 11476
+        },
+        {
+          "phase": "Narrator+Enter:after_send",
+          "utc_started": "2026-09-04T05:40:35.1647049Z",
+          "elapsed_ms_started": 11477,
+          "keyboard_events_inserted": 4,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:35.1685044Z",
+          "elapsed_ms_finished": 11483
+        },
+        {
+          "phase": "Narrator+Enter:observation_window_finished",
+          "utc_started": "2026-09-04T05:40:37.7672877Z",
+          "elapsed_ms_started": 14080,
+          "keyboard_events_inserted": null,
+          "fixture_foreground": false,
+          "focused_element_is_fixture": false,
+          "fixture_event_count": 4,
+          "fixture_last_event": "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true",
+          "utc_finished": "2026-09-04T05:40:37.7713204Z",
+          "elapsed_ms_finished": 14084
+        }
+      ],
+      "fixture_compilation": {
+        "executable_exists": true,
+        "exit_code": 0,
+        "executable_bytes": 19456,
+        "compiler": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe"
+      },
+      "fixture_session_id": 2,
+      "keyboard_events_inserted": 2,
+      "interactive_keyboard_response": "Tab focused beta and Space toggled the native checkbox",
+      "narrator_pid": 3984,
+      "narrator_session_id": 2,
+      "audio_com_calls": [
+        {
+          "stage": "inventory.CoCreateInstance(MMDeviceEnumerator)",
+          "utc": "2026-09-04T05:40:24.9698962Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.EnumAudioEndpoints(eRender,0xF)",
+          "utc": "2026-09-04T05:40:24.9698962Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.IMMDeviceCollection.GetCount",
+          "utc": "2026-09-04T05:40:24.9698962Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "inventory.default[eConsole].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T05:40:24.9719185Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        },
+        {
+          "stage": "inventory.default[eMultimedia].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T05:40:24.9719185Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        },
+        {
+          "stage": "inventory.default[eCommunications].GetDefaultAudioEndpoint(eRender)",
+          "utc": "2026-09-04T05:40:24.9719185Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        },
+        {
+          "stage": "capture.CoCreateInstance(MMDeviceEnumerator)",
+          "utc": "2026-09-04T05:40:29.7371143Z",
+          "hresult_hex": "0x00000000",
+          "exception_type": null,
+          "hresult": 0
+        },
+        {
+          "stage": "capture.GetDefaultAudioEndpoint(eRender,eConsole)",
+          "utc": "2026-09-04T05:40:29.7371143Z",
+          "hresult_hex": "0x80070490",
+          "exception_type": null,
+          "hresult": -2147023728
+        }
+      ]
+    },
+    "errors": [
+      "No usable loopback audio endpoint: Exception calling \".ctor\" with \"1\" argument(s): \"capture.GetDefaultAudioEndpoint(eRender,eConsole) failed (0x80070490)\""
+    ],
+    "elapsed_seconds": 14.205
+  },
+  "actual_clipboard_text_after_copy_last_phrase": "Narrator window heading level 1, \nWelcome to Narrator",
+  "fixture_events": [
+    "2026-09-04T05:40:26.2382406Z elapsed_ms=81 focus=alpha",
+    "2026-09-04T05:40:26.2500986Z elapsed_ms=92 ready",
+    "2026-09-04T05:40:27.1865054Z elapsed_ms=1029 focus=beta",
+    "2026-09-04T05:40:27.2380482Z elapsed_ms=1080 checked=true"
+  ],
+  "raw_artifact_directory": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1",
+  "raw_artifact_file_count": 13,
+  "raw_artifact_files": [
+    {
+      "path": "powershell-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/powershell-version.stderr.log"
+    },
+    {
+      "path": "powershell-version.stdout.log",
+      "bytes": 155,
+      "sha256": "b7e559fe85f86d5907329e739f3893fc1e69e377eac1becea12afe3a6b4c188c",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/powershell-version.stdout.log"
+    },
+    {
+      "path": "probe/command.json",
+      "bytes": 364,
+      "sha256": "b449c00b2b177f145fd040413504d2f879cec243658a821fc1df960a25306f87",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/command.json"
+    },
+    {
+      "path": "probe/compile-error.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/compile-error.log"
+    },
+    {
+      "path": "probe/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/compile.log"
+    },
+    {
+      "path": "probe/fixture-events.log",
+      "bytes": 222,
+      "sha256": "e36cfa5d54c467cebba4dbc747b0f3096b028bf60e439a86a9511b2298b4e214",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/fixture-events.log"
+    },
+    {
+      "path": "probe/narrator-utterance.txt",
+      "bytes": 53,
+      "sha256": "9c9db461330f76b72d93e2f9ca3db3d2c25f8062bb5b4ef5feeb447406fdfd81",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/narrator-utterance.txt"
+    },
+    {
+      "path": "probe/process-exit.json",
+      "bytes": 58,
+      "sha256": "f084c077de3dd290553b6d4c9bd7250e0b33d73e4393d94a3879531bac9cd6a9",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/process-exit.json"
+    },
+    {
+      "path": "probe/process.log",
+      "bytes": 29803,
+      "sha256": "64c75e007ead91e169908db274d77d3f1f6cfaf61079681ff52eef4b0a5c1f8c",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/process.log"
+    },
+    {
+      "path": "probe/report.json",
+      "bytes": 29801,
+      "sha256": "d3e40f45ec1b67714160abdea7e6d001b441f5c3fbf87883996657312b52fa19",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/probe/report.json"
+    },
+    {
+      "path": "provenance.json",
+      "bytes": 2253,
+      "sha256": "5a4b892ffb37b78507c462528deedb14a66fdadcf421432ab7bf3b02941544bc",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/provenance.json"
+    },
+    {
+      "path": "tests/result.json",
+      "bytes": 351,
+      "sha256": "69b6a038148e36f3b7a5c5690fae462b1e5c1471eeb9da538308af50eb11a210",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/tests/result.json"
+    },
+    {
+      "path": "tests/stdout.log",
+      "bytes": 106,
+      "sha256": "4b516c9fe0b06340ffb451f149100a5ac4e494f458c38cf2edc948586b38ed3f",
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/narrator-diagnostic-33841314675-1/tests/stdout.log"
+    }
+  ],
+  "github_metadata_files": [
+    {
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/github-run.json",
+      "bytes": 2171,
+      "sha256": "3191a427ecf5e58de450bf872ad868a53440f253b9238e6b00e927c62d6b7b66"
+    },
+    {
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/github-artifacts.json",
+      "bytes": 736,
+      "sha256": "b6da1f939ec6930767b7e9bd6da97d16da1ac674552e39266ca72bc3dc485959"
+    },
+    {
+      "original_local_path": "/tmp/beautiful-narrator-70e3d149-33841314675/github-job.log",
+      "bytes": 58649,
+      "sha256": "52c6e5ccdb6f286cc5bf3a8d8929276d567fd85c204ecbb153de522ef99ad606"
+    }
+  ],
+  "interpretation": {
+    "runtime_build_and_diagnostic_regression": "Windows PowerShell 5.1.26100.33296 parsed production PowerShell, compiled embedded C#, passed seven pure diagnostic checks and JSON round-trip in 2.5320000000000107 seconds. The actual fixture csc.exe compilation separately returned zero and produced 19456 bytes.",
+    "actual_probe_outcome": "The native probe completed in 14.205 seconds with exit 2 and status not_accepted. Original UIA and ordinary keyboard capability was observed; fixture Narrator navigation, fixture utterance and synthesized audio were not accepted.",
+    "audio_environment": "This observed GitHub-hosted Windows Server 2025 session returned zero render endpoints from a successful all-state EnumAudioEndpoints/GetCount. All three default render roles returned 0x80070490. The original capture failed exactly at GetDefaultAudioEndpoint(eRender,eConsole), before audio-client activation.",
+    "focus_and_utterance": "Fixture beta had keyboard focus and the fixture was foreground before and immediately after Narrator+Tab. The observation-window end snapshot had both false. Later copy/invoke were sent while focus was outside the fixture. The copied text was Narrator window heading level 1, followed by Welcome to Narrator, not the fixture label; it was not the old sentinel.",
+    "limits": [
+      "Endpoint absence is specific to the observed available GitHub-hosted Windows session and image, not a claim about all Windows environments.",
+      "The external focused window was not inspected. The copied Welcome to Narrator heading is recorded evidence, not proof of the destination or cause of every focus transition.",
+      "The missing fixture utterance cannot be attributed solely to an unsupported copy command; a different Narrator heading was actually copied.",
+      "SendInput counts show inserted input events and do not prove Narrator handled the intended task command.",
+      "No virtual endpoint was created, no capture role changed, no acceptance assertion or threshold relaxed, and no run retried.",
+      "Seven pure checks and successful fixture compilation do not accept real speech or the Flutter application. Human speech review and application task acceptance remain unestablished."
+    ]
+  }
+}

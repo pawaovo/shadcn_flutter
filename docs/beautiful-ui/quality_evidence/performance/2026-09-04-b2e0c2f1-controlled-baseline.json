@@ -1,0 +1,1938 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-04T05:32:43.765040+00:00",
+  "method": "Read-only parsing and exact original-assessor recomputation; no Flutter/build/native run was launched by this evidence pass. No raw records or budgets were changed.",
+  "time_zone": "Asia/Shanghai (UTC+08:00); raw epoch and UTC times also retained.",
+  "budget": {
+    "schema_version": 1,
+    "budget_id": "engineering_budget_v1",
+    "approval_status": "engineering_default_not_product_approved",
+    "all_platform_release_accepted": false,
+    "frame_budget": {
+      "basis": "1000000 / observed_display_refresh_rate_hz",
+      "build_p95_max_frame_intervals": 1,
+      "raster_p95_max_frame_intervals": 1,
+      "build_or_raster_over_interval_max_fraction": 0.01,
+      "build_max_frame_intervals": 2,
+      "raster_max_frame_intervals": 2,
+      "total_span_p95_max_frame_intervals": 2
+    },
+    "measured_process_rss": {
+      "sample_peak_max_bytes": 536870912,
+      "positive_end_minus_start_max_bytes": 67108864,
+      "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+    },
+    "evidence_requirements": {
+      "minimum_warmup_rounds": 1,
+      "minimum_measured_rounds": 3,
+      "minimum_frame_samples_per_scenario": 100,
+      "minimum_rss_samples_per_scenario": 10
+    },
+    "interpretation": [
+      "These are explicit engineering defaults, not official Flutter thresholds or a user-approved product budget.",
+      "Frame percentiles use nearest rank and the complete independent FrameTiming arrays, not bounded VM timeline retention.",
+      "Build and raster stages are assessed separately because rendering is pipelined; totalSpan includes scheduling and is not a count of displayed dropped frames.",
+      "The fixed measured-process RSS limits are a desktop harness risk gate; component memory and leak assessment remain unassessed even when it passes.",
+      "One passing observed run does not establish repeat-run stability or acceptance on other devices, platforms, accessibility configurations or physical input."
+    ]
+  },
+  "budget_file": "docs/beautiful-ui/quality_evidence/performance/engineering_budget_v1.json",
+  "budget_sha256": "f4cc5ffbc95841eee3a9e6e2f5ff870e92d056975599870b1c3308313fed5358",
+  "assessor_sha256": "bebbab08df9bd3be14bfa5be8a9fc9bd38a7ee240dc71497e046c3e6466adf2d",
+  "assessor_matches_both_frozen_copies_and_current_repository": true,
+  "component_memory_assessment": "unassessed",
+  "leak_assessment": "unassessed",
+  "other_platforms_and_devices": "unassessed",
+  "all_platform_release_accepted": false,
+  "run_id": "20260904-controlled-baseline",
+  "raw_directory": "/tmp/beautiful-p3-baseline-b2e0c2f1/packages/beautiful_ai_ui_catalog/build/p3-profile/20260904-controlled-baseline",
+  "status": "invalid_complete_baseline",
+  "raw_run_status": "failed",
+  "run_exit_code": 1,
+  "driver_exit_code": 1,
+  "aggregate_assessment": {
+    "status": "invalid_evidence",
+    "assessor_exit_code": 2,
+    "error": "report is not finalized complete",
+    "all_platform_release_accepted": false
+  },
+  "failure_count": 1,
+  "workload_phase_status": "failed",
+  "started_at_utc": "2026-09-04T04:55:09.646097Z",
+  "finished_at_utc": "2026-09-04T05:16:25.175115Z",
+  "source": {
+    "revision": "b2e0c2f1508bbf0e85eeb3b240a5c0dfa8f604da",
+    "file_count": 305,
+    "manifest_sha256": "da3a8ead13884746abb0f6e283178d598969eb20cf82fdc570487bab76656aff",
+    "independently_recomputed": true,
+    "source_integrity": {
+      "schema_version": 1,
+      "status": "verified_unchanged",
+      "revision_unchanged": true,
+      "before_revision": "b2e0c2f1508bbf0e85eeb3b240a5c0dfa8f604da",
+      "after_revision": "b2e0c2f1508bbf0e85eeb3b240a5c0dfa8f604da",
+      "before_manifest_sha256": "da3a8ead13884746abb0f6e283178d598969eb20cf82fdc570487bab76656aff",
+      "after_manifest_sha256": "da3a8ead13884746abb0f6e283178d598969eb20cf82fdc570487bab76656aff",
+      "before_file_count": 305,
+      "after_file_count": 305,
+      "changed_paths": [],
+      "source_worktree_status_unchanged": true,
+      "scope_note": "Acceptance checks the listed build/runtime inputs and git revision. Changes to out-of-scope documentation/tests are reported by worktree status and do not alter this manifest."
+    },
+    "before_file_sha256": "9b7778a5ba0c5263b48635f21dbb20b67ec10d74fbf6d89c7dd154ed7a0eab39",
+    "after_file_sha256": "afcf3ed14667ea57ebf7dcd27a282a7ea4c3c35e6911de3e658fc4bdfddea9f5",
+    "whole_worktree_claim": "No clean-worktree claim; this verifies only the recorded build/runtime input scope."
+  },
+  "runtime": {
+    "operating_system": "macos",
+    "operating_system_version": "Version 15.7.9 (Build 24G830)",
+    "dart_vm_version": "3.13.0 (stable) (Wed Aug 5 00:28:05 2026 -0700) on \"macos_arm64\"",
+    "logical_processor_count": 10,
+    "build_mode": "profile",
+    "application_lifecycle_state": "resumed",
+    "frames_enabled": true,
+    "native_view_physical_px": {
+      "width": 3456.0,
+      "height": 2160.0
+    },
+    "native_view_logical_dp": {
+      "width": 1728.0,
+      "height": 1080.0
+    },
+    "device_pixel_ratio": 2.0,
+    "display_refresh_rate_hz": 120.0,
+    "surface_width_dp": 1696.0,
+    "platform_text_scale_at_14dp": 14.0,
+    "platform_disable_animations": false,
+    "platform_high_contrast": false,
+    "semantics_enabled": true,
+    "platform_semantics_enabled": true,
+    "framework_semantics_enabled": true,
+    "locale": "zh-Hans-CN",
+    "platform_locale": "zh-Hans-CN",
+    "widget_locale": "en-US",
+    "legacy_metadata_note": "locale and semantics_enabled retain the historical platform-dispatcher meaning; widget locale and framework Semantics are recorded independently.",
+    "theme": "light",
+    "motion_policy": "system",
+    "renderer": {
+      "observed_backend": null,
+      "requested_backend": "platform default",
+      "observation_status": "Not exposed by the Flutter public runtime API; inspect the saved engine launch log."
+    },
+    "device_label": "macos"
+  },
+  "native_preparation": {
+    "status": "ready",
+    "wall_time_us": 114575244,
+    "explicit_start_epoch_us": 1788497823169245,
+    "ready_epoch_us": 1788497824222906,
+    "stable_duration_us": 1053658,
+    "completed_framework_frames_since_start": 9,
+    "native_view_physical_px": {
+      "width": 3456.0,
+      "height": 2160.0
+    },
+    "native_view_logical_dp": {
+      "width": 1728.0,
+      "height": 1080.0
+    },
+    "device_pixel_ratio": 2.0,
+    "application_lifecycle_state": "resumed",
+    "frames_enabled": true,
+    "platform_semantics_enabled": true,
+    "framework_semantics_enabled": true,
+    "observation_note": "Readiness requires observed resumed lifecycle, frame progression and stable geometry/semantics flags after explicit Start. It is preparation evidence, not measured frame timing or independent proof of window visibility."
+  },
+  "totals": {
+    "scenarios": 7,
+    "complete_scenarios": 6,
+    "invalid_scenarios": 1,
+    "frame_samples": 3912,
+    "rss_samples": 10813
+  },
+  "scenarios": [
+    {
+      "id": "prompt_bar",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "sources": 1000,
+        "draft_utf16_length": 10000
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 659,
+      "rss_samples": 91,
+      "sampling_start_epoch_us": 1788497830235680,
+      "sampling_end_epoch_us": 1788497839640459,
+      "sampling_start_utc": "2026-09-04T04:57:10.235680+00:00",
+      "sampling_end_utc": "2026-09-04T04:57:19.640459+00:00",
+      "sampling_start_local": "2026-09-04T12:57:10.235680+08:00",
+      "sampling_end_local": "2026-09-04T12:57:19.640459+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788497830235686,
+        "end_epoch_us": 1788497839640465,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 659,
+          "min": 66,
+          "max": 84097,
+          "mean": 2290.224582701062,
+          "percentile_method": "nearest rank",
+          "p50": 834,
+          "p90": 4763,
+          "p95": 8578,
+          "p99": 28059
+        },
+        "raster_us": {
+          "sample_count": 659,
+          "min": 457,
+          "max": 85595,
+          "mean": 4992.141122913506,
+          "percentile_method": "nearest rank",
+          "p50": 2341,
+          "p90": 11690,
+          "p95": 17172,
+          "p99": 38400
+        },
+        "total_span_us": {
+          "sample_count": 659,
+          "min": 1002,
+          "max": 340669,
+          "mean": 15158.259484066768,
+          "percentile_method": "nearest rank",
+          "p50": 7738,
+          "p90": 34029,
+          "p95": 52210,
+          "p99": 98737
+        },
+        "vsync_overhead_us": {
+          "sample_count": 659,
+          "min": 53,
+          "max": 309247,
+          "mean": 6001.203338391502,
+          "percentile_method": "nearest rank",
+          "p50": 1577,
+          "p90": 12541,
+          "p95": 24723,
+          "p99": 62976
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 192905216,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 122,
+      "measured_process_rss": {
+        "start_bytes": 181190656,
+        "end_bytes": 176881664,
+        "signed_end_minus_start_bytes": -4308992,
+        "sample_peak_bytes": 192905216,
+        "process_lifetime_max_at_last_sample_bytes": 193888256,
+        "maximum_sample_gap_us": 397099,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 148471808,
+            "process_lifetime_max_rss_bytes": 188055552
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 148897792,
+            "process_lifetime_max_rss_bytes": 188055552
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 159285248,
+            "process_lifetime_max_rss_bytes": 188055552
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 253952000,
+            "process_lifetime_max_rss_bytes": 253952000
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 231014400,
+            "process_lifetime_max_rss_bytes": 253984768
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 8578,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 84097,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 17172,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 85595,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.18512898330804248,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 52210,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 192905216,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 8578,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 84097,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 17172,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 85595,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.18512898330804248,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 52210,
+          "maximum": 16666.666666666668,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    },
+    {
+      "id": "diff_table",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "records": 500,
+        "fields": 3,
+        "page_size": 20
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 270,
+      "rss_samples": 70,
+      "sampling_start_epoch_us": 1788497851060070,
+      "sampling_end_epoch_us": 1788497861047438,
+      "sampling_start_utc": "2026-09-04T04:57:31.060070+00:00",
+      "sampling_end_utc": "2026-09-04T04:57:41.047438+00:00",
+      "sampling_start_local": "2026-09-04T12:57:31.060070+08:00",
+      "sampling_end_local": "2026-09-04T12:57:41.047438+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788497851060073,
+        "end_epoch_us": 1788497861047444,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 270,
+          "min": 87,
+          "max": 249976,
+          "mean": 7604.451851851852,
+          "percentile_method": "nearest rank",
+          "p50": 3221,
+          "p90": 15540,
+          "p95": 25697,
+          "p99": 93816
+        },
+        "raster_us": {
+          "sample_count": 270,
+          "min": 1587,
+          "max": 649295,
+          "mean": 15740.537037037036,
+          "percentile_method": "nearest rank",
+          "p50": 5031,
+          "p90": 21365,
+          "p95": 41973,
+          "p99": 265480
+        },
+        "total_span_us": {
+          "sample_count": 270,
+          "min": 1920,
+          "max": 664736,
+          "mean": 40508.596296296295,
+          "percentile_method": "nearest rank",
+          "p50": 16877,
+          "p90": 74904,
+          "p95": 160426,
+          "p99": 522735
+        },
+        "vsync_overhead_us": {
+          "sample_count": 270,
+          "min": 72,
+          "max": 515432,
+          "mean": 13892.24074074074,
+          "percentile_method": "nearest rank",
+          "p50": 2215,
+          "p90": 28926,
+          "p95": 42668,
+          "p99": 240752
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 198819840,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 114,
+      "measured_process_rss": {
+        "start_bytes": 193691648,
+        "end_bytes": 192692224,
+        "signed_end_minus_start_bytes": -999424,
+        "sample_peak_bytes": 198819840,
+        "process_lifetime_max_at_last_sample_bytes": 253984768,
+        "maximum_sample_gap_us": 918124,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 231014400,
+            "process_lifetime_max_rss_bytes": 253984768
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 231014400,
+            "process_lifetime_max_rss_bytes": 253984768
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 241221632,
+            "process_lifetime_max_rss_bytes": 253984768
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 252067840,
+            "process_lifetime_max_rss_bytes": 253984768
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 241991680,
+            "process_lifetime_max_rss_bytes": 253984768
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 25697,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 249976,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 41973,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 649295,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.4222222222222222,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 160426,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 198819840,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 25697,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 249976,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 41973,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 649295,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.4222222222222222,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 160426,
+          "maximum": 16666.666666666668,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    },
+    {
+      "id": "records_table",
+      "raw_workload_status": "failed",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "invalid_evidence",
+      "dataset": {
+        "records": 1000,
+        "columns": 20,
+        "typed_cells": 20000,
+        "viewport_height_dp": 400
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 860,
+      "rss_samples": 10368,
+      "sampling_start_epoch_us": 1788497874443421,
+      "sampling_end_epoch_us": 1788498914165220,
+      "sampling_start_utc": "2026-09-04T04:57:54.443421+00:00",
+      "sampling_end_utc": "2026-09-04T05:15:14.165220+00:00",
+      "sampling_start_local": "2026-09-04T12:57:54.443421+08:00",
+      "sampling_end_local": "2026-09-04T13:15:14.165220+08:00",
+      "native_environment_during_measurement": {
+        "status": "invalid_environment_changed",
+        "start_epoch_us": 1788497874443424,
+        "end_epoch_us": 1788498914165225,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [
+          {
+            "epoch_us": 1788497880325596,
+            "phase": "lifecycle_callback",
+            "native_view_physical_px": {
+              "width": 3456.0,
+              "height": 2160.0
+            },
+            "native_view_logical_dp": {
+              "width": 1728.0,
+              "height": 1080.0
+            },
+            "device_pixel_ratio": 2.0,
+            "application_lifecycle_state": "inactive",
+            "frames_enabled": true,
+            "platform_semantics_enabled": true,
+            "framework_semantics_enabled": true
+          },
+          {
+            "epoch_us": 1788497880794121,
+            "phase": "lifecycle_callback",
+            "native_view_physical_px": {
+              "width": 3456.0,
+              "height": 2160.0
+            },
+            "native_view_logical_dp": {
+              "width": 1728.0,
+              "height": 1080.0
+            },
+            "device_pixel_ratio": 2.0,
+            "application_lifecycle_state": "hidden",
+            "frames_enabled": false,
+            "platform_semantics_enabled": true,
+            "framework_semantics_enabled": true
+          },
+          {
+            "epoch_us": 1788498908908058,
+            "phase": "lifecycle_callback",
+            "native_view_physical_px": {
+              "width": 3456.0,
+              "height": 2160.0
+            },
+            "native_view_logical_dp": {
+              "width": 1728.0,
+              "height": 1080.0
+            },
+            "device_pixel_ratio": 2.0,
+            "application_lifecycle_state": "inactive",
+            "frames_enabled": true,
+            "platform_semantics_enabled": true,
+            "framework_semantics_enabled": true
+          },
+          {
+            "epoch_us": 1788498908908214,
+            "phase": "lifecycle_callback",
+            "native_view_physical_px": {
+              "width": 3456.0,
+              "height": 2160.0
+            },
+            "native_view_logical_dp": {
+              "width": 1728.0,
+              "height": 1080.0
+            },
+            "device_pixel_ratio": 2.0,
+            "application_lifecycle_state": "resumed",
+            "frames_enabled": true,
+            "platform_semantics_enabled": true,
+            "framework_semantics_enabled": true
+          }
+        ],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 860,
+          "min": 53,
+          "max": 81523,
+          "mean": 1223.8593023255814,
+          "percentile_method": "nearest rank",
+          "p50": 336,
+          "p90": 1894,
+          "p95": 3062,
+          "p99": 15768
+        },
+        "raster_us": {
+          "sample_count": 860,
+          "min": 346,
+          "max": 60672,
+          "mean": 2598.4802325581395,
+          "percentile_method": "nearest rank",
+          "p50": 827,
+          "p90": 5685,
+          "p95": 9608,
+          "p99": 24037
+        },
+        "total_span_us": {
+          "sample_count": 860,
+          "min": 628,
+          "max": 188874,
+          "mean": 7304.682558139535,
+          "percentile_method": "nearest rank",
+          "p50": 2185,
+          "p90": 18407,
+          "p95": 27454,
+          "p99": 74685
+        },
+        "vsync_overhead_us": {
+          "sample_count": 860,
+          "min": 44,
+          "max": 163860,
+          "mean": 2910.8651162790698,
+          "percentile_method": "nearest rank",
+          "p50": 159,
+          "p90": 7819,
+          "p95": 14820,
+          "p99": 37836
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 216973312,
+      "raw_reported_failure": "The native lifecycle, viewport or semantics state changed while sampling records_table; raw frames and RSS remain preserved, and this workload is invalid.",
+      "assessment_error": "records_table: workload is not complete"
+    },
+    {
+      "id": "sidebar_nav",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "recent_items": 1000,
+        "presentation": "expanded",
+        "height_dp": 480,
+        "width_dp": 288
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 687,
+      "rss_samples": 64,
+      "sampling_start_epoch_us": 1788498923617269,
+      "sampling_end_epoch_us": 1788498929881975,
+      "sampling_start_utc": "2026-09-04T05:15:23.617269+00:00",
+      "sampling_end_utc": "2026-09-04T05:15:29.881975+00:00",
+      "sampling_start_local": "2026-09-04T13:15:23.617269+08:00",
+      "sampling_end_local": "2026-09-04T13:15:29.881975+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788498923617272,
+        "end_epoch_us": 1788498929881978,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 687,
+          "min": 64,
+          "max": 14367,
+          "mean": 555.0363901018923,
+          "percentile_method": "nearest rank",
+          "p50": 319,
+          "p90": 955,
+          "p95": 1404,
+          "p99": 4938
+        },
+        "raster_us": {
+          "sample_count": 687,
+          "min": 278,
+          "max": 35432,
+          "mean": 1501.844250363901,
+          "percentile_method": "nearest rank",
+          "p50": 944,
+          "p90": 2727,
+          "p95": 4578,
+          "p99": 14082
+        },
+        "total_span_us": {
+          "sample_count": 687,
+          "min": 539,
+          "max": 76520,
+          "mean": 3142.5647743813684,
+          "percentile_method": "nearest rank",
+          "p50": 1841,
+          "p90": 6673,
+          "p95": 10089,
+          "p99": 19879
+        },
+        "vsync_overhead_us": {
+          "sample_count": 687,
+          "min": 54,
+          "max": 27672,
+          "mean": 701.72634643377,
+          "percentile_method": "nearest rank",
+          "p50": 171,
+          "p90": 1637,
+          "p95": 3045,
+          "p99": 10400
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 206290944,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 12,
+      "measured_process_rss": {
+        "start_bytes": 200785920,
+        "end_bytes": 200425472,
+        "signed_end_minus_start_bytes": -360448,
+        "sample_peak_bytes": 206290944,
+        "process_lifetime_max_at_last_sample_bytes": 265420800,
+        "maximum_sample_gap_us": 123152,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 221315072,
+            "process_lifetime_max_rss_bytes": 265420800
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 221315072,
+            "process_lifetime_max_rss_bytes": 265420800
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 207224832,
+            "process_lifetime_max_rss_bytes": 265420800
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 262406144,
+            "process_lifetime_max_rss_bytes": 266207232
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 240025600,
+            "process_lifetime_max_rss_bytes": 266207232
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 1404,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "build_max_us",
+          "observed": 14367,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 4578,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 35432,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.017467248908296942,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 10089,
+          "maximum": 16666.666666666668,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 206290944,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "raster_max_us",
+          "observed": 35432,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.017467248908296942,
+          "maximum": 0.01,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    },
+    {
+      "id": "flowchart",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "nodes": 24,
+        "edges": 48,
+        "viewport_height_dp": 420,
+        "presentation": "expanded canvas"
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 376,
+      "rss_samples": 69,
+      "sampling_start_epoch_us": 1788498939491288,
+      "sampling_end_epoch_us": 1788498946240333,
+      "sampling_start_utc": "2026-09-04T05:15:39.491288+00:00",
+      "sampling_end_utc": "2026-09-04T05:15:46.240333+00:00",
+      "sampling_start_local": "2026-09-04T13:15:39.491288+08:00",
+      "sampling_end_local": "2026-09-04T13:15:46.240333+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788498939491293,
+        "end_epoch_us": 1788498946240336,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 376,
+          "min": 72,
+          "max": 27500,
+          "mean": 3167.276595744681,
+          "percentile_method": "nearest rank",
+          "p50": 522,
+          "p90": 15068,
+          "p95": 18939,
+          "p99": 25158
+        },
+        "raster_us": {
+          "sample_count": 376,
+          "min": 1241,
+          "max": 32664,
+          "mean": 7368.087765957447,
+          "percentile_method": "nearest rank",
+          "p50": 7421,
+          "p90": 15135,
+          "p95": 17406,
+          "p99": 25393
+        },
+        "total_span_us": {
+          "sample_count": 376,
+          "min": 1640,
+          "max": 71031,
+          "mean": 13522.978723404256,
+          "percentile_method": "nearest rank",
+          "p50": 10500,
+          "p90": 32412,
+          "p95": 38161,
+          "p99": 58255
+        },
+        "vsync_overhead_us": {
+          "sample_count": 376,
+          "min": 48,
+          "max": 42022,
+          "mean": 1678.5,
+          "percentile_method": "nearest rank",
+          "p50": 142,
+          "p90": 2474,
+          "p95": 12640,
+          "p99": 26662
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 232062976,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 167,
+      "measured_process_rss": {
+        "start_bytes": 214302720,
+        "end_bytes": 223723520,
+        "signed_end_minus_start_bytes": 9420800,
+        "sample_peak_bytes": 232062976,
+        "process_lifetime_max_at_last_sample_bytes": 266207232,
+        "maximum_sample_gap_us": 122639,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 240025600,
+            "process_lifetime_max_rss_bytes": 266207232
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 240041984,
+            "process_lifetime_max_rss_bytes": 266207232
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 241958912,
+            "process_lifetime_max_rss_bytes": 266207232
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 327368704,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 312098816,
+            "process_lifetime_max_rss_bytes": 328597504
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 18939,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 27500,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 17406,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 32664,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.4441489361702128,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 38161,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 232062976,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 9420800,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 18939,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 27500,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 17406,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 32664,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.4441489361702128,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 38161,
+          "maximum": 16666.666666666668,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    },
+    {
+      "id": "insight_cards",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "series": 4,
+        "observations_per_series": 512,
+        "text_rows_when_expanded": 512
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 786,
+      "rss_samples": 112,
+      "sampling_start_epoch_us": 1788498957072456,
+      "sampling_end_epoch_us": 1788498968119787,
+      "sampling_start_utc": "2026-09-04T05:15:57.072456+00:00",
+      "sampling_end_utc": "2026-09-04T05:16:08.119787+00:00",
+      "sampling_start_local": "2026-09-04T13:15:57.072456+08:00",
+      "sampling_end_local": "2026-09-04T13:16:08.119787+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788498957072462,
+        "end_epoch_us": 1788498968119792,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 786,
+          "min": 93,
+          "max": 36663,
+          "mean": 3611.2709923664124,
+          "percentile_method": "nearest rank",
+          "p50": 1228,
+          "p90": 9694,
+          "p95": 12310,
+          "p99": 25904
+        },
+        "raster_us": {
+          "sample_count": 786,
+          "min": 2261,
+          "max": 57416,
+          "mean": 6771.60941475827,
+          "percentile_method": "nearest rank",
+          "p50": 5456,
+          "p90": 11020,
+          "p95": 14834,
+          "p99": 29278
+        },
+        "total_span_us": {
+          "sample_count": 786,
+          "min": 2694,
+          "max": 77907,
+          "mean": 14097.603053435114,
+          "percentile_method": "nearest rank",
+          "p50": 10359,
+          "p90": 28606,
+          "p95": 36875,
+          "p99": 61086
+        },
+        "vsync_overhead_us": {
+          "sample_count": 786,
+          "min": 67,
+          "max": 57144,
+          "mean": 2782.002544529262,
+          "percentile_method": "nearest rank",
+          "p50": 341,
+          "p90": 8648,
+          "p95": 14287,
+          "p99": 31105
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 256884736,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 240,
+      "measured_process_rss": {
+        "start_bytes": 256884736,
+        "end_bytes": 215842816,
+        "signed_end_minus_start_bytes": -41041920,
+        "sample_peak_bytes": 256884736,
+        "process_lifetime_max_at_last_sample_bytes": 328597504,
+        "maximum_sample_gap_us": 144741,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 312098816,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 313049088,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 314556416,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 274972672,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 255492096,
+            "process_lifetime_max_rss_bytes": 328597504
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 12310,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 36663,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 14834,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 57416,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.3053435114503817,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 36875,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 256884736,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 0,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 12310,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 36663,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 14834,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 57416,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.3053435114503817,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 36875,
+          "maximum": 16666.666666666668,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    },
+    {
+      "id": "selection_actions",
+      "raw_workload_status": "complete",
+      "assessment_scope": "Per-scenario diagnostic using unchanged original assessor; this does not override aggregate run validity.",
+      "budget_diagnostic_status": "budget_fail",
+      "dataset": {
+        "document_utf16_length": 20000,
+        "selected_utf16_length": 4,
+        "replacement_utf16_length": 4
+      },
+      "warmup_rounds": 1,
+      "measured_rounds": 3,
+      "frame_samples": 274,
+      "rss_samples": 39,
+      "sampling_start_epoch_us": 1788498976750651,
+      "sampling_end_epoch_us": 1788498980486327,
+      "sampling_start_utc": "2026-09-04T05:16:16.750651+00:00",
+      "sampling_end_utc": "2026-09-04T05:16:20.486327+00:00",
+      "sampling_start_local": "2026-09-04T13:16:16.750651+08:00",
+      "sampling_end_local": "2026-09-04T13:16:20.486327+08:00",
+      "native_environment_during_measurement": {
+        "status": "verified_stable",
+        "start_epoch_us": 1788498976750657,
+        "end_epoch_us": 1788498980486330,
+        "initial": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "final": {
+          "native_view_physical_px": {
+            "width": 3456.0,
+            "height": 2160.0
+          },
+          "native_view_logical_dp": {
+            "width": 1728.0,
+            "height": 1080.0
+          },
+          "device_pixel_ratio": 2.0,
+          "application_lifecycle_state": "resumed",
+          "frames_enabled": true,
+          "platform_semantics_enabled": true,
+          "framework_semantics_enabled": true
+        },
+        "changes": [],
+        "observation_note": "Lifecycle and metrics use native binding events. Both semantics flags are checked at the boundaries and with 100ms RSS samples; framework semantics also uses its binding listener. The original frame and memory samples are retained when any observation invalidates the run."
+      },
+      "frame_timing_summary_us": {
+        "build_us": {
+          "sample_count": 274,
+          "min": 80,
+          "max": 17299,
+          "mean": 2934.514598540146,
+          "percentile_method": "nearest rank",
+          "p50": 1035,
+          "p90": 8976,
+          "p95": 10728,
+          "p99": 13853
+        },
+        "raster_us": {
+          "sample_count": 274,
+          "min": 336,
+          "max": 34316,
+          "mean": 2583.6131386861316,
+          "percentile_method": "nearest rank",
+          "p50": 1219,
+          "p90": 5680,
+          "p95": 7972,
+          "p99": 13361
+        },
+        "total_span_us": {
+          "sample_count": 274,
+          "min": 564,
+          "max": 86076,
+          "mean": 7257.21897810219,
+          "percentile_method": "nearest rank",
+          "p50": 2952,
+          "p90": 18178,
+          "p95": 23543,
+          "p99": 45346
+        },
+        "vsync_overhead_us": {
+          "sample_count": 274,
+          "min": 51,
+          "max": 34594,
+          "mean": 1327.8102189781023,
+          "percentile_method": "nearest rank",
+          "p50": 150,
+          "p90": 2906,
+          "p95": 6461,
+          "p99": 27288
+        }
+      },
+      "raw_sampled_rss_peak_bytes": 234176512,
+      "raw_reported_failure": null,
+      "frame_interval_us": 8333.333333333334,
+      "build_or_raster_over_interval_count": 40,
+      "measured_process_rss": {
+        "start_bytes": 226230272,
+        "end_bytes": 229621760,
+        "signed_end_minus_start_bytes": 3391488,
+        "sample_peak_bytes": 234176512,
+        "process_lifetime_max_at_last_sample_bytes": 328597504,
+        "maximum_sample_gap_us": 147054,
+        "nominal_sample_interval_ms": 100,
+        "component_memory_assessment": "unassessed",
+        "leak_assessment": "unassessed",
+        "lifecycle_snapshots_outside_measured_gate": {
+          "rss_before_fixture": {
+            "current_rss_bytes": 255508480,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_fixture": {
+            "current_rss_bytes": 255557632,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_mount": {
+            "current_rss_bytes": 262291456,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_workload": {
+            "current_rss_bytes": 280330240,
+            "process_lifetime_max_rss_bytes": 328597504
+          },
+          "rss_after_unmount": {
+            "current_rss_bytes": 266747904,
+            "process_lifetime_max_rss_bytes": 328597504
+          }
+        },
+        "scope": "Whole instrumented process during measured interactions; sampled peaks may miss shorter spikes. This gate cannot establish component allocation cost or absence of leaks."
+      },
+      "gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 10728,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 17299,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_p95_us",
+          "observed": 7972,
+          "maximum": 8333.333333333334,
+          "passed": true
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 34316,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.145985401459854,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 23543,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "measured_process_rss_sample_peak_bytes",
+          "observed": 234176512,
+          "maximum": 536870912,
+          "passed": true
+        },
+        {
+          "name": "measured_process_rss_positive_end_minus_start_bytes",
+          "observed": 3391488,
+          "maximum": 67108864,
+          "passed": true
+        }
+      ],
+      "failed_gates": [
+        {
+          "name": "build_p95_us",
+          "observed": 10728,
+          "maximum": 8333.333333333334,
+          "passed": false
+        },
+        {
+          "name": "build_max_us",
+          "observed": 17299,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "raster_max_us",
+          "observed": 34316,
+          "maximum": 16666.666666666668,
+          "passed": false
+        },
+        {
+          "name": "build_or_raster_over_interval_fraction",
+          "observed": 0.145985401459854,
+          "maximum": 0.01,
+          "passed": false
+        },
+        {
+          "name": "total_span_p95_us",
+          "observed": 23543,
+          "maximum": 16666.666666666668,
+          "passed": false
+        }
+      ],
+      "sampling_window_validation": "verified",
+      "epoch_interval_validation": {
+        "steps": "verified",
+        "rounds": "verified",
+        "boundary_validation_tolerance_us": 1000,
+        "tolerated_boundary_gaps": [],
+        "association_uses_original_intervals_without_tolerance": true
+      }
+    }
+  ],
+  "host_sidecar": {
+    "file": "host-top.log",
+    "sha256": "5177f06e38ee7715e7b303589d57854ce8906b841c15560bb149613ad0c04378",
+    "timestamp_samples": 360,
+    "cpu_summary_lines": 360,
+    "first_raw_timestamp": "2026/09/04 04:56:57",
+    "last_raw_timestamp": "2026/09/04 05:03:45",
+    "timestamp_basis": "Raw top timestamps have no offset; UTC interpretation follows the root capture context and native epoch alignment. Local rendering is Asia/Shanghai UTC+08:00.",
+    "first_utc": "2026-09-04T04:56:57+00:00",
+    "last_utc": "2026-09-04T05:03:45+00:00",
+    "first_local": "2026-09-04T12:56:57+08:00",
+    "last_local": "2026-09-04T13:03:45+08:00",
+    "covers_sampling_window": {
+      "prompt_bar": true,
+      "diff_table": true,
+      "records_table": false,
+      "sidebar_nav": false,
+      "flowchart": false,
+      "insight_cards": false,
+      "selection_actions": false
+    },
+    "privacy": "Raw sidecar retained without reproducing process command lines or personal media names.",
+    "interpretation": "Coverage is not CPU/GPU causality. No CPU or contention conclusion is made outside the saved interval."
+  },
+  "diagnostic_interventions": [
+    {
+      "source": "Root operator report",
+      "local_time": "2026-09-04T13:12:00+08:00",
+      "time_precision": "minute only",
+      "action": "CUA native state inspection while the run was stalled; no independent CUA export exists in this raw directory."
+    },
+    {
+      "source": "Retained stalled-vm-observation.json",
+      "action": "Read-only VM/isolate inspection and getStack attempt",
+      "getStack_error": {
+        "code": 100,
+        "message": "Feature is disabled",
+        "data": {
+          "request": {
+            "method": "getStack",
+            "params": {
+              "isolateId": "isolates/6614327468822583",
+              "limit": "40"
+            }
+          },
+          "details": "Debugger is disabled in AOT mode."
+        }
+      },
+      "note": "AOT debugger-disabled response does not identify a Dart stack or prove a computation deadlock; isolate Resume is distinct from Flutter application lifecycle."
+    },
+    {
+      "source": "Retained stalled-vm-timeline.json",
+      "action": "Read-only getVMTimeline retrieval; original response retained",
+      "bytes": 4634531,
+      "sha256": "8dd837b08a7089cd6c47c29d761d9743140ca993ff9bae40188969e0b05624de",
+      "trace_event_count": 32132
+    },
+    {
+      "source": "Root operator report",
+      "action": "Earlier AXRaise attempts did not restore resumed/frame progress",
+      "exact_times": "not independently archived"
+    },
+    {
+      "source": "Root operator report corroborated by native lifecycle callbacks",
+      "local_time": "2026-09-04T13:15:08+08:00",
+      "action": "Native Window menu makeKeyAndOrderFront; app then reported inactive/resumed and continued remaining work."
+    }
+  ],
+  "external_application_observations": {
+    "iina_reported_paused_before_run": true,
+    "playback_controls_operated_by_agent": false,
+    "global_lsappinfo_front_reported": "IINA",
+    "personal_media_names_included": false,
+    "interpretation": "No video playback/CPU/GPU causal inference is made."
+  },
+  "power_settings_check": {
+    "command": "pmset -g custom",
+    "observed_at_utc": "2026-09-04T05:32:43.765040+00:00",
+    "ac_displaysleep_minutes": 10,
+    "settings_changed": false,
+    "display_off_log_corroborated": false,
+    "interpretation": "A configured timeout is not proof that the display turned off or caused the recorded lifecycle interruption."
+  },
+  "clean_complete_baseline": false,
+  "validity_note": "Source integrity is unchanged, but Records lost lifecycle/frame eligibility and the run contains read-only diagnosis plus a native reactivation intervention. Later completed slices are retained, not promoted to a clean complete baseline.",
+  "raw_artifacts": [
+    {
+      "file": "driver_exit_code.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "file": "exit_code.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "file": "flutter_version.json",
+      "bytes": 696,
+      "sha256": "f0c72a0dcd1dc85b1d9116a81c085412ad55cfde31c31283f0dec53e5c9d61e2"
+    },
+    {
+      "file": "host-top.log",
+      "bytes": 186279,
+      "sha256": "5177f06e38ee7715e7b303589d57854ce8906b841c15560bb149613ad0c04378"
+    },
+    {
+      "file": "launch.log",
+      "bytes": 4264,
+      "sha256": "60d2488dea605f22efb36be9ea82ec82092066c34c9a73042509e5c7b1ce6b93"
+    },
+    {
+      "file": "launch_command.txt",
+      "bytes": 249,
+      "sha256": "5232304aed867fed0edd17331347ae46b2c066cdac3dfcb87591235a2752a9d9"
+    },
+    {
+      "file": "launcher_metadata.json",
+      "bytes": 1382,
+      "sha256": "0a60c36893f9b69f0e19d8b65d80245dd715dc35c41c39befc304e8c25db9c00"
+    },
+    {
+      "file": "p3_frame_samples.json",
+      "bytes": 1027892,
+      "sha256": "d9b83379949582cd719eea0f6a9b286f961d7301a6989a15397e11660891abdd"
+    },
+    {
+      "file": "p3_memory_samples.json",
+      "bytes": 1836694,
+      "sha256": "7a9ab585b4f39e537689e06fd2915f5ff582e872ee26ca0b7f82cddc909137d9"
+    },
+    {
+      "file": "p3_performance.json",
+      "bytes": 98491,
+      "sha256": "cee5805cfe4418b34ab26005d9b240accd6d8e5f8ffc3a77393a086ee9c75bff"
+    },
+    {
+      "file": "p3_trace_diff_table.timeline.json",
+      "bytes": 7271776,
+      "sha256": "16897c1bd09c652d3d806ca002ec89d749ec4379c82f3f07e26dfe23fca8019f"
+    },
+    {
+      "file": "p3_trace_flowchart.timeline.json",
+      "bytes": 8742521,
+      "sha256": "35b91e9486261dd2a29f2e362683f09d1510778ba3660c6ef9490a5b2df5bbe3"
+    },
+    {
+      "file": "p3_trace_insight_cards.timeline.json",
+      "bytes": 8908295,
+      "sha256": "a870dc19bd4ecff6fe3f589e37c1569e1efc0f0253175749480517b46e231301"
+    },
+    {
+      "file": "p3_trace_prompt_bar.timeline.json",
+      "bytes": 8683090,
+      "sha256": "bf43662e6910cb6f6e3a89bacab6503b286e4d4854fdee420d609e6ba22f2092"
+    },
+    {
+      "file": "p3_trace_records_table.timeline.json",
+      "bytes": 8715158,
+      "sha256": "bf2143f6b4246a38e7bffb2aef0b11edbe2617aab4c3912b1162f681b80e890b"
+    },
+    {
+      "file": "p3_trace_selection_actions.timeline.json",
+      "bytes": 7270383,
+      "sha256": "c950f797266a16bb9efb951bcc9f42dcc3c9fa289fd2c6bdd05d8ec913727c00"
+    },
+    {
+      "file": "p3_trace_sidebar_nav.timeline.json",
+      "bytes": 8713913,
+      "sha256": "d79a9bf92a3dba65292cdafdaee0a7d3300f5c2b362602a5ec2735cb7dd6989c"
+    },
+    {
+      "file": "pub_get.log",
+      "bytes": 935,
+      "sha256": "6002994b13d2cddec725b7caca822f0b5bafc45d28bc68856ade703b6b51b531"
+    },
+    {
+      "file": "runner_status.json",
+      "bytes": 54,
+      "sha256": "b7343d892b15ef9022c7e81859062d4b04d91ed1bd6c4a8af7dd437821be3c97"
+    },
+    {
+      "file": "source_after.json",
+      "bytes": 62304,
+      "sha256": "afcf3ed14667ea57ebf7dcd27a282a7ea4c3c35e6911de3e658fc4bdfddea9f5"
+    },
+    {
+      "file": "source_before.json",
+      "bytes": 62304,
+      "sha256": "9b7778a5ba0c5263b48635f21dbb20b67ec10d74fbf6d89c7dd154ed7a0eab39"
+    },
+    {
+      "file": "source_integrity.json",
+      "bytes": 727,
+      "sha256": "f3f399e3ca764d975f88c935693e16f9a8e5c29f09cca50aedd28cd640b7ee63"
+    },
+    {
+      "file": "stalled-vm-observation.json",
+      "bytes": 1314,
+      "sha256": "6d001412d7259b5a5b45c39bfcaa21668a561dd912eede9e586c2f4d737794f9"
+    },
+    {
+      "file": "stalled-vm-timeline.json",
+      "bytes": 4634531,
+      "sha256": "8dd837b08a7089cd6c47c29d761d9743140ca993ff9bae40188969e0b05624de"
+    }
+  ]
+}

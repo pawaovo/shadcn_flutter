@@ -1,0 +1,2910 @@
+{
+  "schema_version": 1,
+  "source_revision": "f15f27eb671086444f137475f1cf4e9de3eb6328",
+  "recorded_at": "2026-09-04T05:48:41.026716+00:00",
+  "raw_directory": "/tmp/beautiful-ci-f15f27eb",
+  "runs": {
+    "main": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-09-04T05:18:10Z",
+      "databaseId": 33839986027,
+      "event": "push",
+      "headSha": "f15f27eb671086444f137475f1cf4e9de3eb6328",
+      "jobs": [
+        {
+          "completedAt": "2026-09-04T05:18:18Z",
+          "conclusion": "success",
+          "databaseId": 100920140866,
+          "name": "Detect generated targets",
+          "startedAt": "2026-09-04T05:18:13Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:14Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Detect packages and generated platform runners",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 7,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920140866"
+        },
+        {
+          "completedAt": "2026-09-04T05:23:40Z",
+          "conclusion": "failure",
+          "databaseId": 100920163919,
+          "name": "Run Android journey",
+          "startedAt": "2026-09-04T05:18:22Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:25Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Set up Java",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:41Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:42Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies with bounded retry",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:42Z",
+              "conclusion": "success",
+              "name": "Enable KVM group permissions",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:42Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:38Z",
+              "conclusion": "failure",
+              "name": "Run journey on Android emulator",
+              "number": 7,
+              "startedAt": "2026-09-04T05:18:42Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:38Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 12,
+              "startedAt": "2026-09-04T05:23:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:38Z",
+              "conclusion": "success",
+              "name": "Post Set up Java",
+              "number": 13,
+              "startedAt": "2026-09-04T05:23:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:38Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 14,
+              "startedAt": "2026-09-04T05:23:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:38Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:23:38Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920163919"
+        },
+        {
+          "completedAt": "2026-09-04T05:23:19Z",
+          "conclusion": "success",
+          "databaseId": 100920163928,
+          "name": "Format, analyze, and test",
+          "startedAt": "2026-09-04T05:18:21Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:23Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:25Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:52Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:53Z",
+              "conclusion": "success",
+              "name": "Report Flutter version",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:55Z",
+              "conclusion": "success",
+              "name": "Resolve workspace dependencies",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:55Z",
+              "conclusion": "success",
+              "name": "Verify asset provenance, notices, and original artwork",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:55Z",
+              "conclusion": "success",
+              "name": "Verify pub workspace",
+              "number": 7,
+              "startedAt": "2026-09-04T05:18:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:57Z",
+              "conclusion": "success",
+              "name": "Check formatting",
+              "number": 8,
+              "startedAt": "2026-09-04T05:18:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:18Z",
+              "conclusion": "success",
+              "name": "Analyze packages",
+              "number": 9,
+              "startedAt": "2026-09-04T05:18:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:18Z",
+              "conclusion": "success",
+              "name": "Enforce the shadcn implementation seam",
+              "number": 10,
+              "startedAt": "2026-09-04T05:19:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:45Z",
+              "conclusion": "success",
+              "name": "Run package tests",
+              "number": 11,
+              "startedAt": "2026-09-04T05:19:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:02Z",
+              "conclusion": "success",
+              "name": "Run semantics tests",
+              "number": 12,
+              "startedAt": "2026-09-04T05:20:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:11Z",
+              "conclusion": "success",
+              "name": "Verify Linux golden tests",
+              "number": 13,
+              "startedAt": "2026-09-04T05:21:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:11Z",
+              "conclusion": "skipped",
+              "name": "Upload golden failures",
+              "number": 14,
+              "startedAt": "2026-09-04T05:21:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:04Z",
+              "conclusion": "success",
+              "name": "Run catalog tests",
+              "number": 15,
+              "startedAt": "2026-09-04T05:21:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:14Z",
+              "conclusion": "success",
+              "name": "Run shadcn core regression tests",
+              "number": 16,
+              "startedAt": "2026-09-04T05:22:04Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:16Z",
+              "conclusion": "success",
+              "name": "Upload source asset audit evidence",
+              "number": 17,
+              "startedAt": "2026-09-04T05:23:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:16Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 33,
+              "startedAt": "2026-09-04T05:23:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:17Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 34,
+              "startedAt": "2026-09-04T05:23:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:17Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 35,
+              "startedAt": "2026-09-04T05:23:17Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920163928"
+        },
+        {
+          "completedAt": "2026-09-04T05:22:24Z",
+          "conclusion": "success",
+          "databaseId": 100920163951,
+          "name": "Build Android catalog",
+          "startedAt": "2026-09-04T05:18:21Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Set up Java",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:48Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:49Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:21Z",
+              "conclusion": "success",
+              "name": "Build Android debug APK",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:22Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 10,
+              "startedAt": "2026-09-04T05:22:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:22Z",
+              "conclusion": "success",
+              "name": "Post Set up Java",
+              "number": 11,
+              "startedAt": "2026-09-04T05:22:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:22Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 12,
+              "startedAt": "2026-09-04T05:22:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:22Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-09-04T05:22:22Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920163951"
+        },
+        {
+          "completedAt": "2026-09-04T05:22:41Z",
+          "conclusion": "success",
+          "databaseId": 100920163995,
+          "name": "Run Firefox journey",
+          "startedAt": "2026-09-04T05:18:21Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:25Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:51Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:53Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:36Z",
+              "conclusion": "success",
+              "name": "Run shared journey in installed Firefox",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:37Z",
+              "conclusion": "success",
+              "name": "Upload Firefox journey evidence",
+              "number": 6,
+              "startedAt": "2026-09-04T05:22:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:38Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 11,
+              "startedAt": "2026-09-04T05:22:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:38Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 12,
+              "startedAt": "2026-09-04T05:22:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:38Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-09-04T05:22:38Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920163995"
+        },
+        {
+          "completedAt": "2026-09-04T05:25:11Z",
+          "conclusion": "failure",
+          "databaseId": 100920164003,
+          "name": "Run Edge journey",
+          "startedAt": "2026-09-04T05:18:21Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:30Z",
+              "conclusion": "success",
+              "name": "Verify the narrow Edge protocol adapter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:48Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:49Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:08Z",
+              "conclusion": "failure",
+              "name": "Run shared journey in installed Microsoft Edge",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:09Z",
+              "conclusion": "success",
+              "name": "Upload Edge journey evidence",
+              "number": 7,
+              "startedAt": "2026-09-04T05:25:08Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:09Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 13,
+              "startedAt": "2026-09-04T05:25:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:09Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 14,
+              "startedAt": "2026-09-04T05:25:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:09Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:25:09Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164003"
+        },
+        {
+          "completedAt": "2026-09-04T05:19:38Z",
+          "conclusion": "success",
+          "databaseId": 100920164021,
+          "name": "Build Linux catalog",
+          "startedAt": "2026-09-04T05:18:20Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:22Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:23Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:45Z",
+              "conclusion": "success",
+              "name": "Install Linux build dependencies",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:59Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:01Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:35Z",
+              "conclusion": "success",
+              "name": "Build Linux release",
+              "number": 6,
+              "startedAt": "2026-09-04T05:19:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:36Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 11,
+              "startedAt": "2026-09-04T05:19:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:36Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 12,
+              "startedAt": "2026-09-04T05:19:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:36Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-09-04T05:19:36Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164021"
+        },
+        {
+          "completedAt": "2026-09-04T05:23:09Z",
+          "conclusion": "success",
+          "databaseId": 100920164022,
+          "name": "Run Chrome and Linux journeys",
+          "startedAt": "2026-09-04T05:18:20Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:22Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:40Z",
+              "conclusion": "success",
+              "name": "Install Linux journey dependencies",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:54Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:56Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:54Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:53Z",
+              "conclusion": "success",
+              "name": "Run Chrome journey",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:07Z",
+              "conclusion": "success",
+              "name": "Run Linux desktop journey",
+              "number": 7,
+              "startedAt": "2026-09-04T05:21:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:07Z",
+              "conclusion": "success",
+              "name": "Upload trusted Chrome journey evidence",
+              "number": 8,
+              "startedAt": "2026-09-04T05:23:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:08Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 15,
+              "startedAt": "2026-09-04T05:23:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:08Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 16,
+              "startedAt": "2026-09-04T05:23:08Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:08Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-09-04T05:23:08Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164022"
+        },
+        {
+          "completedAt": "2026-09-04T05:22:30Z",
+          "conclusion": "success",
+          "databaseId": 100920164036,
+          "name": "Build Windows catalog",
+          "startedAt": "2026-09-04T05:18:21Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:23Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:28Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:06Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:09Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:20:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:11Z",
+              "conclusion": "success",
+              "name": "Build Windows release",
+              "number": 5,
+              "startedAt": "2026-09-04T05:20:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:24Z",
+              "conclusion": "success",
+              "name": "Run Windows desktop journey",
+              "number": 6,
+              "startedAt": "2026-09-04T05:21:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:25Z",
+              "conclusion": "success",
+              "name": "Upload Windows journey evidence",
+              "number": 7,
+              "startedAt": "2026-09-04T05:22:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:26Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 13,
+              "startedAt": "2026-09-04T05:22:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:27Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 14,
+              "startedAt": "2026-09-04T05:22:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:28Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:22:27Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164036"
+        },
+        {
+          "completedAt": "2026-09-04T05:20:23Z",
+          "conclusion": "success",
+          "databaseId": 100920164042,
+          "name": "Build Web catalog",
+          "startedAt": "2026-09-04T05:18:20Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:22Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:38Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:40Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:30Z",
+              "conclusion": "success",
+              "name": "Build Web release",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:30Z",
+              "conclusion": "success",
+              "name": "Verify JavaScript bundle assets and notices",
+              "number": 6,
+              "startedAt": "2026-09-04T05:19:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:20Z",
+              "conclusion": "success",
+              "name": "Build WebAssembly release",
+              "number": 7,
+              "startedAt": "2026-09-04T05:19:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:20Z",
+              "conclusion": "success",
+              "name": "Verify WebAssembly bundle assets and notices",
+              "number": 8,
+              "startedAt": "2026-09-04T05:20:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:21Z",
+              "conclusion": "success",
+              "name": "Upload Web asset audit evidence",
+              "number": 9,
+              "startedAt": "2026-09-04T05:20:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:22Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 17,
+              "startedAt": "2026-09-04T05:20:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:22Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 18,
+              "startedAt": "2026-09-04T05:20:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:22Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 19,
+              "startedAt": "2026-09-04T05:20:22Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164042"
+        },
+        {
+          "completedAt": "2026-09-04T05:36:03Z",
+          "conclusion": "success",
+          "databaseId": 100920164055,
+          "name": "Build Apple catalogs",
+          "startedAt": "2026-09-04T05:18:22Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:25Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:28Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:35Z",
+              "conclusion": "success",
+              "name": "Verify the bounded simulator console launcher",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:37Z",
+              "conclusion": "success",
+              "name": "Select full Xcode before dependency resolution",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:50Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:53Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 6,
+              "startedAt": "2026-09-04T05:19:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:01Z",
+              "conclusion": "success",
+              "name": "Build iOS release without code signing",
+              "number": 7,
+              "startedAt": "2026-09-04T05:19:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:27Z",
+              "conclusion": "success",
+              "name": "Build macOS release",
+              "number": 8,
+              "startedAt": "2026-09-04T05:22:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:45Z",
+              "conclusion": "success",
+              "name": "Run macOS desktop journey",
+              "number": 9,
+              "startedAt": "2026-09-04T05:23:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:50Z",
+              "conclusion": "success",
+              "name": "Select an installed iOS simulator",
+              "number": 10,
+              "startedAt": "2026-09-04T05:25:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:29:00Z",
+              "conclusion": "success",
+              "name": "Boot the selected iOS simulator",
+              "number": 11,
+              "startedAt": "2026-09-04T05:25:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:34:22Z",
+              "conclusion": "success",
+              "name": "Build iOS simulator journey",
+              "number": 12,
+              "startedAt": "2026-09-04T05:29:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:35:49Z",
+              "conclusion": "success",
+              "name": "Run iOS simulator journey",
+              "number": 13,
+              "startedAt": "2026-09-04T05:34:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:35:54Z",
+              "conclusion": "success",
+              "name": "Shut down the simulator started by this job",
+              "number": 14,
+              "startedAt": "2026-09-04T05:35:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:35:56Z",
+              "conclusion": "success",
+              "name": "Upload Apple journey evidence",
+              "number": 15,
+              "startedAt": "2026-09-04T05:35:54Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:35:58Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 29,
+              "startedAt": "2026-09-04T05:35:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:35:59Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 30,
+              "startedAt": "2026-09-04T05:35:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:36:02Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 31,
+              "startedAt": "2026-09-04T05:35:59Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100920164055"
+        },
+        {
+          "completedAt": "2026-09-04T05:24:46Z",
+          "conclusion": "success",
+          "databaseId": 100921062668,
+          "name": "Validate pub.dev package",
+          "startedAt": "2026-09-04T05:23:22Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:23:25Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:23:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:27Z",
+              "conclusion": "success",
+              "name": "Checkout repository",
+              "number": 2,
+              "startedAt": "2026-09-04T05:23:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:54Z",
+              "conclusion": "success",
+              "name": "Set up Flutter",
+              "number": 3,
+              "startedAt": "2026-09-04T05:23:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:23:55Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:23:54Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:30Z",
+              "conclusion": "success",
+              "name": "Verify an isolated hosted consumer",
+              "number": 5,
+              "startedAt": "2026-09-04T05:23:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:42Z",
+              "conclusion": "success",
+              "name": "Run publish dry-run",
+              "number": 6,
+              "startedAt": "2026-09-04T05:24:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:43Z",
+              "conclusion": "success",
+              "name": "Upload isolated consumer evidence",
+              "number": 7,
+              "startedAt": "2026-09-04T05:24:42Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:43Z",
+              "conclusion": "success",
+              "name": "Post Set up Flutter",
+              "number": 13,
+              "startedAt": "2026-09-04T05:24:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:44Z",
+              "conclusion": "success",
+              "name": "Post Checkout repository",
+              "number": 14,
+              "startedAt": "2026-09-04T05:24:43Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:24:44Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:24:44Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027/job/100921062668"
+        }
+      ],
+      "name": "Beautiful AI UI",
+      "status": "completed",
+      "updatedAt": "2026-09-04T05:36:04Z",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839986027"
+    },
+    "input": {
+      "attempt": 1,
+      "conclusion": "failure",
+      "createdAt": "2026-09-04T05:18:10Z",
+      "databaseId": 33839985973,
+      "event": "push",
+      "headSha": "f15f27eb671086444f137475f1cf4e9de3eb6328",
+      "jobs": [
+        {
+          "completedAt": "2026-09-04T05:25:41Z",
+          "conclusion": "failure",
+          "databaseId": 100920140368,
+          "name": "Real Safari full journey and input",
+          "startedAt": "2026-09-04T05:18:17Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:19Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:22Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:22Z",
+              "conclusion": "success",
+              "name": "Record and enable only this runner's real Safari driver",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:24Z",
+              "conclusion": "success",
+              "name": "Select full Xcode before dependency resolution",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:27Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:24Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:29Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 6,
+              "startedAt": "2026-09-04T05:19:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:35Z",
+              "conclusion": "failure",
+              "name": "Run original full journey and real Safari input",
+              "number": 7,
+              "startedAt": "2026-09-04T05:19:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:36Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 8,
+              "startedAt": "2026-09-04T05:25:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:36Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 15,
+              "startedAt": "2026-09-04T05:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:37Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 16,
+              "startedAt": "2026-09-04T05:25:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:25:39Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-09-04T05:25:37Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140368"
+        },
+        {
+          "completedAt": "2026-09-04T05:18:54Z",
+          "conclusion": "failure",
+          "databaseId": 100920140532,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "startedAt": "2026-09-04T05:18:14Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:50Z",
+              "conclusion": "failure",
+              "name": "Observe actual Narrator, interactive desktop and audio endpoint",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:51Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:53Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 8,
+              "startedAt": "2026-09-04T05:18:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:53Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 9,
+              "startedAt": "2026-09-04T05:18:53Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140532"
+        },
+        {
+          "completedAt": "2026-09-04T05:18:55Z",
+          "conclusion": "failure",
+          "databaseId": 100920140594,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "startedAt": "2026-09-04T05:18:12Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:14Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:17Z",
+              "conclusion": "success",
+              "name": "Verify AT supervisor cleanup without launching AT",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:38Z",
+              "conclusion": "success",
+              "name": "Provision real AT and speech backend in this disposable runner",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:53Z",
+              "conclusion": "failure",
+              "name": "Observe actual Orca navigation, utterance and synthesized PCM",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:54Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:54Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 12,
+              "startedAt": "2026-09-04T05:18:54Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:54Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 13,
+              "startedAt": "2026-09-04T05:18:54Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140594"
+        },
+        {
+          "completedAt": "2026-09-04T05:21:39Z",
+          "conclusion": "failure",
+          "databaseId": 100920140608,
+          "name": "Real firefox input",
+          "startedAt": "2026-09-04T05:18:13Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:15Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:17Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:39Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:41Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:39Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:44Z",
+              "conclusion": "success",
+              "name": "Verify actual browser input protocol and failure propagation",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:36Z",
+              "conclusion": "failure",
+              "name": "Run framework and trusted browser input suites",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:37Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 7,
+              "startedAt": "2026-09-04T05:21:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:37Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 13,
+              "startedAt": "2026-09-04T05:21:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:37Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-09-04T05:21:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:37Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:21:37Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140608"
+        },
+        {
+          "completedAt": "2026-09-04T05:26:53Z",
+          "conclusion": "failure",
+          "databaseId": 100920140612,
+          "name": "Real edge input",
+          "startedAt": "2026-09-04T05:18:12Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:14Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:18Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:33Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:34Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:40Z",
+              "conclusion": "success",
+              "name": "Verify actual browser input protocol and failure propagation",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:26:51Z",
+              "conclusion": "failure",
+              "name": "Run framework and trusted browser input suites",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:26:52Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 7,
+              "startedAt": "2026-09-04T05:26:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:26:52Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 13,
+              "startedAt": "2026-09-04T05:26:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:26:52Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-09-04T05:26:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:26:52Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:26:52Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140612"
+        },
+        {
+          "completedAt": "2026-09-04T05:21:35Z",
+          "conclusion": "failure",
+          "databaseId": 100920140624,
+          "name": "Real chrome input",
+          "startedAt": "2026-09-04T05:18:13Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:14Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:17Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:33Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:34Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:38Z",
+              "conclusion": "success",
+              "name": "Verify actual browser input protocol and failure propagation",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:32Z",
+              "conclusion": "failure",
+              "name": "Run framework and trusted browser input suites",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:33Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 7,
+              "startedAt": "2026-09-04T05:21:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:33Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 13,
+              "startedAt": "2026-09-04T05:21:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:33Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "startedAt": "2026-09-04T05:21:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:33Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "startedAt": "2026-09-04T05:21:33Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140624"
+        },
+        {
+          "completedAt": "2026-09-04T05:20:56Z",
+          "conclusion": "success",
+          "databaseId": 100920140626,
+          "name": "Native macos input bridge",
+          "startedAt": "2026-09-04T05:18:14Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:19Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:19Z",
+              "conclusion": "skipped",
+              "name": "Verify Windows descendant ownership and cleanup",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:19Z",
+              "conclusion": "skipped",
+              "name": "Install Linux runner dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:21Z",
+              "conclusion": "success",
+              "name": "Select full Xcode before dependency resolution",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:21Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:23Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 7,
+              "startedAt": "2026-09-04T05:19:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:47Z",
+              "conclusion": "success",
+              "name": "Run platform input and real native clipboard bridge",
+              "number": 8,
+              "startedAt": "2026-09-04T05:19:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:49Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 9,
+              "startedAt": "2026-09-04T05:20:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:50Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 17,
+              "startedAt": "2026-09-04T05:20:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:50Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 18,
+              "startedAt": "2026-09-04T05:20:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:53Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 19,
+              "startedAt": "2026-09-04T05:20:50Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140626"
+        },
+        {
+          "completedAt": "2026-09-04T05:22:05Z",
+          "conclusion": "success",
+          "databaseId": 100920140648,
+          "name": "Native windows input bridge",
+          "startedAt": "2026-09-04T05:18:13Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:16Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:23Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "success",
+              "name": "Verify Windows descendant ownership and cleanup",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "skipped",
+              "name": "Install Linux runner dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:26Z",
+              "conclusion": "skipped",
+              "name": "Select full Xcode before dependency resolution",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:23Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:27Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 7,
+              "startedAt": "2026-09-04T05:20:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:58Z",
+              "conclusion": "success",
+              "name": "Run platform input and real native clipboard bridge",
+              "number": 8,
+              "startedAt": "2026-09-04T05:20:27Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:21:59Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 9,
+              "startedAt": "2026-09-04T05:21:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:01Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 17,
+              "startedAt": "2026-09-04T05:21:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:03Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 18,
+              "startedAt": "2026-09-04T05:22:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:22:03Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 19,
+              "startedAt": "2026-09-04T05:22:03Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140648"
+        },
+        {
+          "completedAt": "2026-09-04T05:20:05Z",
+          "conclusion": "success",
+          "databaseId": 100920140660,
+          "name": "Native linux input bridge",
+          "startedAt": "2026-09-04T05:18:13Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-09-04T05:18:15Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-09-04T05:18:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:17Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "startedAt": "2026-09-04T05:18:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:17Z",
+              "conclusion": "skipped",
+              "name": "Verify Windows descendant ownership and cleanup",
+              "number": 3,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:47Z",
+              "conclusion": "success",
+              "name": "Install Linux runner dependencies",
+              "number": 4,
+              "startedAt": "2026-09-04T05:18:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:18:47Z",
+              "conclusion": "skipped",
+              "name": "Select full Xcode before dependency resolution",
+              "number": 5,
+              "startedAt": "2026-09-04T05:18:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:07Z",
+              "conclusion": "success",
+              "name": "Run subosito/flutter-action@v2",
+              "number": 6,
+              "startedAt": "2026-09-04T05:18:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:19:08Z",
+              "conclusion": "success",
+              "name": "Resolve locked dependencies",
+              "number": 7,
+              "startedAt": "2026-09-04T05:19:07Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:01Z",
+              "conclusion": "success",
+              "name": "Run platform input and real native clipboard bridge",
+              "number": 8,
+              "startedAt": "2026-09-04T05:19:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:02Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@v4",
+              "number": 9,
+              "startedAt": "2026-09-04T05:20:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:03Z",
+              "conclusion": "success",
+              "name": "Post Run subosito/flutter-action@v2",
+              "number": 17,
+              "startedAt": "2026-09-04T05:20:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:03Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 18,
+              "startedAt": "2026-09-04T05:20:03Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-09-04T05:20:03Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 19,
+              "startedAt": "2026-09-04T05:20:03Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973/job/100920140660"
+        }
+      ],
+      "name": "Beautiful AI UI input and AT capability evidence",
+      "status": "completed",
+      "updatedAt": "2026-09-04T05:26:54Z",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33839985973"
+    }
+  },
+  "job_counts": {
+    "main": {
+      "passed": 10,
+      "total": 12
+    },
+    "input": {
+      "passed": 3,
+      "total": 9
+    }
+  },
+  "input_suites": {
+    "chrome": {
+      "status": "failed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "edge": {
+      "status": "failed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "firefox": {
+      "status": "failed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "safari": {
+      "status": "failed",
+      "suites": [
+        {
+          "suite": "journey",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "framework",
+          "status": "failed",
+          "exit_code": 1,
+          "cleanup_status": "verified"
+        },
+        {
+          "suite": "browser",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "macos": {
+      "status": "passed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "linux": {
+      "status": "passed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    },
+    "windows": {
+      "status": "passed",
+      "suites": [
+        {
+          "suite": "framework",
+          "status": "passed",
+          "exit_code": 0,
+          "cleanup_status": "verified"
+        }
+      ]
+    }
+  },
+  "ios": {
+    "passed": true,
+    "stages": [
+      {
+        "name": "selected-xcode",
+        "required": true,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 1.317
+      },
+      {
+        "name": "simulator-sdk",
+        "required": true,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 0.031
+      },
+      {
+        "name": "install",
+        "required": true,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 16.734
+      },
+      {
+        "name": "launch",
+        "required": true,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 4.313
+      },
+      {
+        "name": "vm-service-discovery",
+        "required": true,
+        "passed": true,
+        "exit_code": null,
+        "elapsed_seconds": 9.632
+      },
+      {
+        "name": "native-flutter-driver",
+        "required": true,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 56.534
+      },
+      {
+        "name": "terminate",
+        "required": false,
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 0.666
+      }
+    ]
+  },
+  "android_failure": {
+    "job_id": 100920163919,
+    "failure_boundary": "P2 Chat: Stop response absent after Send; old text assertion also matches unsent editor draft",
+    "cause_confirmed": false,
+    "raw_log": "/tmp/beautiful-ci-f15f27eb-android-job100920163919.log",
+    "sha256": "2f10cba10f4048ef6515ca2eb644fc19c4ae316dc96e52ac895b70986f551e4d"
+  },
+  "orca_failure": {
+    "boundary": "New Where Am I utterance not visible in buffered debug log within original deadline",
+    "historical_run_accepted": false,
+    "followup": "../../docs/beautiful-ui/quality_evidence/2026-09-04-orca-capability-log-transport.md"
+  },
+  "performance_evidence": "../../docs/beautiful-ui/quality_evidence/performance/2026-09-04-f15f27eb-display-awake.md",
+  "limitations": [
+    "All original failures retained; neither workflow was retried.",
+    "All four trusted W3C journeys passed; synthetic framework composition and actual OS IME are separate.",
+    "Windows Narrator and Linux fixture capability are not Flutter application acceptance.",
+    "The subsequent Narrator diagnostic has its own source and run record.",
+    "Native P3 engineering budgets pass in the separate exact-source capture; other devices and human AT review remain unaccepted."
+  ],
+  "artifacts": [
+    {
+      "path": "input/input-chrome/browser/browser-input.json",
+      "bytes": 28786,
+      "sha256": "09ce6c946b682cd415cf63c3f491dfa3257fb4ec73094aa975441e4028baa0be"
+    },
+    {
+      "path": "input/input-chrome/browser/command.json",
+      "bytes": 402,
+      "sha256": "bf6d69c28d5fb2f0710a8a4d2410df7cd251469c50df5d6a50a3d6e7786a9f98"
+    },
+    {
+      "path": "input/input-chrome/browser/run.log",
+      "bytes": 1230,
+      "sha256": "feb10183966f4e52fe3353ea2624426df7cb74730f886ab33facb66a1e284528"
+    },
+    {
+      "path": "input/input-chrome/browser/webdriver.log",
+      "bytes": 10436351,
+      "sha256": "c6122d71a182db1df88f5a51aa353860761d8bc37335222df3133fc3169e7f92"
+    },
+    {
+      "path": "input/input-chrome/framework/command.json",
+      "bytes": 404,
+      "sha256": "691560fe64788176e7e2091d88a5aa9ba07c52aaa298365852753cbca8131ee0"
+    },
+    {
+      "path": "input/input-chrome/framework/framework-input.json",
+      "bytes": 51276,
+      "sha256": "b70bd9abe40f371fcf5da9d32f303f810b76aa4a73b04a66706716b2f5cea45e"
+    },
+    {
+      "path": "input/input-chrome/framework/run.log",
+      "bytes": 4553,
+      "sha256": "b58fef99f0cbc1f64cddb5a49fc3be4e59c020b1d21e9319bb46f551e3f17964"
+    },
+    {
+      "path": "input/input-chrome/framework/webdriver.log",
+      "bytes": 9807124,
+      "sha256": "f8f45f2e3fe284f6aac65187216a34a3b3f5ccd22bf30ab0c26789ea537c438f"
+    },
+    {
+      "path": "input/input-chrome/input-acceptance-owner.json",
+      "bytes": 81,
+      "sha256": "ee3ef054135f8f4a6bc6f295ba733ca11070057ccb223be210b6aa425709f0f4"
+    },
+    {
+      "path": "input/input-chrome/input-acceptance-summary.json",
+      "bytes": 1666,
+      "sha256": "01e93cff4b0f141a34e0f75dcffea2923765acba91387898b958f3e1bc778f2b"
+    },
+    {
+      "path": "input/input-edge/browser/browser-identity.json",
+      "bytes": 1036,
+      "sha256": "5f9bb756fae39fb68954c4ca4154aa6bd896199a161c4dea0ab6293f24ffb117"
+    },
+    {
+      "path": "input/input-edge/browser/browser-input.json",
+      "bytes": 28771,
+      "sha256": "052b9dd22e4909e3254623f88eef2c7f6c223642ed26acd2008d3cbd530c0c72"
+    },
+    {
+      "path": "input/input-edge/browser/command.json",
+      "bytes": 346,
+      "sha256": "eeea8791b31f31616950e6c583f2e2f23a5c09a1583dd6a4eb4927aba2e58c03"
+    },
+    {
+      "path": "input/input-edge/browser/msedgedriver.log",
+      "bytes": 934136,
+      "sha256": "041ff1d64fd796cbd8d1ae01255744eafd0fa9dee35194dd8ca9b180f6db4a1b"
+    },
+    {
+      "path": "input/input-edge/browser/run.log",
+      "bytes": 1230,
+      "sha256": "24aeb1d91c0cdde24ab006d0d24827caaf18ea4d903b4bdc41c616ad2d742f4c"
+    },
+    {
+      "path": "input/input-edge/browser/webdriver.log",
+      "bytes": 48629,
+      "sha256": "776c084e48594ef63cbac40403adf4eb5cd8901e95bd7ccd66dbd65479d2cea8"
+    },
+    {
+      "path": "input/input-edge/framework/browser-identity.json",
+      "bytes": 1036,
+      "sha256": "b50f6b7a5514a983f6dd78f78c8faa945a698c7cfe885386ce52a6d3a0738e9a"
+    },
+    {
+      "path": "input/input-edge/framework/command.json",
+      "bytes": 348,
+      "sha256": "1f336dcbbdc4fc5be1a75de433b13d5b2422248bfe8aea17a22cf65a9c349f58"
+    },
+    {
+      "path": "input/input-edge/framework/diagnostics/failure-4.json",
+      "bytes": 1493,
+      "sha256": "669f4e0994232e637e967c65b6d77341d7f3493011380a22c6475d3866b6e000"
+    },
+    {
+      "path": "input/input-edge/framework/msedgedriver.log",
+      "bytes": 285237,
+      "sha256": "789b14bad66fc760bb35c53d307a14ee04b3eacf33cef3ff31ef1ab661d03c29"
+    },
+    {
+      "path": "input/input-edge/framework/run.log",
+      "bytes": 3048,
+      "sha256": "1abe9a8aef9e5966e2a78556c30983cf7abba9a98abe05ce1df4f59ac99507a1"
+    },
+    {
+      "path": "input/input-edge/framework/webdriver.log",
+      "bytes": 2408,
+      "sha256": "e95769bd4924ece9ad67d1f0710eaae02e599ee79efad5fa321474a6453e2143"
+    },
+    {
+      "path": "input/input-edge/input-acceptance-owner.json",
+      "bytes": 79,
+      "sha256": "c62192241d766c5fd4c09ccf1ce030652c699667b547a4c6c301b41162b745f9"
+    },
+    {
+      "path": "input/input-edge/input-acceptance-summary.json",
+      "bytes": 1532,
+      "sha256": "68133c740cc91101f1c35df4ae8a59669d901183789a3eb9c1d636b76966cc85"
+    },
+    {
+      "path": "input/input-firefox/browser/browser-input.json",
+      "bytes": 28620,
+      "sha256": "a67abfcdfe5866d9c4a70192e91adf14e87f78a38dff885c6f2f3c6fbacbc395"
+    },
+    {
+      "path": "input/input-firefox/browser/command.json",
+      "bytes": 349,
+      "sha256": "a04cee0bb1d5064d1dfa47b97eaefb1fb87f58ff19fd0eefc09194e7aa413600"
+    },
+    {
+      "path": "input/input-firefox/browser/run.log",
+      "bytes": 1230,
+      "sha256": "504391b77af1fbd4232f3e20d00e3d08c6fdb34464be71071f71ea07a9fab278"
+    },
+    {
+      "path": "input/input-firefox/browser/webdriver.log",
+      "bytes": 221721,
+      "sha256": "48fb3ff6789c9d9ff1d09b332b8ecc292ebf797c418e7733145a79fda03e5a90"
+    },
+    {
+      "path": "input/input-firefox/framework/command.json",
+      "bytes": 351,
+      "sha256": "ce51b06f5ad76b673812bfb855ac4108b70c3263665c40c8600c5ecea9685894"
+    },
+    {
+      "path": "input/input-firefox/framework/framework-input.json",
+      "bytes": 51276,
+      "sha256": "dbf66c994b9458037cee9c5dbfe0c53a9f438ef29c798ad377a3173db4c4de2b"
+    },
+    {
+      "path": "input/input-firefox/framework/run.log",
+      "bytes": 4645,
+      "sha256": "aa3c5e4944fc5fb7698929e0035b1f969143e7b3c4cd828c6c13d43c4177e090"
+    },
+    {
+      "path": "input/input-firefox/framework/webdriver.log",
+      "bytes": 46590,
+      "sha256": "c1d48212f6dbb3a190264eef5da2e3530a40e4bf9f66f8e3881c2019572830e2"
+    },
+    {
+      "path": "input/input-firefox/input-acceptance-owner.json",
+      "bytes": 82,
+      "sha256": "908128430f00ea6225761f855b51fd8eccdc6f3fde56f267190bf241d455c86d"
+    },
+    {
+      "path": "input/input-firefox/input-acceptance-summary.json",
+      "bytes": 1553,
+      "sha256": "ebc037694214e06b6f96db09cf2fef19f9281461f6e516888292210f2005e7bb"
+    },
+    {
+      "path": "input/input-linux/framework/command.json",
+      "bytes": 389,
+      "sha256": "f715873f5b78e9d4fd3b0006c512781c1c6e34f61d3c86a08f60783f7af436bd"
+    },
+    {
+      "path": "input/input-linux/framework/framework-input.json",
+      "bytes": 126275,
+      "sha256": "eb225cd5aab57f5d46f14a8bba8909d32f296e892eb68c3d89210b67195f103e"
+    },
+    {
+      "path": "input/input-linux/framework/run.log",
+      "bytes": 108730,
+      "sha256": "01914c01e217acf5a52ef68e539d4a3f366d9dcd5dd7413ac6ca868017173838"
+    },
+    {
+      "path": "input/input-linux/framework/test-events.json",
+      "bytes": 113767,
+      "sha256": "b90f43a8ee03d81d65bee3087fa2426887f6efa5c30c6f4da2a6fa6931abeb89"
+    },
+    {
+      "path": "input/input-linux/input-acceptance-owner.json",
+      "bytes": 80,
+      "sha256": "0095b5bfcf90e95f26ff8686fb513ed35d74387a47347ff9e9c9cc1c003f6656"
+    },
+    {
+      "path": "input/input-linux/input-acceptance-summary.json",
+      "bytes": 711,
+      "sha256": "ba9981629d56fd4e7d535b50d51572032f2888db76aeaf9beea877e07048f5ca"
+    },
+    {
+      "path": "input/input-macos/framework/command.json",
+      "bytes": 356,
+      "sha256": "4df250b3efde97a71c6e9cb91453a11c173220ba64899c91bc7ac85d70c6e171"
+    },
+    {
+      "path": "input/input-macos/framework/framework-input.json",
+      "bytes": 134675,
+      "sha256": "72b457bb832da22ff1dd7b690d2072e99dfa238cfc8b067c48719438866c97e1"
+    },
+    {
+      "path": "input/input-macos/framework/run.log",
+      "bytes": 116550,
+      "sha256": "023b3946ab0472fff52e2dbcd9c4bf7a73cddb4631578a7c0ba4d6b0b54055a3"
+    },
+    {
+      "path": "input/input-macos/framework/test-events.json",
+      "bytes": 121752,
+      "sha256": "ca6377077696dc1aee6970e668acedc26b7d406cd50e5aa036163b15579ac6ed"
+    },
+    {
+      "path": "input/input-macos/input-acceptance-owner.json",
+      "bytes": 80,
+      "sha256": "77da3dfbbe3916d1962403911f51a9ed14f74181e56b98a0042def189ca65ebf"
+    },
+    {
+      "path": "input/input-macos/input-acceptance-summary.json",
+      "bytes": 666,
+      "sha256": "53fe37ef4ef1872af2e0ae4584ca80b0790985962615dbb03091728d3a0f5323"
+    },
+    {
+      "path": "input/input-safari/browser/browser-input.json",
+      "bytes": 28456,
+      "sha256": "b20a6f9b06c3f5e700632b4169818b997f26f1a6e9a44f4937a4b92e32abd832"
+    },
+    {
+      "path": "input/input-safari/browser/command.json",
+      "bytes": 359,
+      "sha256": "64d287e40d6e2cc09ded077c8eef6976d7a18a075196144b915fc8a28fc98a96"
+    },
+    {
+      "path": "input/input-safari/browser/run.log",
+      "bytes": 2582,
+      "sha256": "720ab994e5ca835b7baf23a543df2975b39f15bee9617a12fc8c37c329c2b758"
+    },
+    {
+      "path": "input/input-safari/browser/webdriver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/input-safari/enable-automation.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/input-safari/framework/command.json",
+      "bytes": 361,
+      "sha256": "018199242c94a85417468b21491899bd26faf8e8d3a9b96befc8265646ee37fc"
+    },
+    {
+      "path": "input/input-safari/framework/framework-input.json",
+      "bytes": 119443,
+      "sha256": "5b8fc63337a0f0e2b4bce8e120dde5911fb31ddfe6213de4a1197b6da7ef5c0f"
+    },
+    {
+      "path": "input/input-safari/framework/run.log",
+      "bytes": 6827,
+      "sha256": "d4a1fa6c1cb2800faf2d9348d28f3d199f587fcc5c7efc9c2e3b94aa8adfc0ed"
+    },
+    {
+      "path": "input/input-safari/framework/webdriver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/input-safari/input-acceptance-owner.json",
+      "bytes": 82,
+      "sha256": "a8aab412525d6b7158b02b0c9a0db6672ea59406ab6e23a4f52d3309ff640eac"
+    },
+    {
+      "path": "input/input-safari/input-acceptance-summary.json",
+      "bytes": 2184,
+      "sha256": "c0d804ec0bc6c9ab466c044fd2715345fd5a1bde47b9364a39f92f5798c58301"
+    },
+    {
+      "path": "input/input-safari/journey/command.json",
+      "bytes": 408,
+      "sha256": "b107ed90802232f61231b464533b0e8745350b3eb9a058ff91b5dd0ef0fbad1e"
+    },
+    {
+      "path": "input/input-safari/journey/run.log",
+      "bytes": 1249,
+      "sha256": "b08deb653e0ca354307d25347ef6ffdd62c567d47439c6e2fc1370323053ec89"
+    },
+    {
+      "path": "input/input-safari/journey/trusted-journey.json",
+      "bytes": 857,
+      "sha256": "72286cf16d030c00cb614297132de1c6c054d201487c51e60a3183dc384aa745"
+    },
+    {
+      "path": "input/input-safari/journey/webdriver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/input-safari/macos-version.txt",
+      "bytes": 65,
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "path": "input/input-safari/safari-version.txt",
+      "bytes": 7,
+      "sha256": "3db9dd54f6160f2744d2428cda5edfb5b4bf1247b140a1673d82a65f456314ee"
+    },
+    {
+      "path": "input/input-safari/safaridriver-version.txt",
+      "bytes": 45,
+      "sha256": "811321e468d978c2f1e264e69a844c8948a9a1a4ed5faa5d4a6cc84f0ccaa3f4"
+    },
+    {
+      "path": "input/input-windows/framework/command.json",
+      "bytes": 367,
+      "sha256": "1d059fa18a13181ab14ab2545583abc9a044d6739d380f93b0f0363a1a6f76d8"
+    },
+    {
+      "path": "input/input-windows/framework/framework-input.json",
+      "bytes": 128191,
+      "sha256": "4eeb145c2d38aacafbcb7cdfd8597da3c66a536e0cbeb784b4ffc67943ca819e"
+    },
+    {
+      "path": "input/input-windows/framework/run.log",
+      "bytes": 107965,
+      "sha256": "275619c248c8f4c2d8c086c0d19077dbe6b35f4909372fe2f48bab805b9dee3f"
+    },
+    {
+      "path": "input/input-windows/framework/test-events.json",
+      "bytes": 113263,
+      "sha256": "be5518f9a33cb46f3502a5ef2117452df03257b5f128748294d29db0c1d3874b"
+    },
+    {
+      "path": "input/input-windows/input-acceptance-owner.json",
+      "bytes": 82,
+      "sha256": "c5e35783a426ce09c81960e2e7a1741dbc56464701ec813b08ea7096a747baf7"
+    },
+    {
+      "path": "input/input-windows/input-acceptance-summary.json",
+      "bytes": 692,
+      "sha256": "dfaf0ba23cafa94b87c363b2db71e98be58b2c39c593e4b9daad6af486e4cbc6"
+    },
+    {
+      "path": "input/real-at-linux-capability/audio-capture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-linux-capability/fixture-events.log",
+      "bytes": 29,
+      "sha256": "bd1099921653da0a1f20ac81db69e0b2842889e548af5f12f8800efea95c2f94"
+    },
+    {
+      "path": "input/real-at-linux-capability/fixture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-linux-capability/orca-debug.log",
+      "bytes": 101678,
+      "sha256": "01e86dd609dfd01d7f1f27d29b47b1fe5229e795e99432a9aef933c02231f50c"
+    },
+    {
+      "path": "input/real-at-linux-capability/orca-task.pcm",
+      "bytes": 214392,
+      "sha256": "0845b9602b3f85f4df69dc73e19d5c3ceaf87c5e8fd8ed27504bb7fec46ebb4b"
+    },
+    {
+      "path": "input/real-at-linux-capability/orca.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-linux-capability/pulseaudio.log",
+      "bytes": 9997,
+      "sha256": "99d7dae45dbcad26f2ecadc149e97fc451893ea51c383017e469300cdb046749"
+    },
+    {
+      "path": "input/real-at-linux-capability/report.json",
+      "bytes": 1208207,
+      "sha256": "1f5f4c190dee9ac12501adfad2568d515aa4f0fbe506c50c7c91358f7c0a250f"
+    },
+    {
+      "path": "input/real-at-linux-capability/speech-dispatcher.log",
+      "bytes": 1232820,
+      "sha256": "67d987b14e569724d25340d5fe05062e7c538a5ff35b2f113bc6bea7565799e5"
+    },
+    {
+      "path": "input/real-at-linux-capability/speechd-logs/espeak-ng.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-linux-capability/speechd-logs/speech-dispatcher.log",
+      "bytes": 1248902,
+      "sha256": "bf6cc9e0692ffc45a2340b403e7d86b2568465563eead3f400b43a5a84554ff5"
+    },
+    {
+      "path": "input/real-at-windows-capability/compile-error.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-windows-capability/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "input/real-at-windows-capability/fixture-events.log",
+      "bytes": 46,
+      "sha256": "aa15f318cefd7d9a53af7e0bd486ad479b819d125cdcad609dc337b66eeaaa7c"
+    },
+    {
+      "path": "input/real-at-windows-capability/narrator-utterance.txt",
+      "bytes": 142,
+      "sha256": "3d6472b0a6ce4783ca7141b6aa67a7aafa1de64e0df2e5ea68442cc1fd00a0b4"
+    },
+    {
+      "path": "input/real-at-windows-capability/process.log",
+      "bytes": 4888,
+      "sha256": "a546820e9da2c1ae1a1fed514cd2ae021e4ede2452783fa4d389b2d0700b8d69"
+    },
+    {
+      "path": "input/real-at-windows-capability/report.json",
+      "bytes": 4886,
+      "sha256": "2d64a31a3f799f15578d4a0081030423b750ea92da5d752760440be211f3c384"
+    },
+    {
+      "path": "input-run.json",
+      "bytes": 18401,
+      "sha256": "af4b4644a9cdd4e85eb798bb373e2b96b3861d81ce72d16e25a735df2587b4b7"
+    },
+    {
+      "path": "main/apple-native-journeys/_temp/beautiful-ios-simulators.json",
+      "bytes": 187581,
+      "sha256": "9dc26429333091480bcdc9be1e4a6814774c4015f7ea8c5286dfd16cb5102112"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/install.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-build.log",
+      "bytes": 1036138,
+      "sha256": "60727c1710ae2c9ad04ba79d4be5f5e7ee6c0b1fcd79c2d5f6a999e182a644e7"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+      "bytes": 3121,
+      "sha256": "2ef73d9db5b6837c1930d0df51e13d2846b3b2653103c5d41b837ff2838c608d"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/launch.log",
+      "bytes": 44,
+      "sha256": "0f945838249d411674c66e9b3ea30b5f2ac17c8e02b019e9e9fcbad6a94cb080"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/macos-journey.json",
+      "bytes": 2333,
+      "sha256": "ddbc59cc08261f7b14034d4da9e029a5c613282d206e411ba6f6aa757ab037f8"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/native-flutter-driver.log",
+      "bytes": 507896,
+      "sha256": "db9b10aa84b6fc72a1c169e33de89d5ae06781bafb15275550e0ab0b271520c1"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/selected-xcode.log",
+      "bytes": 32,
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/simulator-sdk.log",
+      "bytes": 5,
+      "sha256": "25205f2e2f02dc71036ee827e19c49b893b231a3d1af240e35a3ac55aa8cdcb6"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/terminate.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.json",
+      "bytes": 198,
+      "sha256": "2c201d2e5144fe42bbc40fe88aec39a50059e65c3f07812b52e83e813631ed57"
+    },
+    {
+      "path": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.log",
+      "bytes": 224,
+      "sha256": "73646910a24f9cef49d9dc0e3675067c173afdab3caf1ea30bc501d21b949d64"
+    },
+    {
+      "path": "main/chrome-trusted-journey/chromedriver.log",
+      "bytes": 326,
+      "sha256": "24a606d267316a36c14fc7350275d11726a251490942d2b6deff804bd12a9a08"
+    },
+    {
+      "path": "main/chrome-trusted-journey/trusted-journey.json",
+      "bytes": 1219,
+      "sha256": "b39058a9ec2d87f24f5e137df061625e2d5dd770e526d75085722141b3c292e4"
+    },
+    {
+      "path": "main/edge-journey/adapter.log",
+      "bytes": 2408,
+      "sha256": "8800f52ce5ea8328608b32aa8e5c02429155b43c0eae86ef626b694924d45bc7"
+    },
+    {
+      "path": "main/edge-journey/browser-identity.json",
+      "bytes": 1036,
+      "sha256": "7e8cc4ea52f68a000b50ce340803fde6a42fcd85070d9156c66194739279f254"
+    },
+    {
+      "path": "main/edge-journey/diagnostics/failure-4.json",
+      "bytes": 1493,
+      "sha256": "e1bd0d7cdaec24ea9dc0cbc1659146f4074bb05e70476a665aa31806354eda99"
+    },
+    {
+      "path": "main/edge-journey/journey.log",
+      "bytes": 3034,
+      "sha256": "f3193cc793f02e8d78eb0138cbb49bb09f27049f15c424253b1ae26b76442079"
+    },
+    {
+      "path": "main/edge-journey/msedgedriver.log",
+      "bytes": 285393,
+      "sha256": "0c6f949dafee2a818e6b222ff699c540e4ef79c354626f173a3cfb924b8ae208"
+    },
+    {
+      "path": "main/firefox-journey/browser-version.txt",
+      "bytes": 22,
+      "sha256": "fe2d19c0a22a3443938559b0a982bdc990a535d615017a5214658af893968a45"
+    },
+    {
+      "path": "main/firefox-journey/driver-version.txt",
+      "bytes": 314,
+      "sha256": "1983e5987ee93bc5bd1567da17bed6274cf485da60127117169aac218550446c"
+    },
+    {
+      "path": "main/firefox-journey/geckodriver.log",
+      "bytes": 242594,
+      "sha256": "2619174585785fb5508a49846eed3853a5b337debeb0191e9d8e1077b2b33cce"
+    },
+    {
+      "path": "main/firefox-journey/journey.log",
+      "bytes": 1249,
+      "sha256": "50af65d75f1598593d33a72838ae40e87bdb7568d2b143d49381fb65365bdb1d"
+    },
+    {
+      "path": "main/firefox-journey/trusted-journey.json",
+      "bytes": 1071,
+      "sha256": "ad7c5bd31b6b9d6d871cf1200e42f0b207ea28093eb5f164385ef6b7186f773e"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/consumer-analysis.txt",
+      "bytes": 97,
+      "sha256": "0cb317ec555bd6f31585de540f1aaec9b9c7e9da1526fad3ee7ff1bb6ae0ec22"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/package_config.json",
+      "bytes": 11536,
+      "sha256": "9ca0bde47117443c9c7c0cf199c9439f979be58ca57928d398dcb7515de0eb00"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/production-license-registry.txt",
+      "bytes": 656,
+      "sha256": "51a5ce9bf26e4482f35acc13bea466701f4afb0296313e22e891ea3382bad778"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/public-integration-and-atomic-theme.txt",
+      "bytes": 720,
+      "sha256": "d9d79fe68f3bdd7462ffb70d2782577bd413a6452a8fd0ee0c3d7e15d10831f7"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/pubspec.lock",
+      "bytes": 10656,
+      "sha256": "c2e6d3316498a8abed099f9e02ac63385c2b76b4dec332f74d6a7d0ddc372919"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result/resolve-public-dependencies.txt",
+      "bytes": 1282,
+      "sha256": "f0cc8fc3b36650aaf52def4ef6739195ba472c6edf9b63117dea8381c86efb1e"
+    },
+    {
+      "path": "main/isolated-hosted-consumer/result.json",
+      "bytes": 13033,
+      "sha256": "e789829a062a8a18dc3a9733e01274ffef5f94b51e27568ea4e9f81736d367df"
+    },
+    {
+      "path": "main/source-asset-audits/source-dependency-assets.json",
+      "bytes": 947,
+      "sha256": "d4930538382e8c5067851d75831ae3cf83b9af45f0b1e1fe4c7db782886186a2"
+    },
+    {
+      "path": "main/source-asset-audits/source-media.json",
+      "bytes": 87,
+      "sha256": "556b22a63cfdbff53801ed44111877dbc4ac101fe33302b8cf4f38d964d84b9d"
+    },
+    {
+      "path": "main/web-asset-audits/web-js-dependency-assets.json",
+      "bytes": 10124,
+      "sha256": "cdaf0ceb7b697a91da1274ccb73fcf6b3f24d889d48026ab4eab616a8f74c7ae"
+    },
+    {
+      "path": "main/web-asset-audits/web-js-media.json",
+      "bytes": 323,
+      "sha256": "846a9bbf877eb0fd5c5ca49cddcbe2c56c50ebf212b37cd5ea4d41265c9c67e1"
+    },
+    {
+      "path": "main/web-asset-audits/web-wasm-dependency-assets.json",
+      "bytes": 10124,
+      "sha256": "cdaf0ceb7b697a91da1274ccb73fcf6b3f24d889d48026ab4eab616a8f74c7ae"
+    },
+    {
+      "path": "main/web-asset-audits/web-wasm-media.json",
+      "bytes": 323,
+      "sha256": "846a9bbf877eb0fd5c5ca49cddcbe2c56c50ebf212b37cd5ea4d41265c9c67e1"
+    },
+    {
+      "path": "main/windows-native-journey/catalog-journey.json",
+      "bytes": 2274,
+      "sha256": "3daef163d09a622e690d6c6e432eb4ae4795bf2b746be912926bcbb4b92f0fd8"
+    },
+    {
+      "path": "main-artifacts.json",
+      "bytes": 6877,
+      "sha256": "dee0e31ae31008c72562455fe2178f71e87975d9ffc13678bf25783496fd9b27"
+    },
+    {
+      "path": "main-run.json",
+      "bytes": 25411,
+      "sha256": "0bd79d7e028f9460c84ee880c6c7a22c601b3dac464cb1ffd270dfd27d262a1c"
+    }
+  ]
+}

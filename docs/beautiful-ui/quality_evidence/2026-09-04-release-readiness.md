@@ -2,16 +2,17 @@
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
 Status: **not ready for stable-release sign-off**. At the latest completed
-`f5484b9f` checkpoint, all four browsers pass the complete trusted W3C input
-journey, and all three native framework input jobs pass. Main CI is **11/12**:
-Android and iOS complete their actual journeys, including the corrected input
-synchronization and both numeric submission assertions. The only main failure
-is Edge's initial browser navigation/window request before application code.
+`f15f27eb` checkpoint, all four browsers pass the complete trusted W3C input
+journey, and all three native framework input jobs pass. Main CI is **10/12**:
+iOS completes its actual journey; Android reaches Chat but does not expose the
+expected responding state after Send. Its exact cause remains under diagnosis.
+Edge fails its initial browser navigation/window request before application code.
 Linux's native parent
 repair passes all three actual FlView cases; full Orca tasks now expose SDK
 name-notification and expanded-state limitations. P1/P2 engineering budgets
-passed at the earlier `87299572` runtime snapshot; P3 frames, OS IME and full
-device/AT acceptance remain open.
+passed at the earlier `87299572` runtime snapshot. A complete, stable native P3
+capture at `f15f27eb` now passes **7/7 unchanged engineering budgets**. Actual OS
+IME and full device/AT acceptance remain open.
 
 All 20 Gallery components and seven foundation/building-block items have
 implementations. **All 27 registry entries remain `in_progress`; all six Flutter
@@ -32,7 +33,50 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Latest completed checkpoint at f5484b9f
+## Latest completed checkpoint at f15f27eb
+
+[The exact-source CI record](../../../.github/evidence/f15f27eb-ci.md) preserves
+main run `33839986027` (**10/12**) and input/AT run `33839985973` (**3/9**), both
+attempt 1. The actual iOS driver passes in **56.534 seconds**, all platform builds
+and package validation pass, and all four trusted W3C suites pass. Android's new
+Chat failure is separate from its earlier successful journey: the old text finder
+also matches an unsent draft, so a new one-tap diagnostic records public host
+messages/status, composing state, pointer phases and native insets without
+clearing composition, retrying Send or weakening the original Stop assertion.
+
+The component changes retain Diff totals during pagination and the Flowchart
+scene during viewport transformations. Combined library tests pass **655/655**.
+The [new native P3 record](./performance/2026-09-04-f15f27eb-display-awake.md)
+contains **5,163 frames and 525 RSS samples**, with seven stable native
+environment records and all original engineering gates passing. Its 305-file
+source manifests match before and after. The interrupted preceding baseline and
+all older budget failures remain preserved; the comparison does not isolate the
+two optimizations from environment and display-awake differences. P1/P2 was not
+rerun in this capture, and engineering defaults do not grant product sign-off.
+
+The new Linux capability failure exposed a
+[buffered Orca debug-file transport](./2026-09-04-orca-capability-log-transport.md).
+The real Where Am I handler and generated text are present, but the expected new
+utterance was not visible in the file within its deadline. A deterministic
+unflushed-writer regression supports reusing the existing raw PTY transport; the
+next actual run must verify capability, and this old failure stays unaccepted.
+
+The [separate Narrator diagnostic at 70e3d149](../../../.github/evidence/narrator-70e3d149.md)
+passes real Windows PowerShell/C# compilation and seven diagnostic regressions.
+It confirms **zero render endpoints across all device states**, with all three
+default roles returning `0x80070490`. It also records fixture focus leaving during
+the reader command and a copied `Welcome to Narrator` heading. That is distinct
+from a fixture utterance; neither reader task nor synthesized audio is accepted.
+The [Edge preread experiment](../../../.github/evidence/edge-preread-16906e5e.md)
+records its full setup cost and actual version/image drift and does not resolve
+the original 300-second startup failure.
+
+The [pinned GTK source patch](../diagnostics/linux-sdk-accessibility-patch/README.md)
+has actual native source-unit red/green evidence (**2/10 to 10/10**). Its complete
+isolated engine build and unchanged real Catalog/Orca tasks remain a separate
+runtime verification; the unit link stubs never enter an application build.
+
+## Earlier completed checkpoint at f5484b9f
 
 [The exact-source CI record](../../../.github/evidence/f5484b9f-ci.md) and its
 [JSON manifest](../../../.github/evidence/f5484b9f-ci.json) bind the two new

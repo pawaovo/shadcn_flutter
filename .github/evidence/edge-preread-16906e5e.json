@@ -1,0 +1,549 @@
+{
+  "schema": 1,
+  "scope": "single_explicit_preread_run_compared_with_retained_baseline",
+  "conclusion": "startup_passed_but_original_300_second_failure_not_reproduced_or_resolved",
+  "application_acceptance": "not_measured",
+  "original_edge_failure_resolved": false,
+  "dispatches_performed": 1,
+  "new_baseline_dispatches": 0,
+  "baseline": {
+    "run_id": 33838225726,
+    "source_sha": "d1c44cce0bede4355bb4456a1280af34dce00ec5",
+    "runner_image": "20260823.283.1",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "status": "passed",
+    "browser_executable": {
+      "path": "/opt/microsoft/msedge/msedge",
+      "resolved": "/opt/microsoft/msedge/msedge",
+      "bytes": 398196048,
+      "sha256": "c50c266b5dbae21b5ae7b1ff3a0b6c352441520b114ff9e98d49910e3b450162"
+    },
+    "driver_executable": {
+      "path": "/usr/local/share/edge_driver/msedgedriver",
+      "resolved": "/usr/local/share/edge_driver/msedgedriver",
+      "bytes": 23598936,
+      "sha256": "c8bf9cd5531e0efd7710cc3d6001f4737fdd2b44ced897604ed8c4c11aca271c"
+    },
+    "cases": [
+      {
+        "index": 1,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "55632fc675ff586ef122428cee9b8b7e",
+        "browser_pid": 2240,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.iyNCU4",
+        "browser_version": "151.0.4129.101",
+        "driver_version": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 32.634035,
+        "set_location_seconds": 0.012458,
+        "set_size_seconds": 0.015873,
+        "preread_identity": null,
+        "main_process_sample_count": 32,
+        "D_samples": 26,
+        "folio_wait_samples": 26,
+        "io_psi_some_delta_seconds": 25.142363,
+        "startup_child_errors": []
+      },
+      {
+        "index": 2,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "c01adbfb1b352e3d4a33bf797e66bae8",
+        "browser_pid": 2526,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.Fjwnhb",
+        "browser_version": "151.0.4129.101",
+        "driver_version": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 0.261657,
+        "set_location_seconds": 0.136883,
+        "set_size_seconds": 0.016149,
+        "preread_identity": null,
+        "main_process_sample_count": 0,
+        "D_samples": 0,
+        "folio_wait_samples": 0,
+        "io_psi_some_delta_seconds": 0.174994,
+        "startup_child_errors": []
+      },
+      {
+        "index": 3,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "3bfe3002a7b5beb8edbd2c0de5667c2e",
+        "browser_pid": 2810,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.yg8QOg",
+        "browser_version": "151.0.4129.101",
+        "driver_version": "151.0.4129.101 (cc1d9f4080fd9140611a9600b8d1615db310105d)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 0.277729,
+        "set_location_seconds": 0.018204,
+        "set_size_seconds": 0.019563,
+        "preread_identity": null,
+        "main_process_sample_count": 0,
+        "D_samples": 0,
+        "folio_wait_samples": 0,
+        "io_psi_some_delta_seconds": 0.051203,
+        "startup_child_errors": []
+      }
+    ],
+    "elapsed_seconds_including_preread_and_cleanup": null
+  },
+  "preread_trial": {
+    "run_id": 33840112894,
+    "source_sha": "16906e5ea8f8a2fdc280b1e4504d81d0ac0a290a",
+    "runner_image": "20260831.293.1",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "status": "passed",
+    "browser_executable": {
+      "path": "/opt/microsoft/msedge/msedge",
+      "resolved": "/opt/microsoft/msedge/msedge",
+      "bytes": 398466384,
+      "sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a"
+    },
+    "driver_executable": {
+      "path": "/usr/local/share/edge_driver/msedgedriver",
+      "resolved": "/usr/local/share/edge_driver/msedgedriver",
+      "bytes": 23867976,
+      "sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b"
+    },
+    "cases": [
+      {
+        "index": 1,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "84a6686268a624846f93e20ba964b163",
+        "browser_pid": 2245,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.pKLpWa",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 3.989137,
+        "set_location_seconds": 0.015756,
+        "set_size_seconds": 0.018721,
+        "preread_identity": {
+          "status": "verified",
+          "pid": 2245,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "start_ticks": 18665
+        },
+        "main_process_sample_count": 4,
+        "D_samples": 1,
+        "folio_wait_samples": 1,
+        "io_psi_some_delta_seconds": 2.398146,
+        "startup_child_errors": []
+      },
+      {
+        "index": 2,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "2f2cbaa4725fb5b45a51e35917bb835e",
+        "browser_pid": 2529,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.xReuhH",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 0.366723,
+        "set_location_seconds": 0.018341,
+        "set_size_seconds": 0.023172,
+        "preread_identity": {
+          "status": "verified",
+          "pid": 2529,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "start_ticks": 19111
+        },
+        "main_process_sample_count": 0,
+        "D_samples": 0,
+        "folio_wait_samples": 0,
+        "io_psi_some_delta_seconds": 0.140462,
+        "startup_child_errors": []
+      },
+      {
+        "index": 3,
+        "status": "passed",
+        "cleanup_status": "verified",
+        "session_id": "0cb06d426d09f2c26853e12cadb601ea",
+        "browser_pid": 2812,
+        "profile": "/tmp/com.microsoft.Edge.scoped_dir.6387zL",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "page_load_ms": 300000,
+        "page_load_strategy": "normal",
+        "request_http_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "create_session_seconds": 0.367614,
+        "set_location_seconds": 0.022366,
+        "set_size_seconds": 0.022807,
+        "preread_identity": {
+          "status": "verified",
+          "pid": 2812,
+          "exe": "/opt/microsoft/msedge/msedge",
+          "start_ticks": 19194
+        },
+        "main_process_sample_count": 0,
+        "D_samples": 0,
+        "folio_wait_samples": 0,
+        "io_psi_some_delta_seconds": 0.13269,
+        "startup_child_errors": []
+      }
+    ],
+    "elapsed_seconds_including_preread_and_cleanup": 17.453838
+  },
+  "preread": {
+    "status": "read_complete",
+    "path": "/opt/microsoft/msedge/msedge",
+    "started_epoch": 1788499235.1543288,
+    "bytes_read": 398466384,
+    "condition": "preread_actual_browser_executable_once",
+    "resolved": "/opt/microsoft/msedge/msedge",
+    "sha256": "6a612f822ea7f30de05d5b36566d3e306cdf8fc7b35577c03efaaddcc2a4923a",
+    "bytes": 398466384,
+    "elapsed_seconds": 11.031384,
+    "completed_epoch": 1788499246.1857188
+  },
+  "preread_plus_first_session_creation_seconds": 15.020521,
+  "comparability": {
+    "normalized_init_session_capabilities_equal": true,
+    "actual_browser_launch_argv_equal_except_independent_profile": true,
+    "first_five_request_sequences_equal": true,
+    "browser_version_equal": false,
+    "browser_executable_hash_equal": false,
+    "driver_executable_hash_equal": false,
+    "runner_image_equal": false,
+    "controlled_single_variable_result": false
+  },
+  "old_fixed_152_context": {
+    "run_id": 33761035001,
+    "created_at": "2026-09-03T13:25:04Z",
+    "source_sha": "d97a2e1277b8ba2d1a89625d9982edd668fd0632",
+    "sample_1_job_id": 100667110655,
+    "sample_1_runner_image": "20260823.283.1",
+    "runner_image_evidence_lines": [
+      "Edge 152 sample 1\tUNKNOWN STEP\t2026-09-03T13:25:10.1415959Z Version: 20260823.283.1"
+    ],
+    "sample_2_and_3_runner_image": "not_retrieved_in_this_comparison",
+    "scope": "three_separate_runners_exact_installed_152_distribution_and_complete_catalog_journeys",
+    "samples": [
+      {
+        "sample": 1,
+        "source_sha": "d97a2e1277b8ba2d1a89625d9982edd668fd0632",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "installed_driver_sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b",
+        "driver_hash_matches_preread_trial": true,
+        "browser_executable_sha256": null,
+        "browser_executable_hash_status": "not_recorded_in_old_artifact; package digest is not executable digest",
+        "browser_deb_sha256": "b3322445fbe6ce1e0bcff84ebbe0edea365e0eaf498b1ef6136dda52dea6e3a7",
+        "create_session_seconds": 0.497,
+        "set_location_seconds": 0.014,
+        "set_size_seconds": 0.02,
+        "all_adapter_responses_http_200": true,
+        "journey_all_tests_passed_text_present": true
+      },
+      {
+        "sample": 2,
+        "source_sha": "d97a2e1277b8ba2d1a89625d9982edd668fd0632",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "installed_driver_sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b",
+        "driver_hash_matches_preread_trial": true,
+        "browser_executable_sha256": null,
+        "browser_executable_hash_status": "not_recorded_in_old_artifact; package digest is not executable digest",
+        "browser_deb_sha256": "b3322445fbe6ce1e0bcff84ebbe0edea365e0eaf498b1ef6136dda52dea6e3a7",
+        "create_session_seconds": 1.068,
+        "set_location_seconds": 0.017,
+        "set_size_seconds": 0.022,
+        "all_adapter_responses_http_200": true,
+        "journey_all_tests_passed_text_present": true
+      },
+      {
+        "sample": 3,
+        "source_sha": "d97a2e1277b8ba2d1a89625d9982edd668fd0632",
+        "browser_version": "152.0.4191.53",
+        "driver_version": "152.0.4191.53 (4ee8983fdce2559a0ae8f8376934c5ed353035cd)",
+        "installed_driver_sha256": "a26d989f6c81d1b3a03f036af29670f47662aeeeb3631fd27c4c59b192c5ce2b",
+        "driver_hash_matches_preread_trial": true,
+        "browser_executable_sha256": null,
+        "browser_executable_hash_status": "not_recorded_in_old_artifact; package digest is not executable digest",
+        "browser_deb_sha256": "b3322445fbe6ce1e0bcff84ebbe0edea365e0eaf498b1ef6136dda52dea6e3a7",
+        "create_session_seconds": 0.398,
+        "set_location_seconds": 0.016,
+        "set_size_seconds": 0.019,
+        "all_adapter_responses_http_200": true,
+        "journey_all_tests_passed_text_present": true
+      }
+    ]
+  },
+  "limits": [
+    "The preread run changed Edge/browser-driver binary and runner image relative to the retained baseline. No causal speedup or repair claim is valid.",
+    "The 11.031384-second preread is paid before session creation and is included in the 17.453838-second case-loop total, not hidden as setup.",
+    "Case-loop total excludes initial installed-version/source checks and final post-session executable hashing; baseline did not record that exact total field.",
+    "Resource sampling starts after preread; no 1 Hz resource time series was captured during the preread itself.",
+    "I/O PSI is host-wide; per-process D/wchan samples are sparse. Subsecond cases can have zero periodic browser samples; post-startup identity snapshots are retained.",
+    "Old fixed-152 evidence matches the driver executable digest but does not contain the browser executable digest. Its .deb digest cannot establish ELF equality.",
+    "Old fixed-152 sample 1 used the older runner image and all three samples used separate hosts and complete journeys, so they are context rather than a matched experimental control.",
+    "Neither baseline nor preread trial reproduced the earlier 300-second navigation-wait failure. All earlier failures remain unchanged."
+  ],
+  "source_artifacts": [
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/provenance.json",
+      "bytes": 4352,
+      "sha256": "1395409739f83f2f2f561f2b4699a25bacea261845d6c81f3834965fd2e80ba4"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/summary.json",
+      "bytes": 9310,
+      "sha256": "84a22eabaaefdbf3bf9d6597ab84b94ccb0b620e7b6382c1cf48944027694826"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-1/requests.jsonl",
+      "bytes": 4194,
+      "sha256": "a05e18b4fbf40da1f5d8aed6750d3a35db9b9d869b045f31b9ca51569bc6a54e"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-1/resources.jsonl",
+      "bytes": 320324,
+      "sha256": "bd514fb8c80dcc4e5a82a12ce38928b2c223083584f084b28c2124b6244b5bdc"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-1/post-startup-processes.json",
+      "bytes": 15425,
+      "sha256": "66af2838fc5fafaedecf2a3959f43e589ee4d439acca8f220f91237eb77ee793"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-1/msedgedriver.log",
+      "bytes": 23329,
+      "sha256": "cad7ada3761ba1b13ae9fa5fec0a0ba7f9926dbfbe04d18e23c7f38f1d521d9b"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-2/requests.jsonl",
+      "bytes": 4192,
+      "sha256": "bfffaf46e9345547ce7cfdaf4bd3eedd3073bd1aa483aea5d0f45430f659da59"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-2/resources.jsonl",
+      "bytes": 3904,
+      "sha256": "f4188188e39390b1a3581f6a6c8fe1be88e22017373ffaf1608f495f21dad398"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-2/post-startup-processes.json",
+      "bytes": 15559,
+      "sha256": "c55d2b7cceafb2031f4a8c8ec9eff71f6ea52065a6de7c7ad1b945b202e897ab"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-2/msedgedriver.log",
+      "bytes": 27865,
+      "sha256": "865c4e3e93e8caaafa68404de69c60c34d7bea53fe82f178b04138ec8bfb3a71"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-3/requests.jsonl",
+      "bytes": 4194,
+      "sha256": "0281da59b1b829dd472bd7f4d1e1e0fff3ca542899f01a51a68de597acef93e4"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-3/resources.jsonl",
+      "bytes": 3903,
+      "sha256": "d569f686862ce8ef3a71e5f3cf2871b4314226152d59efb742be500a014374cb"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-3/post-startup-processes.json",
+      "bytes": 16997,
+      "sha256": "903cf19626fbc68a63caef28ca0b910fbbc0bb842285d61c8fcfe4be8a192b29"
+    },
+    {
+      "file": "/tmp/edge-cold-start-d1c44cce-33838225726/session-3/msedgedriver.log",
+      "bytes": 24987,
+      "sha256": "af6e2dbd677838a3d6e60a2788597bfe747425176c8cbb77964cdf3cd371d036"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/provenance.json",
+      "bytes": 4399,
+      "sha256": "ab76cfafc7fb07c04972d8c5f6cc724f4b349a02497ad0b936f7cbc3ecb24213"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/summary.json",
+      "bytes": 10419,
+      "sha256": "5babfb36ce5e0e956dfc534debc3926cf8a28f23445df90a5f89b13c84fe6067"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-1/requests.jsonl",
+      "bytes": 4187,
+      "sha256": "ec8529cb0a0da6f911c7246803f9b90a14c01fc8d93e70e0d6444a6fe743bdfc"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-1/resources.jsonl",
+      "bytes": 39991,
+      "sha256": "b9be7d430fab1ab65b1ef73939f0c9143378536dc7569692d39b7660e70ddce1"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-1/post-startup-processes.json",
+      "bytes": 15346,
+      "sha256": "937ecc1f1414f09091740084a69ac7f8187a3b0f2f37f1d90d782f7f8838dd51"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-1/msedgedriver.log",
+      "bytes": 23333,
+      "sha256": "6880d89e1569b5028fdf451b5a82c46beb087bde29d88730b113aa8d0619e5b6"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-2/requests.jsonl",
+      "bytes": 4186,
+      "sha256": "dc8c102eae430a6865f2fcba4e3b2601633cf204f661bc241b2b977384fbb2c7"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-2/resources.jsonl",
+      "bytes": 3903,
+      "sha256": "4ae20807c536514b4d644662e1def6ff83dd1cac0700faa05aa2f4b8239e1dd7"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-2/post-startup-processes.json",
+      "bytes": 16933,
+      "sha256": "99db1f67b7589fc25979221f6a50fffd660a9ea87b0c46e3c659d64fa62ad429"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-2/msedgedriver.log",
+      "bytes": 22966,
+      "sha256": "fa8553e55a483de971ff5dba899daaa1e06816cfdceab46af45d84d94ce3b4d9"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-3/requests.jsonl",
+      "bytes": 4188,
+      "sha256": "1a97c0da7638bea25f410b30ef0f6b613e3cef45aa18677d631fc1f253e1e67b"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-3/resources.jsonl",
+      "bytes": 3903,
+      "sha256": "83afb6c8f3f9bd3f7374dea9436ad989bdd765c19d53abc5cfe77c008e074850"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-3/post-startup-processes.json",
+      "bytes": 16960,
+      "sha256": "df4531ca8ad62b3da5a0e5c31fa1901396fd36cb93e57b7e220511e5a467503e"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/session-3/msedgedriver.log",
+      "bytes": 24969,
+      "sha256": "f740e5a577042eac378caad877a76ecee2d83db07f4e0f41e5d299e09adc298d"
+    },
+    {
+      "file": "/tmp/edge-preread-16906e5e-33840112894/preread.json",
+      "bytes": 418,
+      "sha256": "a96baa69db924dd296ce3da22741ff35c79ea7d240503e190964fb8f3d5d13b4"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-1/distribution/distribution.json",
+      "bytes": 4328,
+      "sha256": "5dfb82ec99f3862bbd7171aa8cbd0fe15d1104d492ef543858c69fe905bff860"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-1/browser-identity.json",
+      "bytes": 1034,
+      "sha256": "38bc9e66f5e04bf735cad7007b1ed1f487377a0924574437f22c8524179a5d33"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-1/adapter.log",
+      "bytes": 38483,
+      "sha256": "7dcf006fabd22dbfb84222ced976144011f17e91e439626bd603f4873f5d4184"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-1/journey.log",
+      "bytes": 1177,
+      "sha256": "5f6bb69189d7ae39d16cd381a9386aa108634f7e424b5a001278a6650390c93b"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-2/distribution/distribution.json",
+      "bytes": 4360,
+      "sha256": "3135a3f439c6c212bede296e56c6ec7ed3621f52269b853e19be8757a07c157d"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-2/browser-identity.json",
+      "bytes": 1034,
+      "sha256": "a8e1f8201da74c1cf516d3229f375d319e41b7edebe004545756723a041de316"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-2/adapter.log",
+      "bytes": 37867,
+      "sha256": "7cc47ac6c7a2be582fe76cb6e3006a725382bbc1ec8630ddf809ebb246b8d7e6"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-2/journey.log",
+      "bytes": 1177,
+      "sha256": "4e3a2e0a02a63b5985cc4084fa5ca567875e3e6df35f340f523fd7d7741153b5"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-3/distribution/distribution.json",
+      "bytes": 4328,
+      "sha256": "9a28fe7932ec617a6acb86f9dcbd73ecadb3a6dc7c1a3cad1ef97d656c037309"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-3/browser-identity.json",
+      "bytes": 1034,
+      "sha256": "8fd0c42277fe215bf00307bed398fcd2dbb6b2b93ce583bdbda777747c3c0aaa"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-3/adapter.log",
+      "bytes": 38176,
+      "sha256": "aaae1aacfd4207beb12034f02cd52814c06c230968b9a211a3eb6570683f496f"
+    },
+    {
+      "file": "/tmp/edge-152-run-33761035001/edge-152-sample-3/journey.log",
+      "bytes": 1177,
+      "sha256": "bb9a0401aa77124cced491a93c91cf2851278fab652d814805b01032ae754533"
+    },
+    {
+      "file": "/tmp/edge-152-context-33761035001-job100667110655.log",
+      "bytes": 52571,
+      "sha256": "c2982e53375d04545c8e7614b5c8cde7e96ded1318eb14f6b860c1e043beaac5"
+    }
+  ]
+}
