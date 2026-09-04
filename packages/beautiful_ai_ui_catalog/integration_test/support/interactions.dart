@@ -1,6 +1,33 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+/// Sends one framework user edit through the real editor/IME synchronization
+/// path. IntegrationTest leaves TestTextInput unregistered, so pretending to
+/// receive an IME update can leave its real native peer with the old value.
+/// This is framework input, not an OS keyboard/IME acceptance claim.
+Future<void> enterCatalogText(
+  WidgetTester tester,
+  Finder target,
+  String text,
+) async {
+  final editor = tester.state<EditableTextState>(target);
+  editor.requestKeyboard();
+  await tester.pump();
+  expect(
+    editor.widget.focusNode.hasPrimaryFocus,
+    isTrue,
+    reason: 'The intended Catalog editor must receive focus before editing.',
+  );
+  final value = TextEditingValue(
+    text: text,
+    selection: TextSelection.collapsed(offset: text.length),
+  );
+  editor.userUpdateTextEditingValue(value, SelectionChangedCause.keyboard);
+  await tester.pump();
+  expect(editor.textEditingValue, value);
+  expect(editor.widget.focusNode.hasPrimaryFocus, isTrue);
+}
+
 /// Reveals [target] and taps once its center can be hit at a stable position.
 ///
 /// A mounted widget can still be clipped or moving after a disclosure changes

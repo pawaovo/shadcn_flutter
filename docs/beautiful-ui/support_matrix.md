@@ -4,10 +4,11 @@ Status: four-browser W3C input and P1/P2 engineering budgets pass; remaining jou
 Baseline: Flutter `>=3.47.0`, Dart `>=3.13.0 <4.0.0`, `shadcn_flutter` `0.0.54`
 
 Current evidence: [September 4 release readiness](./quality_evidence/2026-09-04-release-readiness.md).
-The completed `bff08825` checkpoint has main CI **10/12** and input/AT **4/9**,
+The completed `e3526d3f` checkpoint has main CI **11/12** and input/AT **4/9**,
 including all three native input bridges. All four independent W3C suites pass
-in full. The two main failures are Android's copy-feedback observation and
-iOS VM-service discovery/cleanup before driver start. At the earlier `87299572`
+in full. Android's complete journey now passes; iOS connects its driver, then
+fails a numeric Width assertion. The next fixture corrects framework/native
+editing-state synchronization and retains the original assertions. At the earlier `87299572`
 runtime snapshot, P1/P2 budgets passed **8/8** and P3 **1/7**. Linux's native
 parent/lifetime contract passes; full Orca tasks still expose SDK dynamic-name
 notification and expanded-state limitations. The
@@ -43,10 +44,10 @@ Exact minimum OS versions are inherited from the pinned Flutter toolchain and ge
 
 | Browser | Evidence expectation | Current status | Automation/execution |
 |---|---|---|---|
-| Chrome stable | Release-blocking shared Web journey | Partial | Main journey and complete independent W3C input pass at bff08825; retained framework composition check fails |
-| Edge stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at bff08825; separate framework driver navigation times out before a report |
-| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at bff08825; retained framework composition check fails |
-| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Main journey and complete independent W3C input pass at bff08825; retained synthetic resize composition check fails; OS/device/AT acceptance remains open |
+| Chrome stable | Release-blocking shared Web journey | Partial | Main journey and complete independent W3C input pass at e3526d3f; retained framework composition check fails |
+| Edge stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at e3526d3f; retained framework composition check fails; earlier startup failure remains separate |
+| Firefox stable | Release-candidate compatibility and shared journey | Partial | Main journey and complete independent W3C input pass at e3526d3f; retained framework composition check fails |
+| Safari stable | Release-candidate compatibility on macOS/iOS | Partial | Main journey and complete independent W3C input pass at e3526d3f; retained synthetic resize composition check fails; OS/device/AT acceptance remains open |
 
 Embedded WebViews, obsolete browser versions, and browser extensions that alter layout or semantics are out of scope unless a consuming product adds a separate requirement.
 

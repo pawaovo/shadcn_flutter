@@ -2,10 +2,11 @@
 
 Date: 2026-09-04 (Asia/Shanghai). Toolchain: Flutter 3.47.0 / Dart 3.13.0.
 Status: **not ready for stable-release sign-off**. At the latest completed
-`bff08825` checkpoint, all four browsers pass the complete trusted W3C input
-journey, and all three native framework input jobs pass. Main CI is **10/12**:
-Android fails a transient copy-feedback observation and iOS fails VM-service
-discovery/host-query cleanup before its driver starts. Linux's native parent
+`e3526d3f` checkpoint, all four browsers pass the complete trusted W3C input
+journey, and all three native framework input jobs pass. Main CI is **11/12**:
+Android's complete journey passes; iOS connects its actual driver and then
+fails the FineTune width assertion (`360` expected, `324` observed). The next
+fixture repair synchronizes framework edits with the real input peer. Linux's native parent
 repair passes all three actual FlView cases; full Orca tasks now expose SDK
 name-notification and expanded-state limitations. P1/P2 engineering budgets
 passed at the earlier `87299572` runtime snapshot; P3 frames, OS IME and full
@@ -30,7 +31,54 @@ The [September 3 readiness document](./2026-09-03-release-readiness.md) and
 entry point; an older heading containing “final” does not override a later
 recorded failure.
 
-## Latest completed checkpoint at bff08825
+## Latest completed checkpoint at e3526d3f
+
+[The exact-source CI record](../../../.github/evidence/e3526d3f-ci.md) binds the
+results to `e3526d3fb6f9ce97706a3e28297d5e682ebce9e8`. Main CI is **11/12**;
+Android's original full journey now passes. The iOS VM discovery query also
+succeeds, verifies cleanup and connects its real Dart driver. The later
+FineTune width failure is therefore an actual test assertion, not the earlier
+environment failure: the test expects `360` and observes `324`.
+
+All four independent W3C suites pass again, as do all three native framework
+input targets. The combined input result remains **4/9**: Chrome/Edge/Firefox
+retain the framework composition failure, Safari retains synthetic resize
+composition failure, and Narrator lacks an audio endpoint. Native JSON output
+and the three actual parent/lifetime cases pass. Thinking's native enabled
+state is now true, while full AT remains **0/3**, including the documented
+SDK name/expanded limitations and an uncompleted Search inspection.
+
+Fresh Web and macOS release builds pass; the latter is 50.5 MB. Publication
+dry-run passes with zero warnings and a 3 MB archive. No publication occurred.
+
+## Framework text-input repair following e3526d3f
+
+The [iOS fixture diagnosis](./2026-09-04-ios-framework-text-input-fixture.md)
+confirms that `360` is within Width's `40..999` bounds and that responsive
+layout does not alter the property value. `IntegrationTest` leaves
+`TestTextInput` unregistered, while the old `tester.enterText` path pretends to
+receive a native edit without updating the actual input peer. The pinned SDK
+explicitly documents that synchronization risk.
+
+The bounded protocol control shows Flutter at `360` while its last outbound
+editing state remains `324`. An explicitly simulated echo reproduces the
+reversion; the actual failed iOS echo sequence was not recorded. The replacement
+uses the public `EditableTextState.userUpdateTextEditingValue` path once, with
+primary-focus and complete-value checks. All six original journey text values
+and subsequent key actions are retained. The original Width controller
+assertion is retained and a new public host-settings assertion requires Width
+to be accepted as `360`, so merely changing a draft cannot pass submission.
+
+The new outbound protocol regression passes, the existing FineTune contract
+suite passes **18/18**, and three existing Catalog interaction scenarios pass
+with this helper in an explicitly labeled local compatibility copy. Targeted
+analysis and formatting pass. The public library and native application source
+remain unchanged; this is a fixture correction requiring the next actual iOS
+run, not OS keyboard or IME acceptance. No new manual Orca run is needed for
+this fixture-only change; the exact e3526d3f native evidence remains scoped to
+its unchanged runtime sources.
+
+## Earlier completed checkpoint at bff08825
 
 The new source is `bff08825bf9bc48a074a261ec9f912a1058058a2`.
 [Main CI 33830801341](https://github.com/pawaovo/shadcn_flutter/actions/runs/33830801341)
@@ -465,12 +513,12 @@ default Catalog samples do not accept those capabilities.
 
 ## Remaining sign-off work
 
-- Verify the Thinking enabled flag, copy-feedback fixture correction and
-  native report-file packaging on their new source. The readonly ArrowRight
-  repair now passes all four W3C suites and the native parent repair passes
-  its real FlView contract at `bff08825`. Full Linux reader tasks still need
-  the verified SDK corrections described above; iOS host discovery and actual
-  IME remain separate open boundaries.
+- Verify the corrected framework text-input path and the retained numeric
+  submission assertions in the next actual iOS journey. Copy feedback,
+  Thinking's enabled state, native report-file packaging and four-browser
+  W3C input now have actual results at `e3526d3f`. Full Linux reader tasks still
+  need the verified SDK corrections described above; actual OS IME remains a
+  separate open boundary.
 - Complete the requested same-source P3 comparison with video playback paused,
   investigate remaining frame-budget failures, and keep both prior observations.
   Product budget approval, repeatability and other-device measurements remain

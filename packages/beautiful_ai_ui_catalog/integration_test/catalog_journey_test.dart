@@ -1,3 +1,5 @@
+import 'package:beautiful_ai_ui/beautiful_ai_ui.dart'
+    show BeautifulFineTuneCard;
 import 'package:beautiful_ai_ui_catalog/main.dart' as catalog;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -117,7 +119,7 @@ void main() {
           'catalog-search',
           find.byType(EditableText),
         );
-        await tester.enterText(searchInput, 'waffle');
+        await enterCatalogText(tester, searchInput, 'waffle');
         await tester.pump();
         expect(find.text('Find waffle cone suppliers'), findsOneWidget);
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
@@ -229,7 +231,7 @@ Future<void> _runP2Journey(WidgetTester tester) async {
   final composer = _inside('catalog-chat', find.byType(EditableText));
   await Scrollable.ensureVisible(tester.element(composer), alignment: 0.5);
   await tester.pump();
-  await tester.enterText(composer, 'Check cone inventory');
+  await enterCatalogText(tester, composer, 'Check cone inventory');
   await tap('catalog-chat', find.text('Send'));
   expect(
     _inside('catalog-chat', find.text('Check cone inventory')),
@@ -263,10 +265,21 @@ Future<void> _runP2Journey(WidgetTester tester) async {
   );
   await tester.ensureVisible(width);
   await tester.pump();
-  await tester.enterText(width, '360');
+  await enterCatalogText(tester, width, '360');
   await tester.sendKeyEvent(LogicalKeyboardKey.enter);
   await tester.pump();
   expect(tester.widget<EditableText>(width).controller.text, '360');
+  expect(
+    tester
+        .widget<BeautifulFineTuneCard>(
+          find.byKey(const Key('catalog-fine-tune')),
+        )
+        .settings
+        .fields
+        .singleWhere((field) => field.id == 'width')
+        .value,
+    360,
+  );
 }
 
 Future<void> _runP3Journey(WidgetTester tester) async {
@@ -279,7 +292,7 @@ Future<void> _runP3Journey(WidgetTester tester) async {
   final prompt = _inside('catalog-prompt-bar', find.byType(EditableText));
   await tester.ensureVisible(prompt);
   await tester.pump();
-  await tester.enterText(prompt, '/rest');
+  await enterCatalogText(tester, prompt, '/rest');
   await tester.pump();
   await tester.sendKeyEvent(LogicalKeyboardKey.enter);
   await tester.pump();
@@ -302,7 +315,7 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     findsOneWidget,
   );
   await tester.ensureVisible(prompt);
-  await tester.enterText(prompt, 'Prepare the seasonal restock');
+  await enterCatalogText(tester, prompt, 'Prepare the seasonal restock');
   await tap(
     'catalog-prompt-bar',
     find.byKey(const Key('beautiful-prompt-send')),
@@ -332,7 +345,7 @@ Future<void> _runP3Journey(WidgetTester tester) async {
     find.byType(EditableText),
   ).first;
   await tester.ensureVisible(recordsSearch);
-  await tester.enterText(recordsSearch, 'Cone');
+  await enterCatalogText(tester, recordsSearch, 'Cone');
   await tester.pump();
   await tap(
     'catalog-records-table',

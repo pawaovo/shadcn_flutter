@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "repository": "pawaovo/shadcn_flutter",
+  "source_sha": "e3526d3fb6f9ce97706a3e28297d5e682ebce9e8",
+  "scope": "Exact candidate evidence; no CI reruns or assertion relaxation. iOS now reaches a real FineTune width assertion failure, distinct from prior discovery failures.",
+  "runs": {
+    "main": {
+      "id": 33832360549,
+      "head_sha": "e3526d3fb6f9ce97706a3e28297d5e682ebce9e8",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33832360549",
+      "success_jobs": 11,
+      "total_jobs": 12,
+      "jobs": [
+        {
+          "id": 100897841638,
+          "name": "Detect generated targets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860105,
+          "name": "Run Android journey",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860150,
+          "name": "Format, analyze, and test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860171,
+          "name": "Build Android catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860176,
+          "name": "Build Windows catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860194,
+          "name": "Run Edge journey",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860200,
+          "name": "Run Firefox journey",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860220,
+          "name": "Run Chrome and Linux journeys",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860244,
+          "name": "Build Linux catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897860245,
+          "name": "Build Apple catalogs",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897860344,
+          "name": "Build Web catalog",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100898688143,
+          "name": "Validate pub.dev package",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "input": {
+      "id": 33832360564,
+      "head_sha": "e3526d3fb6f9ce97706a3e28297d5e682ebce9e8",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33832360564",
+      "success_jobs": 4,
+      "total_jobs": 9,
+      "jobs": [
+        {
+          "id": 100897841788,
+          "name": "Real Narrator capability probe (not app acceptance)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897841838,
+          "name": "Real chrome input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897841855,
+          "name": "Real Safari full journey and input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897841900,
+          "name": "Native macos input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897841903,
+          "name": "Real edge input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897841911,
+          "name": "Real Orca capability probe (not app acceptance)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897841966,
+          "name": "Native linux input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 100897842002,
+          "name": "Real firefox input",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 100897842016,
+          "name": "Native windows input bridge",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "orca-pilot": {
+      "id": 33832394064,
+      "head_sha": "e3526d3fb6f9ce97706a3e28297d5e682ebce9e8",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/pawaovo/shadcn_flutter/actions/runs/33832394064",
+      "success_jobs": 0,
+      "total_jobs": 1,
+      "jobs": [
+        {
+          "id": 100897948599,
+          "name": "Three Catalog tasks with real Orca (not app acceptance)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  },
+  "web": {
+    "chrome": {
+      "trusted_w3c_status": "passed",
+      "last_stage": "complete",
+      "browser_report": {
+        "file": "input/input-chrome/browser/browser-input.json",
+        "sha256": "5fb698378427b017c7fe7dec2f12966f44429a13b8b8f641a3655f586955a451"
+      },
+      "framework_status": "failed",
+      "framework_scenarios": [
+        {
+          "id": "prompt_keyboard_menus_and_focus",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "prompt_composing_and_submission",
+          "status": "failed",
+          "error": "Expected: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+        }
+      ],
+      "framework_report": {
+        "file": "input/input-chrome/framework/framework-input.json",
+        "sha256": "8a36aa510d85f8305f34ed5b882953c656194904403a9447e66b9b64873acdc1"
+      },
+      "runner_summary": {
+        "file": "input/input-chrome/input-acceptance-summary.json",
+        "sha256": "2c9da8324435d7015c467259bc64fdbfc7b38ca3d3063c78c58586a12d1d7d62"
+      }
+    },
+    "edge": {
+      "trusted_w3c_status": "passed",
+      "last_stage": "complete",
+      "browser_report": {
+        "file": "input/input-edge/browser/browser-input.json",
+        "sha256": "52dcb3310664b9a44fcf53bffbb7a08601908691b8865c912d749e1e74115f4b"
+      },
+      "framework_status": "failed",
+      "framework_scenarios": [
+        {
+          "id": "prompt_keyboard_menus_and_focus",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "prompt_composing_and_submission",
+          "status": "failed",
+          "error": "Expected: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+        }
+      ],
+      "framework_report": {
+        "file": "input/input-edge/framework/framework-input.json",
+        "sha256": "e1b3fc0e52474b99f1fa1585744856264d2371fbe03c8605727a1d1eadfe1e93"
+      },
+      "runner_summary": {
+        "file": "input/input-edge/input-acceptance-summary.json",
+        "sha256": "c17a0878d084ba6819cf9c102e821226107c68fca0f916c9ace6bcee2bc95bb2"
+      }
+    },
+    "firefox": {
+      "trusted_w3c_status": "passed",
+      "last_stage": "complete",
+      "browser_report": {
+        "file": "input/input-firefox/browser/browser-input.json",
+        "sha256": "26418435d48a4f39e4d709b704accd8d7cb3c1d01e9515ec5fee3b388e5ff11d"
+      },
+      "framework_status": "failed",
+      "framework_scenarios": [
+        {
+          "id": "prompt_keyboard_menus_and_focus",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "prompt_composing_and_submission",
+          "status": "failed",
+          "error": "Expected: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+        }
+      ],
+      "framework_report": {
+        "file": "input/input-firefox/framework/framework-input.json",
+        "sha256": "1703ff89059baffa1c2a7de56e9b879bdf50d10c9f08cee93b9e0cfe6050e87e"
+      },
+      "runner_summary": {
+        "file": "input/input-firefox/input-acceptance-summary.json",
+        "sha256": "7f290144d2e27847a12590ebd41f63eb864a157ec69c8ed50ffd1f255835ad1d"
+      }
+    },
+    "safari": {
+      "trusted_w3c_status": "passed",
+      "last_stage": "complete",
+      "browser_report": {
+        "file": "input/input-safari/browser/browser-input.json",
+        "sha256": "ea93bf9333d85ef5c651c9a69043ae8024af6edddb1d820bcb5f40e1f91fbfd2"
+      },
+      "framework_status": "failed",
+      "framework_scenarios": [
+        {
+          "id": "prompt_keyboard_menus_and_focus",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "prompt_composing_and_submission",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "numeric_draft_cancel_adjust_and_bounds",
+          "status": "passed",
+          "error": null
+        },
+        {
+          "id": "synthetic_resize_preserves_prompt_draft",
+          "status": "failed",
+          "error": "Expected: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587 inventory draft\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: 0, end: 2))>\n  Actual: TextEditingValue:<TextEditingValue(text: \u2524\u4e2d\u6587 inventory draft\u251c, selection: TextSelection.collapsed(offset: 2, affinity: TextAffinity.downstream, isDirectional: false), composing: TextRange(start: -1, end: -1))>\n"
+        }
+      ],
+      "framework_report": {
+        "file": "input/input-safari/framework/framework-input.json",
+        "sha256": "60e38847231a95376699b0e18a22b8855e7d7b256d1560f6261be54d73b199d5"
+      },
+      "runner_summary": {
+        "file": "input/input-safari/input-acceptance-summary.json",
+        "sha256": "5b319037e023b4ae252c771e287f4420a193a4092573ec5d4d8872b5b5a7924a"
+      }
+    }
+  },
+  "native_input": {
+    "linux": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-linux/framework/framework-input.json",
+        "sha256": "850a5a55ac1a314aa3366d7a89d361594c7170181c3a6dc4f13c7c395f2d65ed"
+      }
+    },
+    "macos": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-macos/framework/framework-input.json",
+        "sha256": "0be8ab058404951fb9b640a761b0c32464734ef040cb95335dcea93f9066bd8f"
+      }
+    },
+    "windows": {
+      "status": "passed",
+      "report": {
+        "file": "input/input-windows/framework/framework-input.json",
+        "sha256": "984188da48141a7b8c0235530d4666d85c717fc3660fdc567db2b20f957e8887"
+      }
+    }
+  },
+  "android_journey": {
+    "passed": true,
+    "job_id": 100897860105,
+    "log": {
+      "file": "android-job.log",
+      "sha256": "6128fc2ca5f43bfc4d7976eab8352f1f0d8842a341997159caa8abba0be64a48"
+    },
+    "boundary": "Actual emulator completed the original full critical interaction journey, including observable copy feedback."
+  },
+  "native_bridge": {
+    "status": "native_bridge_initialization_verified",
+    "report": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-native-bridge/report.json",
+      "sha256": "74cceee762cc21f0cea1fb83a30fa35da7179153965926c5305776fa81419fff"
+    },
+    "stdout": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-native-bridge/stdout.log",
+      "sha256": "0dd6027dc18e30cea298d15cf522a8faf68a37faf5e2bf3bef0e820b4a645f94"
+    },
+    "stderr": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-native-bridge/stderr.log",
+      "sha256": "cda82cc0e0eb1622285f182bcaa45fccbe290d68563e19f49996743fec60ea61"
+    },
+    "report_format": "json.loads accepts the complete report file; runtime diagnostics remain in separate stdout/stderr logs",
+    "real_flview_cases": {
+      "natural_missing_parent": "verified",
+      "constructed_preexisting_parent": "verified",
+      "constructed_replacement_through_destroy": "verified"
+    },
+    "weak_finalization": "all verified"
+  },
+  "catalog_orca": {
+    "report": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-three-tasks/catalog-report.json",
+      "sha256": "6160d9f5e631afda589945bff6c3eaa9502dc622860fad4503a7fa731dca86d1"
+    },
+    "runner": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-run/runner.json",
+      "sha256": "955c57906d1d3f1fa56d42022b0eeb9760b037419bc657bbb1e288fbf5f75ea6"
+    },
+    "build": {
+      "file": "orca-pilot/catalog-orca-pilot-33832394064-1/catalog-orca-build/build-provenance.json",
+      "sha256": "dbf0f299e3aa18f25d6daf8b31edb84b9d3e91edf35308279e999b42fa8c6e57"
+    },
+    "accepted_tasks": 0,
+    "total_tasks": 3,
+    "manifest_file_digests_verified": 29,
+    "theme": "Native Theme system -> light with Space; six actual parent edges all reciprocal to same PID frame; a fresh WhereAmI handler generated old Theme system name.",
+    "thinking": "Actual native disclosure enabled=true; expanded/expandable=false remain the pinned SDK mapping boundary before Space.",
+    "search": "One Tab issued then inspector exceeded its existing eight-second bound; no query or selection was entered.",
+    "cleanup": "verified",
+    "sdk_boundary_document": "docs/beautiful-ui/quality_evidence/2026-09-04-linux-sdk-accessibility-boundaries.md"
+  },
+  "narrator": {
+    "report": {
+      "file": "input/real-at-windows-capability/report.json",
+      "sha256": "1fa676ff29f2c5d8f04bf1c46c4f544d64ff55e25564c692bef02b3ebb824b1e"
+    },
+    "boundary": "No usable WASAPI render endpoint 0x80070490; native UIA and ordinary keyboard response observed; AT acceptance not established."
+  },
+  "ordinary_orca_capability": {
+    "report": {
+      "file": "input/real-at-linux-capability/report.json",
+      "sha256": "9c7e35db66203e1f3d6632509deade8eee988c5e6184740618aa365da46155b6"
+    }
+  },
+  "safari_original_journey": "passed before independent framework and W3C suites",
+  "ios_journey": {
+    "passed": false,
+    "report": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/ios-journey.json",
+      "sha256": "14412c16dfa672c8c89e919819854f88895cffea899a27662eb585234ebc5bce"
+    },
+    "job_log": {
+      "file": "apple-job.log",
+      "sha256": "37296986422bfbfa4e7cdb0bbcced702fbe52f40a85bcf918c22a115335365fd"
+    },
+    "driver_log": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/native-flutter-driver.log",
+      "sha256": "81ab93f7812f46d7c5564503dc2478c78297570d9bc2c211923b6fe32d05e6e2"
+    },
+    "vm_query_capture": {
+      "file": "main/apple-native-journeys/shadcn_flutter/shadcn_flutter/packages/beautiful_ai_ui_catalog/artifacts/apple/vm-service-history-1.json",
+      "sha256": "bb3d0f292e2b2cefb3b460fad5606dd36e17a72e2f69ebc75c55fa1f3c01c5d8"
+    },
+    "vm_discovery_and_cleanup": "passed; VM service found, real Dart driver connected; exit0, 227bytes, host_group_clean and final_drain_complete true",
+    "failure": "Original full journey reached _runP2Journey catalog_journey_test.dart:269:3. FineTune width enterText(360), simulated Enter, pump left controller text 324 instead of expected 360. Root cause not established here; this is an application assertion result, not an external discovery failure."
+  },
+  "main_artifacts": [
+    {
+      "id": 9922424923,
+      "name": "apple-native-journeys",
+      "size_in_bytes": 381844,
+      "digest": "sha256:86e0fed3bedc21a53a386222230d989d667f81864eea35cd0b692328b5d6a7c0"
+    },
+    {
+      "id": 9922230512,
+      "name": "isolated-hosted-consumer",
+      "size_in_bytes": 10376,
+      "digest": "sha256:ed7d8f22d1198cc8a5e06a317d33385ff29a8fa3eb8a78df4f413fbf6b287852"
+    },
+    {
+      "id": 9922215788,
+      "name": "chrome-trusted-journey",
+      "size_in_bytes": 1128,
+      "digest": "sha256:da72fbc83a59ccd9547818d53924b97f4643eec5751ff3afb20343706633347d"
+    },
+    {
+      "id": 9922204927,
+      "name": "source-asset-audits",
+      "size_in_bytes": 882,
+      "digest": "sha256:74a019f671810a93eeac70d126ac8bf59e18ac5ba8e51fa5e529ddc6feace80d"
+    },
+    {
+      "id": 9922201304,
+      "name": "firefox-journey",
+      "size_in_bytes": 18781,
+      "digest": "sha256:05a430bfa00431c4d3a7e965721b643ca4629f52b4f23cb61aba5db0df95c21f"
+    },
+    {
+      "id": 9922190865,
+      "name": "windows-native-journey",
+      "size_in_bytes": 809,
+      "digest": "sha256:4d5d209ff8a0a8bb7374465540f1b0c86acaf7294964ffbb3ed11d90d34a8d6d"
+    },
+    {
+      "id": 9922189385,
+      "name": "edge-journey",
+      "size_in_bytes": 43558,
+      "digest": "sha256:3c40a31549313018b612b662d6ed8949a6b102c29237495cc14fe0dd1591e47b"
+    },
+    {
+      "id": 9922159114,
+      "name": "web-asset-audits",
+      "size_in_bytes": 6364,
+      "digest": "sha256:5e2539ac1117523662e186017ddeac485cdc7e251d2c140190a15dbd3e4abd87"
+    }
+  ],
+  "input_artifacts": [
+    {
+      "id": 9922264892,
+      "name": "input-safari",
+      "size_in_bytes": 13491,
+      "digest": "sha256:42b4f7d8625061bc8d7d2f9f73324347811a84dd9f2ec5debf3cd0a2421f1c0e"
+    },
+    {
+      "id": 9922202466,
+      "name": "input-windows",
+      "size_in_bytes": 15786,
+      "digest": "sha256:501951fc935c0364f04333d49130303410bf7f5247994e80dd686b970ea97cae"
+    },
+    {
+      "id": 9922188910,
+      "name": "input-edge",
+      "size_in_bytes": 73202,
+      "digest": "sha256:b033eb160cdd48e425cbd93b8d23b5440c499b18fa28bfffb2e282621f361fc1"
+    },
+    {
+      "id": 9922187922,
+      "name": "input-firefox",
+      "size_in_bytes": 34271,
+      "digest": "sha256:c55fc6bc23ebe569ee2f6348a989aadebb99d37dbae8421f050e66dd70213eb2"
+    },
+    {
+      "id": 9922175154,
+      "name": "input-chrome",
+      "size_in_bytes": 796760,
+      "digest": "sha256:b94d10863f17c4914ed0676de55fb6163bce12ba2d4de0c2022d4dff319d1423"
+    },
+    {
+      "id": 9922171742,
+      "name": "input-macos",
+      "size_in_bytes": 16271,
+      "digest": "sha256:ba2ccc837af17f2d0add716ab73344732912b38af9b41f2925271277e2066b24"
+    },
+    {
+      "id": 9922141378,
+      "name": "input-linux",
+      "size_in_bytes": 15785,
+      "digest": "sha256:6ae2557e25fa46edc6ae2c808d9addfce5193d77d73f911a5401f5a4c6a9ad86"
+    },
+    {
+      "id": 9922124508,
+      "name": "real-at-linux-capability",
+      "size_in_bytes": 489633,
+      "digest": "sha256:f12ca842b6ff6116080d2457da57b5818a6e87cb7c4c8203ee97029f43b2251a"
+    },
+    {
+      "id": 9922122872,
+      "name": "real-at-windows-capability",
+      "size_in_bytes": 3224,
+      "digest": "sha256:2a8fc06ba90ea4d2d5bd4feb7eb73de7de85087e3f6f949a1d74483e440fd6d2"
+    }
+  ],
+  "pilot_artifact": {
+    "id": 9922175875,
+    "name": "catalog-orca-pilot-33832394064-1",
+    "size_in_bytes": 765790,
+    "digest": "sha256:9d76e872df2d7069400d88b347b7449c6df0b48ab4e69e961bf7d92de09f3f10",
+    "metadata_source": {
+      "file": "orca-pilot-job.log",
+      "sha256": "6bf6592216eb4294dfc2280f68e7f5f806729b8ee6793833cd02febeb42c948e"
+    },
+    "manifest_file_digests_verified": 29
+  },
+  "artifact_digest_boundary": "Artifact digest fields are GitHub-reported ZIP digests. Downloaded ZIP digests independently verified for apple-native-journeys, input-linux, input-macos, input-windows and real-at-linux-capability. Every core-file reference hash is computed from the preserved downloaded file.",
+  "core_file_hashes_verified": 29,
+  "total_artifact_metadata_records": 18
+}
