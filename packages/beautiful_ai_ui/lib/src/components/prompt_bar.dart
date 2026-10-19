@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
 import '../foundation/failure.dart';
+import '../foundation/layout.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/action_control.dart';
 import '../implementation/controls/text_selection.dart';
@@ -149,6 +151,7 @@ final class BeautifulPromptBar extends StatefulWidget {
     required this.composerId,
     this.onSend,
     this.initialDraft = '',
+    this.onDraftChanged,
     this.initialAttachments = const <BeautifulPromptAttachment>[],
     this.sources = const <BeautifulPromptSource>[],
     this.commands = const <BeautifulPromptCommand>[],
@@ -160,6 +163,9 @@ final class BeautifulPromptBar extends StatefulWidget {
     this.onStopDictation,
     this.onConnectSource,
     this.variant = BeautifulPromptBarVariant.rounded,
+    this.density = BeautifulUiDensity.comfortable,
+    this.contextHeader,
+    this.footerLeading,
     this.tall = false,
     this.enabled = true,
     this.autofocus = false,
@@ -210,6 +216,10 @@ final class BeautifulPromptBar extends StatefulWidget {
   /// Draft seed, read only when [composerId] changes or on first mount.
   final String initialDraft;
 
+  /// Reports text edits and a successful send's cleared draft for host persistence.
+  /// Selection-only changes do not emit a value. This does not control the editor.
+  final ValueChanged<String>? onDraftChanged;
+
   /// Attachment seed, using the same lifetime as [initialDraft].
   final List<BeautifulPromptAttachment> initialAttachments;
 
@@ -247,6 +257,17 @@ final class BeautifulPromptBar extends StatefulWidget {
 
   /// Rounded card or pill shape.
   final BeautifulPromptBarVariant variant;
+
+  /// Visual density of controls. The editable area keeps its normal minimum.
+  final BeautifulUiDensity density;
+
+  /// Optional host-owned project or context row above the editable area.
+  /// It shares the composer's surface and does not own or reset its draft.
+  final Widget? contextHeader;
+
+  /// Optional host-owned controls before the built-in footer actions.
+  /// Controls wrap with the toolbar when space is constrained.
+  final Widget? footerLeading;
 
   /// Starts with a taller editor and controls on their own row.
   final bool tall;
@@ -501,6 +522,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
     if (_lastDraft != _draft.text) {
       _lastDraft = _draft.text;
       _draftRevision++;
+      widget.onDraftChanged?.call(_lastDraft);
       _dismissed = false;
       _explicitMenu = null;
       _active = 0;
@@ -909,6 +931,9 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
         )..layout();
         final expanded =
             widget.tall ||
+            widget.density == BeautifulUiDensity.compact ||
+            widget.contextHeader != null ||
+            widget.footerLeading != null ||
             width < 600 ||
             _draft.text.contains('\n') ||
             draftPainter.width + controlsWidth + 64 > width;
@@ -929,6 +954,8 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                 border: Border.all(
                   color: _focused
                       ? theme.colors.accent
+                      : widget.density == BeautifulUiDensity.compact
+                      ? theme.colors.line
                       : theme.colors.lineStrong,
                 ),
                 borderRadius: BorderRadius.circular(
@@ -936,7 +963,9 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                       ? (expanded || _attachments.isNotEmpty ? 24 : 999)
                       : theme.radii.card,
                 ),
-                boxShadow: theme.shadows.card,
+                boxShadow: widget.density == BeautifulUiDensity.compact
+                    ? const <BoxShadow>[]
+                    : theme.shadows.card,
               ),
               child: Padding(
                 padding: EdgeInsets.all(theme.spacing.sm),
@@ -944,6 +973,17 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    if (widget.contextHeader case final header?) ...<Widget>[
+                      Padding(
+                        key: const ValueKey('beautiful-prompt-context-header'),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: theme.spacing.sm,
+                          vertical: theme.spacing.xs,
+                        ),
+                        child: header,
+                      ),
+                      SizedBox(height: theme.spacing.xs),
+                    ],
                     if (_attachments.isNotEmpty) ...<Widget>[
                       Wrap(
                         spacing: theme.spacing.xs,
@@ -1030,16 +1070,22 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
             : widget.dictateLabel)
       : widget.dictateLabel;
 
-  Widget _buildControls(BeautifulUiThemeData theme, String modelLabel) => Wrap(
-    spacing: theme.spacing.xs,
-    runSpacing: theme.spacing.xs,
-    alignment: WrapAlignment.end,
-    children: <Widget>[
+  Widget _buildControls(BeautifulUiThemeData theme, String modelLabel) {
+    final compact = widget.density == BeautifulUiDensity.compact;
+    final leading = <Widget>[
+      if (widget.footerLeading case final leading?)
+        KeyedSubtree(
+          key: const ValueKey('beautiful-prompt-footer-leading'),
+          child: leading,
+        ),
       if (widget.onAttach != null || _sources.isNotEmpty)
         BeautifulActionControl(
           key: const ValueKey<String>('beautiful-prompt-add'),
           label: widget.addLabel,
+          leading: compact ? const _PromptGlyph() : null,
+          iconOnly: compact,
           minHeight: 48,
+          density: widget.density,
           maxLines: null,
           expanded: _menu == _PromptMenu.sources,
           tone: BeautifulActionTone.quiet,
@@ -1056,12 +1102,15 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
                 }
               : null,
         ),
+    ];
+    final trailing = <Widget>[
       if (_models.isNotEmpty)
         BeautifulActionControl(
           key: const ValueKey<String>('beautiful-prompt-model'),
           label: modelLabel,
           semanticLabel: '${widget.modelsLabel}: $modelLabel',
           minHeight: 48,
+          density: widget.density,
           maxLines: null,
           expanded: _menu == _PromptMenu.models,
           tone: BeautifulActionTone.quiet,
@@ -1088,6 +1137,7 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
           key: const ValueKey<String>('beautiful-prompt-dictate'),
           label: _dictationLabel,
           minHeight: 48,
+          density: widget.density,
           maxLines: null,
           selected: _dictating,
           tone: BeautifulActionTone.quiet,
@@ -1102,13 +1152,44 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
       BeautifulActionControl(
         key: const ValueKey<String>('beautiful-prompt-send'),
         label: _sending ? widget.sendingLabel : widget.sendLabel,
+        leading: compact ? const _PromptGlyph(arrow: true) : null,
+        iconOnly: compact,
         minHeight: 48,
+        density: widget.density,
         maxLines: null,
         tone: BeautifulActionTone.primary,
         onPressed: _canSend ? () => unawaited(_send()) : null,
       ),
-    ],
-  );
+    ];
+    if (compact) {
+      return _PromptFooter(
+        spacing: theme.spacing.xs,
+        textDirection: Directionality.of(context),
+        leading: Wrap(
+          spacing: theme.spacing.xs,
+          runSpacing: theme.spacing.xs,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: leading,
+        ),
+        trailing: Wrap(
+          spacing: theme.spacing.xs,
+          runSpacing: theme.spacing.xs,
+          alignment: WrapAlignment.end,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: trailing,
+        ),
+      );
+    }
+    return Wrap(
+      spacing: theme.spacing.xs,
+      runSpacing: theme.spacing.xs,
+      alignment: widget.footerLeading == null
+          ? WrapAlignment.end
+          : WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: <Widget>[...leading, ...trailing],
+    );
+  }
 
   Widget _buildEditor(BeautifulUiThemeData theme) => MergeSemantics(
     child: Semantics(
@@ -1411,4 +1492,166 @@ final class _BeautifulPromptBarState extends State<BeautifulPromptBar> {
       ),
     ),
   );
+}
+
+// Measure the host-owned leading slot instead of guessing a breakpoint from
+// its label. Both groups retain their natural width, then occupy separate rows
+// when needed; the final action stays at the trailing edge in either layout.
+final class _PromptFooter extends MultiChildRenderObjectWidget {
+  _PromptFooter({
+    required Widget leading,
+    required Widget trailing,
+    required this.spacing,
+    required this.textDirection,
+  }) : super(children: <Widget>[leading, trailing]);
+
+  final double spacing;
+  final TextDirection textDirection;
+
+  @override
+  _RenderPromptFooter createRenderObject(BuildContext context) =>
+      _RenderPromptFooter(spacing, textDirection);
+
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    _RenderPromptFooter renderObject,
+  ) {
+    renderObject
+      ..spacing = spacing
+      ..textDirection = textDirection
+      ..markNeedsLayout();
+  }
+}
+
+final class _PromptFooterParentData extends ContainerBoxParentData<RenderBox> {}
+
+final class _RenderPromptFooter extends RenderBox
+    with
+        ContainerRenderObjectMixin<RenderBox, _PromptFooterParentData>,
+        RenderBoxContainerDefaultsMixin<RenderBox, _PromptFooterParentData> {
+  _RenderPromptFooter(this.spacing, this.textDirection);
+
+  double spacing;
+  TextDirection textDirection;
+
+  @override
+  void setupParentData(RenderBox child) {
+    if (child.parentData is! _PromptFooterParentData) {
+      child.parentData = _PromptFooterParentData();
+    }
+  }
+
+  Size _sizeFor(BoxConstraints constraints, Size leading, Size trailing) {
+    final width = constraints.hasBoundedWidth
+        ? constraints.maxWidth
+        : leading.width + spacing + trailing.width;
+    final fits = leading.width + spacing + trailing.width <= width;
+    return constraints.constrain(
+      Size(
+        width,
+        fits
+            ? math.max(leading.height, trailing.height)
+            : leading.height + spacing + trailing.height,
+      ),
+    );
+  }
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) {
+    final childConstraints = BoxConstraints(maxWidth: constraints.maxWidth);
+    return _sizeFor(
+      constraints,
+      firstChild!.getDryLayout(childConstraints),
+      lastChild!.getDryLayout(childConstraints),
+    );
+  }
+
+  @override
+  void performLayout() {
+    final leading = firstChild!;
+    final trailing = lastChild!;
+    final childConstraints = BoxConstraints(maxWidth: constraints.maxWidth);
+    leading.layout(childConstraints, parentUsesSize: true);
+    trailing.layout(childConstraints, parentUsesSize: true);
+    size = _sizeFor(constraints, leading.size, trailing.size);
+    final fits =
+        leading.size.width + spacing + trailing.size.width <= size.width;
+    final leadingData = leading.parentData! as _PromptFooterParentData;
+    final trailingData = trailing.parentData! as _PromptFooterParentData;
+    leadingData.offset = Offset(
+      textDirection == TextDirection.ltr ? 0 : size.width - leading.size.width,
+      fits ? (size.height - leading.size.height) / 2 : 0,
+    );
+    trailingData.offset = Offset(
+      textDirection == TextDirection.ltr ? size.width - trailing.size.width : 0,
+      fits
+          ? (size.height - trailing.size.height) / 2
+          : leading.size.height + spacing,
+    );
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) =>
+      defaultPaint(context, offset);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
+}
+
+final class _PromptGlyph extends StatelessWidget {
+  const _PromptGlyph({this.arrow = false});
+
+  final bool arrow;
+
+  @override
+  Widget build(BuildContext context) {
+    final icon = IconTheme.of(context);
+    return CustomPaint(
+      size: Size.square(icon.size ?? 16),
+      painter: _PromptGlyphPainter(
+        color: icon.color ?? BeautifulUiTheme.of(context).colors.ink,
+        arrow: arrow,
+      ),
+    );
+  }
+}
+
+final class _PromptGlyphPainter extends CustomPainter {
+  const _PromptGlyphPainter({required this.color, required this.arrow});
+
+  final Color color;
+  final bool arrow;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.scale(size.width / 16, size.height / 16);
+    final path = Path()
+      ..moveTo(8, 12)
+      ..lineTo(8, 4);
+    if (arrow) {
+      path
+        ..moveTo(4, 8)
+        ..lineTo(8, 4)
+        ..lineTo(12, 8);
+    } else {
+      path
+        ..moveTo(4, 8)
+        ..lineTo(12, 8);
+    }
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.5
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_PromptGlyphPainter oldDelegate) =>
+      oldDelegate.color != color || oldDelegate.arrow != arrow;
 }

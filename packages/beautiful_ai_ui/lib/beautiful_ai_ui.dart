@@ -2,6 +2,7 @@
 library;
 
 export 'src/components/approval_card.dart';
+export 'src/components/button.dart';
 export 'src/components/chat.dart';
 export 'src/components/code_block.dart';
 export 'src/components/context_cards.dart';

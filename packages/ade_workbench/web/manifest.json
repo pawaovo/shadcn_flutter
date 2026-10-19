@@ -1,0 +1,11 @@
+{
+  "name": "ADE 智能工作台",
+  "short_name": "ADE",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fafafb",
+  "theme_color": "#fafafb",
+  "description": "基于 Beautiful AI UI 的响应式智能工作台",
+  "orientation": "any",
+  "prefer_related_applications": false
+}

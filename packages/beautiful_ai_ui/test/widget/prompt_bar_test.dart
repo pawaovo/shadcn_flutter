@@ -46,6 +46,64 @@ const _file = BeautifulPromptAttachment(
 );
 
 void main() {
+  testWidgets(
+    'composer slots and density changes retain the active IME draft',
+    (tester) async {
+      Widget composer(BeautifulUiDensity density) => BeautifulPromptBar(
+        composerId: 'owned',
+        density: density,
+        contextHeader: const Text('Design / main'),
+        footerLeading: const Text('Ask for approval'),
+        onSend: (_) {},
+      );
+      await tester.pumpWidget(_app(composer(BeautifulUiDensity.comfortable)));
+      final editor = tester.widget<EditableText>(find.byType(EditableText));
+      editor.focusNode.requestFocus();
+      const composing = TextEditingValue(
+        text: '输入中的草稿',
+        selection: TextSelection.collapsed(offset: 6),
+        composing: TextRange(start: 0, end: 6),
+      );
+      editor.controller.value = composing;
+      await tester.pump();
+      await tester.pumpWidget(_app(composer(BeautifulUiDensity.compact)));
+      await tester.pump();
+      final updated = tester.widget<EditableText>(find.byType(EditableText));
+      expect(updated.controller.value, composing);
+      expect(updated.focusNode, same(editor.focusNode));
+      expect(updated.focusNode.hasFocus, isTrue);
+      expect(find.text('Design / main'), findsOneWidget);
+      expect(find.text('Ask for approval'), findsOneWidget);
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pump();
+      expect(updated.controller.text, composing.text);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('reports text drafts and send clearing without selection noise', (
+    tester,
+  ) async {
+    final drafts = <String>[];
+    await tester.pumpWidget(
+      _app(
+        BeautifulPromptBar(
+          composerId: 'persistent',
+          onDraftChanged: drafts.add,
+          onSend: (_) {},
+        ),
+      ),
+    );
+    await tester.enterText(find.byType(EditableText), '保存草稿');
+    final field = _draft(tester);
+    field.selection = const TextSelection.collapsed(offset: 1);
+    await tester.pump();
+    expect(drafts, ['保存草稿']);
+    await tester.tap(find.text('Send'));
+    await tester.pump();
+    expect(drafts, ['保存草稿', '']);
+  });
+
   testWidgets('sends immutable trimmed text with selected model and files', (
     tester,
   ) async {

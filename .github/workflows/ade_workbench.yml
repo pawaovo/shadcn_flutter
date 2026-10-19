@@ -1,0 +1,51 @@
+name: ADE Workbench
+
+on:
+  pull_request:
+    paths:
+      - 'packages/ade_workbench/**'
+      - 'packages/beautiful_ai_ui/**'
+      - 'packages/shadcn_flutter/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/ade_workbench.yml'
+  push:
+    branches: [product/main]
+    paths:
+      - 'packages/ade_workbench/**'
+      - 'packages/beautiful_ai_ui/**'
+      - 'packages/shadcn_flutter/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/ade_workbench.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ade-workbench-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.0'
+          channel: stable
+          cache: true
+      - run: flutter pub get --enforce-lockfile
+      - run: dart format --output=none --set-exit-if-changed packages/ade_workbench/lib packages/ade_workbench/test
+      - run: flutter analyze --no-pub
+        working-directory: packages/ade_workbench
+      - run: flutter test --no-pub packages/ade_workbench/test
+      - run: flutter build web --release --no-pub
+        working-directory: packages/ade_workbench
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ade-workbench-web
+          path: packages/ade_workbench/build/web

@@ -18,6 +18,11 @@ acceptance remain separate; this is validation, not a package publication.
 
 ### Added
 
+- Add opt-in compact density and card/flat/embedded surfaces for workspace
+  composition, with stretchable code, tool and task content, quiet streaming
+  actions, Prompt Bar context/toolbar slots, and Sidebar Nav footer/rail hints.
+- Add public text and icon buttons sharing pointer, keyboard, Semantics,
+  tooltip and motion behavior; add a Catalog workspace-variants example.
 - Add a package-owned theme, responsive, motion, accessibility, and shadcn
   implementation seam (product/main, @pawaovo).
 - Add the four-variant Loading State, multi-platform Catalog, deterministic

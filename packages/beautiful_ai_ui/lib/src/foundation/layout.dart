@@ -1,3 +1,24 @@
+/// The visual spacing used by controls without changing their behavior.
+enum BeautifulUiDensity {
+  /// Roomy controls suitable for touch and existing module presentations.
+  comfortable,
+
+  /// Smaller controls for dense workspaces, retaining touch-sized hit targets.
+  compact,
+}
+
+/// How a module's surface participates in its surrounding layout.
+enum BeautifulSurfaceVariant {
+  /// A standalone surface with its own border, corners, and elevation.
+  card,
+
+  /// A flat surface without decorative elevation.
+  flat,
+
+  /// Content embedded in a surface provided by its parent.
+  embedded,
+}
+
 /// The adaptive presentation selected for the available width.
 enum BeautifulLayoutMode {
   /// A single-column presentation optimized for constrained widths.

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
+import '../foundation/layout.dart';
 import '../foundation/motion.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/action_control.dart';
@@ -167,8 +168,7 @@ final class BeautifulToolDiff {
 /// and during resizing. Escape closes the focused disclosure and returns focus
 /// to its trigger. Closed panels leave the focus and Semantics trees.
 ///
-/// Source Tool Chips has one presentation and no visual variants. Its scripted
-/// reveal timer is replaced by the host's immutable snapshots. Stable IDs keep
+/// Its scripted reveal timer is replaced by the host's immutable snapshots. Stable IDs keep
 /// open details attached to the correct operation when snapshots are reordered.
 /// The run starts expanded; all individual details start collapsed. Changing
 /// [initiallyExpanded] or [initiallyVisibleDiffCount] after mounting does not
@@ -202,12 +202,22 @@ final class BeautifulToolChips extends StatefulWidget {
     this.initiallyVisibleDiffCount = 3,
     this.showMoreLabel = 'Show more files',
     this.showLessLabel = 'Show fewer files',
+    this.density = BeautifulUiDensity.comfortable,
+    this.surfaceVariant = BeautifulSurfaceVariant.card,
+    this.maxWidth = 560,
     this.onExpandedChanged,
     this.onStepExpandedChanged,
     this.onDiffExpandedChanged,
   }) : steps = List<BeautifulToolStep>.unmodifiable(steps),
        diffs = List<BeautifulToolDiff>.unmodifiable(diffs) {
     _requireText(headerLabel, 'headerLabel');
+    if (maxWidth != null && (!maxWidth!.isFinite || maxWidth! <= 0)) {
+      throw ArgumentError.value(
+        maxWidth,
+        'maxWidth',
+        'must be positive and finite',
+      );
+    }
     _requireText(showMoreLabel, 'showMoreLabel');
     _requireText(showLessLabel, 'showLessLabel');
     _requireUniqueIds(this.steps.map((step) => step.id), 'steps');
@@ -241,6 +251,15 @@ final class BeautifulToolChips extends StatefulWidget {
 
   /// Localized action to restore the initial file-chip count.
   final String showLessLabel;
+
+  /// Compact rows use one summary line and disclose output only on activation.
+  final BeautifulUiDensity density;
+
+  /// Surface ownership; embedded rows omit their enclosing control borders.
+  final BeautifulSurfaceVariant surfaceVariant;
+
+  /// Maximum trace width; null uses the parent work surface's available width.
+  final double? maxWidth;
 
   /// Reports a user change to the run's disclosure.
   final ValueChanged<bool>? onExpandedChanged;
@@ -282,7 +301,7 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 560),
+      constraints: BoxConstraints(maxWidth: widget.maxWidth ?? double.infinity),
       child: SizedBox(
         width: double.infinity,
         child: FocusTraversalGroup(
@@ -292,6 +311,7 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
             semanticLabel: widget.headerLabel,
             expanded: _expanded,
             tone: BeautifulActionTone.quiet,
+            density: widget.density,
             onChanged: (expanded) {
               setState(() => _expanded = expanded);
               widget.onExpandedChanged?.call(expanded);
@@ -323,6 +343,11 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
                             : widget.showMoreLabel,
                         fullWidth: true,
                         minHeight: 48,
+                        density: widget.density,
+                        labelAlignment:
+                            widget.density == BeautifulUiDensity.compact
+                            ? TextAlign.start
+                            : TextAlign.center,
                         tone: BeautifulActionTone.quiet,
                         expanded: _showAllDiffs,
                         onPressed: () {
@@ -345,6 +370,7 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
     BeautifulToolStep step,
   ) {
     final statusLabel = step.statusLabel ?? _statusLabel(step.status);
+    final compact = widget.density == BeautifulUiDensity.compact;
     final color = switch (step.status) {
       BeautifulToolStatus.pending => theme.colors.inkMuted,
       BeautifulToolStatus.running => _readableTone(
@@ -369,8 +395,29 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
         padding: EdgeInsets.only(bottom: theme.spacing.xs),
         child: _ToolDisclosure(
           controlKey: ValueKey('beautiful-tool-step-control-${step.id}'),
-          label: step.label,
+          label: compact ? '${step.label} · ${step.chip}' : step.label,
           semanticLabel: '${step.label}, ${step.chip}',
+          density: widget.density,
+          tone: widget.surfaceVariant == BeautifulSurfaceVariant.embedded
+              ? BeautifulActionTone.quiet
+              : BeautifulActionTone.secondary,
+          statusIndicator: compact
+              ? Semantics(
+                  identifier: 'beautiful-tool-status-${step.id}',
+                  liveRegion: true,
+                  label: '${step.label}: $statusLabel',
+                  excludeSemantics: true,
+                  child: _ToolIcon(
+                    shape: switch (step.status) {
+                      BeautifulToolStatus.pending => _ToolIconShape.pending,
+                      BeautifulToolStatus.running => _ToolIconShape.running,
+                      BeautifulToolStatus.complete => _ToolIconShape.complete,
+                      BeautifulToolStatus.failed => _ToolIconShape.failed,
+                    },
+                    color: color,
+                  ),
+                )
+              : null,
           expanded: _openSteps.contains(step.id) && step.details.isNotEmpty,
           leading: _ToolIcon(
             shape: switch (step.kind) {
@@ -381,69 +428,79 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
             },
             color: theme.colors.inkMuted,
           ),
-          summary: Container(
-            width: double.infinity,
-            margin: EdgeInsetsDirectional.fromSTEB(
-              theme.spacing.md,
-              0,
-              theme.spacing.md,
-              theme.spacing.xs,
-            ),
-            padding: EdgeInsets.all(theme.spacing.sm),
-            decoration: BoxDecoration(
-              color: theme.colors.field,
-              borderRadius: BorderRadius.circular(theme.radii.chip),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ExcludeSemantics(
-                  child: Text(
-                    step.chip,
-                    style:
-                        (step.mono
-                                ? theme.typography.mono
-                                : theme.typography.body)
-                            .copyWith(
-                              color: theme.colors.inkMuted,
-                              fontSize: 12,
-                            ),
-                  ),
-                ),
-                Semantics(
+          summary: compact
+              ? Semantics(
                   identifier: 'beautiful-tool-status-${step.id}',
                   liveRegion: true,
                   label: '${step.label}: $statusLabel',
-                  excludeSemantics: true,
-                  child: Row(
+                  child: const SizedBox.shrink(),
+                )
+              : Container(
+                  width: double.infinity,
+                  margin: EdgeInsetsDirectional.fromSTEB(
+                    theme.spacing.md,
+                    0,
+                    theme.spacing.md,
+                    theme.spacing.xs,
+                  ),
+                  padding: EdgeInsets.all(theme.spacing.sm),
+                  decoration: BoxDecoration(
+                    color: theme.colors.field,
+                    borderRadius: BorderRadius.circular(theme.radii.chip),
+                  ),
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _ToolIcon(
-                        shape: switch (step.status) {
-                          BeautifulToolStatus.pending => _ToolIconShape.pending,
-                          BeautifulToolStatus.running => _ToolIconShape.running,
-                          BeautifulToolStatus.complete =>
-                            _ToolIconShape.complete,
-                          BeautifulToolStatus.failed => _ToolIconShape.failed,
-                        },
-                        color: color,
-                      ),
-                      SizedBox(width: theme.spacing.xs),
-                      Flexible(
+                      ExcludeSemantics(
                         child: Text(
-                          statusLabel,
-                          style: theme.typography.caption.copyWith(
-                            color: color,
-                          ),
+                          step.chip,
+                          style:
+                              (step.mono
+                                      ? theme.typography.mono
+                                      : theme.typography.body)
+                                  .copyWith(
+                                    color: theme.colors.inkMuted,
+                                    fontSize: 12,
+                                  ),
+                        ),
+                      ),
+                      Semantics(
+                        identifier: 'beautiful-tool-status-${step.id}',
+                        liveRegion: true,
+                        label: '${step.label}: $statusLabel',
+                        excludeSemantics: true,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _ToolIcon(
+                              shape: switch (step.status) {
+                                BeautifulToolStatus.pending =>
+                                  _ToolIconShape.pending,
+                                BeautifulToolStatus.running =>
+                                  _ToolIconShape.running,
+                                BeautifulToolStatus.complete =>
+                                  _ToolIconShape.complete,
+                                BeautifulToolStatus.failed =>
+                                  _ToolIconShape.failed,
+                              },
+                              color: color,
+                            ),
+                            SizedBox(width: theme.spacing.xs),
+                            Flexible(
+                              child: Text(
+                                statusLabel,
+                                style: theme.typography.caption.copyWith(
+                                  color: color,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
           onChanged: step.details.isEmpty
               ? null
               : (expanded) {
@@ -466,6 +523,7 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
     BeautifulToolDiff diff,
   ) {
     final countLabel = '+${diff.additions}  −${diff.deletions}';
+    final compact = widget.density == BeautifulUiDensity.compact;
     return Semantics(
       key: ValueKey('beautiful-tool-diff-${diff.id}'),
       container: true,
@@ -475,37 +533,46 @@ final class _BeautifulToolChipsState extends State<BeautifulToolChips> {
         padding: EdgeInsets.only(bottom: theme.spacing.xs),
         child: _ToolDisclosure(
           controlKey: ValueKey('beautiful-tool-diff-control-${diff.id}'),
-          label: diff.file,
+          label: compact ? '${diff.file}  $countLabel' : diff.file,
           semanticLabel: '${diff.file}, $countLabel',
+          density: widget.density,
+          tone: widget.surfaceVariant == BeautifulSurfaceVariant.embedded
+              ? BeautifulActionTone.quiet
+              : BeautifulActionTone.secondary,
           expanded: _openDiffs.contains(diff.id) && diff.lines.isNotEmpty,
-          summary: ExcludeSemantics(
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(
-                start: theme.spacing.md,
-                end: theme.spacing.md,
-                bottom: theme.spacing.xs,
-              ),
-              child: Wrap(
-                spacing: theme.spacing.sm,
-                children: [
-                  Text(
-                    '+${diff.additions}',
-                    textDirection: TextDirection.ltr,
-                    style: theme.typography.mono.copyWith(
-                      color: _readableTone(theme, theme.colors.success),
+          summary: compact
+              ? null
+              : ExcludeSemantics(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: theme.spacing.md,
+                      end: theme.spacing.md,
+                      bottom: theme.spacing.xs,
+                    ),
+                    child: Wrap(
+                      spacing: theme.spacing.sm,
+                      children: [
+                        Text(
+                          '+${diff.additions}',
+                          textDirection: TextDirection.ltr,
+                          style: theme.typography.mono.copyWith(
+                            color: _readableTone(theme, theme.colors.success),
+                          ),
+                        ),
+                        Text(
+                          '−${diff.deletions}',
+                          textDirection: TextDirection.ltr,
+                          style: theme.typography.mono.copyWith(
+                            color: _readableTone(
+                              theme,
+                              theme.colors.destructive,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    '−${diff.deletions}',
-                    textDirection: TextDirection.ltr,
-                    style: theme.typography.mono.copyWith(
-                      color: _readableTone(theme, theme.colors.destructive),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
           onChanged: diff.lines.isEmpty
               ? null
               : (expanded) {
@@ -534,6 +601,8 @@ final class _ToolDisclosure extends StatefulWidget {
     this.leading,
     this.summary,
     this.tone = BeautifulActionTone.secondary,
+    this.density = BeautifulUiDensity.comfortable,
+    this.statusIndicator,
   });
 
   final Key controlKey;
@@ -545,6 +614,8 @@ final class _ToolDisclosure extends StatefulWidget {
   final Widget? leading;
   final Widget? summary;
   final BeautifulActionTone tone;
+  final BeautifulUiDensity density;
+  final Widget? statusIndicator;
 
   @override
   State<_ToolDisclosure> createState() => _ToolDisclosureState();
@@ -642,13 +713,28 @@ final class _ToolDisclosureState extends State<_ToolDisclosure> {
                     semanticLabel: widget.semanticLabel,
                     fullWidth: true,
                     minHeight: 48,
-                    maxLines: null,
+                    density: widget.density,
+                    labelAlignment: widget.density == BeautifulUiDensity.compact
+                        ? TextAlign.start
+                        : TextAlign.center,
+                    maxLines: widget.density == BeautifulUiDensity.compact
+                        ? 1
+                        : null,
                     leading: widget.leading,
-                    trailing: _ToolIcon(
-                      shape: widget.expanded
-                          ? _ToolIconShape.chevronDown
-                          : _ToolIconShape.chevronEnd,
-                      color: theme.colors.inkMuted,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (widget.statusIndicator != null) ...[
+                          widget.statusIndicator!,
+                          SizedBox(width: theme.spacing.xs),
+                        ],
+                        _ToolIcon(
+                          shape: widget.expanded
+                              ? _ToolIconShape.chevronDown
+                              : _ToolIconShape.chevronEnd,
+                          color: theme.colors.inkMuted,
+                        ),
+                      ],
                     ),
                     expanded: widget.expanded,
                     tone: widget.tone,
@@ -659,13 +745,49 @@ final class _ToolDisclosureState extends State<_ToolDisclosure> {
                     label: widget.semanticLabel,
                     excludeSemantics: true,
                     child: Padding(
-                      padding: EdgeInsets.all(theme.spacing.md),
-                      child: Text(
-                        widget.label,
-                        style: theme.typography.label.copyWith(
-                          color: theme.colors.ink,
-                        ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: widget.density == BeautifulUiDensity.compact
+                            ? theme.spacing.sm
+                            : theme.spacing.md,
+                        vertical: widget.density == BeautifulUiDensity.compact
+                            ? theme.spacing.xs
+                            : theme.spacing.md,
                       ),
+                      child: widget.density == BeautifulUiDensity.comfortable
+                          ? Text(
+                              widget.label,
+                              style: theme.typography.label.copyWith(
+                                color: theme.colors.ink,
+                              ),
+                            )
+                          : Row(
+                              children: [
+                                if (widget.leading != null) ...[
+                                  widget.leading!,
+                                  SizedBox(width: theme.spacing.xs),
+                                ],
+                                Expanded(
+                                  child: Text(
+                                    widget.label,
+                                    maxLines:
+                                        widget.density ==
+                                            BeautifulUiDensity.compact
+                                        ? 1
+                                        : null,
+                                    overflow:
+                                        widget.density ==
+                                            BeautifulUiDensity.compact
+                                        ? TextOverflow.ellipsis
+                                        : TextOverflow.clip,
+                                    style: theme.typography.label.copyWith(
+                                      color: theme.colors.ink,
+                                    ),
+                                  ),
+                                ),
+                                if (widget.statusIndicator != null)
+                                  widget.statusIndicator!,
+                              ],
+                            ),
                     ),
                   ),
           ),

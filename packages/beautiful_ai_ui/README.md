@@ -84,6 +84,37 @@ writes leave through narrow callbacks. Recoverable asynchronous failures are
 reported through `BeautifulUiScope.onFailure`; networking, URL launching,
 agent orchestration, and persistence remain outside the package.
 
+## Workspace presentation
+
+Composite modules keep their existing presentation by default. Workspace hosts
+can opt into `BeautifulUiDensity.compact` for lighter toolbars and rows, and
+`BeautifulSurfaceVariant.embedded` when their container already owns the surface.
+Code Block, Tool Chips and Task Rows accept `maxWidth: null` to fill a work pane.
+
+```dart
+BeautifulCodeBlock.diff(
+  filename: 'workspace.dart',
+  lines: diffLines,
+  density: BeautifulUiDensity.compact,
+  surfaceVariant: BeautifulSurfaceVariant.embedded,
+  maxWidth: null,
+);
+```
+
+`BeautifulStreamingText(quiet: true)` keeps completed status in Semantics and
+reveals compact actions on desktop hover or focus; touch layouts retain visible
+actions. Prompt Bar accepts `contextHeader` and `footerLeading` slots without
+changing its draft, IME or send ownership. Sidebar Nav accepts the same density
+and surface options plus a host-owned `footer`.
+
+`BeautifulButton` and `BeautifulIconButton` share the modules' keyboard, focus,
+Semantics and motion behavior. Compact controls paint at 32 logical pixels;
+mobile platforms and viewports with a short side below 600 retain at least a
+44-pixel interactive target. This layout/platform heuristic is not hardware
+detection for desktop touchscreens. Comfortable density keeps the original
+targets. The Catalog homepage has an expandable **Workspace variants** example
+for comparing these options.
+
 ## Agent workflows
 
 The P2 modules keep execution and accepted business state in your application:

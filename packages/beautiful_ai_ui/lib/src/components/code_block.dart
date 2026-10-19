@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
 import '../foundation/failure.dart';
+import '../foundation/layout.dart';
 import '../foundation/motion.dart';
 import '../foundation/theme.dart';
+import '../implementation/controls/action_control.dart';
 
 /// A source run within a [BeautifulDiffLine].
 ///
@@ -137,7 +139,11 @@ final class BeautifulCodeBlock extends StatefulWidget {
     this.copiedLabel = 'Copied',
     this.copyFailedLabel = 'Copy failed',
     this.onCopy,
+    this.density = BeautifulUiDensity.comfortable,
+    this.surfaceVariant = BeautifulSurfaceVariant.card,
+    this.maxWidth = 420,
   }) : assert(filename.length > 0),
+       assert(maxWidth == null || (maxWidth > 0 && maxWidth < double.infinity)),
        assert(copyLabel.length > 0),
        assert(copyingLabel.length > 0),
        assert(copiedLabel.length > 0),
@@ -157,7 +163,11 @@ final class BeautifulCodeBlock extends StatefulWidget {
     super.key,
     required this.filename,
     required List<BeautifulDiffLine> lines,
+    this.density = BeautifulUiDensity.comfortable,
+    this.surfaceVariant = BeautifulSurfaceVariant.card,
+    this.maxWidth = 420,
   }) : assert(filename.length > 0),
+       assert(maxWidth == null || (maxWidth > 0 && maxWidth < double.infinity)),
        _mode = _BeautifulCodeBlockMode.diff,
        _code = null,
        _diffLines = lines,
@@ -169,6 +179,15 @@ final class BeautifulCodeBlock extends StatefulWidget {
 
   /// The filename displayed in the header.
   final String filename;
+
+  /// Control spacing; compact retains a full-size copy target on touch devices.
+  final BeautifulUiDensity density;
+
+  /// Whether this listing owns its card or is embedded in a parent surface.
+  final BeautifulSurfaceVariant surfaceVariant;
+
+  /// Maximum listing width; null lets the parent work surface set its width.
+  final double? maxWidth;
 
   /// The localized idle copy-action label.
   final String copyLabel;
@@ -221,21 +240,26 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
   @override
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
-    final radius = BorderRadius.circular(theme.radii.card);
+    final embedded = widget.surfaceVariant == BeautifulSurfaceVariant.embedded;
+    final radius = BorderRadius.circular(embedded ? 0 : theme.radii.card);
 
     return Semantics(
       container: true,
       explicitChildNodes: true,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 420),
+        constraints: BoxConstraints(
+          maxWidth: widget.maxWidth ?? double.infinity,
+        ),
         child: SizedBox(
           width: double.infinity,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: theme.colors.surface,
-              border: Border.all(color: theme.colors.line),
+              border: embedded ? null : Border.all(color: theme.colors.line),
               borderRadius: radius,
-              boxShadow: theme.shadows.card,
+              boxShadow: widget.surfaceVariant == BeautifulSurfaceVariant.card
+                  ? theme.shadows.card
+                  : null,
             ),
             child: ClipRRect(
               borderRadius: radius,
@@ -254,6 +278,7 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
   }
 
   Widget _buildHeader(BeautifulUiThemeData theme) {
+    final compact = widget.density == BeautifulUiDensity.compact;
     final trailing = widget._mode == _BeautifulCodeBlockMode.diff
         ? _buildDiffStatistics(theme)
         : _CodeCopyControl(
@@ -263,6 +288,7 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
             copiedLabel: widget.copiedLabel,
             copyFailedLabel: widget.copyFailedLabel,
             onCopy: widget.onCopy,
+            density: widget.density,
           );
 
     return DecoratedBox(
@@ -270,11 +296,11 @@ final class _BeautifulCodeBlockState extends State<BeautifulCodeBlock> {
         border: Border(bottom: BorderSide(color: theme.colors.line)),
       ),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 48),
+        constraints: BoxConstraints(minHeight: compact ? 36 : 48),
         child: Padding(
           padding: EdgeInsetsDirectional.only(
-            start: theme.spacing.lg,
-            end: theme.spacing.md,
+            start: compact ? theme.spacing.md : theme.spacing.lg,
+            end: compact ? theme.spacing.xs : theme.spacing.md,
           ),
           child: Row(
             children: <Widget>[
@@ -480,6 +506,7 @@ final class _CodeCopyControl extends StatefulWidget {
     required this.copiedLabel,
     required this.copyFailedLabel,
     required this.onCopy,
+    required this.density,
   });
 
   final String code;
@@ -488,6 +515,7 @@ final class _CodeCopyControl extends StatefulWidget {
   final String copiedLabel;
   final String copyFailedLabel;
   final FutureOr<void> Function(String code)? onCopy;
+  final BeautifulUiDensity density;
 
   @override
   State<_CodeCopyControl> createState() => _CodeCopyControlState();
@@ -549,6 +577,21 @@ final class _CodeCopyControlState extends State<_CodeCopyControl> {
             environment.motionPolicy == BeautifulMotionPolicy.none
         ? Duration.zero
         : theme.motion.quick;
+
+    if (widget.density == BeautifulUiDensity.compact) {
+      return Semantics(
+        liveRegion: isLive,
+        child: BeautifulActionControl(
+          label: label,
+          semanticLabel: label,
+          density: widget.density,
+          tone: BeautifulActionTone.quiet,
+          iconOnly: true,
+          leading: _CopyGlyph(feedback: _copyFeedback, color: foreground),
+          onPressed: enabled ? _copy : null,
+        ),
+      );
+    }
 
     return Semantics(
       container: true,

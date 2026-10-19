@@ -1,5 +1,8 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform;
+import 'package:flutter/material.dart' show Tooltip;
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -60,7 +63,12 @@ final class BeautifulSidebarWorkspace {
 @immutable
 final class BeautifulSidebarItem {
   /// Creates a destination with an optional localized count.
-  BeautifulSidebarItem({required this.id, required this.label, this.count}) {
+  BeautifulSidebarItem({
+    required this.id,
+    required this.label,
+    this.count,
+    this.icon,
+  }) {
     _requireText(id, 'id');
     _requireText(label, 'label');
     if (count != null) _requireText(count!, 'count');
@@ -74,6 +82,10 @@ final class BeautifulSidebarItem {
 
   /// Optional caller-formatted count, such as `3/10`.
   final String? count;
+
+  /// Optional destination icon, retained while selected and in the icon rail.
+  /// When omitted, the standard drawn destination icon is used.
+  final IconData? icon;
 }
 
 /// An immutable recent chat summary.
@@ -203,8 +215,11 @@ final class BeautifulSidebarNav extends StatefulWidget {
     this.onNewChat,
     this.footerLabel,
     this.onFooterPressed,
+    this.footer,
     this.labels = const BeautifulSidebarLabels(),
     this.presentation = BeautifulSidebarPresentation.adaptive,
+    this.density = BeautifulUiDensity.comfortable,
+    this.surfaceVariant = BeautifulSurfaceVariant.card,
     this.height = 600,
     this.expandedWidth = 288,
   }) : workspaces = List.unmodifiable(workspaces),
@@ -276,11 +291,22 @@ final class BeautifulSidebarNav extends StatefulWidget {
   /// Requests the optional footer action.
   final VoidCallback? onFooterPressed;
 
+  /// Optional host content anchored below the history and existing footer action.
+  /// The host may omit [footerLabel] to provide its own complete footer.
+  /// This content must also fit the rail when that presentation is enabled.
+  final Widget? footer;
+
   /// Localized controls and section names.
   final BeautifulSidebarLabels labels;
 
   /// Automatic presentation or an explicit choice for a host sidebar lane.
   final BeautifulSidebarPresentation presentation;
+
+  /// Visual row density. Compact rows retain larger targets on narrow screens.
+  final BeautifulUiDensity density;
+
+  /// Whether navigation supplies a card, a flat surface, or no outer surface.
+  final BeautifulSurfaceVariant surfaceVariant;
 
   /// Maximum panel height in logical pixels, at least 96.
   final double height;
@@ -509,10 +535,21 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                 width: width,
                 height: height,
                 child: DecoratedBox(
+                  key: const ValueKey('beautiful-sidebar-surface'),
                   decoration: BoxDecoration(
-                    color: theme.colors.surface,
-                    border: Border.all(color: theme.colors.lineStrong),
-                    borderRadius: BorderRadius.circular(theme.radii.card),
+                    color:
+                        widget.surfaceVariant ==
+                            BeautifulSurfaceVariant.embedded
+                        ? const Color(0x00000000)
+                        : theme.colors.surface,
+                    border:
+                        widget.surfaceVariant == BeautifulSurfaceVariant.card
+                        ? Border.all(color: theme.colors.lineStrong)
+                        : null,
+                    borderRadius:
+                        widget.surfaceVariant == BeautifulSurfaceVariant.card
+                        ? BorderRadius.circular(theme.radii.card)
+                        : null,
                   ),
                   child: PageStorage(
                     bucket: _pageStorage,
@@ -526,6 +563,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                               if (panel)
                                 Expanded(
                                   child: _SidebarButton(
+                                    density: widget.density,
                                     key: const ValueKey(
                                       'beautiful-sidebar-workspace',
                                     ),
@@ -556,6 +594,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                                 if (drawer && !panel)
                                   Expanded(
                                     child: _SidebarButton(
+                                      density: widget.density,
                                       key: const ValueKey(
                                         'beautiful-sidebar-toggle',
                                       ),
@@ -570,6 +609,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                                   SizedBox(
                                     width: 54,
                                     child: _SidebarButton(
+                                      density: widget.density,
                                       key: const ValueKey(
                                         'beautiful-sidebar-toggle',
                                       ),
@@ -632,6 +672,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
               children: [
                 if (drawer)
                   _SidebarButton(
+                    density: widget.density,
                     key: const ValueKey('beautiful-sidebar-toggle'),
                     label: widget.labels.close,
                     icon: _SidebarIconKind.close,
@@ -639,6 +680,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                     onPressed: () => _toggle(true, true),
                   ),
                 _SidebarButton(
+                  density: widget.density,
                   label: widget.labels.newChat,
                   focusNode: _newChatFocus,
                   icon: _SidebarIconKind.add,
@@ -663,6 +705,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                   _search(context)
                 else
                   _SidebarButton(
+                    density: widget.density,
                     key: const ValueKey('beautiful-sidebar-search-trigger'),
                     label: widget.labels.search,
                     icon: _SidebarIconKind.search,
@@ -703,6 +746,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
               itemBuilder: (context, index) {
                 final item = _matches[index];
                 return _SidebarButton(
+                  density: widget.density,
                   key: ValueKey('beautiful-sidebar-recent-${item.id}'),
                   label: item.label,
                   icon: _SidebarIconKind.chat,
@@ -723,27 +767,39 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
         Expanded(child: history),
         if (widget.footerLabel != null)
           Padding(padding: const EdgeInsets.all(4), child: _footer(false)),
+        if (widget.footer case final footer?)
+          Padding(padding: const EdgeInsets.all(4), child: footer),
       ],
     );
   }
 
-  Widget _rail(BuildContext context) => ListView(
-    key: const PageStorageKey('beautiful-sidebar-rail'),
-    padding: const EdgeInsets.symmetric(horizontal: 4),
+  Widget _rail(BuildContext context) => Column(
     children: [
-      _SidebarButton(
-        label: widget.labels.newChat,
-        focusNode: _newChatFocus,
-        icon: _SidebarIconKind.add,
-        iconOnly: true,
-        onPressed: widget.onNewChat,
+      Expanded(
+        child: ListView(
+          key: const PageStorageKey('beautiful-sidebar-rail'),
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          children: [
+            _SidebarButton(
+              density: widget.density,
+              label: widget.labels.newChat,
+              focusNode: _newChatFocus,
+              icon: _SidebarIconKind.add,
+              iconOnly: true,
+              onPressed: widget.onNewChat,
+            ),
+            for (final item in widget.items) _item(item, true),
+            if (widget.footerLabel != null) _footer(true),
+          ],
+        ),
       ),
-      for (final item in widget.items) _item(item, true),
-      if (widget.footerLabel != null) _footer(true),
+      if (widget.footer case final footer?)
+        Padding(padding: const EdgeInsets.all(4), child: footer),
     ],
   );
 
   Widget _item(BeautifulSidebarItem item, bool rail) => _SidebarButton(
+    density: widget.density,
     key: ValueKey('beautiful-sidebar-item-${item.id}'),
     label: item.label,
     focusNode: _itemFocus.putIfAbsent(item.id, FocusNode.new),
@@ -752,6 +808,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
         : '${item.label}, ${item.count}',
     count: item.count,
     icon: _SidebarIconKind.destination,
+    customIcon: item.icon,
     iconOnly: rail,
     selected: item.id == widget.selectedItemId,
     onPressed: widget.onItemSelected == null
@@ -760,6 +817,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
   );
 
   Widget _footer(bool rail) => _SidebarButton(
+    density: widget.density,
     label: widget.footerLabel!,
     focusNode: _footerFocus,
     icon: _SidebarIconKind.forward,
@@ -839,6 +897,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
           ),
         ),
         _SidebarButton(
+          density: widget.density,
           label: widget.labels.closeSearch,
           icon: _SidebarIconKind.close,
           onPressed: _closeSearch,
@@ -879,6 +938,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
           children: [
             for (final workspace in widget.workspaces)
               _SidebarButton(
+                density: widget.density,
                 key: ValueKey('beautiful-sidebar-workspace-${workspace.id}'),
                 label: workspace.label,
                 icon: _SidebarIconKind.workspace,
@@ -892,6 +952,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
               ),
             for (final (action, label) in actions)
               _SidebarButton(
+                density: widget.density,
                 label: label,
                 icon: action == BeautifulSidebarWorkspaceAction.create
                     ? _SidebarIconKind.add
@@ -904,6 +965,7 @@ final class _BeautifulSidebarNavState extends State<BeautifulSidebarNav> {
                       },
               ),
             _SidebarButton(
+              density: widget.density,
               label: widget.labels.closeWorkspaceMenu,
               icon: _SidebarIconKind.close,
               onPressed: _closeWorkspace,
@@ -922,16 +984,19 @@ final class _SidebarButton extends StatefulWidget {
     required this.icon,
     required this.onPressed,
     this.semanticLabel,
+    this.customIcon,
     this.count,
     this.focusNode,
     this.iconOnly = false,
     this.selected,
     this.expanded,
     this.maxLines,
+    this.density = BeautifulUiDensity.comfortable,
   });
 
   final String label;
   final _SidebarIconKind icon;
+  final IconData? customIcon;
   final VoidCallback? onPressed;
   final String? semanticLabel;
   final String? count;
@@ -940,6 +1005,7 @@ final class _SidebarButton extends StatefulWidget {
   final bool? selected;
   final bool? expanded;
   final int? maxLines;
+  final BeautifulUiDensity density;
 
   @override
   State<_SidebarButton> createState() => _SidebarButtonState();
@@ -965,6 +1031,15 @@ final class _SidebarButtonState extends State<_SidebarButton> {
     final theme = BeautifulUiTheme.of(context);
     final enabled = widget.onPressed != null;
     final environment = BeautifulUiEnvironment.of(context);
+    final compact = widget.density == BeautifulUiDensity.compact;
+    final touchLayout = switch (defaultTargetPlatform) {
+      TargetPlatform.android ||
+      TargetPlatform.iOS ||
+      TargetPlatform.fuchsia => true,
+      _ => (MediaQuery.maybeSizeOf(context)?.shortestSide ?? 0) < 600,
+    };
+    final compactTarget = compact && !touchLayout;
+    final iconSize = compact ? 16.0 : 20.0;
     final duration =
         (MediaQuery.maybeOf(context)?.disableAnimations ?? false) ||
             environment.motionPolicy == BeautifulMotionPolicy.none ||
@@ -982,7 +1057,7 @@ final class _SidebarButtonState extends State<_SidebarButton> {
         Color.alphaBlend(background, theme.colors.surface),
       );
     }
-    return Semantics(
+    final control = Semantics(
       label: widget.semanticLabel ?? widget.label,
       button: true,
       enabled: enabled,
@@ -1021,8 +1096,14 @@ final class _SidebarButtonState extends State<_SidebarButton> {
           child: AnimatedContainer(
             duration: duration,
             curve: theme.motion.outCurve,
-            constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            constraints: BoxConstraints(
+              minHeight: compactTarget ? 32 : 48,
+              minWidth: compactTarget ? 32 : 48,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: compact ? 4 : 10,
+            ),
             decoration: BoxDecoration(
               color: background,
               border: Border.all(
@@ -1036,16 +1117,24 @@ final class _SidebarButtonState extends State<_SidebarButton> {
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.start,
               children: [
-                CustomPaint(
-                  size: const Size.square(20),
-                  painter: _SidebarIconPainter(
-                    widget.selected == true
-                        ? _SidebarIconKind.selected
-                        : widget.icon,
-                    enabled ? theme.colors.ink : theme.colors.inkMuted,
-                    Directionality.of(context),
+                if (widget.customIcon != null)
+                  Icon(
+                    widget.customIcon,
+                    size: iconSize,
+                    color: enabled ? theme.colors.ink : theme.colors.inkMuted,
+                  )
+                else
+                  CustomPaint(
+                    size: Size.square(iconSize),
+                    painter: _SidebarIconPainter(
+                      widget.selected == true &&
+                              widget.icon != _SidebarIconKind.destination
+                          ? _SidebarIconKind.selected
+                          : widget.icon,
+                      enabled ? theme.colors.ink : theme.colors.inkMuted,
+                      Directionality.of(context),
+                    ),
                   ),
-                ),
                 if (!widget.iconOnly) ...[
                   const SizedBox(width: 8),
                   Expanded(
@@ -1068,6 +1157,21 @@ final class _SidebarButtonState extends State<_SidebarButton> {
           ),
         ),
       ),
+    );
+    if (!widget.iconOnly || Overlay.maybeOf(context) == null) return control;
+    return Tooltip(
+      message: widget.semanticLabel ?? widget.label,
+      excludeFromSemantics: true,
+      preferBelow: false,
+      decoration: BoxDecoration(
+        color: theme.colors.tooltipBackground,
+        border: Border.all(color: theme.colors.tooltipBorder),
+        borderRadius: BorderRadius.circular(theme.radii.control),
+      ),
+      textStyle: theme.typography.caption.copyWith(
+        color: theme.colors.tooltipForeground,
+      ),
+      child: control,
     );
   }
 }

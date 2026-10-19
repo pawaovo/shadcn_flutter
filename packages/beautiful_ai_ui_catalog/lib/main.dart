@@ -10,6 +10,7 @@ import 'host_file_attachments.dart';
 
 part 'p2_examples.dart';
 part 'p3_examples.dart';
+part 'workspace_variants.dart';
 
 SemanticsHandle? _semanticsHandle;
 
@@ -273,6 +274,8 @@ final class _CatalogHomeState extends State<_CatalogHome> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
+                          const _CatalogWorkspaceVariants(),
+                          SizedBox(height: theme.spacing.lg),
                           _CatalogGrid(children: _cards()),
                           SizedBox(height: theme.spacing.lg),
                           const _CatalogP3Examples(),

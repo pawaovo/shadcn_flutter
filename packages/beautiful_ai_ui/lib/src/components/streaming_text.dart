@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
 import '../foundation/failure.dart';
+import '../foundation/layout.dart';
+import '../foundation/motion.dart';
 import '../foundation/theme.dart';
 import '../implementation/controls/action_control.dart';
 import '../implementation/streaming/stream_content.dart';
@@ -192,6 +194,8 @@ final class BeautifulStreamingText extends StatefulWidget {
     this.onFeedback,
     this.onCopy,
     this.onRetry,
+    this.quiet = false,
+    this.density = BeautifulUiDensity.comfortable,
   }) : content = List.unmodifiable(content),
        sources = List.unmodifiable(sources),
        followUps = List.unmodifiable(followUps) {
@@ -234,6 +238,14 @@ final class BeautifulStreamingText extends StatefulWidget {
   /// Host-owned generation lifecycle.
   final BeautifulStreamingStatus status;
 
+  /// Transcript presentation: completed status remains available to assistive
+  /// technology while its visible label is omitted. Actions reveal on pointer
+  /// hover or keyboard focus; touch-sized viewports keep them visible.
+  final bool quiet;
+
+  /// Optional compact completion actions, without changing selection or copy.
+  final BeautifulUiDensity density;
+
   /// Immutable source metadata indexed by citations.
   final List<BeautifulStreamingSource> sources;
 
@@ -275,6 +287,8 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
   var _copyState = _CopyState.idle;
   var _retryPending = false;
   var _generation = 0;
+  var _hovered = false;
+  var _actionsFocused = false;
 
   String get _plainText {
     final indexes = {
@@ -392,7 +406,10 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
       _CopyState.copied => labels.copied,
       _CopyState.failed => labels.copyFailed,
     };
-    return Column(
+    final compact =
+        widget.quiet || widget.density == BeautifulUiDensity.compact;
+    final hideStatus = widget.quiet && done;
+    final content = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -403,14 +420,16 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
           label: _copyState == _CopyState.idle
               ? statusLabel
               : '$statusLabel. $copyLabel',
-          child: Text(
-            statusLabel,
-            style: theme.typography.caption.copyWith(
-              color: theme.colors.inkMuted,
-            ),
-          ),
+          child: hideStatus
+              ? const SizedBox.shrink()
+              : Text(
+                  statusLabel,
+                  style: theme.typography.caption.copyWith(
+                    color: theme.colors.inkMuted,
+                  ),
+                ),
         ),
-        SizedBox(height: theme.spacing.sm),
+        if (!hideStatus) SizedBox(height: theme.spacing.sm),
         BeautifulStreamContent(
           key: ValueKey(widget.id),
           copyLabel: labels.copy,
@@ -445,42 +464,57 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
         ],
         if (settled) ...[
           SizedBox(height: theme.spacing.sm),
-          Wrap(
-            spacing: theme.spacing.xs,
-            runSpacing: theme.spacing.xs,
-            children: [
-              if (_plainText.isNotEmpty)
-                BeautifulActionControl(
-                  label: copyLabel,
-                  minHeight: 48,
-                  onPressed: _copyState == _CopyState.pending
-                      ? null
-                      : () => _copy(_plainText),
-                ),
-              if (widget.onRetry != null)
-                BeautifulActionControl(
-                  label: _retryPending ? labels.retrying : labels.retry,
-                  minHeight: 48,
-                  onPressed: _retryPending ? null : _retry,
-                ),
-              if (done && widget.onFeedback != null)
-                for (final feedback in BeautifulStreamingFeedback.values)
-                  BeautifulActionControl(
-                    label: feedback == BeautifulStreamingFeedback.positive
-                        ? labels.positiveFeedback
-                        : labels.negativeFeedback,
-                    minHeight: 48,
-                    selected: widget.feedback == feedback,
-                    onPressed: () => widget.onFeedback!(feedback),
+          _actionBar(
+            context,
+            theme,
+            Wrap(
+              spacing: theme.spacing.xs,
+              runSpacing: theme.spacing.xs,
+              children: [
+                if (_plainText.isNotEmpty)
+                  _action(
+                    label: copyLabel,
+                    glyph: _copyState == _CopyState.copied
+                        ? _StreamingGlyph.check
+                        : _copyState == _CopyState.failed
+                        ? _StreamingGlyph.error
+                        : _StreamingGlyph.copy,
+                    compact: compact,
+                    onPressed: _copyState == _CopyState.pending
+                        ? null
+                        : () => _copy(_plainText),
                   ),
-              if (widget.sources.isNotEmpty)
-                BeautifulActionControl(
-                  label: '${labels.sources} (${widget.sources.length})',
-                  minHeight: 48,
-                  expanded: _sourcesOpen,
-                  onPressed: () => setState(() => _sourcesOpen = !_sourcesOpen),
-                ),
-            ],
+                if (widget.onRetry != null)
+                  _action(
+                    label: _retryPending ? labels.retrying : labels.retry,
+                    glyph: _StreamingGlyph.retry,
+                    compact: compact,
+                    onPressed: _retryPending ? null : _retry,
+                  ),
+                if (done && widget.onFeedback != null)
+                  for (final feedback in BeautifulStreamingFeedback.values)
+                    _action(
+                      label: feedback == BeautifulStreamingFeedback.positive
+                          ? labels.positiveFeedback
+                          : labels.negativeFeedback,
+                      glyph: feedback == BeautifulStreamingFeedback.positive
+                          ? _StreamingGlyph.positive
+                          : _StreamingGlyph.negative,
+                      compact: compact,
+                      selected: widget.feedback == feedback,
+                      onPressed: () => widget.onFeedback!(feedback),
+                    ),
+                if (widget.sources.isNotEmpty)
+                  _action(
+                    label: '${labels.sources} (${widget.sources.length})',
+                    glyph: _StreamingGlyph.sources,
+                    compact: compact,
+                    expanded: _sourcesOpen,
+                    onPressed: () =>
+                        setState(() => _sourcesOpen = !_sourcesOpen),
+                  ),
+              ],
+            ),
           ),
           if (_sourcesOpen) ...[
             SizedBox(height: theme.spacing.sm),
@@ -521,6 +555,75 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
         ],
       ],
     );
+    if (!widget.quiet) return content;
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: content,
+    );
+  }
+
+  Widget _action({
+    required String label,
+    required _StreamingGlyph glyph,
+    required bool compact,
+    required VoidCallback? onPressed,
+    bool? selected,
+    bool? expanded,
+  }) => BeautifulActionControl(
+    label: label,
+    semanticLabel: label,
+    minHeight: compact ? 32 : 48,
+    density: compact ? BeautifulUiDensity.compact : widget.density,
+    iconOnly: compact,
+    tone: compact ? BeautifulActionTone.quiet : BeautifulActionTone.secondary,
+    leading: compact
+        ? CustomPaint(
+            size: const Size.square(16),
+            painter: _StreamingActionPainter(
+              glyph,
+              BeautifulUiTheme.of(context).colors.inkMuted,
+            ),
+          )
+        : null,
+    selected: selected,
+    expanded: expanded,
+    onPressed: onPressed,
+  );
+
+  Widget _actionBar(
+    BuildContext context,
+    BeautifulUiThemeData theme,
+    Widget child,
+  ) {
+    if (!widget.quiet) return child;
+    final size = MediaQuery.maybeSizeOf(context);
+    final mobile =
+        defaultTargetPlatform == TargetPlatform.android ||
+        defaultTargetPlatform == TargetPlatform.iOS ||
+        (size != null && size.shortestSide < 600);
+    final visible =
+        mobile ||
+        _hovered ||
+        _actionsFocused ||
+        _sourcesOpen ||
+        _copyState != _CopyState.idle ||
+        _retryPending;
+    final environment = BeautifulUiEnvironment.of(context);
+    final reduced =
+        (MediaQuery.maybeOf(context)?.disableAnimations ?? false) ||
+        environment.motionPolicy == BeautifulMotionPolicy.none ||
+        environment.motionPolicy == BeautifulMotionPolicy.reduced;
+    return Focus(
+      skipTraversal: true,
+      includeSemantics: false,
+      onFocusChange: (value) => setState(() => _actionsFocused = value),
+      child: AnimatedOpacity(
+        opacity: visible ? 1 : 0,
+        duration: reduced ? Duration.zero : theme.motion.quick,
+        child: child,
+      ),
+    );
   }
 
   Widget _source(
@@ -545,4 +648,122 @@ final class _BeautifulStreamingTextState extends State<BeautifulStreamingText> {
       onPressed: () => widget.onSourcePressed!(source),
     );
   }
+}
+
+enum _StreamingGlyph { copy, retry, positive, negative, sources, check, error }
+
+final class _StreamingActionPainter extends CustomPainter {
+  const _StreamingActionPainter(this.glyph, this.color);
+  final _StreamingGlyph glyph;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.save();
+    canvas.scale(size.width / 16, size.height / 16);
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.3
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+    switch (glyph) {
+      case _StreamingGlyph.copy:
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(
+            const Rect.fromLTWH(5, 5, 8, 9),
+            const Radius.circular(1.5),
+          ),
+          paint,
+        );
+        canvas.drawPath(
+          Path()
+            ..moveTo(3, 10)
+            ..lineTo(2, 10)
+            ..lineTo(2, 2)
+            ..lineTo(10, 2)
+            ..lineTo(10, 3),
+          paint,
+        );
+      case _StreamingGlyph.retry:
+        canvas.drawArc(
+          const Rect.fromLTWH(3, 3, 10, 10),
+          0.4,
+          5.1,
+          false,
+          paint,
+        );
+        canvas.drawPath(
+          Path()
+            ..moveTo(12, 2)
+            ..lineTo(12, 6)
+            ..lineTo(8, 6),
+          paint,
+        );
+      case _StreamingGlyph.positive:
+      case _StreamingGlyph.negative:
+        if (glyph == _StreamingGlyph.negative) {
+          canvas.translate(0, 16);
+          canvas.scale(1, -1);
+        }
+        canvas.drawPath(
+          Path()
+            ..moveTo(5, 7)
+            ..lineTo(8, 2)
+            ..quadraticBezierTo(11, 2, 9, 7)
+            ..lineTo(13, 7)
+            ..quadraticBezierTo(14, 7, 13, 10)
+            ..lineTo(12, 13)
+            ..lineTo(5, 13)
+            ..close(),
+          paint,
+        );
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(
+            const Rect.fromLTWH(2, 7, 3, 6),
+            const Radius.circular(0.8),
+          ),
+          paint,
+        );
+      case _StreamingGlyph.sources:
+        canvas.drawPath(
+          Path()
+            ..moveTo(2, 3)
+            ..lineTo(7, 4)
+            ..lineTo(8, 5)
+            ..lineTo(9, 4)
+            ..lineTo(14, 3)
+            ..lineTo(14, 12)
+            ..lineTo(9, 13)
+            ..lineTo(8, 14)
+            ..lineTo(7, 13)
+            ..lineTo(2, 12)
+            ..close()
+            ..moveTo(8, 5)
+            ..lineTo(8, 14),
+          paint,
+        );
+      case _StreamingGlyph.check:
+        canvas.drawPath(
+          Path()
+            ..moveTo(3, 8)
+            ..lineTo(6.5, 11.5)
+            ..lineTo(13, 4.5),
+          paint,
+        );
+      case _StreamingGlyph.error:
+        canvas.drawCircle(const Offset(8, 8), 6, paint);
+        canvas.drawLine(const Offset(8, 4.5), const Offset(8, 8.5), paint);
+        canvas.drawCircle(
+          const Offset(8, 11),
+          0.6,
+          paint..style = PaintingStyle.fill,
+        );
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_StreamingActionPainter oldDelegate) =>
+      oldDelegate.glyph != glyph || oldDelegate.color != color;
 }

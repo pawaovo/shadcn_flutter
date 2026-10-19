@@ -1,4 +1,4 @@
-import 'dart:ui' show Tristate;
+import 'dart:ui' show PointerDeviceKind, Tristate;
 
 import 'package:beautiful_ai_ui/beautiful_ai_ui.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +19,12 @@ BeautifulSidebarNav _sidebar({
   VoidCallback? onFooter,
   String? selectedRecentId,
   String selectedItemId = 'home',
+  IconData? homeIcon,
   String workspaceLabel = 'Research workspace',
   BeautifulSidebarLabels labels = const BeautifulSidebarLabels(),
+  BeautifulUiDensity density = BeautifulUiDensity.comfortable,
+  BeautifulSurfaceVariant surfaceVariant = BeautifulSurfaceVariant.card,
+  Widget? footer,
 }) => BeautifulSidebarNav(
   key: const ValueKey('sidebar'),
   workspaces: [
@@ -29,7 +33,7 @@ BeautifulSidebarNav _sidebar({
   ],
   selectedWorkspaceId: 'research',
   items: [
-    BeautifulSidebarItem(id: 'home', label: 'Home'),
+    BeautifulSidebarItem(id: 'home', label: 'Home', icon: homeIcon),
     BeautifulSidebarItem(id: 'invite', label: 'Invite users', count: '3/10'),
   ],
   recents:
@@ -53,6 +57,9 @@ BeautifulSidebarNav _sidebar({
   onFooterPressed: onFooter ?? () {},
   presentation: presentation,
   labels: labels,
+  density: density,
+  surfaceVariant: surfaceVariant,
+  footer: footer,
 );
 
 Widget _app(
@@ -71,6 +78,72 @@ Widget _app(
 );
 
 void main() {
+  testWidgets('compact embedded navigation keeps search and footer available', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _app(
+        _sidebar(
+          density: BeautifulUiDensity.compact,
+          surfaceVariant: BeautifulSurfaceVariant.embedded,
+          footer: const Text('Account settings'),
+        ),
+      ),
+    );
+    final home = find.byKey(const ValueKey('beautiful-sidebar-item-home'));
+    expect(tester.getSize(home).height, lessThan(48));
+    expect(find.text('Account settings'), findsOneWidget);
+    final surface = tester.widget<DecoratedBox>(
+      find.byKey(const ValueKey('beautiful-sidebar-surface')),
+    );
+    final decoration = surface.decoration as BoxDecoration;
+    expect(decoration.border, isNull);
+    expect(decoration.color, const Color(0x00000000));
+    await tester.tap(find.text('Search chat history'));
+    await tester.pump();
+    await tester.enterText(find.byType(EditableText), 'Alpha');
+    await tester.pump();
+    await tester.pumpWidget(
+      _app(_sidebar(footer: const Text('Account settings'))),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Alpha project'), findsOneWidget);
+    expect(find.text('Beta project'), findsNothing);
+    expect(find.text('Account settings'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  }, variant: const TargetPlatformVariant({TargetPlatform.macOS}));
+
+  testWidgets('rail tooltip reveals its complete destination label', (
+    tester,
+  ) async {
+    final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await tester.pumpWidget(
+      _app(
+        Overlay(
+          initialEntries: [
+            OverlayEntry(
+              builder: (_) => _sidebar(
+                presentation: BeautifulSidebarPresentation.rail,
+                density: BeautifulUiDensity.compact,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    await mouse.addPointer();
+    await mouse.moveTo(
+      tester.getCenter(
+        find.byKey(const ValueKey('beautiful-sidebar-item-home')),
+      ),
+    );
+    await tester.pumpAndSettle(const Duration(milliseconds: 200));
+    expect(find.text('Home'), findsOneWidget);
+    await mouse.removePointer();
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
+
   test(
     'snapshots reject invalid identities and keep immutable collections',
     () {
@@ -168,6 +241,68 @@ void main() {
             .isSelected,
         Tristate.isTrue,
       );
+      semantics.dispose();
+    },
+  );
+
+  testWidgets(
+    'destination icons retain selection, labels and keyboard use in the rail',
+    (tester) async {
+      final semantics = tester.ensureSemantics();
+      const homeIcon = IconData(0xe88a, fontFamily: 'MaterialIcons');
+      final selections = <BeautifulSidebarItem>[];
+      for (final presentation in [
+        BeautifulSidebarPresentation.expanded,
+        BeautifulSidebarPresentation.rail,
+        BeautifulSidebarPresentation.expanded,
+      ]) {
+        await tester.pumpWidget(
+          _app(
+            _sidebar(
+              presentation: presentation,
+              homeIcon: homeIcon,
+              onItem: selections.add,
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final destination = find.byKey(
+          const ValueKey('beautiful-sidebar-item-home'),
+        );
+        expect(
+          find.descendant(of: destination, matching: find.byIcon(homeIcon)),
+          findsOneWidget,
+        );
+        final data = tester
+            .getSemantics(find.bySemanticsLabel('Home'))
+            .getSemanticsData();
+        expect(data.label, 'Home');
+        expect(data.flagsCollection.isSelected, Tristate.isTrue);
+        expect(data.flagsCollection.isButton, isTrue);
+        final fallback = find.byKey(
+          const ValueKey('beautiful-sidebar-item-invite'),
+        );
+        expect(
+          find.descendant(of: fallback, matching: find.byType(Icon)),
+          findsNothing,
+        );
+        final focus = tester
+            .widget<FocusableActionDetector>(
+              find.descendant(
+                of: destination,
+                matching: find.byType(FocusableActionDetector),
+              ),
+            )
+            .focusNode!;
+        focus.requestFocus();
+        await tester.pump();
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+        expect(selections.last.id, 'home');
+        expect(selections.last.icon, homeIcon);
+        expect(tester.takeException(), isNull);
+      }
+      expect(selections, hasLength(3));
       semantics.dispose();
     },
   );

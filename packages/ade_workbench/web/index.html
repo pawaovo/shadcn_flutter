@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="ADE 智能工作台：会话、文件与变更，多端自适应。">
+  <meta name="theme-color" content="#fafafb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ADE">
+  <title>ADE · 智能工作台</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; height: 100%; background: #fafafb; }
+    #loading { height: 100%; display: grid; place-content: center; gap: 16px; text-align: center; font: 14px system-ui, sans-serif; color: #62656b; }
+    #loading strong { font-size: 24px; letter-spacing: -1px; color: #1f2124; }
+  </style>
+</head>
+<body>
+  <div id="loading" role="status"><strong>ADE</strong><span>正在准备你的工作台…</span></div>
+  <script>
+    window.addEventListener('flutter-first-frame', () => document.getElementById('loading')?.remove());
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

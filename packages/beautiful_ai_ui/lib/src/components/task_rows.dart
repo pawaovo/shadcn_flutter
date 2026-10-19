@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../foundation/environment.dart';
 import '../foundation/failure.dart';
+import '../foundation/layout.dart';
 import '../foundation/motion.dart';
 import '../foundation/scope.dart';
 import '../foundation/theme.dart';
@@ -158,6 +160,9 @@ final class BeautifulTaskRows extends StatelessWidget {
     super.key,
     required List<BeautifulTaskRow> rows,
     this.variant = BeautifulTaskRowsVariant.capsules,
+    this.density = BeautifulUiDensity.comfortable,
+    this.surfaceVariant = BeautifulSurfaceVariant.card,
+    this.maxWidth = 440,
     this.pendingLabel = 'Pending',
     this.runningLabel = 'Running',
     this.completedLabel = 'Completed',
@@ -167,7 +172,8 @@ final class BeautifulTaskRows extends StatelessWidget {
     this.stepLabel = 'Step',
     this.emptyLabel = 'No tasks',
     this.onRetry,
-  }) : assert(rows.map((row) => row.id).toSet().length == rows.length),
+  }) : assert(maxWidth == null || (maxWidth > 0 && maxWidth.isFinite)),
+       assert(rows.map((row) => row.id).toSet().length == rows.length),
        assert(pendingLabel.isNotEmpty),
        assert(runningLabel.isNotEmpty),
        assert(completedLabel.isNotEmpty),
@@ -183,6 +189,15 @@ final class BeautifulTaskRows extends StatelessWidget {
 
   /// Separate capsules or a contiguous list card.
   final BeautifulTaskRowsVariant variant;
+
+  /// Row spacing; compact is intended for task and conversation side panels.
+  final BeautifulUiDensity density;
+
+  /// Surface ownership; embedded rows leave borders and elevation to a parent.
+  final BeautifulSurfaceVariant surfaceVariant;
+
+  /// Maximum list width; null stretches within the parent's constraints.
+  final double? maxWidth;
 
   /// Localized pending-state label.
   final String pendingLabel;
@@ -225,17 +240,21 @@ final class BeautifulTaskRows extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = BeautifulUiTheme.of(context);
     final list = variant == BeautifulTaskRowsVariant.list;
+    final card = surfaceVariant == BeautifulSurfaceVariant.card;
+    final embedded = surfaceVariant == BeautifulSurfaceVariant.embedded;
     return Align(
       alignment: AlignmentDirectional.topStart,
       widthFactor: 1,
       heightFactor: 1,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 440),
+        constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: list ? theme.colors.surface : null,
-            borderRadius: BorderRadius.circular(theme.radii.window),
-            boxShadow: list ? theme.shadows.card : null,
+            color: list && !embedded ? theme.colors.surface : null,
+            borderRadius: BorderRadius.circular(
+              embedded ? 0 : theme.radii.window,
+            ),
+            boxShadow: list && card ? theme.shadows.card : null,
           ),
           child: rows.isEmpty
               ? Padding(
@@ -244,7 +263,7 @@ final class BeautifulTaskRows extends StatelessWidget {
                 )
               : ClipRRect(
                   borderRadius: BorderRadius.circular(
-                    list ? theme.radii.window : 0,
+                    list && !embedded ? theme.radii.window : 0,
                   ),
                   clipBehavior: list ? Clip.hardEdge : Clip.none,
                   child: Column(
@@ -255,6 +274,8 @@ final class BeautifulTaskRows extends StatelessWidget {
                           key: ValueKey<String>(rows[index].id),
                           row: rows[index],
                           list: list,
+                          density: density,
+                          surfaceVariant: surfaceVariant,
                           last: index == rows.length - 1,
                           statusLabel: _statusLabel(rows[index]),
                           retryLabel: retryLabel,
@@ -276,6 +297,8 @@ final class _TaskRowView extends StatefulWidget {
     super.key,
     required this.row,
     required this.list,
+    required this.density,
+    required this.surfaceVariant,
     required this.last,
     required this.statusLabel,
     required this.retryLabel,
@@ -286,6 +309,8 @@ final class _TaskRowView extends StatefulWidget {
 
   final BeautifulTaskRow row;
   final bool list;
+  final BeautifulUiDensity density;
+  final BeautifulSurfaceVariant surfaceVariant;
   final bool last;
   final String statusLabel;
   final String retryLabel;
@@ -373,21 +398,37 @@ final class _TaskRowViewState extends State<_TaskRowView> {
         '${widget.stepLabel} ${widget.row.step}',
     ].join(', ');
     final duration = _transitionDuration(context, theme);
-    final radius = widget.list
+    final dense = widget.density == BeautifulUiDensity.compact;
+    final embedded = widget.surfaceVariant == BeautifulSurfaceVariant.embedded;
+    final touchLayout = switch (defaultTargetPlatform) {
+      TargetPlatform.android ||
+      TargetPlatform.iOS ||
+      TargetPlatform.fuchsia => true,
+      _ => (MediaQuery.maybeSizeOf(context)?.shortestSide ?? 0) < 600,
+    };
+    final radius = widget.list || embedded
         ? 0.0
+        : dense
+        ? theme.radii.chip
         : _expanded
         ? theme.radii.window
         : 24.0;
 
     return Padding(
       padding: EdgeInsets.only(
-        bottom: widget.list || widget.last ? 0 : theme.spacing.sm,
+        bottom: widget.list || widget.last
+            ? 0
+            : dense
+            ? theme.spacing.xs
+            : theme.spacing.sm,
       ),
       child: DecoratedBox(
         position: DecorationPosition.foreground,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          border: widget.list && !_focused
+          border: embedded && !_focused
+              ? null
+              : widget.list && !_focused
               ? Border(
                   bottom: widget.last
                       ? BorderSide.none
@@ -402,9 +443,17 @@ final class _TaskRowViewState extends State<_TaskRowView> {
           duration: duration,
           curve: theme.motion.outCurve,
           decoration: BoxDecoration(
-            color: _hovered ? colors.hover : colors.surface,
+            color: _hovered
+                ? colors.hover
+                : embedded
+                ? null
+                : colors.surface,
             borderRadius: BorderRadius.circular(radius),
-            boxShadow: widget.list ? null : theme.shadows.card,
+            boxShadow:
+                widget.list ||
+                    widget.surfaceVariant != BeautifulSurfaceVariant.card
+                ? null
+                : theme.shadows.card,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -465,15 +514,23 @@ final class _TaskRowViewState extends State<_TaskRowView> {
                           }
                         : null,
                     child: ConstrainedBox(
-                      constraints: const BoxConstraints(minHeight: 48),
+                      constraints: BoxConstraints(
+                        minHeight: dense ? (touchLayout ? 44 : 32) : 48,
+                      ),
                       child: Padding(
-                        padding: EdgeInsets.all(theme.spacing.sm),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: dense
+                              ? theme.spacing.xs
+                              : theme.spacing.sm,
+                          vertical: dense ? theme.spacing.xs : theme.spacing.sm,
+                        ),
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             final largeText =
                                 MediaQuery.textScalerOf(context).scale(13) > 18;
                             final compact =
-                                constraints.maxWidth < 390 || largeText;
+                                largeText ||
+                                (constraints.maxWidth < 390 && !dense);
                             return Row(
                               children: <Widget>[
                                 _TaskStatusGlyph(row: widget.row),
@@ -486,8 +543,15 @@ final class _TaskRowViewState extends State<_TaskRowView> {
                                     children: <Widget>[
                                       Text(
                                         widget.row.label,
+                                        maxLines: dense && !largeText
+                                            ? 1
+                                            : null,
+                                        overflow: dense && !largeText
+                                            ? TextOverflow.ellipsis
+                                            : TextOverflow.clip,
                                         style: theme.typography.label.copyWith(
                                           color: colors.ink,
+                                          fontSize: dense ? 13 : null,
                                         ),
                                       ),
                                       if (compact) ...<Widget>[
@@ -609,6 +673,8 @@ final class _TaskRowViewState extends State<_TaskRowView> {
                     tone: BeautifulActionTone.secondary,
                     fullWidth: true,
                     minHeight: 48,
+                    density: widget.density,
+                    labelAlignment: dense ? TextAlign.start : TextAlign.center,
                     onPressed: _retryPending ? null : () => unawaited(_retry()),
                   ),
                 ),
@@ -638,14 +704,15 @@ final class _TaskRowViewState extends State<_TaskRowView> {
             style: theme.typography.caption.copyWith(color: colors.inkMuted),
           ),
         Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: theme.spacing.sm,
-            vertical: 3,
-          ),
-          decoration: BoxDecoration(
-            color: tint,
-            borderRadius: BorderRadius.circular(999),
-          ),
+          padding: widget.density == BeautifulUiDensity.compact
+              ? EdgeInsets.zero
+              : EdgeInsets.symmetric(horizontal: theme.spacing.sm, vertical: 3),
+          decoration: widget.density == BeautifulUiDensity.compact
+              ? null
+              : BoxDecoration(
+                  color: tint,
+                  borderRadius: BorderRadius.circular(999),
+                ),
           child: Text(
             status,
             style: theme.typography.caption.copyWith(color: colors.ink),
